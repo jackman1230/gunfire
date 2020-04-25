@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="85,76">
+  <displayList>
+    <loader id="n0_cqp9" name="xs" xy="30,31" pivot="0.5,0.5" size="65,40" url="ui://bq3h5inscqp93f" align="center" vAlign="middle"/>
+    <loader id="n1_cqp9" name="ss" xy="0,0" pivot="0.5,0.5" size="85,53" url="ui://bq3h5inscqp93s" align="center" vAlign="middle"/>
+  </displayList>
+</component>

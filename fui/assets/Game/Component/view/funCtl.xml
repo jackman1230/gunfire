@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="250,250">
+  <displayList>
+    <component id="n0_cqp9" name="n0" src="cqp93o" fileName="Component/btn/fireBtn.xml" xy="170,170"/>
+    <component id="n1_cqp9" name="jump" src="cqp93n" fileName="Component/btn/jumpBtn.xml" xy="170,59"/>
+    <component id="n2_cqp9" name="throw" src="cqp93p" fileName="Component/btn/throwBtn.xml" xy="83,84"/>
+    <component id="n3_cqp9" name="weapon" src="cqp93q" fileName="Component/btn/weaponBtn.xml" xy="68,170"/>
+  </displayList>
+</component>

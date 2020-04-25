@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="960,640">
+  <displayList>
+    <loader id="n0_cqp9" name="bg" xy="0,0" size="960,640" touchable="false" url="ui://bq3h5inscqp91" align="center" vAlign="middle" fill="scaleFree"/>
+    <component id="n1_cqp9" name="btnCtl" src="cqp93g" fileName="Component/view/BtnCtlView.xml" xy="0,427"/>
+  </displayList>
+</component>
