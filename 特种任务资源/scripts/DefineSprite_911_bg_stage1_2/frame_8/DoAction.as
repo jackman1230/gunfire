@@ -1,0 +1,2 @@
+stop();
+d.type = "water";

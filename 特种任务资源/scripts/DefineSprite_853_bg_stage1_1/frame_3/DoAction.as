@@ -1,0 +1,21 @@
+stop();
+if(_root.game_level < 1)
+{
+   _root.add_enemys01("enemy01",1311,135,5,3,3);
+   _root.add_enemys01("enemy01",1363,132,5,4,2);
+   _root.add_enemys01("enemy01",1181,307,5,4,2);
+   _root.add_enemys01("enemy01",1299,309,5,2,3);
+   _root.add_enemys01("enemy01",1440,304,5,3,3);
+   _root.add_blocks("04",1526,308);
+}
+else
+{
+   _root.add_enemys01("enemy01",1311,135,1000,4,0);
+   _root.add_enemys01("enemy01",1363,132,1000,2,0);
+   _root.add_enemys01("enemy01",1407,130,1000,2,0);
+   _root.add_blocks("01",1290,310);
+   _root.add_enemys01("enemy01",1370,304,5,2,0);
+   _root.add_enemys01("enemy01",1400,304,5,2,0);
+   _root.add_enemys01("enemy01",1423,304,5,1,0);
+   _root.add_enemys01("enemy01",1440,304,5,1,0);
+}

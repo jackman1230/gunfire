@@ -1,0 +1,1 @@
+gun.gotoAndPlay("explode");

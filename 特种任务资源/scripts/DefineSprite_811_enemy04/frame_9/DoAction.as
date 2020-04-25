@@ -1,0 +1,2 @@
+stop();
+body.gotoAndPlay("explode");

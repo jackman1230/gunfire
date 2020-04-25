@@ -1,0 +1,31 @@
+stop();
+if(_root.game_level < 1)
+{
+   _root.add_enemys01("enemy01",1853,113,1000,2,3);
+   _root.add_enemys01("enemy01",1901,104,1000,2,3);
+   _root.add_enemys01("enemy01",1997,92,1,2,2);
+   _root.add_enemys01("enemy01",2046,88,1,2,3);
+   _root.add_enemys01("enemy01",2055,85,1,4,3);
+   _root.add_enemys01("enemy01",2071,87,1,4,3);
+   _root.add_enemys01("enemy01",2226,86,1000,5,2);
+}
+else
+{
+   _root.add_blocks("02",1939,100);
+   _root.add_enemys01("enemy01",1853,113,1000,5,0);
+   _root.add_enemys01("enemy01",1901,104,1000,5,0);
+   _root.add_enemys01("enemy01",1997,92,1,2,0);
+   _root.add_enemys01("enemy01",2046,88,1,2,0);
+   _root.add_enemys01("enemy01",2055,85,1,4,0);
+   _root.add_enemys01("enemy01",2071,87,1,4,0);
+   _root.add_blocks("01",2175,85);
+   if(_root.game_level == 1)
+   {
+      _root.add_enemys01("enemy01",2226,86,1000,5,0);
+   }
+   else
+   {
+      _root.add_prisoner("prisoner01",2228,-65,2,1,"h");
+      _root.add_enemys10("enemy10",2226,86);
+   }
+}

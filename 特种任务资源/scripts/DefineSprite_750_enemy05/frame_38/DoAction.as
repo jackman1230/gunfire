@@ -1,0 +1,9 @@
+if(this.dead)
+{
+   gotoAndStop("die");
+   play();
+}
+else
+{
+   gotoAndStop("normal");
+}
