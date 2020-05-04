@@ -1,3 +1,4 @@
+import { GameManager } from "./GameManager";
 
 export class AssetsManager {
     private static _instance: AssetsManager;
@@ -15,7 +16,10 @@ export class AssetsManager {
     public loadAssetsData() {
         AssetsManager.assetsData.push(
             { url: "res/Game_atlas0.png", type: Laya.Loader.IMAGE },
-            { url: "res/Game.fui", type: Laya.Loader.BUFFER }
+            { url: "res/Game_atlas0_1.png", type: Laya.Loader.IMAGE },
+            { url: "res/Game_atlas0_2.png", type: Laya.Loader.IMAGE },
+            { url: "res/map_1.jpg", type: Laya.Loader.IMAGE },
+            { url: "res/Game.wxfui", type: Laya.Loader.BUFFER }
 
         );
         console.log(AssetsManager.assetsData);
@@ -24,8 +28,10 @@ export class AssetsManager {
     }
 
     private loadComplete(): void {
+        fairygui.UIPackage.addPackage("res/Game");
+
         console.log("资源加载完成");
-        
+        GameManager.instance.startGame();
     }
 }
 

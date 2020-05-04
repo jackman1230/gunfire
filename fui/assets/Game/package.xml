@@ -3,7 +3,7 @@
   <resources>
     <component id="gww20" name="BackGround.xml" path="/Component/view/" exported="true"/>
     <image id="cqp91" name="812.jpg" path="/assets/"/>
-    <component id="cqp92" name="Player.xml" path="/Component/player/" exported="true"/>
+    <component id="cqp92" name="PlayerAction.xml" path="/Component/player/"/>
     <image id="cqp93" name="1462.png" path="/assets/player/蹲-机枪/"/>
     <image id="cqp94" name="1460.png" path="/assets/player/蹲-机枪/"/>
     <image id="cqp95" name="1458.png" path="/assets/player/蹲-机枪/"/>
@@ -16,17 +16,6 @@
     <image id="cqp9c" name="1381.png" path="/assets/player/走-手枪/"/>
     <image id="cqp9d" name="1379.png" path="/assets/player/走-手枪/"/>
     <image id="cqp9e" name="1377.png" path="/assets/player/走-手枪/"/>
-    <image id="cqp9i" name="1725.png" path="/assets/player/阵亡/"/>
-    <image id="cqp9j" name="1723.png" path="/assets/player/阵亡/"/>
-    <image id="cqp9k" name="1721.png" path="/assets/player/阵亡/"/>
-    <image id="cqp9l" name="1719.png" path="/assets/player/阵亡/"/>
-    <image id="cqp9m" name="1717.png" path="/assets/player/阵亡/"/>
-    <image id="cqp9n" name="1715.png" path="/assets/player/阵亡/"/>
-    <image id="cqp9o" name="1713.png" path="/assets/player/阵亡/"/>
-    <image id="cqp9p" name="1711.png" path="/assets/player/阵亡/"/>
-    <image id="cqp9q" name="1709.png" path="/assets/player/阵亡/"/>
-    <image id="cqp9r" name="1707.png" path="/assets/player/阵亡/"/>
-    <image id="cqp9s" name="1705.png" path="/assets/player/阵亡/"/>
     <image id="cqp9t" name="1566.png" path="/assets/player/斜上-手枪/"/>
     <image id="cqp9u" name="1564.png" path="/assets/player/斜上-手枪/"/>
     <image id="cqp9v" name="1562.png" path="/assets/player/斜上-手枪/"/>
@@ -34,22 +23,6 @@
     <image id="cqp9x" name="1558.png" path="/assets/player/斜上-手枪/"/>
     <image id="cqp9y" name="1556.png" path="/assets/player/斜上-手枪/"/>
     <image id="cqp9z" name="1554.png" path="/assets/player/斜上-手枪/"/>
-    <image id="cqp910" name="1341.png" path="/assets/player/下身-跳/"/>
-    <image id="cqp911" name="1339.png" path="/assets/player/下身-跳/"/>
-    <image id="cqp912" name="1337.png" path="/assets/player/下身-跳/"/>
-    <image id="cqp913" name="1335.png" path="/assets/player/下身-跳/"/>
-    <image id="cqp914" name="1333.png" path="/assets/player/下身-跳/"/>
-    <image id="cqp915" name="1330.png" path="/assets/player/下身-跳/"/>
-    <image id="cqp916" name="1315.png" path="/assets/player/下身-跑/"/>
-    <image id="cqp917" name="1313.png" path="/assets/player/下身-跑/"/>
-    <image id="cqp918" name="1311.png" path="/assets/player/下身-跑/"/>
-    <image id="cqp919" name="1309.png" path="/assets/player/下身-跑/"/>
-    <image id="cqp91a" name="1307.png" path="/assets/player/下身-跑/"/>
-    <image id="cqp91b" name="1305.png" path="/assets/player/下身-跑/"/>
-    <image id="cqp91c" name="1303.png" path="/assets/player/下身-跑/"/>
-    <image id="cqp91d" name="1301.png" path="/assets/player/下身-跑/"/>
-    <image id="cqp91e" name="1299.png" path="/assets/player/下身-跑/"/>
-    <image id="cqp91f" name="1296.png" path="/assets/player/下身-跑/"/>
     <image id="cqp91g" name="958.png" path="/assets/player/手榴弹-爆炸/"/>
     <image id="cqp91h" name="956.png" path="/assets/player/手榴弹-爆炸/"/>
     <image id="cqp91i" name="954.png" path="/assets/player/手榴弹-爆炸/"/>
@@ -66,9 +39,6 @@
     <image id="cqp91t" name="932.png" path="/assets/player/手榴弹-爆炸/"/>
     <image id="cqp91u" name="930.png" path="/assets/player/手榴弹-爆炸/"/>
     <image id="cqp91v" name="928.png" path="/assets/player/手榴弹-爆炸/"/>
-    <image id="cqp91w" name="1732.png" path="/assets/player/胜利/"/>
-    <image id="cqp91x" name="1730.png" path="/assets/player/胜利/"/>
-    <image id="cqp91y" name="1728.png" path="/assets/player/胜利/"/>
     <image id="cqp91z" name="1579.png" path="/assets/player/上-手枪/"/>
     <image id="cqp920" name="1577.png" path="/assets/player/上-手枪/"/>
     <image id="cqp921" name="1575.png" path="/assets/player/上-手枪/"/>
@@ -84,33 +54,10 @@
     <image id="cqp92b" name="1398.png" path="/assets/player/上身-跑-机枪/"/>
     <image id="cqp92c" name="1396.png" path="/assets/player/上身-跑-机枪/"/>
     <image id="cqp92d" name="1394.png" path="/assets/player/上身-跑-机枪/"/>
-    <image id="cqp92n" name="1689.png" path="/assets/player/扔雷-手枪/"/>
-    <image id="cqp92o" name="1687.png" path="/assets/player/扔雷-手枪/"/>
-    <image id="cqp92p" name="1685.png" path="/assets/player/扔雷-手枪/"/>
-    <image id="cqp92q" name="1683.png" path="/assets/player/扔雷-手枪/"/>
-    <image id="cqp92r" name="1681.png" path="/assets/player/扔雷-手枪/"/>
-    <image id="cqp92s" name="1679.png" path="/assets/player/扔雷-手枪/"/>
-    <image id="cqp92t" name="1551.png" path="/assets/player/扔雷-机枪/"/>
-    <image id="cqp92u" name="1549.png" path="/assets/player/扔雷-机枪/"/>
-    <image id="cqp92v" name="1547.png" path="/assets/player/扔雷-机枪/"/>
-    <image id="cqp92w" name="1545.png" path="/assets/player/扔雷-机枪/"/>
-    <image id="cqp92x" name="1543.png" path="/assets/player/扔雷-机枪/"/>
-    <image id="cqp92y" name="1541.png" path="/assets/player/扔雷-机枪/"/>
-    <image id="cqp92z" name="1349.png" path="/assets/player/静止-手枪/"/>
-    <image id="cqp930" name="1347.png" path="/assets/player/静止-手枪/"/>
-    <image id="cqp931" name="1345.png" path="/assets/player/静止-手枪/"/>
-    <image id="cqp932" name="1356.png" path="/assets/player/静止-机枪/"/>
-    <image id="cqp933" name="1354.png" path="/assets/player/静止-机枪/"/>
-    <image id="cqp934" name="1352.png" path="/assets/player/静止-机枪/"/>
-    <image id="cqp935" name="1327.png" path="/assets/player/蹲-走/"/>
-    <image id="cqp936" name="1325.png" path="/assets/player/蹲-走/"/>
-    <image id="cqp937" name="1323.png" path="/assets/player/蹲-走/"/>
-    <image id="cqp938" name="1321.png" path="/assets/player/蹲-走/"/>
-    <image id="cqp939" name="1318.png" path="/assets/player/蹲-走/"/>
     <image id="cqp93a" name="1453.png" path="/assets/player/蹲-手枪/"/>
     <image id="cqp93b" name="1451.png" path="/assets/player/蹲-手枪/"/>
     <image id="cqp93c" name="1449.png" path="/assets/player/蹲-手枪/"/>
-    <movieclip id="cqp93f" name="legMove.jta" path="/Component/player/"/>
+    <movieclip id="cqp93f" name="legMove.jta" path="/Component/player/" exported="true"/>
     <component id="cqp93g" name="BtnCtlView.xml" path="/Component/view/"/>
     <image id="cqp93h" name="round.png" path="/assets/btn/"/>
     <image id="cqp93i" name="left.png" path="/assets/btn/"/>
@@ -121,17 +68,102 @@
     <component id="cqp93o" name="fireBtn.xml" path="/Component/btn/"/>
     <component id="cqp93p" name="throwBtn.xml" path="/Component/btn/"/>
     <component id="cqp93q" name="weaponBtn.xml" path="/Component/btn/"/>
-    <movieclip id="cqp93r" name="legJump.jta" path="/Component/player/"/>
-    <movieclip id="cqp93s" name="body_1.jta" path="/Component/player/"/>
-    <image id="cqp93t" name="legStay.png" path="/Component/player/"/>
+    <movieclip id="cqp93r" name="legJump.jta" path="/Component/player/" exported="true"/>
+    <movieclip id="cqp93s" name="body_1.jta" path="/Component/player/" exported="true"/>
+    <image id="cqp93t" name="legStay.png" path="/Component/player/" exported="true"/>
     <component id="cqp93u" name="player_run_1.xml" path="/Component/player/"/>
     <component id="cqp93v" name="player_jump_1.xml" path="/Component/player/"/>
     <component id="cqp93w" name="player_stay_1.xml" path="/Component/player/"/>
-    <image id="cqp93x" name="1296.png" path="/assets/"/>
     <component id="cqp93y" name="player_jump_2.xml" path="/Component/player/"/>
     <component id="cqp93z" name="player_run_2.xml" path="/Component/player/"/>
     <component id="cqp940" name="player_stay_2.xml" path="/Component/player/"/>
-    <movieclip id="cqp941" name="body_2.jta" path="/Component/player/"/>
+    <movieclip id="cqp941" name="body_2.jta" path="/Component/player/" exported="true"/>
+    <image id="msdc42" name="946.png" path="/assets/player/下身-跑/"/>
+    <image id="msdc43" name="944.png" path="/assets/player/下身-跑/"/>
+    <image id="msdc44" name="942.png" path="/assets/player/下身-跑/"/>
+    <image id="msdc45" name="940.png" path="/assets/player/下身-跑/"/>
+    <image id="msdc46" name="938.png" path="/assets/player/下身-跑/"/>
+    <image id="msdc47" name="936.png" path="/assets/player/下身-跑/"/>
+    <image id="msdc48" name="934.png" path="/assets/player/下身-跑/"/>
+    <image id="msdc49" name="932.png" path="/assets/player/下身-跑/"/>
+    <image id="msdc4a" name="930.png" path="/assets/player/下身-跑/"/>
+    <image id="msdc4b" name="927.png" path="/assets/player/下身-跑/"/>
+    <image id="msdc4c" name="972.png" path="/assets/player/下身-跳/"/>
+    <image id="msdc4d" name="970.png" path="/assets/player/下身-跳/"/>
+    <image id="msdc4e" name="968.png" path="/assets/player/下身-跳/"/>
+    <image id="msdc4f" name="966.png" path="/assets/player/下身-跳/"/>
+    <image id="msdc4g" name="964.png" path="/assets/player/下身-跳/"/>
+    <image id="msdc4h" name="961.png" path="/assets/player/下身-跳/"/>
+    <image id="msdc4i" name="1169.png" path="/assets/player/扔雷-手枪/"/>
+    <image id="msdc4j" name="1167.png" path="/assets/player/扔雷-手枪/"/>
+    <image id="msdc4k" name="1165.png" path="/assets/player/扔雷-手枪/"/>
+    <image id="msdc4l" name="1163.png" path="/assets/player/扔雷-手枪/"/>
+    <image id="msdc4m" name="1161.png" path="/assets/player/扔雷-手枪/"/>
+    <image id="msdc4n" name="1159.png" path="/assets/player/扔雷-手枪/"/>
+    <image id="msdc4o" name="1182.png" path="/assets/player/扔雷-机枪/"/>
+    <image id="msdc4p" name="1180.png" path="/assets/player/扔雷-机枪/"/>
+    <image id="msdc4q" name="1178.png" path="/assets/player/扔雷-机枪/"/>
+    <image id="msdc4r" name="1176.png" path="/assets/player/扔雷-机枪/"/>
+    <image id="msdc4s" name="1174.png" path="/assets/player/扔雷-机枪/"/>
+    <image id="msdc4t" name="1172.png" path="/assets/player/扔雷-机枪/"/>
+    <image id="msdc4u" name="1386.png" path="/assets/player/胜利/"/>
+    <image id="msdc4v" name="1382.png" path="/assets/player/胜利/"/>
+    <image id="msdc4w" name="1376.png" path="/assets/player/胜利/"/>
+    <image id="msdc4x" name="958.png" path="/assets/player/蹲-走/"/>
+    <image id="msdc4y" name="956.png" path="/assets/player/蹲-走/"/>
+    <image id="msdc4z" name="954.png" path="/assets/player/蹲-走/"/>
+    <image id="msdc50" name="952.png" path="/assets/player/蹲-走/"/>
+    <image id="msdc51" name="949.png" path="/assets/player/蹲-走/"/>
+    <image id="msdc52" name="1372.png" path="/assets/player/阵亡/"/>
+    <image id="msdc53" name="1370.png" path="/assets/player/阵亡/"/>
+    <image id="msdc54" name="1368.png" path="/assets/player/阵亡/"/>
+    <image id="msdc55" name="1366.png" path="/assets/player/阵亡/"/>
+    <image id="msdc56" name="1364.png" path="/assets/player/阵亡/"/>
+    <image id="msdc57" name="1362.png" path="/assets/player/阵亡/"/>
+    <image id="msdc58" name="1360.png" path="/assets/player/阵亡/"/>
+    <image id="msdc59" name="1358.png" path="/assets/player/阵亡/"/>
+    <image id="msdc5a" name="1356.png" path="/assets/player/阵亡/"/>
+    <image id="msdc5b" name="1354.png" path="/assets/player/阵亡/"/>
+    <image id="msdc5c" name="1352.png" path="/assets/player/阵亡/"/>
+    <image id="msdc5d" name="980.png" path="/assets/player/静止-手枪/"/>
+    <image id="msdc5e" name="978.png" path="/assets/player/静止-手枪/"/>
+    <image id="msdc5f" name="976.png" path="/assets/player/静止-手枪/"/>
+    <image id="msdc5g" name="987.png" path="/assets/player/静止-机枪/"/>
+    <image id="msdc5h" name="985.png" path="/assets/player/静止-机枪/"/>
+    <image id="msdc5i" name="983.png" path="/assets/player/静止-机枪/"/>
+    <component id="msdc5j" name="player_fire_1.xml" path="/Component/player/"/>
+    <component id="msdc5k" name="player_fire_2.xml" path="/Component/player/"/>
+    <movieclip id="msdc5l" name="fire_1.jta" path="/Component/player/" exported="true"/>
+    <image id="msdc5m" name="1282.png" path="/assets/player/开火-手枪/"/>
+    <image id="msdc5n" name="1280.png" path="/assets/player/开火-手枪/"/>
+    <image id="msdc5o" name="1278.png" path="/assets/player/开火-手枪/"/>
+    <image id="msdc5p" name="1276.png" path="/assets/player/开火-手枪/"/>
+    <image id="msdc5q" name="1274.png" path="/assets/player/开火-手枪/"/>
+    <image id="msdc5r" name="1272.png" path="/assets/player/开火-手枪/"/>
+    <image id="msdc5s" name="1270.png" path="/assets/player/开火-手枪/"/>
+    <movieclip id="msdc61" name="fire_3.jta" path="/Component/player/" exported="true"/>
+    <movieclip id="msdc62" name="fire_2.jta" path="/Component/player/" exported="true"/>
+    <image id="msdc63" name="1039.png" path="/assets/player/开火-机枪/"/>
+    <image id="msdc64" name="1037.png" path="/assets/player/开火-机枪/"/>
+    <image id="msdc65" name="1035.png" path="/assets/player/开火-机枪/"/>
+    <image id="msdc66" name="1033.png" path="/assets/player/开火-机枪/"/>
+    <image id="msdc67" name="1031.png" path="/assets/player/开火-机枪/"/>
+    <image id="msdc68" name="1029.png" path="/assets/player/开火-机枪/"/>
+    <image id="msdc69" name="1027.png" path="/assets/player/开火-机枪/"/>
+    <image id="msdc6a" name="1025.png" path="/assets/player/开火-机枪/"/>
+    <image id="msdc6b" name="1300.png" path="/assets/player/开火-来福/"/>
+    <image id="msdc6c" name="1298.png" path="/assets/player/开火-来福/"/>
+    <image id="msdc6d" name="1296.png" path="/assets/player/开火-来福/"/>
+    <image id="msdc6e" name="1294.png" path="/assets/player/开火-来福/"/>
+    <image id="msdc6f" name="1292.png" path="/assets/player/开火-来福/"/>
+    <image id="msdc6g" name="1290.png" path="/assets/player/开火-来福/"/>
+    <image id="msdc6h" name="1287.png" path="/assets/player/开火-来福/"/>
+    <image id="msdc6i" name="1285.png" path="/assets/player/开火-来福/"/>
+    <component id="msdc6j" name="Player.xml" path="/Component/player/" exported="true"/>
+    <component id="msdc6k" name="player_boom_1.xml" path="/Component/player/"/>
+    <component id="msdc6l" name="player_boom_2.xml" path="/Component/player/"/>
+    <movieclip id="msdc6m" name="boom_1.jta" path="/Component/player/" exported="true"/>
+    <movieclip id="msdc6n" name="boom_2.jta" path="/Component/player/" exported="true"/>
   </resources>
-  <publish name="Game" path="..\assets" packageCount="2" genCode="true" codePath="..\src\fui"/>
+  <publish name="Game" path="..\bin\res" packageCount="2" genCode="true" codePath="..\src\fui"/>
 </packageDescription>

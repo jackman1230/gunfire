@@ -3,7 +3,7 @@
     "name": "Flapper", 
     "version": "32.0.0.363", 
     "x-flapper-revision": "101667", 
-    "x-ppapi-arch": "x64", 
+    "x-ppapi-arch": "ia32", 
     "x-ppapi-os": "win", 
     "x-ppapi-required-interfaces": [
         "PPB_AudioConfig;1.1|PPB_AudioConfig;1.0", 

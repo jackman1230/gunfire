@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="85,76">
+<component size="91,91">
   <displayList>
-    <component id="n5_cqp9" name="n5" src="cqp93u" fileName="Component/player/player_run_1.xml" xy="0,0" pivot="0.5,0.5" skew="0,180"/>
-    <component id="n7_cqp9" name="n7" src="cqp93v" fileName="Component/player/player_jump_1.xml" xy="156,2" pivot="0.5,0.5" skew="0,180"/>
-    <component id="n8_cqp9" name="n8" src="cqp93w" fileName="Component/player/player_stay_1.xml" xy="297,1" pivot="0.5,0.5" skew="0,180"/>
-    <component id="n9_cqp9" name="n9" src="cqp93y" fileName="Component/player/player_jump_2.xml" xy="159,136" pivot="0.5,0.5" skew="0,180"/>
-    <component id="n10_cqp9" name="n10" src="cqp93z" fileName="Component/player/player_run_2.xml" xy="4,138" pivot="0.5,0.5" skew="0,180"/>
-    <component id="n11_cqp9" name="n11" src="cqp940" fileName="Component/player/player_stay_2.xml" xy="305,142" pivot="0.5,0.5" skew="0,180"/>
+    <loader id="n12_msdc" name="xs" xy="59,70" pivot="0.5,0.5" anchor="true" size="65,40" url="ui://bq3h5inscqp93f" align="center" vAlign="middle"/>
+    <loader id="n13_msdc" name="ss" xy="42,26" pivot="0.5,0.5" anchor="true" size="85,53" url="ui://bq3h5inscqp93s" align="center" vAlign="middle"/>
   </displayList>
 </component>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="85,76">
+<component size="91,91">
   <displayList>
-    <loader id="n2_cqp9" name="xs2" xy="35,43" pivot="0.5,0.5" size="44,45" url="ui://bq3h5inscqp93r" align="center" vAlign="middle" autoSize="true"/>
+    <loader id="n2_cqp9" name="xs" xy="27,55" pivot="0.5,0.5" size="65,40" url="ui://bq3h5inscqp93r" align="center" vAlign="middle"/>
     <loader id="n1_cqp9" name="ss" xy="0,0" pivot="0.5,0.5" size="85,53" url="ui://bq3h5inscqp941" align="center" vAlign="middle"/>
   </displayList>
 </component>

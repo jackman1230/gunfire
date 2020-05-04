@@ -1,20 +1,22 @@
 {
 	"atlasSetting":{
+		"maxSize":512,
 		"paging":true,
-		"sizeOption":"pot"
+		"sizeOption":"npot",
+		"trimImage":true
 	},
 	"binaryFormat":true,
 	"codeGeneration":{
-		"classNamePrefix":"FUI_",
+		"classNamePrefix":"WXFUI_",
 		"codePath":"..\\src\\fui",
-		"codeType":"TS",
+		"codeType":"TS-2.0",
 		"getMemberByName":false,
 		"ignoreNoname":false,
 		"memberNamePrefix":"m_",
-		"packageName":"fui"
+		"packageName":"wxfui"
 	},
-	"compressDesc":true,
-	"fileExtension":"fui",
+	"compressDesc":false,
+	"fileExtension":"wxfui",
 	"packageCount":2,
 	"path":""
 }

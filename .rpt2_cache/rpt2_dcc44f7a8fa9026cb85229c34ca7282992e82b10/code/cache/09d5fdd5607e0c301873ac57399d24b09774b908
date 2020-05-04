@@ -1,0 +1,4 @@
+{
+  "code": "export class AssetsManager {\r\n    constructor() {\r\n    }\r\n    static get instance() {\r\n        if (this._instance == null)\r\n            this._instance = new AssetsManager();\r\n        return this._instance;\r\n    }\r\n    loadAssetsData() {\r\n        AssetsManager.assetsData.push({ url: \"res/Game_atlas0.png\", type: Laya.Loader.IMAGE }, { url: \"res/Game.fui\", type: Laya.Loader.BUFFER });\r\n        console.log(AssetsManager.assetsData);\r\n        Laya.loader.create(AssetsManager.assetsData, Laya.Handler.create(this, this.loadComplete));\r\n    }\r\n    loadComplete() {\r\n        console.log(\"资源加载完成\");\r\n    }\r\n}\r\nAssetsManager.assetsData = [];\r\n",
+  "references": []
+}

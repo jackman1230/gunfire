@@ -1,0 +1,6 @@
+{
+  "code": "export default class Player {\r\n    constructor() { }\r\n    initView() {\r\n        this.rolePlayer = fairygui.UIPackage.createObject(\"Game\", \"Player\");\r\n        this.rolePlayer.setPivot(0.5, 0.5);\r\n        this.leg = this.rolePlayer.getChildAt(0);\r\n        this.body = this.rolePlayer.getChildAt(1);\r\n    }\r\n    ;\r\n    setLeft() {\r\n        this.rolePlayer.skewY = 0;\r\n    }\r\n    setRight() {\r\n        this.rolePlayer.skewY = 180;\r\n    }\r\n    setJump() {\r\n        this.leg.url = \"ui://Game/legJump\";\r\n    }\r\n    setRun() {\r\n        this.leg.url = \"ui://Game/legMove\";\r\n    }\r\n    setFire() {\r\n        this.body.url = \"ui://Game/fire_2\";\r\n    }\r\n    setBoom() {\r\n        this.body.url = \"ui://Game/boom_2\";\r\n        this.body.asMovieClip.setPlaySettings(1, -1, 1, 1, Laya.Handler.create(this, this.setBoomComplete));\r\n    }\r\n    setStay() {\r\n        this.leg.url = \"ui://Game/legStay\";\r\n        this.body.url = \"ui://Game/body_1\";\r\n    }\r\n    setBoomComplete() {\r\n        this.setStay();\r\n        console.log(\"rengshouliudan\");\r\n    }\r\n}\r\n",
+  "references": [
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_Player.ts"
+  ]
+}

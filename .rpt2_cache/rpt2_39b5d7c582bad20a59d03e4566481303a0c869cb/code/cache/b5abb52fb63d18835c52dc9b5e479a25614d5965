@@ -1,0 +1,6 @@
+{
+  "code": "import { ViewManager } from \"./ViewManager\";\r\nexport class GameManager {\r\n    constructor() {\r\n    }\r\n    static get instance() {\r\n        if (this._instance == null)\r\n            this._instance = new GameManager();\r\n        return this._instance;\r\n    }\r\n    startGame() {\r\n        ViewManager.instance.showStartView();\r\n    }\r\n}\r\nGameManager.assetsData = [];\r\n",
+  "references": [
+    "D:/littleGame/gunfire/src/Manager/ViewManager.ts"
+  ]
+}

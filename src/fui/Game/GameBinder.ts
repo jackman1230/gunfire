@@ -1,24 +1,25 @@
 /** This is an automatically generated class by FairyGUI. Please do not modify it. **/
 
-module fui.Game {
+import WXFUI_BtnCtlView from "./WXFUI_BtnCtlView";
+import WXFUI_dirCtl from "./WXFUI_dirCtl";
+import WXFUI_funCtl from "./WXFUI_funCtl";
+import WXFUI_jumpBtn from "./WXFUI_jumpBtn";
+import WXFUI_fireBtn from "./WXFUI_fireBtn";
+import WXFUI_throwBtn from "./WXFUI_throwBtn";
+import WXFUI_weaponBtn from "./WXFUI_weaponBtn";
+import WXFUI_BackGround from "./WXFUI_BackGround";
+import WXFUI_Player from "./WXFUI_Player";
 
-	export class GameBinder{
-		public static bindAll():void {
-			fairygui.UIObjectFactory.setPackageItemExtension(FUI_Player.URL, FUI_Player);
-			fairygui.UIObjectFactory.setPackageItemExtension(FUI_BtnCtlView.URL, FUI_BtnCtlView);
-			fairygui.UIObjectFactory.setPackageItemExtension(FUI_dirCtl.URL, FUI_dirCtl);
-			fairygui.UIObjectFactory.setPackageItemExtension(FUI_funCtl.URL, FUI_funCtl);
-			fairygui.UIObjectFactory.setPackageItemExtension(FUI_jumpBtn.URL, FUI_jumpBtn);
-			fairygui.UIObjectFactory.setPackageItemExtension(FUI_fireBtn.URL, FUI_fireBtn);
-			fairygui.UIObjectFactory.setPackageItemExtension(FUI_throwBtn.URL, FUI_throwBtn);
-			fairygui.UIObjectFactory.setPackageItemExtension(FUI_weaponBtn.URL, FUI_weaponBtn);
-			fairygui.UIObjectFactory.setPackageItemExtension(FUI_player_run_1.URL, FUI_player_run_1);
-			fairygui.UIObjectFactory.setPackageItemExtension(FUI_player_jump_1.URL, FUI_player_jump_1);
-			fairygui.UIObjectFactory.setPackageItemExtension(FUI_player_stay_1.URL, FUI_player_stay_1);
-			fairygui.UIObjectFactory.setPackageItemExtension(FUI_player_jump_2.URL, FUI_player_jump_2);
-			fairygui.UIObjectFactory.setPackageItemExtension(FUI_player_run_2.URL, FUI_player_run_2);
-			fairygui.UIObjectFactory.setPackageItemExtension(FUI_player_stay_2.URL, FUI_player_stay_2);
-			fairygui.UIObjectFactory.setPackageItemExtension(FUI_BackGround.URL, FUI_BackGround);
-		}
+export default class GameBinder{
+	public static bindAll():void {
+		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_BtnCtlView.URL, WXFUI_BtnCtlView);
+		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_dirCtl.URL, WXFUI_dirCtl);
+		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_funCtl.URL, WXFUI_funCtl);
+		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_jumpBtn.URL, WXFUI_jumpBtn);
+		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_fireBtn.URL, WXFUI_fireBtn);
+		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_throwBtn.URL, WXFUI_throwBtn);
+		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_weaponBtn.URL, WXFUI_weaponBtn);
+		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_BackGround.URL, WXFUI_BackGround);
+		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_Player.URL, WXFUI_Player);
 	}
 }

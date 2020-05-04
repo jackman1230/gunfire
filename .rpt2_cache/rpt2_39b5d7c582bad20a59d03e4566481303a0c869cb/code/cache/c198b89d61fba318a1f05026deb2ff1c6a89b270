@@ -1,0 +1,6 @@
+{
+  "code": "export class BackGroundView {\r\n    constructor() { }\r\n    initView() {\r\n        this.view = fairygui.UIPackage.createObject(\"Game\", \"BackGround\");\r\n        console.log(this.view);\r\n    }\r\n    ;\r\n}\r\n",
+  "references": [
+    "D:/littleGame/gunfire/src/fui/Game/FUI_BackGround.ts"
+  ]
+}
