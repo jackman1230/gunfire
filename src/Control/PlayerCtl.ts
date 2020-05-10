@@ -1,9 +1,10 @@
 import WXFUI_Player from "../fui/Game/WXFUI_Player";
 import { ViewManager } from "../Manager/ViewManager";
+import Player from "../View/Player";
 
 export class PlayerCtl {
 
-    public rolePlayer: WXFUI_Player;
+    public rolePlayer: Player;
 
     constructor() {
 

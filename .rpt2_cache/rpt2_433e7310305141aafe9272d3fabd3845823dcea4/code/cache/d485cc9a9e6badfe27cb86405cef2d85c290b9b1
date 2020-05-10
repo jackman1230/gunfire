@@ -1,0 +1,9 @@
+{
+  "code": "export class BackGroundView {\r\n    constructor() { }\r\n    initView() {\r\n        this.view = fairygui.UIPackage.createObject(\"Game\", \"BackGround\");\r\n        this.bg = this.view.getChildAt(0);\r\n        this.bg.url = \"res/map_1.jpg\";\r\n    }\r\n    ;\r\n    showMap() {\r\n    }\r\n    updateViewPort(moveX) {\r\n        this.bg.x = -moveX;\r\n    }\r\n}\r\n",
+  "references": [
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_BackGround.ts",
+    "D:/littleGame/gunfire/src/Manager/ViewManager.ts",
+    "D:/littleGame/gunfire/src/View/Player.ts",
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_Player.ts"
+  ]
+}

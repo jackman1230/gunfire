@@ -1,4 +1,5 @@
 import { GameManager } from "./GameManager";
+import { ViewManager } from "./ViewManager";
 
 export class AssetsManager {
     private static _instance: AssetsManager;
@@ -18,6 +19,11 @@ export class AssetsManager {
             { url: "res/Game_atlas0.png", type: Laya.Loader.IMAGE },
             { url: "res/Game_atlas0_1.png", type: Laya.Loader.IMAGE },
             { url: "res/Game_atlas0_2.png", type: Laya.Loader.IMAGE },
+            { url: "res/Game_atlas0_3.png", type: Laya.Loader.IMAGE },
+            { url: "res/Game_atlas0_4.png", type: Laya.Loader.IMAGE },
+            { url: "res/Game_atlas0_5.png", type: Laya.Loader.IMAGE },
+            { url: "res/Game_atlas0_6.png", type: Laya.Loader.IMAGE },
+            { url: "res/Game_atlas0_7.png", type: Laya.Loader.IMAGE },
             { url: "res/map_1.jpg", type: Laya.Loader.IMAGE },
             { url: "res/Game.wxfui", type: Laya.Loader.BUFFER }
 

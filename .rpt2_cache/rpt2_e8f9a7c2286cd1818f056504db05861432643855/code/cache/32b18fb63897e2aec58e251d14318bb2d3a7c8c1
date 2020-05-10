@@ -1,0 +1,10 @@
+{
+  "code": "import { WarView } from \"../View/WarView\";\r\nimport Player from \"../View/Player\";\r\nimport Enemy from \"../View/Enemy\";\r\nexport class ViewManager {\r\n    constructor() {\r\n    }\r\n    static get instance() {\r\n        if (this._instance == null)\r\n            this._instance = new ViewManager();\r\n        return this._instance;\r\n    }\r\n    showStartView() {\r\n        this.initView();\r\n        Laya.stage.addChild(this.warView.warView.displayObject);\r\n        this.warView.warView.addChild(this.player.rolePlayer);\r\n        this.player.rolePlayer.x = 200;\r\n        this.player.rolePlayer.y = 400;\r\n        console.log(\"开始初始化界面\");\r\n        Laya.stage.addChild(this.enemy.enemy.displayObject);\r\n        this.enemy.enemy.x = 800;\r\n        this.enemy.enemy.y = 400;\r\n        this.enemy.setFire();\r\n    }\r\n    initView() {\r\n        this.warView = new WarView();\r\n        this.player = new Player();\r\n        this.enemy = new Enemy();\r\n        this.warView.initView();\r\n        this.player.initView();\r\n        this.enemy.initView();\r\n    }\r\n    getRolePlayer() {\r\n        return this.player;\r\n    }\r\n    updateViewPort(moveX) {\r\n        this.warView.updateViewPort(moveX);\r\n    }\r\n}\r\n",
+  "references": [
+    "D:/littleGame/gunfire/src/View/BackGroundView.ts",
+    "D:/littleGame/gunfire/src/View/WarView.ts",
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_Player.ts",
+    "D:/littleGame/gunfire/src/View/Player.ts",
+    "D:/littleGame/gunfire/src/View/Enemy.ts"
+  ]
+}

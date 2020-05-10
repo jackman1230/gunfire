@@ -1,0 +1,4 @@
+{
+  "code": "export class WarView {\r\n    constructor() { }\r\n    initView() {\r\n    }\r\n    ;\r\n}\r\n",
+  "references": []
+}

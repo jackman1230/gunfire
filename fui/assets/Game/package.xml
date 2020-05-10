@@ -57,8 +57,8 @@
     <image id="cqp93a" name="1453.png" path="/assets/player/蹲-手枪/"/>
     <image id="cqp93b" name="1451.png" path="/assets/player/蹲-手枪/"/>
     <image id="cqp93c" name="1449.png" path="/assets/player/蹲-手枪/"/>
-    <movieclip id="cqp93f" name="legMove.jta" path="/Component/player/" exported="true"/>
-    <component id="cqp93g" name="BtnCtlView.xml" path="/Component/view/"/>
+    <movieclip id="cqp93f" name="legMove.jta" path="/Component/player/playerAni/" exported="true"/>
+    <component id="cqp93g" name="BtnCtlView.xml" path="/Component/view/" exported="true"/>
     <image id="cqp93h" name="round.png" path="/assets/btn/"/>
     <image id="cqp93i" name="left.png" path="/assets/btn/"/>
     <image id="cqp93j" name="right.png" path="/assets/btn/"/>
@@ -68,16 +68,16 @@
     <component id="cqp93o" name="fireBtn.xml" path="/Component/btn/"/>
     <component id="cqp93p" name="throwBtn.xml" path="/Component/btn/"/>
     <component id="cqp93q" name="weaponBtn.xml" path="/Component/btn/"/>
-    <movieclip id="cqp93r" name="legJump.jta" path="/Component/player/" exported="true"/>
-    <movieclip id="cqp93s" name="body_1.jta" path="/Component/player/" exported="true"/>
-    <image id="cqp93t" name="legStay.png" path="/Component/player/" exported="true"/>
+    <movieclip id="cqp93r" name="legJump.jta" path="/Component/player/playerAni/" exported="true"/>
+    <movieclip id="cqp93s" name="body_1.jta" path="/Component/player/playerAni/" exported="true"/>
+    <image id="cqp93t" name="legStay.png" path="/Component/player/playerAni/" exported="true"/>
     <component id="cqp93u" name="player_run_1.xml" path="/Component/player/"/>
     <component id="cqp93v" name="player_jump_1.xml" path="/Component/player/"/>
-    <component id="cqp93w" name="player_stay_1.xml" path="/Component/player/"/>
+    <component id="cqp93w" name="player_stay_1.xml" path="/Component/player/" exported="true"/>
     <component id="cqp93y" name="player_jump_2.xml" path="/Component/player/"/>
     <component id="cqp93z" name="player_run_2.xml" path="/Component/player/"/>
-    <component id="cqp940" name="player_stay_2.xml" path="/Component/player/"/>
-    <movieclip id="cqp941" name="body_2.jta" path="/Component/player/" exported="true"/>
+    <component id="cqp940" name="player_stay_2.xml" path="/Component/player/" exported="true"/>
+    <movieclip id="cqp941" name="body_2.jta" path="/Component/player/playerAni/" exported="true"/>
     <image id="msdc42" name="946.png" path="/assets/player/下身-跑/"/>
     <image id="msdc43" name="944.png" path="/assets/player/下身-跑/"/>
     <image id="msdc44" name="942.png" path="/assets/player/下身-跑/"/>
@@ -131,9 +131,9 @@
     <image id="msdc5g" name="987.png" path="/assets/player/静止-机枪/"/>
     <image id="msdc5h" name="985.png" path="/assets/player/静止-机枪/"/>
     <image id="msdc5i" name="983.png" path="/assets/player/静止-机枪/"/>
-    <component id="msdc5j" name="player_fire_1.xml" path="/Component/player/"/>
-    <component id="msdc5k" name="player_fire_2.xml" path="/Component/player/"/>
-    <movieclip id="msdc5l" name="fire_1.jta" path="/Component/player/" exported="true"/>
+    <component id="msdc5j" name="player_fire_1.xml" path="/Component/player/" exported="true"/>
+    <component id="msdc5k" name="player_fire_2.xml" path="/Component/player/" exported="true"/>
+    <movieclip id="msdc5l" name="fire_1.jta" path="/Component/player/playerAni/" exported="true"/>
     <image id="msdc5m" name="1282.png" path="/assets/player/开火-手枪/"/>
     <image id="msdc5n" name="1280.png" path="/assets/player/开火-手枪/"/>
     <image id="msdc5o" name="1278.png" path="/assets/player/开火-手枪/"/>
@@ -141,8 +141,8 @@
     <image id="msdc5q" name="1274.png" path="/assets/player/开火-手枪/"/>
     <image id="msdc5r" name="1272.png" path="/assets/player/开火-手枪/"/>
     <image id="msdc5s" name="1270.png" path="/assets/player/开火-手枪/"/>
-    <movieclip id="msdc61" name="fire_3.jta" path="/Component/player/" exported="true"/>
-    <movieclip id="msdc62" name="fire_2.jta" path="/Component/player/" exported="true"/>
+    <movieclip id="msdc61" name="fire_3.jta" path="/Component/player/playerAni/" exported="true"/>
+    <movieclip id="msdc62" name="fire_2.jta" path="/Component/player/playerAni/" exported="true"/>
     <image id="msdc63" name="1039.png" path="/assets/player/开火-机枪/"/>
     <image id="msdc64" name="1037.png" path="/assets/player/开火-机枪/"/>
     <image id="msdc65" name="1035.png" path="/assets/player/开火-机枪/"/>
@@ -160,10 +160,153 @@
     <image id="msdc6h" name="1287.png" path="/assets/player/开火-来福/"/>
     <image id="msdc6i" name="1285.png" path="/assets/player/开火-来福/"/>
     <component id="msdc6j" name="Player.xml" path="/Component/player/" exported="true"/>
-    <component id="msdc6k" name="player_boom_1.xml" path="/Component/player/"/>
-    <component id="msdc6l" name="player_boom_2.xml" path="/Component/player/"/>
-    <movieclip id="msdc6m" name="boom_1.jta" path="/Component/player/" exported="true"/>
-    <movieclip id="msdc6n" name="boom_2.jta" path="/Component/player/" exported="true"/>
+    <component id="msdc6k" name="player_boom_1.xml" path="/Component/player/" exported="true"/>
+    <component id="msdc6l" name="player_boom_2.xml" path="/Component/player/" exported="true"/>
+    <movieclip id="msdc6m" name="boom_1.jta" path="/Component/player/playerAni/" exported="true"/>
+    <movieclip id="msdc6n" name="boom_2.jta" path="/Component/player/playerAni/" exported="true"/>
+    <image id="oqgw6p" name="689.png" path="/assets/enemy/机枪兵/开火/"/>
+    <image id="oqgw6q" name="687.png" path="/assets/enemy/机枪兵/开火/"/>
+    <image id="oqgw6r" name="685.png" path="/assets/enemy/机枪兵/开火/"/>
+    <image id="oqgw6s" name="683.png" path="/assets/enemy/机枪兵/开火/"/>
+    <image id="oqgw6t" name="681.png" path="/assets/enemy/机枪兵/开火/"/>
+    <image id="oqgw6u" name="679.png" path="/assets/enemy/机枪兵/开火/"/>
+    <image id="oqgw6v" name="677.png" path="/assets/enemy/机枪兵/开火/"/>
+    <image id="oqgw6w" name="629.png" path="/assets/enemy/机枪兵/跑/"/>
+    <image id="oqgw6x" name="627.png" path="/assets/enemy/机枪兵/跑/"/>
+    <image id="oqgw6y" name="625.png" path="/assets/enemy/机枪兵/跑/"/>
+    <image id="oqgw6z" name="623.png" path="/assets/enemy/机枪兵/跑/"/>
+    <image id="oqgw70" name="621.png" path="/assets/enemy/机枪兵/跑/"/>
+    <image id="oqgw71" name="674.png" path="/assets/enemy/手枪兵/开枪/"/>
+    <image id="oqgw72" name="672.png" path="/assets/enemy/手枪兵/开枪/"/>
+    <image id="oqgw73" name="670.png" path="/assets/enemy/手枪兵/开枪/"/>
+    <image id="oqgw74" name="668.png" path="/assets/enemy/手枪兵/开枪/"/>
+    <image id="oqgw75" name="731.png" path="/assets/enemy/手榴弹兵/"/>
+    <image id="oqgw76" name="729.png" path="/assets/enemy/手榴弹兵/"/>
+    <image id="oqgw77" name="727.png" path="/assets/enemy/手榴弹兵/"/>
+    <image id="oqgw78" name="grenade.png" path="/assets/"/>
+    <image id="oqgw79" name="724.png" path="/assets/enemy/手榴弹兵/"/>
+    <image id="oqgw7a" name="722.png" path="/assets/enemy/手榴弹兵/"/>
+    <image id="oqgw7b" name="720.png" path="/assets/enemy/手榴弹兵/"/>
+    <image id="oqgw7c" name="718.png" path="/assets/enemy/手榴弹兵/"/>
+    <image id="oqgw7d" name="716.png" path="/assets/enemy/手榴弹兵/"/>
+    <image id="oqgw7e" name="714.png" path="/assets/enemy/手榴弹兵/"/>
+    <image id="oqgw7f" name="711.png" path="/assets/enemy/手榴弹兵/"/>
+    <image id="oqgw7g" name="770.png" path="/assets/enemy/死亡1/"/>
+    <image id="oqgw7h" name="768.png" path="/assets/enemy/死亡1/"/>
+    <image id="oqgw7i" name="766.png" path="/assets/enemy/死亡1/"/>
+    <image id="oqgw7j" name="764.png" path="/assets/enemy/死亡1/"/>
+    <image id="oqgw7k" name="762.png" path="/assets/enemy/死亡1/"/>
+    <image id="oqgw7l" name="760.png" path="/assets/enemy/死亡1/"/>
+    <image id="oqgw7m" name="758.png" path="/assets/enemy/死亡1/"/>
+    <image id="oqgw7n" name="756.png" path="/assets/enemy/死亡1/"/>
+    <image id="oqgw7o" name="754.png" path="/assets/enemy/死亡1/"/>
+    <image id="oqgw7p" name="752.png" path="/assets/enemy/死亡1/"/>
+    <image id="oqgw7q" name="750.png" path="/assets/enemy/死亡1/"/>
+    <image id="oqgw7v" name="785.png" path="/assets/enemy/死亡2/"/>
+    <image id="oqgw7w" name="783.png" path="/assets/enemy/死亡2/"/>
+    <image id="oqgw7x" name="781.png" path="/assets/enemy/死亡2/"/>
+    <image id="oqgw7y" name="779.png" path="/assets/enemy/死亡2/"/>
+    <image id="oqgw7z" name="777.png" path="/assets/enemy/死亡2/"/>
+    <image id="oqgw80" name="775.png" path="/assets/enemy/死亡2/"/>
+    <image id="oqgw81" name="773.png" path="/assets/enemy/死亡2/"/>
+    <image id="oqgw82" name="806.png" path="/assets/enemy/死亡3/"/>
+    <image id="oqgw83" name="804.png" path="/assets/enemy/死亡3/"/>
+    <image id="oqgw84" name="802.png" path="/assets/enemy/死亡3/"/>
+    <image id="oqgw85" name="800.png" path="/assets/enemy/死亡3/"/>
+    <image id="oqgw86" name="798.png" path="/assets/enemy/死亡3/"/>
+    <image id="oqgw87" name="796.png" path="/assets/enemy/死亡3/"/>
+    <image id="oqgw88" name="794.png" path="/assets/enemy/死亡3/"/>
+    <image id="oqgw89" name="792.png" path="/assets/enemy/死亡3/"/>
+    <image id="oqgw8a" name="790.png" path="/assets/enemy/死亡3/"/>
+    <image id="oqgw8b" name="788.png" path="/assets/enemy/死亡3/"/>
+    <image id="oqgw8c" name="829.png" path="/assets/enemy/死亡4/"/>
+    <image id="oqgw8d" name="827.png" path="/assets/enemy/死亡4/"/>
+    <image id="oqgw8e" name="825.png" path="/assets/enemy/死亡4/"/>
+    <image id="oqgw8f" name="823.png" path="/assets/enemy/死亡4/"/>
+    <image id="oqgw8g" name="821.png" path="/assets/enemy/死亡4/"/>
+    <image id="oqgw8h" name="819.png" path="/assets/enemy/死亡4/"/>
+    <image id="oqgw8i" name="817.png" path="/assets/enemy/死亡4/"/>
+    <image id="oqgw8j" name="815.png" path="/assets/enemy/死亡4/"/>
+    <image id="oqgw8k" name="813.png" path="/assets/enemy/死亡4/"/>
+    <image id="oqgw8l" name="811.png" path="/assets/enemy/死亡4/"/>
+    <image id="oqgw8m" name="809.png" path="/assets/enemy/死亡4/"/>
+    <image id="oqgw8n" name="708.png" path="/assets/enemy/火桶兵/开火/"/>
+    <image id="oqgw8o" name="706.png" path="/assets/enemy/火桶兵/开火/"/>
+    <image id="oqgw8p" name="704.png" path="/assets/enemy/火桶兵/开火/"/>
+    <image id="oqgw8q" name="702.png" path="/assets/enemy/火桶兵/开火/"/>
+    <image id="oqgw8r" name="700.png" path="/assets/enemy/火桶兵/开火/"/>
+    <image id="oqgw8s" name="640.png" path="/assets/enemy/火桶兵/跑/"/>
+    <image id="oqgw8t" name="638.png" path="/assets/enemy/火桶兵/跑/"/>
+    <image id="oqgw8u" name="636.png" path="/assets/enemy/火桶兵/跑/"/>
+    <image id="oqgw8v" name="634.png" path="/assets/enemy/火桶兵/跑/"/>
+    <image id="oqgw8w" name="632.png" path="/assets/enemy/火桶兵/跑/"/>
+    <image id="oqgw8x" name="618.png" path="/assets/enemy/跑/"/>
+    <image id="oqgw8y" name="616.png" path="/assets/enemy/跑/"/>
+    <image id="oqgw8z" name="614.png" path="/assets/enemy/跑/"/>
+    <image id="oqgw90" name="612.png" path="/assets/enemy/跑/"/>
+    <image id="oqgw91" name="610.png" path="/assets/enemy/跑/"/>
+    <image id="oqgw92" name="1977.png" path="/assets/enemy/迫击炮兵/"/>
+    <image id="oqgw93" name="1975.png" path="/assets/enemy/迫击炮兵/"/>
+    <image id="oqgw94" name="1973.png" path="/assets/enemy/迫击炮兵/"/>
+    <image id="oqgw95" name="1971.png" path="/assets/enemy/迫击炮兵/"/>
+    <image id="oqgw96" name="1969.png" path="/assets/enemy/迫击炮兵/"/>
+    <image id="oqgw97" name="1967.png" path="/assets/enemy/迫击炮兵/"/>
+    <image id="oqgw98" name="1964.png" path="/assets/enemy/迫击炮兵/"/>
+    <image id="oqgw99" name="1962.png" path="/assets/enemy/迫击炮兵/"/>
+    <image id="oqgw9a" name="1960.png" path="/assets/enemy/迫击炮兵/"/>
+    <image id="oqgw9b" name="1957.png" path="/assets/enemy/迫击炮兵/"/>
+    <image id="oqgw9c" name="1955.png" path="/assets/enemy/迫击炮兵/"/>
+    <image id="oqgw9d" name="mis.png" path="/assets/"/>
+    <image id="oqgw9e" name="1952.png" path="/assets/enemy/迫击炮兵/"/>
+    <image id="oqgw9f" name="1950.png" path="/assets/enemy/迫击炮兵/"/>
+    <image id="oqgw9g" name="1947.png" path="/assets/enemy/迫击炮兵/"/>
+    <image id="oqgw9h" name="1945.png" path="/assets/enemy/迫击炮兵/"/>
+    <image id="oqgw9i" name="1943.png" path="/assets/enemy/迫击炮兵/"/>
+    <movieclip id="oqgw9j" name="death_1.jta" path="/Component/enemy/enemyAni/" exported="true"/>
+    <movieclip id="oqgw9o" name="death_2.jta" path="/Component/enemy/enemyAni/" exported="true"/>
+    <movieclip id="oqgw9p" name="death_3.jta" path="/Component/enemy/enemyAni/" exported="true"/>
+    <movieclip id="oqgw9q" name="death_4.jta" path="/Component/enemy/enemyAni/" exported="true"/>
+    <movieclip id="oqgw9r" name="shock.jta" path="/Component/enemy/enemyAni/" exported="true"/>
+    <movieclip id="oqgw9s" name="enemy_1.jta" path="/Component/enemy/enemyAni/" exported="true"/>
+    <movieclip id="oqgw9t" name="enemy_2.jta" path="/Component/enemy/enemyAni/" exported="true"/>
+    <movieclip id="oqgw9u" name="enemy_3.jta" path="/Component/enemy/enemyAni/" exported="true"/>
+    <movieclip id="oqgw9v" name="enemy_4.jta" path="/Component/enemy/enemyAni/" exported="true"/>
+    <movieclip id="oqgw9w" name="enemy_fire_3.jta" path="/Component/enemy/enemyAni/" exported="true"/>
+    <component id="oqgw9y" name="enemy1.xml" path="/Component/enemy/"/>
+    <movieclip id="oqgw9z" name="enemyRun.jta" path="/Component/enemy/enemyAni/" exported="true"/>
+    <component id="oqgwa0" name="enemy2.xml" path="/Component/enemy/"/>
+    <component id="oqgwa1" name="enemy3.xml" path="/Component/enemy/"/>
+    <component id="oqgwa2" name="enemy4.xml" path="/Component/enemy/"/>
+    <movieclip id="oqgwa3" name="enemy_fire_4.jta" path="/Component/enemy/enemyAni/" exported="true"/>
+    <component id="oqgwa5" name="enemy.xml" path="/Component/enemy/" exported="true"/>
+    <image id="oqgwa6" name="607.png" path="/assets/enemy/惊吓/"/>
+    <image id="oqgwa7" name="605.png" path="/assets/enemy/惊吓/"/>
+    <image id="oqgwa8" name="603.png" path="/assets/enemy/惊吓/"/>
+    <image id="oqgwa9" name="591.png" path="/assets/enemy/战立/"/>
+    <image id="oqgwaa" name="589.png" path="/assets/enemy/战立/"/>
+    <image id="oqgwab" name="587.png" path="/assets/enemy/战立/"/>
+    <image id="oqgwac" name="747.png" path="/assets/enemy/死前/"/>
+    <image id="oqgwad" name="746.png" path="/assets/enemy/死前/"/>
+    <image id="oqgwae" name="745.png" path="/assets/enemy/死前/"/>
+    <image id="oqgwaf" name="744.png" path="/assets/enemy/死前/"/>
+    <movieclip id="oqgwag" name="enemyStay.jta" path="/Component/enemy/enemyAni/" exported="true"/>
+    <movieclip id="oqgwah" name="enemyDeath.jta" path="/Component/enemy/enemyAni/" exported="true"/>
+    <movieclip id="oqgwai" name="enemy_5.jta" path="/Component/enemy/enemyAni/" exported="true"/>
+    <movieclip id="oqgwaj" name="enemy_fire_5.jta" path="/Component/enemy/enemyAni/" exported="true"/>
+    <component id="oqgwak" name="leg.xml" path="/Component/player/"/>
+    <component id="oqgwal" name="body.xml" path="/Component/player/"/>
+    <component id="oqgwam" name="WarView.xml" path="/Component/view/" exported="true"/>
+    <image id="oqgwan" name="2487_ls_level_0_0.jpg" path="/Component/view/"/>
+    <image id="yqv7ao" name="zidan2.png" path="/assets/" exported="true"/>
+    <image id="yqv7ap" name="zidan1.png" path="/assets/" exported="true"/>
+    <image id="yqv7aq" name="252.png" path="/assets/"/>
+    <image id="yqv7ar" name="254.png" path="/assets/"/>
+    <image id="yqv7as" name="261.png" path="/assets/"/>
+    <component id="yqv7at" name="bullet1.xml" path="/Component/bullet/"/>
+    <component id="yqv7au" name="bullet2.xml" path="/Component/bullet/"/>
+    <image id="yqv7av" name="368.png" path="/assets/"/>
+    <image id="yqv7aw" name="366.png" path="/assets/"/>
+    <component id="yqv7ax" name="zidan.xml" path="/Component/bullet/" exported="true"/>
   </resources>
   <publish name="Game" path="..\bin\res" packageCount="2" genCode="true" codePath="..\src\fui"/>
 </packageDescription>
