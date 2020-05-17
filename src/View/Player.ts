@@ -8,14 +8,14 @@ import Bullet from "./Bullet";
 export default class Player {
 
     public rolePlayer: WXFUI_Player;
-    private playerAni: PlayerAni;
-    private body: fairygui.GLoader;
-    private fireTypeCtl: fairygui.Controller;
-    private firePosCtl: fairygui.Controller;
-    private firePos1: fairygui.GLoader;
-    private firePos2: fairygui.GLoader;
+    public playerAni: PlayerAni;
+    public body: fairygui.GLoader;
+    public fireTypeCtl: fairygui.Controller;
+    public firePosCtl: fairygui.Controller;
+    public firePos1: fairygui.GLoader;
+    public firePos2: fairygui.GLoader;
 
-    private direction: number = 0;
+    public direction: number = 0;
 
     private sRun: boolean = false;//人物是否在跑
     private sFire: boolean = false;
@@ -26,7 +26,10 @@ export default class Player {
 
     private speed: number = 5;
     private jumpHigh: number = 200;
-    private weaponType: number = 1;
+    public weaponType: number = 1;
+
+    private rigidBody: Laya.RigidBody;
+    private boxCollider: Laya.BoxCollider;
 
     constructor() { }
 
@@ -46,6 +49,27 @@ export default class Player {
         this.playerAni = new PlayerAni();
         this.playerAni.initView();
 
+
+
+        this.rolePlayer.displayObject.addComponent(Laya.RigidBody);
+        this.rolePlayer.displayObject.addComponent(Laya.BoxCollider);
+        this.rigidBody = this.rolePlayer.displayObject.getComponent(Laya.RigidBody);
+        this.boxCollider = this.rolePlayer.displayObject.getComponent(Laya.BoxCollider);
+        // this.rigidBody.setVelocity({ x: this.speed, y: 0 });
+        this.rigidBody.linearDamping = 0;
+        this.boxCollider.width = this.rolePlayer.displayObject.width;
+        this.boxCollider.height = this.rolePlayer.displayObject.height;
+        // this.boxCollider.refresh
+        this.boxCollider.friction = 0;
+        console.log(this.boxCollider);
+        // r.group = 1;
+        // Laya.Browser.window.matter  _sysPhysicToNode
+
+        // this.rolePlayer.displayObject
+        // this.rigidBody.type = "kinematic";
+
+        // Laya.Physics.I.positionIterations
+
         this.setStay();
         this.setRight();
 
@@ -53,9 +77,21 @@ export default class Player {
         Laya.stage.on(Laya.Event.KEY_UP, this, this.keyUpEvent);
         Laya.stage.on(Laya.Event.MOUSE_DOWN, this, this.setFire);
         Laya.stage.on(Laya.Event.MOUSE_UP, this, this.setFireEnd);
-        // Laya.Rectangle
-        // this.rolePlayer.displayObject.getBounds
 
+        var nu: number = 0;
+        // Laya.timer.loop(500, this, () => {
+        //     nu++;
+        //     console.log("roleplayer--" + this.rolePlayer.x, this.rolePlayer.y);
+        //     console.log(this.boxCollider);
+        //     var w = this.rigidBody.getWorldCenter();
+        //     console.log("worldpos22");
+        //     console.log(w)
+        //     // this.rolePlayer.x = w.x;
+        //     // this.rolePlayer.y = w.y;
+        //     if (nu > 6) {
+        //         Laya.timer.clearAll(this);
+        //     }
+        // })
     };
 
     private keyUpEvent(e: any): void {
@@ -66,7 +102,7 @@ export default class Player {
                 if (this.keyRight == false) {
                     this.sRun = false;
                     if (this.keyJump == false)
-                        this.setStay();
+                        this.stopMove();
                 }
                 break;
             case 68:
@@ -74,7 +110,7 @@ export default class Player {
                 if (this.keyLeft == false) {
                     this.sRun = false;
                     if (this.keyJump == false)
-                        this.setStay();
+                        this.stopMove();
                 }
                 break;
 
@@ -158,32 +194,57 @@ export default class Player {
                 this.bodyLeg.content.rewind();
                 return;
             }
-            this.setStay();
+            this.stopMove();
         }));
     }
 
     // private runTime: number = 50;
     public setRun(): void {
         if (this.sRun) return;
-        // this.body.url = "ui://Game/player_stay_" + this.weaponType;
+        if (this.sFire) {
+            this.body.url = "ui://Game/player_fire_" + this.weaponType;
+        } else {
+            this.body.url = "ui://Game/player_stay_" + this.weaponType;
+        }
         this.bodyLeg.url = "ui://Game/legMove";
         this.sRun = true;
         Laya.timer.clear(this, this.stillRun);
         Laya.timer.frameLoop(1, this, this.stillRun);
+
     }
 
     public stillRun(): void {
+        var w = this.rigidBody.getWorldCenter();
         if (this.direction == 1) {
-            this.rolePlayer.x += this.speed;
-            if (this.rolePlayer.x >= Laya.Browser.clientWidth / 2) {
-                this.rolePlayer.x = Laya.Browser.clientWidth / 2;
+            // this.rigidBody.setVelocity({ x: this.speed, y: 0 });
+            this.rolePlayer.x += this.speed;//做一个卡点的坐标可以随意移动
+            if (this.rolePlayer.x - Math.abs(ViewManager.instance.warView.warView.x) >= Laya.Browser.clientWidth / 2) {
+                // this.rolePlayer.x = Laya.Browser.clientWidth / 2;
+                // w.x = Laya.Browser.clientWidth / 2;
                 ViewManager.instance.updateViewPort(this.speed);
             }
+            // if (w.x - Math.abs(ViewManager.instance.warView.warView.x) >= Laya.Browser.clientWidth / 2) {
+            //     // this.rolePlayer.x = Laya.Browser.clientWidth / 2;
+            //     ViewManager.instance.updateViewPort(this.speed);
+            // }
         } else {
-            this.rolePlayer.x -= this.speed;
-            if (this.rolePlayer.x < 1)
-                this.rolePlayer.x = 1;
+            this.rigidBody.setVelocity({ x: -this.speed, y: 0 });
+            if (w.x < Math.abs(ViewManager.instance.warView.warView.x))
+                w.x = Math.abs(ViewManager.instance.warView.warView.x);
         }
+        // else {
+        //     this.rolePlayer.x -= this.speed;
+        //     if (this.rolePlayer.x < Math.abs(ViewManager.instance.warView.warView.x))
+        //         this.rolePlayer.x = Math.abs(ViewManager.instance.warView.warView.x);
+        // }
+
+
+        console.log("roleplayer--" + this.rolePlayer.x, this.rolePlayer.y);
+        // console.log(this.boxCollider);
+        console.log("www--", w.x, w.y);
+        var b = this.rigidBody.getCenter();
+        console.log("bbb--", b.x, b.y);
+
     }
 
     public setFire(): void {
@@ -194,7 +255,7 @@ export default class Player {
         this["firePos" + this.weaponType].visible = true;
         Laya.timer.clear(this, this.stillFire);
         Laya.timer.loop(100, this, this.stillFire);
-        this.createBullet();
+        ViewManager.instance.createBullet();
         if (this.sRun) {
             this.bodyLeg.url = "ui://Game/legMove";
             return;
@@ -209,25 +270,11 @@ export default class Player {
             this["firePos" + this.weaponType].visible = false;
         } else {
             this["firePos" + this.weaponType].visible = true;
-            this.createBullet();
+            ViewManager.instance.createBullet();
         }
     }
 
-    private createBullet(): void {
-        var b: Bullet = new Bullet();
-        b.initView();
-        b.setBulletData(this.weaponType, this.direction);
-        ViewManager.instance.warView.warView.addChild(b.view);
-        var p: Laya.Point = this.rolePlayer.localToGlobal(this["firePos" + this.weaponType].x, this["firePos" + this.weaponType].y);
-        if (this.direction == 1) {
-            b.view.x = p.x + b.view.width;
-            b.view.y = p.y - 20;
-        } else {
-            b.view.x = p.x - b.view.width;
-            b.view.y = p.y - 20;
-        }
-        b.flyBullet();
-    }
+
 
     private setFireEnd(): void {
         Laya.timer.clear(this, this.stillFire);
@@ -271,15 +318,19 @@ export default class Player {
             this.bodyLeg.url = "ui://Game/legJump";
     }
 
-    public setStay(): void {
-        this.body.url = "ui://Game/player_stay_" + this.weaponType;
-        this.bodyLeg.url = "ui://Game/legStay";
-        // this.bodyLeg.content.rewind();
+    public stopMove(): void {
         this.keyLeft = false;
         this.keyRight = false;
         this.sRun = false;
         this.keyJump = false;
+        this.bodyLeg.url = "ui://Game/legStay";
+        this.rigidBody.setVelocity({ x: 0, y: 0 });
         Laya.timer.clear(this, this.stillRun);
+    }
+
+    public setStay(): void {
+        this.body.url = "ui://Game/player_stay_" + this.weaponType;
+        this.stopMove();
         Laya.timer.clear(this, this.stillFire);
     }
 
@@ -292,6 +343,16 @@ export default class Player {
         this.body.url = "ui://Game/player_stay_" + this.weaponType;
         if (this.sRun) this.bodyLeg.url = "ui://Game/legMove";
         if (this.keyJump) this.bodyLeg.url = "ui://Game/legJump";
+    }
+
+    public beHit(): void {
+        Laya.timer.clear(this, this.setColor);
+        this.body.color = "#ff0000";
+        Laya.timer.once(200, this, this.setColor);
+        console.log("player--be--hit");
+    }
+    private setColor(): void {
+        this.body.color = "#ffffff";
     }
 
     private get bodyComponent(): fairygui.GComponent {

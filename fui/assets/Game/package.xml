@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <packageDescription id="bq3h5ins">
   <resources>
-    <component id="gww20" name="BackGround.xml" path="/Component/view/" exported="true"/>
+    <component id="gww20" name="BackGround.xml" path="/Component/view/"/>
     <image id="cqp91" name="812.jpg" path="/assets/"/>
     <component id="cqp92" name="PlayerAction.xml" path="/Component/player/"/>
     <image id="cqp93" name="1462.png" path="/assets/player/蹲-机枪/"/>
@@ -267,16 +267,16 @@
     <movieclip id="oqgw9p" name="death_3.jta" path="/Component/enemy/enemyAni/" exported="true"/>
     <movieclip id="oqgw9q" name="death_4.jta" path="/Component/enemy/enemyAni/" exported="true"/>
     <movieclip id="oqgw9r" name="shock.jta" path="/Component/enemy/enemyAni/" exported="true"/>
-    <movieclip id="oqgw9s" name="enemy_1.jta" path="/Component/enemy/enemyAni/" exported="true"/>
-    <movieclip id="oqgw9t" name="enemy_2.jta" path="/Component/enemy/enemyAni/" exported="true"/>
-    <movieclip id="oqgw9u" name="enemy_3.jta" path="/Component/enemy/enemyAni/" exported="true"/>
-    <movieclip id="oqgw9v" name="enemy_4.jta" path="/Component/enemy/enemyAni/" exported="true"/>
+    <movieclip id="oqgw9s" name="enemy_fire_1.jta" path="/Component/enemy/enemyAni/" exported="true"/>
+    <movieclip id="oqgw9t" name="enemy_fire_2.jta" path="/Component/enemy/enemyAni/" exported="true"/>
+    <movieclip id="oqgw9u" name="enemy_run_3.jta" path="/Component/enemy/enemyAni/" exported="true"/>
+    <movieclip id="oqgw9v" name="enemy_run_4.jta" path="/Component/enemy/enemyAni/" exported="true"/>
     <movieclip id="oqgw9w" name="enemy_fire_3.jta" path="/Component/enemy/enemyAni/" exported="true"/>
-    <component id="oqgw9y" name="enemy1.xml" path="/Component/enemy/"/>
-    <movieclip id="oqgw9z" name="enemyRun.jta" path="/Component/enemy/enemyAni/" exported="true"/>
-    <component id="oqgwa0" name="enemy2.xml" path="/Component/enemy/"/>
-    <component id="oqgwa1" name="enemy3.xml" path="/Component/enemy/"/>
-    <component id="oqgwa2" name="enemy4.xml" path="/Component/enemy/"/>
+    <component id="oqgw9y" name="enemy1.xml" path="/Component/enemy/" exported="true"/>
+    <movieclip id="oqgw9z" name="enemy_run_2.jta" path="/Component/enemy/enemyAni/" exported="true"/>
+    <component id="oqgwa0" name="enemy2.xml" path="/Component/enemy/" exported="true"/>
+    <component id="oqgwa1" name="enemy3.xml" path="/Component/enemy/" exported="true"/>
+    <component id="oqgwa2" name="enemy4.xml" path="/Component/enemy/" exported="true"/>
     <movieclip id="oqgwa3" name="enemy_fire_4.jta" path="/Component/enemy/enemyAni/" exported="true"/>
     <component id="oqgwa5" name="enemy.xml" path="/Component/enemy/" exported="true"/>
     <image id="oqgwa6" name="607.png" path="/assets/enemy/惊吓/"/>
@@ -289,9 +289,9 @@
     <image id="oqgwad" name="746.png" path="/assets/enemy/死前/"/>
     <image id="oqgwae" name="745.png" path="/assets/enemy/死前/"/>
     <image id="oqgwaf" name="744.png" path="/assets/enemy/死前/"/>
-    <movieclip id="oqgwag" name="enemyStay.jta" path="/Component/enemy/enemyAni/" exported="true"/>
+    <movieclip id="oqgwag" name="enemyStay_1.jta" path="/Component/enemy/enemyAni/" exported="true"/>
     <movieclip id="oqgwah" name="enemyDeath.jta" path="/Component/enemy/enemyAni/" exported="true"/>
-    <movieclip id="oqgwai" name="enemy_5.jta" path="/Component/enemy/enemyAni/" exported="true"/>
+    <movieclip id="oqgwai" name="enemy_fire5.jta" path="/Component/enemy/enemyAni/" exported="true"/>
     <movieclip id="oqgwaj" name="enemy_fire_5.jta" path="/Component/enemy/enemyAni/" exported="true"/>
     <component id="oqgwak" name="leg.xml" path="/Component/player/"/>
     <component id="oqgwal" name="body.xml" path="/Component/player/"/>
@@ -307,6 +307,20 @@
     <image id="yqv7av" name="368.png" path="/assets/"/>
     <image id="yqv7aw" name="366.png" path="/assets/"/>
     <component id="yqv7ax" name="zidan.xml" path="/Component/bullet/" exported="true"/>
+    <image id="yqv7ay" name="600.png" path="/assets/enemy/战立2/"/>
+    <image id="yqv7az" name="598.png" path="/assets/enemy/战立2/"/>
+    <image id="yqv7b0" name="596.png" path="/assets/enemy/战立2/"/>
+    <image id="yqv7b1" name="594.png" path="/assets/enemy/战立2/"/>
+    <image id="yqv7b2" name="546.png" path="/assets/enemy/机枪兵/静止/"/>
+    <image id="yqv7b3" name="544.png" path="/assets/enemy/机枪兵/静止/"/>
+    <image id="yqv7b4" name="551.png" path="/assets/enemy/火桶兵/静止/"/>
+    <image id="yqv7b5" name="549.png" path="/assets/enemy/火桶兵/静止/"/>
+    <movieclip id="yqv7b6" name="enemy_run_1.jta" path="/Component/enemy/enemyAni/" exported="true"/>
+    <movieclip id="yqv7b7" name="enemy_run_5.jta" path="/Component/enemy/enemyAni/" exported="true"/>
+    <component id="yqv7b8" name="enemy5.xml" path="/Component/enemy/" exported="true"/>
+    <movieclip id="yqv7b9" name="enemyStay_2.jta" path="/Component/enemy/enemyAni/" exported="true"/>
+    <movieclip id="yqv7ba" name="enemyStay_3.jta" path="/Component/enemy/enemyAni/" exported="true"/>
+    <movieclip id="yqv7bb" name="enemyStay_4.jta" path="/Component/enemy/enemyAni/" exported="true"/>
   </resources>
   <publish name="Game" path="..\bin\res" packageCount="2" genCode="true" codePath="..\src\fui"/>
 </packageDescription>

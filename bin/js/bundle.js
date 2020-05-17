@@ -29,12 +29,19 @@
             this.bg.url = "res/map_1.jpg";
             this.bg.setScale(3.5, 3.5);
             this.img = this.warView.getChildAt(1);
+            this.img.displayObject.addComponent(Laya.RigidBody);
+            this.img.displayObject.addComponent(Laya.BoxCollider);
+            this.boxCollider = this.img.displayObject.getComponent(Laya.BoxCollider);
+            this.rigidBody = this.img.displayObject.getComponent(Laya.RigidBody);
+            this.boxCollider.width = this.img.displayObject.width;
+            this.boxCollider.height = this.img.displayObject.height;
+            this.rigidBody.type = "static";
+            Laya.Physics.I.worldRoot = this.warView.displayObject;
         }
         ;
         updateViewPort(moveX) {
-            this.bg.x -= moveX;
-            this.img.x -= moveX;
-            console.log("this.bg.x:" + this.bg.x);
+            this.warView.x -= moveX;
+            console.log("this.warView.x:" + this.warView.x);
         }
     }
 
@@ -65,50 +72,6 @@
     PlayerData.ENEMY_FIRE = 4;
     PlayerData.ENEMY_MOR = 4;
 
-    class Bullet extends Laya.Script {
-        constructor() {
-            super();
-            this.bulletType = 1;
-            this.direction = 1;
-            this.theEnd = false;
-            this.speed = 35;
-            this.dis = 0;
-        }
-        initView() {
-            this.view = fairygui.UIPackage.createObject("Game", "zidan");
-            this.zidan = this.view.getChildAt(0).asLoader;
-        }
-        setBulletData(type, dir) {
-            this.bulletType = type;
-            this.direction = dir;
-            this.zidan.url = "ui://Game/zidan" + this.bulletType;
-        }
-        flyBullet() {
-            Laya.timer.frameLoop(3, this, this.updateView);
-        }
-        updateView() {
-            this.dis += this.speed;
-            if (this.direction == 1) {
-                this.view.x += this.speed;
-                if (this.dis > Laya.Browser.clientWidth) {
-                    Laya.timer.clear(this, this.updateView);
-                    this.dis = 0;
-                }
-            }
-            else {
-                this.view.x -= this.speed;
-                if (this.view.x < 0) {
-                    Laya.timer.clear(this, this.updateView);
-                    this.dis = 0;
-                }
-            }
-        }
-        onEnable() {
-        }
-        onDisable() {
-        }
-    }
-
     class Player {
         constructor() {
             this.direction = 0;
@@ -135,12 +98,22 @@
             this.firePos1.visible = this.firePos2.visible = false;
             this.playerAni = new PlayerAni();
             this.playerAni.initView();
+            this.rolePlayer.displayObject.addComponent(Laya.RigidBody);
+            this.rolePlayer.displayObject.addComponent(Laya.BoxCollider);
+            this.rigidBody = this.rolePlayer.displayObject.getComponent(Laya.RigidBody);
+            this.boxCollider = this.rolePlayer.displayObject.getComponent(Laya.BoxCollider);
+            this.rigidBody.linearDamping = 0;
+            this.boxCollider.width = this.rolePlayer.displayObject.width;
+            this.boxCollider.height = this.rolePlayer.displayObject.height;
+            this.boxCollider.friction = 0;
+            console.log(this.boxCollider);
             this.setStay();
             this.setRight();
             Laya.stage.on(Laya.Event.KEY_DOWN, this, this.keyDowmEvent);
             Laya.stage.on(Laya.Event.KEY_UP, this, this.keyUpEvent);
             Laya.stage.on(Laya.Event.MOUSE_DOWN, this, this.setFire);
             Laya.stage.on(Laya.Event.MOUSE_UP, this, this.setFireEnd);
+            var nu = 0;
         }
         ;
         keyUpEvent(e) {
@@ -151,7 +124,7 @@
                     if (this.keyRight == false) {
                         this.sRun = false;
                         if (this.keyJump == false)
-                            this.setStay();
+                            this.stopMove();
                     }
                     break;
                 case 68:
@@ -159,7 +132,7 @@
                     if (this.keyLeft == false) {
                         this.sRun = false;
                         if (this.keyJump == false)
-                            this.setStay();
+                            this.stopMove();
                     }
                     break;
             }
@@ -242,30 +215,40 @@
                     this.bodyLeg.content.rewind();
                     return;
                 }
-                this.setStay();
+                this.stopMove();
             }));
         }
         setRun() {
             if (this.sRun)
                 return;
+            if (this.sFire) {
+                this.body.url = "ui://Game/player_fire_" + this.weaponType;
+            }
+            else {
+                this.body.url = "ui://Game/player_stay_" + this.weaponType;
+            }
             this.bodyLeg.url = "ui://Game/legMove";
             this.sRun = true;
             Laya.timer.clear(this, this.stillRun);
             Laya.timer.frameLoop(1, this, this.stillRun);
         }
         stillRun() {
+            var w = this.rigidBody.getWorldCenter();
             if (this.direction == 1) {
                 this.rolePlayer.x += this.speed;
-                if (this.rolePlayer.x >= Laya.Browser.clientWidth / 2) {
-                    this.rolePlayer.x = Laya.Browser.clientWidth / 2;
+                if (this.rolePlayer.x - Math.abs(ViewManager.instance.warView.warView.x) >= Laya.Browser.clientWidth / 2) {
                     ViewManager.instance.updateViewPort(this.speed);
                 }
             }
             else {
-                this.rolePlayer.x -= this.speed;
-                if (this.rolePlayer.x < 1)
-                    this.rolePlayer.x = 1;
+                this.rigidBody.setVelocity({ x: -this.speed, y: 0 });
+                if (w.x < Math.abs(ViewManager.instance.warView.warView.x))
+                    w.x = Math.abs(ViewManager.instance.warView.warView.x);
             }
+            console.log("roleplayer--" + this.rolePlayer.x, this.rolePlayer.y);
+            console.log("www--", w.x, w.y);
+            var b = this.rigidBody.getCenter();
+            console.log("bbb--", b.x, b.y);
         }
         setFire() {
             if (this.sFire)
@@ -276,7 +259,7 @@
             this["firePos" + this.weaponType].visible = true;
             Laya.timer.clear(this, this.stillFire);
             Laya.timer.loop(100, this, this.stillFire);
-            this.createBullet();
+            ViewManager.instance.createBullet();
             if (this.sRun) {
                 this.bodyLeg.url = "ui://Game/legMove";
                 return;
@@ -291,24 +274,8 @@
             }
             else {
                 this["firePos" + this.weaponType].visible = true;
-                this.createBullet();
+                ViewManager.instance.createBullet();
             }
-        }
-        createBullet() {
-            var b = new Bullet();
-            b.initView();
-            b.setBulletData(this.weaponType, this.direction);
-            ViewManager.instance.warView.warView.addChild(b.view);
-            var p = this.rolePlayer.localToGlobal(this["firePos" + this.weaponType].x, this["firePos" + this.weaponType].y);
-            if (this.direction == 1) {
-                b.view.x = p.x + b.view.width;
-                b.view.y = p.y - 20;
-            }
-            else {
-                b.view.x = p.x - b.view.width;
-                b.view.y = p.y - 20;
-            }
-            b.flyBullet();
         }
         setFireEnd() {
             Laya.timer.clear(this, this.stillFire);
@@ -350,14 +317,18 @@
             if (this.keyJump)
                 this.bodyLeg.url = "ui://Game/legJump";
         }
-        setStay() {
-            this.body.url = "ui://Game/player_stay_" + this.weaponType;
-            this.bodyLeg.url = "ui://Game/legStay";
+        stopMove() {
             this.keyLeft = false;
             this.keyRight = false;
             this.sRun = false;
             this.keyJump = false;
+            this.bodyLeg.url = "ui://Game/legStay";
+            this.rigidBody.setVelocity({ x: 0, y: 0 });
             Laya.timer.clear(this, this.stillRun);
+        }
+        setStay() {
+            this.body.url = "ui://Game/player_stay_" + this.weaponType;
+            this.stopMove();
             Laya.timer.clear(this, this.stillFire);
         }
         changeWeaponType() {
@@ -373,6 +344,15 @@
             if (this.keyJump)
                 this.bodyLeg.url = "ui://Game/legJump";
         }
+        beHit() {
+            Laya.timer.clear(this, this.setColor);
+            this.body.color = "#ff0000";
+            Laya.timer.once(200, this, this.setColor);
+            console.log("player--be--hit");
+        }
+        setColor() {
+            this.body.color = "#ffffff";
+        }
         get bodyComponent() {
             return this.body.component;
         }
@@ -386,23 +366,22 @@
 
     class EnemyAni {
         constructor() {
-            this.enemyType = 1;
+            this.enemyType = 3;
         }
         initView(type) {
             this.enemyType = type;
-            this.death_1 = fairygui.UIPackage.createObject("Game", "death_1").asMovieClip;
-            this.death_2 = fairygui.UIPackage.createObject("Game", "death_2").asMovieClip;
-            this.death_3 = fairygui.UIPackage.createObject("Game", "death_3").asMovieClip;
-            this.death_4 = fairygui.UIPackage.createObject("Game", "death_4").asMovieClip;
-            this.fire_1 = fairygui.UIPackage.createObject("Game", "enemy_1").asMovieClip;
-            this.fire_2 = fairygui.UIPackage.createObject("Game", "enemy_2").asMovieClip;
-            this.fire_3 = fairygui.UIPackage.createObject("Game", "enemy_fire_3").asMovieClip;
-            this.fire_4 = fairygui.UIPackage.createObject("Game", "enemy_fire_4").asMovieClip;
-            this.run_1 = fairygui.UIPackage.createObject("Game", "enemyRun").asMovieClip;
-            this.run_2 = fairygui.UIPackage.createObject("Game", "enemyRun").asMovieClip;
-            this.run_3 = fairygui.UIPackage.createObject("Game", "enemy_3").asMovieClip;
-            this.run_4 = fairygui.UIPackage.createObject("Game", "enemy_4").asMovieClip;
-            this.stay = fairygui.UIPackage.createObject("Game", "enemyStay").asMovieClip;
+        }
+        get stayAniUrl() {
+            return "ui://Game/enemyStay_" + this.enemyType;
+        }
+        get deathAniUrl() {
+            return "ui://Game/death_" + this.enemyType;
+        }
+        get fireAniUrl() {
+            return "ui://Game/enemy_fire_" + this.enemyType;
+        }
+        get runAniUrl() {
+            return "ui://Game/enemy_run_" + this.enemyType;
         }
         get deathAni() {
             return this["death_" + this.enemyType];
@@ -425,71 +404,137 @@
             this.keyJump = false;
             this.speed = 10;
             this.jumpHigh = 200;
-            this.runTime = 0;
         }
         initView() {
-            this.enemy = fairygui.UIPackage.createObject("Game", "enemy");
-            this.enemy.setPivot(0.5, 0.5);
-            this.fire_pos = this.enemy.getChildAt(2);
-            this.enemyCtl = this.enemy.getController("ctl");
+            this.view = fairygui.UIPackage.createObject("Game", "enemy");
+            this.view.setPivot(0.5, 0.5);
+            this.enemyCtl = this.view.getController("ctl");
+            this.enemy = this.view.getChildAt(0);
             this.enemyAni = new EnemyAni();
             this.enemyAni.initView(this.enemyType);
+            this.enemy.url = "ui://Game/enemy" + this.enemyType;
         }
         ;
+        beHit() {
+            Laya.timer.clear(this, this.setColor);
+            this.enemy.color = "#ff0000";
+            Laya.timer.once(200, this, this.setColor);
+            console.log("enemy--be--hit");
+        }
+        setColor() {
+            this.enemy.color = "#ffffff";
+        }
         setLeft() {
             if (this.direction == -1)
                 return;
             this.direction = -1;
-            this.enemy.skewY = 0;
+            this.view.skewY = 0;
         }
         setRight() {
             if (this.direction == 1)
                 return;
             this.direction = 1;
-            this.enemy.skewY = 180;
+            this.view.skewY = 180;
+        }
+        setIdle() {
+            if (this.enemyType < 5) {
+            }
         }
         setRun() {
             if (this.sRun)
                 return;
-            this.enemy.addChild(this.enemyAni.runAni);
+            this.enemy.url = this.enemyAni.runAniUrl;
         }
         stillRun() {
             if (this.direction == 1) {
-                this.enemy.x += this.speed;
-                if (this.enemy.x >= Laya.Browser.clientWidth / 2) {
-                    this.enemy.x = Laya.Browser.clientWidth / 2;
-                    this.runTime++;
-                    ViewManager.instance.updateViewPort(this.runTime * this.speed);
+                this.view.x += this.speed;
+                if (this.view.x >= Laya.Browser.clientWidth / 2) {
+                    this.view.x = Laya.Browser.clientWidth / 2;
                 }
             }
             else {
-                this.enemy.x -= this.speed;
-                if (this.enemy.x < 1)
-                    this.enemy.x = 1;
+                this.view.x -= this.speed;
+                if (this.view.x < 1)
+                    this.view.x = 1;
             }
-            console.log("人物X坐标---", this.enemy.x);
         }
         setFire() {
             Laya.timer.loop(2000, this, this.setFire);
-            this.enemy.addChild(this.enemyAni.fireAni);
-            this.enemyAni.fireAni.setPlaySettings(1, -1, 1, 1);
+            this.enemy.url = this.enemyAni.fireAniUrl;
         }
         setBoom() {
         }
         setStay() {
-            this.enemy.addChild(this.enemyAni.stay);
+            this.enemy.url = this.enemyAni.stayAniUrl;
         }
         setBoomComplete() {
             this.setStay();
             console.log("rengshouliudan");
         }
         setDeath() {
-            this.enemy.addChild(this.enemyAni.deathAni);
+            this.enemy.url = this.enemyAni.deathAniUrl;
+        }
+        getBody() {
+            return this.enemy.component;
+        }
+        getBodyLoader() {
+            return this.enemy.component.getChildAt(0).asLoader;
+        }
+    }
+
+    class Bullet extends Laya.Script {
+        constructor() {
+            super();
+            this.bulletType = 1;
+            this.direction = 1;
+            this.theEnd = false;
+            this.speed = 35;
+            this.isEnd = false;
+            this.dis = 0;
+        }
+        initView() {
+            this.view = fairygui.UIPackage.createObject("Game", "zidan");
+            this.zidan = this.view.getChildAt(0).asLoader;
+        }
+        setBulletData(type, dir) {
+            this.bulletType = type;
+            this.direction = dir;
+            this.zidan.url = "ui://Game/zidan" + this.bulletType;
+            if (this.direction == 1) {
+                this.view.setSkew(0, 0);
+            }
+            else {
+                this.view.setSkew(180, 180);
+            }
+        }
+        updateView() {
+            this.dis += this.speed;
+            if (this.direction == 1) {
+                this.view.x += this.speed;
+            }
+            else {
+                this.view.x -= this.speed;
+                if (this.view.x < 0) {
+                    this.isEnd = true;
+                    this.dis = 0;
+                }
+            }
+            if (this.dis > Laya.Browser.clientWidth) {
+                this.dis = 0;
+                this.isEnd = true;
+            }
+        }
+        onEnable() {
+        }
+        onDisable() {
         }
     }
 
     class ViewManager {
         constructor() {
+            this.bulletArr = [];
+            this.enemyArr = [];
+            this.isChecking = false;
         }
         static get instance() {
             if (this._instance == null)
@@ -503,10 +548,40 @@
             this.player.rolePlayer.x = 200;
             this.player.rolePlayer.y = 400;
             console.log("开始初始化界面");
-            Laya.stage.addChild(this.enemy.enemy.displayObject);
+            this.warView.warView.addChild(this.enemy.enemy);
             this.enemy.enemy.x = 800;
             this.enemy.enemy.y = 400;
             this.enemy.setFire();
+            this.enemyArr.push(this.enemy);
+        }
+        createBullet() {
+            var b = new Bullet();
+            b.initView();
+            b.setBulletData(this.rolePlayer.weaponType, this.rolePlayer.direction);
+            var p = this.rolePlayer.rolePlayer.localToGlobal(this.rolePlayer["firePos" + this.rolePlayer.weaponType].x, this.rolePlayer["firePos" + this.rolePlayer.weaponType].y);
+            var y = this.bulletRandomY();
+            if (this.rolePlayer.direction == 1) {
+                b.view.x = Math.abs(this.warView.warView.x) + p.x + b.view.width - 20;
+                b.view.y = p.y - this.bulletRandomY();
+            }
+            else {
+                b.view.x = Math.abs(this.warView.warView.x) + p.x - b.view.width * 2 + 20;
+                b.view.y = p.y - this.bulletRandomY();
+            }
+            this.warView.warView.addChild(b.view);
+            this.bulletArr.push(b);
+            this.addFrameTimer();
+            return b;
+        }
+        addFrameTimer() {
+            if (this.isChecking)
+                return;
+            this.isChecking = true;
+            Laya.timer.frameLoop(3, this, this.updateBulletPos);
+        }
+        checkBulletHit() {
+            if (this.isChecking)
+                return;
         }
         initView() {
             this.warView = new WarView();
@@ -516,11 +591,40 @@
             this.player.initView();
             this.enemy.initView();
         }
-        getRolePlayer() {
+        get rolePlayer() {
             return this.player;
+        }
+        updateBulletPos() {
+            for (let i = this.bulletArr.length - 1; i >= 0; i--) {
+                var b = this.bulletArr[i];
+                if (b.isEnd) {
+                    b.view.dispose();
+                    this.bulletArr.splice(i, 1);
+                    b = null;
+                    continue;
+                }
+                b.updateView();
+                for (let j = 0; j < this.enemyArr.length; j++) {
+                    var e = this.enemyArr[j];
+                    if (b.view.x >= e.enemy.x && b.view.x < e.enemy.x + e.enemy.width && b.view.y >= e.enemy.y && b.view.y <= e.enemy.y + e.enemy.height) {
+                        e.beHit();
+                        b.view.dispose();
+                        this.bulletArr.splice(i, 1);
+                        b = null;
+                    }
+                }
+            }
+            if (this.bulletArr.length < 1 || this.enemyArr.length < 1) {
+                Laya.timer.clear(this, this.updateBulletPos);
+                this.isChecking = false;
+                console.log("clearFrameLoop");
+            }
         }
         updateViewPort(moveX) {
             this.warView.updateViewPort(moveX);
+        }
+        bulletRandomY() {
+            return Math.floor(Math.random() * 10) + 10;
         }
     }
 
@@ -547,7 +651,7 @@
             return this._instance;
         }
         loadAssetsData() {
-            AssetsManager.assetsData.push({ url: "res/Game_atlas0.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_1.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_2.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_3.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_4.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_5.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_6.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_7.png", type: Laya.Loader.IMAGE }, { url: "res/map_1.jpg", type: Laya.Loader.IMAGE }, { url: "res/Game.wxfui", type: Laya.Loader.BUFFER });
+            AssetsManager.assetsData.push({ url: "res/Game_atlas0.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_1.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_2.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_3.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_4.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_5.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_6.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_7.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_8.png", type: Laya.Loader.IMAGE }, { url: "res/map_1.jpg", type: Laya.Loader.IMAGE }, { url: "res/Game.wxfui", type: Laya.Loader.BUFFER });
             console.log(AssetsManager.assetsData);
             Laya.loader.create(AssetsManager.assetsData, Laya.Handler.create(this, this.loadComplete));
         }

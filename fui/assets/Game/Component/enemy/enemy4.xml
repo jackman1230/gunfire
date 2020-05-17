@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="91,91">
-  <controller name="ctl" pages="0,,1," selected="1"/>
   <displayList>
-    <loader id="n12_msdc" name="en1" xy="45,45" pivot="0.5,0.5" anchor="true" size="65,40" url="ui://bq3h5insoqgw9v" align="center" vAlign="middle">
-      <gearDisplay controller="ctl" pages="0"/>
-    </loader>
-    <loader id="n13_msdc" name="en2" xy="45,45" pivot="0.5,0.5" anchor="true" size="85,53" url="ui://bq3h5insoqgwa3" align="center" vAlign="middle">
-      <gearDisplay controller="ctl" pages="1"/>
-    </loader>
+    <loader id="n12_msdc" name="en1" xy="45,45" pivot="0.5,0.5" anchor="true" size="65,40" url="ui://bq3h5insoqgw9v" align="center" vAlign="middle"/>
     <text id="n14_oqgw" name="firePos" xy="-70,12" size="13,19" fontSize="12" autoSize="none" text=""/>
   </displayList>
 </component>

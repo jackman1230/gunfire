@@ -20,31 +20,47 @@ export default class EnemyAni {
     // public legMove: fairygui.GMovieClip;
     public stay: fairygui.GMovieClip;
 
-    public enemyType: number = 1;
+    public enemyType: number = 3;
 
     constructor() { }
 
     public initView(type: number): void {
         this.enemyType = type;
-        this.death_1 = fairygui.UIPackage.createObject("Game", "death_1").asMovieClip;
-        this.death_2 = fairygui.UIPackage.createObject("Game", "death_2").asMovieClip;
-        this.death_3 = fairygui.UIPackage.createObject("Game", "death_3").asMovieClip;
-        this.death_4 = fairygui.UIPackage.createObject("Game", "death_4").asMovieClip;
+        // this.death_1 = fairygui.UIPackage.createObject("Game", "death_1").asMovieClip;
+        // this.death_2 = fairygui.UIPackage.createObject("Game", "death_2").asMovieClip;
+        // this.death_3 = fairygui.UIPackage.createObject("Game", "death_3").asMovieClip;
+        // this.death_4 = fairygui.UIPackage.createObject("Game", "death_4").asMovieClip;
 
-        this.fire_1 = fairygui.UIPackage.createObject("Game", "enemy_1").asMovieClip;
-        this.fire_2 = fairygui.UIPackage.createObject("Game", "enemy_2").asMovieClip;
-        this.fire_3 = fairygui.UIPackage.createObject("Game", "enemy_fire_3").asMovieClip;
-        this.fire_4 = fairygui.UIPackage.createObject("Game", "enemy_fire_4").asMovieClip;
+        // this.fire_1 = fairygui.UIPackage.createObject("Game", "enemy_1").asMovieClip;
+        // this.fire_2 = fairygui.UIPackage.createObject("Game", "enemy_2").asMovieClip;
+        // this.fire_3 = fairygui.UIPackage.createObject("Game", "enemy_fire_3").asMovieClip;
+        // this.fire_4 = fairygui.UIPackage.createObject("Game", "enemy_fire_4").asMovieClip;
 
-        this.run_1 = fairygui.UIPackage.createObject("Game", "enemyRun").asMovieClip;
-        this.run_2 = fairygui.UIPackage.createObject("Game", "enemyRun").asMovieClip;
-        this.run_3 = fairygui.UIPackage.createObject("Game", "enemy_3").asMovieClip;
-        this.run_4 = fairygui.UIPackage.createObject("Game", "enemy_4").asMovieClip;
+        // this.run_1 = fairygui.UIPackage.createObject("Game", "enemyRun").asMovieClip;
+        // this.run_2 = fairygui.UIPackage.createObject("Game", "enemyRun").asMovieClip;
+        // this.run_3 = fairygui.UIPackage.createObject("Game", "enemy_3").asMovieClip;
+        // this.run_4 = fairygui.UIPackage.createObject("Game", "enemy_4").asMovieClip;
 
         // this.legJump = fairygui.UIPackage.createObject("Game", "legJump").asMovieClip;
         // this.legMove = fairygui.UIPackage.createObject("Game", "legMove").asMovieClip;
-        this.stay = fairygui.UIPackage.createObject("Game", "enemyStay").asMovieClip;
+        // this.stay = fairygui.UIPackage.createObject("Game", "enemyStay").asMovieClip;
 
+    }
+
+    public get stayAniUrl(): string {
+        return "ui://Game/enemyStay_" + this.enemyType;
+    }
+
+    public get deathAniUrl(): string {
+        return "ui://Game/death_" + this.enemyType;
+    }
+
+    public get fireAniUrl(): string {
+        return "ui://Game/enemy_fire_" + this.enemyType;
+    }
+
+    public get runAniUrl(): string {
+        return "ui://Game/enemy_run_" + this.enemyType;
     }
 
     public get deathAni(): fairygui.GMovieClip {

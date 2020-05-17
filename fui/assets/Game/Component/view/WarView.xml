@@ -2,6 +2,7 @@
 <component size="1334,750" restrictSize="0,4900,0,784">
   <displayList>
     <loader id="n3_oqgw" name="bg" xy="0,0" size="50,30" autoSize="true"/>
-    <graph id="n2_oqgw" name="n2" xy="1,491" size="1126,79" type="rect" fillColor="#ffff0000"/>
+    <graph id="n2_oqgw" name="box" xy="1,564" size="4000,79" skew="1,1" type="rect" fillColor="#ffff0000"/>
+    <graph id="n4_jt82" name="box2" xy="672,499" pivot="0.5,0.5" anchor="true" size="100,1616" skew="80,80" type="rect"/>
   </displayList>
 </component>

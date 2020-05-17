@@ -5,7 +5,7 @@
 export default class WXFUI_enemy extends fairygui.GComponent {
 
 	public m_ctl:fairygui.Controller;
-	public m_firePos:fairygui.GTextField;
+	public m_enemy:fairygui.GLoader;
 	public m_n21:fairygui.GImage;
 	public m_n27:fairygui.GImage;
 	public m_gre:fairygui.Transition;
@@ -23,7 +23,7 @@ export default class WXFUI_enemy extends fairygui.GComponent {
 
 	protected onConstruct(): void {
 		this.m_ctl = this.getControllerAt(0);
-		this.m_firePos = <fairygui.GTextField><any>(this.getChildAt(0));
+		this.m_enemy = <fairygui.GLoader><any>(this.getChildAt(0));
 		this.m_n21 = <fairygui.GImage><any>(this.getChildAt(1));
 		this.m_n27 = <fairygui.GImage><any>(this.getChildAt(2));
 		this.m_gre = this.getTransitionAt(0);

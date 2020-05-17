@@ -12,6 +12,8 @@ export default class Bullet extends Laya.Script {
 
     private speed: number = 35;
 
+    public isEnd: boolean = false;
+
     constructor() { super(); }
 
     public initView(): void {
@@ -23,27 +25,33 @@ export default class Bullet extends Laya.Script {
         this.bulletType = type;
         this.direction = dir;
         this.zidan.url = "ui://Game/zidan" + this.bulletType;
+        if (this.direction == 1) {
+            this.view.setSkew(0, 0);
+        } else {
+            this.view.setSkew(180, 180);
+        }
     }
 
-    public flyBullet(): void {
-        Laya.timer.frameLoop(3, this, this.updateView);
-    }
+    // public flyBullet(): void {
+    // Laya.timer.frameLoop(3, this, this.updateView);
+    // }
     private dis: number = 0;
-    private updateView(): void {
+    public updateView(): void {
         this.dis += this.speed;
 
         if (this.direction == 1) {
             this.view.x += this.speed;
-            if (this.dis > Laya.Browser.clientWidth) {
-                Laya.timer.clear(this, this.updateView);
-                this.dis = 0;
-            }
+
         } else {
             this.view.x -= this.speed;
             if (this.view.x < 0) {
-                Laya.timer.clear(this, this.updateView);
+                this.isEnd = true;
                 this.dis = 0;
             }
+        }
+        if (this.dis > Laya.Browser.clientWidth) {
+            this.dis = 0;
+            this.isEnd = true;
         }
     }
 

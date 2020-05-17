@@ -24,6 +24,7 @@ export class AssetsManager {
             { url: "res/Game_atlas0_5.png", type: Laya.Loader.IMAGE },
             { url: "res/Game_atlas0_6.png", type: Laya.Loader.IMAGE },
             { url: "res/Game_atlas0_7.png", type: Laya.Loader.IMAGE },
+            { url: "res/Game_atlas0_8.png", type: Laya.Loader.IMAGE },
             { url: "res/map_1.jpg", type: Laya.Loader.IMAGE },
             { url: "res/Game.wxfui", type: Laya.Loader.BUFFER }
 

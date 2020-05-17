@@ -5,7 +5,8 @@
 export default class WXFUI_WarView extends fairygui.GComponent {
 
 	public m_bg:fairygui.GLoader;
-	public m_n2:fairygui.GGraph;
+	public m_box:fairygui.GGraph;
+	public m_box2:fairygui.GGraph;
 
 	public static URL:string = "ui://bq3h5insoqgwam";
 
@@ -19,6 +20,7 @@ export default class WXFUI_WarView extends fairygui.GComponent {
 
 	protected onConstruct(): void {
 		this.m_bg = <fairygui.GLoader><any>(this.getChildAt(0));
-		this.m_n2 = <fairygui.GGraph><any>(this.getChildAt(1));
+		this.m_box = <fairygui.GGraph><any>(this.getChildAt(1));
+		this.m_box2 = <fairygui.GGraph><any>(this.getChildAt(2));
 	}
 }

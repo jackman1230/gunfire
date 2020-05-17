@@ -11,6 +11,6 @@ export class PlayerCtl {
     }
 
     public initCtl(): void {
-        this.rolePlayer = ViewManager.instance.getRolePlayer();
+        this.rolePlayer = ViewManager.instance.rolePlayer;
     }
 }
