@@ -1,0 +1,7 @@
+{
+  "code": "import { ViewManager } from \"../Manager/ViewManager\";\r\nexport class WarView {\r\n    constructor() { }\r\n    initView() {\r\n        Laya.Scene.load(\"map_1.scene\", Laya.Handler.create(this, this.loadComplete));\r\n    }\r\n    ;\r\n    loadComplete(s) {\r\n        this.scene = s;\r\n        this.warView = fairygui.UIPackage.createObject(\"Game\", \"WarView\");\r\n        Laya.Physics.I.worldRoot = this.scene;\r\n        this.warView.displayObject.addChild(this.scene);\r\n        this.scene.addChild(ViewManager.instance.rolePlayer.roleBody);\r\n        ViewManager.instance.rolePlayer.roleBody.x = 800;\r\n        ViewManager.instance.rolePlayer.roleBody.y = 400;\r\n        ViewManager.instance.rolePlayer.setStay();\r\n        Laya.stage.addChild(this.warView.displayObject);\r\n    }\r\n    updateViewPort(moveX) {\r\n        this.warView.x -= moveX;\r\n    }\r\n}\r\n",
+  "references": [
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_WarView.ts",
+    "D:/littleGame/gunfire/src/Manager/ViewManager.ts"
+  ]
+}

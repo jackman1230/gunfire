@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="91,91">
+  <displayList>
+    <loader id="n12_msdc" name="en" xy="34,48" pivot="0.5,0.5" anchor="true" size="125,123" url="ui://bq3h5insoqgwaj" align="center" vAlign="middle" autoSize="true" playing="false"/>
+    <movieclip id="n15_yqv7" name="people" src="oqgwai" fileName="Component/enemy/enemyAni/enemy_fire5.jta" xy="48,1" frame="1"/>
+  </displayList>
+</component>

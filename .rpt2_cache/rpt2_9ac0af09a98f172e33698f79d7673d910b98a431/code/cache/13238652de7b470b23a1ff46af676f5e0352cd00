@@ -1,0 +1,4 @@
+{
+  "code": "export class PlayerData {\r\n}\r\nPlayerData.WEAPON_TYPE = 1;\r\nPlayerData.WEAPON_PIS = 1;\r\nPlayerData.WEAPON_MAC = 2;\r\nPlayerData.WEAPON_MAX = 2;\r\nPlayerData.ENEMY_PIS = 1;\r\nPlayerData.ENEMY_GRE = 2;\r\nPlayerData.ENEMY_MAC = 3;\r\nPlayerData.ENEMY_FIRE = 4;\r\nPlayerData.ENEMY_MOR = 4;\r\n",
+  "references": []
+}

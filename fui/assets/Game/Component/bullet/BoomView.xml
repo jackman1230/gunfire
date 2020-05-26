@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="90,90">
+  <displayList>
+    <loader id="n0_ke5w" name="boom" xy="45,109" pivot="0.5,1" anchor="true" size="130,127" align="center" vAlign="middle" autoSize="true"/>
+  </displayList>
+</component>

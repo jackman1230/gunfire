@@ -1,0 +1,1 @@
+{"type":"View","props":{"width":91,"height":91},"compId":2,"child":[{"type":"Script","props":{"width":91,"height":91,"friction":0,"density":5,"runtime":"laya.physics.BoxCollider"},"compId":3},{"type":"Script","props":{"group":0,"gravityScale":1,"allowRotation":false,"runtime":"laya.physics.RigidBody"},"compId":4}],"loadList":[],"loadList3D":[]}

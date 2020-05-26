@@ -1,5 +1,6 @@
 import { GameManager } from "./GameManager";
 import { ViewManager } from "./ViewManager";
+import GameBinder from "../fui/Game/GameBinder";
 
 export class AssetsManager {
     private static _instance: AssetsManager;
@@ -25,6 +26,17 @@ export class AssetsManager {
             { url: "res/Game_atlas0_6.png", type: Laya.Loader.IMAGE },
             { url: "res/Game_atlas0_7.png", type: Laya.Loader.IMAGE },
             { url: "res/Game_atlas0_8.png", type: Laya.Loader.IMAGE },
+            { url: "res/Game_atlas0_9.png", type: Laya.Loader.IMAGE },
+            { url: "res/Game_atlas0_10.png", type: Laya.Loader.IMAGE },
+            { url: "res/Game_atlas0_11.png", type: Laya.Loader.IMAGE },
+            { url: "res/Game_atlas0_12.png", type: Laya.Loader.IMAGE },
+            { url: "res/Game_atlas0_13.png", type: Laya.Loader.IMAGE },
+            { url: "res/Game_atlas0_14.png", type: Laya.Loader.IMAGE },
+            { url: "res/Game_atlas0_15.png", type: Laya.Loader.IMAGE },
+            { url: "res/Game_atlas0_16.png", type: Laya.Loader.IMAGE },
+            { url: "res/Game_atlas0_17.png", type: Laya.Loader.IMAGE },
+            { url: "res/Game_atlas0_18.png", type: Laya.Loader.IMAGE },
+            { url: "res/Game_atlas0_19.png", type: Laya.Loader.IMAGE },
             { url: "res/map_1.jpg", type: Laya.Loader.IMAGE },
             { url: "res/Game.wxfui", type: Laya.Loader.BUFFER }
 

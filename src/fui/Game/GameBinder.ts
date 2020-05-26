@@ -9,6 +9,13 @@ import WXFUI_throwBtn from "./WXFUI_throwBtn";
 import WXFUI_weaponBtn from "./WXFUI_weaponBtn";
 import WXFUI_player_stay_1 from "./WXFUI_player_stay_1";
 import WXFUI_player_stay_2 from "./WXFUI_player_stay_2";
+import WXFUI_enemyStay_5 from "./WXFUI_enemyStay_5";
+import WXFUI_enemy_fire_5 from "./WXFUI_enemy_fire_5";
+import WXFUI_enemy5 from "./WXFUI_enemy5";
+import WXFUI_player_stay_3 from "./WXFUI_player_stay_3";
+import WXFUI_Bomb from "./WXFUI_Bomb";
+import WXFUI_BoomView from "./WXFUI_BoomView";
+import WXFUI_player_fire_3 from "./WXFUI_player_fire_3";
 import WXFUI_player_fire_1 from "./WXFUI_player_fire_1";
 import WXFUI_player_fire_2 from "./WXFUI_player_fire_2";
 import WXFUI_Player from "./WXFUI_Player";
@@ -23,7 +30,6 @@ import WXFUI_WarView from "./WXFUI_WarView";
 import WXFUI_bullet1 from "./WXFUI_bullet1";
 import WXFUI_bullet2 from "./WXFUI_bullet2";
 import WXFUI_zidan from "./WXFUI_zidan";
-import WXFUI_enemy5 from "./WXFUI_enemy5";
 
 export default class GameBinder{
 	public static bindAll():void {
@@ -36,6 +42,13 @@ export default class GameBinder{
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_weaponBtn.URL, WXFUI_weaponBtn);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_1.URL, WXFUI_player_stay_1);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_2.URL, WXFUI_player_stay_2);
+		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemyStay_5.URL, WXFUI_enemyStay_5);
+		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy_fire_5.URL, WXFUI_enemy_fire_5);
+		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy5.URL, WXFUI_enemy5);
+		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_3.URL, WXFUI_player_stay_3);
+		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_Bomb.URL, WXFUI_Bomb);
+		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_BoomView.URL, WXFUI_BoomView);
+		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_3.URL, WXFUI_player_fire_3);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_1.URL, WXFUI_player_fire_1);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_2.URL, WXFUI_player_fire_2);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_Player.URL, WXFUI_Player);
@@ -50,6 +63,5 @@ export default class GameBinder{
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_bullet1.URL, WXFUI_bullet1);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_bullet2.URL, WXFUI_bullet2);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_zidan.URL, WXFUI_zidan);
-		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy5.URL, WXFUI_enemy5);
 	}
 }

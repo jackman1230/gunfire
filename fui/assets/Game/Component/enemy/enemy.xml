@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="116,100">
+<component size="91,91">
   <controller name="ctl" pages="0,,1,,2,,3,,4," selected="0"/>
   <displayList>
-    <loader id="n29_yqv7" name="enemy" xy="12,4" pivot="0.5,0.5" size="91,91" url="ui://bq3h5insyqv7b8" align="center" vAlign="middle" autoSize="true"/>
-    <image id="n21_oqgw" name="n21" src="oqgw78" fileName="assets/grenade.png" xy="81,8">
+    <loader id="n29_yqv7" name="enemy" xy="0,0" pivot="0.5,0.5" size="91,91" align="center" vAlign="middle" autoSize="true"/>
+    <text id="n30_ge3s" name="firePos1" xy="-32,16" size="13,19" fontSize="12" autoSize="none" text="">
+      <gearDisplay controller="ctl" pages="0"/>
+    </text>
+    <text id="n31_ge3s" name="firePos2" xy="61,-26" size="13,19" fontSize="12" autoSize="none" text="">
       <gearDisplay controller="ctl" pages="1"/>
-    </image>
-    <image id="n27_oqgw" name="n27" src="oqgw9d" fileName="assets/mis.png" xy="-7,-38">
+    </text>
+    <text id="n32_ge3s" name="firePos3" xy="-71,21" size="13,19" fontSize="12" autoSize="none" text="">
+      <gearDisplay controller="ctl" pages="2"/>
+    </text>
+    <text id="n33_ge3s" name="firePos4" xy="-70,12" size="13,19" fontSize="12" autoSize="none" text="">
+      <gearDisplay controller="ctl" pages="3"/>
+    </text>
+    <text id="n34_ge3s" name="firePos5" xy="-10,-32" size="13,19" fontSize="12" autoSize="none" text="">
       <gearDisplay controller="ctl" pages="4"/>
-    </image>
+    </text>
   </displayList>
-  <transition name="gre" autoPlayDelay="0.200">
-    <item time="2" type="Rotation" target="n21_oqgw" tween="true" startValue="50" endValue="360" duration="18" ease="Linear"/>
-    <item time="2" type="XY" target="n21_oqgw" tween="true" startValue="57,-32" endValue="-246,95" duration="18" ease="Linear" path="2,0,0,-64,-160,-214,-3,1,2,-303,127,-540,585,0,0,1"/>
-  </transition>
-  <transition name="mis" autoPlayDelay="0.200">
-    <item time="2" type="Rotation" target="n27_oqgw" tween="true" startValue="0" endValue="-150" duration="18" ease="Linear"/>
-    <item time="2" type="XY" target="n27_oqgw" tween="true" startValue="-7,-38" endValue="-329,117" duration="18" ease="Linear" path="2,0,0,-64,-160,-277,19,1,2,-322,155,-510,663,0,0,1"/>
-  </transition>
 </component>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="20,20" pivot="0.5,0.5">
+  <displayList>
+    <loader id="n0_cqp9" name="boom" xy="-10,-15" pivot="0.5,0.5" size="41,52" skew="0,180" touchable="false" url="ui://bq3h5insoqgw9d" align="center" vAlign="middle" autoSize="true"/>
+    <loader id="n1_dhkt" name="boom2" xy="-10,-16" pivot="0.5,0.5" size="41,52" skew="180,180" touchable="false" url="ui://bq3h5insoqgw9d" align="center" vAlign="middle" autoSize="true"/>
+  </displayList>
+  <transition name="z2">
+    <item time="0" type="Rotation" target="n0_cqp9" label="start" tween="true" startValue="0" endValue="120" duration="30" label2="end" ease="Linear"/>
+    <item time="36" type="Rotation" target="n0_cqp9" label="start2" tween="true" startValue="-60" endValue="-180" duration="30" label2="end2" ease="Linear"/>
+  </transition>
+  <transition name="t3" autoPlay="true" autoPlayRepeat="2">
+    <item time="0" type="Rotation" target="n1_dhkt" tween="true" startValue="145" endValue="-215" duration="30" ease="Linear"/>
+  </transition>
+</component>

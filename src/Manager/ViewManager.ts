@@ -3,19 +3,19 @@ import { WarView } from "../View/WarView";
 import WXFUI_Player from "../fui/Game/WXFUI_Player";
 import Player from "../View/Player";
 import Enemy from "../View/Enemy";
-import Bullet from "../View/Bullet";
+import EnemyBullet from "../View/EnemyBullet";
+import PlayerBullet from "../View/PlayerBullet";
+import BombView from "../View/BombView";
+import { BombData } from "../Data/PlayerData";
 
 export class ViewManager {
 
     private static _instance: ViewManager;
-
-
-    // private bgView: BackGroundView;
     public warView: WarView;
     private player: Player;
     private enemy: Enemy;
 
-    private bulletArr: Bullet[] = [];
+    private bulletArr: PlayerBullet[] = [];
     private enemyArr: Enemy[] = [];
 
     private isChecking: boolean = false;
@@ -31,93 +31,50 @@ export class ViewManager {
 
     public showStartView(): void {
         this.initView();
-
-        // Laya.stage.addChild(this.bgView.view.displayObject);
-        Laya.stage.addChild(this.warView.warView.displayObject);
-        this.warView.warView.addChild(this.player.rolePlayer);
-        this.player.rolePlayer.x = 200;
-        this.player.rolePlayer.y = 400;
-        // this.player.setStay();
         console.log("开始初始化界面");
-
-        this.warView.warView.addChild(this.enemy.enemy);
-        this.enemy.enemy.x = 800;
-        this.enemy.enemy.y = 400;
-        this.enemy.setFire();
-        this.enemyArr.push(this.enemy);
     }
 
-    public createBullet(): Bullet {
-        var b: Bullet = new Bullet();
+    public createBomb(type: number, dir: number, parentPos: Laya.Point, b: boolean): void {
+        var bomb: BombView = Laya.Pool.getItemByClass("bombView", BombView);
+        if (b)
+            bomb.initView(BombData.BOMB_1, dir, parentPos, b, this.getPlayerBulletOffSetPos(dir, type));
+        else
+            bomb.initView(type, dir, parentPos, b, this.getEnemyBulletOffSetPos(dir, type));
+    }
+
+    public createBullet(): void {
+        var b: PlayerBullet = Laya.Pool.getItemByClass("PlayerBullet", PlayerBullet);
+        b.initView(this.rolePlayer.weaponType, this.rolePlayer.direction);
+    }
+
+    public createEnemyBullet(type: number, dir: number, s: Laya.Point): void {
+        var b: EnemyBullet = Laya.Pool.getItemByClass("enemyBullet", EnemyBullet);
+        b.initView(type, dir, s);
+    }
+
+    public createEnemy(): void {
+        var b: Enemy = Laya.Pool.getItemByClass("enemy", Enemy);
         b.initView();
-        b.setBulletData(this.rolePlayer.weaponType, this.rolePlayer.direction);
-        var p: Laya.Point = this.rolePlayer.rolePlayer.localToGlobal(this.rolePlayer["firePos" + this.rolePlayer.weaponType].x, this.rolePlayer["firePos" + this.rolePlayer.weaponType].y);
-        var y: number = this.bulletRandomY();
-        if (this.rolePlayer.direction == 1) {
-            b.view.x = Math.abs(this.warView.warView.x) + p.x + b.view.width - 20;
-            b.view.y = p.y - this.bulletRandomY();
-        } else {
-            b.view.x = Math.abs(this.warView.warView.x) + p.x - b.view.width * 2 + 20;
-            b.view.y = p.y - this.bulletRandomY();
-        }
-        this.warView.warView.addChild(b.view);
-        this.bulletArr.push(b);
-        this.addFrameTimer();
-        return b;
-    }
-
-    private addFrameTimer(): void {
-        if (this.isChecking) return;
-        this.isChecking = true;
-        Laya.timer.frameLoop(3, this, this.updateBulletPos);
-    }
-
-    public checkBulletHit(): void {
-        if (this.isChecking) return;
-
     }
 
     public initView(): void {
         this.warView = new WarView();
         this.player = new Player();
-        this.enemy = new Enemy();
 
         this.warView.initView();
         this.player.initView();
-        this.enemy.initView();
     }
 
     public get rolePlayer(): Player {
         return this.player;
     }
 
-    public updateBulletPos(): void {
-        for (let i = this.bulletArr.length - 1; i >= 0; i--) {
-            var b: Bullet = this.bulletArr[i];
-            if (b.isEnd) {
-                b.view.dispose();
-                this.bulletArr.splice(i, 1);
-                b = null;
-                continue;
-            }
-            b.updateView();
-            for (let j = 0; j < this.enemyArr.length; j++) {
-                var e: Enemy = this.enemyArr[j];
-                if (b.view.x >= e.enemy.x && b.view.x < e.enemy.x + e.enemy.width && b.view.y >= e.enemy.y && b.view.y <= e.enemy.y + e.enemy.height) {
-                    e.beHit();
-                    b.view.dispose();
-                    this.bulletArr.splice(i, 1);
-                    b = null;
-                }
-            }
-        }
+    public showEnemyDeathAfter(): void {
 
-        if (this.bulletArr.length < 1 || this.enemyArr.length < 1) {
-            Laya.timer.clear(this, this.updateBulletPos);
-            this.isChecking = false;
-            console.log("clearFrameLoop");
+    }
 
-        }
+    public getBodyCenterPos(s: Laya.Sprite): Laya.Point {
+        return (s.getComponent(Laya.RigidBody) as Laya.RigidBody).getWorldCenter();
     }
 
 
@@ -126,8 +83,56 @@ export class ViewManager {
         this.warView.updateViewPort(moveX);
     }
 
-    private bulletRandomY(): number {
+    public bulletRandomY(): number {
         return Math.floor(Math.random() * 10) + 10;
+    }
+
+    /**角色子弹坐标偏移 */
+    private playerBulletPos: object = {
+        "11": [135, -22],//武器手枪，方向右
+        "12": [167, 0],//武器机枪，方向右
+        "13": [],//武器来福枪，方向右
+        "14": [20, -60],//武器手雷，方向右
+        "-11": [-200, -22],//武器手枪，方向左
+        "-12": [-220, 0],//武器机枪，方向左
+        "-13": [],//武器来福枪，方向左
+        "-14": [-20, -60],//武器手雷，方向左
+        "21": [-150, -30],//武器手枪，方向右上
+        "22": [],//武器机枪，方向右上
+        "23": [],//武器来福枪，方向右上
+        "-21": [],//武器手枪，方向左上
+        "-22": [],//武器机枪，方向左上
+        "-23": [],//武器来福枪，方向左上
+    }
+    /**角色子弹坐标偏移 */
+    public getPlayerBulletOffSetPos(dir: number, weaponType: number): Laya.Point {
+        var s: string = dir + "" + weaponType;
+        if (this.playerBulletPos[s])
+            return new Laya.Point(this.playerBulletPos[s][0], this.playerBulletPos[s][1]);
+        else
+            return new Laya.Point(0, 0);
+    }
+    /**敌人子弹坐标偏移 */
+    private enemyBulletPos: object = {
+        "11": [105, 10],//武器手枪，方向右
+        "12": [10, -40],//武器手雷，方向右
+        "13": [125, 15],//武器机枪，方向右
+        "14": [],//武器火箭筒，方向右
+        "15": [70, -20],//武器迫击炮，方向右
+        "-11": [-100, 10],//武器手枪，方向左
+        "-12": [0, -50],//武器手雷，方向左
+        "-13": [-75, 15],//武器机枪，方向左
+        "-14": [],//武器火箭筒，方向左
+        "-15": [0, -20],//武器迫击炮，方向左
+    }
+
+    public getEnemyBulletOffSetPos(dir: number, weaponType: number): Laya.Point {
+        var s: string = dir + "" + weaponType;
+        console.log("getEnemyBulletOffSetPos--", s);
+        if (this.enemyBulletPos[s])
+            return new Laya.Point(this.enemyBulletPos[s][0], this.enemyBulletPos[s][1]);
+        else
+            return new Laya.Point(0, 0);
     }
 
 }

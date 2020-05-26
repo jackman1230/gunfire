@@ -1,0 +1,4 @@
+{
+  "code": "export default class EnemyAni {\r\n    constructor() {\r\n        this.enemyType = 3;\r\n    }\r\n    initView(type) {\r\n        this.enemyType = type;\r\n    }\r\n    get stayAniUrl() {\r\n        return \"ui://Game/enemyStay_\" + this.enemyType;\r\n    }\r\n    get deathAniUrl() {\r\n        return \"ui://Game/death_\" + this.enemyType;\r\n    }\r\n    get fireAniUrl() {\r\n        return \"ui://Game/enemy_fire_\" + this.enemyType;\r\n    }\r\n    get runAniUrl() {\r\n        return \"ui://Game/enemy_run_\" + this.enemyType;\r\n    }\r\n    get deathAni() {\r\n        return this[\"death_\" + this.enemyType];\r\n    }\r\n    get fireAni() {\r\n        return this[\"fire_\" + this.enemyType];\r\n    }\r\n    get runAni() {\r\n        return this[\"run_\" + this.enemyType];\r\n    }\r\n}\r\n",
+  "references": []
+}

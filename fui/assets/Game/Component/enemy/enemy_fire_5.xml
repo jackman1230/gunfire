@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="91,91">
+  <displayList>
+    <movieclip id="n16_dhkt" name="mor" src="oqgwaj" fileName="Component/enemy/enemyAni/enemy_fire5.jta" xy="-8,-12"/>
+    <movieclip id="n15_yqv7" name="people" src="dhktel" fileName="Component/enemy/enemyAni/enemy_fire5(1).jta" xy="48,1" frame="1"/>
+  </displayList>
+</component>

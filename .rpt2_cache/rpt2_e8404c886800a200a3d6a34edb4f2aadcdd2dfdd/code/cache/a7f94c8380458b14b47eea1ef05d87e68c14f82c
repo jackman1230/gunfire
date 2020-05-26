@@ -1,0 +1,4 @@
+{
+  "code": "export class PlayerData {\r\n}\r\nPlayerData.WEAPON_TYPE = 1;\r\nPlayerData.WEAPON_PIS = 1;\r\nPlayerData.WEAPON_MAC = 2;\r\nPlayerData.WEAPON_RIFLE = 3;\r\nPlayerData.WEAPON_GRE = 4;\r\nPlayerData.WEAPON_MAX = 3;\r\nPlayerData.ENEMY_PIS = 1;\r\nPlayerData.ENEMY_GRE = 2;\r\nPlayerData.ENEMY_MAC = 3;\r\nPlayerData.ENEMY_FIRE = 4;\r\nPlayerData.ENEMY_MOR = 5;\r\nexport class BombData {\r\n}\r\nBombData.BOMB_1 = 1;\r\nBombData.BOMB_2 = 2;\r\nBombData.BOMB_4 = 4;\r\nBombData.BOMB_5 = 5;\r\nexport class ShotDirectionData {\r\n}\r\nShotDirectionData.LEFT = -1;\r\nShotDirectionData.RIGHT = 1;\r\nShotDirectionData.RIGHT_UP = 2;\r\nShotDirectionData.LEFT_UP = -2;\r\n",
+  "references": []
+}

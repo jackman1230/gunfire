@@ -3,16 +3,16 @@ import { AssetsManager } from "./Manager/AssetsManager";
 class Main {
 	constructor() {
 		//根据IDE设置初始化引擎		
-		if (window["Laya3D"])
-			Laya3D.init(GameConfig.width, GameConfig.height);
-		else
-			Laya.init(GameConfig.width, GameConfig.height, Laya["WebGL"]);
+		// if (window["Laya3D"])
+		// 	Laya3D.init(GameConfig.width, GameConfig.height);
+		// else
+		Laya.init(1334, 750, Laya["WebGL"]);
 		Laya["Physics"] && Laya["Physics"].enable();
 		Laya["DebugPanel"] && Laya["DebugPanel"].enable();
-		Laya.stage.scaleMode = GameConfig.scaleMode;
-		Laya.stage.screenMode = GameConfig.screenMode;
-		Laya.stage.alignV = GameConfig.alignV;
-		Laya.stage.alignH = GameConfig.alignH;
+		Laya.stage.scaleMode = Laya.Stage.SCALE_EXACTFIT;
+		Laya.stage.screenMode = Laya.Stage.SCREEN_HORIZONTAL;
+		Laya.stage.alignV = Laya.Stage.ALIGN_CENTER;
+		Laya.stage.alignH = Laya.Stage.ALIGN_MIDDLE;
 		//兼容微信不支持加载scene后缀场景
 		Laya.URL.exportSceneToJson = GameConfig.exportSceneToJson;
 
@@ -38,7 +38,7 @@ class Main {
 
 	onConfigLoaded(): void {
 		//加载IDE指定的场景
-		GameConfig.startScene && Laya.Scene.open(GameConfig.startScene);
+		// GameConfig.startScene && Laya.Scene.open(GameConfig.startScene);
 	}
 }
 //激活启动类

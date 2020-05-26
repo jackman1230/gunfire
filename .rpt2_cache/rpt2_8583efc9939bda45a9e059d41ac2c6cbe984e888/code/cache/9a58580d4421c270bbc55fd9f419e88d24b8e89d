@@ -1,0 +1,6 @@
+{
+  "code": "export class WarView {\r\n    constructor() { }\r\n    initView() {\r\n        this.warView = fairygui.UIPackage.createObject(\"Game\", \"WarView\");\r\n        this.bg = this.warView.getChildAt(0);\r\n        this.bg.url = \"res/map_1.jpg\";\r\n        this.bg.setScale(3.5, 3.5);\r\n        this.img = this.warView.getChildAt(1);\r\n        this.img.displayObject.addComponent(Laya.RigidBody);\r\n        this.img.displayObject.addComponent(Laya.BoxCollider);\r\n        this.boxCollider = this.img.displayObject.getComponent(Laya.BoxCollider);\r\n        this.rigidBody = this.img.displayObject.getComponent(Laya.RigidBody);\r\n        this.boxCollider.width = this.img.displayObject.width;\r\n        this.boxCollider.height = this.img.displayObject.height;\r\n        this.rigidBody.type = \"static\";\r\n        Laya.Physics.I.worldRoot = this.warView.displayObject;\r\n    }\r\n    ;\r\n    updateViewPort(moveX) {\r\n        this.warView.x -= moveX;\r\n        console.log(\"this.warView.x:\" + this.warView.x);\r\n    }\r\n}\r\n",
+  "references": [
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_WarView.ts"
+  ]
+}

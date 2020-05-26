@@ -1,8 +1,10 @@
 import { ViewManager } from "./ViewManager";
 
-export  class GameManager  {
+export class GameManager {
     private static _instance: GameManager;
     public static assetsData = [];
+
+    private event: Laya.EventDispatcher;
 
     constructor() {
     }
@@ -13,8 +15,8 @@ export  class GameManager  {
         return this._instance;
     }
 
-    public startGame():void{
+    public startGame(): void {
         ViewManager.instance.showStartView();
     }
-    
+
 }

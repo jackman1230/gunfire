@@ -9,6 +9,7 @@ export default class WXFUI_Player extends fairygui.GComponent {
 	public m_body:fairygui.GLoader;
 	public m_firePos1:fairygui.GLoader;
 	public m_firePos2:fairygui.GLoader;
+	public m_firePos3:fairygui.GLoader;
 
 	public static URL:string = "ui://bq3h5insmsdc6j";
 
@@ -26,5 +27,6 @@ export default class WXFUI_Player extends fairygui.GComponent {
 		this.m_body = <fairygui.GLoader><any>(this.getChildAt(0));
 		this.m_firePos1 = <fairygui.GLoader><any>(this.getChildAt(1));
 		this.m_firePos2 = <fairygui.GLoader><any>(this.getChildAt(2));
+		this.m_firePos3 = <fairygui.GLoader><any>(this.getChildAt(3));
 	}
 }
