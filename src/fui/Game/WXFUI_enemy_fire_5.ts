@@ -4,7 +4,7 @@
 
 export default class WXFUI_enemy_fire_5 extends fairygui.GComponent {
 
-	public m_mor:fairygui.GMovieClip;
+	public m_mor:fairygui.GLoader;
 	public m_people:fairygui.GMovieClip;
 
 	public static URL:string = "ui://bq3h5insdhktej";
@@ -18,7 +18,7 @@ export default class WXFUI_enemy_fire_5 extends fairygui.GComponent {
 	}
 
 	protected onConstruct(): void {
-		this.m_mor = <fairygui.GMovieClip><any>(this.getChildAt(0));
-		this.m_people = <fairygui.GMovieClip><any>(this.getChildAt(1));
+		this.m_mor = <fairygui.GLoader><any>(this.getChild("mor"));
+		this.m_people = <fairygui.GMovieClip><any>(this.getChild("people"));
 	}
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="60,60" extention="Button">
+<component size="60,60" pivot="0.5,0.5" extention="Button">
   <controller name="button" pages="0,up,1,down" selected="0"/>
   <displayList>
     <image id="n0_cqp9" name="n0" src="cqp93h" fileName="assets/btn/round.png" xy="0,0">
@@ -12,5 +12,5 @@
       <relation target="" sidePair="width-width,height-height"/>
     </text>
   </displayList>
-  <Button/>
+  <Button downEffect="scale" downEffectValue="0.98"/>
 </component>

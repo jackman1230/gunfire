@@ -1,6 +1,6 @@
 {
 	"atlasSetting":{
-		"maxSize":512,
+		"maxSize":1024,
 		"paging":true,
 		"sizeOption":"npot",
 		"trimImage":true
@@ -10,7 +10,7 @@
 		"classNamePrefix":"WXFUI_",
 		"codePath":"..\\src\\fui",
 		"codeType":"TS-2.0",
-		"getMemberByName":false,
+		"getMemberByName":true,
 		"ignoreNoname":false,
 		"memberNamePrefix":"m_",
 		"packageName":"wxfui"

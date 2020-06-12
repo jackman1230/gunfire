@@ -26,17 +26,23 @@ export default class BulletBody extends Laya.Script {
     }
 
     onTriggerEnter(other: Laya.BoxCollider, self: Laya.BoxCollider, contact: any): void {
-        if (self.label == "PlayerBullet" && other.label == "enemy") {
-            console.log("主角击中敌人-敌人ID=", other.id);
-            this.owner.removeSelf();
-            EventManager.instance.dispatcherEvt(GameEvent.BULLET_HIT_ENEMY, this.owner);
+        if (self.label == "PlayerBullet") {
+            if (other.label == "enemy") {
+                console.log("主角子弹击中敌人-敌人ID=", other.id);
+                // this.owner.removeSelf();
+                EventManager.instance.dispatcherEvt(GameEvent.PLAYER_BULLET_HIT_ENEMY, { o: other.owner, s: self.owner });
+            } else if (other.label == "obstacle") {
+                console.log("主角子弹击中障碍物", other.id);
+                // this.owner.removeSelf();
+                EventManager.instance.dispatcherEvt(GameEvent.PLAYER_BULLET_HIT_OBSTACLE, { o: other.owner, s: self.owner });
+            }
             return;
-        }
-        if (self.label == "enemyBullet" && other.label == "player") {
-            console.log("敌人击中主角-主角ID=", other.id);
-            this.owner.removeSelf();
-            EventManager.instance.dispatcherEvt(GameEvent.BULLET_HIT_ROLE, this.owner);
-            return;
+        } else if (self.label == "enemyBullet") {
+            if (other.label == "player") {
+                console.log("敌人子弹击中主角--ID=", other.id, self.id);
+                this.selfCollider.destroy();
+                EventManager.instance.dispatcherEvt(GameEvent.ENEMY_BULLET_HIT_PLAYER, { o: other.owner, s: self.owner });
+            }
         }
     }
     onTriggerExit(): void {

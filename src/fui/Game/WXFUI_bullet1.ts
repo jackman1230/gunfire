@@ -18,7 +18,7 @@ export default class WXFUI_bullet1 extends fairygui.GComponent {
 	}
 
 	protected onConstruct(): void {
-		this.m_n0 = <fairygui.GImage><any>(this.getChildAt(0));
-		this.m_n1 = <fairygui.GImage><any>(this.getChildAt(1));
+		this.m_n0 = <fairygui.GImage><any>(this.getChild("n0"));
+		this.m_n1 = <fairygui.GImage><any>(this.getChild("n1"));
 	}
 }

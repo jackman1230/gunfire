@@ -17,6 +17,6 @@ export default class WXFUI_enemy2 extends fairygui.GComponent {
 	}
 
 	protected onConstruct(): void {
-		this.m_en = <fairygui.GLoader><any>(this.getChildAt(0));
+		this.m_en = <fairygui.GLoader><any>(this.getChild("en"));
 	}
 }

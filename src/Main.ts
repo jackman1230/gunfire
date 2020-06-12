@@ -1,5 +1,6 @@
 import GameConfig from "./GameConfig";
 import { AssetsManager } from "./Manager/AssetsManager";
+import GameBinder from "./fui/Game/GameBinder";
 class Main {
 	constructor() {
 		//根据IDE设置初始化引擎		
@@ -26,6 +27,7 @@ class Main {
 		Laya.ResourceVersion.enable("version.json", Laya.Handler.create(this, this.onVersionLoaded), Laya.ResourceVersion.FILENAME_VERSION);
 
 		fairygui.UIConfig.packageFileExtension = "wxfui";
+		GameBinder.bindAll();
 		AssetsManager.instance.loadAssetsData();
 
 

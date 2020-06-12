@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<component size="1335,212">
-  <displayList>
-    <component id="n0_cqp9" name="dirCtl" src="cqp93k" fileName="Component/view/dirCtl.xml" xy="32,42"/>
-    <component id="n1_cqp9" name="funCtl" src="cqp93m" fileName="Component/view/funCtl.xml" xy="1055,-38"/>
-  </displayList>
-</component>

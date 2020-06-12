@@ -6,13 +6,19 @@ import Enemy from "../View/Enemy";
 import EnemyBullet from "../View/EnemyBullet";
 import PlayerBullet from "../View/PlayerBullet";
 import BombView from "../View/BombView";
-import { BombData } from "../Data/PlayerData";
+import ObstacleView from "../View/ObstacleView";
+import { BombData, BoomAniType, ObstacleType } from "../Data/GameData";
+import ChopperView from "../View/ChopperView";
+import TankeView from "../View/TankeView";
+import ChopperBomb from "../View/ChopperBomb";
+import GoodsView from "../View/GoodsView";
+import PlayerInfoView from "../View/PlayerInfoView";
 
 export class ViewManager {
 
     private static _instance: ViewManager;
     public warView: WarView;
-    private player: Player;
+    public player: Player;
     private enemy: Enemy;
 
     private bulletArr: PlayerBullet[] = [];
@@ -29,40 +35,69 @@ export class ViewManager {
         return this._instance;
     }
 
-    public showStartView(): void {
-        this.initView();
-        console.log("开始初始化界面");
+    public createWarView(): void {
+        this.warView.createView()
     }
-
+    /**创建步兵扔的雷 */
     public createBomb(type: number, dir: number, parentPos: Laya.Point, b: boolean): void {
         var bomb: BombView = Laya.Pool.getItemByClass("bombView", BombView);
         if (b)
-            bomb.initView(BombData.BOMB_1, dir, parentPos, b, this.getPlayerBulletOffSetPos(dir, type));
+            bomb.createView(BombData.BOMB_1, dir, parentPos, b, this.getPlayerBulletOffSetPos(dir, type));
         else
-            bomb.initView(type, dir, parentPos, b, this.getEnemyBulletOffSetPos(dir, type));
+            bomb.createView(type, dir, parentPos, b, this.getEnemyBulletOffSetPos(dir, type));
     }
-
+    /**创建飞机的导弹 */
+    public createChopperBomb(type: number, parentPos: Laya.Point, s: Laya.Point): void {
+        var bomb: ChopperBomb = Laya.Pool.getItemByClass("ChopperBomb", ChopperBomb);
+        bomb.createView(type, parentPos, s);
+    }
+    /**创建主角子弹 */
     public createBullet(): void {
         var b: PlayerBullet = Laya.Pool.getItemByClass("PlayerBullet", PlayerBullet);
-        b.initView(this.rolePlayer.weaponType, this.rolePlayer.direction);
+        b.createView(this.rolePlayer.weaponType, this.rolePlayer.direction);
     }
-
+    /**
+     * 创建敌人子弹
+     * @param type 子弹类型
+     * @param dir 方向
+     * @param s 父节点世界坐标
+     */
     public createEnemyBullet(type: number, dir: number, s: Laya.Point): void {
         var b: EnemyBullet = Laya.Pool.getItemByClass("enemyBullet", EnemyBullet);
-        b.initView(type, dir, s);
+        b.createView(type, dir, s);
+    }
+    /**创建步兵敌人 */
+    public createEnemy(d: any): void {
+        var b: Enemy = Laya.Pool.getItemByClass("enemy", Enemy);
+        b.createView(d);
     }
 
-    public createEnemy(): void {
-        var b: Enemy = Laya.Pool.getItemByClass("enemy", Enemy);
-        b.initView();
+    /**创建直升机 */
+    public createChopper(): void {
+        var b: ChopperView = Laya.Pool.getItemByClass("Chopper", ChopperView);
+        b.createView();
+    }
+    /**创建坦克 */
+    public createTanke(type: number): void {
+        var b: TankeView = Laya.Pool.getItemByClass("Tanke", TankeView);
+        b.enemyType = type;
+        b.createView();
+    }
+
+    /**创建掉落物品 */
+    public createGoods(type: number, s: Laya.Point): void {
+        var b: GoodsView = Laya.Pool.getItemByClass("goods", GoodsView);
+        b.createView(type, s);
+    }
+
+    /**创建掉落物品 */
+    public createPlayerInfoView(): void {
+        var b: PlayerInfoView = new PlayerInfoView();
+        b.createView();
     }
 
     public initView(): void {
         this.warView = new WarView();
-        this.player = new Player();
-
-        this.warView.initView();
-        this.player.initView();
     }
 
     public get rolePlayer(): Player {
@@ -81,6 +116,27 @@ export class ViewManager {
     public updateViewPort(moveX: number): void {
         // this.bgView.updateViewPort(moveX);
         this.warView.updateViewPort(moveX);
+    }
+
+    public getBoomAniTypeByBomb(type: number): number {
+        if (type == BombData.BOMB_1 || type == BombData.BOMB_2) {
+            return BoomAniType.BOOM_1;
+        } else if (type == BombData.BOMB_5) {
+            return BoomAniType.BOOM_2;
+        } else if (type == BombData.BOMB_4) {
+            return BoomAniType.BOOM_3;
+        }
+        return 1;
+    }
+
+    public getBoomAniTypeByObsType(type: number): number {
+        if (type == ObstacleType.ObstacleType_1) {
+            return BoomAniType.BOOM_2;
+        } else if (type == ObstacleType.ObstacleType_6) {
+            return BoomAniType.BOOM_5;
+        } else {
+            return BoomAniType.BOOM_3;
+        }
     }
 
     public bulletRandomY(): number {
@@ -119,11 +175,13 @@ export class ViewManager {
         "13": [125, 15],//武器机枪，方向右
         "14": [],//武器火箭筒，方向右
         "15": [70, -20],//武器迫击炮，方向右
+        "111": [165, 15],//武器坦克，方向右
         "-11": [-100, 10],//武器手枪，方向左
         "-12": [0, -50],//武器手雷，方向左
         "-13": [-75, 15],//武器机枪，方向左
         "-14": [],//武器火箭筒，方向左
         "-15": [0, -20],//武器迫击炮，方向左
+        "-111": [0, 15],//武器坦克，方向左
     }
 
     public getEnemyBulletOffSetPos(dir: number, weaponType: number): Laya.Point {

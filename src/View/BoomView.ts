@@ -8,7 +8,7 @@ import BoomBody from "./Body/BoomBody";
 export default class BoomView {
     public scene: Laya.Sprite;
     public view: WXFUI_BoomView;
-    public boom: fairygui.GLoader;
+    // public boom: fairygui.GLoader;
 
     public boomType: number = 1;
     public direction: number = 1;
@@ -22,7 +22,7 @@ export default class BoomView {
     private pos: Laya.Point;
     constructor() { }
 
-    initView(type: number, s: Laya.Point, b: boolean): void {
+    createView(type: number, s: Laya.Point, b: boolean): void {
         this.boomType = type;
         this.isPlayer = b;
         this.pos = s;
@@ -33,7 +33,7 @@ export default class BoomView {
         console.log("boomBody.scene--loadComplete");
 
         this.view = fairygui.UIPackage.createObject("Game", "BoomView") as WXFUI_BoomView;
-        this.boom = this.view.getChildAt(0).asLoader;
+        // this.boom = this.view.getChildAt(0).asLoader;
 
         this.scene = s;
         this.scene.addComponent(BoomBody);
@@ -50,8 +50,8 @@ export default class BoomView {
         ViewManager.instance.warView.scene.addChild(this.scene);
         // this.parent.scene.addChild(this.scene);
 
-        this.boom.url = "ui://Game/boom_" + this.boomType;
-        this.boom.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.showComplete));
+        this.view.m_boom.url = "ui://Game/boom_" + this.boomType;
+        this.view.m_boom.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.showComplete));
 
         this.setBoomViewPos();
 
@@ -80,6 +80,7 @@ export default class BoomView {
         // EventManager.instance.offNotice(GameEvent.BULLET_DISPOSE, this, this.dispose);
         Laya.Pool.recover("boomView", this);
         this.view.dispose();
+        this.scene.removeSelf();
         console.log("销毁子弹--enemyBullet");
         // }
     }

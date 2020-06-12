@@ -5,9 +5,8 @@
 export default class WXFUI_throwBtn extends fairygui.GButton {
 
 	public m_button:fairygui.Controller;
-	public m_n0:fairygui.GImage;
-	public m_n1:fairygui.GImage;
-	public m_title:fairygui.GTextField;
+	public m_n3:fairygui.GImage;
+	public m_n4:fairygui.GImage;
 
 	public static URL:string = "ui://bq3h5inscqp93p";
 
@@ -20,9 +19,8 @@ export default class WXFUI_throwBtn extends fairygui.GButton {
 	}
 
 	protected onConstruct(): void {
-		this.m_button = this.getControllerAt(0);
-		this.m_n0 = <fairygui.GImage><any>(this.getChildAt(0));
-		this.m_n1 = <fairygui.GImage><any>(this.getChildAt(1));
-		this.m_title = <fairygui.GTextField><any>(this.getChildAt(2));
+		this.m_button = this.getController("button");
+		this.m_n3 = <fairygui.GImage><any>(this.getChild("n3"));
+		this.m_n4 = <fairygui.GImage><any>(this.getChild("n4"));
 	}
 }

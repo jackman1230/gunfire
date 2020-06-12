@@ -18,7 +18,7 @@ export default class WXFUI_player_stay_2 extends fairygui.GComponent {
 	}
 
 	protected onConstruct(): void {
-		this.m_xs = <fairygui.GLoader><any>(this.getChildAt(0));
-		this.m_ss = <fairygui.GLoader><any>(this.getChildAt(1));
+		this.m_xs = <fairygui.GLoader><any>(this.getChild("xs"));
+		this.m_ss = <fairygui.GLoader><any>(this.getChild("ss"));
 	}
 }

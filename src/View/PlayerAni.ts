@@ -16,7 +16,7 @@ export default class PlayerAni {
 
     constructor() { }
 
-    public initView(): void {
+    public createView(): void {
         this.body_1 = fairygui.UIPackage.createObject("Game", "body_1").asMovieClip;
         this.body_2 = fairygui.UIPackage.createObject("Game", "body_2").asMovieClip;
         this.boomAni_1 = fairygui.UIPackage.createObject("Game", "boom_1").asMovieClip;

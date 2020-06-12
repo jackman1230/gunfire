@@ -17,6 +17,6 @@ export default class WXFUI_BoomView extends fairygui.GComponent {
 	}
 
 	protected onConstruct(): void {
-		this.m_boom = <fairygui.GLoader><any>(this.getChildAt(0));
+		this.m_boom = <fairygui.GLoader><any>(this.getChild("boom"));
 	}
 }

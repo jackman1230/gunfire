@@ -3,78 +3,111 @@ import WXFUI_Player from "../fui/Game/WXFUI_Player";
 import PlayerAni from "./PlayerAni";
 import { ViewManager } from "../Manager/ViewManager";
 import WXFUI_enemy from "../fui/Game/WXFUI_enemy";
-import { PlayerData } from "../Data/PlayerData";
+import { PlayerData } from "../Data/GameData";
 import EnemyBody from "./Body/EnemyBody";
 import GameEvent from "../Control/GameEvent";
 import { EventManager } from "../Manager/EventManager";
+import { EnemyInfo } from "../Manager/GameManager";
 
 export default class Enemy {
     //常规兵种
     public scene: Laya.Sprite;
-    public view: WXFUI_enemy;
+    public view: fairygui.GComponent;
     public enemy: fairygui.GLoader;
     public enemyLoader: fairygui.GLoader;
 
     public enemyType: number = 5;
 
-    private fire_pos: fairygui.GTextField;
-    public enemyCtl: fairygui.Controller
+    protected direction: number = 0;
+    protected box: Laya.BoxCollider;
 
+    protected sRun: boolean = false;//人物是否在跑
+    protected keyRight: boolean = false;
+    protected keyLeft: boolean = false;
+    protected keyJump: boolean = false;
 
-    private direction: number = -1;
+    protected speed: number = 10;
+    protected jumpHigh: number = 200;
+    protected isDeath: boolean = false;
 
-    private sRun: boolean = false;//人物是否在跑
-    private keyRight: boolean = false;
-    private keyLeft: boolean = false;
-    private keyJump: boolean = false;
-
-    private speed: number = 10;
-    private jumpHigh: number = 200;
-
-    public hp: number = 100;
+    protected hp: number = 1;
+    protected damage: number;
+    protected activeDis: number;
+    protected pos: Laya.Point;
+    protected expRate: number[] = [];
+    protected enemyData: EnemyInfo;
+    protected isBoss: boolean = false;
 
     constructor() { }
 
-    public initView() {
+    public createView(d: EnemyInfo) {
+        this.enemyData = d;
+        this.direction = d.dir;
+        this.enemyType = d.type;
+        this.hp = d.blood;
+        this.damage = d.damage;
+        this.activeDis = d.activeDis;
+        this.pos = d.pos;
+        this.expRate = d.expRate.concat();
+        this.isBoss = d.isBoss;
+
         Laya.Scene.load("EnemyBody.scene", Laya.Handler.create(this, this.loadComplete));
     };
 
     public loadComplete(s: Laya.Sprite) {
-        this.scene = s;
-        this.view = fairygui.UIPackage.createObject("Game", "enemy") as WXFUI_enemy;
+        this.view = fairygui.UIPackage.createObject("Game", "enemy") as fairygui.GComponent;
         this.view.setPivot(0.5, 0.5);
-        this.enemyCtl = this.view.getController("ctl");
         this.enemy = this.view.getChildAt(0) as fairygui.GLoader;
-
-        this.enemy.url = "ui://Game/enemy" + this.enemyType;
-
-        this.scene.addChild(this.enemy.displayObject);
-        this.scene.addComponent(EnemyBody);
-
-        this.scene.x = 1000;
-        this.scene.y = 400;
-        ViewManager.instance.warView.scene.addChild(this.scene);
-        EventManager.instance.addNotice(GameEvent.BULLET_HIT_ENEMY, this, this.beHit);
-        EventManager.instance.addNotice(GameEvent.BOMB_HIT_ENEMY, this, this.beHit);
-
-        // this.setLeft();
-        this.setRight();
-        Laya.timer.loop(2000, this, this.setFire);
+        this.scene = s;
+        this.initView();
     };
 
-    public beHit(): void {
-        this.hp -= 30;
-        Laya.timer.clear(this, this.setColor);
-        this.bodyLoader.color = "#ff0000";
-        if (this.hp <= 0) {
-            this.setDeath();
-        } else {
-            Laya.timer.once(200, this, this.setColor);
+    public initView(): void {
+        this.enemy.url = "ui://Game/enemy" + this.enemyType;
+        this.scene.addChild(this.enemy.displayObject);
+        this.scene.addComponent(EnemyBody);
+        this.box = this.scene.getComponent(Laya.BoxCollider);
+
+        this.isDeath = false;
+
+        this.scene.x = this.pos.x;
+        this.scene.y = this.pos.y;
+        ViewManager.instance.warView.scene.addChild(this.scene);
+        EventManager.instance.addNotice(GameEvent.PLAYER_BULLET_HIT_ENEMY, this, this.beHit);
+        EventManager.instance.addNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.beHit);
+
+        this.setDirection();
+        Laya.timer.loop(2000, this, this.setFire);
+    }
+
+    public beHit(s: any): void {
+        if (this.isDeath) return;
+        if (s.o == this.box.owner) {
+            this.hp--;
+            Laya.timer.clear(this, this.setColor);
+            if (this.hp <= 0) {
+                this.setDeath();
+            } else {
+                if (this.enemyType == PlayerData.ENEMY_MOR) {
+                    this.bodyLoader.component.getChildAt(0).asLoader.content.color = "#ff0000";
+                    this.bodyLoader.component.getChildAt(1).asMovieClip.color = "#ff0000";
+                } else
+                    this.bodyLoader.color = "#ff0000";
+                Laya.timer.once(200, this, this.setColor);
+            }
         }
     }
 
-    private setColor(): void {
+    protected setColor(): void {
         this.bodyLoader.color = "#ffffff";
+    }
+
+    private setDirection(): void {
+        if (this.direction == -1) {
+            this.bodyLoader.skewY = 0;
+        } else {
+            this.bodyLoader.skewY = 180;
+        }
     }
 
     public setLeft(): void {
@@ -98,6 +131,8 @@ export default class Enemy {
             this.bodyLoader.url = "ui://Game/enemyStay_4";
         } else if (this.enemyType == PlayerData.ENEMY_MOR) {
             this.bodyLoader.url = "ui://Game/enemyStay_5";
+        } else if (this.enemyType == PlayerData.ENEMY_TANKE) {
+            this.bodyLoader.url = "ui://Game/enemy11";
         } else {
             this.bodyLoader.url = "ui://Game/enemyIdle_1";
         }
@@ -124,7 +159,7 @@ export default class Enemy {
     }
 
     public setFire(): void {
-        Laya.timer.once(3000, this, this.setFire);
+        // Laya.timer.once(3000, this, this.setFire);
         if (this.enemyType == PlayerData.ENEMY_PIS || this.enemyType == PlayerData.ENEMY_GRE) {
             if (this.getRandomFire() == 1) {//手枪
                 this.bodyLoader.url = "ui://Game/enemy_fire_1";
@@ -140,31 +175,34 @@ export default class Enemy {
             this.bodyLoader.url = "ui://Game/enemy_fire_4";
         } else if (this.enemyType == PlayerData.ENEMY_MOR) {//迫击炮
             this.bodyLoader.url = "ui://Game/enemy_fire_5";
-            this.bodyLoader.component.getChildAt(0).asMovieClip.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.morComplete));
+            this.bodyLoader.component.getChildAt(0).asLoader.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.morComplete));
             this.bodyLoader.component.getChildAt(1).asMovieClip.setPlaySettings(0, -1, 1, 0);
         } else {
             console.log("没有对应的敌人攻击效果");
         }
+
     }
 
-    private morComplete(): void {
+    protected morComplete(): void {
         ViewManager.instance.createBomb(PlayerData.ENEMY_MOR, this.direction, ViewManager.instance.getBodyCenterPos(this.scene), false);
         this.setIdle();
     }
 
-    private shotComplete(): void {
+    protected shotComplete(): void {
         ViewManager.instance.createEnemyBullet(PlayerData.ENEMY_PIS, this.direction, ViewManager.instance.getBodyCenterPos(this.scene));
         this.setIdle();
     }
 
-    private shot2Complete(): void {
+    protected shot2Complete(): void {
         ViewManager.instance.createEnemyBullet(PlayerData.ENEMY_MAC, this.direction, ViewManager.instance.getBodyCenterPos(this.scene));
         this.setIdle();
     }
 
-    private bombComplete(): void {
+    protected bombComplete(): void {
         ViewManager.instance.createBomb(PlayerData.ENEMY_GRE, this.direction, ViewManager.instance.getBodyCenterPos(this.scene), false);
         this.setIdle();
+    }
+    protected tankeComplete(): void {
     }
 
     public setStay(): void {
@@ -172,19 +210,26 @@ export default class Enemy {
     }
 
 
-    private setBoomComplete(): void {
+    protected setBoomComplete(): void {
         this.setStay();
         console.log("rengshouliudan");
     }
 
     public setDeath(): void {
+        this.isDeath = true;
+        Laya.timer.clearAll(this);
         this.bodyLoader.url = "ui://Game/death_" + this.enemyType;
         this.bodyLoader.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
+
+        var p: Laya.Point = new Laya.Point();
+        p.x = this.scene.x + this.scene.width / 2;
+        p.y = this.scene.y + this.scene.height / 2;
+        ViewManager.instance.createGoods(1, p);
     }
 
-    private dispose(): void {
-        EventManager.instance.offNotice(GameEvent.BULLET_HIT_ENEMY, this, this.beHit);
-        EventManager.instance.offNotice(GameEvent.BOMB_HIT_ENEMY, this, this.beHit);
+    protected dispose(): void {
+        EventManager.instance.offNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.beHit);
+        EventManager.instance.offNotice(GameEvent.PLAYER_BULLET_HIT_ENEMY, this, this.beHit);
         Laya.timer.clearAll(this);
         this.scene.removeSelf();
         this.view.dispose();
@@ -202,5 +247,13 @@ export default class Enemy {
     public getRandomFire(): number {
         if (Math.random() > 0.5) return 1;
         return 2;
+    }
+
+    public getRandomDeath(): number {
+        var r: number = Math.random();
+        if (r > 0.75) return 4;
+        if (r > 0.5) return 3;
+        if (r > 0.25) return 2;
+        return 1;
     }
 }

@@ -18,7 +18,7 @@ export default class WXFUI_WarView extends fairygui.GComponent {
 	}
 
 	protected onConstruct(): void {
-		this.m_bg = <fairygui.GLoader><any>(this.getChildAt(0));
-		this.m_box2 = <fairygui.GGraph><any>(this.getChildAt(1));
+		this.m_bg = <fairygui.GLoader><any>(this.getChild("bg"));
+		this.m_box2 = <fairygui.GGraph><any>(this.getChild("box2"));
 	}
 }

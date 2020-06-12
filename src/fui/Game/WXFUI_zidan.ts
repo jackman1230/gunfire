@@ -17,6 +17,6 @@ export default class WXFUI_zidan extends fairygui.GComponent {
 	}
 
 	protected onConstruct(): void {
-		this.m_zidan = <fairygui.GLoader><any>(this.getChildAt(0));
+		this.m_zidan = <fairygui.GLoader><any>(this.getChild("zidan"));
 	}
 }

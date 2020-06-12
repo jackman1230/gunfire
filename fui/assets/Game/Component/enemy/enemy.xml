@@ -1,22 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="91,91">
-  <controller name="ctl" pages="0,,1,,2,,3,,4," selected="0"/>
   <displayList>
-    <loader id="n29_yqv7" name="enemy" xy="0,0" pivot="0.5,0.5" size="91,91" align="center" vAlign="middle" autoSize="true"/>
-    <text id="n30_ge3s" name="firePos1" xy="-32,16" size="13,19" fontSize="12" autoSize="none" text="">
-      <gearDisplay controller="ctl" pages="0"/>
-    </text>
-    <text id="n31_ge3s" name="firePos2" xy="61,-26" size="13,19" fontSize="12" autoSize="none" text="">
-      <gearDisplay controller="ctl" pages="1"/>
-    </text>
-    <text id="n32_ge3s" name="firePos3" xy="-71,21" size="13,19" fontSize="12" autoSize="none" text="">
-      <gearDisplay controller="ctl" pages="2"/>
-    </text>
-    <text id="n33_ge3s" name="firePos4" xy="-70,12" size="13,19" fontSize="12" autoSize="none" text="">
-      <gearDisplay controller="ctl" pages="3"/>
-    </text>
-    <text id="n34_ge3s" name="firePos5" xy="-10,-32" size="13,19" fontSize="12" autoSize="none" text="">
-      <gearDisplay controller="ctl" pages="4"/>
-    </text>
+    <loader id="n29_yqv7" name="enemy" xy="0,0" size="227,110" align="center" vAlign="middle" autoSize="true"/>
   </displayList>
 </component>

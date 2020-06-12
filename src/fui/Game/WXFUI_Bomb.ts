@@ -20,9 +20,9 @@ export default class WXFUI_Bomb extends fairygui.GComponent {
 	}
 
 	protected onConstruct(): void {
-		this.m_boom = <fairygui.GLoader><any>(this.getChildAt(0));
-		this.m_boom2 = <fairygui.GLoader><any>(this.getChildAt(1));
-		this.m_z2 = this.getTransitionAt(0);
-		this.m_t3 = this.getTransitionAt(1);
+		this.m_boom = <fairygui.GLoader><any>(this.getChild("boom"));
+		this.m_boom2 = <fairygui.GLoader><any>(this.getChild("boom2"));
+		this.m_z2 = this.getTransition("z2");
+		this.m_t3 = this.getTransition("t3");
 	}
 }
