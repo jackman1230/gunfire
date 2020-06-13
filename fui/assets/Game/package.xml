@@ -57,15 +57,12 @@
     <image id="cqp93b" name="1451.png" path="/assets/player/蹲-手枪/"/>
     <image id="cqp93c" name="1449.png" path="/assets/player/蹲-手枪/"/>
     <movieclip id="cqp93f" name="legMove.jta" path="/Component/player/playerAni/" exported="true"/>
-    <component id="cqp93g" name="PlayerInfoView.xml" path="/Component/view/" exported="true"/>
     <image id="cqp93h" name="round.png" path="/assets/btn/"/>
     <image id="cqp93i" name="left.png" path="/assets/btn/"/>
     <image id="cqp93j" name="right.png" path="/assets/btn/"/>
-    <component id="cqp93k" name="dirCtl.xml" path="/Component/view/"/>
     <component id="cqp93n" name="jumpBtn.xml" path="/Component/btn/"/>
     <component id="cqp93o" name="fireBtn.xml" path="/Component/btn/"/>
     <component id="cqp93p" name="throwBtn.xml" path="/Component/btn/"/>
-    <component id="cqp93q" name="weaponBtn.xml" path="/Component/btn/"/>
     <movieclip id="cqp93r" name="legJump.jta" path="/Component/player/playerAni/" exported="true"/>
     <movieclip id="cqp93s" name="body_1.jta" path="/Component/player/playerAni/" exported="true"/>
     <image id="cqp93t" name="legStay.png" path="/Component/player/playerAni/" exported="true"/>
@@ -414,7 +411,6 @@
     <image id="ke5we5" name="1953.png" path="/assets/bomb/"/>
     <image id="ke5we6" name="1870.png" path="/assets/bomb/"/>
     <image id="ke5we7" name="1867.png" path="/assets/bomb/"/>
-    <image id="ke5we8" name="goods_4.png" path="/Component/goods/" exported="true"/>
     <image id="ke5we9" name="517.png" path="/assets/goods/"/>
     <image id="ke5wea" name="515.png" path="/assets/goods/"/>
     <image id="ke5web" name="512.png" path="/assets/goods/"/>
@@ -456,29 +452,18 @@
     <image id="dhktfd" name="852.png" path="/assets/enemy/军官/跑/"/>
     <image id="dhktfh" name="2136.png" path="/assets/tanke/"/>
     <image id="dhktfi" name="2135.png" path="/assets/tanke/"/>
-    <image id="dhktfn" name="zhadan_3.png" path="/assets/zadan/" exported="true"/>
     <image id="dhktfq" name="1986.png" path="/assets/tanke/"/>
     <image id="dhktfr" name="1983.png" path="/assets/tanke/"/>
     <image id="dhktfs" name="1980.png" path="/assets/tanke/"/>
     <image id="dhktfu" name="1717.png" path="/assets/tanke/"/>
     <image id="dhktfv" name="1598.png" path="/assets/tanke/"/>
     <image id="dhktfw" name="1596.png" path="/assets/tanke/"/>
-    <component id="dhktfx" name="obstacle.xml" path="/Component/obstacle/" exported="true"/>
-    <image id="p0x7g4" name="2174.png" path="/assets/obstacle/"/>
     <image id="p0x7g5" name="obstacle_2.png" path="/assets/zadan/" exported="true"/>
-    <image id="p0x7g6" name="2122.png" path="/assets/obstacle/"/>
     <image id="p0x7g7" name="obstacle_3.png" path="/assets/zadan/" exported="true"/>
-    <image id="p0x7g8" name="2090.png" path="/assets/obstacle/"/>
-    <image id="p0x7g9" name="obstacle_5.png" path="/assets/zadan/"/>
-    <image id="p0x7ga" name="2064.png" path="/assets/obstacle/"/>
+    <image id="p0x7g9" name="obstacle_5.png" path="/assets/zadan/" exported="true"/>
     <image id="p0x7gb" name="obstacle_4.png" path="/assets/zadan/" exported="true"/>
-    <image id="p0x7gc" name="obstacle_6.png" path="/assets/zadan/" exported="true"/>
-    <image id="p0x7gd" name="2180.png" path="/assets/obstacle/"/>
-    <image id="p0x7ge" name="obstacle_1.png" path="/assets/zadan/" exported="true"/>
-    <component id="dnw6gf" name="enemy10.xml" path="/Component/enemy/" exported="true"/>
     <movieclip id="dnw6gg" name="chopperAni.jta" path="/Component/enemy/chopper/" exported="true"/>
     <movieclip id="dnw6gh" name="tankeAni.jta" path="/Component/enemy/chopper/" exported="true"/>
-    <component id="dnw6gi" name="enemy11.xml" path="/Component/enemy/" exported="true"/>
     <image id="dnw6gj" name="1667.png" path="/assets/tanke/开火/"/>
     <image id="dnw6gk" name="1665.png" path="/assets/tanke/开火/"/>
     <image id="dnw6gl" name="1663.png" path="/assets/tanke/开火/"/>
@@ -492,53 +477,15 @@
     <image id="dnw6gt" name="1644.png" path="/assets/tanke/开火/"/>
     <image id="dnw6gu" name="1641.png" path="/assets/tanke/开火/"/>
     <image id="dnw6gv" name="1638.png" path="/assets/tanke/开火/"/>
-    <image id="dnw6gw" name="2429.png" path="/assets/tanke/"/>
-    <image id="dnw6gx" name="2417.png" path="/assets/tanke/"/>
-    <image id="dnw6gy" name="2415.png" path="/assets/tanke/"/>
-    <movieclip id="dnw6gz" name="tankeFire.jta" path="/Component/enemy/chopper/"/>
-    <image id="dnw6h0" name="255.png" path="/Component/enemy/"/>
-    <image id="dnw6h1" name="309.png" path="/Component/enemy/"/>
+    <movieclip id="dnw6gz" name="tankeFire.jta" path="/Component/enemy/chopper/" exported="true"/>
     <image id="dnw6h2" name="zhadan_4.png" path="/assets/zadan/" exported="true"/>
-    <component id="dnw6h3" name="enemy_fire_11.xml" path="/Component/enemy/" exported="true"/>
-    <component id="et35h4" name="enemy12.xml" path="/Component/enemy/" exported="true"/>
-    <component id="et35h5" name="enemy_fire_12.xml" path="/Component/enemy/" exported="true"/>
     <movieclip id="et35h6" name="tankeAni2.jta" path="/Component/enemy/chopper/" exported="true"/>
-    <component id="fmzphk" name="dirBtn.xml" path="/Component/btn/"/>
     <font id="fmzphw" name="bulletNum.fnt" path="/Component/font/" exported="true"/>
-    <component id="fmzphx" name="infoView.xml" path="/Component/view/"/>
-    <component id="fmzphy" name="blood.xml" path="/Component/view/"/>
-    <component id="fmzphz" name="suspendBtn.xml" path="/Component/btn/"/>
-    <image id="fmzpi0" name="285.png" path="/assets/bullent/disAni/"/>
-    <image id="fmzpi1" name="283.png" path="/assets/bullent/disAni/"/>
-    <image id="fmzpi2" name="281.png" path="/assets/bullent/disAni/"/>
-    <image id="fmzpi3" name="279.png" path="/assets/bullent/disAni/"/>
-    <image id="fmzpi4" name="277.png" path="/assets/bullent/disAni/"/>
-    <image id="fmzpi5" name="275.png" path="/assets/bullent/disAni/"/>
-    <image id="fmzpi6" name="273.png" path="/assets/bullent/disAni/"/>
-    <image id="fmzpi7" name="271.png" path="/assets/bullent/disAni/"/>
-    <image id="fmzpi8" name="269.png" path="/assets/bullent/disAni/"/>
-    <image id="fmzpi9" name="267.png" path="/assets/bullent/disAni/"/>
-    <image id="fmzpia" name="265.png" path="/assets/bullent/disAni/"/>
-    <image id="fmzpib" name="263.png" path="/assets/bullent/disAni/"/>
-    <image id="fmzpic" name="368.png" path="/assets/bullent/"/>
-    <image id="fmzpid" name="366.png" path="/assets/bullent/"/>
-    <image id="fmzpie" name="261.png" path="/assets/bullent/"/>
-    <image id="fmzpif" name="254.png" path="/assets/bullent/"/>
-    <image id="fmzpig" name="252.png" path="/assets/bullent/"/>
     <movieclip id="fmzpih" name="bulletDisAni.jta" path="/assets/zadan/" exported="true"/>
-    <image id="fmzpij" name="zidan3.png" path="/assets/zadan/" exported="true"/>
-    <component id="fmzpik" name="goodsView.xml" path="/Component/goods/" exported="true"/>
     <movieclip id="fmzpil" name="goods_1.jta" path="/Component/goods/" exported="true"/>
     <movieclip id="fmzpim" name="goods_2.jta" path="/Component/goods/" exported="true"/>
     <movieclip id="fmzpin" name="goods_3.jta" path="/Component/goods/" exported="true"/>
-    <image id="fmzpio" name="493.png" path="/assets/goods/createGoods/"/>
-    <image id="fmzpip" name="503.png" path="/assets/goods/createGoods/"/>
-    <image id="fmzpiq" name="501.png" path="/assets/goods/createGoods/"/>
-    <image id="fmzpir" name="499.png" path="/assets/goods/createGoods/"/>
-    <image id="fmzpis" name="497.png" path="/assets/goods/createGoods/"/>
-    <image id="fmzpit" name="495.png" path="/assets/goods/createGoods/"/>
     <movieclip id="fmzpiu" name="createGoodsAni.jta" path="/Component/goods/" exported="true"/>
-    <movieclip id="etakiv" name="bulletDisAni2.jta" path="/assets/zadan/" exported="true"/>
     <image id="dhhtiw" name="左上角底框。(1).png" path="/assets/playerInfo/"/>
     <image id="dhhtix" name="暂停按钮(1).png" path="/assets/playerInfo/"/>
     <image id="dhhtiy" name="血量(1).png" path="/assets/playerInfo/"/>
@@ -551,7 +498,7 @@
     <image id="dhhtj5" name="攻击(1).png" path="/assets/playerInfo/"/>
     <image id="dhhtj6" name="方向底框(1).png" path="/assets/playerInfo/"/>
     <image id="dhhtj7" name="d(1).png" path="/assets/playerInfo/"/>
-    <image id="dhhtj8" name="082f7a0c8135400d959786773fc9c271.png" path="/assets/playerInfo/"/>
+    <image id="dhhtj8" name="jump.png" path="/assets/playerInfo/"/>
     <image id="dhhtj9" name="9.png" path="/assets/playerInfo/弹药储存数字/"/>
     <image id="dhhtja" name="8.png" path="/assets/playerInfo/弹药储存数字/"/>
     <image id="dhhtjb" name="7.png" path="/assets/playerInfo/弹药储存数字/"/>
@@ -563,6 +510,56 @@
     <image id="dhhtjh" name="1.png" path="/assets/playerInfo/弹药储存数字/"/>
     <image id="dhhtji" name="0.png" path="/assets/playerInfo/弹药储存数字/"/>
     <image id="dhhtjj" name="_.png" path="/assets/playerInfo/弹药储存数字/"/>
+    <image id="dhhtjk" name="zidan3.png" path="/assets/zadan/" exported="true"/>
+    <image id="dhhtjl" name="zhadan_3.png" path="/assets/zadan/" exported="true"/>
+    <image id="dhhtjo" name="obstacle_1.png" path="/assets/zadan/" exported="true"/>
+    <image id="dhhtjp" name="285.png" path="/assets/bullent/disAni/"/>
+    <image id="dhhtjq" name="283.png" path="/assets/bullent/disAni/"/>
+    <image id="dhhtjr" name="281.png" path="/assets/bullent/disAni/"/>
+    <image id="dhhtjs" name="279.png" path="/assets/bullent/disAni/"/>
+    <image id="dhhtjt" name="277.png" path="/assets/bullent/disAni/"/>
+    <image id="dhhtju" name="275.png" path="/assets/bullent/disAni/"/>
+    <image id="dhhtjv" name="273.png" path="/assets/bullent/disAni/"/>
+    <image id="dhhtjw" name="271.png" path="/assets/bullent/disAni/"/>
+    <image id="dhhtjx" name="269.png" path="/assets/bullent/disAni/"/>
+    <image id="dhhtjy" name="267.png" path="/assets/bullent/disAni/"/>
+    <image id="dhhtjz" name="265.png" path="/assets/bullent/disAni/"/>
+    <image id="dhhtk0" name="263.png" path="/assets/bullent/disAni/"/>
+    <image id="dhhtk4" name="261.png" path="/assets/bullent/"/>
+    <image id="dhhtk5" name="259.png" path="/assets/bullent/"/>
+    <image id="dhhtk6" name="257.png" path="/assets/bullent/"/>
+    <image id="dhhtk7" name="255.png" path="/assets/bullent/"/>
+    <image id="dhhtk8" name="254.png" path="/assets/bullent/"/>
+    <image id="dhhtk9" name="252.png" path="/assets/bullent/"/>
+    <image id="dhhtka" name="368.png" path="/assets/bullent/"/>
+    <image id="dhhtkb" name="366.png" path="/assets/bullent/"/>
+    <image id="dhhtkc" name="2429.png" path="/assets/tanke/"/>
+    <image id="dhhtkd" name="2417.png" path="/assets/tanke/"/>
+    <image id="dhhtke" name="2415.png" path="/assets/tanke/"/>
+    <image id="dhhtkf" name="503.png" path="/assets/goods/createGoods/"/>
+    <image id="dhhtkg" name="501.png" path="/assets/goods/createGoods/"/>
+    <image id="dhhtkh" name="499.png" path="/assets/goods/createGoods/"/>
+    <image id="dhhtki" name="497.png" path="/assets/goods/createGoods/"/>
+    <image id="dhhtkj" name="495.png" path="/assets/goods/createGoods/"/>
+    <image id="dhhtkk" name="493.png" path="/assets/goods/createGoods/"/>
+    <image id="dhhtkl" name="2122.png" path="/assets/obstacle/"/>
+    <image id="dhhtkm" name="2090.png" path="/assets/obstacle/"/>
+    <image id="dhhtkn" name="2064.png" path="/assets/obstacle/"/>
+    <image id="dhhtko" name="goods_4.png" path="/Component/goods/" exported="true"/>
+    <component id="qz5ukq" name="goodsView.xml" path="/Component/goods/"/>
+    <component id="qz5ukr" name="enemy10.xml" path="/Component/enemy/"/>
+    <component id="qz5uks" name="enemy_fire_11.xml" path="/Component/enemy/" exported="true"/>
+    <component id="qz5ukt" name="enemy_fire_12.xml" path="/Component/enemy/" exported="true"/>
+    <component id="qz5uku" name="obstacle.xml" path="/Component/obstacle/" exported="true"/>
+    <movieclip id="qz5ukv" name="boom_6.jta" path="/Component/enemy/bomb/" exported="true"/>
+    <image id="qz5ukw" name="1899.png" path="/assets/obstacle/"/>
+    <image id="iasdkx" name="255.png" path="/Component/enemy/"/>
+    <image id="iasdky" name="309.png" path="/Component/enemy/"/>
+    <component id="iasdkz" name="PlayerInfoView.xml" path="/Component/view/"/>
+    <component id="iasdl0" name="PlayerCtlView.xml" path="/Component/view/"/>
+    <component id="iasdl1" name="dirCtlView.xml" path="/Component/view/"/>
+    <component id="iasdl2" name="dirBtn.xml" path="/Component/view/"/>
+    <component id="iasdl3" name="susBtn.xml" path="/Component/btn/"/>
   </resources>
   <publish name="Game" path="..\bin\res" packageCount="2" genCode="true" codePath="..\src\fui"/>
 </packageDescription>

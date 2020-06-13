@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="261,262">
+  <displayList>
+    <image id="n0_iasd" name="bg" src="dhhtj6" fileName="assets/playerInfo/方向底框(1).png" xy="0,0"/>
+    <component id="n1_iasd" name="dirBtn" src="iasdl2" fileName="Component/view/dirBtn.xml" xy="3,65"/>
+  </displayList>
+</component>

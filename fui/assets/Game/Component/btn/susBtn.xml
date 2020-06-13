@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="90,75" pivot="0.5,0.5" extention="Button">
+  <controller name="button" pages="0,up,1,down" selected="0"/>
+  <displayList>
+    <image id="n3_fmzp" name="n3" src="dhhtix" fileName="assets/playerInfo/暂停按钮(1).png" xy="1,1"/>
+  </displayList>
+  <Button downEffect="scale" downEffectValue="0.98"/>
+</component>
