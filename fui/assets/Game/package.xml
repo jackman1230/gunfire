@@ -503,31 +503,7 @@
     <component id="et35h4" name="enemy12.xml" path="/Component/enemy/" exported="true"/>
     <component id="et35h5" name="enemy_fire_12.xml" path="/Component/enemy/" exported="true"/>
     <movieclip id="et35h6" name="tankeAni2.jta" path="/Component/enemy/chopper/" exported="true"/>
-    <image id="fmzph7" name="雪灰.png" path="/assets/playerInfo/"/>
-    <image id="fmzph8" name="金币.png" path="/assets/playerInfo/"/>
-    <image id="fmzph9" name="跳跃.png" path="/assets/playerInfo/"/>
-    <image id="fmzpha" name="血量.png" path="/assets/playerInfo/"/>
-    <image id="fmzphb" name="暂停按钮.png" path="/assets/playerInfo/"/>
-    <image id="fmzphc" name="方向底框.png" path="/assets/playerInfo/"/>
-    <image id="fmzphd" name="攻击底框.png" path="/assets/playerInfo/"/>
-    <image id="fmzphe" name="攻击.png" path="/assets/playerInfo/"/>
-    <image id="fmzphf" name="扔雷.png" path="/assets/playerInfo/"/>
-    <image id="fmzphg" name="手柄.png" path="/assets/playerInfo/"/>
-    <image id="fmzphh" name="左上角底框。.png" path="/assets/playerInfo/"/>
-    <image id="fmzphi" name="d.png" path="/assets/playerInfo/"/>
-    <image id="fmzphj" name="tiao.png" path="/assets/playerInfo/"/>
     <component id="fmzphk" name="dirBtn.xml" path="/Component/btn/"/>
-    <image id="fmzphl" name="_.png" path="/assets/playerInfo/弹药储存数字/"/>
-    <image id="fmzphm" name="9.png" path="/assets/playerInfo/弹药储存数字/"/>
-    <image id="fmzphn" name="8.png" path="/assets/playerInfo/弹药储存数字/"/>
-    <image id="fmzpho" name="7.png" path="/assets/playerInfo/弹药储存数字/"/>
-    <image id="fmzphp" name="6.png" path="/assets/playerInfo/弹药储存数字/"/>
-    <image id="fmzphq" name="5.png" path="/assets/playerInfo/弹药储存数字/"/>
-    <image id="fmzphr" name="4.png" path="/assets/playerInfo/弹药储存数字/"/>
-    <image id="fmzphs" name="3.png" path="/assets/playerInfo/弹药储存数字/"/>
-    <image id="fmzpht" name="2.png" path="/assets/playerInfo/弹药储存数字/"/>
-    <image id="fmzphu" name="1.png" path="/assets/playerInfo/弹药储存数字/"/>
-    <image id="fmzphv" name="0.png" path="/assets/playerInfo/弹药储存数字/"/>
     <font id="fmzphw" name="bulletNum.fnt" path="/Component/font/" exported="true"/>
     <component id="fmzphx" name="infoView.xml" path="/Component/view/"/>
     <component id="fmzphy" name="blood.xml" path="/Component/view/"/>
@@ -563,6 +539,30 @@
     <image id="fmzpit" name="495.png" path="/assets/goods/createGoods/"/>
     <movieclip id="fmzpiu" name="createGoodsAni.jta" path="/Component/goods/" exported="true"/>
     <movieclip id="etakiv" name="bulletDisAni2.jta" path="/assets/zadan/" exported="true"/>
+    <image id="dhhtiw" name="左上角底框。(1).png" path="/assets/playerInfo/"/>
+    <image id="dhhtix" name="暂停按钮(1).png" path="/assets/playerInfo/"/>
+    <image id="dhhtiy" name="血量(1).png" path="/assets/playerInfo/"/>
+    <image id="dhhtiz" name="雪灰(1).png" path="/assets/playerInfo/"/>
+    <image id="dhhtj0" name="跳跃(1).png" path="/assets/playerInfo/"/>
+    <image id="dhhtj1" name="手柄(1).png" path="/assets/playerInfo/"/>
+    <image id="dhhtj2" name="扔雷(1).png" path="/assets/playerInfo/"/>
+    <image id="dhhtj3" name="金币(1).png" path="/assets/playerInfo/"/>
+    <image id="dhhtj4" name="攻击底框(1).png" path="/assets/playerInfo/"/>
+    <image id="dhhtj5" name="攻击(1).png" path="/assets/playerInfo/"/>
+    <image id="dhhtj6" name="方向底框(1).png" path="/assets/playerInfo/"/>
+    <image id="dhhtj7" name="d(1).png" path="/assets/playerInfo/"/>
+    <image id="dhhtj8" name="082f7a0c8135400d959786773fc9c271.png" path="/assets/playerInfo/"/>
+    <image id="dhhtj9" name="9.png" path="/assets/playerInfo/弹药储存数字/"/>
+    <image id="dhhtja" name="8.png" path="/assets/playerInfo/弹药储存数字/"/>
+    <image id="dhhtjb" name="7.png" path="/assets/playerInfo/弹药储存数字/"/>
+    <image id="dhhtjc" name="6.png" path="/assets/playerInfo/弹药储存数字/"/>
+    <image id="dhhtjd" name="5.png" path="/assets/playerInfo/弹药储存数字/"/>
+    <image id="dhhtje" name="4.png" path="/assets/playerInfo/弹药储存数字/"/>
+    <image id="dhhtjf" name="3.png" path="/assets/playerInfo/弹药储存数字/"/>
+    <image id="dhhtjg" name="2.png" path="/assets/playerInfo/弹药储存数字/"/>
+    <image id="dhhtjh" name="1.png" path="/assets/playerInfo/弹药储存数字/"/>
+    <image id="dhhtji" name="0.png" path="/assets/playerInfo/弹药储存数字/"/>
+    <image id="dhhtjj" name="_.png" path="/assets/playerInfo/弹药储存数字/"/>
   </resources>
   <publish name="Game" path="..\bin\res" packageCount="2" genCode="true" codePath="..\src\fui"/>
 </packageDescription>
