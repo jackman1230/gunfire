@@ -1,0 +1,172 @@
+{
+    "role": {
+        "blood": 3,
+        "bombNum": 10,
+        "weaponType": 1,
+        "addBombNum": 10,
+        "addMacNum": 200,
+        "addRifNum": 50
+    },
+    "level_1": {
+        "rolePos": [
+            800,
+            400
+        ],
+        "enemyArr": {
+            "enemy_1": {
+                "type": 1,
+                "direction": -1,
+                "blood": 5,
+                "damage": 1,
+                "activeDis": 500,
+                "pos": [
+                    800,
+                    500
+                ],
+                "isBoss": false,
+                "expRate": [
+                    1,
+                    1
+                ]
+            },
+            "enemy_2": {
+                "type": 3,
+                "direction": -1,
+                "blood": 5,
+                "damage": 1,
+                "activeDis": 500,
+                "pos": [
+                    1000,
+                    500
+                ],
+                "isBoss": false,
+                "expRate": [
+                    1,
+                    1
+                ]
+            },
+            "enemy_3": {
+                "type": 3,
+                "direction": -1,
+                "blood": 5,
+                "damage": 1,
+                "activeDis": 500,
+                "pos": [
+                    1200,
+                    400
+                ],
+                "isBoss": false,
+                "expRate": [
+                    1,
+                    1
+                ]
+            },
+            "enemy_4": {
+                "type": 4,
+                "direction": -1,
+                "blood": 5,
+                "damage": 1,
+                "activeDis": 500,
+                "pos": [
+                    1300,
+                    400
+                ],
+                "isBoss": false,
+                "expRate": [
+                    1,
+                    1
+                ]
+            },
+            "enemy_5": {
+                "type": 4,
+                "direction": -1,
+                "blood": 5,
+                "damage": 1,
+                "activeDis": 500,
+                "pos": [
+                    1500,
+                    400
+                ],
+                "isBoss": false,
+                "expRate": [
+                    1,
+                    1
+                ]
+            },
+            "enemy_6": {
+                "type": 5,
+                "direction": -1,
+                "blood": 5,
+                "damage": 1,
+                "activeDis": 500,
+                "pos": [
+                    1700,
+                    400
+                ],
+                "isBoss": false,
+                "expRate": [
+                    1,
+                    1
+                ]
+            },
+            "enemy_7": {
+                "type": 10,
+                "direction": -1,
+                "blood": 5,
+                "damage": 1,
+                "activeDis": 500,
+                "pos": [
+                    1400,
+                    50
+                ],
+                "isBoss": false,
+                "expRate": [
+                    1,
+                    1
+                ]
+            },
+            "enemy_8": {
+                "type": 11,
+                "direction": -1,
+                "blood": 5,
+                "damage": 1,
+                "activeDis": 500,
+                "pos": [
+                    1500,
+                    300
+                ],
+                "isBoss": false,
+                "expRate": [
+                    1,
+                    1
+                ]
+            },
+            "enemy_9": {
+                "type": 12,
+                "direction": -1,
+                "blood": 5,
+                "damage": 1,
+                "activeDis": 500,
+                "pos": [
+                    1700,
+                    300
+                ],
+                "isBoss": false,
+                "expRate": [
+                    1,
+                    1
+                ]
+            }
+        },
+        "obstacle": {
+            "obstacle_1": {
+                "type": 1,
+                "blood": 5,
+                "pos": [
+                    1100,
+                    400
+                ]
+            }
+        }
+    }
+}

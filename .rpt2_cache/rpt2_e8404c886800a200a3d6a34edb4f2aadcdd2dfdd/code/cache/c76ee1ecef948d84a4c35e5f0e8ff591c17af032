@@ -1,4 +1,0 @@
-{
-  "code": "export default class PlayerAni {\r\n    constructor() { }\r\n    initView() {\r\n        this.body_1 = fairygui.UIPackage.createObject(\"Game\", \"body_1\").asMovieClip;\r\n        this.body_2 = fairygui.UIPackage.createObject(\"Game\", \"body_2\").asMovieClip;\r\n        this.boomAni_1 = fairygui.UIPackage.createObject(\"Game\", \"boom_1\").asMovieClip;\r\n        this.boomAni_2 = fairygui.UIPackage.createObject(\"Game\", \"boom_2\").asMovieClip;\r\n        this.legJump = fairygui.UIPackage.createObject(\"Game\", \"legJump\").asMovieClip;\r\n        this.legMove = fairygui.UIPackage.createObject(\"Game\", \"legMove\").asMovieClip;\r\n        this.legStay = fairygui.UIPackage.createObject(\"Game\", \"legStay\").asImage;\r\n        this.fire_1 = fairygui.UIPackage.createObject(\"Game\", \"fire_1\").asMovieClip;\r\n        this.fire_2 = fairygui.UIPackage.createObject(\"Game\", \"fire_2\").asMovieClip;\r\n    }\r\n}\r\n",
-  "references": []
-}

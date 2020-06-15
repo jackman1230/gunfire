@@ -57,9 +57,6 @@
     <image id="cqp93b" name="1451.png" path="/assets/player/蹲-手枪/"/>
     <image id="cqp93c" name="1449.png" path="/assets/player/蹲-手枪/"/>
     <movieclip id="cqp93f" name="legMove.jta" path="/Component/player/playerAni/" exported="true"/>
-    <image id="cqp93h" name="round.png" path="/assets/btn/"/>
-    <image id="cqp93i" name="left.png" path="/assets/btn/"/>
-    <image id="cqp93j" name="right.png" path="/assets/btn/"/>
     <component id="cqp93n" name="jumpBtn.xml" path="/Component/btn/"/>
     <component id="cqp93o" name="fireBtn.xml" path="/Component/btn/"/>
     <component id="cqp93p" name="throwBtn.xml" path="/Component/btn/"/>
@@ -546,8 +543,8 @@
     <image id="dhhtkm" name="2090.png" path="/assets/obstacle/"/>
     <image id="dhhtkn" name="2064.png" path="/assets/obstacle/"/>
     <image id="dhhtko" name="goods_4.png" path="/Component/goods/" exported="true"/>
-    <component id="qz5ukq" name="goodsView.xml" path="/Component/goods/"/>
-    <component id="qz5ukr" name="enemy10.xml" path="/Component/enemy/"/>
+    <component id="qz5ukq" name="goodsView.xml" path="/Component/goods/" exported="true"/>
+    <component id="qz5ukr" name="enemy10.xml" path="/Component/enemy/" exported="true"/>
     <component id="qz5uks" name="enemy_fire_11.xml" path="/Component/enemy/" exported="true"/>
     <component id="qz5ukt" name="enemy_fire_12.xml" path="/Component/enemy/" exported="true"/>
     <component id="qz5uku" name="obstacle.xml" path="/Component/obstacle/" exported="true"/>
@@ -555,11 +552,13 @@
     <image id="qz5ukw" name="1899.png" path="/assets/obstacle/"/>
     <image id="iasdkx" name="255.png" path="/Component/enemy/"/>
     <image id="iasdky" name="309.png" path="/Component/enemy/"/>
-    <component id="iasdkz" name="PlayerInfoView.xml" path="/Component/view/"/>
-    <component id="iasdl0" name="PlayerCtlView.xml" path="/Component/view/"/>
+    <component id="iasdkz" name="PlayerInfoView.xml" path="/Component/view/" exported="true"/>
+    <component id="iasdl0" name="PlayerCtlView.xml" path="/Component/view/" exported="true"/>
     <component id="iasdl1" name="dirCtlView.xml" path="/Component/view/"/>
     <component id="iasdl2" name="dirBtn.xml" path="/Component/view/"/>
     <component id="iasdl3" name="susBtn.xml" path="/Component/btn/"/>
+    <component id="dx35l4" name="enemy11.xml" path="/Component/enemy/" exported="true"/>
+    <component id="dx35l5" name="enemy12.xml" path="/Component/enemy/" exported="true"/>
   </resources>
   <publish name="Game" path="..\bin\res" packageCount="2" genCode="true" codePath="..\src\fui"/>
 </packageDescription>

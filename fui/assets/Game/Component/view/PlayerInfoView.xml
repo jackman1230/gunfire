@@ -11,7 +11,7 @@
     <image id="n7_iasd" name="n7" src="dhhtj3" fileName="assets/playerInfo/金币(1).png" xy="206,154"/>
     <component id="n8_iasd" name="n8" src="iasdl3" fileName="Component/btn/susBtn.xml" xy="1058,55"/>
     <text id="n9_iasd" name="coin" xy="231,154" size="105,27" font="ui://bq3h5insfmzphw" fontSize="12" autoSize="none" singleLine="true" text="12321321"/>
-    <text id="n10_iasd" name="coin" xy="488,83" size="86,25" font="ui://bq3h5insfmzphw" fontSize="10" vAlign="middle" autoSize="none" singleLine="true" text="12321321"/>
-    <text id="n11_iasd" name="coin" xy="602,83" size="86,25" font="ui://bq3h5insfmzphw" fontSize="10" vAlign="middle" autoSize="none" singleLine="true" text="12321321"/>
+    <text id="n10_iasd" name="bullet" xy="488,83" size="86,25" font="ui://bq3h5insfmzphw" fontSize="10" vAlign="middle" autoSize="none" singleLine="true" text="12321321"/>
+    <text id="n11_iasd" name="gre" xy="602,83" size="86,25" font="ui://bq3h5insfmzphw" fontSize="10" vAlign="middle" autoSize="none" singleLine="true" text="12321321"/>
   </displayList>
 </component>

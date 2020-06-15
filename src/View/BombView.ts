@@ -19,15 +19,15 @@ export default class BombView {
     public direction: number = 1;
     public isPlayer: boolean = false;
 
-    private body: Laya.RigidBody;
-    private box: Laya.BoxCollider;
+    protected body: Laya.RigidBody;
+    protected box: Laya.BoxCollider;
 
-    private parentPos: Laya.Point;
-    private offPos: Laya.Point;
+    protected parentPos: Laya.Point;
+    protected offPos: Laya.Point;
 
     constructor() { }
 
-    createView(type: number, dir: number, s: Laya.Point, p: boolean, offPos?: Laya.Point): void {
+    createView(type: number, dir?: number, s?: Laya.Point, p?: boolean, offPos?: Laya.Point): void {
         this.bombType = type;
         this.direction = dir;
         this.parentPos = s;
@@ -36,15 +36,15 @@ export default class BombView {
         Laya.Scene.load("BombBody.scene", Laya.Handler.create(this, this.loadComplete));
     }
 
-    private loadComplete(s: Laya.Scene): void {
+    protected loadComplete(s: Laya.Scene): void {
         console.log("bomb.scene--loadComplete", this.bombType);
 
         this.view = fairygui.UIPackage.createObject("Game", "Bomb") as WXFUI_Bomb;
         this.view.m_boom.visible = this.view.m_boom2.visible = false;
-        if (this.bombType == BombData.BOMB_5) {
+        if (this.bombType == BombData.BOMB_MOR) {
             this.view.m_boom.visible = true;
             this.trans = this.view.getTransitionAt(0);
-        } else if (this.bombType == BombData.BOMB_2 || this.bombType == BombData.BOMB_1) {
+        } else if (this.bombType == BombData.BOMB_ENEMY_GRE || this.bombType == BombData.BOMB_MY_GRE) {
             this.view.m_boom2.visible = true;
             this.trans = this.view.getTransitionAt(1);
         }
@@ -58,10 +58,10 @@ export default class BombView {
             this.box.label = this.body.label = "enemyBomb";
         }
         this.view.m_boom.url = this.view.m_boom2.url = "ui://Game/zhadan_" + this.bombType;
-        if (this.bombType == BombData.BOMB_2)
+        if (this.bombType == BombData.BOMB_ENEMY_GRE)
             this.view.m_boom2.content.setPlaySettings(0, -1, 0, 0);
 
-        if (this.bombType != BombData.BOMB_4 && this.bombType != BombData.BOMB_5)
+        if (this.bombType == BombData.BOMB_MY_GRE || this.bombType == BombData.BOMB_ENEMY_GRE)
             this.trans.play(null, 1);
 
         this.scene.addChild(this.view.displayObject);
@@ -74,15 +74,15 @@ export default class BombView {
 
     }
 
-    private setBombPos(): void {
+    protected setBombPos(): void {
         if (this.direction == 1) {
             this.body.setVelocity({ x: 7, y: -6 });
-            if (this.bombType == BombData.BOMB_5)
+            if (this.bombType == BombData.BOMB_MOR)
                 this.trans.play(null, 1, 0, 0, 1.25);
 
         } else {
             this.body.setVelocity({ x: -7, y: -6 });
-            if (this.bombType == BombData.BOMB_5)
+            if (this.bombType == BombData.BOMB_MOR)
                 this.trans.play(null, 1, 0, 1.5, 2.75);
         }
         this.scene.x = this.parentPos.x + this.offPos.x;
@@ -90,13 +90,13 @@ export default class BombView {
     }
 
 
-    private showBoomView(): void {
+    protected showBoomView(): void {
         var bomb: BoomView = Laya.Pool.getItemByClass("boomView", BoomView);
         var p: Laya.Point = ViewManager.instance.getBodyCenterPos(this.scene);
         bomb.createView(ViewManager.instance.getBoomAniTypeByBomb(this.bombType), p, this.isPlayer);
     }
 
-    private dispose(s: any): void {
+    protected dispose(s: any): void {
         if (s.s == this.box.owner) {
             this.showBoomView();
             EventManager.instance.offNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.dispose);

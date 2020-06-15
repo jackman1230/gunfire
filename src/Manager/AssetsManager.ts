@@ -22,7 +22,7 @@ export class AssetsManager {
             { url: "res/Game_atlas0_2.png", type: Laya.Loader.IMAGE },
             { url: "res/Game_atlas0_3.png", type: Laya.Loader.IMAGE },
             { url: "res/Game_atlas0_4.png", type: Laya.Loader.IMAGE },
-            // { url: "res/Game_atlas0_5.png", type: Laya.Loader.IMAGE },
+            { url: "res/Game_atlas0_5.png", type: Laya.Loader.IMAGE },
             // { url: "res/Game_atlas0_6.png", type: Laya.Loader.IMAGE },
             // { url: "res/Game_atlas0_7.png", type: Laya.Loader.IMAGE },
             // { url: "res/Game_atlas0_8.png", type: Laya.Loader.IMAGE },

@@ -1,6 +1,0 @@
-{
-  "code": "export class Player {\r\n    constructor() { }\r\n    initView() {\r\n        this.rolePlayer = fairygui.UIPackage.createObject(\"Game\", \"Player\");\r\n        this.rolePlayer.setPivot(0.5, 0.5);\r\n    }\r\n    ;\r\n    setLeft() {\r\n        this.rolePlayer.skewY = 0;\r\n    }\r\n    setRight() {\r\n        this.rolePlayer.skewY = 180;\r\n    }\r\n}\r\n",
-  "references": [
-    "D:/littleGame/gunfire/src/fui/Game/FUI_Player.ts"
-  ]
-}

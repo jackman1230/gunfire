@@ -7,12 +7,14 @@ import EnemyBullet from "../View/EnemyBullet";
 import PlayerBullet from "../View/PlayerBullet";
 import BombView from "../View/BombView";
 import ObstacleView from "../View/ObstacleView";
-import { BombData, BoomAniType, ObstacleType } from "../Data/GameData";
-import ChopperView from "../View/ChopperView";
-import TankeView from "../View/TankeView";
+import { BombData, ObstacleType } from "../Data/GameData";
+import Chopper from "../View/Chopper";
+import Tank from "../View/Tank";
+import { EnemyInfo, ObstacleInfo } from "../Data/PlayerData";
 import ChopperBomb from "../View/ChopperBomb";
 import GoodsView from "../View/GoodsView";
 import PlayerInfoView from "../View/PlayerInfoView";
+import PlayerCtlView from "../View/PlayerCtlView";
 
 export class ViewManager {
 
@@ -36,20 +38,21 @@ export class ViewManager {
     }
 
     public createWarView(): void {
-        this.warView.createView()
+        this.warView.createView();
+        this.createPlayerInfoView();//创建角色信息界面
     }
     /**创建步兵扔的雷 */
     public createBomb(type: number, dir: number, parentPos: Laya.Point, b: boolean): void {
         var bomb: BombView = Laya.Pool.getItemByClass("bombView", BombView);
         if (b)
-            bomb.createView(BombData.BOMB_1, dir, parentPos, b, this.getPlayerBulletOffSetPos(dir, type));
+            bomb.createView(BombData.BOMB_MY_GRE, dir, parentPos, b, this.getPlayerBulletOffSetPos(dir, type));
         else
             bomb.createView(type, dir, parentPos, b, this.getEnemyBulletOffSetPos(dir, type));
     }
     /**创建飞机的导弹 */
     public createChopperBomb(type: number, parentPos: Laya.Point, s: Laya.Point): void {
         var bomb: ChopperBomb = Laya.Pool.getItemByClass("ChopperBomb", ChopperBomb);
-        bomb.createView(type, parentPos, s);
+        bomb.createView(type, null, parentPos, null, s);
     }
     /**创建主角子弹 */
     public createBullet(): void {
@@ -66,6 +69,13 @@ export class ViewManager {
         var b: EnemyBullet = Laya.Pool.getItemByClass("enemyBullet", EnemyBullet);
         b.createView(type, dir, s);
     }
+
+    /**创建障碍物 */
+    public createObstacle(d: ObstacleInfo): void {
+        var b: ObstacleView = Laya.Pool.getItemByClass("obstacle", ObstacleView);
+        b.createView(d);
+    }
+
     /**创建步兵敌人 */
     public createEnemy(d: any): void {
         var b: Enemy = Laya.Pool.getItemByClass("enemy", Enemy);
@@ -73,15 +83,14 @@ export class ViewManager {
     }
 
     /**创建直升机 */
-    public createChopper(): void {
-        var b: ChopperView = Laya.Pool.getItemByClass("Chopper", ChopperView);
-        b.createView();
+    public createChopper(d: EnemyInfo): void {
+        var b: Chopper = Laya.Pool.getItemByClass("chopper", Chopper);
+        b.createView(d);
     }
     /**创建坦克 */
-    public createTanke(type: number): void {
-        var b: TankeView = Laya.Pool.getItemByClass("Tanke", TankeView);
-        b.enemyType = type;
-        b.createView();
+    public createTank(d: EnemyInfo): void {
+        var b: Tank = Laya.Pool.getItemByClass("tank", Tank);
+        b.createView(d);
     }
 
     /**创建掉落物品 */
@@ -90,9 +99,15 @@ export class ViewManager {
         b.createView(type, s);
     }
 
-    /**创建掉落物品 */
+    /**创建人物信息界面 */
     public createPlayerInfoView(): void {
         var b: PlayerInfoView = new PlayerInfoView();
+        b.createView();
+    }
+
+    /**创建人物操作界面 */
+    public createPlayerCtlView(): void {
+        var b: PlayerCtlView = new PlayerCtlView();
         b.createView();
     }
 
@@ -117,25 +132,25 @@ export class ViewManager {
         // this.bgView.updateViewPort(moveX);
         this.warView.updateViewPort(moveX);
     }
-
+    /**根据导弹类型，获取导弹爆炸效果 */
     public getBoomAniTypeByBomb(type: number): number {
-        if (type == BombData.BOMB_1 || type == BombData.BOMB_2) {
-            return BoomAniType.BOOM_1;
-        } else if (type == BombData.BOMB_5) {
-            return BoomAniType.BOOM_2;
-        } else if (type == BombData.BOMB_4) {
-            return BoomAniType.BOOM_3;
+        if (type == BombData.BOMB_MY_GRE || type == BombData.BOMB_MY_GRE || type == BombData.BOMB_CHOPPER) {
+            return 1;
+        } else if (type == BombData.BOMB_MOR) {
+            return 2;
+        } else if (type == BombData.BOMB_TANK) {
+            return 3;
         }
         return 1;
     }
-
+    /**根据障碍物类型，获取导弹爆炸效果 */
     public getBoomAniTypeByObsType(type: number): number {
-        if (type == ObstacleType.ObstacleType_1) {
-            return BoomAniType.BOOM_2;
-        } else if (type == ObstacleType.ObstacleType_6) {
-            return BoomAniType.BOOM_5;
+        if (type == ObstacleType.ObstacleType_SHABAO) {
+            return 2;
+        } else if (type == ObstacleType.ObstacleType_DACHE) {
+            return 5;
         } else {
-            return BoomAniType.BOOM_3;
+            return 3;
         }
     }
 

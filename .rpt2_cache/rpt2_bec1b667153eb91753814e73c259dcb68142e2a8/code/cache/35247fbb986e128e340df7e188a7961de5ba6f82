@@ -1,4 +1,0 @@
-{
-  "code": "export default class EnemyBody extends Laya.Script {\r\n    constructor() { super(); }\r\n    onAwake() {\r\n        this.selfCollider = this.owner.getComponent(Laya.BoxCollider);\r\n        this.selfBody = this.selfCollider.rigidBody;\r\n        this.selfCollider.label = \"enemy\";\r\n        this.selfBody.label = \"enemy\";\r\n    }\r\n    onDisable() {\r\n    }\r\n    onTriggerEnter(other, self, contact) {\r\n    }\r\n    onTriggerExit() {\r\n    }\r\n    onTriggerStay(other, self, contact) {\r\n    }\r\n    onUpdate() {\r\n    }\r\n    setSpeedZero() {\r\n        this.selfBody.linearVelocity = { x: 0, y: 0 };\r\n        this.selfBody.angularVelocity = 0;\r\n        this.selfBody.setVelocity({ x: 0, y: 0 });\r\n        this.selfBody.linearDamping = 0;\r\n        this.selfBody.angularDamping = 0;\r\n        this.selfBody.setAngle({ x: 0, y: 0 });\r\n        this.selfCollider.refresh();\r\n    }\r\n}\r\n",
-  "references": []
-}

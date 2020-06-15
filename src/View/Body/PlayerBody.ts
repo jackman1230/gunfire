@@ -36,6 +36,10 @@ export default class PlayerBody extends Laya.Script {
             EventManager.instance.dispatcherEvt(GameEvent.PLAYER_COLLISION_GROUND);
             this.setSpeedZero();
         }
+        if (other.label == "goods") {
+            EventManager.instance.dispatcherEvt(GameEvent.PLAYER_GET_GOODS, other.owner);
+
+        }
     }
     onTriggerExit(): void {
         console.log("onTriggerExit--");

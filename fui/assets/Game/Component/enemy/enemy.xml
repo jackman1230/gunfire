@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="91,91">
   <displayList>
-    <loader id="n29_yqv7" name="enemy" xy="0,0" size="227,110" align="center" vAlign="middle" autoSize="true"/>
+    <loader id="n29_yqv7" name="enemy" xy="0,0" size="91,91" url="ui://bq3h5insoqgw9y" align="center" vAlign="middle" autoSize="true"/>
   </displayList>
 </component>

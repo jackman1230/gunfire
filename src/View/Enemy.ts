@@ -3,11 +3,11 @@ import WXFUI_Player from "../fui/Game/WXFUI_Player";
 import PlayerAni from "./PlayerAni";
 import { ViewManager } from "../Manager/ViewManager";
 import WXFUI_enemy from "../fui/Game/WXFUI_enemy";
-import { PlayerData } from "../Data/GameData";
 import EnemyBody from "./Body/EnemyBody";
 import GameEvent from "../Control/GameEvent";
 import { EventManager } from "../Manager/EventManager";
-import { EnemyInfo } from "../Manager/GameManager";
+import { GameData, ShotDirectionData } from "../Data/GameData";
+import { EnemyInfo } from "../Data/PlayerData";
 
 export default class Enemy {
     //常规兵种
@@ -30,7 +30,7 @@ export default class Enemy {
     protected jumpHigh: number = 200;
     protected isDeath: boolean = false;
 
-    protected hp: number = 1;
+    protected blood: number = 1;
     protected damage: number;
     protected activeDis: number;
     protected pos: Laya.Point;
@@ -41,18 +41,21 @@ export default class Enemy {
     constructor() { }
 
     public createView(d: EnemyInfo) {
+        this.initData(d);
+        Laya.Scene.load("EnemyBody.scene", Laya.Handler.create(this, this.loadComplete));
+    };
+
+    protected initData(d: EnemyInfo): void {
         this.enemyData = d;
-        this.direction = d.dir;
+        this.direction = d.direction;
         this.enemyType = d.type;
-        this.hp = d.blood;
+        this.blood = d.blood;
         this.damage = d.damage;
         this.activeDis = d.activeDis;
         this.pos = d.pos;
         this.expRate = d.expRate.concat();
         this.isBoss = d.isBoss;
-
-        Laya.Scene.load("EnemyBody.scene", Laya.Handler.create(this, this.loadComplete));
-    };
+    }
 
     public loadComplete(s: Laya.Sprite) {
         this.view = fairygui.UIPackage.createObject("Game", "enemy") as fairygui.GComponent;
@@ -83,12 +86,12 @@ export default class Enemy {
     public beHit(s: any): void {
         if (this.isDeath) return;
         if (s.o == this.box.owner) {
-            this.hp--;
+            this.blood--;
             Laya.timer.clear(this, this.setColor);
-            if (this.hp <= 0) {
+            if (this.blood <= 0) {
                 this.setDeath();
             } else {
-                if (this.enemyType == PlayerData.ENEMY_MOR) {
+                if (this.enemyType == GameData.ENEMY_MOR) {
                     this.bodyLoader.component.getChildAt(0).asLoader.content.color = "#ff0000";
                     this.bodyLoader.component.getChildAt(1).asMovieClip.color = "#ff0000";
                 } else
@@ -102,8 +105,8 @@ export default class Enemy {
         this.bodyLoader.color = "#ffffff";
     }
 
-    private setDirection(): void {
-        if (this.direction == -1) {
+    public setDirection(): void {
+        if (this.direction == ShotDirectionData.LEFT) {
             this.bodyLoader.skewY = 0;
         } else {
             this.bodyLoader.skewY = 180;
@@ -123,16 +126,20 @@ export default class Enemy {
     }
 
     public setIdle(): void {
-        if (this.enemyType == PlayerData.ENEMY_PIS || this.enemyType == PlayerData.ENEMY_GRE) {
+        if (this.enemyType == GameData.ENEMY_PIS || this.enemyType == GameData.ENEMY_GRE) {
             this.bodyLoader.url = "ui://Game/enemyIdle_1";
-        } else if (this.enemyType == PlayerData.ENEMY_MAC) {
+        } else if (this.enemyType == GameData.ENEMY_MAC) {
             this.bodyLoader.url = "ui://Game/enemyIdle_2";
-        } else if (this.enemyType == PlayerData.ENEMY_FIRE) {
+        } else if (this.enemyType == GameData.ENEMY_FIRE) {
             this.bodyLoader.url = "ui://Game/enemyStay_4";
-        } else if (this.enemyType == PlayerData.ENEMY_MOR) {
+        } else if (this.enemyType == GameData.ENEMY_MOR) {
             this.bodyLoader.url = "ui://Game/enemyStay_5";
-        } else if (this.enemyType == PlayerData.ENEMY_TANKE) {
+        } else if (this.enemyType == GameData.ENEMY_TANK_1) {
             this.bodyLoader.url = "ui://Game/enemy11";
+        } else if (this.enemyType == GameData.ENEMY_TANK_2) {
+            this.bodyLoader.url = "ui://Game/enemy12";
+        } else if (this.enemyType == GameData.ENEMY_CHOPPER) {
+            this.bodyLoader.url = "ui://Game/enemy10";
         } else {
             this.bodyLoader.url = "ui://Game/enemyIdle_1";
         }
@@ -160,7 +167,7 @@ export default class Enemy {
 
     public setFire(): void {
         // Laya.timer.once(3000, this, this.setFire);
-        if (this.enemyType == PlayerData.ENEMY_PIS || this.enemyType == PlayerData.ENEMY_GRE) {
+        if (this.enemyType == GameData.ENEMY_PIS || this.enemyType == GameData.ENEMY_GRE) {
             if (this.getRandomFire() == 1) {//手枪
                 this.bodyLoader.url = "ui://Game/enemy_fire_1";
                 this.bodyLoader.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.shotComplete));
@@ -168,12 +175,12 @@ export default class Enemy {
                 this.bodyLoader.url = "ui://Game/enemy_fire_2";
                 this.bodyLoader.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.bombComplete));
             }
-        } else if (this.enemyType == PlayerData.ENEMY_MAC) {//机枪
+        } else if (this.enemyType == GameData.ENEMY_MAC) {//机枪
             this.bodyLoader.url = "ui://Game/enemy_fire_3";
             this.bodyLoader.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.shot2Complete));
-        } else if (this.enemyType == PlayerData.ENEMY_FIRE) {//火箭筒
+        } else if (this.enemyType == GameData.ENEMY_FIRE) {//火箭筒
             this.bodyLoader.url = "ui://Game/enemy_fire_4";
-        } else if (this.enemyType == PlayerData.ENEMY_MOR) {//迫击炮
+        } else if (this.enemyType == GameData.ENEMY_MOR) {//迫击炮
             this.bodyLoader.url = "ui://Game/enemy_fire_5";
             this.bodyLoader.component.getChildAt(0).asLoader.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.morComplete));
             this.bodyLoader.component.getChildAt(1).asMovieClip.setPlaySettings(0, -1, 1, 0);
@@ -184,22 +191,22 @@ export default class Enemy {
     }
 
     protected morComplete(): void {
-        ViewManager.instance.createBomb(PlayerData.ENEMY_MOR, this.direction, ViewManager.instance.getBodyCenterPos(this.scene), false);
+        ViewManager.instance.createBomb(GameData.ENEMY_MOR, this.direction, ViewManager.instance.getBodyCenterPos(this.scene), false);
         this.setIdle();
     }
 
     protected shotComplete(): void {
-        ViewManager.instance.createEnemyBullet(PlayerData.ENEMY_PIS, this.direction, ViewManager.instance.getBodyCenterPos(this.scene));
+        ViewManager.instance.createEnemyBullet(GameData.ENEMY_PIS, this.direction, ViewManager.instance.getBodyCenterPos(this.scene));
         this.setIdle();
     }
 
     protected shot2Complete(): void {
-        ViewManager.instance.createEnemyBullet(PlayerData.ENEMY_MAC, this.direction, ViewManager.instance.getBodyCenterPos(this.scene));
+        ViewManager.instance.createEnemyBullet(GameData.ENEMY_MAC, this.direction, ViewManager.instance.getBodyCenterPos(this.scene));
         this.setIdle();
     }
 
     protected bombComplete(): void {
-        ViewManager.instance.createBomb(PlayerData.ENEMY_GRE, this.direction, ViewManager.instance.getBodyCenterPos(this.scene), false);
+        ViewManager.instance.createBomb(GameData.ENEMY_GRE, this.direction, ViewManager.instance.getBodyCenterPos(this.scene), false);
         this.setIdle();
     }
     protected tankeComplete(): void {
@@ -221,10 +228,17 @@ export default class Enemy {
         this.bodyLoader.url = "ui://Game/death_" + this.enemyType;
         this.bodyLoader.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
 
-        var p: Laya.Point = new Laya.Point();
-        p.x = this.scene.x + this.scene.width / 2;
-        p.y = this.scene.y + this.scene.height / 2;
-        ViewManager.instance.createGoods(1, p);
+        this.createGoods();
+
+    }
+
+    protected createGoods(): void {
+        if (this.expRate.length > 0) {
+            var p: Laya.Point = new Laya.Point();
+            p.x = this.scene.x + this.scene.width / 2;
+            p.y = this.scene.y + this.scene.height / 2;
+            ViewManager.instance.createGoods(1, p);
+        }
     }
 
     protected dispose(): void {

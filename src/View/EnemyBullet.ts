@@ -4,7 +4,7 @@ import { ViewManager } from "../Manager/ViewManager";
 import GameEvent from "../Control/GameEvent";
 import { EventManager } from "../Manager/EventManager";
 import Enemy from "./Enemy";
-import { PlayerData } from "../Data/GameData";
+import { GameData } from "../Data/GameData";
 
 export default class EnemyBullet {
     public scene: Laya.Sprite;
@@ -37,7 +37,7 @@ export default class EnemyBullet {
         this.box = this.scene.getComponent(Laya.BoxCollider);
         this.box.label = this.body.label = "enemyBullet";
         console.log("enemyBullet.scene--loadComplete", this.box.id);
-        if (this.bulletType == PlayerData.ENEMY_TANKE) {
+        if (this.bulletType == GameData.ENEMY_TANK_1 || this.bulletType == GameData.ENEMY_TANK_2) {
             this.view.m_zidan.url = "ui://Game/zhadan_4";
         } else
             this.view.m_zidan.url = "ui://Game/zidan3";

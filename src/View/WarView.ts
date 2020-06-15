@@ -1,10 +1,10 @@
 import WXFUI_WarView from "../fui/Game/WXFUI_WarView";
 import { ViewManager } from "../Manager/ViewManager";
 import ObstacleView from "./ObstacleView";
-import { ObstacleType } from "../Data/GameData";
-import { LayerData } from "../Data/LayerData";
-import { GameManager, EnemyInfo } from "../Manager/GameManager";
+import { ObstacleType, GameData } from "../Data/GameData";
 import Player from "./Player";
+import { GameManager } from "../Manager/GameManager";
+import { EnemyInfo } from "../Data/PlayerData";
 
 export class WarView {
 
@@ -23,37 +23,13 @@ export class WarView {
         this.warView.displayObject.addChild(this.scene);
 
         Laya.stage.addChildAt(this.warView.displayObject, 0);
+        Laya.stage.addChild(fairygui.GRoot.inst.displayObject);
 
-        this.initRole();
-        this.initEnemy();
-        ViewManager.instance.createPlayerInfoView();
-    }
 
-    private initRole(): void {
-        if (!ViewManager.instance.rolePlayer) {
-            ViewManager.instance.player = new Player();
-            ViewManager.instance.player.createView();
-        }
-    }
 
-    private initEnemy(): void {
-        var enemyArr: any[] = GameManager.instance.curLvData.enemy.concat();
-        console.log("enemyArr--", enemyArr);
-        for (let i = 0; i < enemyArr.length; i++) {
-            var t: any = enemyArr[i];
-            var d: EnemyInfo = new EnemyInfo();
-            d.expRate = t.expRate.concat();
-            d.pos = new Laya.Point(t.pos[0], t.pos[1]);
-            d.activeDis = t.activeDis;
-            d.damage = t.damage;
-            d.blood = t.blood;
-            d.dir = t.dir;
-            d.isBoss = t.isBoss;
-            d.type = t.type;
-            if (d) {
-                ViewManager.instance.createEnemy(d);
-            }
-        }
+        GameManager.instance.createPlayer();//创建人物
+        GameManager.instance.createEnemyData();//创建当前关卡的敌人
+        GameManager.instance.createObstacleData();//创建当前关卡的障碍物
     }
 
     public updateViewPort(moveX: number): void {

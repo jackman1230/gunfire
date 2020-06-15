@@ -2,12 +2,12 @@
 import WXFUI_Player from "../fui/Game/WXFUI_Player";
 import PlayerAni from "./PlayerAni";
 import { ViewManager } from "../Manager/ViewManager";
-import { PlayerData, BombData, GoodsType } from "../Data/GameData";
 import PlayerBody from "./Body/PlayerBody";
 import BoomView from "./BoomView";
 import { EventManager } from "../Manager/EventManager";
 import GameEvent from "../Control/GameEvent";
 import { GameManager } from "../Manager/GameManager";
+import { PlayerData } from "../Data/PlayerData";
 
 export default class Player extends Laya.Script {
 

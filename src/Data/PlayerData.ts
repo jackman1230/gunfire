@@ -9,17 +9,47 @@ export class PlayerData {
     public static WEAPON_RIFLE: number = 3;
     /**手榴弹 */
     public static WEAPON_GRE: number = 4;
-    /**最多武器类型 */
-    public static WEAPON_MAX: number = 3;
-    /**敌人武器类型-手枪 */
-    public static ENEMY_PIS: number = 1;
-    /**敌人武器类型-手榴弹 */
-    public static ENEMY_GRE: number = 2;
-    /**敌人武器类型-机枪 */
-    public static ENEMY_MAC: number = 3;
-    /**敌人武器类型-火箭筒 */
-    public static ENEMY_FIRE: number = 4;
-    /**敌人武器类型-迫击炮 */
-    public static ENEMY_MOR: number = 5;
+
+}
+
+export class PlayerInfo {
+    public blood: number;
+    public bulletNum: number;
+    public bombNum: number;
+    public levelNum: number;
+    public weaponType: number;
+    public rolePos: Laya.Point;
+    public isDeath: boolean;
+    public addMacNum: number;
+    public addBombNum: number;
+    public addRifNum: number;
+
+    constructor() {
+    }
+
+}
+
+export class EnemyInfo {
+    public type: number;
+    public damage: number;
+    public blood: number;
+    public direction: number;
+    public activeDis: number;
+    public pos: Laya.Point;
+    public expRate: number[] = [];
+    public isBoss: boolean = false;
+
+    constructor() {
+    }
+
+}
+
+export class ObstacleInfo {
+    public type: number;
+    public blood: number;
+    public pos: Laya.Point;
+
+    constructor() {
+    }
 
 }

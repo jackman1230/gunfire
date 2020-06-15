@@ -2,8 +2,8 @@
 <component size="1334,750">
   <displayList>
     <component id="n1_iasd" name="ctl" src="iasdl1" fileName="Component/view/dirCtlView.xml" xy="121,446"/>
-    <component id="n2_iasd" name="n2" src="cqp93o" fileName="Component/btn/fireBtn.xml" xy="1027,493"/>
-    <component id="n3_iasd" name="n3" src="cqp93n" fileName="Component/btn/jumpBtn.xml" xy="871,530"/>
-    <component id="n4_iasd" name="n4" src="cqp93p" fileName="Component/btn/throwBtn.xml" xy="1060,359"/>
+    <component id="n2_iasd" name="fire" src="cqp93o" fileName="Component/btn/fireBtn.xml" xy="1027,493"/>
+    <component id="n3_iasd" name="jump" src="cqp93n" fileName="Component/btn/jumpBtn.xml" xy="871,530"/>
+    <component id="n4_iasd" name="bomb" src="cqp93p" fileName="Component/btn/throwBtn.xml" xy="1060,359"/>
   </displayList>
 </component>

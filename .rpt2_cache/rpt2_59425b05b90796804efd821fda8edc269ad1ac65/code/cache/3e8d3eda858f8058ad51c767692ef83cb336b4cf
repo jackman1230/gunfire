@@ -1,9 +1,0 @@
-{
-  "code": "import { BackGroundView } from \"../View/BackGroundView\";\r\nimport { Player } from \"../View/Player\";\r\nimport { WarView } from \"../View/WarView\";\r\nexport class ViewManager {\r\n    constructor() {\r\n    }\r\n    static get instance() {\r\n        if (this._instance == null)\r\n            this._instance = new ViewManager();\r\n        return this._instance;\r\n    }\r\n    showStartView() {\r\n        this.initView();\r\n        Laya.stage.addChild(this.bgView.view.displayObject);\r\n        this.bgView.view.addChild(this.player.rolePlayer);\r\n        this.player.rolePlayer.x = 200;\r\n        this.player.rolePlayer.y = 400;\r\n        this.player.setRight();\r\n        console.log(\"开始初始化界面\");\r\n    }\r\n    initView() {\r\n        this.bgView = new BackGroundView();\r\n        this.warView = new WarView();\r\n        this.player = new Player();\r\n        this.bgView.initView();\r\n        this.player.initView();\r\n        this.warView.initView();\r\n    }\r\n    getRolePlayer() {\r\n        if (this.player) {\r\n            return this.player.rolePlayer;\r\n        }\r\n        return null;\r\n    }\r\n}\r\n",
-  "references": [
-    "D:/littleGame/gunfire/src/View/BackGroundView.ts",
-    "D:/littleGame/gunfire/src/View/Player.ts",
-    "D:/littleGame/gunfire/src/View/WarView.ts",
-    "D:/littleGame/gunfire/src/fui/Game/FUI_Player.ts"
-  ]
-}

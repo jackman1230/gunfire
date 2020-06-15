@@ -1,4 +1,0 @@
-{
-  "code": "export default class GameEvent {\r\n    constructor() { }\r\n}\r\nGameEvent.BULLET_DISPOSE = \"BULLET_DISPOSE\";\r\n",
-  "references": []
-}

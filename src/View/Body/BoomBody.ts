@@ -17,7 +17,7 @@ export default class BoomBody extends Laya.Script {
         this.selfBody = this.selfCollider.rigidBody;
         this.self = this.owner as Laya.Sprite;
         this.oriPosX = this.self.x;
-        console.log("oriPosX--" + this.oriPosX);
+        // console.log("oriPosX--" + this.oriPosX);
 
     }
 
