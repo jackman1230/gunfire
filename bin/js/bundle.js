@@ -13,7 +13,7 @@
     GameConfig.screenMode = "none";
     GameConfig.alignV = "top";
     GameConfig.alignH = "left";
-    GameConfig.startScene = "GoodsBody.scene";
+    GameConfig.startScene = "ChopperBody.scene";
     GameConfig.sceneRoot = "";
     GameConfig.debug = false;
     GameConfig.stat = false;
@@ -190,10 +190,10 @@
             this.isBoss = d.isBoss;
         }
         loadComplete(s) {
+            this.scene = s;
             this.view = fairygui.UIPackage.createObject("Game", "enemy");
             this.view.setPivot(0.5, 0.5);
             this.enemy = this.view.getChildAt(0);
-            this.scene = s;
             this.initView();
         }
         ;
@@ -273,12 +273,6 @@
             else if (this.enemyType == GameData.ENEMY_TANK_2) {
                 this.bodyLoader.url = "ui://Game/enemy12";
             }
-            else if (this.enemyType == GameData.ENEMY_CHOPPER) {
-                this.bodyLoader.url = "ui://Game/enemy10";
-            }
-            else {
-                this.bodyLoader.url = "ui://Game/enemyIdle_1";
-            }
             this.bodyLoader.content.setPlaySettings(0, -1, 0, 0);
         }
         setRun() {
@@ -353,9 +347,11 @@
             console.log("rengshouliudan");
         }
         setDeath() {
+            if (this.isDeath)
+                return;
             this.isDeath = true;
             Laya.timer.clearAll(this);
-            this.bodyLoader.url = "ui://Game/death_" + this.enemyType;
+            this.bodyLoader.url = "ui://Game/death_" + this.getRandomDeath();
             this.bodyLoader.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
             this.createGoods();
         }
@@ -615,7 +611,6 @@
             this.selfBody = this.selfCollider.rigidBody;
             this.self = this.owner;
             this.oriPosX = this.self.x;
-            console.log("oriPosX--" + this.oriPosX);
         }
         onDisable() {
         }
@@ -852,9 +847,11 @@
             ViewManager.instance.createChopperBomb(BombData.BOMB_CHOPPER, ViewManager.instance.getBodyCenterPos(this.scene), p);
         }
         setDeath() {
+            if (this.isDeath)
+                return;
             this.isDeath = true;
             Laya.timer.clearAll(this);
-            this.bodyLoader.url = "ui://Game/death_" + this.enemyType;
+            this.bodyLoader.url = "ui://Game/death_2";
             this.bodyLoader.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
         }
         dispose() {
@@ -882,20 +879,18 @@
         ;
         setFire() {
             this.bodyLoader.url = "ui://Game/enemy_fire_" + this.enemyType;
-            this.bodyLoader.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.tankShotComplete));
+            this.bodyLoader.component.getChildAt(0).asMovieClip.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.tankShotComplete));
             ViewManager.instance.createEnemyBullet(this.enemyType, this.direction, ViewManager.instance.getBodyCenterPos(this.scene));
         }
         tankShotComplete() {
             this.setIdle();
         }
-        setBoomComplete() {
-            this.setStay();
-            console.log("rengshouliudan");
-        }
         setDeath() {
+            if (this.isDeath)
+                return;
             this.isDeath = true;
             Laya.timer.clearAll(this);
-            this.bodyLoader.url = "ui://Game/death_" + this.enemyType;
+            this.bodyLoader.url = "ui://Game/boom_5";
             this.bodyLoader.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
         }
         dispose() {
@@ -905,27 +900,6 @@
             this.scene.removeSelf();
             this.view.dispose();
             Laya.Pool.recover("tank", this);
-        }
-        get component() {
-            return this.enemy.component;
-        }
-        get bodyLoader() {
-            return this.enemy.component.getChildAt(0).asLoader;
-        }
-        getRandomFire() {
-            if (Math.random() > 0.5)
-                return 1;
-            return 2;
-        }
-        getRandomDeath() {
-            var r = Math.random();
-            if (r > 0.75)
-                return 4;
-            if (r > 0.5)
-                return 3;
-            if (r > 0.25)
-                return 2;
-            return 1;
         }
     }
 
@@ -939,8 +913,8 @@
         }
         setBombPos() {
             this.body.setVelocity({ x: 0, y: 5 });
-            this.scene.x = this.parentPos.x + this.offPos.x;
-            this.scene.y = this.parentPos.y + this.offPos.y;
+            this.scene.x = this.parentPos.x + 165;
+            this.scene.y = this.parentPos.y + 85;
         }
     }
 
@@ -1013,9 +987,12 @@
             fairygui.GRoot.inst.addChild(this.view);
             EventManager.instance.addNotice(GameEvent.CHANGE_PLAYER_GOODS, this, this.changePlayerGoods);
             EventManager.instance.addNotice(GameEvent.USE_PLAYER_BULLET, this, this.usePlyerBullet);
-            EventManager.instance.addNotice(GameEvent.USE_PLAYER_BOMB, this, this.changePlayerGoods);
-            EventManager.instance.addNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.changePlayerGoods);
-            EventManager.instance.addNotice(GameEvent.ENEMY_BULLET_HIT_PLAYER, this, this.changePlayerGoods);
+            EventManager.instance.addNotice(GameEvent.USE_PLAYER_BOMB, this, this.decBombNum);
+            EventManager.instance.addNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.decPlayerBlood);
+            EventManager.instance.addNotice(GameEvent.ENEMY_BULLET_HIT_PLAYER, this, this.decPlayerBlood);
+            this.updateBulletNum();
+            this.updatePlayerBlood();
+            this.updateGreNum();
         }
         changePlayerGoods(t) {
             if (t == GoodsType.GoodsType_MED) {
@@ -1057,6 +1034,10 @@
             }
             this.updateBulletNum();
         }
+        decBombNum() {
+            GameManager.instance.roleInfo.bombNum--;
+            this.updateGreNum();
+        }
         updateBulletNum() {
             this.view.m_bullet.text = GameManager.instance.roleInfo.bulletNum + "";
         }
@@ -1068,7 +1049,7 @@
                 EventManager.instance.dispatcherEvt(GameEvent.PLAYER_DEATH);
             }
             for (let i = 3; i > 0; i--) {
-                if (i >= GameManager.instance.roleInfo.blood) {
+                if (i <= GameManager.instance.roleInfo.blood) {
                     this.view["m_blood_" + i].visible = true;
                 }
                 else {
@@ -1682,7 +1663,7 @@
             }
         }
         createObstacleData() {
-            var obstacle = GameManager.instance.curLevelData.enemyArr;
+            var obstacle = GameManager.instance.curLevelData.obstacle;
             console.log("obstacle--", obstacle);
             for (const key in obstacle) {
                 if (obstacle.hasOwnProperty(key)) {
@@ -1691,7 +1672,7 @@
                     d.pos = new Laya.Point(t.pos[0], t.pos[1]);
                     d.blood = t.blood;
                     d.type = t.type;
-                    ViewManager.instance.createEnemy(d);
+                    ViewManager.instance.createObstacle(d);
                 }
             }
         }

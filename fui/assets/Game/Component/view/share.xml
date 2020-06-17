@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="182,60">
+  <displayList>
+    <image id="n2_dr1t" name="n2" src="n8quna" fileName="assets/otherView/otherPng/分割线.png" xy="0,0"/>
+    <component id="n3_dr1t" name="share1" src="dr1to3" fileName="Component/btn/shareBtn1.xml" xy="29,7"/>
+    <component id="n4_dr1t" name="share2" src="dr1to4" fileName="Component/btn/shareBtn2.xml" xy="114,7"/>
+  </displayList>
+</component>

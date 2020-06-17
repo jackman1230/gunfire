@@ -56,7 +56,7 @@ export default class Tank extends Enemy {
 
     public setFire(): void {
         this.bodyLoader.url = "ui://Game/enemy_fire_" + this.enemyType;
-        this.bodyLoader.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.tankShotComplete));
+        this.bodyLoader.component.getChildAt(0).asMovieClip.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.tankShotComplete));
         ViewManager.instance.createEnemyBullet(this.enemyType, this.direction, ViewManager.instance.getBodyCenterPos(this.scene));
 
     }
@@ -66,18 +66,11 @@ export default class Tank extends Enemy {
         this.setIdle();
     }
 
-
-
-
-    protected setBoomComplete(): void {
-        this.setStay();
-        console.log("rengshouliudan");
-    }
-
     public setDeath(): void {
+        if (this.isDeath) return;
         this.isDeath = true;
         Laya.timer.clearAll(this);
-        this.bodyLoader.url = "ui://Game/death_" + this.enemyType;
+        this.bodyLoader.url = "ui://Game/boom_5";
         this.bodyLoader.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
 
         // var p: Laya.Point = new Laya.Point();
@@ -93,26 +86,5 @@ export default class Tank extends Enemy {
         this.scene.removeSelf();
         this.view.dispose();
         Laya.Pool.recover("tank", this);
-    }
-
-    public get component(): fairygui.GComponent {
-        return this.enemy.component;
-    }
-
-    public get bodyLoader(): fairygui.GLoader {
-        return this.enemy.component.getChildAt(0).asLoader;
-    }
-
-    public getRandomFire(): number {
-        if (Math.random() > 0.5) return 1;
-        return 2;
-    }
-
-    public getRandomDeath(): number {
-        var r: number = Math.random();
-        if (r > 0.75) return 4;
-        if (r > 0.5) return 3;
-        if (r > 0.25) return 2;
-        return 1;
     }
 }

@@ -15,11 +15,18 @@ import ChopperBomb from "../View/ChopperBomb";
 import GoodsView from "../View/GoodsView";
 import PlayerInfoView from "../View/PlayerInfoView";
 import PlayerCtlView from "../View/PlayerCtlView";
+import WXFUI_loadingView from "../fui/loading/WXFUI_loadingView";
+import SuspendView from "../View/SuspendView";
+import ChapterView from "../View/ChapterView";
+import AfterWar from "../View/AfterWar";
+import BeforeWar from "../View/BeforeWar";
+import PopUpView from "../View/PopUpView";
 
 export class ViewManager {
 
     private static _instance: ViewManager;
     public warView: WarView;
+    public loadingView: WXFUI_loadingView;
     public player: Player;
     private enemy: Enemy;
 
@@ -28,6 +35,13 @@ export class ViewManager {
 
     private isChecking: boolean = false;
 
+    public suspendView: SuspendView;
+    public chapterView: ChapterView;
+    public afterWar: AfterWar;
+    public beforeWar: BeforeWar;
+
+    public popUpView: PopUpView;
+
     constructor() {
 
     }
@@ -35,6 +49,11 @@ export class ViewManager {
         if (this._instance == null)
             this._instance = new ViewManager();
         return this._instance;
+    }
+
+    public createLoaningView(): void {
+        this.loadingView = WXFUI_loadingView.createInstance();
+        Laya.stage.addChild(this.loadingView.displayObject);
     }
 
     public createWarView(): void {
@@ -111,16 +130,52 @@ export class ViewManager {
         b.createView();
     }
 
+    public showAfterWarView(): void {
+        this.showPopUpView(this.afterWar);
+    }
+
+    public showBeforeWarView(): void {
+        this.showPopUpView(this.beforeWar);
+    }
+
+    public showSuspendView(): void {
+        this.showPopUpView(this.suspendView);
+    }
+
+    public showChapterView(): void {
+        this.showPopUpView(this.chapterView);
+    }
+
     public initView(): void {
         this.warView = new WarView();
+
+        this.afterWar = new AfterWar();
+        this.beforeWar = new BeforeWar()
+        this.suspendView = new SuspendView();
+        this.chapterView = new ChapterView();
+        this.popUpView = new PopUpView("")
+
+        this.afterWar.createView();
+        this.beforeWar.createView();
+        this.suspendView.createView();
+        this.chapterView.createView();
+
+    }
+    private curPopView: PopUpView;
+    /**显示弹窗 */
+    public showPopUpView(p: PopUpView): void {
+        if (this.curPopView) this.curPopView.hideView(p.showView);
+        else
+            p.showView();
+    }
+    /**隐藏弹窗 */
+    public hidePopUpView(p: PopUpView): void {
+        p.hideView();
+        if (this.curPopView == p) this.curPopView = null;
     }
 
     public get rolePlayer(): Player {
         return this.player;
-    }
-
-    public showEnemyDeathAfter(): void {
-
     }
 
     public getBodyCenterPos(s: Laya.Sprite): Laya.Point {

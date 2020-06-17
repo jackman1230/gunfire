@@ -1,171 +1,175 @@
 {
-    "role": {
-        "blood": 3,
-        "bombNum": 10,
-        "weaponType": 1,
-        "addBombNum": 10,
-        "addMacNum": 200,
-        "addRifNum": 50
+    "maxChapter": 1, //有多少个章节
+    "role": { //角色初始化信息
+        "blood": 3, //血量
+        "bombNum": 10, //手榴弹数量
+        "weaponType": 1, //武器类型
+        "addBombNum": 10, //增加手榴弹数量
+        "addMacNum": 200, //增加机枪子弹数量
+        "addRifNum": 50 //增加来福枪子弹数量
     },
-    "level_1": {
-        "rolePos": [
-            800,
-            400
-        ],
-        "enemyArr": {
-            "enemy_1": {
-                "type": 1,
-                "direction": -1,
-                "blood": 5,
-                "damage": 1,
-                "activeDis": 500,
-                "pos": [
-                    800,
-                    500
-                ],
-                "isBoss": false,
-                "expRate": [
-                    1,
-                    1
-                ]
+    "chapter_1": { //章节
+        "maxLevelNum": 1, //当前章节最多关卡数
+        "level_1": { //关卡
+            "rolePos": [
+                800,
+                400
+            ], //角色关卡初始化位置
+            "enemyArr": { //关卡敌人数据
+                "enemy_1": {
+                    "type": 1, //敌人类型
+                    "direction": -1, //地方初始方向，左-1，右1
+                    "blood": 5, //血量
+                    "damage": 1, //武器伤害
+                    "activeDis": 500, //激活距离（与主角X坐标小于此值时，激活
+                    "pos": [
+                        800,
+                        500
+                    ], //坐标
+                    "isBoss": false, //是否为不关卡bos
+                    "expRate": [
+                        1,
+                        1
+                    ] //爆物品[类型，概率，类型，概率] 概率之和为 1
+                },
+                "enemy_2": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        1000,
+                        500
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_3": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        1200,
+                        400
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_4": {
+                    "type": 4,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        1300,
+                        400
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_5": {
+                    "type": 4,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        1500,
+                        400
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_6": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        1700,
+                        400
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_7": {
+                    "type": 10,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        1200,
+                        50
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_8": {
+                    "type": 11,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2000,
+                        300
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_9": {
+                    "type": 12,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        1700,
+                        300
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                }
             },
-            "enemy_2": {
-                "type": 3,
-                "direction": -1,
-                "blood": 5,
-                "damage": 1,
-                "activeDis": 500,
-                "pos": [
-                    1000,
-                    500
-                ],
-                "isBoss": false,
-                "expRate": [
-                    1,
-                    1
-                ]
-            },
-            "enemy_3": {
-                "type": 3,
-                "direction": -1,
-                "blood": 5,
-                "damage": 1,
-                "activeDis": 500,
-                "pos": [
-                    1200,
-                    400
-                ],
-                "isBoss": false,
-                "expRate": [
-                    1,
-                    1
-                ]
-            },
-            "enemy_4": {
-                "type": 4,
-                "direction": -1,
-                "blood": 5,
-                "damage": 1,
-                "activeDis": 500,
-                "pos": [
-                    1300,
-                    400
-                ],
-                "isBoss": false,
-                "expRate": [
-                    1,
-                    1
-                ]
-            },
-            "enemy_5": {
-                "type": 4,
-                "direction": -1,
-                "blood": 5,
-                "damage": 1,
-                "activeDis": 500,
-                "pos": [
-                    1500,
-                    400
-                ],
-                "isBoss": false,
-                "expRate": [
-                    1,
-                    1
-                ]
-            },
-            "enemy_6": {
-                "type": 5,
-                "direction": -1,
-                "blood": 5,
-                "damage": 1,
-                "activeDis": 500,
-                "pos": [
-                    1700,
-                    400
-                ],
-                "isBoss": false,
-                "expRate": [
-                    1,
-                    1
-                ]
-            },
-            "enemy_7": {
-                "type": 10,
-                "direction": -1,
-                "blood": 5,
-                "damage": 1,
-                "activeDis": 500,
-                "pos": [
-                    1400,
-                    50
-                ],
-                "isBoss": false,
-                "expRate": [
-                    1,
-                    1
-                ]
-            },
-            "enemy_8": {
-                "type": 11,
-                "direction": -1,
-                "blood": 5,
-                "damage": 1,
-                "activeDis": 500,
-                "pos": [
-                    1500,
-                    300
-                ],
-                "isBoss": false,
-                "expRate": [
-                    1,
-                    1
-                ]
-            },
-            "enemy_9": {
-                "type": 12,
-                "direction": -1,
-                "blood": 5,
-                "damage": 1,
-                "activeDis": 500,
-                "pos": [
-                    1700,
-                    300
-                ],
-                "isBoss": false,
-                "expRate": [
-                    1,
-                    1
-                ]
-            }
-        },
-        "obstacle": {
-            "obstacle_1": {
-                "type": 1,
-                "blood": 5,
-                "pos": [
-                    1100,
-                    400
-                ]
+            "obstacle": {
+                "obstacle_1": {
+                    "type": 1,
+                    "blood": 5,
+                    "pos": [
+                        1100,
+                        400
+                    ]
+                }
             }
         }
     }

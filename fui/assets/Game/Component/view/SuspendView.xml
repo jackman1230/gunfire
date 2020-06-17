@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1334,750">
+  <displayList>
+    <image id="n10_dr1t" name="n10" src="dr1tnv" fileName="Component/view/mask.png" xy="-33,-25" size="1400,800" alpha="0.8"/>
+    <image id="n6_dr1t" name="bg" src="n8qumw" fileName="assets/otherView/暂停界面/暂停底框.png" xy="391,31"/>
+    <component id="n7_dr1t" name="back" src="dr1tni" fileName="Component/btn/backHomeBtn.xml" xy="483,349"/>
+    <component id="n8_dr1t" name="continue" src="dr1tns" fileName="Component/btn/continueBtn2.xml" xy="536,182" scale="1.2,1.2"/>
+    <component id="n9_dr1t" name="restart" src="dr1tnj" fileName="Component/btn/restartBtn.xml" xy="787,349"/>
+  </displayList>
+</component>

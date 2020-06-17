@@ -16,13 +16,14 @@ export class PlayerInfo {
     public blood: number;
     public bulletNum: number;
     public bombNum: number;
-    public levelNum: number;
     public weaponType: number;
     public rolePos: Laya.Point;
     public isDeath: boolean;
     public addMacNum: number;
     public addBombNum: number;
     public addRifNum: number;
+    public curChapter: number;
+    public curLevel: number;
 
     constructor() {
     }

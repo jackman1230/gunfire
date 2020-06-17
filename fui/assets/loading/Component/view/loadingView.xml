@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1334,750">
+  <displayList>
+    <image id="n7_n8qu" name="n7" src="n8quey" fileName="assets/otherView/load/切图/beijing.jpg" xy="-145,0"/>
+    <image id="n6_n8qu" name="n6" src="n8quew" fileName="assets/otherView/load/切图/logo.png" xy="349,100"/>
+    <component id="n8_n8qu" name="bar" src="n8quim" fileName="Component/view/loadingBar.xml" xy="233,629">
+      <ProgressBar value="100" max="100"/>
+    </component>
+    <text id="n9_n8qu" name="txt" xy="375,688" size="584,37" font="SimHei" fontSize="24" color="#fff6db" align="center" vAlign="middle" autoSize="none" singleLine="true" text="控制好游戏角色，消灭敌人并不断前进吧！！"/>
+  </displayList>
+</component>

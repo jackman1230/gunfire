@@ -27,9 +27,10 @@ export default class Chopper extends Enemy {
 
 
     public setDeath(): void {
+        if (this.isDeath) return;
         this.isDeath = true;
         Laya.timer.clearAll(this);
-        this.bodyLoader.url = "ui://Game/death_" + this.enemyType;
+        this.bodyLoader.url = "ui://Game/death_2";
         this.bodyLoader.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
 
         // var p: Laya.Point = new Laya.Point();

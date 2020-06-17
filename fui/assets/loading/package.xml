@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="nr80du74">
+  <resources>
+    <image id="n8quej" name="9.png" path="/assets/otherView/load/切图/加载条进度数字/"/>
+    <image id="n8quek" name="8.png" path="/assets/otherView/load/切图/加载条进度数字/"/>
+    <image id="n8quel" name="7.png" path="/assets/otherView/load/切图/加载条进度数字/"/>
+    <image id="n8quem" name="6.png" path="/assets/otherView/load/切图/加载条进度数字/"/>
+    <image id="n8quen" name="5.png" path="/assets/otherView/load/切图/加载条进度数字/"/>
+    <image id="n8queo" name="4.png" path="/assets/otherView/load/切图/加载条进度数字/"/>
+    <image id="n8quep" name="3.png" path="/assets/otherView/load/切图/加载条进度数字/"/>
+    <image id="n8queq" name="2.png" path="/assets/otherView/load/切图/加载条进度数字/"/>
+    <image id="n8quer" name="1.png" path="/assets/otherView/load/切图/加载条进度数字/"/>
+    <image id="n8ques" name="0.png" path="/assets/otherView/load/切图/加载条进度数字/"/>
+    <image id="n8quet" name="%.png" path="/assets/otherView/load/切图/加载条进度数字/"/>
+    <image id="n8queu" name="加载条白光.png" path="/assets/otherView/load/切图/"/>
+    <image id="n8quev" name="加载条.png" path="/assets/otherView/load/切图/" scale="9grid" scale9grid="60,7,332,16"/>
+    <image id="n8quew" name="logo.png" path="/assets/otherView/load/切图/"/>
+    <image id="n8quex" name="jiazaikuang.png" path="/assets/otherView/load/切图/"/>
+    <image id="n8quey" name="beijing.jpg" path="/assets/otherView/load/切图/" exported="true" atlas="alone_npot"/>
+    <image id="n8quez" name="加载页效果图.jpg" path="/assets/otherView/load/"/>
+    <image id="n8qufd" name="252.png" path="/assets/bullent/"/>
+    <image id="n8qufe" name="254.png" path="/assets/bullent/"/>
+    <image id="n8qufg" name="368.png" path="/assets/bullent/"/>
+    <image id="n8qufh" name="366.png" path="/assets/bullent/"/>
+    <component id="n8quil" name="loadingView.xml" path="/Component/view/" exported="true"/>
+    <component id="n8quim" name="loadingBar.xml" path="/Component/view/"/>
+    <font id="n8quin" name="loadingFont.fnt" path="/Component/view/" exported="true"/>
+  </resources>
+  <publish name="loading" genCode="true">
+    <atlas compression="true" index="0"/>
+  </publish>
+</packageDescription>

@@ -5,7 +5,7 @@ import GameBinder from "../fui/Game/GameBinder";
 export class AssetsManager {
     private static _instance: AssetsManager;
     public static assetsData = [];
-
+    public static loadingAssetsData = [];
     constructor() {
     }
 
@@ -13,6 +13,20 @@ export class AssetsManager {
         if (this._instance == null)
             this._instance = new AssetsManager();
         return this._instance;
+    }
+
+    public loadLoadingAssetsData(): void {
+        AssetsManager.loadingAssetsData.push(
+            { url: "res/loading_atlas0.png", type: Laya.Loader.IMAGE },
+            { url: "res/loading_atlas_n8quey.png", type: Laya.Loader.IMAGE },
+            { url: "res/loading.wxfui", type: Laya.Loader.BUFFER }
+        );
+        Laya.loader.create(AssetsManager.loadingAssetsData, Laya.Handler.create(this, this.loadingAssetsComplete));
+    }
+
+    private loadingAssetsComplete(): void {
+        console.log("loading界面资源加载完成--显示loading界面，并开始加载游戏资源");
+        ViewManager.instance.createLoaningView();
     }
 
     public loadAssetsData() {
@@ -23,8 +37,9 @@ export class AssetsManager {
             { url: "res/Game_atlas0_3.png", type: Laya.Loader.IMAGE },
             { url: "res/Game_atlas0_4.png", type: Laya.Loader.IMAGE },
             { url: "res/Game_atlas0_5.png", type: Laya.Loader.IMAGE },
-            // { url: "res/Game_atlas0_6.png", type: Laya.Loader.IMAGE },
-            // { url: "res/Game_atlas0_7.png", type: Laya.Loader.IMAGE },
+            { url: "res/Game_atlas0_6.png", type: Laya.Loader.IMAGE },
+            { url: "res/Game_atlas_n8qun1.png", type: Laya.Loader.IMAGE },
+            { url: "res/Game_atlas_n8qun7.png", type: Laya.Loader.IMAGE },
             // { url: "res/Game_atlas0_8.png", type: Laya.Loader.IMAGE },
             // { url: "res/Game_atlas0_9.png", type: Laya.Loader.IMAGE },
             // { url: "res/Game_atlas0_10.png", type: Laya.Loader.IMAGE },
@@ -34,12 +49,6 @@ export class AssetsManager {
             // { url: "res/Game_atlas0_14.png", type: Laya.Loader.IMAGE },
             // { url: "res/Game_atlas0_15.png", type: Laya.Loader.IMAGE },
             // { url: "res/Game_atlas0_16.png", type: Laya.Loader.IMAGE },
-            // { url: "res/Game_atlas0_17.png", type: Laya.Loader.IMAGE },
-            // { url: "res/Game_atlas0_18.png", type: Laya.Loader.IMAGE },
-            // { url: "res/Game_atlas0_19.png", type: Laya.Loader.IMAGE },
-            // { url: "res/Game_atlas0_20.png", type: Laya.Loader.IMAGE },
-            // { url: "res/Game_atlas0_21.png", type: Laya.Loader.IMAGE },
-            // { url: "res/Game_atlas0_22.png", type: Laya.Loader.IMAGE },
             { url: "res/LevelData.json", type: Laya.Loader.JSON },
             { url: "res/map_1.jpg", type: Laya.Loader.IMAGE },
             { url: "res/Game.wxfui", type: Laya.Loader.BUFFER }

@@ -1,6 +1,7 @@
 import GameConfig from "./GameConfig";
 import { AssetsManager } from "./Manager/AssetsManager";
 import GameBinder from "./fui/Game/GameBinder";
+import loadingBinder from "./fui/loading/loadingBinder";
 class Main {
 	constructor() {
 		//根据IDE设置初始化引擎		
@@ -28,7 +29,8 @@ class Main {
 
 		fairygui.UIConfig.packageFileExtension = "wxfui";
 		GameBinder.bindAll();
-		AssetsManager.instance.loadAssetsData();
+		loadingBinder.bindAll();
+		AssetsManager.instance.loadLoadingAssetsData();
 
 
 	}

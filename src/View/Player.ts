@@ -104,7 +104,7 @@ export default class Player extends Laya.Script {
 
     private keyDowmEvent(e: any): void {
         var keyCode: number = e["keyCode"];
-        console.log(keyCode);
+        // console.log(keyCode);
 
         switch (keyCode) {
             case 87:
@@ -115,7 +115,7 @@ export default class Player extends Laya.Script {
                 break;
             case 65:
                 this.keyLeft = true;
-                console.log("左");
+                // console.log("左");
                 this.setLeft();
                 if (this.sRun) return;
                 this.setRun();
@@ -123,7 +123,7 @@ export default class Player extends Laya.Script {
                 break;
             case 68:
                 this.keyRight = true;
-                console.log("右");
+                // console.log("右");
                 this.setRight();
                 if (this.sRun) return;
                 this.setRun();

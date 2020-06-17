@@ -559,6 +559,114 @@
     <component id="iasdl3" name="susBtn.xml" path="/Component/btn/"/>
     <component id="dx35l4" name="enemy11.xml" path="/Component/enemy/" exported="true"/>
     <component id="dx35l5" name="enemy12.xml" path="/Component/enemy/" exported="true"/>
+    <component id="n8qul6" name="SuspendView.xml" path="/Component/view/" exported="true"/>
+    <image id="n8qul7" name="9.png" path="/assets/otherView/加载页面/切图/加载条进度数字/"/>
+    <image id="n8qul8" name="8.png" path="/assets/otherView/加载页面/切图/加载条进度数字/"/>
+    <image id="n8qul9" name="7.png" path="/assets/otherView/加载页面/切图/加载条进度数字/"/>
+    <image id="n8qula" name="6.png" path="/assets/otherView/加载页面/切图/加载条进度数字/"/>
+    <image id="n8qulb" name="5.png" path="/assets/otherView/加载页面/切图/加载条进度数字/"/>
+    <image id="n8qulc" name="4.png" path="/assets/otherView/加载页面/切图/加载条进度数字/"/>
+    <image id="n8quld" name="3.png" path="/assets/otherView/加载页面/切图/加载条进度数字/"/>
+    <image id="n8qule" name="2.png" path="/assets/otherView/加载页面/切图/加载条进度数字/"/>
+    <image id="n8qulf" name="1.png" path="/assets/otherView/加载页面/切图/加载条进度数字/"/>
+    <image id="n8qulg" name="0.png" path="/assets/otherView/加载页面/切图/加载条进度数字/"/>
+    <image id="n8qulh" name="%.png" path="/assets/otherView/加载页面/切图/加载条进度数字/"/>
+    <image id="n8quli" name="金币底框.png" path="/assets/otherView/战前准备/切图/"/>
+    <image id="n8qulj" name="金币.png" path="/assets/otherView/战前准备/切图/"/>
+    <image id="n8qulk" name="进入游戏.png" path="/assets/otherView/战前准备/切图/"/>
+    <image id="n8qull" name="购买.png" path="/assets/otherView/战前准备/切图/"/>
+    <image id="n8qulm" name="装备框.png" path="/assets/otherView/战前准备/切图/"/>
+    <image id="n8quln" name="战前准备.png" path="/assets/otherView/战前准备/切图/"/>
+    <image id="n8qulo" name="底框.png" path="/assets/otherView/战前准备/切图/"/>
+    <image id="n8qulp" name="免费获得.png" path="/assets/otherView/战前准备/切图/"/>
+    <image id="n8qulq" name="加载条白光.png" path="/assets/otherView/加载页面/切图/"/>
+    <image id="n8qulr" name="加载条.png" path="/assets/otherView/加载页面/切图/"/>
+    <image id="n8quls" name="logo.png" path="/assets/otherView/加载页面/切图/"/>
+    <image id="n8qult" name="jiazaikuang.png" path="/assets/otherView/加载页面/切图/"/>
+    <image id="n8qulu" name="beijing.jpg" path="/assets/otherView/加载页面/切图/"/>
+    <image id="n8qulv" name="加载页效果图.jpg" path="/assets/otherView/加载页面/"/>
+    <image id="n8qulw" name="效果图.jpg" path="/assets/otherView/战前准备/"/>
+    <image id="n8qulx" name="chapter_4.png" path="/assets/otherView/otherPng/" exported="true"/>
+    <image id="n8quly" name="chapter_10.png" path="/assets/otherView/otherPng/" exported="true"/>
+    <image id="n8qulz" name="chapter_6.png" path="/assets/otherView/otherPng/" exported="true"/>
+    <image id="n8qum0" name="chapter_8.png" path="/assets/otherView/otherPng/" exported="true"/>
+    <image id="n8qum1" name="chapter_5.png" path="/assets/otherView/otherPng/" exported="true"/>
+    <image id="n8qum2" name="chapter_2.png" path="/assets/otherView/otherPng/" exported="true"/>
+    <image id="n8qum3" name="chapter_9.png" path="/assets/otherView/otherPng/" exported="true"/>
+    <image id="n8qum4" name="chapter_3.png" path="/assets/otherView/otherPng/" exported="true"/>
+    <image id="n8qum5" name="chapter_7.png" path="/assets/otherView/otherPng/" exported="true"/>
+    <image id="n8qum6" name="chapter_1.png" path="/assets/otherView/otherPng/" exported="true"/>
+    <image id="n8qum7" name="9.png" path="/assets/otherView/选择关卡页面/关卡数字/"/>
+    <image id="n8qum8" name="8.png" path="/assets/otherView/选择关卡页面/关卡数字/"/>
+    <image id="n8qum9" name="7.png" path="/assets/otherView/选择关卡页面/关卡数字/"/>
+    <image id="n8quma" name="6.png" path="/assets/otherView/选择关卡页面/关卡数字/"/>
+    <image id="n8qumb" name="5.png" path="/assets/otherView/选择关卡页面/关卡数字/"/>
+    <image id="n8qumc" name="4.png" path="/assets/otherView/选择关卡页面/关卡数字/"/>
+    <image id="n8qumd" name="3.png" path="/assets/otherView/选择关卡页面/关卡数字/"/>
+    <image id="n8qume" name="2.png" path="/assets/otherView/选择关卡页面/关卡数字/"/>
+    <image id="n8qumf" name="1.png" path="/assets/otherView/选择关卡页面/关卡数字/"/>
+    <image id="n8qumg" name="0.png" path="/assets/otherView/选择关卡页面/关卡数字/"/>
+    <image id="n8qumh" name="金币.png" path="/assets/otherView/战后结算页面/切图/"/>
+    <image id="n8qumi" name="重新开始.png" path="/assets/otherView/战后结算页面/切图/"/>
+    <image id="n8qumj" name="返回.png" path="/assets/otherView/战后结算页面/切图/"/>
+    <image id="n8qumk" name="营救成功.png" path="/assets/otherView/战后结算页面/切图/"/>
+    <image id="n8quml" name="营救失败.png" path="/assets/otherView/战后结算页面/切图/"/>
+    <image id="n8qumm" name="继续游戏.png" path="/assets/otherView/战后结算页面/切图/"/>
+    <image id="n8qumn" name="继续任务.png" path="/assets/otherView/战后结算页面/切图/"/>
+    <image id="n8qumo" name="放弃营救.png" path="/assets/otherView/战后结算页面/切图/"/>
+    <image id="n8qump" name="+1000  黑体  26  白色.png" path="/assets/otherView/战后结算页面/切图/"/>
+    <image id="n8qumq" name="营救成功效果图.jpg" path="/assets/otherView/战后结算页面/"/>
+    <image id="n8qumr" name="营救失败效果图.jpg" path="/assets/otherView/战后结算页面/"/>
+    <image id="n8qums" name="放弃营救效果图.jpg" path="/assets/otherView/战后结算页面/"/>
+    <image id="n8qumt" name="重新开始.png" path="/assets/otherView/暂停界面/"/>
+    <image id="n8qumu" name="返回首页.png" path="/assets/otherView/暂停界面/"/>
+    <image id="n8qumv" name="继续游戏.png" path="/assets/otherView/暂停界面/"/>
+    <image id="n8qumw" name="暂停底框.png" path="/assets/otherView/暂停界面/"/>
+    <image id="n8qumx" name="暂停.png" path="/assets/otherView/暂停界面/"/>
+    <image id="n8qumy" name="效果图.jpg" path="/assets/otherView/暂停界面/"/>
+    <image id="n8qumz" name="形状 31.png" path="/assets/otherView/暂停界面/"/>
+    <image id="n8qun0" name="图层 32.png" path="/assets/otherView/暂停界面/"/>
+    <image id="n8qun1" name="背景.jpg" path="/assets/otherView/选择关卡页面/" exported="true" atlas="alone_npot"/>
+    <image id="n8qun2" name="share2.png" path="/assets/otherView/otherPng/" exported="true"/>
+    <image id="n8qun3" name="管卡图标02.png" path="/assets/otherView/选择关卡页面/"/>
+    <image id="n8qun4" name="章头底框.png" path="/assets/otherView/选择关卡页面/"/>
+    <image id="n8qun5" name="所在图标.png" path="/assets/otherView/选择关卡页面/"/>
+    <image id="n8qun6" name="所在关卡图标.png" path="/assets/otherView/选择关卡页面/"/>
+    <image id="n8qun7" name="levelMap_1.png" path="/assets/otherView/otherPng/" exported="true" atlas="alone_npot"/>
+    <image id="n8qun8" name="圆角矩形.png" path="/assets/otherView/otherPng/" exported="true"/>
+    <image id="n8qun9" name="zhendong.png" path="/assets/otherView/otherPng/" exported="true"/>
+    <image id="n8quna" name="分割线.png" path="/assets/otherView/otherPng/" exported="true"/>
+    <image id="n8qunb" name="关卡选择页面效果图.jpg" path="/assets/otherView/选择关卡页面/"/>
+    <image id="n8qunc" name="关卡图标.png" path="/assets/otherView/选择关卡页面/"/>
+    <image id="n8qund" name="下一章.png" path="/assets/otherView/otherPng/" exported="true"/>
+    <image id="n8qune" name="上一章.png" path="/assets/otherView/otherPng/" exported="true"/>
+    <image id="n8qunf" name="share1.png" path="/assets/otherView/otherPng/" exported="true"/>
+    <image id="n8qung" name="Volume.png" path="/assets/otherView/otherPng/" exported="true"/>
+    <image id="n8qunh" name="setting.png" path="/assets/otherView/otherPng/" exported="true"/>
+    <component id="dr1tni" name="backHomeBtn.xml" path="/Component/btn/"/>
+    <component id="dr1tnj" name="restartBtn.xml" path="/Component/btn/"/>
+    <component id="dr1tnk" name="continueBtn.xml" path="/Component/btn/"/>
+    <component id="dr1tnl" name="BeforeWar.xml" path="/Component/view/" exported="true"/>
+    <component id="dr1tnm" name="buyItem.xml" path="/Component/view/" exported="true"/>
+    <component id="dr1tnn" name="enterBtn.xml" path="/Component/btn/"/>
+    <component id="dr1tno" name="buyBtn.xml" path="/Component/btn/"/>
+    <component id="dr1tnp" name="freeBtn.xml" path="/Component/btn/"/>
+    <component id="dr1tnq" name="AfterWar.xml" path="/Component/view/" exported="true"/>
+    <component id="dr1tnr" name="backBtn.xml" path="/Component/btn/"/>
+    <component id="dr1tns" name="continueBtn2.xml" path="/Component/btn/"/>
+    <component id="dr1tnt" name="continueBtn3.xml" path="/Component/btn/"/>
+    <component id="dr1tnu" name="continueBtn4.xml" path="/Component/btn/"/>
+    <image id="dr1tnv" name="mask.png" path="/Component/view/" exported="true" scale="9grid" scale9grid="25,25,50,50"/>
+    <component id="dr1tnw" name="ChapterView.xml" path="/Component/view/" exported="true"/>
+    <component id="dr1tnx" name="LevelItem.xml" path="/Component/view/" exported="true"/>
+    <font id="dr1tny" name="levelFont.fnt" path="/Component/font/" exported="true"/>
+    <component id="dr1tnz" name="lastChapter.xml" path="/Component/btn/"/>
+    <component id="dr1to0" name="nextChapter.xml" path="/Component/btn/"/>
+    <component id="dr1to2" name="share.xml" path="/Component/view/" exported="true"/>
+    <component id="dr1to3" name="shareBtn1.xml" path="/Component/btn/"/>
+    <component id="dr1to4" name="shareBtn2.xml" path="/Component/btn/"/>
+    <component id="dr1to5" name="setting.xml" path="/Component/btn/"/>
+    <component id="mtpio6" name="PopUpView.xml" path="/Component/view/" exported="true"/>
   </resources>
   <publish name="Game" path="..\bin\res" packageCount="2" genCode="true" codePath="..\src\fui"/>
 </packageDescription>

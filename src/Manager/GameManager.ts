@@ -5,10 +5,14 @@ import Player from "../View/Player";
 
 export class GameManager {
     private static _instance: GameManager;
-    private playerInfo: PlayerInfo;
-    public curLevel: number = 0;
-    public curLvData: any;
-    public levelData: any;
+    private playerInfo: PlayerInfo;//角色数据
+    public curLevel: number = 0;//当前第几个关卡
+    public curChapter: number = 1;//当前第几个章节
+    public curLvData: any;//当前关卡数据
+    public levelData: any;//levelData.json 中的所有数据
+    public maxLevel: number = 10;//当前章节最大关卡数
+    public maxChapter: number = 1;//章节最大数
+    public gotoMaxLevel: number = 1;//当前章节所通过的最大关卡
 
     constructor() {
     }
@@ -20,20 +24,66 @@ export class GameManager {
     }
 
     public startGame(): void {
+        this.initChapterConfig();
         this.initRoleData();
         ViewManager.instance.initView();
         this.gotoNextLevel();
     }
 
+    private initChapterConfig(): void {
+        this.curChapter = 1;
+        this.levelData = Laya.loader.getRes("res/LevelData.json");
+        this.maxLevel = this.levelData["chapter_" + this.curChapter].maxLevelNum;
+        this.maxChapter = this.levelData.maxChapter;
+    }
+
+    /**返回首页 */
+    public goBack(): void {
+
+    }
+
+    /**返回首页 */
+    public goFirstPage(): void {
+
+    }
+
+    /**暂停后继续游戏 */
+    public goContinueGame(): void {
+
+    }
+
+    /**暂停游戏 */
+    public suspendGame(): void {
+
+    }
+
+    public victoryGame(): void {
+        if (this.gotoMaxLevel < this.curLevel) this.gotoMaxLevel = this.curLevel;
+    }
+
+    /**重新开始当前关卡 */
+    public restartGame(): void {//
+        this.curLevel--;
+        if (this.curLevel < 0) this.curLevel = 0;
+        this.gotoNextLevel();
+    }
+
     public gotoNextLevel(): void {
         this.curLevel++;
-        this.curLevelData = this.levelData["level_" + this.curLevel];
-        ViewManager.instance.createWarView();
+        if (this.curLevel > this.maxLevel) {
+            this.curChapter++;
+        }
+        if (this.levelData["chapter_" + this.curChapter]) {
+            this.maxLevel = this.levelData["chapter_" + this.curChapter].maxLevelNum;
+            this.curLevelData = this.levelData["chapter_" + this.curChapter]["level_" + this.curLevel];
+            ViewManager.instance.createWarView();
+        }
+
     }
 
     private initRoleData(): void {
-        this.playerInfo = new PlayerInfo();
-        this.levelData = Laya.loader.getRes("res/LevelData.json");
+        if (!this.playerInfo) this.playerInfo = new PlayerInfo();
+
         this.playerInfo.bombNum = this.levelData.role.bombNum;
         this.playerInfo.weaponType = this.levelData.role.weaponType;
         this.playerInfo.blood = this.levelData.role.blood;
@@ -41,6 +91,8 @@ export class GameManager {
         this.playerInfo.addBombNum = this.levelData.role.addBombNum;
         this.playerInfo.addMacNum = this.levelData.role.addMacNum;
         this.playerInfo.addRifNum = this.levelData.role.addRifNum;
+        this.playerInfo.curLevel = this.playerInfo.curChapter = 1;
+        this.maxChapter = this.levelData.role.maxChapter;
     }
 
     public createPlayer(): void {
@@ -79,7 +131,7 @@ export class GameManager {
 
 
     public createObstacleData(): void {
-        var obstacle: any = GameManager.instance.curLevelData.enemyArr;
+        var obstacle: any = GameManager.instance.curLevelData.obstacle;
         console.log("obstacle--", obstacle);
         for (const key in obstacle) {
             if (obstacle.hasOwnProperty(key)) {
@@ -88,7 +140,7 @@ export class GameManager {
                 d.pos = new Laya.Point(t.pos[0], t.pos[1]);
                 d.blood = t.blood;
                 d.type = t.type;
-                ViewManager.instance.createEnemy(d);
+                ViewManager.instance.createObstacle(d);
             }
         }
     }
@@ -104,7 +156,6 @@ export class GameManager {
     public get curLevelData(): any {
         return this.curLvData;
     }
-
 }
 
 

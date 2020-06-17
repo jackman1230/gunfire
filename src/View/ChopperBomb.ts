@@ -15,8 +15,8 @@ export default class ChopperBomb extends BombView {
 
     protected setBombPos(): void {
         this.body.setVelocity({ x: 0, y: 5 });
-        this.scene.x = this.parentPos.x + this.offPos.x;
-        this.scene.y = this.parentPos.y + this.offPos.y;
+        this.scene.x = this.parentPos.x + 165;
+        this.scene.y = this.parentPos.y + 85;
     }
 
 }

@@ -18,10 +18,14 @@ export default class PlayerInfoView {
 
         EventManager.instance.addNotice(GameEvent.CHANGE_PLAYER_GOODS, this, this.changePlayerGoods);
         EventManager.instance.addNotice(GameEvent.USE_PLAYER_BULLET, this, this.usePlyerBullet);
-        EventManager.instance.addNotice(GameEvent.USE_PLAYER_BOMB, this, this.changePlayerGoods);
-        EventManager.instance.addNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.changePlayerGoods);
-        EventManager.instance.addNotice(GameEvent.ENEMY_BULLET_HIT_PLAYER, this, this.changePlayerGoods);
+        EventManager.instance.addNotice(GameEvent.USE_PLAYER_BOMB, this, this.decBombNum);
+        EventManager.instance.addNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.decPlayerBlood);
+        EventManager.instance.addNotice(GameEvent.ENEMY_BULLET_HIT_PLAYER, this, this.decPlayerBlood);
 
+
+        this.updateBulletNum();
+        this.updatePlayerBlood();
+        this.updateGreNum();
 
     }
 
@@ -62,28 +66,29 @@ export default class PlayerInfoView {
         this.updateBulletNum();
     }
 
-    private updateBulletNum(): void {
+    private decBombNum(): void {
+        GameManager.instance.roleInfo.bombNum--;
+        this.updateGreNum();
+    }
+
+    public updateBulletNum(): void {
         this.view.m_bullet.text = GameManager.instance.roleInfo.bulletNum + "";
     }
 
-    private updateGreNum(): void {
+    public updateGreNum(): void {
         this.view.m_gre.text = GameManager.instance.roleInfo.bombNum + "";
     }
 
-    private updatePlayerBlood(): void {
+    public updatePlayerBlood(): void {
         if (GameManager.instance.roleInfo.blood <= 0) {
             EventManager.instance.dispatcherEvt(GameEvent.PLAYER_DEATH);
-
         }
         for (let i = 3; i > 0; i--) {
-            if (i >= GameManager.instance.roleInfo.blood) {
+            if (i <= GameManager.instance.roleInfo.blood) {
                 this.view["m_blood_" + i].visible = true;
             } else {
                 this.view["m_blood_" + i].visible = false;
-
             }
-
-
         }
     }
 

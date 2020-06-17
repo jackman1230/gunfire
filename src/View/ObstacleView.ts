@@ -32,7 +32,7 @@ export default class ObstacleView {
         this.blood = d.blood;
         this.pos = d.pos;
 
-        Laya.Scene.load("ObstacleView" + this.type + ".scene", Laya.Handler.create(this, this.loadComplete));
+        Laya.Scene.load("ObstacleView_" + this.type + ".scene", Laya.Handler.create(this, this.loadComplete));
     };
 
     public loadComplete(s: Laya.Sprite) {

@@ -58,10 +58,10 @@ export default class Enemy {
     }
 
     public loadComplete(s: Laya.Sprite) {
+        this.scene = s;
         this.view = fairygui.UIPackage.createObject("Game", "enemy") as fairygui.GComponent;
         this.view.setPivot(0.5, 0.5);
         this.enemy = this.view.getChildAt(0) as fairygui.GLoader;
-        this.scene = s;
         this.initView();
     };
 
@@ -70,9 +70,7 @@ export default class Enemy {
         this.scene.addChild(this.enemy.displayObject);
         this.scene.addComponent(EnemyBody);
         this.box = this.scene.getComponent(Laya.BoxCollider);
-
         this.isDeath = false;
-
         this.scene.x = this.pos.x;
         this.scene.y = this.pos.y;
         ViewManager.instance.warView.scene.addChild(this.scene);
@@ -138,11 +136,12 @@ export default class Enemy {
             this.bodyLoader.url = "ui://Game/enemy11";
         } else if (this.enemyType == GameData.ENEMY_TANK_2) {
             this.bodyLoader.url = "ui://Game/enemy12";
-        } else if (this.enemyType == GameData.ENEMY_CHOPPER) {
-            this.bodyLoader.url = "ui://Game/enemy10";
-        } else {
-            this.bodyLoader.url = "ui://Game/enemyIdle_1";
         }
+        // else if (this.enemyType == GameData.ENEMY_CHOPPER) {
+        //     this.bodyLoader.url = "ui://Game/enemy10";
+        // } else {
+        //     this.bodyLoader.url = "ui://Game/enemyIdle_1";
+        // }
         this.bodyLoader.content.setPlaySettings(0, -1, 0, 0);
     }
 
@@ -223,9 +222,10 @@ export default class Enemy {
     }
 
     public setDeath(): void {
+        if (this.isDeath) return;
         this.isDeath = true;
         Laya.timer.clearAll(this);
-        this.bodyLoader.url = "ui://Game/death_" + this.enemyType;
+        this.bodyLoader.url = "ui://Game/death_" + this.getRandomDeath();
         this.bodyLoader.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
 
         this.createGoods();
