@@ -18,15 +18,17 @@ export class AssetsManager {
     public loadLoadingAssetsData(): void {
         AssetsManager.loadingAssetsData.push(
             { url: "res/loading_atlas0.png", type: Laya.Loader.IMAGE },
-            { url: "res/loading_atlas_n8quey.png", type: Laya.Loader.IMAGE },
+            { url: "res/loading_atlas_n8quey.jpg", type: Laya.Loader.IMAGE },
             { url: "res/loading.wxfui", type: Laya.Loader.BUFFER }
         );
         Laya.loader.create(AssetsManager.loadingAssetsData, Laya.Handler.create(this, this.loadingAssetsComplete));
     }
 
     private loadingAssetsComplete(): void {
+        fairygui.UIPackage.addPackage("res/loading");
         console.log("loading界面资源加载完成--显示loading界面，并开始加载游戏资源");
         ViewManager.instance.createLoaningView();
+        this.loadAssetsData();
     }
 
     public loadAssetsData() {
@@ -38,7 +40,7 @@ export class AssetsManager {
             { url: "res/Game_atlas0_4.png", type: Laya.Loader.IMAGE },
             { url: "res/Game_atlas0_5.png", type: Laya.Loader.IMAGE },
             { url: "res/Game_atlas0_6.png", type: Laya.Loader.IMAGE },
-            { url: "res/Game_atlas_n8qun1.png", type: Laya.Loader.IMAGE },
+            { url: "res/Game_atlas_n8qun1.jpg", type: Laya.Loader.IMAGE },
             { url: "res/Game_atlas_n8qun7.png", type: Laya.Loader.IMAGE },
             // { url: "res/Game_atlas0_8.png", type: Laya.Loader.IMAGE },
             // { url: "res/Game_atlas0_9.png", type: Laya.Loader.IMAGE },
@@ -56,13 +58,18 @@ export class AssetsManager {
         );
         console.log(AssetsManager.assetsData);
 
-        Laya.loader.create(AssetsManager.assetsData, Laya.Handler.create(this, this.loadComplete));
+        Laya.loader.create(AssetsManager.assetsData, Laya.Handler.create(this, this.loadComplete), Laya.Handler.create(this, this.onloadingProgress));
+    }
+
+    private onloadingProgress(progress: number): void {
+        ViewManager.instance.setLoadongProgress(progress);
     }
 
     private loadComplete(): void {
         fairygui.UIPackage.addPackage("res/Game");
 
         console.log("资源加载完成");
+        ViewManager.instance.hideLoadingView();
         GameManager.instance.startGame();
     }
 }

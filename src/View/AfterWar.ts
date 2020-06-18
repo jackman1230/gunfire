@@ -5,7 +5,7 @@ import PopUpView from "./PopUpView";
 export default class AfterWar extends PopUpView {
 
     public view: WXFUI_AfterWar;
-    constructor() { super(WXFUI_AfterWar.URL) }
+    constructor() { super() }
 
     createView(): void {
         this.view = WXFUI_AfterWar.createInstance();
@@ -15,11 +15,6 @@ export default class AfterWar extends PopUpView {
         this.view.m_continue_3.onClick(this, this.continueGameByVideo);
 
     }
-
-    public showView(): void {
-
-    }
-
     private continueGame(): void {
 
     }

@@ -6,7 +6,6 @@ import WXFUI_restartBtn from "./WXFUI_restartBtn";
 
 export default class WXFUI_SuspendView extends fairygui.GComponent {
 
-	public m_n10:fairygui.GImage;
 	public m_bg:fairygui.GImage;
 	public m_back:WXFUI_backHomeBtn;
 	public m_continue:WXFUI_continueBtn2;
@@ -23,7 +22,6 @@ export default class WXFUI_SuspendView extends fairygui.GComponent {
 	}
 
 	protected onConstruct(): void {
-		this.m_n10 = <fairygui.GImage><any>(this.getChild("n10"));
 		this.m_bg = <fairygui.GImage><any>(this.getChild("bg"));
 		this.m_back = <WXFUI_backHomeBtn><any>(this.getChild("back"));
 		this.m_continue = <WXFUI_continueBtn2><any>(this.getChild("continue"));

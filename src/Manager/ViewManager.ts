@@ -21,6 +21,7 @@ import ChapterView from "../View/ChapterView";
 import AfterWar from "../View/AfterWar";
 import BeforeWar from "../View/BeforeWar";
 import PopUpView from "../View/PopUpView";
+import { GameManager } from "./GameManager";
 
 export class ViewManager {
 
@@ -41,6 +42,8 @@ export class ViewManager {
     public beforeWar: BeforeWar;
 
     public popUpView: PopUpView;
+    public playerInfoView: PlayerInfoView;
+    public playerCtlView: PlayerCtlView;
 
     constructor() {
 
@@ -53,12 +56,27 @@ export class ViewManager {
 
     public createLoaningView(): void {
         this.loadingView = WXFUI_loadingView.createInstance();
+        this.loadingView.m_bar.text = "0%";
+        this.loadingView.m_bar.value = 0;
         Laya.stage.addChild(this.loadingView.displayObject);
+    }
+
+    public setLoadongProgress(p: number): void {
+        console.log("progress--", p);
+        this.loadingView.m_bar.m_title.text = Math.ceil(p * 100) + "%";
+        this.loadingView.m_bar.value = p * 100;
+    }
+
+    public hideLoadingView(): void {
+        Laya.stage.removeChild(this.loadingView.displayObject);
     }
 
     public createWarView(): void {
         this.warView.createView();
-        this.createPlayerInfoView();//创建角色信息界面
+
+        this.showPlayerCtlView();
+        this.showPlayerInfoView();
+        this.hidePopUpView(this.beforeWar, true);
     }
     /**创建步兵扔的雷 */
     public createBomb(type: number, dir: number, parentPos: Laya.Point, b: boolean): void {
@@ -119,15 +137,15 @@ export class ViewManager {
     }
 
     /**创建人物信息界面 */
-    public createPlayerInfoView(): void {
-        var b: PlayerInfoView = new PlayerInfoView();
-        b.createView();
+    public showPlayerInfoView(): void {
+        if (!this.playerInfoView) this.playerInfoView = new PlayerInfoView();
+        fairygui.GRoot.inst.addChild(this.playerInfoView.view);
     }
 
     /**创建人物操作界面 */
-    public createPlayerCtlView(): void {
-        var b: PlayerCtlView = new PlayerCtlView();
-        b.createView();
+    public showPlayerCtlView(): void {
+        if (!this.playerCtlView) this.playerCtlView = new PlayerCtlView();
+        fairygui.GRoot.inst.addChild(this.playerCtlView.view);
     }
 
     public showAfterWarView(): void {
@@ -143,7 +161,8 @@ export class ViewManager {
     }
 
     public showChapterView(): void {
-        this.showPopUpView(this.chapterView);
+        this.chapterView.view.m_chapter.selectedIndex = GameManager.instance.curChapter - 1;
+        this.showPopUpView(this.chapterView, false, true);
     }
 
     public initView(): void {
@@ -153,25 +172,39 @@ export class ViewManager {
         this.beforeWar = new BeforeWar()
         this.suspendView = new SuspendView();
         this.chapterView = new ChapterView();
-        this.popUpView = new PopUpView("")
+        this.popUpView = new PopUpView();
 
         this.afterWar.createView();
         this.beforeWar.createView();
         this.suspendView.createView();
         this.chapterView.createView();
 
+        Laya.stage.addChild(fairygui.GRoot.inst.displayObject);
+
     }
-    private curPopView: PopUpView;
+    public curPopView: PopUpView[] = [];
     /**显示弹窗 */
-    public showPopUpView(p: PopUpView): void {
-        if (this.curPopView) this.curPopView.hideView(p.showView);
-        else
-            p.showView();
+    public showPopUpView(p: PopUpView, showMask: boolean = true, hideOther: boolean = false): void {
+        if (hideOther) {
+            for (let i = 0; i < this.curPopView.length; i++) {
+                var p: PopUpView = this.curPopView[i];
+                p.hideAllView();
+            }
+        }
+        p.showView(showMask);
+        this.curPopView.push(p);
     }
     /**隐藏弹窗 */
-    public hidePopUpView(p: PopUpView): void {
-        p.hideView();
-        if (this.curPopView == p) this.curPopView = null;
+    public hidePopUpView(p: PopUpView, all: boolean = false): void {
+        if (all) {
+            for (let i = 0; i < this.curPopView.length; i++) {
+                var p: PopUpView = this.curPopView[i];
+                p.hideAllView();
+            }
+            this.curPopView.length = 0;
+        } else {
+            p.hideAllView();
+        }
     }
 
     public get rolePlayer(): Player {

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="1334,750">
+<component size="1334,750" opaque="false">
   <displayList>
-    <image id="n18_dr1t" name="n18" src="dr1tnv" fileName="Component/view/mask.png" xy="-33,-25" size="1400,800" alpha="0.8"/>
     <image id="n11_dr1t" name="bg" src="n8qulo" fileName="assets/otherView/战前准备/切图/底框.png" xy="332,33"/>
     <component id="n12_dr1t" name="item_1" src="dr1tnm" fileName="Component/view/buyItem.xml" xy="376,141"/>
     <component id="n13_dr1t" name="item_2" src="dr1tnm" fileName="Component/view/buyItem.xml" xy="712,139"/>

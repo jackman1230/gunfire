@@ -33,7 +33,6 @@
             Laya.Physics.I.worldRoot = this.scene;
             this.warView.displayObject.addChild(this.scene);
             Laya.stage.addChildAt(this.warView.displayObject, 0);
-            Laya.stage.addChild(fairygui.GRoot.inst.displayObject);
             GameManager.instance.createPlayer();
             GameManager.instance.createEnemyData();
             GameManager.instance.createObstacleData();
@@ -46,10 +45,6 @@
     class EnemyBody extends Laya.Script {
         constructor() { super(); }
         onAwake() {
-            this.selfCollider = this.owner.getComponent(Laya.BoxCollider);
-            this.selfBody = this.selfCollider.rigidBody;
-            this.selfCollider.label = "enemy";
-            this.selfBody.label = "enemy";
         }
         onDisable() {
         }
@@ -765,7 +760,7 @@
             this.type = d.type;
             this.blood = d.blood;
             this.pos = d.pos;
-            Laya.Scene.load("ObstacleView" + this.type + ".scene", Laya.Handler.create(this, this.loadComplete));
+            Laya.Scene.load("ObstacleView_" + this.type + ".scene", Laya.Handler.create(this, this.loadComplete));
         }
         ;
         loadComplete(s) {
@@ -981,10 +976,9 @@
     }
 
     class PlayerInfoView {
-        constructor() { }
+        constructor() { this.createView(); }
         createView() {
             this.view = fairygui.UIPackage.createObject("Game", "PlayerInfoView");
-            fairygui.GRoot.inst.addChild(this.view);
             EventManager.instance.addNotice(GameEvent.CHANGE_PLAYER_GOODS, this, this.changePlayerGoods);
             EventManager.instance.addNotice(GameEvent.USE_PLAYER_BULLET, this, this.usePlyerBullet);
             EventManager.instance.addNotice(GameEvent.USE_PLAYER_BOMB, this, this.decBombNum);
@@ -1060,10 +1054,225 @@
     }
 
     class PlayerCtlView {
-        constructor() { }
+        constructor() { this.createView(); }
         createView() {
             this.view = fairygui.UIPackage.createObject("Game", "PlayerCtlView");
-            fairygui.GRoot.inst.addChildAt(this.view, 20);
+        }
+    }
+
+    class WXFUI_loadingView extends fairygui.GComponent {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("loading", "loadingView"));
+        }
+        onConstruct() {
+            this.m_n7 = (this.getChild("n7"));
+            this.m_n6 = (this.getChild("n6"));
+            this.m_bar = (this.getChild("bar"));
+            this.m_txt = (this.getChild("txt"));
+        }
+    }
+    WXFUI_loadingView.URL = "ui://nr80du74n8quil";
+
+    class WXFUI_SuspendView extends fairygui.GComponent {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "SuspendView"));
+        }
+        onConstruct() {
+            this.m_bg = (this.getChild("bg"));
+            this.m_back = (this.getChild("back"));
+            this.m_continue = (this.getChild("continue"));
+            this.m_restart = (this.getChild("restart"));
+        }
+    }
+    WXFUI_SuspendView.URL = "ui://bq3h5insn8qul6";
+
+    class WXFUI_PopUpView extends fairygui.GComponent {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "PopUpView"));
+        }
+        onConstruct() {
+            this.m_mask = (this.getChild("mask"));
+            this.m_load = (this.getChild("load"));
+            this.m_t0 = this.getTransition("t0");
+        }
+    }
+    WXFUI_PopUpView.URL = "ui://bq3h5insmtpio6";
+
+    class PopUpView {
+        constructor() {
+            this.v = WXFUI_PopUpView.createInstance();
+        }
+        showView(showMask = true) {
+            Laya.Tween.clearAll(this);
+            this.v.addChild(this.view);
+            fairygui.GRoot.inst.addChild(this.v);
+            this.view.setPivot(0.5, 0.5);
+            this.view.setScale(0.4, 0.4);
+            this.tween = Laya.Tween.to(this.view, { scaleX: 1, scaleY: 1 }, 250, null, Laya.Handler.create(this, this.showComplete, [showMask]));
+        }
+        showComplete(s) {
+            if (s) {
+                console.log("showComplete---");
+                this.v.m_mask.visible = true;
+                this.v.m_mask.on(Laya.Event.CLICK, this, this.hideAllView);
+            }
+            this.view.setScale(1, 1);
+        }
+        hideAllView() {
+            console.log("hideAllView--");
+            this.v.m_mask.displayObject.off(Laya.Event.CLICK, this, this.hideAllView);
+            fairygui.GRoot.inst.removeChild(this.v);
+        }
+    }
+
+    class SuspendView extends PopUpView {
+        constructor() { super(); }
+        createView() {
+            this.view = WXFUI_SuspendView.createInstance();
+            this.view.m_back.onClick(this, this.goFirstPage);
+        }
+        goFirstPage() {
+            GameManager.instance.goBack();
+        }
+    }
+
+    class WXFUI_ChapterView extends fairygui.GComponent {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "ChapterView"));
+        }
+        onConstruct() {
+            this.m_chapter = this.getController("chapter");
+            this.m_n12 = (this.getChild("n12"));
+            this.m_n14 = (this.getChild("n14"));
+            this.m_map = (this.getChild("map"));
+            this.m_last = (this.getChild("last"));
+            this.m_next = (this.getChild("next"));
+            this.m_level_1 = (this.getChild("level_1"));
+            this.m_level_2 = (this.getChild("level_2"));
+            this.m_level_3 = (this.getChild("level_3"));
+            this.m_level_4 = (this.getChild("level_4"));
+            this.m_level_5 = (this.getChild("level_5"));
+            this.m_level_6 = (this.getChild("level_6"));
+            this.m_level_7 = (this.getChild("level_7"));
+            this.m_level_8 = (this.getChild("level_8"));
+            this.m_level_9 = (this.getChild("level_9"));
+            this.m_level_10 = (this.getChild("level_10"));
+            this.m_title = (this.getChild("title"));
+            this.m_share = (this.getChild("share"));
+        }
+    }
+    WXFUI_ChapterView.URL = "ui://bq3h5insdr1tnw";
+
+    class ChapterView extends PopUpView {
+        constructor() { super(); }
+        createView() {
+            this.view = WXFUI_ChapterView.createInstance();
+            this.view.m_title.url = "ui://Game/chapter_1";
+            for (let t = 1; t <= GameManager.instance.maxLevel; t++) {
+                this.view["m_level_" + t].on(Laya.Event.CLICK, this, this.chooseLevel, [t]);
+            }
+            this.updateView();
+        }
+        updateView() {
+            this.view.m_last.visible = GameManager.instance.curChapter <= 1 ? false : true;
+            this.view.m_next.visible = GameManager.instance.curChapter >= GameManager.instance.maxChapter ? false : true;
+            for (let i = 1; i <= GameManager.instance.maxLevel; i++) {
+                if (i < GameManager.instance.gotoMaxLevel) {
+                    this.view["m_level_" + i].m_ctl.selectedIndex = 1;
+                }
+                else if (i == GameManager.instance.gotoMaxLevel) {
+                    this.view["m_level_" + i].m_ctl.selectedIndex = 2;
+                }
+                else
+                    this.view["m_level_" + i].m_ctl.selectedIndex = 0;
+            }
+        }
+        chooseLevel(l) {
+            console.log("选择第" + GameManager.instance.curChapter + "章，" + "第" + l + "关");
+            if (l > GameManager.instance.gotoMaxLevel)
+                return;
+            GameManager.instance.choiseLevel = l;
+            ViewManager.instance.showBeforeWarView();
+        }
+    }
+
+    class WXFUI_AfterWar extends fairygui.GComponent {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "AfterWar"));
+        }
+        onConstruct() {
+            this.m_ctl = this.getController("ctl");
+            this.m_n20 = (this.getChild("n20"));
+            this.m_coin = (this.getChild("coin"));
+            this.m_n24 = (this.getChild("n24"));
+            this.m_n26 = (this.getChild("n26"));
+            this.m_n29 = (this.getChild("n29"));
+            this.m_continue_1 = (this.getChild("continue_1"));
+            this.m_continue_2 = (this.getChild("continue_2"));
+            this.m_continue_3 = (this.getChild("continue_3"));
+            this.m_return = (this.getChild("return"));
+        }
+    }
+    WXFUI_AfterWar.URL = "ui://bq3h5insdr1tnq";
+
+    class AfterWar extends PopUpView {
+        constructor() { super(); }
+        createView() {
+            this.view = WXFUI_AfterWar.createInstance();
+            this.view.m_continue_1.onClick(this, this.continueGame);
+            this.view.m_continue_2.onClick(this, this.restartGame);
+            this.view.m_continue_3.onClick(this, this.continueGameByVideo);
+        }
+        continueGame() {
+        }
+        restartGame() {
+        }
+        continueGameByVideo() {
+        }
+    }
+
+    class WXFUI_BeforeWar extends fairygui.GComponent {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "BeforeWar"));
+        }
+        onConstruct() {
+            this.m_bg = (this.getChild("bg"));
+            this.m_item_1 = (this.getChild("item_1"));
+            this.m_item_2 = (this.getChild("item_2"));
+            this.m_item_3 = (this.getChild("item_3"));
+            this.m_item_4 = (this.getChild("item_4"));
+            this.m_enter = (this.getChild("enter"));
+            this.m_n17 = (this.getChild("n17"));
+        }
+    }
+    WXFUI_BeforeWar.URL = "ui://bq3h5insdr1tnl";
+
+    class BeforeWar extends PopUpView {
+        constructor() { super(); }
+        createView() {
+            this.view = WXFUI_BeforeWar.createInstance();
+            this.view.m_enter.onClick(this, this.enterGame);
+        }
+        enterGame() {
+            GameManager.instance.enterGame();
         }
     }
 
@@ -1072,6 +1281,7 @@
             this.bulletArr = [];
             this.enemyArr = [];
             this.isChecking = false;
+            this.curPopView = [];
             this.playerBulletPos = {
                 "11": [135, -22],
                 "12": [167, 0],
@@ -1108,9 +1318,25 @@
                 this._instance = new ViewManager();
             return this._instance;
         }
+        createLoaningView() {
+            this.loadingView = WXFUI_loadingView.createInstance();
+            this.loadingView.m_bar.text = "0%";
+            this.loadingView.m_bar.value = 0;
+            Laya.stage.addChild(this.loadingView.displayObject);
+        }
+        setLoadongProgress(p) {
+            console.log("progress--", p);
+            this.loadingView.m_bar.m_title.text = Math.ceil(p * 100) + "%";
+            this.loadingView.m_bar.value = p * 100;
+        }
+        hideLoadingView() {
+            Laya.stage.removeChild(this.loadingView.displayObject);
+        }
         createWarView() {
             this.warView.createView();
-            this.createPlayerInfoView();
+            this.showPlayerCtlView();
+            this.showPlayerInfoView();
+            this.hidePopUpView(this.beforeWar, true);
         }
         createBomb(type, dir, parentPos, b) {
             var bomb = Laya.Pool.getItemByClass("bombView", BombView);
@@ -1151,21 +1377,66 @@
             var b = Laya.Pool.getItemByClass("goods", GoodsView);
             b.createView(type, s);
         }
-        createPlayerInfoView() {
-            var b = new PlayerInfoView();
-            b.createView();
+        showPlayerInfoView() {
+            if (!this.playerInfoView)
+                this.playerInfoView = new PlayerInfoView();
+            fairygui.GRoot.inst.addChild(this.playerInfoView.view);
         }
-        createPlayerCtlView() {
-            var b = new PlayerCtlView();
-            b.createView();
+        showPlayerCtlView() {
+            if (!this.playerCtlView)
+                this.playerCtlView = new PlayerCtlView();
+            fairygui.GRoot.inst.addChild(this.playerCtlView.view);
+        }
+        showAfterWarView() {
+            this.showPopUpView(this.afterWar);
+        }
+        showBeforeWarView() {
+            this.showPopUpView(this.beforeWar);
+        }
+        showSuspendView() {
+            this.showPopUpView(this.suspendView);
+        }
+        showChapterView() {
+            this.chapterView.view.m_chapter.selectedIndex = GameManager.instance.curChapter - 1;
+            this.showPopUpView(this.chapterView, false, true);
         }
         initView() {
             this.warView = new WarView();
+            this.afterWar = new AfterWar();
+            this.beforeWar = new BeforeWar();
+            this.suspendView = new SuspendView();
+            this.chapterView = new ChapterView();
+            this.popUpView = new PopUpView();
+            this.afterWar.createView();
+            this.beforeWar.createView();
+            this.suspendView.createView();
+            this.chapterView.createView();
+            Laya.stage.addChild(fairygui.GRoot.inst.displayObject);
+        }
+        showPopUpView(p, showMask = true, hideOther = false) {
+            if (hideOther) {
+                for (let i = 0; i < this.curPopView.length; i++) {
+                    var p = this.curPopView[i];
+                    p.hideAllView();
+                }
+            }
+            p.showView(showMask);
+            this.curPopView.push(p);
+        }
+        hidePopUpView(p, all = false) {
+            if (all) {
+                for (let i = 0; i < this.curPopView.length; i++) {
+                    var p = this.curPopView[i];
+                    p.hideAllView();
+                }
+                this.curPopView.length = 0;
+            }
+            else {
+                p.hideAllView();
+            }
         }
         get rolePlayer() {
             return this.player;
-        }
-        showEnemyDeathAfter() {
         }
         getBodyCenterPos(s) {
             return s.getComponent(Laya.RigidBody).getWorldCenter();
@@ -1338,7 +1609,6 @@
         }
         keyDowmEvent(e) {
             var keyCode = e["keyCode"];
-            console.log(keyCode);
             switch (keyCode) {
                 case 87:
                     console.log("上");
@@ -1348,7 +1618,6 @@
                     break;
                 case 65:
                     this.keyLeft = true;
-                    console.log("左");
                     this.setLeft();
                     if (this.sRun)
                         return;
@@ -1357,7 +1626,6 @@
                     break;
                 case 68:
                     this.keyRight = true;
-                    console.log("右");
                     this.setRight();
                     if (this.sRun)
                         return;
@@ -1602,6 +1870,11 @@
     class GameManager {
         constructor() {
             this.curLevel = 0;
+            this.curChapter = 1;
+            this.maxLevel = 10;
+            this.maxChapter = 1;
+            this.gotoMaxLevel = 1;
+            this.choiseLevel = 1;
         }
         static get instance() {
             if (this._instance == null)
@@ -1609,18 +1882,57 @@
             return this._instance;
         }
         startGame() {
+            this.initChapterConfig();
             this.initRoleData();
             ViewManager.instance.initView();
+            ViewManager.instance.showChapterView();
+        }
+        initChapterConfig() {
+            this.curChapter = 1;
+            this.levelData = Laya.loader.getRes("res/LevelData.json");
+            this.maxLevel = this.levelData["chapter_" + this.curChapter].maxLevelNum;
+            this.maxChapter = this.levelData.maxChapter;
+        }
+        goPointToLevel(l) {
+            this.curLevel = --l;
+            this.gotoNextLevel();
+        }
+        enterGame() {
+            this.curLevel = --this.choiseLevel;
+            this.gotoNextLevel();
+        }
+        goBack() {
+        }
+        goFirstPage() {
+        }
+        goContinueGame() {
+        }
+        suspendGame() {
+        }
+        victoryGame() {
+            if (this.gotoMaxLevel < this.curLevel)
+                this.gotoMaxLevel = this.curLevel;
+        }
+        restartGame() {
+            this.curLevel--;
+            if (this.curLevel < 0)
+                this.curLevel = 0;
             this.gotoNextLevel();
         }
         gotoNextLevel() {
             this.curLevel++;
-            this.curLevelData = this.levelData["level_" + this.curLevel];
-            ViewManager.instance.createWarView();
+            if (this.curLevel > this.maxLevel) {
+                this.curChapter++;
+            }
+            if (this.levelData["chapter_" + this.curChapter]) {
+                this.maxLevel = this.levelData["chapter_" + this.curChapter].maxLevelNum;
+                this.curLevelData = this.levelData["chapter_" + this.curChapter]["level_" + this.curLevel];
+                ViewManager.instance.createWarView();
+            }
         }
         initRoleData() {
-            this.playerInfo = new PlayerInfo();
-            this.levelData = Laya.loader.getRes("res/LevelData.json");
+            if (!this.playerInfo)
+                this.playerInfo = new PlayerInfo();
             this.playerInfo.bombNum = this.levelData.role.bombNum;
             this.playerInfo.weaponType = this.levelData.role.weaponType;
             this.playerInfo.blood = this.levelData.role.blood;
@@ -1628,6 +1940,8 @@
             this.playerInfo.addBombNum = this.levelData.role.addBombNum;
             this.playerInfo.addMacNum = this.levelData.role.addMacNum;
             this.playerInfo.addRifNum = this.levelData.role.addRifNum;
+            this.playerInfo.curLevel = this.playerInfo.curChapter = 1;
+            this.maxChapter = this.levelData.role.maxChapter;
         }
         createPlayer() {
             if (!ViewManager.instance.rolePlayer) {
@@ -1695,18 +2009,33 @@
                 this._instance = new AssetsManager();
             return this._instance;
         }
+        loadLoadingAssetsData() {
+            AssetsManager.loadingAssetsData.push({ url: "res/loading_atlas0.png", type: Laya.Loader.IMAGE }, { url: "res/loading_atlas_n8quey.jpg", type: Laya.Loader.IMAGE }, { url: "res/loading.wxfui", type: Laya.Loader.BUFFER });
+            Laya.loader.create(AssetsManager.loadingAssetsData, Laya.Handler.create(this, this.loadingAssetsComplete));
+        }
+        loadingAssetsComplete() {
+            fairygui.UIPackage.addPackage("res/loading");
+            console.log("loading界面资源加载完成--显示loading界面，并开始加载游戏资源");
+            ViewManager.instance.createLoaningView();
+            this.loadAssetsData();
+        }
         loadAssetsData() {
-            AssetsManager.assetsData.push({ url: "res/Game_atlas0.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_1.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_2.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_3.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_4.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_5.png", type: Laya.Loader.IMAGE }, { url: "res/LevelData.json", type: Laya.Loader.JSON }, { url: "res/map_1.jpg", type: Laya.Loader.IMAGE }, { url: "res/Game.wxfui", type: Laya.Loader.BUFFER });
+            AssetsManager.assetsData.push({ url: "res/Game_atlas0.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_1.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_2.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_3.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_4.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_5.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_6.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas_n8qun1.jpg", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas_n8qun7.png", type: Laya.Loader.IMAGE }, { url: "res/LevelData.json", type: Laya.Loader.JSON }, { url: "res/map_1.jpg", type: Laya.Loader.IMAGE }, { url: "res/Game.wxfui", type: Laya.Loader.BUFFER });
             console.log(AssetsManager.assetsData);
-            Laya.loader.create(AssetsManager.assetsData, Laya.Handler.create(this, this.loadComplete));
+            Laya.loader.create(AssetsManager.assetsData, Laya.Handler.create(this, this.loadComplete), Laya.Handler.create(this, this.onloadingProgress));
+        }
+        onloadingProgress(progress) {
+            ViewManager.instance.setLoadongProgress(progress);
         }
         loadComplete() {
             fairygui.UIPackage.addPackage("res/Game");
             console.log("资源加载完成");
+            ViewManager.instance.hideLoadingView();
             GameManager.instance.startGame();
         }
     }
     AssetsManager.assetsData = [];
+    AssetsManager.loadingAssetsData = [];
 
     class WXFUI_jumpBtn extends fairygui.GButton {
         constructor() {
@@ -1835,6 +2164,242 @@
         }
     }
     WXFUI_player_stay_3.URL = "ui://bq3h5insdhkten";
+
+    class WXFUI_backHomeBtn extends fairygui.GButton {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "backHomeBtn"));
+        }
+        onConstruct() {
+            this.m_button = this.getController("button");
+            this.m_n5 = (this.getChild("n5"));
+            this.m_n4 = (this.getChild("n4"));
+        }
+    }
+    WXFUI_backHomeBtn.URL = "ui://bq3h5insdr1tni";
+
+    class WXFUI_restartBtn extends fairygui.GButton {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "restartBtn"));
+        }
+        onConstruct() {
+            this.m_button = this.getController("button");
+            this.m_n5 = (this.getChild("n5"));
+            this.m_n4 = (this.getChild("n4"));
+        }
+    }
+    WXFUI_restartBtn.URL = "ui://bq3h5insdr1tnj";
+
+    class WXFUI_buyItem extends fairygui.GComponent {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "buyItem"));
+        }
+        onConstruct() {
+            this.m_n2 = (this.getChild("n2"));
+            this.m_n4 = (this.getChild("n4"));
+            this.m_n5 = (this.getChild("n5"));
+            this.m_buy = (this.getChild("buy"));
+            this.m_coin = (this.getChild("coin"));
+            this.m_free = (this.getChild("free"));
+            this.m_n9 = (this.getChild("n9"));
+            this.m_info = (this.getChild("info"));
+        }
+    }
+    WXFUI_buyItem.URL = "ui://bq3h5insdr1tnm";
+
+    class WXFUI_enterBtn extends fairygui.GButton {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "enterBtn"));
+        }
+        onConstruct() {
+            this.m_button = this.getController("button");
+            this.m_n5 = (this.getChild("n5"));
+        }
+    }
+    WXFUI_enterBtn.URL = "ui://bq3h5insdr1tnn";
+
+    class WXFUI_buyBtn extends fairygui.GButton {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "buyBtn"));
+        }
+        onConstruct() {
+            this.m_button = this.getController("button");
+            this.m_n5 = (this.getChild("n5"));
+        }
+    }
+    WXFUI_buyBtn.URL = "ui://bq3h5insdr1tno";
+
+    class WXFUI_freeBtn extends fairygui.GButton {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "freeBtn"));
+        }
+        onConstruct() {
+            this.m_button = this.getController("button");
+            this.m_n6 = (this.getChild("n6"));
+        }
+    }
+    WXFUI_freeBtn.URL = "ui://bq3h5insdr1tnp";
+
+    class WXFUI_backBtn extends fairygui.GButton {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "backBtn"));
+        }
+        onConstruct() {
+            this.m_button = this.getController("button");
+            this.m_n6 = (this.getChild("n6"));
+        }
+    }
+    WXFUI_backBtn.URL = "ui://bq3h5insdr1tnr";
+
+    class WXFUI_continueBtn2 extends fairygui.GButton {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "continueBtn2"));
+        }
+        onConstruct() {
+            this.m_button = this.getController("button");
+            this.m_n5 = (this.getChild("n5"));
+        }
+    }
+    WXFUI_continueBtn2.URL = "ui://bq3h5insdr1tns";
+
+    class WXFUI_continueBtn3 extends fairygui.GButton {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "continueBtn3"));
+        }
+        onConstruct() {
+            this.m_button = this.getController("button");
+            this.m_n6 = (this.getChild("n6"));
+        }
+    }
+    WXFUI_continueBtn3.URL = "ui://bq3h5insdr1tnt";
+
+    class WXFUI_continueBtn4 extends fairygui.GButton {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "continueBtn4"));
+        }
+        onConstruct() {
+            this.m_button = this.getController("button");
+            this.m_n7 = (this.getChild("n7"));
+        }
+    }
+    WXFUI_continueBtn4.URL = "ui://bq3h5insdr1tnu";
+
+    class WXFUI_LevelItem extends fairygui.GComponent {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "LevelItem"));
+        }
+        onConstruct() {
+            this.m_ctl = this.getController("ctl");
+            this.m_n12 = (this.getChild("n12"));
+            this.m_n13 = (this.getChild("n13"));
+            this.m_n14 = (this.getChild("n14"));
+            this.m_n15 = (this.getChild("n15"));
+        }
+    }
+    WXFUI_LevelItem.URL = "ui://bq3h5insdr1tnx";
+
+    class WXFUI_lastChapter extends fairygui.GButton {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "lastChapter"));
+        }
+        onConstruct() {
+            this.m_button = this.getController("button");
+            this.m_n7 = (this.getChild("n7"));
+        }
+    }
+    WXFUI_lastChapter.URL = "ui://bq3h5insdr1tnz";
+
+    class WXFUI_nextChapter extends fairygui.GButton {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "nextChapter"));
+        }
+        onConstruct() {
+            this.m_button = this.getController("button");
+            this.m_n7 = (this.getChild("n7"));
+        }
+    }
+    WXFUI_nextChapter.URL = "ui://bq3h5insdr1to0";
+
+    class WXFUI_share extends fairygui.GComponent {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "share"));
+        }
+        onConstruct() {
+            this.m_n2 = (this.getChild("n2"));
+            this.m_share1 = (this.getChild("share1"));
+            this.m_share2 = (this.getChild("share2"));
+        }
+    }
+    WXFUI_share.URL = "ui://bq3h5insdr1to2";
+
+    class WXFUI_shareBtn1 extends fairygui.GButton {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "shareBtn1"));
+        }
+        onConstruct() {
+            this.m_button = this.getController("button");
+            this.m_n6 = (this.getChild("n6"));
+        }
+    }
+    WXFUI_shareBtn1.URL = "ui://bq3h5insdr1to3";
+
+    class WXFUI_shareBtn2 extends fairygui.GButton {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "shareBtn2"));
+        }
+        onConstruct() {
+            this.m_button = this.getController("button");
+            this.m_n6 = (this.getChild("n6"));
+        }
+    }
+    WXFUI_shareBtn2.URL = "ui://bq3h5insdr1to4";
 
     class WXFUI_enemy11 extends fairygui.GComponent {
         constructor() {
@@ -2257,6 +2822,25 @@
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy_fire_5.URL, WXFUI_enemy_fire_5);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy5.URL, WXFUI_enemy5);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_3.URL, WXFUI_player_stay_3);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_backHomeBtn.URL, WXFUI_backHomeBtn);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_restartBtn.URL, WXFUI_restartBtn);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_BeforeWar.URL, WXFUI_BeforeWar);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_buyItem.URL, WXFUI_buyItem);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enterBtn.URL, WXFUI_enterBtn);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_buyBtn.URL, WXFUI_buyBtn);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_freeBtn.URL, WXFUI_freeBtn);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_AfterWar.URL, WXFUI_AfterWar);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_backBtn.URL, WXFUI_backBtn);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_continueBtn2.URL, WXFUI_continueBtn2);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_continueBtn3.URL, WXFUI_continueBtn3);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_continueBtn4.URL, WXFUI_continueBtn4);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_ChapterView.URL, WXFUI_ChapterView);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_LevelItem.URL, WXFUI_LevelItem);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_lastChapter.URL, WXFUI_lastChapter);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_nextChapter.URL, WXFUI_nextChapter);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_share.URL, WXFUI_share);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_shareBtn1.URL, WXFUI_shareBtn1);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_shareBtn2.URL, WXFUI_shareBtn2);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy11.URL, WXFUI_enemy11);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy12.URL, WXFUI_enemy12);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_Bomb.URL, WXFUI_Bomb);
@@ -2272,6 +2856,8 @@
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_Player.URL, WXFUI_Player);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_boom_1.URL, WXFUI_player_boom_1);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_boom_2.URL, WXFUI_player_boom_2);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_PopUpView.URL, WXFUI_PopUpView);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_SuspendView.URL, WXFUI_SuspendView);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy1.URL, WXFUI_enemy1);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy2.URL, WXFUI_enemy2);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy3.URL, WXFUI_enemy3);
@@ -2286,6 +2872,28 @@
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_bullet1.URL, WXFUI_bullet1);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_bullet2.URL, WXFUI_bullet2);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_zidan.URL, WXFUI_zidan);
+        }
+    }
+
+    class WXFUI_loadingBar extends fairygui.GProgressBar {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("loading", "loadingBar"));
+        }
+        onConstruct() {
+            this.m_n0 = (this.getChild("n0"));
+            this.m_bar = (this.getChild("bar"));
+            this.m_title = (this.getChild("title"));
+        }
+    }
+    WXFUI_loadingBar.URL = "ui://nr80du74n8quim";
+
+    class loadingBinder {
+        static bindAll() {
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_loadingView.URL, WXFUI_loadingView);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_loadingBar.URL, WXFUI_loadingBar);
         }
     }
 
@@ -2309,7 +2917,8 @@
             Laya.ResourceVersion.enable("version.json", Laya.Handler.create(this, this.onVersionLoaded), Laya.ResourceVersion.FILENAME_VERSION);
             fairygui.UIConfig.packageFileExtension = "wxfui";
             GameBinder.bindAll();
-            AssetsManager.instance.loadAssetsData();
+            loadingBinder.bindAll();
+            AssetsManager.instance.loadLoadingAssetsData();
         }
         onVersionLoaded() {
             Laya.AtlasInfoManager.enable("fileconfig.json", Laya.Handler.create(this, this.onConfigLoaded));

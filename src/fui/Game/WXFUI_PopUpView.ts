@@ -4,6 +4,7 @@
 
 export default class WXFUI_PopUpView extends fairygui.GComponent {
 
+	public m_mask:fairygui.GLoader;
 	public m_load:fairygui.GLoader;
 	public m_t0:fairygui.Transition;
 
@@ -18,6 +19,7 @@ export default class WXFUI_PopUpView extends fairygui.GComponent {
 	}
 
 	protected onConstruct(): void {
+		this.m_mask = <fairygui.GLoader><any>(this.getChild("mask"));
 		this.m_load = <fairygui.GLoader><any>(this.getChild("load"));
 		this.m_t0 = this.getTransition("t0");
 	}

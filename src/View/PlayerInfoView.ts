@@ -10,11 +10,10 @@ export default class PlayerInfoView {
     public view: WXFUI_PlayerInfoView;
 
 
-    constructor() { }
+    constructor() { this.createView() }
 
     createView(): void {
         this.view = fairygui.UIPackage.createObject("Game", "PlayerInfoView") as WXFUI_PlayerInfoView;
-        fairygui.GRoot.inst.addChild(this.view);
 
         EventManager.instance.addNotice(GameEvent.CHANGE_PLAYER_GOODS, this, this.changePlayerGoods);
         EventManager.instance.addNotice(GameEvent.USE_PLAYER_BULLET, this, this.usePlyerBullet);

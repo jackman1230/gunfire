@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1334,750">
   <displayList>
-    <loader id="n11_mtpi" name="load" xy="0,0" pivot="0.5,0.5" size="1334,750" align="center" vAlign="middle" autoSize="true"/>
+    <loader id="n15_mtpi" name="mask" xy="-33,-25" size="1400,800" url="ui://bq3h5insmtpio8" align="center" vAlign="middle" fill="scaleFree"/>
+    <loader id="n11_mtpi" name="load" xy="662,370" pivot="0.5,0.5" size="10,10" align="center" vAlign="middle"/>
   </displayList>
   <transition name="t0">
     <item time="0" type="Scale" target="n11_mtpi" tween="true" startValue="0,0" endValue="1,1" duration="6" ease="Linear"/>

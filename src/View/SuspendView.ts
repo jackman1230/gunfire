@@ -7,7 +7,7 @@ export default class SuspendView extends PopUpView {
 
     public view: WXFUI_SuspendView;
 
-    constructor() { super(WXFUI_SuspendView.URL) }
+    constructor() { super() }
 
     createView(): void {
         this.view = WXFUI_SuspendView.createInstance();

@@ -10,12 +10,10 @@ export default class PlayerCtlView {
     public view: WXFUI_PlayerCtlView;
 
 
-    constructor() { }
+    constructor() { this.createView() }
 
     createView(): void {
         this.view = fairygui.UIPackage.createObject("Game", "PlayerCtlView") as WXFUI_PlayerCtlView;
-
-        fairygui.GRoot.inst.addChildAt(this.view, 20);
 
 
     }

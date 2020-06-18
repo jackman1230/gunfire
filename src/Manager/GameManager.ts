@@ -6,13 +6,14 @@ import Player from "../View/Player";
 export class GameManager {
     private static _instance: GameManager;
     private playerInfo: PlayerInfo;//角色数据
-    public curLevel: number = 0;//当前第几个关卡
+    public curLevel: number = 0;//当前正在战斗的关卡
     public curChapter: number = 1;//当前第几个章节
     public curLvData: any;//当前关卡数据
     public levelData: any;//levelData.json 中的所有数据
     public maxLevel: number = 10;//当前章节最大关卡数
     public maxChapter: number = 1;//章节最大数
     public gotoMaxLevel: number = 1;//当前章节所通过的最大关卡
+    public choiseLevel: number = 1;//当前选择的关卡
 
     constructor() {
     }
@@ -27,7 +28,8 @@ export class GameManager {
         this.initChapterConfig();
         this.initRoleData();
         ViewManager.instance.initView();
-        this.gotoNextLevel();
+        ViewManager.instance.showChapterView();
+        // this.gotoNextLevel();
     }
 
     private initChapterConfig(): void {
@@ -35,6 +37,16 @@ export class GameManager {
         this.levelData = Laya.loader.getRes("res/LevelData.json");
         this.maxLevel = this.levelData["chapter_" + this.curChapter].maxLevelNum;
         this.maxChapter = this.levelData.maxChapter;
+    }
+
+    public goPointToLevel(l: number): void {
+        this.curLevel = --l;
+        this.gotoNextLevel();
+    }
+
+    public enterGame(): void {
+        this.curLevel = --this.choiseLevel;
+        this.gotoNextLevel();
     }
 
     /**返回首页 */

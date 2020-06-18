@@ -23,7 +23,6 @@ export class WarView {
         this.warView.displayObject.addChild(this.scene);
 
         Laya.stage.addChildAt(this.warView.displayObject, 0);
-        Laya.stage.addChild(fairygui.GRoot.inst.displayObject);
 
 
 

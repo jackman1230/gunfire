@@ -5,7 +5,6 @@ import WXFUI_enterBtn from "./WXFUI_enterBtn";
 
 export default class WXFUI_BeforeWar extends fairygui.GComponent {
 
-	public m_n18:fairygui.GImage;
 	public m_bg:fairygui.GImage;
 	public m_item_1:WXFUI_buyItem;
 	public m_item_2:WXFUI_buyItem;
@@ -25,7 +24,6 @@ export default class WXFUI_BeforeWar extends fairygui.GComponent {
 	}
 
 	protected onConstruct(): void {
-		this.m_n18 = <fairygui.GImage><any>(this.getChild("n18"));
 		this.m_bg = <fairygui.GImage><any>(this.getChild("bg"));
 		this.m_item_1 = <WXFUI_buyItem><any>(this.getChild("item_1"));
 		this.m_item_2 = <WXFUI_buyItem><any>(this.getChild("item_2"));

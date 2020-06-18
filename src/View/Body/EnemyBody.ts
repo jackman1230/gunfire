@@ -6,11 +6,11 @@ export default class EnemyBody extends Laya.Script {
     constructor() { super(); }
 
     onAwake(): void {
-        this.selfCollider = this.owner.getComponent(Laya.BoxCollider);
-        this.selfBody = this.selfCollider.rigidBody;
+        // this.selfCollider = this.owner.getComponent(Laya.BoxCollider);
+        // this.selfBody = this.selfCollider.rigidBody;
 
-        this.selfCollider.label = "enemy";
-        this.selfBody.label = "enemy";
+        // this.selfCollider.label = "enemy";
+        // this.selfBody.label = "enemy";
     }
 
     onDisable(): void {
