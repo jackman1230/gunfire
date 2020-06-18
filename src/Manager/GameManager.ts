@@ -2,6 +2,8 @@ import { ViewManager } from "./ViewManager";
 import { PlayerInfo, EnemyInfo, ObstacleInfo } from "../Data/PlayerData";
 import { GameData } from "../Data/GameData";
 import Player from "../View/Player";
+import { EventManager } from "./EventManager";
+import GameEvent from "../Control/GameEvent";
 
 export class GameManager {
     private static _instance: GameManager;
@@ -14,6 +16,10 @@ export class GameManager {
     public maxChapter: number = 1;//章节最大数
     public gotoMaxLevel: number = 1;//当前章节所通过的最大关卡
     public choiseLevel: number = 1;//当前选择的关卡
+
+    public bossDeath: boolean = false;//当前关卡boss是否阵亡
+
+    public isPauseGame: boolean = false;
 
     constructor() {
     }
@@ -66,11 +72,27 @@ export class GameManager {
 
     /**暂停游戏 */
     public suspendGame(): void {
+        this.isPauseGame = this.isPauseGame == false ? true : false;
+        if (GameManager.instance.isPauseGame) {
+            Laya.updateTimer.pause();
+            Laya.physicsTimer.pause();
+            Laya.timer.pause();
+        } else {
+            Laya.updateTimer.resume();
+            Laya.physicsTimer.resume();
+            Laya.timer.resume();
+        }
 
+        EventManager.instance.dispatcherEvt(GameEvent.PAUSE_GAME);
     }
 
     public victoryGame(): void {
-        if (this.gotoMaxLevel < this.curLevel) this.gotoMaxLevel = this.curLevel;
+        if (this.gotoMaxLevel > this.curLevel) {
+            this.gotoMaxLevel = this.curLevel;
+        } else if (this.gotoMaxLevel == this.curLevel)
+            this.gotoMaxLevel++;
+        ViewManager.instance.showAfterWarView(1);
+
     }
 
     /**重新开始当前关卡 */
@@ -88,6 +110,7 @@ export class GameManager {
         if (this.levelData["chapter_" + this.curChapter]) {
             this.maxLevel = this.levelData["chapter_" + this.curChapter].maxLevelNum;
             this.curLevelData = this.levelData["chapter_" + this.curChapter]["level_" + this.curLevel];
+            this.playerInfo.curlvCoin = 0;
             ViewManager.instance.createWarView();
         }
 
@@ -105,6 +128,8 @@ export class GameManager {
         this.playerInfo.addRifNum = this.levelData.role.addRifNum;
         this.playerInfo.curLevel = this.playerInfo.curChapter = 1;
         this.maxChapter = this.levelData.role.maxChapter;
+        this.playerInfo.curlvCoin = this.playerInfo.totalCoin = 0;
+
     }
 
     public createPlayer(): void {

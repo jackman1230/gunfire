@@ -147,8 +147,12 @@ export class ViewManager {
         if (!this.playerCtlView) this.playerCtlView = new PlayerCtlView();
         fairygui.GRoot.inst.addChild(this.playerCtlView.view);
     }
-
-    public showAfterWarView(): void {
+    /**
+     * 显示关卡战斗之后界面
+     * @param type 1胜利界面，2失败界面，3放弃界面
+     */
+    public showAfterWarView(type: number): void {
+        this.afterWar.view.m_ctl.selectedIndex = type - 1;
         this.showPopUpView(this.afterWar);
     }
 
@@ -162,6 +166,7 @@ export class ViewManager {
 
     public showChapterView(): void {
         this.chapterView.view.m_chapter.selectedIndex = GameManager.instance.curChapter - 1;
+        this.chapterView.updateView();
         this.showPopUpView(this.chapterView, false, true);
     }
 

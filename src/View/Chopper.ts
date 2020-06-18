@@ -30,8 +30,8 @@ export default class Chopper extends Enemy {
         if (this.isDeath) return;
         this.isDeath = true;
         Laya.timer.clearAll(this);
-        this.bodyLoader.url = "ui://Game/death_2";
-        this.bodyLoader.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
+        this.enemy.url = "ui://Game/boom_4";
+        this.enemy.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
 
         // var p: Laya.Point = new Laya.Point();
         // p.x = this.scene.x + this.scene.width / 2;
@@ -39,12 +39,7 @@ export default class Chopper extends Enemy {
         // ViewManager.instance.createGoods(1, p);
     }
 
-    protected dispose(): void {
-        EventManager.instance.offNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.beHit);
-        EventManager.instance.offNotice(GameEvent.PLAYER_BULLET_HIT_ENEMY, this, this.beHit);
-        Laya.timer.clearAll(this);
-        this.scene.removeSelf();
-        this.view.dispose();
+    protected recover(): void {
         Laya.Pool.recover("chopper", this);
     }
 

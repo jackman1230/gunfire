@@ -37,6 +37,10 @@ export default class GameEvent {
 
     public static USE_PLAYER_BULLET: string = "USE_PLAYER_BULLET";
 
+    public static PAUSE_GAME: string = "PAUSE_GAME";
+
+    public static VICITORY_LEVEL: string = "VICITORY_LEVEL";
+
     constructor() { }
 
 

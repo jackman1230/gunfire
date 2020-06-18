@@ -8,13 +8,14 @@ import GameEvent from "../Control/GameEvent";
 import { EventManager } from "../Manager/EventManager";
 import { GameData, ShotDirectionData } from "../Data/GameData";
 import { EnemyInfo } from "../Data/PlayerData";
+import { GameManager } from "../Manager/GameManager";
 
 export default class Enemy {
     //常规兵种
     public scene: Laya.Sprite;
     public view: fairygui.GComponent;
     public enemy: fairygui.GLoader;
-    public enemyLoader: fairygui.GLoader;
+    // public enemyLoader: fairygui.GLoader;
 
     public enemyType: number = 5;
 
@@ -76,9 +77,18 @@ export default class Enemy {
         ViewManager.instance.warView.scene.addChild(this.scene);
         EventManager.instance.addNotice(GameEvent.PLAYER_BULLET_HIT_ENEMY, this, this.beHit);
         EventManager.instance.addNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.beHit);
+        EventManager.instance.addNotice(GameEvent.PAUSE_GAME, this, this.pauseGame);
 
         this.setDirection();
         Laya.timer.loop(2000, this, this.setFire);
+    }
+
+    private pauseGame(): void {
+        this.bodyLoader.playing = !GameManager.instance.isPauseGame;
+        if (this.enemyType == GameData.ENEMY_MOR) {
+            this.bodyLoader.component.getChildAt(0).asLoader.playing = !GameManager.instance.isPauseGame;
+            this.bodyLoader.component.getChildAt(1).asMovieClip.playing = !GameManager.instance.isPauseGame;
+        }
     }
 
     public beHit(s: any): void {
@@ -225,9 +235,17 @@ export default class Enemy {
         if (this.isDeath) return;
         this.isDeath = true;
         Laya.timer.clearAll(this);
-        this.bodyLoader.url = "ui://Game/death_" + this.getRandomDeath();
-        this.bodyLoader.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
+        // if (this.enemyType == GameData.ENEMY_MOR) {
+        this.enemy.url = "ui://Game/death_" + this.getRandomDeath();
+        this.enemy.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
 
+        // }
+        // this.bodyLoader.url = "ui://Game/death_" + this.getRandomDeath();
+        // this.bodyLoader.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
+
+        if (this.isBoss) {
+            GameManager.instance.bossDeath = true;
+        }
         this.createGoods();
 
     }
@@ -242,11 +260,16 @@ export default class Enemy {
     }
 
     protected dispose(): void {
+        EventManager.instance.offNotice(GameEvent.PAUSE_GAME, this, this.pauseGame);
         EventManager.instance.offNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.beHit);
         EventManager.instance.offNotice(GameEvent.PLAYER_BULLET_HIT_ENEMY, this, this.beHit);
         Laya.timer.clearAll(this);
         this.scene.removeSelf();
         this.view.dispose();
+        this.recover();
+    }
+
+    protected recover(): void {
         Laya.Pool.recover("enenmy", this);
     }
 

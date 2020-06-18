@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="4900,784" restrictSize="0,4900,0,784">
   <displayList>
-    <loader id="n3_oqgw" name="bg" xy="0,0" size="50,30" autoSize="true"/>
+    <loader id="n3_oqgw" name="bg" xy="0,0" size="4900,784" fill="scaleFree"/>
   </displayList>
 </component>

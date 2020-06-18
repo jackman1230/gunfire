@@ -1,9 +1,0 @@
-{
-  "manifest_version": 2,
-  "name": "crl-set-12343900532663193038.data",
-  "version": "5939",
-  "imageName": "image.squash",
-  "squash": true,
-  "fsType": "squashfs",
-  "isRemovable": false
-}

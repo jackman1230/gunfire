@@ -70,21 +70,12 @@ export default class Tank extends Enemy {
         if (this.isDeath) return;
         this.isDeath = true;
         Laya.timer.clearAll(this);
-        this.bodyLoader.url = "ui://Game/boom_5";
-        this.bodyLoader.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
+        this.enemy.url = "ui://Game/boom_5";
+        this.enemy.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
 
-        // var p: Laya.Point = new Laya.Point();
-        // p.x = this.scene.x + this.scene.width / 2;
-        // p.y = this.scene.y + this.scene.height / 2;
-        // ViewManager.instance.createGoods(1, p);
     }
 
-    protected dispose(): void {
-        EventManager.instance.offNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.beHit);
-        EventManager.instance.offNotice(GameEvent.PLAYER_BULLET_HIT_ENEMY, this, this.beHit);
-        Laya.timer.clearAll(this);
-        this.scene.removeSelf();
-        this.view.dispose();
+    protected recover(): void {
         Laya.Pool.recover("tank", this);
     }
 }

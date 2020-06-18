@@ -547,7 +547,7 @@
     <component id="qz5ukr" name="enemy10.xml" path="/Component/enemy/" exported="true"/>
     <component id="qz5uks" name="enemy_fire_11.xml" path="/Component/enemy/" exported="true"/>
     <component id="qz5ukt" name="enemy_fire_12.xml" path="/Component/enemy/" exported="true"/>
-    <component id="qz5uku" name="obstacle.xml" path="/Component/obstacle/" exported="true"/>
+    <component id="qz5uku" name="obstacleView.xml" path="/Component/obstacle/" exported="true"/>
     <movieclip id="qz5ukv" name="boom_6.jta" path="/Component/enemy/bomb/" exported="true"/>
     <image id="qz5ukw" name="1899.png" path="/assets/obstacle/"/>
     <image id="iasdkx" name="255.png" path="/Component/enemy/"/>
@@ -656,7 +656,6 @@
     <component id="dr1tns" name="continueBtn2.xml" path="/Component/btn/"/>
     <component id="dr1tnt" name="continueBtn3.xml" path="/Component/btn/"/>
     <component id="dr1tnu" name="continueBtn4.xml" path="/Component/btn/"/>
-    <image id="dr1tnv" name="mask.png" path="/Component/view/" scale="9grid" scale9grid="25,25,50,50"/>
     <component id="dr1tnw" name="ChapterView.xml" path="/Component/view/" exported="true"/>
     <component id="dr1tnx" name="LevelItem.xml" path="/Component/view/" exported="true"/>
     <font id="dr1tny" name="levelFont.fnt" path="/Component/font/" exported="true"/>
@@ -667,7 +666,6 @@
     <component id="dr1to4" name="shareBtn2.xml" path="/Component/btn/"/>
     <component id="dr1to5" name="setting.xml" path="/Component/btn/"/>
     <component id="mtpio6" name="PopUpView.xml" path="/Component/view/" exported="true"/>
-    <component id="mtpio7" name="maskView.xml" path="/Component/view/"/>
     <image id="mtpio8" name="mask2.png" path="/Component/view/" scale="9grid" scale9grid="25,25,50,50"/>
   </resources>
   <publish name="Game" path="..\bin\res" packageCount="2" genCode="true" codePath="..\src\fui"/>

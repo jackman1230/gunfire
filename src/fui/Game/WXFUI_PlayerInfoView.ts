@@ -12,7 +12,7 @@ export default class WXFUI_PlayerInfoView extends fairygui.GComponent {
 	public m_blood_2:fairygui.GImage;
 	public m_blood_3:fairygui.GImage;
 	public m_n7:fairygui.GImage;
-	public m_n8:WXFUI_susBtn;
+	public m_pause:WXFUI_susBtn;
 	public m_coin:fairygui.GTextField;
 	public m_bullet:fairygui.GTextField;
 	public m_gre:fairygui.GTextField;
@@ -36,7 +36,7 @@ export default class WXFUI_PlayerInfoView extends fairygui.GComponent {
 		this.m_blood_2 = <fairygui.GImage><any>(this.getChild("blood_2"));
 		this.m_blood_3 = <fairygui.GImage><any>(this.getChild("blood_3"));
 		this.m_n7 = <fairygui.GImage><any>(this.getChild("n7"));
-		this.m_n8 = <WXFUI_susBtn><any>(this.getChild("n8"));
+		this.m_pause = <WXFUI_susBtn><any>(this.getChild("pause"));
 		this.m_coin = <fairygui.GTextField><any>(this.getChild("coin"));
 		this.m_bullet = <fairygui.GTextField><any>(this.getChild("bullet"));
 		this.m_gre = <fairygui.GTextField><any>(this.getChild("gre"));

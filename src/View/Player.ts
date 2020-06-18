@@ -213,7 +213,15 @@ export default class Player extends Laya.Script {
     public stillRun(): void {
         if (this.direction == 1) {
             this.roleSprite.x += this.speed;//做一个卡点的坐标可以随意移动
-            if (this.roleSprite.x - Math.abs(ViewManager.instance.warView.warView.x) >= Laya.Browser.clientWidth / 2) {
+            if (GameManager.instance.bossDeath) {
+                if (this.roleSprite.x > ViewManager.instance.warView.warView.width - 200) {
+                    // EventManager.instance.dispatcherEvt(GameEvent.VICITORY_LEVEL);
+                    GameManager.instance.victoryGame();
+                }
+            }
+            if (Math.abs(ViewManager.instance.warView.warView.x) + Laya.stage.width > ViewManager.instance.warView.warView.width - 20)
+                return;
+            if (this.roleSprite.x - Math.abs(ViewManager.instance.warView.warView.x) >= Laya.stage.width / 2) {
                 ViewManager.instance.updateViewPort(this.speed);
             }
         } else {

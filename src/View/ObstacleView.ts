@@ -17,7 +17,7 @@ export default class ObstacleView {
     public type: number = 1;
 
     protected direction: number = 0;
-    protected box: Laya.BoxCollider;
+    protected box: Laya.PolygonCollider;
 
     protected isDeath: boolean = false;
 
@@ -36,7 +36,7 @@ export default class ObstacleView {
     };
 
     public loadComplete(s: Laya.Sprite) {
-        this.view = fairygui.UIPackage.createObject("Game", "enemy") as fairygui.GComponent;
+        this.view = fairygui.UIPackage.createObject("Game", "obstacleView") as fairygui.GComponent;
         this.view.setPivot(0.5, 0.5);
         this.load = this.view.getChildAt(0) as fairygui.GLoader;
         this.scene = s;
@@ -44,18 +44,18 @@ export default class ObstacleView {
     };
 
     public initView(): void {
-        this.load.url = "ui://Game/enemy" + this.type;
+        this.load.url = "ui://Game/obstacle_" + this.type;
         this.scene.addChild(this.view.displayObject);
         this.scene.addComponent(EnemyBody);
-        this.box = this.scene.getComponent(Laya.BoxCollider);
+        this.box = this.scene.getComponent(Laya.PolygonCollider);
 
         this.isDeath = false;
 
         this.scene.x = this.pos.x;
         this.scene.y = this.pos.y;
         ViewManager.instance.warView.scene.addChild(this.scene);
-        EventManager.instance.addNotice(GameEvent.PLAYER_BULLET_HIT_ENEMY, this, this.beHit);
-        EventManager.instance.addNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.beHit);
+        EventManager.instance.addNotice(GameEvent.PLAYER_BOMB_HIT_OBSTACLE, this, this.beHit);
+        EventManager.instance.addNotice(GameEvent.PLAYER_BULLET_HIT_OBSTACLE, this, this.beHit);
 
     }
 
@@ -81,8 +81,8 @@ export default class ObstacleView {
     public setDeath(): void {
         this.isDeath = true;
         Laya.timer.clearAll(this);
-        // this.bodyLoader.url = "ui://Game/death_" + this.type;
-        // this.bodyLoader.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
+        this.load.url = "ui://Game/boom_" + ViewManager.instance.getBoomAniTypeByObsType(this.type);;
+        this.load.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
 
         // var p: Laya.Point = new Laya.Point();
         // p.x = this.scene.x + this.scene.width / 2;
@@ -96,20 +96,6 @@ export default class ObstacleView {
         Laya.timer.clearAll(this);
         this.scene.removeSelf();
         this.view.dispose();
-        Laya.Pool.recover("enenmy", this);
-    }
-
-
-    public getRandomFire(): number {
-        if (Math.random() > 0.5) return 1;
-        return 2;
-    }
-
-    public getRandomDeath(): number {
-        var r: number = Math.random();
-        if (r > 0.75) return 4;
-        if (r > 0.5) return 3;
-        if (r > 0.25) return 2;
-        return 1;
+        Laya.Pool.recover("obstacle", this);
     }
 }

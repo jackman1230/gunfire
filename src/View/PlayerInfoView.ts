@@ -26,6 +26,12 @@ export default class PlayerInfoView {
         this.updatePlayerBlood();
         this.updateGreNum();
 
+        this.view.m_pause.onClick(this, this.pauseGame);
+
+    }
+
+    private pauseGame(): void {
+        GameManager.instance.suspendGame();
     }
 
     private changePlayerGoods(t: number): void {
@@ -45,6 +51,9 @@ export default class PlayerInfoView {
                 GameManager.instance.roleInfo.bulletNum = GameManager.instance.roleInfo.addRifNum;
             this.updateBulletNum();
         } else if (t == GoodsType.GoodsType_GRE) {
+            GameManager.instance.roleInfo.bombNum += GameManager.instance.roleInfo.addBombNum;
+            this.updateGreNum();
+        } else if (t == GoodsType.GoodsType_COIN) {
             GameManager.instance.roleInfo.bombNum += GameManager.instance.roleInfo.addBombNum;
             this.updateGreNum();
         }
@@ -78,6 +87,10 @@ export default class PlayerInfoView {
         this.view.m_gre.text = GameManager.instance.roleInfo.bombNum + "";
     }
 
+    public updateCoin(): void {
+
+    }
+
     public updatePlayerBlood(): void {
         if (GameManager.instance.roleInfo.blood <= 0) {
             EventManager.instance.dispatcherEvt(GameEvent.PLAYER_DEATH);
@@ -89,6 +102,10 @@ export default class PlayerInfoView {
                 this.view["m_blood_" + i].visible = false;
             }
         }
+    }
+
+    public getRandomCoin(): number {
+        return Math.floor(Math.random() * 200);
     }
 
 

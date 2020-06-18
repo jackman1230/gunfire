@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<component size="1400,800">
-  <displayList>
-    <image id="n15_mtpi" name="mask" src="mtpio8" fileName="Component/view/mask2.png" xy="0,0" size="1400,800"/>
-  </displayList>
-</component>

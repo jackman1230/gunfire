@@ -24,6 +24,8 @@ export class PlayerInfo {
     public addRifNum: number;
     public curChapter: number;
     public curLevel: number;
+    public totalCoin: number;
+    public curlvCoin: number
 
     constructor() {
     }
