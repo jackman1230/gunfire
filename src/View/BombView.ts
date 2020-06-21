@@ -7,6 +7,7 @@ import WXFUI_Bomb from "../fui/Game/WXFUI_Bomb";
 import { BombData } from "../Data/GameData";
 import BombBody from "./Body/BombBody";
 import BoomView from "./BoomView";
+import { SoundManager } from "../Manager/SoundManager";
 
 export default class BombView {
     public scene: Laya.Sprite;
@@ -87,10 +88,13 @@ export default class BombView {
         }
         this.scene.x = this.parentPos.x + this.offPos.x;
         this.scene.y = this.parentPos.y + this.offPos.y;
+
     }
 
 
     protected showBoomView(): void {
+        SoundManager.instance.playSound("boom");
+
         var bomb: BoomView = Laya.Pool.getItemByClass("boomView", BoomView);
         var p: Laya.Point = ViewManager.instance.getBodyCenterPos(this.scene);
         bomb.createView(ViewManager.instance.getBoomAniTypeByBomb(this.bombType), p, this.isPlayer);

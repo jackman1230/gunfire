@@ -1,6 +1,4 @@
 export class GameData {
-    /**主角武器类型 */
-    public static WEAPON_TYPE: number = 1;
     /**手枪 */
     public static WEAPON_PIS: number = 1;
     /**机枪 */
@@ -9,8 +7,6 @@ export class GameData {
     public static WEAPON_RIFLE: number = 3;
     /**手榴弹 */
     public static WEAPON_GRE: number = 4;
-    /**最多武器类型 */
-    public static WEAPON_MAX: number = 3;
     /**敌人武器类型-手枪 */
     public static ENEMY_PIS: number = 1;
     /**敌人武器类型-手榴弹 */
@@ -28,7 +24,10 @@ export class GameData {
     /**敌人武器类型-黄坦克 */
     public static ENEMY_TANK_2: number = 12;
     /**掉落随机金币最大值*/
-    public static RandomCoin: number = 200;
+    public static RANDOM_COIN: number = 200;
+
+    /**声音文件开头的路径 */
+    public static SOUND_FONT: string = "res/sound/";
 
 }
 
@@ -86,4 +85,5 @@ export class GoodsType {
     public static GoodsType_COIN: number = 5;
 
 }
+
 

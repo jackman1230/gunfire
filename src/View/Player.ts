@@ -8,11 +8,11 @@ import { EventManager } from "../Manager/EventManager";
 import GameEvent from "../Control/GameEvent";
 import { GameManager } from "../Manager/GameManager";
 import { PlayerData } from "../Data/PlayerData";
+import { SoundManager } from "../Manager/SoundManager";
 
 export default class Player extends Laya.Script {
 
     public rolePlayer: WXFUI_Player;
-    public playerAni: PlayerAni;
     public body: fairygui.GLoader;
 
     public direction: number = 0;
@@ -23,7 +23,6 @@ export default class Player extends Laya.Script {
     private keyRight: boolean = false;
     private keyLeft: boolean = false;
     private keyJump: boolean = false;
-    // private isDeath: boolean = false;
 
     private speed: number = 5;
     private jumpHigh: number = 200;
@@ -32,8 +31,6 @@ export default class Player extends Laya.Script {
     public roleSprite: Laya.Sprite;
     private roleBody: Laya.RigidBody;
 
-    // private _hp: number = 100;
-
     constructor() { super() }
 
     public createView() {
@@ -41,7 +38,6 @@ export default class Player extends Laya.Script {
     };
 
     private loadComplete(s: Laya.Sprite): void {
-
         this.roleSprite = s;
         this.rolePlayer = fairygui.UIPackage.createObject("Game", "Player") as WXFUI_Player;
         this.rolePlayer.setPivot(0.5, 0.5);
@@ -213,8 +209,10 @@ export default class Player extends Laya.Script {
     public stillRun(): void {
         if (this.direction == 1) {
             this.roleSprite.x += this.speed;//做一个卡点的坐标可以随意移动
+            if (this.roleSprite.x > ViewManager.instance.warView.warView.width - this.roleSprite.width - 20)
+                this.roleSprite.x = ViewManager.instance.warView.warView.width - this.roleSprite.width - 20;
             if (GameManager.instance.bossDeath) {
-                if (this.roleSprite.x > ViewManager.instance.warView.warView.width - 200) {
+                if (this.roleSprite.x > ViewManager.instance.warView.warView.width - 300) {
                     // EventManager.instance.dispatcherEvt(GameEvent.VICITORY_LEVEL);
                     GameManager.instance.victoryGame();
                 }
@@ -234,6 +232,7 @@ export default class Player extends Laya.Script {
     public setFire(): void {
         if (this.sFire) return;
         if (this.sBoom) return;
+        this.playWeaponSound();
         this.sFire = true;
         this.body.url = "ui://Game/player_fire_" + this.weaponType;
         this.rolePlayer.m_fireType.selectedIndex = this.weaponType - 1;
@@ -270,6 +269,7 @@ export default class Player extends Laya.Script {
         if (this.weaponType != PlayerData.WEAPON_PIS) {
             EventManager.instance.dispatcherEvt(GameEvent.USE_PLAYER_BULLET);
         }
+        this.playWeaponSound();
     }
 
     private rilfeComplete(): void {
@@ -349,17 +349,11 @@ export default class Player extends Laya.Script {
     }
 
     private changeWeaponType(type: number): void {
-        // if (this.sBoom) return;
-        // this.sFire = false;
-        // this.weaponType++;
         this.weaponType = GameManager.instance.roleInfo.weaponType = type;
         if (this.sFire) {
             this.body.url = "ui://Game/player_fire_" + this.weaponType;
         } else
             this.body.url = "ui://Game/player_stay_" + this.weaponType;
-
-        // if (this.sRun) this.bodyLeg.url = "ui://Game/legMove";
-        // if (this.keyJump) this.bodyLeg.url = "ui://Game/legJump";
     }
 
     private setDeath(): void {
@@ -370,6 +364,22 @@ export default class Player extends Laya.Script {
         EventManager.instance.offNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.beHit);
         this.body.url = "ui://Game/player_death";
         this.body.content.setPlaySettings(0, -1, 1, this.body.content.frameCount - 1, Laya.Handler.create(this, this.deathComplete));
+        this.playDeathSound();
+    }
+
+    private playDeathSound(): void {
+        var s: number = 1;
+        var r: number = Math.random();
+        if (r > 0.75) s = 4;
+        if (r > 0.5) s = 3;
+        if (r > 0.25) s = 2;
+        s = 1;
+        SoundManager.instance.playSound("die" + s);
+    }
+
+    private playWeaponSound(): void {
+        SoundManager.instance.playSound("weapon" + this.weaponType);
+
     }
 
     private deathComplete(): void {
@@ -401,6 +411,31 @@ export default class Player extends Laya.Script {
 
     private get bodybody(): fairygui.GLoader {
         return this.bodyComponent.getChildAt(1).asLoader;
+    }
+
+    public dispose(): void {
+        Laya.stage.off(Laya.Event.KEY_DOWN, this, this.keyDowmEvent);
+        Laya.stage.off(Laya.Event.KEY_UP, this, this.keyUpEvent);
+        Laya.stage.off(Laya.Event.MOUSE_DOWN, this, this.setFire);
+        Laya.stage.off(Laya.Event.MOUSE_UP, this, this.setFireEnd);
+
+        EventManager.instance.offNotice(GameEvent.PLAYER_COLLISION_GROUND, this, this.colliGround);
+        EventManager.instance.offNotice(GameEvent.ENEMY_BULLET_HIT_PLAYER, this, this.beHit);
+        EventManager.instance.offNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.beHit);
+        EventManager.instance.offNotice(GameEvent.CHANGE_PLAYER_WEAPON, this, this.changeWeaponType);
+        EventManager.instance.offNotice(GameEvent.PLAYER_DEATH, this, this.setDeath);
+
+
+        Laya.timer.clearAll(this);
+        this.roleSprite.removeSelf();
+        this.rolePlayer.dispose();
+        this.rolePlayer = null;
+        this.roleSprite = null;
+        this.recover();
+    }
+
+    protected recover(): void {
+        Laya.Pool.recover("player", this);
     }
 
 }

@@ -71,12 +71,21 @@ export class ViewManager {
         Laya.stage.removeChild(this.loadingView.displayObject);
     }
 
+    public createPlayer(): void {
+        if (this.player) this.player.dispose();
+
+        this.player = Laya.Pool.getItemByClass("player", Player);
+        this.player.createView();
+    }
+
     public createWarView(): void {
+        if (this.warView) this.warView.dispose();
+
+        this.warView = Laya.Pool.getItemByClass("warView", WarView);
         this.warView.createView();
 
         this.showPlayerCtlView();
         this.showPlayerInfoView();
-        this.hidePopUpView(this.beforeWar, true);
     }
     /**创建步兵扔的雷 */
     public createBomb(type: number, dir: number, parentPos: Laya.Point, b: boolean): void {
@@ -153,6 +162,7 @@ export class ViewManager {
      */
     public showAfterWarView(type: number): void {
         this.afterWar.view.m_ctl.selectedIndex = type - 1;
+        this.afterWar.updateCoin();
         this.showPopUpView(this.afterWar);
     }
 
@@ -170,9 +180,7 @@ export class ViewManager {
         this.showPopUpView(this.chapterView, false, true);
     }
 
-    public initView(): void {
-        this.warView = new WarView();
-
+    public initPopUpView(): void {
         this.afterWar = new AfterWar();
         this.beforeWar = new BeforeWar()
         this.suspendView = new SuspendView();
@@ -192,9 +200,10 @@ export class ViewManager {
     public showPopUpView(p: PopUpView, showMask: boolean = true, hideOther: boolean = false): void {
         if (hideOther) {
             for (let i = 0; i < this.curPopView.length; i++) {
-                var p: PopUpView = this.curPopView[i];
-                p.hideAllView();
+                var t: PopUpView = this.curPopView[i];
+                t.hideAllView();
             }
+            this.curPopView.length = 0;
         }
         p.showView(showMask);
         this.curPopView.push(p);
@@ -203,13 +212,21 @@ export class ViewManager {
     public hidePopUpView(p: PopUpView, all: boolean = false): void {
         if (all) {
             for (let i = 0; i < this.curPopView.length; i++) {
-                var p: PopUpView = this.curPopView[i];
-                p.hideAllView();
+                var t: PopUpView = this.curPopView[i];
+                t.hideAllView();
             }
             this.curPopView.length = 0;
         } else {
-            p.hideAllView();
+            if (p)
+                p.hideAllView();
         }
+    }
+
+    public disposeWarView(): void {
+        if (this.rolePlayer)
+            this.rolePlayer.dispose();
+        if (this.warView)
+            this.warView.dispose();
     }
 
     public get rolePlayer(): Player {

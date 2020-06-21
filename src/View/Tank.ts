@@ -3,6 +3,7 @@ import GameEvent from "../Control/GameEvent";
 import { EventManager } from "../Manager/EventManager";
 import Enemy from "./Enemy";
 import { EnemyInfo } from "../Data/PlayerData";
+import { GameManager } from "../Manager/GameManager";
 
 export default class Tank extends Enemy {
     constructor() { super() }
@@ -73,6 +74,10 @@ export default class Tank extends Enemy {
         this.enemy.url = "ui://Game/boom_5";
         this.enemy.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
 
+        if (this.isBoss) {
+            GameManager.instance.bossDeath = true;
+        }
+        this.createGoods();
     }
 
     protected recover(): void {

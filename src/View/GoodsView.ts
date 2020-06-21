@@ -2,6 +2,8 @@ import { EventManager } from "../Manager/EventManager";
 import GameEvent from "../Control/GameEvent";
 import WXFUI_goodsView from "../fui/Game/WXFUI_goodsView";
 import { ViewManager } from "../Manager/ViewManager";
+import { GoodsType } from "../Data/GameData";
+import { SoundManager } from "../Manager/SoundManager";
 
 export default class GoodsView {
 
@@ -15,6 +17,7 @@ export default class GoodsView {
     protected body: Laya.RigidBody;
 
     protected pos: Laya.Point;
+    protected mc: fairygui.GMovieClip;
 
     constructor() { }
 
@@ -31,8 +34,14 @@ export default class GoodsView {
         this.box = this.scene.getComponent(Laya.BoxCollider);
 
         this.view = fairygui.UIPackage.createObject("Game", "goodsView") as WXFUI_goodsView;
-        this.view.m_load.url = "ui://Game/createGoodsAni";
-        this.view.m_load.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.createAniComplete))
+        this.mc = fairygui.UIPackage.createObject("Game", "createGoodsAni").asMovieClip;
+        // this.view.m_load.url = "ui://Game/createGoodsAni";
+        this.mc.x = -this.mc.width / 2 + 20;
+        this.mc.y = -this.mc.height / 2;
+        this.mc.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.createAniComplete))
+        this.view.addChild(this.mc);
+        // this.view.m_load.url = "ui://Game/goods_" + this.type;
+
 
         this.scene.addChild(this.view.displayObject);
         ViewManager.instance.warView.scene.addChild(this.scene);
@@ -43,11 +52,16 @@ export default class GoodsView {
     }
 
     private createAniComplete(): void {
+        this.view.removeChild(this.mc);
         this.view.m_load.url = "ui://Game/goods_" + this.type;
+        if (this.type != GoodsType.GoodsType_COIN && this.type != GoodsType.GoodsType_GRE) {
+            this.view.m_load.content.setPlaySettings(0, -1, 0, 0);
+        }
     }
 
     private dispose(s: Laya.Sprite): void {
         if (s == this.box.owner) {
+            SoundManager.instance.playSound("get_goods");
             EventManager.instance.offNotice(GameEvent.PLAYER_GET_GOODS, this, this.dispose);
             EventManager.instance.dispatcherEvt(GameEvent.CHANGE_PLAYER_GOODS, this.type);
 

@@ -2,6 +2,7 @@ import WXFUI_ChapterView from "../fui/Game/WXFUI_ChapterView";
 import { GameManager } from "../Manager/GameManager";
 import PopUpView from "./PopUpView";
 import { ViewManager } from "../Manager/ViewManager";
+import { SoundManager } from "../Manager/SoundManager";
 
 export default class ChapterView extends PopUpView {
 
@@ -11,13 +12,8 @@ export default class ChapterView extends PopUpView {
     createView(): void {
         this.view = WXFUI_ChapterView.createInstance();
         this.view.m_title.url = "ui://Game/chapter_1";
-        // this.view = fairygui.UIPackage.createObject("Game", "ChapterView") as WXFUI_ChapterView;
         for (let t = 1; t <= GameManager.instance.maxLevel; t++) {
-            // this.view["m_level_" + t].onClick(this, this.chooseLevel, [t]);
-            // this.view["m_level_" + t].offClick(this, this.chooseLevel);
             this.view["m_level_" + t].on(Laya.Event.CLICK, this, this.chooseLevel, [t]);
-            // this.view.m_level_8.on(Laya.Event.CLICK, this, this.chooseLevel);
-            // this.view.m_level_8.m_ctl.selectedIndex = 2
         }
         this.updateView();
     }
@@ -39,6 +35,7 @@ export default class ChapterView extends PopUpView {
     /**选择关卡 */
 
     public chooseLevel(l: number): void {
+        SoundManager.instance.playSound("btn_click");
         console.log("选择第" + GameManager.instance.curChapter + "章，" + "第" + l + "关");
         if (l > GameManager.instance.gotoMaxLevel) return;//所点击的关卡超过所通过的最大关卡
         GameManager.instance.choiseLevel = l;

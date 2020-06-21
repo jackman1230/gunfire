@@ -33,7 +33,7 @@ export class GameManager {
     public startGame(): void {
         this.initChapterConfig();
         this.initRoleData();
-        ViewManager.instance.initView();
+        ViewManager.instance.initPopUpView();
         ViewManager.instance.showChapterView();
         // this.gotoNextLevel();
     }
@@ -42,9 +42,9 @@ export class GameManager {
         this.curChapter = 1;
         this.levelData = Laya.loader.getRes("res/LevelData.json");
         this.maxLevel = this.levelData["chapter_" + this.curChapter].maxLevelNum;
-        this.maxChapter = this.levelData.maxChapter;
+        this.maxChapter = this.levelData["maxChapter"];
     }
-
+    /**跳到指定关卡 */
     public goPointToLevel(l: number): void {
         this.curLevel = --l;
         this.gotoNextLevel();
@@ -62,7 +62,8 @@ export class GameManager {
 
     /**返回首页 */
     public goFirstPage(): void {
-
+        ViewManager.instance.hidePopUpView(null, true);
+        ViewManager.instance.showChapterView();
     }
 
     /**暂停后继续游戏 */
@@ -87,9 +88,8 @@ export class GameManager {
     }
 
     public victoryGame(): void {
-        if (this.gotoMaxLevel > this.curLevel) {
-            this.gotoMaxLevel = this.curLevel;
-        } else if (this.gotoMaxLevel == this.curLevel)
+        this.bossDeath = false;
+        if (this.gotoMaxLevel <= this.curLevel)
             this.gotoMaxLevel++;
         ViewManager.instance.showAfterWarView(1);
 
@@ -97,12 +97,14 @@ export class GameManager {
 
     /**重新开始当前关卡 */
     public restartGame(): void {//
+        ViewManager.instance.hidePopUpView(null, true);
         this.curLevel--;
         if (this.curLevel < 0) this.curLevel = 0;
         this.gotoNextLevel();
     }
 
     public gotoNextLevel(): void {
+        // ViewManager.instance.warView.warView.x = 0;
         this.curLevel++;
         if (this.curLevel > this.maxLevel) {
             this.curChapter++;
@@ -127,17 +129,10 @@ export class GameManager {
         this.playerInfo.addMacNum = this.levelData.role.addMacNum;
         this.playerInfo.addRifNum = this.levelData.role.addRifNum;
         this.playerInfo.curLevel = this.playerInfo.curChapter = 1;
-        this.maxChapter = this.levelData.role.maxChapter;
         this.playerInfo.curlvCoin = this.playerInfo.totalCoin = 0;
 
     }
 
-    public createPlayer(): void {
-        if (!ViewManager.instance.rolePlayer) {
-            ViewManager.instance.player = new Player();
-            ViewManager.instance.player.createView();
-        }
-    }
 
     public createEnemyData(): void {
         var enemyArr: any = this.curLevelData.enemyArr;

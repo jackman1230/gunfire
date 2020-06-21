@@ -2,9 +2,10 @@
 	"backgroundColor": 6710886,
 	"auxline2": true,
 	"canvasColor": 10066329,
-	"test.device": "iPhone Xs Max",
-	"libview.currentGroup": "",
 	"libview.twoColumn": false,
+	"test.device": "iPhone Xs Max",
+	"auxline1": true,
+	"doc.activeDoc": "ui://bq3h5insdr1tnq",
 	"libview.expandedNodes": [
 		"bq3h5ins",
 		"/",
@@ -27,7 +28,15 @@
 		"bq3h5ins",
 		"/Component/btn/",
 		"bq3h5ins",
+		"/Component/enemy/",
+		"bq3h5ins",
+		"/Component/enemy/bomb/",
+		"bq3h5ins",
+		"/Component/enemy/enemyAni/",
+		"bq3h5ins",
 		"/Component/font/",
+		"bq3h5ins",
+		"/Component/obstacle/",
 		"bq3h5ins",
 		"/Component/view/",
 		"nr80du74",
@@ -45,8 +54,9 @@
 		"nr80du74",
 		"/Component/view/"
 	],
-	"auxline1": true,
-	"doc.activeDoc": "ui://bq3h5insn8qul6",
+	"libview.currentGroup": "",
+	"libview.firstColumnWidth": 200,
+	"test.orientation": "landscape",
 	"doc.openedDocs": [
 		"ui://bq3h5insgww20",
 		"ui://bq3h5insoqgwam",
@@ -63,7 +73,6 @@
 		"ui://bq3h5insdr1tnz",
 		"ui://bq3h5insdr1tnx",
 		"ui://bq3h5insmtpio6",
-		"ui://bq3h5insmtpio7",
 		"ui://bq3h5insdr1tnm",
 		"ui://bq3h5insdr1tnl",
 		"ui://bq3h5insdr1tnq",
@@ -118,7 +127,5 @@
 		"ui://bq3h5inscqp93z",
 		"ui://bq3h5inscqp940",
 		"ui://bq3h5insdhkten"
-	],
-	"test.orientation": "landscape",
-	"libview.firstColumnWidth": 200
+	]
 }

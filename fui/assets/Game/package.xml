@@ -667,6 +667,14 @@
     <component id="dr1to5" name="setting.xml" path="/Component/btn/"/>
     <component id="mtpio6" name="PopUpView.xml" path="/Component/view/" exported="true"/>
     <image id="mtpio8" name="mask2.png" path="/Component/view/" scale="9grid" scale9grid="25,25,50,50"/>
+    <image id="10sixob" name="goods_5.png" path="/Component/goods/" exported="true"/>
+    <image id="10sixoc" name="obstacle_6.png" path="/assets/zadan/" exported="true"/>
+    <image id="10sixod" name="obstacle_7.png" path="/assets/zadan/" exported="true"/>
+    <image id="10sixoe" name="obstacle_8.png" path="/assets/zadan/" exported="true"/>
+    <image id="10sixof" name="obstacle_9.png" path="/assets/zadan/" exported="true"/>
+    <image id="10sixog" name="2438.png" path="/assets/tanke/"/>
+    <image id="10sixoh" name="2436.png" path="/assets/tanke/"/>
+    <movieclip id="10sixoi" name="TankAni3.jta" path="/Component/enemy/chopper/" exported="true"/>
   </resources>
   <publish name="Game" path="..\bin\res" packageCount="2" genCode="true" codePath="..\src\fui"/>
 </packageDescription>

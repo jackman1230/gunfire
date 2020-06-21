@@ -9,6 +9,7 @@ import { EventManager } from "../Manager/EventManager";
 import { GameData, ShotDirectionData } from "../Data/GameData";
 import { EnemyInfo } from "../Data/PlayerData";
 import { GameManager } from "../Manager/GameManager";
+import { SoundManager } from "../Manager/SoundManager";
 
 export default class Enemy {
     //常规兵种
@@ -147,11 +148,6 @@ export default class Enemy {
         } else if (this.enemyType == GameData.ENEMY_TANK_2) {
             this.bodyLoader.url = "ui://Game/enemy12";
         }
-        // else if (this.enemyType == GameData.ENEMY_CHOPPER) {
-        //     this.bodyLoader.url = "ui://Game/enemy10";
-        // } else {
-        //     this.bodyLoader.url = "ui://Game/enemyIdle_1";
-        // }
         this.bodyLoader.content.setPlaySettings(0, -1, 0, 0);
     }
 
@@ -178,6 +174,7 @@ export default class Enemy {
         // Laya.timer.once(3000, this, this.setFire);
         if (this.enemyType == GameData.ENEMY_PIS || this.enemyType == GameData.ENEMY_GRE) {
             if (this.getRandomFire() == 1) {//手枪
+                SoundManager.instance.playSound("enemy_fire");
                 this.bodyLoader.url = "ui://Game/enemy_fire_1";
                 this.bodyLoader.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.shotComplete));
             } else {//扔雷
@@ -185,11 +182,14 @@ export default class Enemy {
                 this.bodyLoader.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.bombComplete));
             }
         } else if (this.enemyType == GameData.ENEMY_MAC) {//机枪
+            SoundManager.instance.playSound("enemy_fire");
             this.bodyLoader.url = "ui://Game/enemy_fire_3";
             this.bodyLoader.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.shot2Complete));
         } else if (this.enemyType == GameData.ENEMY_FIRE) {//火箭筒
+            SoundManager.instance.playSound("BombDrop");
             this.bodyLoader.url = "ui://Game/enemy_fire_4";
         } else if (this.enemyType == GameData.ENEMY_MOR) {//迫击炮
+            SoundManager.instance.playSound("BombDrop");
             this.bodyLoader.url = "ui://Game/enemy_fire_5";
             this.bodyLoader.component.getChildAt(0).asLoader.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.morComplete));
             this.bodyLoader.component.getChildAt(1).asMovieClip.setPlaySettings(0, -1, 1, 0);
@@ -235,27 +235,31 @@ export default class Enemy {
         if (this.isDeath) return;
         this.isDeath = true;
         Laya.timer.clearAll(this);
-        // if (this.enemyType == GameData.ENEMY_MOR) {
-        this.enemy.url = "ui://Game/death_" + this.getRandomDeath();
+        var s: number = this.getRandomDeath();
+        SoundManager.instance.playSound("die_" + s);
+        this.enemy.url = "ui://Game/death_" + s;
         this.enemy.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
-
-        // }
-        // this.bodyLoader.url = "ui://Game/death_" + this.getRandomDeath();
-        // this.bodyLoader.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
-
-        if (this.isBoss) {
-            GameManager.instance.bossDeath = true;
-        }
         this.createGoods();
-
     }
 
     protected createGoods(): void {
         if (this.expRate.length > 0) {
-            var p: Laya.Point = new Laya.Point();
-            p.x = this.scene.x + this.scene.width / 2;
-            p.y = this.scene.y + this.scene.height / 2;
-            ViewManager.instance.createGoods(1, p);
+            var r: number = Math.random();
+            var rate: number = 0;
+            var type: number = 0;
+            for (let i = 0; i < this.expRate.length; i += 2) {
+                rate += this.expRate[i + 1];
+                if (rate >= r) {
+                    type = this.expRate[i];
+                    if (type > 0) {
+                        var p: Laya.Point = new Laya.Point();
+                        p.x = this.scene.x + this.scene.width / 2;
+                        p.y = this.scene.y + this.scene.height / 2;
+                        ViewManager.instance.createGoods(type, p);
+                    }
+                    break;
+                }
+            }
         }
     }
 
@@ -266,6 +270,8 @@ export default class Enemy {
         Laya.timer.clearAll(this);
         this.scene.removeSelf();
         this.view.dispose();
+        // this.scene = null;
+        // this.view = null;
         this.recover();
     }
 

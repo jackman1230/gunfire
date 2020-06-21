@@ -2,8 +2,9 @@ import WXFUI_PlayerInfoView from "../fui/Game/WXFUI_PlayerInfoView";
 import { GameManager } from "../Manager/GameManager";
 import { EventManager } from "../Manager/EventManager";
 import GameEvent from "../Control/GameEvent";
-import { GoodsType } from "../Data/GameData";
+import { GoodsType, GameData } from "../Data/GameData";
 import { PlayerData } from "../Data/PlayerData";
+import { SoundManager } from "../Manager/SoundManager";
 
 export default class PlayerInfoView {
 
@@ -31,6 +32,7 @@ export default class PlayerInfoView {
     }
 
     private pauseGame(): void {
+        SoundManager.instance.playSound("btn_click");
         GameManager.instance.suspendGame();
     }
 
@@ -41,26 +43,36 @@ export default class PlayerInfoView {
         } else if (t == GoodsType.GoodsType_MAC) {
             if (GameManager.instance.roleInfo.weaponType == PlayerData.WEAPON_MAC) {
                 GameManager.instance.roleInfo.bulletNum += GameManager.instance.roleInfo.addMacNum;
-            } else
+            } else {
                 GameManager.instance.roleInfo.bulletNum = GameManager.instance.roleInfo.addMacNum;
+                GameManager.instance.roleInfo.weaponType = PlayerData.WEAPON_MAC;
+            }
+            EventManager.instance.dispatcherEvt(GameEvent.CHANGE_PLAYER_WEAPON, GameManager.instance.roleInfo.weaponType);
             this.updateBulletNum();
         } else if (t == GoodsType.GoodsType_RIF) {
             if (GameManager.instance.roleInfo.weaponType == PlayerData.WEAPON_RIFLE) {
                 GameManager.instance.roleInfo.bulletNum += GameManager.instance.roleInfo.addRifNum;
-            } else
+            } else {
                 GameManager.instance.roleInfo.bulletNum = GameManager.instance.roleInfo.addRifNum;
+                GameManager.instance.roleInfo.weaponType = PlayerData.WEAPON_RIFLE;
+            }
             this.updateBulletNum();
+            EventManager.instance.dispatcherEvt(GameEvent.CHANGE_PLAYER_WEAPON, GameManager.instance.roleInfo.weaponType);
+
         } else if (t == GoodsType.GoodsType_GRE) {
             GameManager.instance.roleInfo.bombNum += GameManager.instance.roleInfo.addBombNum;
             this.updateGreNum();
         } else if (t == GoodsType.GoodsType_COIN) {
-            GameManager.instance.roleInfo.bombNum += GameManager.instance.roleInfo.addBombNum;
-            this.updateGreNum();
+            var coin: number = this.getRandomCoin();
+            GameManager.instance.roleInfo.curlvCoin += coin;
+            GameManager.instance.roleInfo.totalCoin += coin;
+            this.updateCoin();
         }
     }
 
     private decPlayerBlood(): void {
         GameManager.instance.roleInfo.blood--;
+        if (GameManager.instance.roleInfo.blood < 0) GameManager.instance.roleInfo.blood = 0;
         this.updatePlayerBlood();
     }
 
@@ -88,7 +100,7 @@ export default class PlayerInfoView {
     }
 
     public updateCoin(): void {
-
+        this.view.m_coin.text = GameManager.instance.roleInfo.totalCoin + "";
     }
 
     public updatePlayerBlood(): void {
@@ -105,7 +117,7 @@ export default class PlayerInfoView {
     }
 
     public getRandomCoin(): number {
-        return Math.floor(Math.random() * 200);
+        return Math.floor((Math.random() * 100) * GameData.RANDOM_COIN / 100);
     }
 
 

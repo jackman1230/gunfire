@@ -2,6 +2,7 @@
 import WXFUI_SuspendView from "../fui/Game/WXFUI_SuspendView";
 import { GameManager } from "../Manager/GameManager";
 import PopUpView from "./PopUpView";
+import { SoundManager } from "../Manager/SoundManager";
 
 export default class SuspendView extends PopUpView {
 
@@ -16,7 +17,8 @@ export default class SuspendView extends PopUpView {
     }
 
     private goFirstPage(): void {
-        GameManager.instance.goBack();
+        SoundManager.instance.playSound("btn_click");
+        GameManager.instance.goFirstPage();
     }
 
 }

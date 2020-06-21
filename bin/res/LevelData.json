@@ -9,7 +9,7 @@
         "addRifNum": 50
     },
     "chapter_1": {
-        "maxLevelNum": 2,
+        "maxLevelNum": 8,
         "level_1": {
             "mapIndex": 1,
             "rolePos": [
@@ -33,7 +33,7 @@
                     ],
                     "isBoss": false,
                     "expRate": [
-                        1,
+                        5,
                         1
                     ]
                 },
@@ -49,7 +49,7 @@
                     ],
                     "isBoss": false,
                     "expRate": [
-                        1,
+                        2,
                         1
                     ]
                 },
@@ -65,7 +65,7 @@
                     ],
                     "isBoss": false,
                     "expRate": [
-                        1,
+                        4,
                         1
                     ]
                 },
@@ -97,7 +97,7 @@
                     ],
                     "isBoss": false,
                     "expRate": [
-                        1,
+                        5,
                         1
                     ]
                 },
@@ -113,7 +113,7 @@
                     ],
                     "isBoss": false,
                     "expRate": [
-                        1,
+                        5,
                         1
                     ]
                 },
@@ -145,7 +145,7 @@
                     ],
                     "isBoss": false,
                     "expRate": [
-                        1,
+                        2,
                         1
                     ]
                 },
@@ -160,10 +160,7 @@
                         110
                     ],
                     "isBoss": true,
-                    "expRate": [
-                        1,
-                        1
-                    ]
+                    "expRate": []
                 }
             },
             "obstacle": {
@@ -194,7 +191,7 @@
             }
         },
         "level_2": {
-            "mapIndex": 1,
+            "mapIndex": 2,
             "rolePos": [
                 100,
                 200
@@ -245,7 +242,7 @@
                     ],
                     "isBoss": false,
                     "expRate": [
-                        1,
+                        2,
                         1
                     ]
                 },
@@ -261,7 +258,7 @@
                     ],
                     "isBoss": false,
                     "expRate": [
-                        1,
+                        5,
                         1
                     ]
                 },
@@ -277,7 +274,7 @@
                     ],
                     "isBoss": false,
                     "expRate": [
-                        1,
+                        5,
                         1
                     ]
                 },
@@ -293,7 +290,7 @@
                     ],
                     "isBoss": false,
                     "expRate": [
-                        1,
+                        2,
                         1
                     ]
                 },
@@ -325,7 +322,7 @@
                     ],
                     "isBoss": false,
                     "expRate": [
-                        1,
+                        5,
                         1
                     ]
                 },
@@ -341,7 +338,7 @@
                     ],
                     "isBoss": false,
                     "expRate": [
-                        1,
+                        5,
                         1
                     ]
                 },
@@ -357,7 +354,7 @@
                     ],
                     "isBoss": false,
                     "expRate": [
-                        1,
+                        5,
                         1
                     ]
                 },
@@ -373,7 +370,7 @@
                     ],
                     "isBoss": false,
                     "expRate": [
-                        1,
+                        5,
                         1
                     ]
                 },
@@ -389,7 +386,7 @@
                     ],
                     "isBoss": false,
                     "expRate": [
-                        1,
+                        5,
                         1
                     ]
                 },
@@ -405,7 +402,7 @@
                     ],
                     "isBoss": false,
                     "expRate": [
-                        1,
+                        2,
                         1
                     ]
                 },
@@ -478,6 +475,4484 @@
                     "pos": [
                         3157,
                         74
+                    ]
+                }
+            }
+        },
+        "level_3": {
+            "mapIndex": 3,
+            "rolePos": [
+                1034,
+                480
+            ],
+            "warViewPos": [
+                0,
+                0
+            ],
+            "enemyArr": {
+                "enemy_1": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        1707,
+                        501
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_3": {
+                    "type": 1,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2421,
+                        195
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        4,
+                        1
+                    ]
+                },
+                "enemy_5": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2868,
+                        150
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_8": {
+                    "type": 1,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3326,
+                        159
+                    ],
+                    "isBoss": false,
+                    "expRate": []
+                },
+                "enemy_9": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3029,
+                        501
+                    ],
+                    "isBoss": false,
+                    "expRate": []
+                },
+                "enemy_11": {
+                    "type": 12,
+                    "direction": -1,
+                    "blood": 30,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3953,
+                        462
+                    ],
+                    "isBoss": true,
+                    "expRate": []
+                }
+            },
+            "obstacle": {
+                "obstacle_1": {
+                    "type": 9,
+                    "blood": 8,
+                    "pos": [
+                        1134,
+                        474
+                    ]
+                },
+                "obstacle_2": {
+                    "type": 9,
+                    "blood": 8,
+                    "pos": [
+                        1150,
+                        474
+                    ]
+                },
+                "obstacle_3": {
+                    "type": 6,
+                    "blood": 8,
+                    "pos": [
+                        2278,
+                        363
+                    ]
+                },
+                "obstacle_4": {
+                    "type": 8,
+                    "blood": 8,
+                    "pos": [
+                        2368,
+                        212
+                    ]
+                },
+                "obstacle_5": {
+                    "type": 8,
+                    "blood": 8,
+                    "pos": [
+                        2816,
+                        166
+                    ]
+                },
+                "obstacle_7": {
+                    "type": 8,
+                    "blood": 8,
+                    "pos": [
+                        3274,
+                        177
+                    ]
+                },
+                "obstacle_8": {
+                    "type": 9,
+                    "blood": 8,
+                    "pos": [
+                        2848,
+                        478
+                    ]
+                },
+                "obstacle_9": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        3675,
+                        497
+                    ]
+                }
+            }
+        },
+        "level_4": {
+            "mapIndex": 4,
+            "rolePos": [
+                674,
+                438
+            ],
+            "warViewPos": [
+                0,
+                0
+            ],
+            "enemyArr": {
+                "enemy_1": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        1390,
+                        367
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_4": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        1960,
+                        430
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_5": {
+                    "type": 1,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2120,
+                        386
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_6": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2640,
+                        382
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_8": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2860,
+                        329
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_10": {
+                    "type": 1,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3107,
+                        339
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_11": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3240,
+                        377
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_15": {
+                    "type": 13,
+                    "direction": -1,
+                    "blood": 20,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3998,
+                        354
+                    ],
+                    "isBoss": true,
+                    "expRate": []
+                }
+            },
+            "obstacle": {
+                "obstacle_1": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        1178,
+                        329
+                    ]
+                },
+                "obstacle_2": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        1710,
+                        425
+                    ]
+                },
+                "obstacle_3": {
+                    "type": 2,
+                    "blood": 8,
+                    "pos": [
+                        2400,
+                        392
+                    ]
+                },
+                "obstacle_4": {
+                    "type": 2,
+                    "blood": 8,
+                    "pos": [
+                        2490,
+                        392
+                    ]
+                }
+            }
+        },
+        "level_5": {
+            "mapIndex": 5,
+            "rolePos": [
+                1300,
+                400
+            ],
+            "warViewPos": [
+                -800,
+                0
+            ],
+            "enemyArr": {
+                "enemy_1": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2006,
+                        449
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_2": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2180,
+                        407
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_3": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2290,
+                        407
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        4,
+                        1
+                    ]
+                },
+                "enemy_4": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2605,
+                        356
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_5": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2730,
+                        356
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_6": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3580,
+                        480
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_7": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3720,
+                        480
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_8": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        4280,
+                        540
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_9": {
+                    "type": 10,
+                    "direction": -1,
+                    "blood": 20,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        4520,
+                        110
+                    ],
+                    "isBoss": true,
+                    "expRate": []
+                }
+            },
+            "obstacle": {
+                "obstacle_1": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        1690,
+                        473
+                    ]
+                },
+                "obstacle_2": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        3015,
+                        444
+                    ]
+                },
+                "obstacle_3": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        4037,
+                        535
+                    ]
+                }
+            }
+        },
+        "level_6": {
+            "mapIndex": 6,
+            "rolePos": [
+                1300,
+                400
+            ],
+            "warViewPos": [
+                -800,
+                0
+            ],
+            "enemyArr": {
+                "enemy_1": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2006,
+                        449
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_2": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2180,
+                        407
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_3": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2290,
+                        407
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        4,
+                        1
+                    ]
+                },
+                "enemy_4": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2605,
+                        356
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_5": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2730,
+                        356
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_6": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3580,
+                        480
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_7": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3720,
+                        480
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_8": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        4280,
+                        540
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_9": {
+                    "type": 10,
+                    "direction": -1,
+                    "blood": 20,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        4520,
+                        110
+                    ],
+                    "isBoss": true,
+                    "expRate": []
+                }
+            },
+            "obstacle": {
+                "obstacle_1": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        1690,
+                        473
+                    ]
+                },
+                "obstacle_2": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        3015,
+                        444
+                    ]
+                },
+                "obstacle_3": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        4037,
+                        535
+                    ]
+                }
+            }
+        },
+        "level_7": {
+            "mapIndex": 7,
+            "rolePos": [
+                1300,
+                400
+            ],
+            "warViewPos": [
+                -800,
+                0
+            ],
+            "enemyArr": {
+                "enemy_1": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2006,
+                        449
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_2": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2180,
+                        407
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_3": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2290,
+                        407
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        4,
+                        1
+                    ]
+                },
+                "enemy_4": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2605,
+                        356
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_5": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2730,
+                        356
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_6": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3580,
+                        480
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_7": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3720,
+                        480
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_8": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        4280,
+                        540
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_9": {
+                    "type": 10,
+                    "direction": -1,
+                    "blood": 20,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        4520,
+                        110
+                    ],
+                    "isBoss": true,
+                    "expRate": []
+                }
+            },
+            "obstacle": {
+                "obstacle_1": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        1690,
+                        473
+                    ]
+                },
+                "obstacle_2": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        3015,
+                        444
+                    ]
+                },
+                "obstacle_3": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        4037,
+                        535
+                    ]
+                }
+            }
+        },
+        "level_8": {
+            "mapIndex": 8,
+            "rolePos": [
+                1300,
+                400
+            ],
+            "warViewPos": [
+                -800,
+                0
+            ],
+            "enemyArr": {
+                "enemy_1": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2006,
+                        449
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_2": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2180,
+                        407
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_3": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2290,
+                        407
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        4,
+                        1
+                    ]
+                },
+                "enemy_4": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2605,
+                        356
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_5": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2730,
+                        356
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_6": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3580,
+                        480
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_7": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3720,
+                        480
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_8": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        4280,
+                        540
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_9": {
+                    "type": 10,
+                    "direction": -1,
+                    "blood": 20,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        4520,
+                        110
+                    ],
+                    "isBoss": true,
+                    "expRate": []
+                }
+            },
+            "obstacle": {
+                "obstacle_1": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        1690,
+                        473
+                    ]
+                },
+                "obstacle_2": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        3015,
+                        444
+                    ]
+                },
+                "obstacle_3": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        4037,
+                        535
+                    ]
+                }
+            }
+        }
+    },
+    "chapter_2": {
+        "maxLevelNum": 8,
+        "level_1": {
+            "mapIndex": 1,
+            "rolePos": [
+                1300,
+                400
+            ],
+            "warViewPos": [
+                -800,
+                0
+            ],
+            "enemyArr": {
+                "enemy_1": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2006,
+                        449
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_2": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2180,
+                        407
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_3": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2290,
+                        407
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        4,
+                        1
+                    ]
+                },
+                "enemy_4": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2605,
+                        356
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_5": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2730,
+                        356
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_6": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3580,
+                        480
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_7": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3720,
+                        480
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_8": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        4280,
+                        540
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_9": {
+                    "type": 10,
+                    "direction": -1,
+                    "blood": 20,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        4520,
+                        110
+                    ],
+                    "isBoss": true,
+                    "expRate": []
+                }
+            },
+            "obstacle": {
+                "obstacle_1": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        1690,
+                        473
+                    ]
+                },
+                "obstacle_2": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        3015,
+                        444
+                    ]
+                },
+                "obstacle_3": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        4037,
+                        535
+                    ]
+                }
+            }
+        },
+        "level_2": {
+            "mapIndex": 2,
+            "rolePos": [
+                100,
+                200
+            ],
+            "warViewPos": [
+                0,
+                0
+            ],
+            "enemyArr": {
+                "enemy_1": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        1164,
+                        332
+                    ],
+                    "isBoss": false,
+                    "expRate": []
+                },
+                "enemy_2": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        1363,
+                        341
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_3": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        1901,
+                        361
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_4": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2155,
+                        369
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_5": {
+                    "type": 1,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2327,
+                        74
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_6": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2427,
+                        74
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_7": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2563,
+                        91
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_8": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2667,
+                        91
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_9": {
+                    "type": 1,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2960,
+                        147
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_10": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3060,
+                        147
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_11": {
+                    "type": 1,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3153,
+                        52
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_12": {
+                    "type": 1,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3254,
+                        51
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_13": {
+                    "type": 12,
+                    "direction": -1,
+                    "blood": 20,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3367,
+                        351
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_14": {
+                    "type": 11,
+                    "direction": -1,
+                    "blood": 20,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3531,
+                        352
+                    ],
+                    "isBoss": true,
+                    "expRate": []
+                }
+            },
+            "obstacle": {
+                "obstacle_1": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        854,
+                        304
+                    ]
+                },
+                "obstacle_2": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        1593,
+                        352
+                    ]
+                },
+                "obstacle_3": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        2590,
+                        356
+                    ]
+                },
+                "obstacle_4": {
+                    "type": 8,
+                    "blood": 8,
+                    "pos": [
+                        2327,
+                        97
+                    ]
+                },
+                "obstacle_5": {
+                    "type": 8,
+                    "blood": 8,
+                    "pos": [
+                        2540,
+                        97
+                    ]
+                },
+                "obstacle_6": {
+                    "type": 8,
+                    "blood": 8,
+                    "pos": [
+                        2960,
+                        170
+                    ]
+                },
+                "obstacle_7": {
+                    "type": 8,
+                    "blood": 8,
+                    "pos": [
+                        3157,
+                        74
+                    ]
+                }
+            }
+        },
+        "level_3": {
+            "mapIndex": 3,
+            "rolePos": [
+                1034,
+                480
+            ],
+            "warViewPos": [
+                0,
+                0
+            ],
+            "enemyArr": {
+                "enemy_1": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        1707,
+                        501
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_2": {
+                    "type": 10,
+                    "direction": -1,
+                    "blood": 20,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        1707,
+                        25
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_3": {
+                    "type": 1,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2421,
+                        195
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        4,
+                        1
+                    ]
+                },
+                "enemy_4": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2540,
+                        501
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_5": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2868,
+                        150
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_7": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3075,
+                        250
+                    ],
+                    "isBoss": false,
+                    "expRate": []
+                },
+                "enemy_8": {
+                    "type": 1,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3326,
+                        159
+                    ],
+                    "isBoss": false,
+                    "expRate": []
+                },
+                "enemy_9": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3029,
+                        501
+                    ],
+                    "isBoss": false,
+                    "expRate": []
+                },
+                "enemy_11": {
+                    "type": 12,
+                    "direction": -1,
+                    "blood": 30,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3953,
+                        462
+                    ],
+                    "isBoss": true,
+                    "expRate": []
+                }
+            },
+            "obstacle": {
+                "obstacle_1": {
+                    "type": 9,
+                    "blood": 8,
+                    "pos": [
+                        1134,
+                        474
+                    ]
+                },
+                "obstacle_2": {
+                    "type": 9,
+                    "blood": 8,
+                    "pos": [
+                        1150,
+                        474
+                    ]
+                },
+                "obstacle_3": {
+                    "type": 6,
+                    "blood": 8,
+                    "pos": [
+                        2278,
+                        363
+                    ]
+                },
+                "obstacle_4": {
+                    "type": 8,
+                    "blood": 8,
+                    "pos": [
+                        2368,
+                        212
+                    ]
+                },
+                "obstacle_5": {
+                    "type": 8,
+                    "blood": 8,
+                    "pos": [
+                        2816,
+                        166
+                    ]
+                },
+                "obstacle_6": {
+                    "type": 8,
+                    "blood": 8,
+                    "pos": [
+                        3021,
+                        270
+                    ]
+                },
+                "obstacle_7": {
+                    "type": 8,
+                    "blood": 8,
+                    "pos": [
+                        3274,
+                        177
+                    ]
+                },
+                "obstacle_8": {
+                    "type": 9,
+                    "blood": 8,
+                    "pos": [
+                        2848,
+                        478
+                    ]
+                },
+                "obstacle_9": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        3675,
+                        497
+                    ]
+                }
+            }
+        },
+        "level_4": {
+            "mapIndex": 4,
+            "rolePos": [
+                674,
+                438
+            ],
+            "warViewPos": [
+                0,
+                0
+            ],
+            "enemyArr": {
+                "enemy_1": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        1390,
+                        367
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_2": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        1504,
+                        393
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_4": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        1960,
+                        430
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_5": {
+                    "type": 1,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2120,
+                        386
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_6": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2640,
+                        382
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_7": {
+                    "type": 1,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2747,
+                        356
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_8": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2860,
+                        329
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_10": {
+                    "type": 1,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3107,
+                        339
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_11": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3240,
+                        377
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_13": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3632,
+                        311
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_15": {
+                    "type": 13,
+                    "direction": -1,
+                    "blood": 20,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3998,
+                        354
+                    ],
+                    "isBoss": true,
+                    "expRate": []
+                }
+            },
+            "obstacle": {
+                "obstacle_1": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        1178,
+                        329
+                    ]
+                },
+                "obstacle_2": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        1710,
+                        425
+                    ]
+                },
+                "obstacle_3": {
+                    "type": 2,
+                    "blood": 8,
+                    "pos": [
+                        2400,
+                        392
+                    ]
+                },
+                "obstacle_4": {
+                    "type": 2,
+                    "blood": 8,
+                    "pos": [
+                        2490,
+                        392
+                    ]
+                }
+            }
+        },
+        "level_5": {
+            "mapIndex": 5,
+            "rolePos": [
+                1300,
+                400
+            ],
+            "warViewPos": [
+                -800,
+                0
+            ],
+            "enemyArr": {
+                "enemy_1": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2006,
+                        449
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_2": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2180,
+                        407
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_3": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2290,
+                        407
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        4,
+                        1
+                    ]
+                },
+                "enemy_4": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2605,
+                        356
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_5": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2730,
+                        356
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_6": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3580,
+                        480
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_7": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3720,
+                        480
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_8": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        4280,
+                        540
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_9": {
+                    "type": 10,
+                    "direction": -1,
+                    "blood": 20,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        4520,
+                        110
+                    ],
+                    "isBoss": true,
+                    "expRate": []
+                }
+            },
+            "obstacle": {
+                "obstacle_1": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        1690,
+                        473
+                    ]
+                },
+                "obstacle_2": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        3015,
+                        444
+                    ]
+                },
+                "obstacle_3": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        4037,
+                        535
+                    ]
+                }
+            }
+        },
+        "level_6": {
+            "mapIndex": 6,
+            "rolePos": [
+                1300,
+                400
+            ],
+            "warViewPos": [
+                -800,
+                0
+            ],
+            "enemyArr": {
+                "enemy_1": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2006,
+                        449
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_2": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2180,
+                        407
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_3": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2290,
+                        407
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        4,
+                        1
+                    ]
+                },
+                "enemy_4": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2605,
+                        356
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_5": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2730,
+                        356
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_6": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3580,
+                        480
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_7": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3720,
+                        480
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_8": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        4280,
+                        540
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_9": {
+                    "type": 10,
+                    "direction": -1,
+                    "blood": 20,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        4520,
+                        110
+                    ],
+                    "isBoss": true,
+                    "expRate": []
+                }
+            },
+            "obstacle": {
+                "obstacle_1": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        1690,
+                        473
+                    ]
+                },
+                "obstacle_2": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        3015,
+                        444
+                    ]
+                },
+                "obstacle_3": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        4037,
+                        535
+                    ]
+                }
+            }
+        },
+        "level_7": {
+            "mapIndex": 7,
+            "rolePos": [
+                1300,
+                400
+            ],
+            "warViewPos": [
+                -800,
+                0
+            ],
+            "enemyArr": {
+                "enemy_1": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2006,
+                        449
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_2": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2180,
+                        407
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_3": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2290,
+                        407
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        4,
+                        1
+                    ]
+                },
+                "enemy_4": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2605,
+                        356
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_5": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2730,
+                        356
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_6": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3580,
+                        480
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_7": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3720,
+                        480
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_8": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        4280,
+                        540
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_9": {
+                    "type": 10,
+                    "direction": -1,
+                    "blood": 20,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        4520,
+                        110
+                    ],
+                    "isBoss": true,
+                    "expRate": []
+                }
+            },
+            "obstacle": {
+                "obstacle_1": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        1690,
+                        473
+                    ]
+                },
+                "obstacle_2": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        3015,
+                        444
+                    ]
+                },
+                "obstacle_3": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        4037,
+                        535
+                    ]
+                }
+            }
+        },
+        "level_8": {
+            "mapIndex": 8,
+            "rolePos": [
+                1300,
+                400
+            ],
+            "warViewPos": [
+                -800,
+                0
+            ],
+            "enemyArr": {
+                "enemy_1": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2006,
+                        449
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_2": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2180,
+                        407
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_3": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2290,
+                        407
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        4,
+                        1
+                    ]
+                },
+                "enemy_4": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2605,
+                        356
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_5": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2730,
+                        356
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_6": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3580,
+                        480
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_7": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3720,
+                        480
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_8": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        4280,
+                        540
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_9": {
+                    "type": 10,
+                    "direction": -1,
+                    "blood": 20,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        4520,
+                        110
+                    ],
+                    "isBoss": true,
+                    "expRate": []
+                }
+            },
+            "obstacle": {
+                "obstacle_1": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        1690,
+                        473
+                    ]
+                },
+                "obstacle_2": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        3015,
+                        444
+                    ]
+                },
+                "obstacle_3": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        4037,
+                        535
+                    ]
+                }
+            }
+        }
+    },
+    "chapter_3": {
+        "maxLevelNum": 8,
+        "level_1": {
+            "mapIndex": 1,
+            "rolePos": [
+                1034,
+                480
+            ],
+            "warViewPos": [
+                -800,
+                0
+            ],
+            "enemyArr": {
+                "enemy_1": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        1707,
+                        501
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_2": {
+                    "type": 10,
+                    "direction": -1,
+                    "blood": 20,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        1707,
+                        25
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_3": {
+                    "type": 1,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2421,
+                        195
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        4,
+                        1
+                    ]
+                },
+                "enemy_4": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2540,
+                        501
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_5": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2868,
+                        150
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_6": {
+                    "type": 10,
+                    "direction": -1,
+                    "blood": 20,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2540,
+                        25
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_7": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3075,
+                        250
+                    ],
+                    "isBoss": false,
+                    "expRate": []
+                },
+                "enemy_8": {
+                    "type": 1,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3326,
+                        159
+                    ],
+                    "isBoss": false,
+                    "expRate": []
+                },
+                "enemy_9": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3029,
+                        501
+                    ],
+                    "isBoss": false,
+                    "expRate": []
+                },
+                "enemy_10": {
+                    "type": 12,
+                    "direction": -1,
+                    "blood": 25,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3283,
+                        462
+                    ],
+                    "isBoss": false,
+                    "expRate": []
+                },
+                "enemy_11": {
+                    "type": 12,
+                    "direction": -1,
+                    "blood": 30,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3953,
+                        462
+                    ],
+                    "isBoss": true,
+                    "expRate": []
+                }
+            },
+            "obstacle": {
+                "obstacle_1": {
+                    "type": 9,
+                    "blood": 8,
+                    "pos": [
+                        1134,
+                        474
+                    ]
+                },
+                "obstacle_2": {
+                    "type": 9,
+                    "blood": 8,
+                    "pos": [
+                        1150,
+                        474
+                    ]
+                },
+                "obstacle_3": {
+                    "type": 6,
+                    "blood": 8,
+                    "pos": [
+                        2278,
+                        363
+                    ]
+                },
+                "obstacle_4": {
+                    "type": 8,
+                    "blood": 8,
+                    "pos": [
+                        2368,
+                        212
+                    ]
+                },
+                "obstacle_5": {
+                    "type": 8,
+                    "blood": 8,
+                    "pos": [
+                        2816,
+                        166
+                    ]
+                },
+                "obstacle_6": {
+                    "type": 8,
+                    "blood": 8,
+                    "pos": [
+                        3021,
+                        270
+                    ]
+                },
+                "obstacle_7": {
+                    "type": 8,
+                    "blood": 8,
+                    "pos": [
+                        3274,
+                        177
+                    ]
+                },
+                "obstacle_8": {
+                    "type": 9,
+                    "blood": 8,
+                    "pos": [
+                        2848,
+                        478
+                    ]
+                },
+                "obstacle_9": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        3675,
+                        497
+                    ]
+                }
+            }
+        },
+        "level_2": {
+            "mapIndex": 2,
+            "rolePos": [
+                100,
+                200
+            ],
+            "warViewPos": [
+                0,
+                0
+            ],
+            "enemyArr": {
+                "enemy_1": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        1164,
+                        332
+                    ],
+                    "isBoss": false,
+                    "expRate": []
+                },
+                "enemy_2": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        1363,
+                        341
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_3": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        1901,
+                        361
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_4": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2155,
+                        369
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_5": {
+                    "type": 1,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2327,
+                        74
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_6": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2427,
+                        74
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_7": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2563,
+                        91
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_8": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2667,
+                        91
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_9": {
+                    "type": 1,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2960,
+                        147
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_10": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3060,
+                        147
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_11": {
+                    "type": 1,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3153,
+                        52
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_12": {
+                    "type": 1,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3254,
+                        51
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_13": {
+                    "type": 12,
+                    "direction": -1,
+                    "blood": 20,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3367,
+                        351
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_14": {
+                    "type": 11,
+                    "direction": -1,
+                    "blood": 20,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3531,
+                        352
+                    ],
+                    "isBoss": true,
+                    "expRate": []
+                }
+            },
+            "obstacle": {
+                "obstacle_1": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        854,
+                        304
+                    ]
+                },
+                "obstacle_2": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        1593,
+                        352
+                    ]
+                },
+                "obstacle_3": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        2590,
+                        356
+                    ]
+                },
+                "obstacle_4": {
+                    "type": 8,
+                    "blood": 8,
+                    "pos": [
+                        2327,
+                        97
+                    ]
+                },
+                "obstacle_5": {
+                    "type": 8,
+                    "blood": 8,
+                    "pos": [
+                        2540,
+                        97
+                    ]
+                },
+                "obstacle_6": {
+                    "type": 8,
+                    "blood": 8,
+                    "pos": [
+                        2960,
+                        170
+                    ]
+                },
+                "obstacle_7": {
+                    "type": 8,
+                    "blood": 8,
+                    "pos": [
+                        3157,
+                        74
+                    ]
+                }
+            }
+        },
+        "level_3": {
+            "mapIndex": 3,
+            "rolePos": [
+                1034,
+                480
+            ],
+            "warViewPos": [
+                0,
+                0
+            ],
+            "enemyArr": {
+                "enemy_1": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        1707,
+                        501
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_2": {
+                    "type": 10,
+                    "direction": -1,
+                    "blood": 20,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        1707,
+                        25
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_3": {
+                    "type": 1,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2421,
+                        195
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        4,
+                        1
+                    ]
+                },
+                "enemy_4": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2540,
+                        501
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_5": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2868,
+                        150
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_6": {
+                    "type": 10,
+                    "direction": -1,
+                    "blood": 20,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2540,
+                        25
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_7": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3075,
+                        250
+                    ],
+                    "isBoss": false,
+                    "expRate": []
+                },
+                "enemy_8": {
+                    "type": 1,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3326,
+                        159
+                    ],
+                    "isBoss": false,
+                    "expRate": []
+                },
+                "enemy_9": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3029,
+                        501
+                    ],
+                    "isBoss": false,
+                    "expRate": []
+                },
+                "enemy_10": {
+                    "type": 12,
+                    "direction": -1,
+                    "blood": 25,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3283,
+                        462
+                    ],
+                    "isBoss": false,
+                    "expRate": []
+                },
+                "enemy_11": {
+                    "type": 12,
+                    "direction": -1,
+                    "blood": 30,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3953,
+                        462
+                    ],
+                    "isBoss": true,
+                    "expRate": []
+                }
+            },
+            "obstacle": {
+                "obstacle_1": {
+                    "type": 9,
+                    "blood": 8,
+                    "pos": [
+                        1134,
+                        474
+                    ]
+                },
+                "obstacle_2": {
+                    "type": 9,
+                    "blood": 8,
+                    "pos": [
+                        1150,
+                        474
+                    ]
+                },
+                "obstacle_3": {
+                    "type": 6,
+                    "blood": 8,
+                    "pos": [
+                        2278,
+                        363
+                    ]
+                },
+                "obstacle_4": {
+                    "type": 8,
+                    "blood": 8,
+                    "pos": [
+                        2368,
+                        212
+                    ]
+                },
+                "obstacle_5": {
+                    "type": 8,
+                    "blood": 8,
+                    "pos": [
+                        2816,
+                        166
+                    ]
+                },
+                "obstacle_6": {
+                    "type": 8,
+                    "blood": 8,
+                    "pos": [
+                        3021,
+                        270
+                    ]
+                },
+                "obstacle_7": {
+                    "type": 8,
+                    "blood": 8,
+                    "pos": [
+                        3274,
+                        177
+                    ]
+                },
+                "obstacle_8": {
+                    "type": 9,
+                    "blood": 8,
+                    "pos": [
+                        2848,
+                        478
+                    ]
+                },
+                "obstacle_9": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        3675,
+                        497
+                    ]
+                }
+            }
+        },
+        "level_4": {
+            "mapIndex": 4,
+            "rolePos": [
+                674,
+                438
+            ],
+            "warViewPos": [
+                0,
+                0
+            ],
+            "enemyArr": {
+                "enemy_1": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        1390,
+                        367
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_2": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        1504,
+                        393
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_3": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        1610,
+                        420
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        4,
+                        1
+                    ]
+                },
+                "enemy_4": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        1960,
+                        430
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_5": {
+                    "type": 1,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2120,
+                        386
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_6": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2640,
+                        382
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_7": {
+                    "type": 1,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2747,
+                        356
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_8": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2860,
+                        329
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_9": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 20,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2985,
+                        315
+                    ],
+                    "isBoss": true,
+                    "expRate": []
+                },
+                "enemy_10": {
+                    "type": 1,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3107,
+                        339
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_11": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3240,
+                        377
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_12": {
+                    "type": 1,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3376,
+                        406
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_13": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3632,
+                        311
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_14": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3806,
+                        340
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_15": {
+                    "type": 13,
+                    "direction": -1,
+                    "blood": 20,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3998,
+                        354
+                    ],
+                    "isBoss": true,
+                    "expRate": []
+                }
+            },
+            "obstacle": {
+                "obstacle_1": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        1178,
+                        329
+                    ]
+                },
+                "obstacle_2": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        1710,
+                        425
+                    ]
+                },
+                "obstacle_3": {
+                    "type": 2,
+                    "blood": 8,
+                    "pos": [
+                        2400,
+                        392
+                    ]
+                },
+                "obstacle_4": {
+                    "type": 2,
+                    "blood": 8,
+                    "pos": [
+                        2490,
+                        392
+                    ]
+                }
+            }
+        },
+        "level_5": {
+            "mapIndex": 5,
+            "rolePos": [
+                1300,
+                400
+            ],
+            "warViewPos": [
+                -800,
+                0
+            ],
+            "enemyArr": {
+                "enemy_1": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2006,
+                        449
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_2": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2180,
+                        407
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_3": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2290,
+                        407
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        4,
+                        1
+                    ]
+                },
+                "enemy_4": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2605,
+                        356
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_5": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2730,
+                        356
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_6": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3580,
+                        480
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_7": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3720,
+                        480
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_8": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        4280,
+                        540
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_9": {
+                    "type": 10,
+                    "direction": -1,
+                    "blood": 20,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        4520,
+                        110
+                    ],
+                    "isBoss": true,
+                    "expRate": []
+                }
+            },
+            "obstacle": {
+                "obstacle_1": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        1690,
+                        473
+                    ]
+                },
+                "obstacle_2": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        3015,
+                        444
+                    ]
+                },
+                "obstacle_3": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        4037,
+                        535
+                    ]
+                }
+            }
+        },
+        "level_6": {
+            "mapIndex": 6,
+            "rolePos": [
+                1300,
+                400
+            ],
+            "warViewPos": [
+                -800,
+                0
+            ],
+            "enemyArr": {
+                "enemy_1": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2006,
+                        449
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_2": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2180,
+                        407
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_3": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2290,
+                        407
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        4,
+                        1
+                    ]
+                },
+                "enemy_4": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2605,
+                        356
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_5": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2730,
+                        356
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_6": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3580,
+                        480
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_7": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3720,
+                        480
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_8": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        4280,
+                        540
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_9": {
+                    "type": 10,
+                    "direction": -1,
+                    "blood": 20,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        4520,
+                        110
+                    ],
+                    "isBoss": true,
+                    "expRate": []
+                }
+            },
+            "obstacle": {
+                "obstacle_1": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        1690,
+                        473
+                    ]
+                },
+                "obstacle_2": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        3015,
+                        444
+                    ]
+                },
+                "obstacle_3": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        4037,
+                        535
+                    ]
+                }
+            }
+        },
+        "level_7": {
+            "mapIndex": 7,
+            "rolePos": [
+                1300,
+                400
+            ],
+            "warViewPos": [
+                -800,
+                0
+            ],
+            "enemyArr": {
+                "enemy_1": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2006,
+                        449
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_2": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2180,
+                        407
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_3": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2290,
+                        407
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        4,
+                        1
+                    ]
+                },
+                "enemy_4": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2605,
+                        356
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_5": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2730,
+                        356
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_6": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3580,
+                        480
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_7": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3720,
+                        480
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_8": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        4280,
+                        540
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_9": {
+                    "type": 10,
+                    "direction": -1,
+                    "blood": 20,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        4520,
+                        110
+                    ],
+                    "isBoss": true,
+                    "expRate": []
+                }
+            },
+            "obstacle": {
+                "obstacle_1": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        1690,
+                        473
+                    ]
+                },
+                "obstacle_2": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        3015,
+                        444
+                    ]
+                },
+                "obstacle_3": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        4037,
+                        535
+                    ]
+                }
+            }
+        },
+        "level_8": {
+            "mapIndex": 8,
+            "rolePos": [
+                1300,
+                400
+            ],
+            "warViewPos": [
+                -800,
+                0
+            ],
+            "enemyArr": {
+                "enemy_1": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2006,
+                        449
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_2": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2180,
+                        407
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_3": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2290,
+                        407
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        4,
+                        1
+                    ]
+                },
+                "enemy_4": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2605,
+                        356
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_5": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        2730,
+                        356
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_6": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3580,
+                        480
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        5,
+                        1
+                    ]
+                },
+                "enemy_7": {
+                    "type": 3,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        3720,
+                        480
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        1,
+                        1
+                    ]
+                },
+                "enemy_8": {
+                    "type": 5,
+                    "direction": -1,
+                    "blood": 5,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        4280,
+                        540
+                    ],
+                    "isBoss": false,
+                    "expRate": [
+                        2,
+                        1
+                    ]
+                },
+                "enemy_9": {
+                    "type": 10,
+                    "direction": -1,
+                    "blood": 20,
+                    "damage": 1,
+                    "activeDis": 500,
+                    "pos": [
+                        4520,
+                        110
+                    ],
+                    "isBoss": true,
+                    "expRate": []
+                }
+            },
+            "obstacle": {
+                "obstacle_1": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        1690,
+                        473
+                    ]
+                },
+                "obstacle_2": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        3015,
+                        444
+                    ]
+                },
+                "obstacle_3": {
+                    "type": 1,
+                    "blood": 8,
+                    "pos": [
+                        4037,
+                        535
                     ]
                 }
             }

@@ -62,6 +62,8 @@ export default class PlayerBullet {
         Laya.Pool.recover("PlayerBullet", this);
         this.view.dispose();
         this.scene.removeSelf();
+        // this.scene = null;
+        // this.view = null;
         console.log("销毁子弹--PlayerBullet");
     }
 

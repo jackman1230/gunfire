@@ -8,6 +8,7 @@ import GameEvent from "../Control/GameEvent";
 import { EventManager } from "../Manager/EventManager";
 import { GameData } from "../Data/GameData";
 import { ObstacleInfo } from "../Data/PlayerData";
+import { SoundManager } from "../Manager/SoundManager";
 
 export default class ObstacleView {
     public scene: Laya.Sprite;
@@ -83,7 +84,7 @@ export default class ObstacleView {
         Laya.timer.clearAll(this);
         this.load.url = "ui://Game/boom_" + ViewManager.instance.getBoomAniTypeByObsType(this.type);;
         this.load.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
-
+        SoundManager.instance.playSound("obstacleBoom")
         // var p: Laya.Point = new Laya.Point();
         // p.x = this.scene.x + this.scene.width / 2;
         // p.y = this.scene.y + this.scene.height / 2;

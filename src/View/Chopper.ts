@@ -9,6 +9,8 @@ import { EventManager } from "../Manager/EventManager";
 import Enemy from "./Enemy";
 import { EnemyInfo } from "../Data/PlayerData";
 import { BombData } from "../Data/GameData";
+import { GameManager } from "../Manager/GameManager";
+import { SoundManager } from "../Manager/SoundManager";
 
 export default class Chopper extends Enemy {
 
@@ -22,6 +24,7 @@ export default class Chopper extends Enemy {
     public setFire(): void {
         var p: Laya.Point = new Laya.Point(this.view.width / 2, this.view.height)
         ViewManager.instance.createChopperBomb(BombData.BOMB_CHOPPER, ViewManager.instance.getBodyCenterPos(this.scene), p);
+        SoundManager.instance.playSound("bombDrop");
 
     }
 
@@ -30,13 +33,13 @@ export default class Chopper extends Enemy {
         if (this.isDeath) return;
         this.isDeath = true;
         Laya.timer.clearAll(this);
-        this.enemy.url = "ui://Game/boom_4";
+        this.enemy.url = "ui://Game/boom_5";
         this.enemy.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
 
-        // var p: Laya.Point = new Laya.Point();
-        // p.x = this.scene.x + this.scene.width / 2;
-        // p.y = this.scene.y + this.scene.height / 2;
-        // ViewManager.instance.createGoods(1, p);
+        if (this.isBoss) {
+            GameManager.instance.bossDeath = true;
+        }
+        this.createGoods();
     }
 
     protected recover(): void {

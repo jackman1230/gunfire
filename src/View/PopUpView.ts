@@ -13,12 +13,10 @@ export default class PopUpView {
     }
 
     public showView(showMask: boolean = true): void {
-        // this.removeView();
         Laya.Tween.clearAll(this);
         this.v.addChild(this.view);
         fairygui.GRoot.inst.addChild(this.v);
         this.view.setPivot(0.5, 0.5);
-        // this.v.m_t0.play();
         this.view.setScale(0.4, 0.4);
         this.tween = Laya.Tween.to(this.view, { scaleX: 1, scaleY: 1 }, 250, null, Laya.Handler.create(this, this.showComplete, [showMask]));
 
@@ -35,10 +33,11 @@ export default class PopUpView {
 
 
     public hideAllView(): void {
-        console.log("hideAllView--");
-        this.v.m_mask.displayObject.off(Laya.Event.CLICK, this, this.hideAllView);
-        // this.v.removeChildren();
+        console.log("hidePopUpView--", this.view);
+        this.v.m_mask.off(Laya.Event.CLICK, this, this.hideAllView);
         fairygui.GRoot.inst.removeChild(this.v);
+        // this.tween = Laya.Tween.from(this.view, { scaleX: 0, scaleY: 0 }, 300, null, Laya.Handler.create(this, () => {
+        // }));
     }
 
 }
