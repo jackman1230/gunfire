@@ -674,7 +674,12 @@
     <image id="10sixof" name="obstacle_9.png" path="/assets/zadan/" exported="true"/>
     <image id="10sixog" name="2438.png" path="/assets/tanke/"/>
     <image id="10sixoh" name="2436.png" path="/assets/tanke/"/>
-    <movieclip id="10sixoi" name="TankAni3.jta" path="/Component/enemy/chopper/" exported="true"/>
+    <movieclip id="10sixoi" name="tankAni3.jta" path="/Component/enemy/chopper/" exported="true"/>
+    <image id="10sixoj" name="obstacle_10.png" path="/assets/zadan/" exported="true"/>
+    <image id="10sixok" name="obstacle_11.png" path="/assets/zadan/" exported="true"/>
+    <image id="10sixol" name="2372.png" path="/assets/tanke/"/>
+    <image id="10sixom" name="2370.png" path="/assets/tanke/"/>
+    <movieclip id="10sixon" name="tankAni4.jta" path="/Component/enemy/chopper/" exported="true"/>
   </resources>
   <publish name="Game" path="..\bin\res" packageCount="2" genCode="true" codePath="..\src\fui"/>
 </packageDescription>

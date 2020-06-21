@@ -255,9 +255,9 @@ export class ViewManager {
     }
     /**根据障碍物类型，获取导弹爆炸效果 */
     public getBoomAniTypeByObsType(type: number): number {
-        if (type == ObstacleType.ObstacleType_SHABAO) {
+        if (type == ObstacleType.ObstacleType_SHABAO || type == ObstacleType.ObstacleType_YOUGUAN || type == ObstacleType.ObstacleType_9) {
             return 2;
-        } else if (type == ObstacleType.ObstacleType_DACHE) {
+        } else if (type == ObstacleType.ObstacleType_DACHE || type == ObstacleType.ObstacleType_11) {
             return 5;
         } else {
             return 3;
