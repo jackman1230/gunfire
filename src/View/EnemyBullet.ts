@@ -36,7 +36,7 @@ export default class EnemyBullet {
         this.body = this.scene.getComponent(Laya.RigidBody);
         this.box = this.scene.getComponent(Laya.BoxCollider);
         this.box.label = this.body.label = "enemyBullet";
-        console.log("enemyBullet.scene--loadComplete", this.box.id);
+        // console.log("enemyBullet.scene--loadComplete", this.box.id);
         if (this.bulletType == GameData.ENEMY_TANK_1 || this.bulletType == GameData.ENEMY_TANK_2) {
             this.view.m_zidan.url = "ui://Game/zhadan_4";
         } else
@@ -81,12 +81,12 @@ export default class EnemyBullet {
     private disposeAll(): void {
         // EventManager.instance.offNotice(GameEvent.ENEMY_BULLET_HIT_PLAYER, this, this.bulletHitPlayer);
         // EventManager.instance.offNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.dispose);
-        console.log("enemyBullet--disposeAll");
+        // console.log("enemyBullet--disposeAll");
 
         Laya.Pool.recover("enemyBullet", this);
         this.view.displayObject.destroy();
         this.scene.removeSelf();
-        console.log("销毁子弹--enemyBullet");
+        // console.log("销毁子弹--enemyBullet");
     }
 
     private dispose(s: Laya.Sprite): void {

@@ -228,7 +228,7 @@ export default class Enemy {
 
     protected setBoomComplete(): void {
         this.setStay();
-        console.log("rengshouliudan");
+        // console.log("rengshouliudan");
     }
 
     public setDeath(): void {

@@ -33,7 +33,6 @@ export class ViewManager {
 
     private bulletArr: PlayerBullet[] = [];
     private enemyArr: Enemy[] = [];
-
     private isChecking: boolean = false;
 
     public suspendView: SuspendView;
@@ -62,7 +61,7 @@ export class ViewManager {
     }
 
     public setLoadongProgress(p: number): void {
-        console.log("progress--", p);
+        // console.log("progress--", p);
         this.loadingView.m_bar.m_title.text = Math.ceil(p * 100) + "%";
         this.loadingView.m_bar.value = p * 100;
     }
@@ -84,7 +83,7 @@ export class ViewManager {
         this.warView = Laya.Pool.getItemByClass("warView", WarView);
         this.warView.createView();
 
-        this.showPlayerCtlView();
+        // this.showPlayerCtlView();
         this.showPlayerInfoView();
     }
     /**创建步兵扔的雷 */
@@ -103,7 +102,7 @@ export class ViewManager {
     /**创建主角子弹 */
     public createBullet(): void {
         var b: PlayerBullet = Laya.Pool.getItemByClass("PlayerBullet", PlayerBullet);
-        b.createView(this.rolePlayer.weaponType, this.rolePlayer.direction);
+        b.createView(this.rolePlayer.weaponType, this.rolePlayer.faceType);
     }
     /**
      * 创建敌人子弹
@@ -268,22 +267,52 @@ export class ViewManager {
         return Math.floor(Math.random() * 10) + 10;
     }
 
+    public getPlayerDirection(pos: Laya.Point): number {
+        var rad = Math.atan2(pos.y, pos.x);// [-PI, PI]
+        if ((rad >= -2 * Math.PI / 8 && rad < 0) || (rad >= 0 && rad < 2 * Math.PI / 8)) {
+            return 1;// 右
+        } else if (rad >= 2 * Math.PI / 8 && rad < 4 * Math.PI / 8) {
+            return 2;// 右下
+        } else if (rad >= 4 * Math.PI / 8 && rad < 6 * Math.PI / 8) {
+            return -2;// 左下
+        } else if ((rad >= 6 * Math.PI / 8 && rad < Math.PI) || (rad >= -Math.PI && rad < -6 * Math.PI / 8)) {
+            return -1;// 左
+        } else if (rad >= -6 * Math.PI / 8 && rad < -4 * Math.PI / 8) {
+            return -3;// 左上
+        } else {
+            return 3;// 右上
+        }
+
+        // else if (rad >= -5 * Math.PI / 8 && rad < -3 * Math.PI / 8) {
+        //     return cc.v2(0, -1);// 下
+        // }
+        // else if (rad >= 3 * Math.PI / 8 && rad < 5 * Math.PI / 8) {
+        //     return cc.v2(0, 1);// 上
+        // }
+    }
+
     /**角色子弹坐标偏移 */
     private playerBulletPos: object = {
-        "11": [135, -22],//武器手枪，方向右
-        "12": [167, 0],//武器机枪，方向右
-        "13": [],//武器来福枪，方向右
+        "11": [135, -22],//武器手枪，方向 右
+        "12": [150, 0],//武器机枪，方向 右
+        "13": [],//武器来福枪，方向 右
+        "21": [125, 25],//武器手枪，方向 右下
+        "22": [115, 70],//武器机枪，方向 右下
+        "23": [],//武器来福枪，方向 右下
+        "31": [115, -95],//武器手枪，方向 右上
+        "32": [120, -50],//武器机枪，方向 右上
+        "33": [],//武器来福枪，方向 右上
         "14": [20, -60],//武器手雷，方向右
-        "-11": [-200, -22],//武器手枪，方向左
-        "-12": [-220, 0],//武器机枪，方向左
-        "-13": [],//武器来福枪，方向左
-        "-14": [-20, -60],//武器手雷，方向左
-        "21": [-150, -30],//武器手枪，方向右上
-        "22": [],//武器机枪，方向右上
-        "23": [],//武器来福枪，方向右上
-        "-21": [],//武器手枪，方向左上
-        "-22": [],//武器机枪，方向左上
-        "-23": [],//武器来福枪，方向左上
+        "-11": [-200, -22],//武器手枪，方向 左
+        "-12": [-210, 0],//武器机枪，方向 左
+        "-13": [],//武器来福枪，方向 左
+        "-14": [-20, -60],//武器手雷，方向 左
+        "-21": [-190, 20],//武器手枪，方向 左下
+        "-22": [-180, 60],//武器机枪，方向 左下
+        "-23": [],//武器来福枪，方向 左下
+        "-31": [-190, -90],//武器手枪，方向 左上
+        "-32": [-180, -50],//武器机枪，方向 左上
+        "-33": [],//武器来福枪，方向 左上
     }
     /**角色子弹坐标偏移 */
     public getPlayerBulletOffSetPos(dir: number, weaponType: number): Laya.Point {
@@ -311,7 +340,7 @@ export class ViewManager {
 
     public getEnemyBulletOffSetPos(dir: number, weaponType: number): Laya.Point {
         var s: string = dir + "" + weaponType;
-        console.log("getEnemyBulletOffSetPos--", s);
+        // console.log("getEnemyBulletOffSetPos--", s);
         if (this.enemyBulletPos[s])
             return new Laya.Point(this.enemyBulletPos[s][0], this.enemyBulletPos[s][1]);
         else

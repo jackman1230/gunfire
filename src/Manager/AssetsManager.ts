@@ -40,9 +40,9 @@ export class AssetsManager {
             { url: "res/Game_atlas0_4.png", type: Laya.Loader.IMAGE },
             { url: "res/Game_atlas0_5.png", type: Laya.Loader.IMAGE },
             { url: "res/Game_atlas0_6.png", type: Laya.Loader.IMAGE },
+            { url: "res/Game_atlas0_7.png", type: Laya.Loader.IMAGE },
             { url: "res/Game_atlas_n8qun1.jpg", type: Laya.Loader.IMAGE },
             { url: "res/Game_atlas_n8qun7.png", type: Laya.Loader.IMAGE },
-            // { url: "res/Game_atlas0_8.png", type: Laya.Loader.IMAGE },
             // { url: "res/Game_atlas0_9.png", type: Laya.Loader.IMAGE },
             // { url: "res/Game_atlas0_10.png", type: Laya.Loader.IMAGE },
             // { url: "res/Game_atlas0_11.png", type: Laya.Loader.IMAGE },
@@ -53,6 +53,13 @@ export class AssetsManager {
             // { url: "res/Game_atlas0_16.png", type: Laya.Loader.IMAGE },
             { url: "res/LevelData.json", type: Laya.Loader.JSON },
             { url: "res/map_1.jpg", type: Laya.Loader.IMAGE },
+            { url: "res/map_2.jpg", type: Laya.Loader.IMAGE },
+            { url: "res/map_3.jpg", type: Laya.Loader.IMAGE },
+            { url: "res/map_4.jpg", type: Laya.Loader.IMAGE },
+            { url: "res/map_5.jpg", type: Laya.Loader.IMAGE },
+            { url: "res/map_6.jpg", type: Laya.Loader.IMAGE },
+            { url: "res/map_7.jpg", type: Laya.Loader.IMAGE },
+            { url: "res/map_8.jpg", type: Laya.Loader.IMAGE },
             { url: "res/Game.wxfui", type: Laya.Loader.BUFFER }
 
         );

@@ -38,7 +38,7 @@ export default class BombView {
     }
 
     protected loadComplete(s: Laya.Scene): void {
-        console.log("bomb.scene--loadComplete", this.bombType);
+        // console.log("bomb.scene--loadComplete", this.bombType);
 
         this.view = fairygui.UIPackage.createObject("Game", "Bomb") as WXFUI_Bomb;
         this.view.m_boom.visible = this.view.m_boom2.visible = false;
@@ -109,7 +109,7 @@ export default class BombView {
             Laya.Pool.recover("bombView", this);
             this.view.dispose();
             this.scene.removeSelf();
-            console.log("销毁炸弹--", this.bombType);
+            // console.log("销毁炸弹--", this.bombType);
         }
     }
 

@@ -18,10 +18,6 @@
     <image id="n8quex" name="jiazaikuang.png" path="/assets/otherView/load/切图/"/>
     <image id="n8quey" name="beijing.jpg" path="/assets/otherView/load/切图/" exported="true" atlas="alone_npot"/>
     <image id="n8quez" name="加载页效果图.jpg" path="/assets/otherView/load/"/>
-    <image id="n8qufd" name="252.png" path="/assets/bullent/"/>
-    <image id="n8qufe" name="254.png" path="/assets/bullent/"/>
-    <image id="n8qufg" name="368.png" path="/assets/bullent/"/>
-    <image id="n8qufh" name="366.png" path="/assets/bullent/"/>
     <component id="n8quil" name="loadingView.xml" path="/Component/view/" exported="true"/>
     <component id="n8quim" name="loadingBar.xml" path="/Component/view/"/>
     <font id="n8quin" name="loadingFont.fnt" path="/Component/view/" exported="true"/>

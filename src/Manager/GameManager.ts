@@ -136,7 +136,7 @@ export class GameManager {
 
     public createEnemyData(): void {
         var enemyArr: any = this.curLevelData.enemyArr;
-        console.log("enemyArr--", enemyArr);
+        // console.log("enemyArr--", enemyArr);
 
         for (const key in enemyArr) {
             if (enemyArr.hasOwnProperty(key)) {
@@ -164,7 +164,7 @@ export class GameManager {
 
     public createObstacleData(): void {
         var obstacle: any = GameManager.instance.curLevelData.obstacle;
-        console.log("obstacle--", obstacle);
+        // console.log("obstacle--", obstacle);
         for (const key in obstacle) {
             if (obstacle.hasOwnProperty(key)) {
                 var t = obstacle[key];

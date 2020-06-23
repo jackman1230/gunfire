@@ -30,7 +30,7 @@ export default class BoomView {
     }
 
     private loadComplete(s: Laya.Scene): void {
-        console.log("boomBody.scene--loadComplete");
+        // console.log("boomBody.scene--loadComplete");
 
         this.view = fairygui.UIPackage.createObject("Game", "BoomView") as WXFUI_BoomView;
         // this.boom = this.view.getChildAt(0).asLoader;
@@ -81,7 +81,7 @@ export default class BoomView {
         Laya.Pool.recover("boomView", this);
         this.view.dispose();
         this.scene.removeSelf();
-        console.log("销毁子弹--enemyBullet");
+        // console.log("销毁子弹--enemyBullet");
         // }
     }
 }

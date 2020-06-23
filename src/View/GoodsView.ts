@@ -28,7 +28,7 @@ export default class GoodsView {
     }
 
     protected loadComplete(s: Laya.Scene): void {
-        console.log("GoodsBody.scene--loadComplete", s);
+        // console.log("GoodsBody.scene--loadComplete", s);
         this.scene = s;
         this.body = this.scene.getComponent(Laya.RigidBody);
         this.box = this.scene.getComponent(Laya.BoxCollider);

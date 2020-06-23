@@ -13,7 +13,7 @@
     GameConfig.screenMode = "none";
     GameConfig.alignV = "top";
     GameConfig.alignH = "left";
-    GameConfig.startScene = "GoodsBody.scene";
+    GameConfig.startScene = "Bullet.scene";
     GameConfig.sceneRoot = "";
     GameConfig.debug = false;
     GameConfig.stat = false;
@@ -119,7 +119,6 @@
         onTriggerEnter(other, self, contact) {
             this.lastBox = other;
             if (other.label == "ground" && this.jumpEnd) {
-                console.log("jumpend");
                 this.isJump = false;
                 this.jumpEnd = false;
                 EventManager.instance.dispatcherEvt(GameEvent.PLAYER_COLLISION_GROUND);
@@ -130,9 +129,7 @@
             }
         }
         onTriggerExit() {
-            console.log("onTriggerExit--");
             if (this.lastBox.label == "ground" && this.isJump) {
-                console.log("jumpstart");
                 this.jumpEnd = true;
             }
         }
@@ -176,10 +173,98 @@
         }
     }
 
+    class GameData {
+    }
+    GameData.WEAPON_PIS = 1;
+    GameData.WEAPON_MAC = 2;
+    GameData.WEAPON_RIFLE = 3;
+    GameData.WEAPON_GRE = 4;
+    GameData.ENEMY_PIS = 1;
+    GameData.ENEMY_GRE = 2;
+    GameData.ENEMY_MAC = 3;
+    GameData.ENEMY_FIRE = 4;
+    GameData.ENEMY_MOR = 5;
+    GameData.ENEMY_CHOPPER = 10;
+    GameData.ENEMY_TANK_1 = 11;
+    GameData.ENEMY_TANK_2 = 12;
+    GameData.RANDOM_COIN = 200;
+    GameData.SOUND_FONT = "res/sound/";
+    class BombData {
+    }
+    BombData.BOMB_MY_GRE = 1;
+    BombData.BOMB_ENEMY_GRE = 2;
+    BombData.BOMB_CHOPPER = 3;
+    BombData.BOMB_TANK = 4;
+    BombData.BOMB_MOR = 5;
+    class ShotDirectionData {
+    }
+    ShotDirectionData.LEFT = -1;
+    ShotDirectionData.RIGHT = 1;
+    ShotDirectionData.RIGHT_UP = 2;
+    ShotDirectionData.LEFT_UP = -2;
+    class ObstacleType {
+    }
+    ObstacleType.ObstacleType_SHABAO = 1;
+    ObstacleType.ObstacleType_YOUGUAN = 2;
+    ObstacleType.ObstacleType_MICHE = 3;
+    ObstacleType.ObstacleType_XIAOCHE = 4;
+    ObstacleType.ObstacleType_CHE = 5;
+    ObstacleType.ObstacleType_DACHE = 6;
+    ObstacleType.ObstacleType_7 = 7;
+    ObstacleType.ObstacleType_8 = 8;
+    ObstacleType.ObstacleType_9 = 9;
+    ObstacleType.ObstacleType_10 = 10;
+    ObstacleType.ObstacleType_11 = 11;
+    class GoodsType {
+    }
+    GoodsType.GoodsType_MED = 1;
+    GoodsType.GoodsType_MAC = 2;
+    GoodsType.GoodsType_RIF = 3;
+    GoodsType.GoodsType_GRE = 4;
+    GoodsType.GoodsType_COIN = 5;
+
+    class SoundManager {
+        constructor() {
+            this.isOpenSound = true;
+        }
+        static get instance() {
+            if (this._instance == null) {
+                this._instance = new SoundManager();
+                Laya.SoundManager.useAudioMusic = false;
+            }
+            return this._instance;
+        }
+        playSound(n) {
+            var s = GameData.SOUND_FONT + n + ".mp3";
+            Laya.SoundManager.playSound(s);
+        }
+        playBGM() {
+            Laya.SoundManager.playMusic("res/sound/bgm.mp3");
+        }
+        offSound() {
+            this.isOpenSound = !this.isOpenSound;
+            if (this.isOpenSound) {
+                Laya.SoundManager.setMusicVolume(1);
+                Laya.SoundManager.setSoundVolume(1);
+            }
+            else {
+                Laya.SoundManager.setMusicVolume(0);
+                Laya.SoundManager.setSoundVolume(0);
+            }
+        }
+    }
+
+    class PlayerCtlView {
+        constructor() { this.createView(); }
+        createView() {
+            this.view = fairygui.UIPackage.createObject("Game", "PlayerCtlView");
+        }
+    }
+
     class Player extends Laya.Script {
         constructor() {
             super();
-            this.direction = 0;
+            this.direction = 1;
             this.sRun = false;
             this.sFire = false;
             this.sBoom = false;
@@ -189,6 +274,7 @@
             this.speed = 5;
             this.jumpHigh = 200;
             this.weaponType = 1;
+            this.faceType = 1;
             this.stillFireNum = 1;
         }
         createView() {
@@ -210,7 +296,6 @@
             this.roleSprite.addChild(this.rolePlayer.displayObject);
             this.roleSprite.addComponent(PlayerBody);
             this.setStay();
-            this.setRight();
             Laya.stage.on(Laya.Event.KEY_DOWN, this, this.keyDowmEvent);
             Laya.stage.on(Laya.Event.KEY_UP, this, this.keyUpEvent);
             Laya.stage.on(Laya.Event.MOUSE_DOWN, this, this.setFire);
@@ -220,6 +305,63 @@
             EventManager.instance.addNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.beHit);
             EventManager.instance.addNotice(GameEvent.CHANGE_PLAYER_WEAPON, this, this.changeWeaponType);
             EventManager.instance.addNotice(GameEvent.PLAYER_DEATH, this, this.setDeath);
+            if (!this.playerCtlView)
+                this.playerCtlView = new PlayerCtlView();
+            fairygui.GRoot.inst.addChild(this.playerCtlView.view);
+            this.playerCtlView.view.m_fire.on(Laya.Event.MOUSE_DOWN, this, this.setFire);
+            this.playerCtlView.view.m_fire.on(Laya.Event.MOUSE_UP, this, this.setFireEnd);
+            this.playerCtlView.view.m_bomb.on(Laya.Event.CLICK, this, this.onClickBomb);
+            this.playerCtlView.view.m_jump.on(Laya.Event.CLICK, this, this.onClickJump);
+            this.playerCtlView.view.m_ctl.m_mask.on(Laya.Event.MOUSE_DOWN, this, this.addMouseDown);
+            this.playerCtlView.view.m_ctl.m_mask.on(Laya.Event.MOUSE_UP, this, this.addCtlViewMouseUp);
+            Laya.stage.on(Laya.Event.MOUSE_UP, this, this.addStageMouseUp);
+        }
+        addCtlViewMouseUp() {
+            this.playerCtlView.view.m_ctl.m_dirBtn.y = this.playerCtlView.view.m_ctl.m_dirBtn.x = 0;
+            this.setStay();
+        }
+        addMouseDown(e) {
+            this.setDirection();
+            this.playerCtlView.view.m_ctl.m_mask.on(Laya.Event.MOUSE_MOVE, this, this.setDirection);
+        }
+        setDirection() {
+            var pos = this.playerCtlView.view.m_ctl.globalToLocal(Laya.stage.mouseX, Laya.stage.mouseY);
+            pos.x += 131;
+            pos.y += 131;
+            this.playerCtlView.view.m_ctl.m_dirBtn.x = pos.x;
+            this.playerCtlView.view.m_ctl.m_dirBtn.y = pos.y;
+            console.log("pospospospospos---", pos);
+            this.faceType = GameManager.instance.roleInfo.direction = ViewManager.instance.getPlayerDirection(pos);
+            if (this.faceType > 0) {
+                this.rolePlayer.skewY = 180;
+                this.keyRight = true;
+                this.keyLeft = false;
+                if (this.faceType == 1) {
+                    this.direction = 1;
+                    this.setRightRun();
+                }
+                else {
+                    this.sRun = false;
+                    Laya.timer.clear(this, this.stillRun);
+                }
+            }
+            else {
+                this.keyLeft = true;
+                this.keyRight = false;
+                this.rolePlayer.skewY = 0;
+                if (this.faceType == -1) {
+                    this.direction = -1;
+                    this.setLeftRun();
+                }
+                else {
+                    this.sRun = false;
+                    Laya.timer.clear(this, this.stillRun);
+                }
+            }
+            this.setPlayerDir();
+        }
+        addStageMouseUp() {
+            this.playerCtlView.view.m_ctl.m_mask.off(Laya.Event.MOUSE_MOVE, this, this.setDirection);
         }
         keyUpEvent(e) {
             var keyCode = e["keyCode"];
@@ -253,7 +395,7 @@
                     break;
                 case 65:
                     this.keyLeft = true;
-                    this.setLeft();
+                    this.rolePlayer.skewY = 0;
                     if (this.sRun)
                         return;
                     this.setRun();
@@ -261,7 +403,7 @@
                     break;
                 case 68:
                     this.keyRight = true;
-                    this.setRight();
+                    this.rolePlayer.skewY = 180;
                     if (this.sRun)
                         return;
                     this.setRun();
@@ -272,29 +414,45 @@
                     this.setJump();
                     break;
                 case 81:
-                    console.log("扔雷");
-                    if (this.sBoom)
-                        return;
-                    if (GameManager.instance.roleInfo.bombNum <= 0)
-                        return;
-                    this.setBoom();
                     break;
                 case 69:
                     console.log("切枪");
                     break;
             }
         }
-        setLeft() {
-            if (this.direction == -1)
+        onClickBomb() {
+            console.log("扔雷");
+            if (this.sBoom)
                 return;
-            this.direction = -1;
-            this.rolePlayer.skewY = 0;
+            if (GameManager.instance.roleInfo.bombNum <= 0)
+                return;
+            this.setBoom();
         }
-        setRight() {
-            if (this.direction == 1)
+        onClickJump() {
+            console.log("跳");
+            if (this.keyJump)
                 return;
-            this.direction = 1;
-            this.rolePlayer.skewY = 180;
+            this.setJump();
+        }
+        setLeftRun() {
+            if (this.sRun)
+                return;
+            this.setRun();
+            this.stillRun();
+        }
+        setRightRun() {
+            if (this.sRun)
+                return;
+            this.setRun();
+            this.stillRun();
+        }
+        setPlayerDir() {
+            if (!this.sFire) {
+                this.body.url = "ui://Game/player_stay_" + this.weaponType + "_" + Math.abs(this.faceType);
+            }
+            else {
+                this.body.url = "ui://Game/player_fire_" + this.weaponType + "_" + Math.abs(this.faceType);
+            }
         }
         colliGround() {
             if (this.keyJump)
@@ -313,7 +471,7 @@
                 this.setBoomComplete();
             }
             else if (this.sFire) {
-                this.body.url = "ui://Game/player_fire_" + this.weaponType;
+                this.body.url = "ui://Game/player_fire_" + this.weaponType + "_" + this.direction;
             }
             if (this.sRun) {
                 this.bodyLeg.url = "ui://Game/legMove";
@@ -323,13 +481,11 @@
             this.stopMove();
         }
         setRun() {
-            if (this.sRun)
-                return;
             if (this.sFire) {
-                this.body.url = "ui://Game/player_fire_" + this.weaponType;
+                this.body.url = "ui://Game/player_fire_" + this.weaponType + "_" + Math.abs(this.faceType);
             }
             else {
-                this.body.url = "ui://Game/player_stay_" + this.weaponType;
+                this.body.url = "ui://Game/player_stay_" + this.weaponType + "_" + Math.abs(this.faceType);
             }
             this.bodyLeg.url = "ui://Game/legMove";
             this.sRun = true;
@@ -352,7 +508,7 @@
                     ViewManager.instance.updateViewPort(this.speed);
                 }
             }
-            else {
+            else if (this.direction == -1) {
                 this.roleSprite.x -= this.speed;
                 if (this.roleSprite.x < Math.abs(ViewManager.instance.warView.warView.x))
                     this.roleSprite.x = Math.abs(ViewManager.instance.warView.warView.x);
@@ -363,9 +519,11 @@
                 return;
             if (this.sBoom)
                 return;
+            this.playWeaponSound();
             this.sFire = true;
-            this.body.url = "ui://Game/player_fire_" + this.weaponType;
+            this.body.url = "ui://Game/player_fire_" + this.weaponType + "_" + Math.abs(this.faceType);
             this.rolePlayer.m_fireType.selectedIndex = this.weaponType - 1;
+            this.setFireAniSkew();
             Laya.timer.clear(this, this.stillFire);
             this.rolePlayer["m_firePos" + this.weaponType].visible = true;
             if (this.weaponType != PlayerData.WEAPON_PIS) {
@@ -389,16 +547,33 @@
         stillFire() {
             if (this.sBoom)
                 return;
+            this.setFireAniSkew();
             this.stillFireNum++;
             if (this.stillFireNum % 2 == 0) {
-                this.rolePlayer["m_firePos" + this.weaponType].visible = false;
+                this.rolePlayer.m_firePos1.visible = this.rolePlayer.m_firePos2.visible = false;
             }
             else {
                 this.rolePlayer["m_firePos" + this.weaponType].visible = true;
-                ViewManager.instance.createBullet();
             }
+            ViewManager.instance.createBullet();
             if (this.weaponType != PlayerData.WEAPON_PIS) {
                 EventManager.instance.dispatcherEvt(GameEvent.USE_PLAYER_BULLET);
+            }
+            this.playWeaponSound();
+        }
+        setFireAniSkew() {
+            this.rolePlayer.m_firePos.selectedIndex = Math.abs(this.faceType) - 1;
+            if (Math.abs(this.faceType) == 1) {
+                this.rolePlayer.m_firePos1.setSkew(180, 180);
+                this.rolePlayer.m_firePos2.setSkew(180, 180);
+            }
+            else if (Math.abs(this.faceType) == 2) {
+                this.rolePlayer.m_firePos1.setSkew(160, 160);
+                this.rolePlayer.m_firePos2.setSkew(160, 160);
+            }
+            else if (Math.abs(this.faceType) == 3) {
+                this.rolePlayer.m_firePos1.setSkew(200, 200);
+                this.rolePlayer.m_firePos2.setSkew(200, 200);
             }
         }
         rilfeComplete() {
@@ -410,9 +585,9 @@
         setFireEnd() {
             Laya.timer.clear(this, this.stillFire);
             this.sFire = false;
-            this.rolePlayer["m_firePos" + this.weaponType].visible = false;
             this.stillFireNum = 1;
-            this.body.url = "ui://Game/player_stay_" + this.weaponType;
+            this.rolePlayer.m_firePos1.visible = this.rolePlayer.m_firePos2.visible = false;
+            this.body.url = "ui://Game/player_stay_" + this.weaponType + "_" + Math.abs(this.faceType);
             this.body.content.setPlaySettings(0, -1, 0, 0);
             if (this.sRun) {
                 this.bodyLeg.url = "ui://Game/legMove";
@@ -424,7 +599,6 @@
         }
         setBoom() {
             this.sBoom = true;
-            this.rolePlayer["m_firePos" + this.weaponType].visible = false;
             EventManager.instance.dispatcherEvt(GameEvent.USE_PLAYER_BOMB);
             this.body.url = "ui://Game/player_boom_" + this.weaponType;
             this.bodybody.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.setBoomComplete));
@@ -442,9 +616,9 @@
             if (this.keyJump)
                 return;
             if (this.sFire)
-                this.body.url = "ui://Game/player_fire_" + this.weaponType;
+                this.body.url = "ui://Game/player_fire_" + this.weaponType + "_" + Math.abs(this.faceType);
             else
-                this.body.url = "ui://Game/player_stay_" + this.weaponType;
+                this.body.url = "ui://Game/player_stay_" + this.weaponType + "_" + Math.abs(this.faceType);
             if (this.sRun) {
                 this.bodyLeg.url = "ui://Game/legMove";
                 return;
@@ -461,17 +635,25 @@
             Laya.timer.clear(this, this.stillRun);
         }
         setStay() {
-            this.body.url = "ui://Game/player_stay_" + this.weaponType;
-            this.stopMove();
+            if (this.faceType > 0) {
+                this.direction = 1;
+                this.rolePlayer.skewY = 180;
+            }
+            else {
+                this.direction = -1;
+                this.rolePlayer.skewY = 0;
+            }
+            this.body.url = "ui://Game/player_stay_" + this.weaponType + "_" + Math.abs(this.faceType);
             Laya.timer.clear(this, this.stillFire);
+            this.stopMove();
         }
         changeWeaponType(type) {
             this.weaponType = GameManager.instance.roleInfo.weaponType = type;
             if (this.sFire) {
-                this.body.url = "ui://Game/player_fire_" + this.weaponType;
+                this.body.url = "ui://Game/player_fire_" + this.weaponType + "_" + Math.abs(this.faceType);
             }
             else
-                this.body.url = "ui://Game/player_stay_" + this.weaponType;
+                this.body.url = "ui://Game/player_stay_" + this.weaponType + "_" + Math.abs(this.faceType);
         }
         setDeath() {
             if (GameManager.instance.roleInfo.isDeath)
@@ -482,6 +664,22 @@
             EventManager.instance.offNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.beHit);
             this.body.url = "ui://Game/player_death";
             this.body.content.setPlaySettings(0, -1, 1, this.body.content.frameCount - 1, Laya.Handler.create(this, this.deathComplete));
+            this.playDeathSound();
+        }
+        playDeathSound() {
+            var s = 1;
+            var r = Math.random();
+            if (r > 0.75)
+                s = 4;
+            if (r > 0.5)
+                s = 3;
+            if (r > 0.25)
+                s = 2;
+            s = 1;
+            SoundManager.instance.playSound("die_" + s);
+        }
+        playWeaponSound() {
+            SoundManager.instance.playSound("weapon_" + this.weaponType);
         }
         deathComplete() {
         }
@@ -510,10 +708,10 @@
             return this.bodyComponent.getChildAt(1).asLoader;
         }
         dispose() {
-            Laya.stage.off(Laya.Event.KEY_DOWN, this, this.keyDowmEvent);
-            Laya.stage.off(Laya.Event.KEY_UP, this, this.keyUpEvent);
-            Laya.stage.off(Laya.Event.MOUSE_DOWN, this, this.setFire);
-            Laya.stage.off(Laya.Event.MOUSE_UP, this, this.setFireEnd);
+            this.playerCtlView.view.m_fire.off(Laya.Event.MOUSE_DOWN, this, this.setFire);
+            this.playerCtlView.view.m_fire.off(Laya.Event.MOUSE_UP, this, this.setFireEnd);
+            this.playerCtlView.view.m_bomb.off(Laya.Event.CLICK, this, this.onClickBomb);
+            this.playerCtlView.view.m_jump.off(Laya.Event.CLICK, this, this.onClickJump);
             EventManager.instance.offNotice(GameEvent.PLAYER_COLLISION_GROUND, this, this.colliGround);
             EventManager.instance.offNotice(GameEvent.ENEMY_BULLET_HIT_PLAYER, this, this.beHit);
             EventManager.instance.offNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.beHit);
@@ -555,51 +753,6 @@
             this.selfCollider.refresh();
         }
     }
-
-    class GameData {
-    }
-    GameData.WEAPON_TYPE = 1;
-    GameData.WEAPON_PIS = 1;
-    GameData.WEAPON_MAC = 2;
-    GameData.WEAPON_RIFLE = 3;
-    GameData.WEAPON_GRE = 4;
-    GameData.WEAPON_MAX = 3;
-    GameData.ENEMY_PIS = 1;
-    GameData.ENEMY_GRE = 2;
-    GameData.ENEMY_MAC = 3;
-    GameData.ENEMY_FIRE = 4;
-    GameData.ENEMY_MOR = 5;
-    GameData.ENEMY_CHOPPER = 10;
-    GameData.ENEMY_TANK_1 = 11;
-    GameData.ENEMY_TANK_2 = 12;
-    GameData.RANDOM_COIN = 200;
-    class BombData {
-    }
-    BombData.BOMB_MY_GRE = 1;
-    BombData.BOMB_ENEMY_GRE = 2;
-    BombData.BOMB_CHOPPER = 3;
-    BombData.BOMB_TANK = 4;
-    BombData.BOMB_MOR = 5;
-    class ShotDirectionData {
-    }
-    ShotDirectionData.LEFT = -1;
-    ShotDirectionData.RIGHT = 1;
-    ShotDirectionData.RIGHT_UP = 2;
-    ShotDirectionData.LEFT_UP = -2;
-    class ObstacleType {
-    }
-    ObstacleType.ObstacleType_SHABAO = 1;
-    ObstacleType.ObstacleType_YOUGUAN = 2;
-    ObstacleType.ObstacleType_XIAOCHE = 4;
-    ObstacleType.ObstacleType_CHE = 5;
-    ObstacleType.ObstacleType_DACHE = 6;
-    class GoodsType {
-    }
-    GoodsType.GoodsType_MED = 1;
-    GoodsType.GoodsType_MAC = 2;
-    GoodsType.GoodsType_RIF = 3;
-    GoodsType.GoodsType_GRE = 4;
-    GoodsType.GoodsType_COIN = 5;
 
     class Enemy {
         constructor() {
@@ -748,6 +901,7 @@
         setFire() {
             if (this.enemyType == GameData.ENEMY_PIS || this.enemyType == GameData.ENEMY_GRE) {
                 if (this.getRandomFire() == 1) {
+                    SoundManager.instance.playSound("enemy_fire");
                     this.bodyLoader.url = "ui://Game/enemy_fire_1";
                     this.bodyLoader.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.shotComplete));
                 }
@@ -757,13 +911,16 @@
                 }
             }
             else if (this.enemyType == GameData.ENEMY_MAC) {
+                SoundManager.instance.playSound("enemy_fire");
                 this.bodyLoader.url = "ui://Game/enemy_fire_3";
                 this.bodyLoader.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.shot2Complete));
             }
             else if (this.enemyType == GameData.ENEMY_FIRE) {
+                SoundManager.instance.playSound("BombDrop");
                 this.bodyLoader.url = "ui://Game/enemy_fire_4";
             }
             else if (this.enemyType == GameData.ENEMY_MOR) {
+                SoundManager.instance.playSound("BombDrop");
                 this.bodyLoader.url = "ui://Game/enemy_fire_5";
                 this.bodyLoader.component.getChildAt(0).asLoader.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.morComplete));
                 this.bodyLoader.component.getChildAt(1).asMovieClip.setPlaySettings(0, -1, 1, 0);
@@ -795,14 +952,15 @@
         }
         setBoomComplete() {
             this.setStay();
-            console.log("rengshouliudan");
         }
         setDeath() {
             if (this.isDeath)
                 return;
             this.isDeath = true;
             Laya.timer.clearAll(this);
-            this.enemy.url = "ui://Game/death_" + this.getRandomDeath();
+            var s = this.getRandomDeath();
+            SoundManager.instance.playSound("die_" + s);
+            this.enemy.url = "ui://Game/death_" + s;
             this.enemy.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
             this.createGoods();
         }
@@ -868,25 +1026,21 @@
             this.selfBody = this.selfCollider.rigidBody;
             this.self = this.owner;
             this.oriPosX = this.self.x;
-            console.log("oriPosX--" + this.oriPosX);
         }
         onDisable() {
         }
         onTriggerEnter(other, self, contact) {
             if (self.label == "PlayerBullet") {
                 if (other.label == "enemy") {
-                    console.log("主角子弹击中敌人-敌人ID=", other.id);
                     EventManager.instance.dispatcherEvt(GameEvent.PLAYER_BULLET_HIT_ENEMY, { o: other.owner, s: self.owner });
                 }
                 else if (other.label == "obstacle") {
-                    console.log("主角子弹击中障碍物", other.id);
                     EventManager.instance.dispatcherEvt(GameEvent.PLAYER_BULLET_HIT_OBSTACLE, { o: other.owner, s: self.owner });
                 }
                 return;
             }
             else if (self.label == "enemyBullet") {
                 if (other.label == "player") {
-                    console.log("敌人子弹击中主角--ID=", other.id, self.id);
                     this.selfCollider.destroy();
                     EventManager.instance.dispatcherEvt(GameEvent.ENEMY_BULLET_HIT_PLAYER, { o: other.owner, s: self.owner });
                 }
@@ -918,7 +1072,6 @@
             this.body = this.scene.getComponent(Laya.RigidBody);
             this.box = this.scene.getComponent(Laya.BoxCollider);
             this.box.label = this.body.label = "enemyBullet";
-            console.log("enemyBullet.scene--loadComplete", this.box.id);
             if (this.bulletType == GameData.ENEMY_TANK_1 || this.bulletType == GameData.ENEMY_TANK_2) {
                 this.view.m_zidan.url = "ui://Game/zhadan_4";
             }
@@ -953,11 +1106,9 @@
             }
         }
         disposeAll() {
-            console.log("enemyBullet--disposeAll");
             Laya.Pool.recover("enemyBullet", this);
             this.view.displayObject.destroy();
             this.scene.removeSelf();
-            console.log("销毁子弹--enemyBullet");
         }
         dispose(s) {
             if (s == this.box.owner) {
@@ -980,7 +1131,6 @@
             Laya.Scene.load("Bullet.scene", Laya.Handler.create(this, this.loadComplete));
         }
         loadComplete(s) {
-            console.log("PlayerBullet.scene--loadComplete");
             this.view = fairygui.UIPackage.createObject("Game", "zidan");
             this.scene = s;
             this.scene.addComponent(BulletBody);
@@ -1007,22 +1157,40 @@
             Laya.Pool.recover("PlayerBullet", this);
             this.view.dispose();
             this.scene.removeSelf();
-            console.log("销毁子弹--PlayerBullet");
         }
         setBulletPos() {
             var p = ViewManager.instance.getPlayerBulletOffSetPos(this.direction, this.bulletType);
             var y = ViewManager.instance.bulletRandomY();
             var c = ViewManager.instance.rolePlayer.roleSprite.getComponent(Laya.RigidBody).getWorldCenter();
-            if (this.direction == 1) {
-                this.view.setSkew(0, 0);
-                this.scene.x = c.x + p.x;
-                this.body.setVelocity({ x: 10, y: 0 });
+            if (this.direction > 0) {
+                if (this.direction == 2) {
+                    this.view.setSkew(25, 25);
+                    this.body.setVelocity({ x: 10, y: 7 });
+                }
+                else if (this.direction == 3) {
+                    this.view.setSkew(-25, -25);
+                    this.body.setVelocity({ x: 10, y: -7 });
+                }
+                else {
+                    this.view.setSkew(0, 0);
+                    this.body.setVelocity({ x: 10, y: 0 });
+                }
             }
             else {
-                this.view.setSkew(180, 180);
-                this.scene.x = c.x + p.x;
-                this.body.setVelocity({ x: -10, y: 0 });
+                if (this.direction == -2) {
+                    this.view.setSkew(155, 155);
+                    this.body.setVelocity({ x: -10, y: 7 });
+                }
+                else if (this.direction == -3) {
+                    this.view.setSkew(205, 205);
+                    this.body.setVelocity({ x: -10, y: -7 });
+                }
+                else {
+                    this.view.setSkew(180, 180);
+                    this.body.setVelocity({ x: -10, y: 0 });
+                }
             }
+            this.scene.x = c.x + p.x;
             this.scene.y = c.y - y + p.y;
         }
     }
@@ -1034,30 +1202,25 @@
             this.selfBody = this.selfCollider.rigidBody;
             this.self = this.owner;
             this.oriPosX = this.self.x;
-            console.log("oriPosX--" + this.oriPosX);
         }
         onDisable() {
         }
         onTriggerEnter(other, self, contact) {
             if (self.label == "PlayerBomb") {
                 if (other.label == "enemy") {
-                    console.log("主角扔雷击中敌人-敌人ID=", other.id);
                     EventManager.instance.dispatcherEvt(GameEvent.PLAYER_BOMB_HIT_ENEMY, { o: other.owner, s: self.owner });
                     this.owner.removeSelf();
                 }
                 else if (other.label == "obstacle") {
-                    console.log("主角扔雷击中障碍物", other.id);
                     EventManager.instance.dispatcherEvt(GameEvent.PLAYER_BOMB_HIT_OBSTACLE, { o: other.owner, s: self.owner });
                 }
             }
             else if (self.label == "enemyBomb" && other.label == "player") {
-                console.log("敌人扔雷击中主角-主角ID=", other.id);
                 this.owner.removeSelf();
                 EventManager.instance.dispatcherEvt(GameEvent.ENEMY_BOMB_HIT_PLAYER, { o: other.owner, s: self.owner });
                 return;
             }
             if (other.label == "ground") {
-                console.log("雷撞墙了=", this.self.x, this.self.y);
                 this.owner.removeSelf();
                 EventManager.instance.dispatcherEvt(GameEvent.BOMB_DISPOSE, { o: other.owner, s: self.owner });
                 return;
@@ -1104,7 +1267,6 @@
             Laya.Scene.load("BoomBody.scene", Laya.Handler.create(this, this.loadComplete));
         }
         loadComplete(s) {
-            console.log("boomBody.scene--loadComplete");
             this.view = fairygui.UIPackage.createObject("Game", "BoomView");
             this.scene = s;
             this.scene.addComponent(BoomBody);
@@ -1136,7 +1298,6 @@
             Laya.Pool.recover("boomView", this);
             this.view.dispose();
             this.scene.removeSelf();
-            console.log("销毁子弹--enemyBullet");
         }
     }
 
@@ -1155,7 +1316,6 @@
             Laya.Scene.load("BombBody.scene", Laya.Handler.create(this, this.loadComplete));
         }
         loadComplete(s) {
-            console.log("bomb.scene--loadComplete", this.bombType);
             this.view = fairygui.UIPackage.createObject("Game", "Bomb");
             this.view.m_boom.visible = this.view.m_boom2.visible = false;
             if (this.bombType == BombData.BOMB_MOR) {
@@ -1203,6 +1363,7 @@
             this.scene.y = this.parentPos.y + this.offPos.y;
         }
         showBoomView() {
+            SoundManager.instance.playSound("boom");
             var bomb = Laya.Pool.getItemByClass("boomView", BoomView);
             var p = ViewManager.instance.getBodyCenterPos(this.scene);
             bomb.createView(ViewManager.instance.getBoomAniTypeByBomb(this.bombType), p, this.isPlayer);
@@ -1216,7 +1377,6 @@
                 Laya.Pool.recover("bombView", this);
                 this.view.dispose();
                 this.scene.removeSelf();
-                console.log("销毁炸弹--", this.bombType);
             }
         }
     }
@@ -1279,6 +1439,7 @@
             this.load.url = "ui://Game/boom_" + ViewManager.instance.getBoomAniTypeByObsType(this.type);
             ;
             this.load.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
+            SoundManager.instance.playSound("obstacleBoom");
         }
         dispose() {
             EventManager.instance.offNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.beHit);
@@ -1300,6 +1461,7 @@
         setFire() {
             var p = new Laya.Point(this.view.width / 2, this.view.height);
             ViewManager.instance.createChopperBomb(BombData.BOMB_CHOPPER, ViewManager.instance.getBodyCenterPos(this.scene), p);
+            SoundManager.instance.playSound("bombDrop");
         }
         setDeath() {
             if (this.isDeath)
@@ -1381,7 +1543,6 @@
             Laya.Scene.load("GoodsBody.scene", Laya.Handler.create(this, this.loadComplete));
         }
         loadComplete(s) {
-            console.log("GoodsBody.scene--loadComplete", s);
             this.scene = s;
             this.body = this.scene.getComponent(Laya.RigidBody);
             this.box = this.scene.getComponent(Laya.BoxCollider);
@@ -1405,6 +1566,7 @@
         }
         dispose(s) {
             if (s == this.box.owner) {
+                SoundManager.instance.playSound("get_goods");
                 EventManager.instance.offNotice(GameEvent.PLAYER_GET_GOODS, this, this.dispose);
                 EventManager.instance.dispatcherEvt(GameEvent.CHANGE_PLAYER_GOODS, this.type);
                 this.scene.removeSelf();
@@ -1433,6 +1595,7 @@
             this.view.m_pause.onClick(this, this.pauseGame);
         }
         pauseGame() {
+            SoundManager.instance.playSound("btn_click");
             GameManager.instance.suspendGame();
         }
         changePlayerGoods(t) {
@@ -1520,13 +1683,6 @@
         }
     }
 
-    class PlayerCtlView {
-        constructor() { this.createView(); }
-        createView() {
-            this.view = fairygui.UIPackage.createObject("Game", "PlayerCtlView");
-        }
-    }
-
     class WXFUI_loadingView extends fairygui.GComponent {
         constructor() {
             super();
@@ -1588,14 +1744,12 @@
         }
         showComplete(s) {
             if (s) {
-                console.log("showComplete---");
                 this.v.m_mask.visible = true;
                 this.v.m_mask.on(Laya.Event.CLICK, this, this.hideAllView);
             }
             this.view.setScale(1, 1);
         }
         hideAllView() {
-            console.log("hidePopUpView--", this.view);
             this.v.m_mask.off(Laya.Event.CLICK, this, this.hideAllView);
             fairygui.GRoot.inst.removeChild(this.v);
         }
@@ -1608,6 +1762,7 @@
             this.view.m_back.onClick(this, this.goFirstPage);
         }
         goFirstPage() {
+            SoundManager.instance.playSound("btn_click");
             GameManager.instance.goFirstPage();
         }
     }
@@ -1667,6 +1822,7 @@
             }
         }
         chooseLevel(l) {
+            SoundManager.instance.playSound("btn_click");
             console.log("选择第" + GameManager.instance.curChapter + "章，" + "第" + l + "关");
             if (l > GameManager.instance.gotoMaxLevel)
                 return;
@@ -1711,14 +1867,18 @@
             this.view.m_coin.text = " " + GameManager.instance.roleInfo.curlvCoin + " ";
         }
         continueGame() {
+            SoundManager.instance.playSound("btn_click");
             ViewManager.instance.showChapterView();
         }
         restartGame() {
+            SoundManager.instance.playSound("btn_click");
             GameManager.instance.restartGame();
         }
         continueGameByVideo() {
+            SoundManager.instance.playSound("btn_click");
         }
         returnHandle() {
+            SoundManager.instance.playSound("btn_click");
             GameManager.instance.goFirstPage();
         }
     }
@@ -1749,6 +1909,7 @@
             this.view.m_enter.onClick(this, this.enterGame);
         }
         enterGame() {
+            SoundManager.instance.playSound("btn_click");
             GameManager.instance.enterGame();
             ViewManager.instance.hidePopUpView(this, true);
         }
@@ -1762,19 +1923,25 @@
             this.curPopView = [];
             this.playerBulletPos = {
                 "11": [135, -22],
-                "12": [167, 0],
+                "12": [150, 0],
                 "13": [],
+                "21": [125, 25],
+                "22": [115, 70],
+                "23": [],
+                "31": [115, -95],
+                "32": [120, -50],
+                "33": [],
                 "14": [20, -60],
                 "-11": [-200, -22],
-                "-12": [-220, 0],
+                "-12": [-210, 0],
                 "-13": [],
                 "-14": [-20, -60],
-                "21": [-150, -30],
-                "22": [],
-                "23": [],
-                "-21": [],
-                "-22": [],
+                "-21": [-190, 20],
+                "-22": [-180, 60],
                 "-23": [],
+                "-31": [-190, -90],
+                "-32": [-180, -50],
+                "-33": [],
             };
             this.enemyBulletPos = {
                 "11": [105, 10],
@@ -1803,7 +1970,6 @@
             Laya.stage.addChild(this.loadingView.displayObject);
         }
         setLoadongProgress(p) {
-            console.log("progress--", p);
             this.loadingView.m_bar.m_title.text = Math.ceil(p * 100) + "%";
             this.loadingView.m_bar.value = p * 100;
         }
@@ -1821,7 +1987,6 @@
                 this.warView.dispose();
             this.warView = Laya.Pool.getItemByClass("warView", WarView);
             this.warView.createView();
-            this.showPlayerCtlView();
             this.showPlayerInfoView();
         }
         createBomb(type, dir, parentPos, b) {
@@ -1837,7 +2002,7 @@
         }
         createBullet() {
             var b = Laya.Pool.getItemByClass("PlayerBullet", PlayerBullet);
-            b.createView(this.rolePlayer.weaponType, this.rolePlayer.direction);
+            b.createView(this.rolePlayer.weaponType, this.rolePlayer.faceType);
         }
         createEnemyBullet(type, dir, s) {
             var b = Laya.Pool.getItemByClass("enemyBullet", EnemyBullet);
@@ -1953,10 +2118,10 @@
             return 1;
         }
         getBoomAniTypeByObsType(type) {
-            if (type == ObstacleType.ObstacleType_SHABAO) {
+            if (type == ObstacleType.ObstacleType_SHABAO || type == ObstacleType.ObstacleType_YOUGUAN || type == ObstacleType.ObstacleType_9) {
                 return 2;
             }
-            else if (type == ObstacleType.ObstacleType_DACHE) {
+            else if (type == ObstacleType.ObstacleType_DACHE || type == ObstacleType.ObstacleType_11) {
                 return 5;
             }
             else {
@@ -1965,6 +2130,27 @@
         }
         bulletRandomY() {
             return Math.floor(Math.random() * 10) + 10;
+        }
+        getPlayerDirection(pos) {
+            var rad = Math.atan2(pos.y, pos.x);
+            if ((rad >= -2 * Math.PI / 8 && rad < 0) || (rad >= 0 && rad < 2 * Math.PI / 8)) {
+                return 1;
+            }
+            else if (rad >= 2 * Math.PI / 8 && rad < 4 * Math.PI / 8) {
+                return 2;
+            }
+            else if (rad >= 4 * Math.PI / 8 && rad < 6 * Math.PI / 8) {
+                return -2;
+            }
+            else if ((rad >= 6 * Math.PI / 8 && rad < Math.PI) || (rad >= -Math.PI && rad < -6 * Math.PI / 8)) {
+                return -1;
+            }
+            else if (rad >= -6 * Math.PI / 8 && rad < -4 * Math.PI / 8) {
+                return -3;
+            }
+            else {
+                return 3;
+            }
         }
         getPlayerBulletOffSetPos(dir, weaponType) {
             var s = dir + "" + weaponType;
@@ -1975,7 +2161,6 @@
         }
         getEnemyBulletOffSetPos(dir, weaponType) {
             var s = dir + "" + weaponType;
-            console.log("getEnemyBulletOffSetPos--", s);
             if (this.enemyBulletPos[s])
                 return new Laya.Point(this.enemyBulletPos[s][0], this.enemyBulletPos[s][1]);
             else
@@ -2081,7 +2266,6 @@
         }
         createEnemyData() {
             var enemyArr = this.curLevelData.enemyArr;
-            console.log("enemyArr--", enemyArr);
             for (const key in enemyArr) {
                 if (enemyArr.hasOwnProperty(key)) {
                     var t = enemyArr[key];
@@ -2108,7 +2292,6 @@
         }
         createObstacleData() {
             var obstacle = GameManager.instance.curLevelData.obstacle;
-            console.log("obstacle--", obstacle);
             for (const key in obstacle) {
                 if (obstacle.hasOwnProperty(key)) {
                     var t = obstacle[key];
@@ -2150,7 +2333,7 @@
             this.loadAssetsData();
         }
         loadAssetsData() {
-            AssetsManager.assetsData.push({ url: "res/Game_atlas0.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_1.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_2.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_3.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_4.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_5.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_6.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas_n8qun1.jpg", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas_n8qun7.png", type: Laya.Loader.IMAGE }, { url: "res/LevelData.json", type: Laya.Loader.JSON }, { url: "res/map_1.jpg", type: Laya.Loader.IMAGE }, { url: "res/Game.wxfui", type: Laya.Loader.BUFFER });
+            AssetsManager.assetsData.push({ url: "res/Game_atlas0.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_1.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_2.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_3.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_4.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_5.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_6.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_7.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas_n8qun1.jpg", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas_n8qun7.png", type: Laya.Loader.IMAGE }, { url: "res/LevelData.json", type: Laya.Loader.JSON }, { url: "res/map_1.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_2.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_3.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_4.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_5.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_6.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_7.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_8.jpg", type: Laya.Loader.IMAGE }, { url: "res/Game.wxfui", type: Laya.Loader.BUFFER });
             console.log(AssetsManager.assetsData);
             Laya.loader.create(AssetsManager.assetsData, Laya.Handler.create(this, this.loadComplete), Laya.Handler.create(this, this.onloadingProgress));
         }
@@ -2212,33 +2395,33 @@
     }
     WXFUI_throwBtn.URL = "ui://bq3h5inscqp93p";
 
-    class WXFUI_player_stay_1 extends fairygui.GComponent {
+    class WXFUI_player_stay_1_1 extends fairygui.GComponent {
         constructor() {
             super();
         }
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_stay_1"));
+            return (fairygui.UIPackage.createObject("Game", "player_stay_1_1"));
         }
         onConstruct() {
             this.m_xs = (this.getChild("xs"));
             this.m_ss = (this.getChild("ss"));
         }
     }
-    WXFUI_player_stay_1.URL = "ui://bq3h5inscqp93w";
+    WXFUI_player_stay_1_1.URL = "ui://bq3h5inscqp93w";
 
-    class WXFUI_player_stay_2 extends fairygui.GComponent {
+    class WXFUI_player_stay_2_1 extends fairygui.GComponent {
         constructor() {
             super();
         }
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_stay_2"));
+            return (fairygui.UIPackage.createObject("Game", "player_stay_2_1"));
         }
         onConstruct() {
             this.m_xs = (this.getChild("xs"));
             this.m_ss = (this.getChild("ss"));
         }
     }
-    WXFUI_player_stay_2.URL = "ui://bq3h5inscqp940";
+    WXFUI_player_stay_2_1.URL = "ui://bq3h5inscqp940";
 
     class WXFUI_enemyStay_5 extends fairygui.GComponent {
         constructor() {
@@ -2281,19 +2464,19 @@
     }
     WXFUI_enemy5.URL = "ui://bq3h5insdhktem";
 
-    class WXFUI_player_stay_3 extends fairygui.GComponent {
+    class WXFUI_player_stay_3_1 extends fairygui.GComponent {
         constructor() {
             super();
         }
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_stay_3"));
+            return (fairygui.UIPackage.createObject("Game", "player_stay_3_1"));
         }
         onConstruct() {
             this.m_xs = (this.getChild("xs"));
             this.m_ss = (this.getChild("ss"));
         }
     }
-    WXFUI_player_stay_3.URL = "ui://bq3h5insdhkten";
+    WXFUI_player_stay_3_1.URL = "ui://bq3h5insdhkten";
 
     class WXFUI_backHomeBtn extends fairygui.GButton {
         constructor() {
@@ -2623,6 +2806,7 @@
         onConstruct() {
             this.m_bg = (this.getChild("bg"));
             this.m_dirBtn = (this.getChild("dirBtn"));
+            this.m_mask = (this.getChild("mask"));
         }
     }
     WXFUI_dirCtlView.URL = "ui://bq3h5insiasdl1";
@@ -2667,47 +2851,47 @@
     }
     WXFUI_BoomView.URL = "ui://bq3h5inske5wdt";
 
-    class WXFUI_player_fire_3 extends fairygui.GComponent {
+    class WXFUI_player_fire_3_1 extends fairygui.GComponent {
         constructor() {
             super();
         }
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_fire_3"));
+            return (fairygui.UIPackage.createObject("Game", "player_fire_3_1"));
         }
         onConstruct() {
             this.m_xs = (this.getChild("xs"));
             this.m_ss = (this.getChild("ss"));
         }
     }
-    WXFUI_player_fire_3.URL = "ui://bq3h5inske5wdy";
+    WXFUI_player_fire_3_1.URL = "ui://bq3h5inske5wdy";
 
-    class WXFUI_player_fire_1 extends fairygui.GComponent {
+    class WXFUI_player_fire_1_1 extends fairygui.GComponent {
         constructor() {
             super();
         }
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_fire_1"));
+            return (fairygui.UIPackage.createObject("Game", "player_fire_1_1"));
         }
         onConstruct() {
             this.m_xs = (this.getChild("xs"));
             this.m_ss = (this.getChild("ss"));
         }
     }
-    WXFUI_player_fire_1.URL = "ui://bq3h5insmsdc5j";
+    WXFUI_player_fire_1_1.URL = "ui://bq3h5insmsdc5j";
 
-    class WXFUI_player_fire_2 extends fairygui.GComponent {
+    class WXFUI_player_fire_2_1 extends fairygui.GComponent {
         constructor() {
             super();
         }
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_fire_2"));
+            return (fairygui.UIPackage.createObject("Game", "player_fire_2_1"));
         }
         onConstruct() {
             this.m_xs = (this.getChild("xs"));
             this.m_ss = (this.getChild("ss"));
         }
     }
-    WXFUI_player_fire_2.URL = "ui://bq3h5insmsdc5k";
+    WXFUI_player_fire_2_1.URL = "ui://bq3h5insmsdc5k";
 
     class WXFUI_Player extends fairygui.GComponent {
         constructor() {
@@ -2900,6 +3084,240 @@
     }
     WXFUI_obstacleView.URL = "ui://bq3h5insqz5uku";
 
+    class WXFUI_enemy6 extends fairygui.GComponent {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "enemy6"));
+        }
+        onConstruct() {
+            this.m_en = (this.getChild("en"));
+        }
+    }
+    WXFUI_enemy6.URL = "ui://bq3h5instvmxxoo";
+
+    class WXFUI_enemy13 extends fairygui.GComponent {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "enemy13"));
+        }
+        onConstruct() {
+            this.m_load = (this.getChild("load"));
+        }
+    }
+    WXFUI_enemy13.URL = "ui://bq3h5instvmxxot";
+
+    class WXFUI_enemy14 extends fairygui.GComponent {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "enemy14"));
+        }
+        onConstruct() {
+            this.m_load = (this.getChild("load"));
+        }
+    }
+    WXFUI_enemy14.URL = "ui://bq3h5instvmxxou";
+
+    class WXFUI_enemy_fire_13 extends fairygui.GComponent {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "enemy_fire_13"));
+        }
+        onConstruct() {
+            this.m_load = (this.getChild("load"));
+        }
+    }
+    WXFUI_enemy_fire_13.URL = "ui://bq3h5instvmxxov";
+
+    class WXFUI_player_fire_2_2 extends fairygui.GComponent {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "player_fire_2_2"));
+        }
+        onConstruct() {
+            this.m_xs = (this.getChild("xs"));
+            this.m_ss = (this.getChild("ss"));
+        }
+    }
+    WXFUI_player_fire_2_2.URL = "ui://bq3h5instvmxxp1";
+
+    class WXFUI_player_fire_2_3 extends fairygui.GComponent {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "player_fire_2_3"));
+        }
+        onConstruct() {
+            this.m_xs = (this.getChild("xs"));
+            this.m_ss = (this.getChild("ss"));
+        }
+    }
+    WXFUI_player_fire_2_3.URL = "ui://bq3h5instvmxxp2";
+
+    class WXFUI_player_fire_1_2 extends fairygui.GComponent {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "player_fire_1_2"));
+        }
+        onConstruct() {
+            this.m_xs = (this.getChild("xs"));
+            this.m_ss = (this.getChild("ss"));
+        }
+    }
+    WXFUI_player_fire_1_2.URL = "ui://bq3h5instvmxxp3";
+
+    class WXFUI_player_fire_1_3 extends fairygui.GComponent {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "player_fire_1_3"));
+        }
+        onConstruct() {
+            this.m_xs = (this.getChild("xs"));
+            this.m_ss = (this.getChild("ss"));
+        }
+    }
+    WXFUI_player_fire_1_3.URL = "ui://bq3h5instvmxxp4";
+
+    class WXFUI_player_fire_3_2 extends fairygui.GComponent {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "player_fire_3_2"));
+        }
+        onConstruct() {
+            this.m_xs = (this.getChild("xs"));
+            this.m_ss = (this.getChild("ss"));
+        }
+    }
+    WXFUI_player_fire_3_2.URL = "ui://bq3h5instvmxxp5";
+
+    class WXFUI_player_fire_3_3 extends fairygui.GComponent {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "player_fire_3_3"));
+        }
+        onConstruct() {
+            this.m_xs = (this.getChild("xs"));
+            this.m_ss = (this.getChild("ss"));
+        }
+    }
+    WXFUI_player_fire_3_3.URL = "ui://bq3h5instvmxxp6";
+
+    class WXFUI_player_stay_1_2 extends fairygui.GComponent {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "player_stay_1_2"));
+        }
+        onConstruct() {
+            this.m_xs = (this.getChild("xs"));
+            this.m_ss = (this.getChild("ss"));
+        }
+    }
+    WXFUI_player_stay_1_2.URL = "ui://bq3h5instvmxxp7";
+
+    class WXFUI_player_stay_1_3 extends fairygui.GComponent {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "player_stay_1_3"));
+        }
+        onConstruct() {
+            this.m_xs = (this.getChild("xs"));
+            this.m_ss = (this.getChild("ss"));
+        }
+    }
+    WXFUI_player_stay_1_3.URL = "ui://bq3h5instvmxxp8";
+
+    class WXFUI_player_stay_2_3 extends fairygui.GComponent {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "player_stay_2_3"));
+        }
+        onConstruct() {
+            this.m_xs = (this.getChild("xs"));
+            this.m_ss = (this.getChild("ss"));
+        }
+    }
+    WXFUI_player_stay_2_3.URL = "ui://bq3h5instvmxxp9";
+
+    class WXFUI_player_stay_2_2 extends fairygui.GComponent {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "player_stay_2_2"));
+        }
+        onConstruct() {
+            this.m_xs = (this.getChild("xs"));
+            this.m_ss = (this.getChild("ss"));
+        }
+    }
+    WXFUI_player_stay_2_2.URL = "ui://bq3h5instvmxxpa";
+
+    class WXFUI_player_stay_3_2 extends fairygui.GComponent {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "player_stay_3_2"));
+        }
+        onConstruct() {
+            this.m_xs = (this.getChild("xs"));
+            this.m_ss = (this.getChild("ss"));
+        }
+    }
+    WXFUI_player_stay_3_2.URL = "ui://bq3h5instvmxxpb";
+
+    class WXFUI_player_stay_3_3 extends fairygui.GComponent {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "player_stay_3_3"));
+        }
+        onConstruct() {
+            this.m_xs = (this.getChild("xs"));
+            this.m_ss = (this.getChild("ss"));
+        }
+    }
+    WXFUI_player_stay_3_3.URL = "ui://bq3h5instvmxxpc";
+
+    class WXFUI_player_boom_3 extends fairygui.GComponent {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "player_boom_3"));
+        }
+        onConstruct() {
+            this.m_xs = (this.getChild("xs"));
+            this.m_ss = (this.getChild("ss"));
+        }
+    }
+    WXFUI_player_boom_3.URL = "ui://bq3h5instvmxxpd";
+
     class WXFUI_bullet1 extends fairygui.GComponent {
         constructor() {
             super();
@@ -2946,12 +3364,12 @@
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_jumpBtn.URL, WXFUI_jumpBtn);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_fireBtn.URL, WXFUI_fireBtn);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_throwBtn.URL, WXFUI_throwBtn);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_1.URL, WXFUI_player_stay_1);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_2.URL, WXFUI_player_stay_2);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_1_1.URL, WXFUI_player_stay_1_1);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_2_1.URL, WXFUI_player_stay_2_1);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemyStay_5.URL, WXFUI_enemyStay_5);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy_fire_5.URL, WXFUI_enemy_fire_5);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy5.URL, WXFUI_enemy5);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_3.URL, WXFUI_player_stay_3);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_3_1.URL, WXFUI_player_stay_3_1);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_backHomeBtn.URL, WXFUI_backHomeBtn);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_restartBtn.URL, WXFUI_restartBtn);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_BeforeWar.URL, WXFUI_BeforeWar);
@@ -2980,9 +3398,9 @@
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_dirBtn.URL, WXFUI_dirBtn);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_susBtn.URL, WXFUI_susBtn);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_BoomView.URL, WXFUI_BoomView);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_3.URL, WXFUI_player_fire_3);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_1.URL, WXFUI_player_fire_1);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_2.URL, WXFUI_player_fire_2);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_3_1.URL, WXFUI_player_fire_3_1);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_1_1.URL, WXFUI_player_fire_1_1);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_2_1.URL, WXFUI_player_fire_2_1);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_Player.URL, WXFUI_Player);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_boom_1.URL, WXFUI_player_boom_1);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_boom_2.URL, WXFUI_player_boom_2);
@@ -2999,6 +3417,23 @@
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy_fire_11.URL, WXFUI_enemy_fire_11);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy_fire_12.URL, WXFUI_enemy_fire_12);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_obstacleView.URL, WXFUI_obstacleView);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy6.URL, WXFUI_enemy6);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy13.URL, WXFUI_enemy13);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy14.URL, WXFUI_enemy14);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy_fire_13.URL, WXFUI_enemy_fire_13);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_2_2.URL, WXFUI_player_fire_2_2);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_2_3.URL, WXFUI_player_fire_2_3);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_1_2.URL, WXFUI_player_fire_1_2);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_1_3.URL, WXFUI_player_fire_1_3);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_3_2.URL, WXFUI_player_fire_3_2);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_3_3.URL, WXFUI_player_fire_3_3);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_1_2.URL, WXFUI_player_stay_1_2);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_1_3.URL, WXFUI_player_stay_1_3);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_2_3.URL, WXFUI_player_stay_2_3);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_2_2.URL, WXFUI_player_stay_2_2);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_3_2.URL, WXFUI_player_stay_3_2);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_3_3.URL, WXFUI_player_stay_3_3);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_boom_3.URL, WXFUI_player_boom_3);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_bullet1.URL, WXFUI_bullet1);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_bullet2.URL, WXFUI_bullet2);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_zidan.URL, WXFUI_zidan);

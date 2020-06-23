@@ -25,7 +25,8 @@ export class PlayerInfo {
     public curChapter: number;
     public curLevel: number;
     public totalCoin: number;
-    public curlvCoin: number
+    public curlvCoin: number;
+    public direction: number;
 
     constructor() {
     }

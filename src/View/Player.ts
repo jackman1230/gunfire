@@ -9,13 +9,14 @@ import GameEvent from "../Control/GameEvent";
 import { GameManager } from "../Manager/GameManager";
 import { PlayerData } from "../Data/PlayerData";
 import { SoundManager } from "../Manager/SoundManager";
+import PlayerCtlView from "./PlayerCtlView";
 
 export default class Player extends Laya.Script {
 
     public rolePlayer: WXFUI_Player;
     public body: fairygui.GLoader;
 
-    public direction: number = 0;
+    public direction: number = 1;//方向1为右，-1为左
 
     private sRun: boolean = false;//人物是否在跑
     private sFire: boolean = false;
@@ -30,6 +31,9 @@ export default class Player extends Laya.Script {
 
     public roleSprite: Laya.Sprite;
     private roleBody: Laya.RigidBody;
+
+    private playerCtlView: PlayerCtlView;
+    public faceType: number = 1;//面朝向
 
     constructor() { super() }
 
@@ -58,7 +62,6 @@ export default class Player extends Laya.Script {
         this.roleSprite.addComponent(PlayerBody);
 
         this.setStay();
-        this.setRight();
 
 
         Laya.stage.on(Laya.Event.KEY_DOWN, this, this.keyDowmEvent);
@@ -72,8 +75,69 @@ export default class Player extends Laya.Script {
         EventManager.instance.addNotice(GameEvent.CHANGE_PLAYER_WEAPON, this, this.changeWeaponType);
         EventManager.instance.addNotice(GameEvent.PLAYER_DEATH, this, this.setDeath);
 
+
+
+        if (!this.playerCtlView) this.playerCtlView = new PlayerCtlView();
+        fairygui.GRoot.inst.addChild(this.playerCtlView.view);
+        // this.playerCtlView = ViewManager.instance.playerCtlView;
+
+        this.playerCtlView.view.m_fire.on(Laya.Event.MOUSE_DOWN, this, this.setFire);
+        this.playerCtlView.view.m_fire.on(Laya.Event.MOUSE_UP, this, this.setFireEnd);
+        this.playerCtlView.view.m_bomb.on(Laya.Event.CLICK, this, this.onClickBomb);
+        this.playerCtlView.view.m_jump.on(Laya.Event.CLICK, this, this.onClickJump);
+        this.playerCtlView.view.m_ctl.m_mask.on(Laya.Event.MOUSE_DOWN, this, this.addMouseDown);
+        this.playerCtlView.view.m_ctl.m_mask.on(Laya.Event.MOUSE_UP, this, this.addCtlViewMouseUp);
+        Laya.stage.on(Laya.Event.MOUSE_UP, this, this.addStageMouseUp);
+
     }
 
+    private addCtlViewMouseUp(): void {
+        this.playerCtlView.view.m_ctl.m_dirBtn.y = this.playerCtlView.view.m_ctl.m_dirBtn.x = 0;
+        this.setStay();
+    }
+
+    private addMouseDown(e: any): void {
+        this.setDirection();
+        this.playerCtlView.view.m_ctl.m_mask.on(Laya.Event.MOUSE_MOVE, this, this.setDirection);
+    }
+
+    private setDirection(): void {
+        var pos: Laya.Point = this.playerCtlView.view.m_ctl.globalToLocal(Laya.stage.mouseX, Laya.stage.mouseY)
+        pos.x += 131;
+        pos.y += 131;
+        this.playerCtlView.view.m_ctl.m_dirBtn.x = pos.x;
+        this.playerCtlView.view.m_ctl.m_dirBtn.y = pos.y;
+        console.log("pospospospospos---", pos);
+        this.faceType = GameManager.instance.roleInfo.direction = ViewManager.instance.getPlayerDirection(pos);
+        if (this.faceType > 0) {
+            this.rolePlayer.skewY = 180;
+            this.keyRight = true;
+            this.keyLeft = false;
+            if (this.faceType == 1) {
+                this.direction = 1;
+                this.setRightRun();
+            } else {
+                this.sRun = false;
+                Laya.timer.clear(this, this.stillRun);
+            }
+        } else {
+            this.keyLeft = true;
+            this.keyRight = false;
+            this.rolePlayer.skewY = 0;
+            if (this.faceType == -1) {
+                this.direction = -1;
+                this.setLeftRun();
+            } else {
+                this.sRun = false;
+                Laya.timer.clear(this, this.stillRun);
+            }
+        }
+        this.setPlayerDir();
+    }
+
+    private addStageMouseUp(): void {
+        this.playerCtlView.view.m_ctl.m_mask.off(Laya.Event.MOUSE_MOVE, this, this.setDirection);
+    }
 
     private keyUpEvent(e: any): void {
         var keyCode: number = e["keyCode"];
@@ -104,6 +168,7 @@ export default class Player extends Laya.Script {
 
         switch (keyCode) {
             case 87:
+                // this.setFire();
                 console.log("上");
                 break;
             case 83:
@@ -111,16 +176,14 @@ export default class Player extends Laya.Script {
                 break;
             case 65:
                 this.keyLeft = true;
-                // console.log("左");
-                this.setLeft();
+                this.rolePlayer.skewY = 0;
                 if (this.sRun) return;
                 this.setRun();
                 this.stillRun();
                 break;
             case 68:
                 this.keyRight = true;
-                // console.log("右");
-                this.setRight();
+                this.rolePlayer.skewY = 180;
                 if (this.sRun) return;
                 this.setRun();
                 this.stillRun();
@@ -131,10 +194,7 @@ export default class Player extends Laya.Script {
                 this.setJump();
                 break;
             case 81:
-                console.log("扔雷");
-                if (this.sBoom) return;
-                if (GameManager.instance.roleInfo.bombNum <= 0) return;
-                this.setBoom();
+
                 break;
             case 69:
                 console.log("切枪");
@@ -143,17 +203,43 @@ export default class Player extends Laya.Script {
                 break;
         }
     }
-
-    public setLeft(): void {
-        if (this.direction == -1) return;
-        this.direction = -1;
-        this.rolePlayer.skewY = 0;
+    private onClickBomb(): void {
+        console.log("扔雷");
+        if (this.sBoom) return;
+        if (GameManager.instance.roleInfo.bombNum <= 0) return;
+        this.setBoom();
     }
 
-    public setRight(): void {
-        if (this.direction == 1) return;
-        this.direction = 1;
-        this.rolePlayer.skewY = 180;
+    private onClickJump(): void {
+        console.log("跳");
+        if (this.keyJump) return;
+        this.setJump();
+    }
+
+    public setLeftRun(): void {
+        // this.setRun();
+        // this.rolePlayer.skewY = 0;
+        if (this.sRun) return;
+        this.setRun();
+        this.stillRun();
+    }
+
+    public setRightRun(): void {
+        // this.setRun();
+        // this.keyRight = true;
+        // this.rolePlayer.skewY = 180;
+        if (this.sRun) return;
+        this.setRun();
+        this.stillRun();
+    }
+
+    private setPlayerDir(): void {
+        if (!this.sFire) {
+            this.body.url = "ui://Game/player_stay_" + this.weaponType + "_" + Math.abs(this.faceType);
+        } else {
+            this.body.url = "ui://Game/player_fire_" + this.weaponType + "_" + Math.abs(this.faceType);
+
+        }
     }
 
     private colliGround(): void {
@@ -180,7 +266,7 @@ export default class Player extends Laya.Script {
         if (this.sBoom) {
             this.setBoomComplete();
         } else if (this.sFire) {
-            this.body.url = "ui://Game/player_fire_" + this.weaponType;
+            this.body.url = "ui://Game/player_fire_" + this.weaponType + "_" + this.direction;
         }
         if (this.sRun) {
             this.bodyLeg.url = "ui://Game/legMove";
@@ -193,11 +279,11 @@ export default class Player extends Laya.Script {
 
     // private runTime: number = 50;
     public setRun(): void {
-        if (this.sRun) return;
+        // if (this.sRun) return;
         if (this.sFire) {
-            this.body.url = "ui://Game/player_fire_" + this.weaponType;
+            this.body.url = "ui://Game/player_fire_" + this.weaponType + "_" + Math.abs(this.faceType);
         } else {
-            this.body.url = "ui://Game/player_stay_" + this.weaponType;
+            this.body.url = "ui://Game/player_stay_" + this.weaponType + "_" + Math.abs(this.faceType);
         }
         this.bodyLeg.url = "ui://Game/legMove";
         this.sRun = true;
@@ -222,7 +308,7 @@ export default class Player extends Laya.Script {
             if (this.roleSprite.x - Math.abs(ViewManager.instance.warView.warView.x) >= Laya.stage.width / 2) {
                 ViewManager.instance.updateViewPort(this.speed);
             }
-        } else {
+        } else if (this.direction == -1) {
             this.roleSprite.x -= this.speed;
             if (this.roleSprite.x < Math.abs(ViewManager.instance.warView.warView.x))
                 this.roleSprite.x = Math.abs(ViewManager.instance.warView.warView.x);
@@ -234,8 +320,9 @@ export default class Player extends Laya.Script {
         if (this.sBoom) return;
         this.playWeaponSound();
         this.sFire = true;
-        this.body.url = "ui://Game/player_fire_" + this.weaponType;
+        this.body.url = "ui://Game/player_fire_" + this.weaponType + "_" + Math.abs(this.faceType);
         this.rolePlayer.m_fireType.selectedIndex = this.weaponType - 1;
+        this.setFireAniSkew();
         Laya.timer.clear(this, this.stillFire);
         this.rolePlayer["m_firePos" + this.weaponType].visible = true;
         if (this.weaponType != PlayerData.WEAPON_PIS) {
@@ -259,17 +346,34 @@ export default class Player extends Laya.Script {
     private stillFireNum: number = 1;
     private stillFire(): void {
         if (this.sBoom) return;
+
+
+        this.setFireAniSkew();
         this.stillFireNum++;
         if (this.stillFireNum % 2 == 0) {
-            this.rolePlayer["m_firePos" + this.weaponType].visible = false;
+            this.rolePlayer.m_firePos1.visible = this.rolePlayer.m_firePos2.visible = false;
         } else {
             this.rolePlayer["m_firePos" + this.weaponType].visible = true;
-            ViewManager.instance.createBullet();
         }
+        ViewManager.instance.createBullet();
         if (this.weaponType != PlayerData.WEAPON_PIS) {
             EventManager.instance.dispatcherEvt(GameEvent.USE_PLAYER_BULLET);
         }
         this.playWeaponSound();
+    }
+
+    private setFireAniSkew(): void {
+        this.rolePlayer.m_firePos.selectedIndex = Math.abs(this.faceType) - 1;
+        if (Math.abs(this.faceType) == 1) {
+            this.rolePlayer.m_firePos1.setSkew(180, 180);
+            this.rolePlayer.m_firePos2.setSkew(180, 180);
+        } else if (Math.abs(this.faceType) == 2) {
+            this.rolePlayer.m_firePos1.setSkew(160, 160);
+            this.rolePlayer.m_firePos2.setSkew(160, 160);
+        } else if (Math.abs(this.faceType) == 3) {
+            this.rolePlayer.m_firePos1.setSkew(200, 200);
+            this.rolePlayer.m_firePos2.setSkew(200, 200);
+        }
     }
 
     private rilfeComplete(): void {
@@ -282,9 +386,9 @@ export default class Player extends Laya.Script {
     private setFireEnd(): void {
         Laya.timer.clear(this, this.stillFire);
         this.sFire = false;
-        this.rolePlayer["m_firePos" + this.weaponType].visible = false;
         this.stillFireNum = 1;
-        this.body.url = "ui://Game/player_stay_" + this.weaponType;
+        this.rolePlayer.m_firePos1.visible = this.rolePlayer.m_firePos2.visible = false;
+        this.body.url = "ui://Game/player_stay_" + this.weaponType + "_" + Math.abs(this.faceType);
         this.body.content.setPlaySettings(0, -1, 0, 0);
         if (this.sRun) {
             this.bodyLeg.url = "ui://Game/legMove";
@@ -297,7 +401,7 @@ export default class Player extends Laya.Script {
 
     public setBoom(): void {
         this.sBoom = true;
-        this.rolePlayer["m_firePos" + this.weaponType].visible = false;
+        // this.rolePlayer["m_firePos" + this.weaponType].visible = false;
         EventManager.instance.dispatcherEvt(GameEvent.USE_PLAYER_BOMB);
         this.body.url = "ui://Game/player_boom_" + this.weaponType;
         this.bodybody.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.setBoomComplete));
@@ -316,9 +420,9 @@ export default class Player extends Laya.Script {
         if (this.keyJump) return;
         // this.bodyLeg.content.rewind();
         if (this.sFire)
-            this.body.url = "ui://Game/player_fire_" + this.weaponType;
+            this.body.url = "ui://Game/player_fire_" + this.weaponType + "_" + Math.abs(this.faceType);
         else
-            this.body.url = "ui://Game/player_stay_" + this.weaponType;
+            this.body.url = "ui://Game/player_stay_" + this.weaponType + "_" + Math.abs(this.faceType);
         if (this.sRun) {
             this.bodyLeg.url = "ui://Game/legMove";
             return;
@@ -338,22 +442,29 @@ export default class Player extends Laya.Script {
         this.sRun = false;
         this.keyJump = false;
         this.bodyLeg.url = "ui://Game/legStay";
-        // this.rigidBody.setVelocity({ x: 0, y: 0 });
         Laya.timer.clear(this, this.stillRun);
     }
 
     public setStay(): void {
-        this.body.url = "ui://Game/player_stay_" + this.weaponType;
-        this.stopMove();
+        if (this.faceType > 0) {
+            this.direction = 1;
+            this.rolePlayer.skewY = 180;
+        }
+        else {
+            this.direction = -1;
+            this.rolePlayer.skewY = 0;
+        }
+        this.body.url = "ui://Game/player_stay_" + this.weaponType + "_" + Math.abs(this.faceType);
         Laya.timer.clear(this, this.stillFire);
+        this.stopMove();
     }
 
     private changeWeaponType(type: number): void {
         this.weaponType = GameManager.instance.roleInfo.weaponType = type;
         if (this.sFire) {
-            this.body.url = "ui://Game/player_fire_" + this.weaponType;
+            this.body.url = "ui://Game/player_fire_" + this.weaponType + "_" + Math.abs(this.faceType);
         } else
-            this.body.url = "ui://Game/player_stay_" + this.weaponType;
+            this.body.url = "ui://Game/player_stay_" + this.weaponType + "_" + Math.abs(this.faceType);
     }
 
     private setDeath(): void {
@@ -374,11 +485,11 @@ export default class Player extends Laya.Script {
         if (r > 0.5) s = 3;
         if (r > 0.25) s = 2;
         s = 1;
-        SoundManager.instance.playSound("die" + s);
+        SoundManager.instance.playSound("die_" + s);
     }
 
     private playWeaponSound(): void {
-        SoundManager.instance.playSound("weapon" + this.weaponType);
+        SoundManager.instance.playSound("weapon_" + this.weaponType);
 
     }
 
@@ -414,10 +525,11 @@ export default class Player extends Laya.Script {
     }
 
     public dispose(): void {
-        Laya.stage.off(Laya.Event.KEY_DOWN, this, this.keyDowmEvent);
-        Laya.stage.off(Laya.Event.KEY_UP, this, this.keyUpEvent);
-        Laya.stage.off(Laya.Event.MOUSE_DOWN, this, this.setFire);
-        Laya.stage.off(Laya.Event.MOUSE_UP, this, this.setFireEnd);
+
+        this.playerCtlView.view.m_fire.off(Laya.Event.MOUSE_DOWN, this, this.setFire);
+        this.playerCtlView.view.m_fire.off(Laya.Event.MOUSE_UP, this, this.setFireEnd);
+        this.playerCtlView.view.m_bomb.off(Laya.Event.CLICK, this, this.onClickBomb);
+        this.playerCtlView.view.m_jump.off(Laya.Event.CLICK, this, this.onClickJump);
 
         EventManager.instance.offNotice(GameEvent.PLAYER_COLLISION_GROUND, this, this.colliGround);
         EventManager.instance.offNotice(GameEvent.ENEMY_BULLET_HIT_PLAYER, this, this.beHit);

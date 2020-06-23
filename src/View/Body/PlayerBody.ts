@@ -30,7 +30,7 @@ export default class PlayerBody extends Laya.Script {
         this.lastBox = other;
         // console.log(this.lastBox.label);
         if (other.label == "ground" && this.jumpEnd) {
-            console.log("jumpend");
+            // console.log("jumpend");
             this.isJump = false;
             this.jumpEnd = false;
             EventManager.instance.dispatcherEvt(GameEvent.PLAYER_COLLISION_GROUND);
@@ -42,9 +42,9 @@ export default class PlayerBody extends Laya.Script {
         }
     }
     onTriggerExit(): void {
-        console.log("onTriggerExit--");
+        // console.log("onTriggerExit--");
         if (this.lastBox.label == "ground" && this.isJump) {
-            console.log("jumpstart");
+            // console.log("jumpstart");
             this.jumpEnd = true;
         }
     }

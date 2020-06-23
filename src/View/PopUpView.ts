@@ -24,7 +24,7 @@ export default class PopUpView {
 
     private showComplete(s: boolean): void {
         if (s) {
-            console.log("showComplete---");
+            // console.log("showComplete---");
             this.v.m_mask.visible = true;
             this.v.m_mask.on(Laya.Event.CLICK, this, this.hideAllView);
         }
@@ -33,7 +33,7 @@ export default class PopUpView {
 
 
     public hideAllView(): void {
-        console.log("hidePopUpView--", this.view);
+        // console.log("hidePopUpView--", this.view);
         this.v.m_mask.off(Laya.Event.CLICK, this, this.hideAllView);
         fairygui.GRoot.inst.removeChild(this.v);
         // this.tween = Laya.Tween.from(this.view, { scaleX: 0, scaleY: 0 }, 300, null, Laya.Handler.create(this, () => {
