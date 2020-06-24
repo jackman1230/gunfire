@@ -74,7 +74,6 @@ import WXFUI_player_stay_3_2 from "./WXFUI_player_stay_3_2";
 import WXFUI_player_stay_3_3 from "./WXFUI_player_stay_3_3";
 import WXFUI_player_boom_3 from "./WXFUI_player_boom_3";
 import WXFUI_bullet1 from "./WXFUI_bullet1";
-import WXFUI_bullet2 from "./WXFUI_bullet2";
 import WXFUI_zidan from "./WXFUI_zidan";
 
 export default class GameBinder{
@@ -153,7 +152,6 @@ export default class GameBinder{
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_3_3.URL, WXFUI_player_stay_3_3);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_boom_3.URL, WXFUI_player_boom_3);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_bullet1.URL, WXFUI_bullet1);
-		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_bullet2.URL, WXFUI_bullet2);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_zidan.URL, WXFUI_zidan);
 	}
 }

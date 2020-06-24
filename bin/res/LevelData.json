@@ -3,7 +3,7 @@
     "role": {
         "blood": 3,
         "bombNum": 10,
-        "weaponType": 1,
+        "weaponType": 3,
         "addBombNum": 10,
         "addMacNum": 200,
         "addRifNum": 50
@@ -13,8 +13,8 @@
         "level_1": {
             "mapIndex": 1,
             "rolePos": [
-                1300,
-                400
+                1200,
+                470
             ],
             "warViewPos": [
                 -800,
@@ -33,7 +33,7 @@
                     ],
                     "isBoss": false,
                     "expRate": [
-                        5,
+                        3,
                         1
                     ]
                 },
@@ -1232,8 +1232,8 @@
             "level_1": {
                 "mapIndex": 1,
                 "rolePos": [
-                    1300,
-                    400
+                    1200,
+                    470
                 ],
                 "warViewPos": [
                     -800,
@@ -2941,8 +2941,8 @@
             "level_1": {
                 "mapIndex": 1,
                 "rolePos": [
-                    1034,
-                    480
+                    1200,
+                    470
                 ],
                 "warViewPos": [
                     -800,

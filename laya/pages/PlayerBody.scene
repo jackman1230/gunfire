@@ -20,7 +20,7 @@
             "switchAble":true,
             "searchKey":"BoxCollider",
             "removeAble":true,
-            "props":{"width":91,"label":"player","isSensor":false,"height":91,"friction":0,"density":10},
+            "props":{"width":91,"label":"player","isSensor":false,"height":91,"friction":0,"density":20},
             "nodeParent":2,
             "label":"BoxCollider",
             "isDirectory":false,

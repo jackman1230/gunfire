@@ -22,6 +22,7 @@ export default class Enemy {
 
     protected direction: number = 0;
     protected box: Laya.BoxCollider;
+    protected body: Laya.RigidBody;
 
     protected sRun: boolean = false;//人物是否在跑
     protected keyRight: boolean = false;
@@ -39,6 +40,7 @@ export default class Enemy {
     protected expRate: number[] = [];
     protected enemyData: EnemyInfo;
     protected isBoss: boolean = false;
+    protected isActive: boolean = false;
 
     constructor() { }
 
@@ -72,19 +74,33 @@ export default class Enemy {
         this.scene.addChild(this.enemy.displayObject);
         this.scene.addComponent(EnemyBody);
         this.box = this.scene.getComponent(Laya.BoxCollider);
+        this.body = this.scene.getComponent(Laya.RigidBody)
         this.isDeath = false;
         this.scene.x = this.pos.x;
         this.scene.y = this.pos.y;
         ViewManager.instance.warView.scene.addChild(this.scene);
+        
         EventManager.instance.addNotice(GameEvent.PLAYER_BULLET_HIT_ENEMY, this, this.beHit);
         EventManager.instance.addNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.beHit);
         EventManager.instance.addNotice(GameEvent.PAUSE_GAME, this, this.pauseGame);
+        EventManager.instance.addNotice(GameEvent.ACTIVE_ENEMY, this, this.activeEnemy);
 
         this.setDirection();
-        Laya.timer.loop(2000, this, this.setFire);
+        this.setStay();
+        // Laya.timer.loop(2000, this, this.setFire);
     }
 
-    private pauseGame(): void {
+    protected activeEnemy(s: Laya.Sprite): void {
+        //角色距离靠近至500，激活攻击
+        if (this.isActive) return;
+        if (this.box.owner == s) {
+            this.isActive = true;
+            this.setFire();
+            Laya.timer.loop(2000, this, this.setFire);
+        }
+    }
+
+    protected pauseGame(): void {
         this.bodyLoader.playing = !GameManager.instance.isPauseGame;
         if (this.enemyType == GameData.ENEMY_MOR) {
             this.bodyLoader.component.getChildAt(0).asLoader.playing = !GameManager.instance.isPauseGame;
@@ -95,7 +111,7 @@ export default class Enemy {
     public beHit(s: any): void {
         if (this.isDeath) return;
         if (s.o == this.box.owner) {
-            this.blood--;
+            this.blood -= s.d;
             Laya.timer.clear(this, this.setColor);
             if (this.blood <= 0) {
                 this.setDeath();
@@ -143,10 +159,16 @@ export default class Enemy {
             this.bodyLoader.url = "ui://Game/enemyStay_4";
         } else if (this.enemyType == GameData.ENEMY_MOR) {
             this.bodyLoader.url = "ui://Game/enemyStay_5";
+        } else if (this.enemyType == GameData.ENEMY_JUNGUAN) {
+            this.bodyLoader.url = "ui://Game/enemyStay_6";
         } else if (this.enemyType == GameData.ENEMY_TANK_1) {
             this.bodyLoader.url = "ui://Game/enemy11";
         } else if (this.enemyType == GameData.ENEMY_TANK_2) {
             this.bodyLoader.url = "ui://Game/enemy12";
+        } else if (this.enemyType == GameData.ENEMY_TANK_3) {
+            this.bodyLoader.url = "ui://Game/enemy13";
+        } else if (this.enemyType == GameData.ENEMY_TANK_4) {
+            this.bodyLoader.url = "ui://Game/enemy14";
         }
         this.bodyLoader.content.setPlaySettings(0, -1, 0, 0);
     }
@@ -264,14 +286,13 @@ export default class Enemy {
     }
 
     protected dispose(): void {
+        EventManager.instance.offNotice(GameEvent.ACTIVE_ENEMY, this, this.activeEnemy);
         EventManager.instance.offNotice(GameEvent.PAUSE_GAME, this, this.pauseGame);
         EventManager.instance.offNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.beHit);
         EventManager.instance.offNotice(GameEvent.PLAYER_BULLET_HIT_ENEMY, this, this.beHit);
         Laya.timer.clearAll(this);
         this.scene.removeSelf();
         this.view.dispose();
-        // this.scene = null;
-        // this.view = null;
         this.recover();
     }
 

@@ -47,7 +47,7 @@ export default class ObstacleView {
     public initView(): void {
         this.load.url = "ui://Game/obstacle_" + this.type;
         this.scene.addChild(this.view.displayObject);
-        this.scene.addComponent(EnemyBody);
+        // this.scene.addComponent(EnemyBody);
         this.box = this.scene.getComponent(Laya.PolygonCollider);
 
         this.isDeath = false;
@@ -63,7 +63,7 @@ export default class ObstacleView {
     public beHit(s: any): void {
         if (this.isDeath) return;
         if (s.o == this.box.owner) {
-            this.blood--;
+            this.blood -= s.d;
             Laya.timer.clear(this, this.setColor);
             if (this.blood <= 0) {
                 this.setDeath();

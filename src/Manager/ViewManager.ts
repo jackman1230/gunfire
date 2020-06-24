@@ -100,9 +100,10 @@ export class ViewManager {
         bomb.createView(type, null, parentPos, null, s);
     }
     /**创建主角子弹 */
-    public createBullet(): void {
+    public createBullet(): PlayerBullet {
         var b: PlayerBullet = Laya.Pool.getItemByClass("PlayerBullet", PlayerBullet);
         b.createView(this.rolePlayer.weaponType, this.rolePlayer.faceType);
+        return b;
     }
     /**
      * 创建敌人子弹
@@ -295,24 +296,24 @@ export class ViewManager {
     private playerBulletPos: object = {
         "11": [135, -22],//武器手枪，方向 右
         "12": [150, 0],//武器机枪，方向 右
-        "13": [],//武器来福枪，方向 右
+        "13": [50, 70],//武器来福枪，方向 右
         "21": [125, 25],//武器手枪，方向 右下
         "22": [115, 70],//武器机枪，方向 右下
-        "23": [],//武器来福枪，方向 右下
+        "23": [50, 5],//武器来福枪，方向 右下
         "31": [115, -95],//武器手枪，方向 右上
         "32": [120, -50],//武器机枪，方向 右上
-        "33": [],//武器来福枪，方向 右上
+        "33": [25, 130],//武器来福枪，方向 右上
         "14": [20, -60],//武器手雷，方向右
         "-11": [-200, -22],//武器手枪，方向 左
         "-12": [-210, 0],//武器机枪，方向 左
-        "-13": [],//武器来福枪，方向 左
+        "-13": [240, 80],//武器来福枪，方向 左
         "-14": [-20, -60],//武器手雷，方向 左
         "-21": [-190, 20],//武器手枪，方向 左下
-        "-22": [-180, 60],//武器机枪，方向 左下
-        "-23": [],//武器来福枪，方向 左下
+        "-22": [-180, 15],//武器机枪，方向 左下
+        "-23": [250, 20],//武器来福枪，方向 左下
         "-31": [-190, -90],//武器手枪，方向 左上
         "-32": [-180, -50],//武器机枪，方向 左上
-        "-33": [],//武器来福枪，方向 左上
+        "-33": [255, 130],//武器来福枪，方向 左上
     }
     /**角色子弹坐标偏移 */
     public getPlayerBulletOffSetPos(dir: number, weaponType: number): Laya.Point {

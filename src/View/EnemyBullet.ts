@@ -31,11 +31,6 @@ export default class EnemyBullet {
     private loadComplete(s: Laya.Scene): void {
         this.view = fairygui.UIPackage.createObject("Game", "zidan") as WXFUI_zidan;
         this.scene = s;
-
-        this.scene.addComponent(BulletBody);
-        this.body = this.scene.getComponent(Laya.RigidBody);
-        this.box = this.scene.getComponent(Laya.BoxCollider);
-        this.box.label = this.body.label = "enemyBullet";
         // console.log("enemyBullet.scene--loadComplete", this.box.id);
         if (this.bulletType == GameData.ENEMY_TANK_1 || this.bulletType == GameData.ENEMY_TANK_2) {
             this.view.m_zidan.url = "ui://Game/zhadan_4";
@@ -48,6 +43,8 @@ export default class EnemyBullet {
 
 
         this.setBulletPos();
+
+        EventManager.instance.addNotice(GameEvent.BULLET_DISPOSE, this, this.dispose);
         EventManager.instance.addNotice(GameEvent.ENEMY_BULLET_HIT_PLAYER, this, this.bulletHitPlayer);
         EventManager.instance.addNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.dispose);
 
@@ -55,7 +52,12 @@ export default class EnemyBullet {
 
     private setBulletPos(): void {
         var p: Laya.Point = ViewManager.instance.getEnemyBulletOffSetPos(this.direction, this.bulletType);
-
+        this.scene.x = this.parentPos.x + p.x;
+        this.scene.y = this.parentPos.y + p.y;
+        this.scene.addComponent(BulletBody);
+        this.body = this.scene.getComponent(Laya.RigidBody);
+        this.box = this.scene.getComponent(Laya.BoxCollider);
+        this.box.label = this.body.label = "enemyBullet";
         if (this.direction == 1) {
             this.view.setSkew(0, 0);
             this.body.setVelocity({ x: 10, y: 0 });
@@ -63,8 +65,6 @@ export default class EnemyBullet {
             this.view.setSkew(180, 180);
             this.body.setVelocity({ x: -10, y: 0 });
         }
-        this.scene.x = this.parentPos.x + p.x;
-        this.scene.y = this.parentPos.y + p.y;
         // console.log("parent--", this.parent.view.x, this.parent.view.y, this.scene.x, this.scene.y);
     }
 
@@ -91,6 +91,7 @@ export default class EnemyBullet {
 
     private dispose(s: Laya.Sprite): void {
         if (s == this.box.owner) {
+            EventManager.instance.offNotice(GameEvent.BULLET_DISPOSE, this, this.dispose);
             EventManager.instance.offNotice(GameEvent.ENEMY_BULLET_HIT_PLAYER, this, this.bulletHitPlayer);
             EventManager.instance.offNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.dispose);
             this.disposeAll();

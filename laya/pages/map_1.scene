@@ -2,11 +2,11 @@
     "x":0,
     "type":"Scene",
     "selectedBox":2,
-    "selecteID":37,
+    "selecteID":12,
     "searchKey":"Scene",
     "props":{"width":50,"sceneColor":"#000000","height":50},
     "nodeParent":-1,
-    "maxID":38,
+    "maxID":40,
     "label":"Scene",
     "isOpen":true,
     "isDirectory":true,
@@ -16,11 +16,25 @@
     "child":[
         {
             "x":15,
+            "type":"Sprite",
+            "searchKey":"Sprite",
+            "props":{"y":0,"x":0,"width":4900,"texture":"map_1.jpg","height":784},
+            "nodeParent":2,
+            "label":"Sprite",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":39,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
             "type":"ChainCollider",
             "switchAble":true,
             "searchKey":"ChainCollider",
             "removeAble":true,
-            "props":{"y":585,"x":1911,"points":"-825,-335,-825,-16,-4,-16,138,-42,262,-89,555,-89,676,-138,923,-138,1348,30,1553,52","label":"ground","friction":0},
+            "props":{"y":579,"x":1872,"points":"-825,-335,-825,-16,-4,-16,138,-42,262,-89,555,-89,615,-102,676,-138,923,-138,1348,30,1556,66,1554,-99,1578,7,1960,7,2197,96,3133,96","label":"ground","friction":0},
             "nodeParent":2,
             "label":"ChainCollider",
             "isOpen":true,
@@ -47,112 +61,6 @@
             "compId":13,
             "child":[
                 ]
-        },
-        {
-            "x":15,
-            "type":"ChainCollider",
-            "switchAble":true,
-            "searchKey":"ChainCollider",
-            "removeAble":true,
-            "props":{"y":459,"x":3469,"points":"353,114,572,172,1563,172","label":"ground","friction":0},
-            "nodeParent":2,
-            "label":"ChainCollider",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":18,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
-            "type":"Sprite",
-            "searchKey":"Sprite",
-            "props":{"y":479.5,"x":3426,"width":43,"visible":false,"texture":"block.png","height":156},
-            "nodeParent":2,
-            "label":"Sprite",
-            "isOpen":true,
-            "isDirectory":true,
-            "isAniNode":true,
-            "hasChild":true,
-            "compId":15,
-            "child":[
-                {
-                    "x":30,
-                    "type":"BoxCollider",
-                    "switchAble":true,
-                    "searchKey":"BoxCollider",
-                    "removeAble":true,
-                    "props":{"y":0,"x":0,"width":43,"label":"ground","height":156,"friction":0},
-                    "nodeParent":15,
-                    "label":"BoxCollider",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":16,
-                    "child":[
-                        ]
-                },
-                {
-                    "x":30,
-                    "type":"RigidBody",
-                    "switchAble":true,
-                    "searchKey":"RigidBody",
-                    "removeAble":true,
-                    "props":{"type":"static","label":"ground"},
-                    "nodeParent":15,
-                    "label":"RigidBody",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":17,
-                    "child":[
-                        ]
-                },
-                {
-                    "x":30,
-                    "type":"Sprite",
-                    "searchKey":"Sprite",
-                    "props":{"y":93,"x":41,"width":379,"texture":"block.png","rotation":0,"height":3},
-                    "nodeParent":15,
-                    "label":"Sprite",
-                    "isOpen":false,
-                    "isDirectory":true,
-                    "isAniNode":true,
-                    "hasChild":true,
-                    "compId":19,
-                    "child":[
-                        {
-                            "type":"BoxCollider",
-                            "switchAble":true,
-                            "searchKey":"BoxCollider",
-                            "removeAble":true,
-                            "props":{"width":379,"height":1,"friction":0},
-                            "nodeParent":19,
-                            "label":"BoxCollider",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":20,
-                            "child":[
-                                ]
-                        },
-                        {
-                            "type":"RigidBody",
-                            "switchAble":true,
-                            "searchKey":"RigidBody",
-                            "removeAble":true,
-                            "props":{"type":"static"},
-                            "nodeParent":19,
-                            "label":"RigidBody",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":21,
-                            "child":[
-                                ]
-                        }]
-                }]
         }],
     "animations":[
         {

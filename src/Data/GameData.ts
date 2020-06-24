@@ -17,15 +17,22 @@ export class GameData {
     public static ENEMY_FIRE: number = 4;
     /**敌人武器类型-迫击炮 */
     public static ENEMY_MOR: number = 5;
+    /**敌人武器类型-军官 */
+    public static ENEMY_JUNGUAN: number = 6;
     /**敌人武器类型-直升机 */
     public static ENEMY_CHOPPER: number = 10;
     /**敌人武器类型-灰坦克 */
     public static ENEMY_TANK_1: number = 11;
     /**敌人武器类型-黄坦克 */
     public static ENEMY_TANK_2: number = 12;
+    /**敌人武器类型-推土坦克 */
+    public static ENEMY_TANK_3: number = 13;
+    /**敌人武器类型-装甲坦克 */
+    public static ENEMY_TANK_4: number = 14;
     /**掉落随机金币最大值*/
     public static RANDOM_COIN: number = 200;
-
+    /**人物手榴弹的伤害*/
+    public static BOMB_DAMAGE: number = 5;
     /**声音文件开头的路径 */
     public static SOUND_FONT: string = "res/sound/";
 

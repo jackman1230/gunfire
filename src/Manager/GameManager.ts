@@ -188,6 +188,18 @@ export class GameManager {
     public get curLevelData(): any {
         return this.curLvData;
     }
+
+    public getPlayerBulletDamage(type: number): number {
+        if (type == GameData.WEAPON_PIS) {
+            return 1;
+        } else if (type == GameData.WEAPON_RIFLE) {
+            return 5;
+        } else if (type == GameData.WEAPON_MAC) {
+            return 2;
+        } else {
+            return 1;
+        }
+    }
 }
 
 

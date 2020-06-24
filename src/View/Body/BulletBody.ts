@@ -1,5 +1,7 @@
 import { EventManager } from "../../Manager/EventManager";
 import GameEvent from "../../Control/GameEvent";
+import { GameManager } from "../../Manager/GameManager";
+import { GameData } from "../../Data/GameData";
 
 
 export default class BulletBody extends Laya.Script {
@@ -9,14 +11,20 @@ export default class BulletBody extends Laya.Script {
 
     private oriPosX: number;
     private self: Laya.Sprite;
+    private damage: number;
+    private bulletType: number = 0;
 
     constructor() { super(); }
 
-    onEnable(): void {
+    onAwake(): void {
         this.selfCollider = this.owner.getComponent(Laya.BoxCollider);
         this.selfBody = this.selfCollider.rigidBody;
         this.self = this.owner as Laya.Sprite;
         this.oriPosX = this.self.x;
+        if (this.selfCollider.label.indexOf("PlayerBullet") > -1) {
+            this.bulletType = Number(this.selfCollider.label.substr(("PlayerBullet").length, 1));
+            this.damage = GameManager.instance.getPlayerBulletDamage(this.bulletType);
+        }
         // console.log("oriPosX--" + this.oriPosX);
 
     }
@@ -26,15 +34,15 @@ export default class BulletBody extends Laya.Script {
     }
 
     onTriggerEnter(other: Laya.BoxCollider, self: Laya.BoxCollider, contact: any): void {
-        if (self.label == "PlayerBullet") {
+        if (self.label.indexOf("PlayerBullet") > -1) {
             if (other.label == "enemy") {
                 // console.log("主角子弹击中敌人-敌人ID=", other.id);
                 // this.owner.removeSelf();
-                EventManager.instance.dispatcherEvt(GameEvent.PLAYER_BULLET_HIT_ENEMY, { o: other.owner, s: self.owner });
+                EventManager.instance.dispatcherEvt(GameEvent.PLAYER_BULLET_HIT_ENEMY, { o: other.owner, s: self.owner, d: this.damage });
             } else if (other.label == "obstacle") {
                 // console.log("主角子弹击中障碍物", other.id);
                 // this.owner.removeSelf();
-                EventManager.instance.dispatcherEvt(GameEvent.PLAYER_BULLET_HIT_OBSTACLE, { o: other.owner, s: self.owner });
+                EventManager.instance.dispatcherEvt(GameEvent.PLAYER_BULLET_HIT_OBSTACLE, { o: other.owner, s: self.owner, d: this.damage });
             }
             return;
         } else if (self.label == "enemyBullet") {
@@ -43,6 +51,7 @@ export default class BulletBody extends Laya.Script {
                 this.selfCollider.destroy();
                 EventManager.instance.dispatcherEvt(GameEvent.ENEMY_BULLET_HIT_PLAYER, { o: other.owner, s: self.owner });
             }
+            return;
         }
     }
     onTriggerExit(): void {
@@ -53,12 +62,19 @@ export default class BulletBody extends Laya.Script {
     }
 
     onUpdate(): void {
-        // console.log("self-", this.self.x);
-
-        // if (Math.abs(this.self.x) - Math.abs(this.oriPosX) > Laya.Browser.clientWidth / 2) {
-        //     console.log("bulletremoveSelf");
-        //     this.owner.removeSelf();
-        //     EventManager.instance.dispatcherEvt(GameEvent.BULLET_DISPOSE, this.owner)
-        // }
+        if (this.bulletType == GameData.WEAPON_RIFLE) return;
+        if (this.selfBody.label.indexOf("PlayerBullet") > -1) {
+            if (this.oriPosX < this.self.x) {
+                if (Math.abs(this.self.x - this.oriPosX) > Laya.stage.width * 0.6) {
+                    this.owner.removeSelf();
+                    EventManager.instance.dispatcherEvt(GameEvent.BULLET_DISPOSE, this.owner);
+                }
+            } else {
+                if (Math.abs(this.oriPosX - this.self.x) > Laya.stage.width * 0.6) {
+                    this.owner.removeSelf();
+                    EventManager.instance.dispatcherEvt(GameEvent.BULLET_DISPOSE, this.owner);
+                }
+            }
+        }
     }
 }

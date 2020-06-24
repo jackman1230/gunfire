@@ -10,6 +10,7 @@ import { GameManager } from "../Manager/GameManager";
 import { PlayerData } from "../Data/PlayerData";
 import { SoundManager } from "../Manager/SoundManager";
 import PlayerCtlView from "./PlayerCtlView";
+import PlayerBullet from "./PlayerBullet";
 
 export default class Player extends Laya.Script {
 
@@ -24,6 +25,7 @@ export default class Player extends Laya.Script {
     private keyRight: boolean = false;
     private keyLeft: boolean = false;
     private keyJump: boolean = false;
+    private stillRifle: boolean = false;
 
     private speed: number = 5;
     private jumpHigh: number = 200;
@@ -31,6 +33,7 @@ export default class Player extends Laya.Script {
 
     public roleSprite: Laya.Sprite;
     private roleBody: Laya.RigidBody;
+    private roleCol: Laya.BoxCollider;
 
     private playerCtlView: PlayerCtlView;
     public faceType: number = 1;//面朝向
@@ -50,6 +53,7 @@ export default class Player extends Laya.Script {
         var d: any = GameManager.instance.curLvData;
         this.roleSprite.x = d.rolePos[0];
         this.roleSprite.y = d.rolePos[1];
+        this.weaponType = GameManager.instance.roleInfo.weaponType;
 
         this.body = this.rolePlayer.getChildAt(0) as fairygui.GLoader;
 
@@ -57,6 +61,7 @@ export default class Player extends Laya.Script {
         this.rolePlayer.m_firePos1.visible = this.rolePlayer.m_firePos2.visible = this.rolePlayer.m_firePos3.visible = false;
 
         this.roleBody = this.roleSprite.getComponent(Laya.RigidBody);
+        this.roleCol = this.roleSprite.getComponent(Laya.BoxCollider);
 
         this.roleSprite.addChild(this.rolePlayer.displayObject);
         this.roleSprite.addComponent(PlayerBody);
@@ -64,10 +69,6 @@ export default class Player extends Laya.Script {
         this.setStay();
 
 
-        Laya.stage.on(Laya.Event.KEY_DOWN, this, this.keyDowmEvent);
-        Laya.stage.on(Laya.Event.KEY_UP, this, this.keyUpEvent);
-        Laya.stage.on(Laya.Event.MOUSE_DOWN, this, this.setFire);
-        Laya.stage.on(Laya.Event.MOUSE_UP, this, this.setFireEnd);
 
         EventManager.instance.addNotice(GameEvent.PLAYER_COLLISION_GROUND, this, this.colliGround);
         EventManager.instance.addNotice(GameEvent.ENEMY_BULLET_HIT_PLAYER, this, this.beHit);
@@ -81,6 +82,10 @@ export default class Player extends Laya.Script {
         fairygui.GRoot.inst.addChild(this.playerCtlView.view);
         // this.playerCtlView = ViewManager.instance.playerCtlView;
 
+        Laya.stage.on(Laya.Event.KEY_DOWN, this, this.keyDowmEvent);
+        Laya.stage.on(Laya.Event.KEY_UP, this, this.keyUpEvent);
+        // Laya.stage.on(Laya.Event.MOUSE_DOWN, this, this.setFire);
+        // Laya.stage.on(Laya.Event.MOUSE_UP, this, this.setFireEnd);
         this.playerCtlView.view.m_fire.on(Laya.Event.MOUSE_DOWN, this, this.setFire);
         this.playerCtlView.view.m_fire.on(Laya.Event.MOUSE_UP, this, this.setFireEnd);
         this.playerCtlView.view.m_bomb.on(Laya.Event.CLICK, this, this.onClickBomb);
@@ -107,7 +112,6 @@ export default class Player extends Laya.Script {
         pos.y += 131;
         this.playerCtlView.view.m_ctl.m_dirBtn.x = pos.x;
         this.playerCtlView.view.m_ctl.m_dirBtn.y = pos.y;
-        console.log("pospospospospos---", pos);
         this.faceType = GameManager.instance.roleInfo.direction = ViewManager.instance.getPlayerDirection(pos);
         if (this.faceType > 0) {
             this.rolePlayer.skewY = 180;
@@ -142,6 +146,9 @@ export default class Player extends Laya.Script {
     private keyUpEvent(e: any): void {
         var keyCode: number = e["keyCode"];
         switch (keyCode) {
+            case 87:
+                this.setFireEnd();
+                break;
             case 65:
                 this.keyLeft = false;
                 if (this.keyRight == false) {
@@ -165,10 +172,9 @@ export default class Player extends Laya.Script {
     private keyDowmEvent(e: any): void {
         var keyCode: number = e["keyCode"];
         // console.log(keyCode);
-
         switch (keyCode) {
             case 87:
-                // this.setFire();
+                this.setFire();
                 console.log("上");
                 break;
             case 83:
@@ -189,9 +195,9 @@ export default class Player extends Laya.Script {
                 this.stillRun();
                 break;
             case 32:
-                console.log("跳");
+                // console.log("跳");
                 // if (this.keyJump) return;
-                this.setJump();
+                // this.setJump();
                 break;
             case 81:
 
@@ -243,24 +249,27 @@ export default class Player extends Laya.Script {
     }
 
     private colliGround(): void {
-        if (this.keyJump) this.jumpEnd();
-        // if (this.jummpTween && this.keyJump)
-        //     Laya.Tween.clear(this.jummpTween);
+        if (this.keyJump)
+            this.jumpEnd();
 
     }
 
     private jummpTween: laya.utils.Tween;
     public setJump(): void {
         // if (this.sBoom) return;
-        this.setBoomComplete();
         this.keyJump = true;
+        this.setBoomComplete();
         this.bodyLeg.url = "ui://Game/legJump";
-        this.roleBody.setVelocity({ x: 0, y: -10 });
+        // this.roleBody.linearDamping = 0;
+        // this.roleCol.refresh();
+        // this.roleBody.setVelocity({ x: 0, y: -10 });
         EventManager.instance.dispatcherEvt(GameEvent.PLAYER_JUMP);
         // this.jummpTween = Laya.Tween.to(this.roleBody, { y: this.roleBody.y - this.jumpHigh }, 350, null, Laya.Handler.create(this, this.jumpEnd));
     }
 
     private jumpEnd(): void {
+        console.log("PLAYER_COLLISION_GROUND---");
+
         // this.jummpTween = Laya.Tween.to(this.roleSprite, { y: this.roleSprite.y + this.jumpHigh }, 350, null, Laya.Handler.create(this, () => {
         this.keyJump = false;
         if (this.sBoom) {
@@ -274,12 +283,10 @@ export default class Player extends Laya.Script {
             return;
         }
         this.stopMove();
-        // }));
     }
 
-    // private runTime: number = 50;
     public setRun(): void {
-        // if (this.sRun) return;
+        EventManager.instance.dispatcherEvt(GameEvent.PLAYER_RUN);
         if (this.sFire) {
             this.body.url = "ui://Game/player_fire_" + this.weaponType + "_" + Math.abs(this.faceType);
         } else {
@@ -289,7 +296,6 @@ export default class Player extends Laya.Script {
         this.sRun = true;
         Laya.timer.clear(this, this.stillRun);
         Laya.timer.frameLoop(1, this, this.stillRun);
-
     }
 
     public stillRun(): void {
@@ -318,6 +324,7 @@ export default class Player extends Laya.Script {
     public setFire(): void {
         if (this.sFire) return;
         if (this.sBoom) return;
+        if (this.stillRifle) return;
         this.playWeaponSound();
         this.sFire = true;
         this.body.url = "ui://Game/player_fire_" + this.weaponType + "_" + Math.abs(this.faceType);
@@ -328,12 +335,14 @@ export default class Player extends Laya.Script {
         if (this.weaponType != PlayerData.WEAPON_PIS) {
             EventManager.instance.dispatcherEvt(GameEvent.USE_PLAYER_BULLET);
         }
+        var b: PlayerBullet = ViewManager.instance.createBullet();
         if (this.weaponType == PlayerData.WEAPON_RIFLE) {//如果是来福枪
-            var c: fairygui.MovieClip = this.rolePlayer["m_firePos" + this.weaponType].content;
-            c.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.rilfeComplete));
+            this.stillRifle = true;
+            Laya.timer.once(700, this, this.rilfeComplete);
+            Laya.timer.loop(800, this, this.stillFire);
         } else {//如果是子弹枪
-            Laya.timer.loop(120, this, this.stillFire);
-            ViewManager.instance.createBullet();
+            this.stillRifle = false;
+            Laya.timer.loop(150, this, this.stillFire);
         }
         if (this.sRun) {
             this.bodyLeg.url = "ui://Game/legMove";
@@ -377,10 +386,7 @@ export default class Player extends Laya.Script {
     }
 
     private rilfeComplete(): void {
-        if (this.sFire) {
-            var c: fairygui.MovieClip = this.rolePlayer["m_firePos" + this.weaponType].content;
-            c.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.rilfeComplete));
-        }
+        this.stillRifle = false;
     }
 
     private setFireEnd(): void {
@@ -431,16 +437,13 @@ export default class Player extends Laya.Script {
             this.bodyLeg.url = "ui://Game/legJump";
     }
 
-    // private stopFire(): void {
-    //     this.sFire = false;
-    //     Laya.timer.clear(this, this.stillFire);
-    // }
 
     public stopMove(): void {
+        EventManager.instance.dispatcherEvt(GameEvent.PLAYER_STAY);
         this.keyLeft = false;
         this.keyRight = false;
         this.sRun = false;
-        this.keyJump = false;
+        // this.keyJump = false;
         this.bodyLeg.url = "ui://Game/legStay";
         Laya.timer.clear(this, this.stillRun);
     }
@@ -503,8 +506,6 @@ export default class Player extends Laya.Script {
         this.bodyLeg.color = "#ff0000";
         this.bodybody.color = "#ff0000";
         Laya.timer.once(200, this, this.setColor);
-
-        console.log("player--be--hit");
     }
     private setColor(): void {
         if (GameManager.instance.roleInfo.isDeath) return;

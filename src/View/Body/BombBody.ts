@@ -1,5 +1,6 @@
 import { EventManager } from "../../Manager/EventManager";
 import GameEvent from "../../Control/GameEvent";
+import { GameData } from "../../Data/GameData";
 
 
 export default class BombBody extends Laya.Script {
@@ -29,13 +30,13 @@ export default class BombBody extends Laya.Script {
         if (self.label == "PlayerBomb") {
             if (other.label == "enemy") {
                 // console.log("主角扔雷击中敌人-敌人ID=", other.id);
-                EventManager.instance.dispatcherEvt(GameEvent.PLAYER_BOMB_HIT_ENEMY, { o: other.owner, s: self.owner });
+                EventManager.instance.dispatcherEvt(GameEvent.PLAYER_BOMB_HIT_ENEMY, { o: other.owner, s: self.owner, d: GameData.BOMB_DAMAGE });
                 // EventManager.instance.dispatcherEvt(GameEvent.BOMB_DISPOSE, this.owner);
                 this.owner.removeSelf();
             } else if (other.label == "obstacle") {
                 // console.log("主角扔雷击中障碍物", other.id);
                 // EventManager.instance.dispatcherEvt(GameEvent.BOMB_DISPOSE, this.owner);
-                EventManager.instance.dispatcherEvt(GameEvent.PLAYER_BOMB_HIT_OBSTACLE, { o: other.owner, s: self.owner });
+                EventManager.instance.dispatcherEvt(GameEvent.PLAYER_BOMB_HIT_OBSTACLE, { o: other.owner, s: self.owner, d: GameData.BOMB_DAMAGE });
             }
         } else if (self.label == "enemyBomb" && other.label == "player") {
             // console.log("敌人扔雷击中主角-主角ID=", other.id);

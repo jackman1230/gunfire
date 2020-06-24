@@ -15,7 +15,6 @@
     <image id="cqp9c" name="1381.png" path="/assets/player/走-手枪/"/>
     <image id="cqp9d" name="1379.png" path="/assets/player/走-手枪/"/>
     <image id="cqp9e" name="1377.png" path="/assets/player/走-手枪/"/>
-    <image id="cqp9u" name="1564.png" path="/assets/player/斜上-手枪/"/>
     <image id="cqp91g" name="958.png" path="/assets/player/手榴弹-爆炸/"/>
     <image id="cqp91h" name="956.png" path="/assets/player/手榴弹-爆炸/"/>
     <image id="cqp91i" name="954.png" path="/assets/player/手榴弹-爆炸/"/>
@@ -282,10 +281,9 @@
     <component id="oqgwal" name="body.xml" path="/Component/player/"/>
     <component id="oqgwam" name="WarView.xml" path="/Component/view/" exported="true"/>
     <image id="oqgwan" name="2487_ls_level_0_0.jpg" path="/Component/view/"/>
-    <image id="yqv7ao" name="zidan2.png" path="/assets/zadan/" exported="true"/>
-    <image id="yqv7ap" name="zidan1.png" path="/assets/zadan/" exported="true"/>
+    <image id="yqv7ao" name="playerzidan2.png" path="/assets/zadan/" exported="true"/>
+    <image id="yqv7ap" name="playerzidan1.png" path="/assets/zadan/" exported="true"/>
     <component id="yqv7at" name="bullet1.xml" path="/Component/bullet/"/>
-    <component id="yqv7au" name="bullet2.xml" path="/Component/bullet/"/>
     <component id="yqv7ax" name="zidan.xml" path="/Component/bullet/" exported="true"/>
     <image id="yqv7ay" name="600.png" path="/assets/enemy/战立2/"/>
     <image id="yqv7az" name="598.png" path="/assets/enemy/战立2/"/>
@@ -394,7 +392,7 @@
     <movieclip id="ke5wdw" name="boom_4.jta" path="/Component/enemy/bomb/" exported="true"/>
     <movieclip id="ke5wdx" name="boom_5.jta" path="/Component/enemy/bomb/" exported="true"/>
     <component id="ke5wdy" name="player_fire_3_1.xml" path="/Component/player/" exported="true"/>
-    <movieclip id="ke5wdz" name="fire_3_1.jta" path="/Component/player/playerAni/" exported="true"/>
+    <movieclip id="ke5wdz" name="playerzidan3.jta" path="/assets/zadan/" exported="true"/>
     <movieclip id="ke5we1" name="zhadan_2.jta" path="/Component/enemy/bomb/" exported="true"/>
     <image id="ke5we2" name="1837.png" path="/assets/bomb/仍手榴弹/"/>
     <image id="ke5we3" name="1835.png" path="/assets/bomb/仍手榴弹/"/>
@@ -681,7 +679,7 @@
     <image id="tvmxxox" name="994.png" path="/assets/player/斜上-手枪/"/>
     <image id="tvmxxoy" name="992.png" path="/assets/player/斜上-手枪/"/>
     <image id="tvmxxoz" name="990.png" path="/assets/player/斜上-手枪/"/>
-    <movieclip id="tvmxxp0" name="fire_1_3.jta" path="/Component/player/playerAni/" exported="true"/>
+    <movieclip id="tvmxxp0" name="fire_1_3.jta" path="/Component/player/playerAni/"/>
     <component id="tvmxxp1" name="player_fire_2_2.xml" path="/Component/player/" exported="true"/>
     <component id="tvmxxp2" name="player_fire_2_3.xml" path="/Component/player/" exported="true"/>
     <component id="tvmxxp3" name="player_fire_1_2.xml" path="/Component/player/" exported="true"/>
@@ -695,6 +693,7 @@
     <component id="tvmxxpb" name="player_stay_3_2.xml" path="/Component/player/" exported="true"/>
     <component id="tvmxxpc" name="player_stay_3_3.xml" path="/Component/player/" exported="true"/>
     <component id="tvmxxpd" name="player_boom_3.xml" path="/Component/player/" exported="true"/>
+    <component id="tvmxxpe" name="bullet2.xml" path="/Component/bullet/"/>
   </resources>
   <publish name="Game" path="..\bin\res" packageCount="2" genCode="true" codePath="..\src\fui"/>
 </packageDescription>

@@ -4,6 +4,7 @@ import GameEvent from "../Control/GameEvent";
 import { GameManager } from "../Manager/GameManager";
 import { EventManager } from "../Manager/EventManager";
 import BulletBody from "./Body/BulletBody";
+import { GameData } from "../Data/GameData";
 
 export default class PlayerBullet {
     public scene: Laya.Sprite;
@@ -22,35 +23,34 @@ export default class PlayerBullet {
     createView(type: number, dir: number): void {
         this.bulletType = type;
         this.direction = dir;
-
-        Laya.Scene.load("Bullet.scene", Laya.Handler.create(this, this.loadComplete));
+        this.view = fairygui.UIPackage.createObject("Game", "zidan") as WXFUI_zidan;
+        this.view.m_zidan.url = "ui://Game/playerzidan" + this.bulletType;
+        if (this.bulletType == GameData.WEAPON_RIFLE) {
+            Laya.Scene.load("BulletRifle.scene", Laya.Handler.create(this, this.loadComplete));
+        } else {
+            Laya.Scene.load("Bullet.scene", Laya.Handler.create(this, this.loadComplete));
+        }
     }
 
     private loadComplete(s: Laya.Scene): void {
-        // console.log("PlayerBullet.scene--loadComplete");
-
-        this.view = fairygui.UIPackage.createObject("Game", "zidan") as WXFUI_zidan;
-        // this.zidan = this.view.getChildAt(0).asLoader;
-
         this.scene = s;
-        // this.scene.pivot(0.5, 1);
-        // this.scene.skew(15, 15);
+        ViewManager.instance.warView.scene.addChild(this.scene);
         this.scene.addComponent(BulletBody);
         this.body = this.scene.getComponent(Laya.RigidBody);
         this.box = this.scene.getComponent(Laya.BoxCollider);
-        this.box.label = this.body.label = "PlayerBullet";
-        this.view.m_zidan.url = "ui://Game/zidan" + this.bulletType;
-
-        this.scene.addChild(this.view.displayObject);
-        ViewManager.instance.warView.scene.addChild(this.scene);
+        this.box.label = this.body.label = "PlayerBullet" + this.bulletType;
+        var b: BulletBody = this.scene.getComponent(BulletBody);
+        b.onAwake();
         this.setBulletPos();
 
-        // EventManager.instance.addNotice(GameEvent.BULLET_DISPOSE, this, this.dispose);
+
+        EventManager.instance.addNotice(GameEvent.BULLET_DISPOSE, this, this.disposeBullet);
         EventManager.instance.addNotice(GameEvent.PLAYER_BULLET_HIT_ENEMY, this, this.hitEnemy);
         EventManager.instance.addNotice(GameEvent.PLAYER_BULLET_HIT_OBSTACLE, this, this.hitEnemy);
     }
 
     private hitEnemy(s: any): void {
+        if (this.bulletType == GameData.WEAPON_RIFLE) return;
         if (s.s == this.box.owner) {
             this.body.setVelocity({ x: 0, y: 0 });
             this.view.m_zidan.url = "ui://Game/bulletDisAni";
@@ -59,46 +59,87 @@ export default class PlayerBullet {
     }
 
     private disposeAll(): void {
+        EventManager.instance.offNotice(GameEvent.BULLET_DISPOSE, this, this.disposeBullet);
         EventManager.instance.offNotice(GameEvent.PLAYER_BULLET_HIT_ENEMY, this, this.hitEnemy);
         EventManager.instance.offNotice(GameEvent.PLAYER_BULLET_HIT_OBSTACLE, this, this.hitEnemy);
         Laya.Pool.recover("PlayerBullet", this);
         this.view.dispose();
         this.scene.removeSelf();
-        // this.scene = null;
-        // this.view = null;
-        // console.log("销毁子弹--PlayerBullet");
+        this.scene = null;
+        this.view = null;
+    }
+    private disposeBullet(s: Laya.Sprite): void {
+        if (s == this.body.owner) {
+            this.disposeAll();
+        }
     }
 
     private setBulletPos(): void {
         var p: Laya.Point = ViewManager.instance.getPlayerBulletOffSetPos(this.direction, this.bulletType);
-        var y: number = ViewManager.instance.bulletRandomY();
         var c: Laya.Point = (ViewManager.instance.rolePlayer.roleSprite.getComponent(Laya.RigidBody) as Laya.RigidBody).getWorldCenter();
-        if (this.direction > 0) {
-            if (this.direction == 2) {//右下
-                this.view.setSkew(25, 25);
-                this.body.setVelocity({ x: 10, y: 7 });
-            } else if (this.direction == 3) {//右上
-                this.view.setSkew(-25, -25);
-                this.body.setVelocity({ x: 10, y: -7 });
+        if (this.bulletType == GameData.WEAPON_RIFLE) {
+            this.view.x = p.x;
+            this.view.y = p.y;
+
+            this.scene.addChild(this.view.displayObject);
+            if (this.direction > 0) {
+                this.scene.x = c.x + 45;
+                if (this.direction == 2) {//右下
+                    this.scene.y = c.y;
+                    this.view.setSkew(15, 15);
+                } else if (this.direction == 3) {//右上
+                    this.scene.y = c.y - this.scene.height;
+                    this.view.setSkew(-15, -15);
+                } else {
+                    this.scene.y = c.y - this.scene.height / 2;
+                    this.view.setSkew(0, 0);//右
+                }
             } else {
-                this.view.setSkew(0, 0);//右
-                this.body.setVelocity({ x: 10, y: 0 });
+                this.scene.x = c.x - this.scene.width - 45;
+                if (this.direction == -2) {//左下
+                    this.scene.y = c.y;
+                    this.view.setSkew(165, 165);
+                } else if (this.direction == -3) {//左上
+                    this.scene.y = c.y - this.scene.height;
+                    this.view.setSkew(195, 195);
+                } else {
+                    this.scene.y = c.y - this.scene.height / 2;
+                    this.view.setSkew(180, 180);//左
+                }
             }
+            this.view.m_zidan.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.disposeAll));
         } else {
-            if (this.direction == -2) {//左下
-                this.view.setSkew(155, 155);
-                this.body.setVelocity({ x: -10, y: 7 });
-            } else if (this.direction == -3) {//左上
-                this.view.setSkew(205, 205);
-                this.body.setVelocity({ x: -10, y: -7 });
+            var y: number = ViewManager.instance.bulletRandomY();
+            this.scene.x = c.x + p.x;
+            this.scene.y = c.y - y + p.y;
+            this.scene.addComponent(BulletBody);
+            this.body = this.scene.getComponent(Laya.RigidBody);
+            this.box = this.scene.getComponent(Laya.BoxCollider);
+            this.box.label = this.body.label = "PlayerBullet";
+            if (this.direction > 0) {
+                if (this.direction == 2) {//右下
+                    this.view.setSkew(25, 25);
+                    this.body.setVelocity({ x: 10, y: 7 });
+                } else if (this.direction == 3) {//右上
+                    this.view.setSkew(-25, -25);
+                    this.body.setVelocity({ x: 10, y: -7 });
+                } else {
+                    this.view.setSkew(0, 0);//右
+                    this.body.setVelocity({ x: 10, y: 0 });
+                }
             } else {
-                this.view.setSkew(180, 180);//左
-                this.body.setVelocity({ x: -10, y: 0 });
+                if (this.direction == -2) {//左下
+                    this.view.setSkew(155, 155);
+                    this.body.setVelocity({ x: -10, y: 7 });
+                } else if (this.direction == -3) {//左上
+                    this.view.setSkew(205, 205);
+                    this.body.setVelocity({ x: -10, y: -7 });
+                } else {
+                    this.view.setSkew(180, 180);//左
+                    this.body.setVelocity({ x: -10, y: 0 });
+                }
             }
         }
-        this.scene.x = c.x + p.x;
-        this.scene.y = c.y - y + p.y;
-
     }
 
 }

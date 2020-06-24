@@ -3,15 +3,21 @@ export default class GameEvent {
 
     public static PLAYER_JUMP: string = "PLAYER_JUMP";
 
+    public static PLAYER_RUN: string = "PLAYER_RUN";
+
+    public static PLAYER_STAY: string = "PLAYER_STAY";
+
     public static PLAYER_COLLISION_GROUND: string = "PLAYER_COLLISION_GROUND";
 
-    // public static BULLET_DISPOSE: string = "BULLET_DISPOSE";
+    public static BULLET_DISPOSE: string = "BULLET_DISPOSE";
 
     public static PLAYER_BULLET_HIT_ENEMY: string = "PLAYER_BULLET_HIT_ENEMY";
 
     public static PLAYER_BULLET_HIT_OBSTACLE: string = "PLAYER_BULLET_HIT_OBSTACLE";
 
     public static ENEMY_BULLET_HIT_PLAYER: string = "ENEMY_BULLET_HIT_PLAYER";
+
+    public static ACTIVE_ENEMY: string = "ACTIVE_ENEMY";
 
     public static BOMB_DISPOSE: string = "BOMB_DISPOSE";
 

@@ -1,13 +1,21 @@
+import { GameManager } from "../../Manager/GameManager";
+import { ViewManager } from "../../Manager/ViewManager";
+import { EventManager } from "../../Manager/EventManager";
+import GameEvent from "../../Control/GameEvent";
+
 export default class EnemyBody extends Laya.Script {
 
     private selfCollider: Laya.BoxCollider;//角色碰撞体
     private selfBody: Laya.RigidBody;//角色刚体
 
+    public activeDis: number = 500;
+
     constructor() { super(); }
 
     onAwake(): void {
-        // this.selfCollider = this.owner.getComponent(Laya.BoxCollider);
-        // this.selfBody = this.selfCollider.rigidBody;
+        this.selfCollider = this.owner.getComponent(Laya.BoxCollider);
+        this.selfBody = this.selfCollider.rigidBody;
+
 
         // this.selfCollider.label = "enemy";
         // this.selfBody.label = "enemy";
@@ -30,6 +38,10 @@ export default class EnemyBody extends Laya.Script {
 
     onUpdate(): void {
         // this.setSpeedZero();
+        var p: Laya.Point = this.selfBody.getWorldCenter();
+        if (Math.abs(ViewManager.instance.rolePlayer.roleSprite.x - p.x) < this.activeDis) {
+            EventManager.instance.dispatcherEvt(GameEvent.ACTIVE_ENEMY, this.owner);
+        }
     }
     /**防止斜坡有加速度，将速度设置为0 */
     private setSpeedZero(): void {

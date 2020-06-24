@@ -7,8 +7,9 @@ export default class PlayerBody extends Laya.Script {
     private selfBody: Laya.RigidBody;//角色刚体
     private lastBox: Laya.BoxCollider;
 
-    private isJump: boolean = false;
-    private jumpEnd: boolean = false;
+    private playerState: number = 0;
+    private startJump: boolean = false;
+    private keyJump: boolean = false;
 
     constructor() { super(); }
 
@@ -17,10 +18,29 @@ export default class PlayerBody extends Laya.Script {
         this.selfBody = this.selfCollider.rigidBody;
 
         EventManager.instance.addNotice(GameEvent.PLAYER_JUMP, this, this.jump);
+        EventManager.instance.addNotice(GameEvent.PLAYER_RUN, this, this.run);
+        EventManager.instance.addNotice(GameEvent.PLAYER_STAY, this, this.stay);
+        EventManager.instance.addNotice(GameEvent.PLAYER_DEATH, this, this.death);
+
     }
 
     private jump(): void {
-        this.isJump = true;
+        this.keyJump = true;
+        this.playerState = 2;
+        this.setSpeedZero();
+        // this.jumpEnd = false;
+    }
+    private run(): void {
+        this.playerState = 1;
+        this.setSpeedZero();
+    }
+    private death(): void {
+        // this.playerState = 5;
+        // this.setSpeedZero();
+    }
+    private stay(): void {
+        this.playerState = 0;
+        this.setSpeedZero();
     }
 
     onDisable(): void {
@@ -28,32 +48,34 @@ export default class PlayerBody extends Laya.Script {
 
     onTriggerEnter(other: Laya.BoxCollider, self: Laya.BoxCollider, contact: any): void {
         this.lastBox = other;
-        // console.log(this.lastBox.label);
-        if (other.label == "ground" && this.jumpEnd) {
-            // console.log("jumpend");
-            this.isJump = false;
-            this.jumpEnd = false;
-            EventManager.instance.dispatcherEvt(GameEvent.PLAYER_COLLISION_GROUND);
+        // // console.log(this.lastBox.label);
+        if (!this.keyJump)
             this.setSpeedZero();
+        if ((this.lastBox.label == "ground" || this.lastBox.label == "obstacle") && this.startJump) {
+            console.log("jumpend");
+            this.keyJump = false;
+            this.startJump = false;
+            EventManager.instance.dispatcherEvt(GameEvent.PLAYER_COLLISION_GROUND);
         }
         if (other.label == "goods") {
             EventManager.instance.dispatcherEvt(GameEvent.PLAYER_GET_GOODS, other.owner);
-
         }
     }
     onTriggerExit(): void {
         // console.log("onTriggerExit--");
-        if (this.lastBox.label == "ground" && this.isJump) {
-            // console.log("jumpstart");
-            this.jumpEnd = true;
+        if (this.lastBox.label == "ground" || this.lastBox.label == "obstacle") {
+            if (this.keyJump) {
+                console.log("jumpstart");
+                this.startJump = true;
+            }
         }
     }
 
     onTriggerStay(other: Laya.BoxCollider, self: Laya.BoxCollider, contact: any): void {
-        if (this.isJump == false) {
-            // console.log("onTriggerStay---");
-            this.setSpeedZero();
-        }
+        // if (this.isJump == false) {
+        // console.log("onTriggerStay---");
+        // this.setSpeedZero();
+        // }
     }
 
     onUpdate(): void {
@@ -61,12 +83,20 @@ export default class PlayerBody extends Laya.Script {
     }
     /**防止斜坡有加速度，将速度设置为0 */
     private setSpeedZero(): void {
-        this.selfBody.linearVelocity = { x: 0, y: 0 };
-        this.selfBody.angularVelocity = 0;
-        this.selfBody.setVelocity({ x: 0, y: 0 });
-        this.selfBody.linearDamping = 0;
-        this.selfBody.angularDamping = 0;
-        this.selfBody.setAngle({ x: 0, y: 0 });
+        if (this.playerState == 0) {
+            this.selfBody.linearDamping = 999;
+            this.selfBody.setVelocity({ x: 0, y: 0 });
+        } else if (this.playerState == 1) {
+            this.selfBody.linearDamping = 0;
+            this.selfBody.setVelocity({ x: 0, y: 0 });
+        } else if (this.playerState == 2) {
+            // if (this.key) return;
+            this.selfBody.linearDamping = 0;
+            this.selfBody.setVelocity({ x: 0, y: -10 });
+        } else {
+            this.selfBody.linearDamping = 0;
+            this.selfBody.setVelocity({ x: 0, y: 0 });
+        }
         this.selfCollider.refresh();
     }
 }
