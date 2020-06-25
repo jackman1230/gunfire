@@ -47,6 +47,11 @@ export default class GameEvent {
 
     public static VICITORY_LEVEL: string = "VICITORY_LEVEL";
 
+    public static BUY_SHOP_ITEM: string = "BUY_SHOP_ITEM";
+
+    public static BUY_SHOP_ITEM_FREE: string = "BUY_SHOP_ITEM_FREE";
+
+
     constructor() { }
 
 

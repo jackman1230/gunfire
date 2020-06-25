@@ -19,6 +19,11 @@ export class SoundManager {
         Laya.SoundManager.playMusic("res/sound/bgm.mp3");
     }
 
+    public stopBGM(): void {
+        Laya.SoundManager.stopMusic();
+
+    }
+
     public offSound(): void {
         this.isOpenSound = !this.isOpenSound;
         if (this.isOpenSound) {

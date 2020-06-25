@@ -3,10 +3,24 @@
     "role": {
         "blood": 3,
         "bombNum": 10,
-        "weaponType": 3,
+        "weaponType": 2,
         "addBombNum": 10,
         "addMacNum": 200,
         "addRifNum": 50
+    },
+    "shop": {
+        "item_2": {
+            "type": 2,
+            "coin": 500,
+            "name": "冲锋枪子弹x200",
+            "num": 200
+        },
+        "item_3": {
+            "type": 4,
+            "coin": 1000,
+            "name": "手榴弹x20",
+            "num": 20
+        }
     },
     "chapter_1": {
         "maxLevelNum": 8,

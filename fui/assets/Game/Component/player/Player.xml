@@ -3,12 +3,12 @@
   <controller name="firePos" exported="true" pages="0,,1,,2," selected="2"/>
   <controller name="fireType" pages="0,,1,,2," selected="1"/>
   <displayList>
-    <loader id="n12_msdc" name="body" xy="45,45" pivot="0.5,0.5" anchor="true" size="91,91" url="ui://bq3h5instvmxxp2" align="center" vAlign="middle" autoSize="true"/>
+    <loader id="n12_msdc" name="body" xy="45,45" pivot="0.5,0.5" anchor="true" size="91,91" url="ui://bq3h5insmsdc5k" align="center" vAlign="middle" autoSize="true"/>
     <loader id="n13_yqv7" name="firePos1" xy="-58,-26" pivot="0.5,0.5" anchor="true" size="58,28" skew="180,180" url="ui://bq3h5insyqv7at" autoSize="true">
       <gearDisplay controller="fireType" pages="0"/>
       <gearXY controller="firePos" pages="0,1,2" values="-69,17|-77,44|-58,-26"/>
     </loader>
-    <loader id="n14_yqv7" name="firePos2" xy="-49,19" pivot="0.5,0.5" anchor="true" size="50,50" skew="195,195" url="ui://bq3h5insyqv7au" align="center" vAlign="middle" autoSize="true">
+    <loader id="n14_yqv7" name="firePos2" xy="-49,19" pivot="0.5,0.5" anchor="true" size="50,50" skew="195,195" url="ui://bq3h5instvmxxpe" align="center" vAlign="middle" autoSize="true">
       <gearDisplay controller="fireType" pages="1"/>
       <gearXY controller="firePos" pages="0,1,2" values="-49,47|-51,82|-49,19"/>
     </loader>

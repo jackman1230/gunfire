@@ -11,7 +11,7 @@ export default class WXFUI_buyItem extends fairygui.GComponent {
 	public m_buy:WXFUI_buyBtn;
 	public m_coin:fairygui.GTextField;
 	public m_free:WXFUI_freeBtn;
-	public m_n9:fairygui.GLoader;
+	public m_icon:fairygui.GLoader;
 	public m_info:fairygui.GTextField;
 
 	public static URL:string = "ui://bq3h5insdr1tnm";
@@ -31,7 +31,7 @@ export default class WXFUI_buyItem extends fairygui.GComponent {
 		this.m_buy = <WXFUI_buyBtn><any>(this.getChild("buy"));
 		this.m_coin = <fairygui.GTextField><any>(this.getChild("coin"));
 		this.m_free = <WXFUI_freeBtn><any>(this.getChild("free"));
-		this.m_n9 = <fairygui.GLoader><any>(this.getChild("n9"));
+		this.m_icon = <fairygui.GLoader><any>(this.getChild("icon"));
 		this.m_info = <fairygui.GTextField><any>(this.getChild("info"));
 	}
 }

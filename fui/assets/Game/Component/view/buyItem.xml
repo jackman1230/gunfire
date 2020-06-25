@@ -7,7 +7,7 @@
     <component id="n7_dr1t" name="buy" src="dr1tno" fileName="Component/btn/buyBtn.xml" xy="188,-2"/>
     <text id="n6_dr1t" name="coin" xy="129,4" size="69,24" font="SimHei" fontSize="20" color="#ffffff" vAlign="middle" autoSize="none" singleLine="true" text="2000"/>
     <component id="n8_dr1t" name="free" src="dr1tnp" fileName="Component/btn/freeBtn.xml" xy="106,35"/>
-    <loader id="n9_dr1t" name="n9" xy="23,16" pivot="0.5,0.5" size="50,50" align="center" vAlign="middle"/>
+    <loader id="n9_dr1t" name="icon" xy="23,16" pivot="0.5,0.5" size="50,50" align="center" vAlign="middle"/>
     <text id="n11_dr1t" name="info" xy="-10,86" size="121,24" font="SimHei" fontSize="16" color="#ffffff" align="center" vAlign="middle" leading="1" letterSpacing="-1" autoSize="none" singleLine="true" text="获得冲锋枪 x 1"/>
   </displayList>
 </component>

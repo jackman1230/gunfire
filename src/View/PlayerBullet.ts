@@ -39,8 +39,6 @@ export default class PlayerBullet {
         this.body = this.scene.getComponent(Laya.RigidBody);
         this.box = this.scene.getComponent(Laya.BoxCollider);
         this.box.label = this.body.label = "PlayerBullet" + this.bulletType;
-        var b: BulletBody = this.scene.getComponent(BulletBody);
-        b.onAwake();
         this.setBulletPos();
 
 
@@ -65,8 +63,6 @@ export default class PlayerBullet {
         Laya.Pool.recover("PlayerBullet", this);
         this.view.dispose();
         this.scene.removeSelf();
-        this.scene = null;
-        this.view = null;
     }
     private disposeBullet(s: Laya.Sprite): void {
         if (s == this.body.owner) {
@@ -80,8 +76,9 @@ export default class PlayerBullet {
         if (this.bulletType == GameData.WEAPON_RIFLE) {
             this.view.x = p.x;
             this.view.y = p.y;
-
             this.scene.addChild(this.view.displayObject);
+            var b: BulletBody = this.scene.getComponent(BulletBody);
+            b.onAwake();
             if (this.direction > 0) {
                 this.scene.x = c.x + 45;
                 if (this.direction == 2) {//右下
@@ -112,10 +109,9 @@ export default class PlayerBullet {
             var y: number = ViewManager.instance.bulletRandomY();
             this.scene.x = c.x + p.x;
             this.scene.y = c.y - y + p.y;
-            this.scene.addComponent(BulletBody);
-            this.body = this.scene.getComponent(Laya.RigidBody);
-            this.box = this.scene.getComponent(Laya.BoxCollider);
-            this.box.label = this.body.label = "PlayerBullet";
+            this.scene.addChild(this.view.displayObject);
+            var b: BulletBody = this.scene.getComponent(BulletBody);
+            b.onAwake();
             if (this.direction > 0) {
                 if (this.direction == 2) {//右下
                     this.view.setSkew(25, 25);

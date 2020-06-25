@@ -1,9 +1,10 @@
 import { ViewManager } from "./ViewManager";
-import { PlayerInfo, EnemyInfo, ObstacleInfo } from "../Data/PlayerData";
-import { GameData } from "../Data/GameData";
+import { PlayerInfo, EnemyInfo, ObstacleInfo, PlayerData } from "../Data/PlayerData";
+import { GameData, GoodsType } from "../Data/GameData";
 import Player from "../View/Player";
 import { EventManager } from "./EventManager";
 import GameEvent from "../Control/GameEvent";
+import { SoundManager } from "./SoundManager";
 
 export class GameManager {
     private static _instance: GameManager;
@@ -64,6 +65,7 @@ export class GameManager {
     public goFirstPage(): void {
         ViewManager.instance.hidePopUpView(null, true);
         ViewManager.instance.showChapterView();
+        Laya.SoundManager.stopMusic();
     }
 
     /**暂停后继续游戏 */
@@ -104,7 +106,6 @@ export class GameManager {
     }
 
     public gotoNextLevel(): void {
-        // ViewManager.instance.warView.warView.x = 0;
         this.curLevel++;
         if (this.curLevel > this.maxLevel) {
             this.curChapter++;
@@ -114,6 +115,7 @@ export class GameManager {
             this.curLevelData = this.levelData["chapter_" + this.curChapter]["level_" + this.curLevel];
             this.playerInfo.curlvCoin = 0;
             ViewManager.instance.createWarView();
+            SoundManager.instance.playBGM();
         }
 
     }
@@ -174,6 +176,17 @@ export class GameManager {
                 d.type = t.type;
                 ViewManager.instance.createObstacle(d);
             }
+        }
+    }
+
+    public buyShopItem(d: any): void {
+        if (d.type == GoodsType.GoodsType_MED) {
+            GameManager.instance.roleInfo.blood++;
+        } else if (d.type == GoodsType.GoodsType_MAC) {
+            GameManager.instance.roleInfo.weaponType = PlayerData.WEAPON_MAC;
+            GameManager.instance.roleInfo.bulletNum += d.num;
+        } else if (d.type == GoodsType.GoodsType_GRE) {
+            GameManager.instance.roleInfo.bombNum += d.num;
         }
     }
 

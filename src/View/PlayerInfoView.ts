@@ -21,6 +21,8 @@ export default class PlayerInfoView {
         EventManager.instance.addNotice(GameEvent.USE_PLAYER_BOMB, this, this.decBombNum);
         EventManager.instance.addNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.decPlayerBlood);
         EventManager.instance.addNotice(GameEvent.ENEMY_BULLET_HIT_PLAYER, this, this.decPlayerBlood);
+        // EventManager.instance.addNotice(GameEvent.BUY_SHOP_ITEM, this, this.buyShopItem);
+        // EventManager.instance.addNotice(GameEvent.BUY_SHOP_ITEM_FREE, this, this.decPlayerBlood);
 
 
         this.updateBulletNum();
@@ -31,8 +33,9 @@ export default class PlayerInfoView {
 
     }
 
+
     private pauseGame(): void {
-        SoundManager.instance.playSound("btn_click");
+        SoundManager.instance.playSound("btn_press");
         GameManager.instance.suspendGame();
     }
 

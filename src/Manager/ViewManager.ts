@@ -22,6 +22,7 @@ import AfterWar from "../View/AfterWar";
 import BeforeWar from "../View/BeforeWar";
 import PopUpView from "../View/PopUpView";
 import { GameManager } from "./GameManager";
+import TipsPopView from "../View/TipsPopView";
 
 export class ViewManager {
 
@@ -40,6 +41,7 @@ export class ViewManager {
     public afterWar: AfterWar;
     public beforeWar: BeforeWar;
 
+    public tipsView: TipsPopView;
     public popUpView: PopUpView;
     public playerInfoView: PlayerInfoView;
     public playerCtlView: PlayerCtlView;
@@ -186,6 +188,7 @@ export class ViewManager {
         this.suspendView = new SuspendView();
         this.chapterView = new ChapterView();
         this.popUpView = new PopUpView();
+        this.tipsView = new TipsPopView();
 
         this.afterWar.createView();
         this.beforeWar.createView();
@@ -195,6 +198,12 @@ export class ViewManager {
         Laya.stage.addChild(fairygui.GRoot.inst.displayObject);
 
     }
+
+    /**显示弹窗 */
+    public showTipsView(str: string): void {
+        this.tipsView.showView(str);
+    }
+
     public curPopView: PopUpView[] = [];
     /**显示弹窗 */
     public showPopUpView(p: PopUpView, showMask: boolean = true, hideOther: boolean = false): void {

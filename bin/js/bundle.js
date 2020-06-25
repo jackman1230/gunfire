@@ -103,6 +103,8 @@
     GameEvent.USE_PLAYER_BULLET = "USE_PLAYER_BULLET";
     GameEvent.PAUSE_GAME = "PAUSE_GAME";
     GameEvent.VICITORY_LEVEL = "VICITORY_LEVEL";
+    GameEvent.BUY_SHOP_ITEM = "BUY_SHOP_ITEM";
+    GameEvent.BUY_SHOP_ITEM_FREE = "BUY_SHOP_ITEM_FREE";
 
     class PlayerBody extends Laya.Script {
         constructor() {
@@ -1240,8 +1242,6 @@
             this.body = this.scene.getComponent(Laya.RigidBody);
             this.box = this.scene.getComponent(Laya.BoxCollider);
             this.box.label = this.body.label = "PlayerBullet" + this.bulletType;
-            var b = this.scene.getComponent(BulletBody);
-            b.onAwake();
             this.setBulletPos();
             EventManager.instance.addNotice(GameEvent.BULLET_DISPOSE, this, this.disposeBullet);
             EventManager.instance.addNotice(GameEvent.PLAYER_BULLET_HIT_ENEMY, this, this.hitEnemy);
@@ -1263,8 +1263,6 @@
             Laya.Pool.recover("PlayerBullet", this);
             this.view.dispose();
             this.scene.removeSelf();
-            this.scene = null;
-            this.view = null;
         }
         disposeBullet(s) {
             if (s == this.body.owner) {
@@ -1278,6 +1276,8 @@
                 this.view.x = p.x;
                 this.view.y = p.y;
                 this.scene.addChild(this.view.displayObject);
+                var b = this.scene.getComponent(BulletBody);
+                b.onAwake();
                 if (this.direction > 0) {
                     this.scene.x = c.x + 45;
                     if (this.direction == 2) {
@@ -1314,10 +1314,9 @@
                 var y = ViewManager.instance.bulletRandomY();
                 this.scene.x = c.x + p.x;
                 this.scene.y = c.y - y + p.y;
-                this.scene.addComponent(BulletBody);
-                this.body = this.scene.getComponent(Laya.RigidBody);
-                this.box = this.scene.getComponent(Laya.BoxCollider);
-                this.box.label = this.body.label = "PlayerBullet";
+                this.scene.addChild(this.view.displayObject);
+                var b = this.scene.getComponent(BulletBody);
+                b.onAwake();
                 if (this.direction > 0) {
                     if (this.direction == 2) {
                         this.view.setSkew(25, 25);
@@ -1749,7 +1748,7 @@
             this.view.m_pause.onClick(this, this.pauseGame);
         }
         pauseGame() {
-            SoundManager.instance.playSound("btn_click");
+            SoundManager.instance.playSound("btn_press");
             GameManager.instance.suspendGame();
         }
         changePlayerGoods(t) {
@@ -1916,7 +1915,7 @@
             this.view.m_back.onClick(this, this.goFirstPage);
         }
         goFirstPage() {
-            SoundManager.instance.playSound("btn_click");
+            SoundManager.instance.playSound("btn_press");
             GameManager.instance.goFirstPage();
         }
     }
@@ -1976,7 +1975,7 @@
             }
         }
         chooseLevel(l) {
-            SoundManager.instance.playSound("btn_click");
+            SoundManager.instance.playSound("btn_press");
             console.log("选择第" + GameManager.instance.curChapter + "章，" + "第" + l + "关");
             if (l > GameManager.instance.gotoMaxLevel)
                 return;
@@ -2021,18 +2020,18 @@
             this.view.m_coin.text = " " + GameManager.instance.roleInfo.curlvCoin + " ";
         }
         continueGame() {
-            SoundManager.instance.playSound("btn_click");
+            SoundManager.instance.playSound("btn_press");
             ViewManager.instance.showChapterView();
         }
         restartGame() {
-            SoundManager.instance.playSound("btn_click");
+            SoundManager.instance.playSound("btn_press");
             GameManager.instance.restartGame();
         }
         continueGameByVideo() {
-            SoundManager.instance.playSound("btn_click");
+            SoundManager.instance.playSound("btn_press");
         }
         returnHandle() {
-            SoundManager.instance.playSound("btn_click");
+            SoundManager.instance.playSound("btn_press");
             GameManager.instance.goFirstPage();
         }
     }
@@ -2061,11 +2060,77 @@
         createView() {
             this.view = WXFUI_BeforeWar.createInstance();
             this.view.m_enter.onClick(this, this.enterGame);
+            this.shopData = GameManager.instance.levelData.shop;
+            this.view.m_item_1.visible = this.view.m_item_2.visible = this.view.m_item_3.visible = this.view.m_item_4.visible = false;
+            var index = 0;
+            for (const key in this.shopData) {
+                if (this.shopData.hasOwnProperty(key)) {
+                    index++;
+                    var d = this.shopData[key];
+                    this.view["m_item_" + index].visible = true;
+                    this.view["m_item_" + index].m_coin.text = d.coin + "";
+                    this.view["m_item_" + index].m_info.text = d.name;
+                    this.view["m_item_" + index].m_icon.url = "ui://Game/goods_" + d.type;
+                    this.view["m_item_" + index].m_buy.onClick(this, this.buyItem, [d]);
+                    this.view["m_item_" + index].m_free.onClick(this, this.buyItemByFree, [d]);
+                }
+            }
+        }
+        buyItem(d) {
+            GameManager.instance.roleInfo.totalCoin = 20000;
+            if (GameManager.instance.roleInfo.totalCoin < d.coin) {
+                ViewManager.instance.showTipsView("金币不足！");
+                return;
+            }
+            else {
+                ViewManager.instance.showTipsView("金币-" + d.coin);
+                GameManager.instance.roleInfo.totalCoin -= d.coin;
+                GameManager.instance.buyShopItem(d);
+            }
+        }
+        buyItemByFree(d) {
+            ViewManager.instance.showTipsView("敬请期待！@_@");
+            EventManager.instance.dispatcherEvt(GameEvent.BUY_SHOP_ITEM_FREE, d);
         }
         enterGame() {
-            SoundManager.instance.playSound("btn_click");
+            SoundManager.instance.playSound("btn_press");
             GameManager.instance.enterGame();
             ViewManager.instance.hidePopUpView(this, true);
+        }
+    }
+
+    class WXFUI_TipsPopView extends fairygui.GComponent {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "TipsPopView"));
+        }
+        onConstruct() {
+            this.m_tips = (this.getChild("tips"));
+            this.m_play = this.getTransition("play");
+        }
+    }
+    WXFUI_TipsPopView.URL = "ui://bq3h5insugvixpf";
+
+    class TipsPopView {
+        constructor() {
+            this.isShow = false;
+            this.v = WXFUI_TipsPopView.createInstance();
+        }
+        showView(str) {
+            if (this.isShow)
+                return;
+            this.isShow = true;
+            this.v.x = (Laya.stage.width - this.v.width) / 2;
+            this.v.y = (Laya.stage.height - this.v.height) / 2;
+            this.v.m_tips.text = str;
+            Laya.stage.addChildAt(this.v.displayObject, 1);
+            this.v.m_play.play(Laya.Handler.create(this, this.hideView), 1, 0, 0);
+        }
+        hideView() {
+            Laya.stage.removeChild(this.v.displayObject);
+            this.isShow = false;
         }
     }
 
@@ -2215,11 +2280,15 @@
             this.suspendView = new SuspendView();
             this.chapterView = new ChapterView();
             this.popUpView = new PopUpView();
+            this.tipsView = new TipsPopView();
             this.afterWar.createView();
             this.beforeWar.createView();
             this.suspendView.createView();
             this.chapterView.createView();
             Laya.stage.addChild(fairygui.GRoot.inst.displayObject);
+        }
+        showTipsView(str) {
+            this.tipsView.showView(str);
         }
         showPopUpView(p, showMask = true, hideOther = false) {
             if (hideOther) {
@@ -2458,6 +2527,18 @@
                 }
             }
         }
+        buyShopItem(d) {
+            if (d.type == GoodsType.GoodsType_MED) {
+                GameManager.instance.roleInfo.blood++;
+            }
+            else if (d.type == GoodsType.GoodsType_MAC) {
+                GameManager.instance.roleInfo.weaponType = PlayerData.WEAPON_MAC;
+                GameManager.instance.roleInfo.bulletNum += d.num;
+            }
+            else if (d.type == GoodsType.GoodsType_GRE) {
+                GameManager.instance.roleInfo.bombNum += d.num;
+            }
+        }
         get roleInfo() {
             return this.playerInfo;
         }
@@ -2691,7 +2772,7 @@
             this.m_buy = (this.getChild("buy"));
             this.m_coin = (this.getChild("coin"));
             this.m_free = (this.getChild("free"));
-            this.m_n9 = (this.getChild("n9"));
+            this.m_icon = (this.getChild("icon"));
             this.m_info = (this.getChild("info"));
         }
     }
@@ -3487,6 +3568,20 @@
     }
     WXFUI_player_boom_3.URL = "ui://bq3h5instvmxxpd";
 
+    class WXFUI_bullet2 extends fairygui.GComponent {
+        constructor() {
+            super();
+        }
+        static createInstance() {
+            return (fairygui.UIPackage.createObject("Game", "bullet2"));
+        }
+        onConstruct() {
+            this.m_n3 = (this.getChild("n3"));
+            this.m_n4 = (this.getChild("n4"));
+        }
+    }
+    WXFUI_bullet2.URL = "ui://bq3h5instvmxxpe";
+
     class WXFUI_bullet1 extends fairygui.GComponent {
         constructor() {
             super();
@@ -3589,6 +3684,8 @@
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_3_2.URL, WXFUI_player_stay_3_2);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_3_3.URL, WXFUI_player_stay_3_3);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_boom_3.URL, WXFUI_player_boom_3);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_bullet2.URL, WXFUI_bullet2);
+            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_TipsPopView.URL, WXFUI_TipsPopView);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_bullet1.URL, WXFUI_bullet1);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_zidan.URL, WXFUI_zidan);
         }
