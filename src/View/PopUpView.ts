@@ -12,21 +12,22 @@ export default class PopUpView {
         this.v = WXFUI_PopUpView.createInstance();
     }
 
-    public showView(showMask: boolean = true): void {
+    public showView(showMask: boolean = true, clickMaskHide: boolean = true): void {
         Laya.Tween.clearAll(this);
         this.v.addChild(this.view);
         fairygui.GRoot.inst.addChild(this.v);
         this.view.setPivot(0.5, 0.5);
         this.view.setScale(0.4, 0.4);
-        this.tween = Laya.Tween.to(this.view, { scaleX: 1, scaleY: 1 }, 250, null, Laya.Handler.create(this, this.showComplete, [showMask]));
+        this.tween = Laya.Tween.to(this.view, { scaleX: 1, scaleY: 1 }, 250, null, Laya.Handler.create(this, this.showComplete, [showMask, clickMaskHide]));
 
     }
 
-    private showComplete(s: boolean): void {
+    private showComplete(s: boolean, c: boolean): void {
         if (s) {
             // console.log("showComplete---");
             this.v.m_mask.visible = true;
-            this.v.m_mask.on(Laya.Event.CLICK, this, this.hideAllView);
+            if (c)
+                this.v.m_mask.on(Laya.Event.CLICK, this, this.hideAllView);
         }
         this.view.setScale(1, 1);
     }

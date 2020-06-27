@@ -13,20 +13,20 @@ export class PlayerData {
 }
 
 export class PlayerInfo {
-    public blood: number;
-    public bulletNum: number;
-    public bombNum: number;
-    public weaponType: number;
+    public blood: number = 0;
+    public bulletNum: number = 0;
+    public bombNum: number = 0;
+    public weaponType: number = 0;
     public rolePos: Laya.Point;
-    public isDeath: boolean;
-    public addMacNum: number;
-    public addBombNum: number;
-    public addRifNum: number;
-    public curChapter: number;
-    public curLevel: number;
-    public totalCoin: number;
-    public curlvCoin: number;
-    public direction: number;
+    public isDeath: boolean = false;
+    public addMacNum: number = 0;
+    public addBombNum: number = 0;
+    public addRifNum: number = 0;
+    public curChapter: number = 0;
+    public curLevel: number = 0;
+    public totalCoin: number = 0;
+    public curlvCoin: number = 0;
+    public direction: number = 0;
 
     constructor() {
     }

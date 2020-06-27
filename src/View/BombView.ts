@@ -12,8 +12,6 @@ import { SoundManager } from "../Manager/SoundManager";
 export default class BombView {
     public scene: Laya.Sprite;
     public view: WXFUI_Bomb;
-    // public bomb: fairygui.GLoader;
-    // public bomb2: fairygui.GLoader;
     public trans: fairygui.Transition;
 
     public bombType: number = 1;
@@ -69,10 +67,10 @@ export default class BombView {
         ViewManager.instance.warView.scene.addChild(this.scene);
         this.setBombPos();
 
+        EventManager.instance.addNotice(GameEvent.CLEAR_WAR_VIEW, this, this.disposeAll);
         EventManager.instance.addNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.dispose);
         EventManager.instance.addNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.dispose);
         EventManager.instance.addNotice(GameEvent.BOMB_DISPOSE, this, this.dispose);
-
     }
 
     protected setBombPos(): void {
@@ -80,7 +78,6 @@ export default class BombView {
             this.body.setVelocity({ x: 7, y: -6 });
             if (this.bombType == BombData.BOMB_MOR)
                 this.trans.play(null, 1, 0, 0, 1.25);
-
         } else {
             this.body.setVelocity({ x: -7, y: -6 });
             if (this.bombType == BombData.BOMB_MOR)
@@ -91,10 +88,8 @@ export default class BombView {
 
     }
 
-
     protected showBoomView(): void {
         SoundManager.instance.playSound("boom");
-
         var bomb: BoomView = Laya.Pool.getItemByClass("boomView", BoomView);
         var p: Laya.Point = ViewManager.instance.getBodyCenterPos(this.scene);
         bomb.createView(ViewManager.instance.getBoomAniTypeByBomb(this.bombType), p, this.isPlayer);
@@ -103,14 +98,18 @@ export default class BombView {
     protected dispose(s: any): void {
         if (s.s == this.box.owner) {
             this.showBoomView();
-            EventManager.instance.offNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.dispose);
-            EventManager.instance.offNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.dispose);
-            EventManager.instance.offNotice(GameEvent.BOMB_DISPOSE, this, this.dispose);
-            Laya.Pool.recover("bombView", this);
-            this.view.dispose();
-            this.scene.removeSelf();
-            // console.log("销毁炸弹--", this.bombType);
+            this.disposeAll();
         }
+    }
+
+    protected disposeAll(): void {
+        EventManager.instance.offNotice(GameEvent.CLEAR_WAR_VIEW, this, this.disposeAll);
+        EventManager.instance.offNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.dispose);
+        EventManager.instance.offNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.dispose);
+        EventManager.instance.offNotice(GameEvent.BOMB_DISPOSE, this, this.dispose);
+        Laya.Pool.recover("bombView", this);
+        if (this.view) this.view.dispose();
+        this.scene.removeSelf();
     }
 
 }

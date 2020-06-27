@@ -2,7 +2,7 @@
 <component size="262,262" pivot="0.5,0.5" anchor="true">
   <displayList>
     <image id="n0_iasd" name="bg" src="dhhtj6" fileName="assets/playerInfo/方向底框(1).png" xy="0,0" pivot="0.5,0.5" anchor="true" size="262,262"/>
-    <component id="n1_iasd" name="dirBtn" src="iasdl2" fileName="Component/view/dirBtn.xml" xy="0,0" pivot="0.5,0.5" anchor="true"/>
-    <loader id="n3_tvmx" name="mask" xy="0,0" pivot="0.5,0.5" anchor="true" size="262,262"/>
+    <component id="n1_iasd" name="dirBtn" src="iasdl2" fileName="Component/view/dirBtn.xml" xy="3,-139" pivot="0.5,0.5" anchor="true"/>
+    <loader id="n3_tvmx" name="mask" xy="0,0" pivot="0.5,0.5" anchor="true" size="700,800"/>
   </displayList>
 </component>

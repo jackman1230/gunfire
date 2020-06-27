@@ -59,6 +59,9 @@ export default class Enemy {
         this.pos = d.pos;
         this.expRate = d.expRate.concat();
         this.isBoss = d.isBoss;
+        this.isActive = false;
+        this.isDeath = false;
+        Laya.timer.clearAll(this);
     }
 
     public loadComplete(s: Laya.Sprite) {
@@ -79,11 +82,14 @@ export default class Enemy {
         this.scene.x = this.pos.x;
         this.scene.y = this.pos.y;
         ViewManager.instance.warView.scene.addChild(this.scene);
-        
+
         EventManager.instance.addNotice(GameEvent.PLAYER_BULLET_HIT_ENEMY, this, this.beHit);
         EventManager.instance.addNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.beHit);
         EventManager.instance.addNotice(GameEvent.PAUSE_GAME, this, this.pauseGame);
         EventManager.instance.addNotice(GameEvent.ACTIVE_ENEMY, this, this.activeEnemy);
+        EventManager.instance.addNotice(GameEvent.CLEAR_WAR_VIEW, this, this.dispose);
+
+
 
         this.setDirection();
         this.setStay();
@@ -93,6 +99,7 @@ export default class Enemy {
     protected activeEnemy(s: Laya.Sprite): void {
         //角色距离靠近至500，激活攻击
         if (this.isActive) return;
+        if (this.isDeath) return;
         if (this.box.owner == s) {
             this.isActive = true;
             this.setFire();
@@ -151,6 +158,7 @@ export default class Enemy {
     }
 
     public setIdle(): void {
+        if (this.isDeath) return;
         if (this.enemyType == GameData.ENEMY_PIS || this.enemyType == GameData.ENEMY_GRE) {
             this.bodyLoader.url = "ui://Game/enemyIdle_1";
         } else if (this.enemyType == GameData.ENEMY_MAC) {
@@ -174,12 +182,14 @@ export default class Enemy {
     }
 
     public setRun(): void {
+        if (this.isDeath) return;
         if (this.sRun) return;
         this.bodyLoader.url = "ui://Game/enemy_run_" + this.enemyType;
         this.bodyLoader.content.setPlaySettings(0, -1, 0, 0);
     }
 
     public stillRun(): void {
+        if (this.isDeath) return;
         if (this.direction == 1) {
             this.scene.x += this.speed;
             if (this.scene.x >= Laya.Browser.clientWidth / 2) {
@@ -194,6 +204,7 @@ export default class Enemy {
 
     public setFire(): void {
         // Laya.timer.once(3000, this, this.setFire);
+        if (this.isDeath) return;
         if (this.enemyType == GameData.ENEMY_PIS || this.enemyType == GameData.ENEMY_GRE) {
             if (this.getRandomFire() == 1) {//手枪
                 SoundManager.instance.playSound("enemy_fire");
@@ -286,13 +297,14 @@ export default class Enemy {
     }
 
     protected dispose(): void {
+        EventManager.instance.offNotice(GameEvent.CLEAR_WAR_VIEW, this, this.dispose);
         EventManager.instance.offNotice(GameEvent.ACTIVE_ENEMY, this, this.activeEnemy);
         EventManager.instance.offNotice(GameEvent.PAUSE_GAME, this, this.pauseGame);
         EventManager.instance.offNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.beHit);
         EventManager.instance.offNotice(GameEvent.PLAYER_BULLET_HIT_ENEMY, this, this.beHit);
         Laya.timer.clearAll(this);
         this.scene.removeSelf();
-        this.view.dispose();
+        if (this.view) this.view.dispose();
         this.recover();
     }
 

@@ -4,6 +4,7 @@ import { EventManager } from "../Manager/EventManager";
 import Enemy from "./Enemy";
 import { EnemyInfo } from "../Data/PlayerData";
 import { GameManager } from "../Manager/GameManager";
+import { SoundManager } from "../Manager/SoundManager";
 
 export default class Tank extends Enemy {
     constructor() { super() }
@@ -14,27 +15,16 @@ export default class Tank extends Enemy {
         Laya.Scene.load("TankBody" + this.enemyType + ".scene", Laya.Handler.create(this, this.loadComplete));
     };
 
-
-    // public initView(): void {
-    //     this.enemy.url = "ui://Game/enemy" + this.enemyType;
-    //     this.scene.addChild(this.enemy.displayObject);
-    //     this.scene.addComponent(EnemyBody);
-    //     this.box = this.scene.getComponent(Laya.BoxCollider);
-
-    //     this.isDeath = false;
-
-    //     this.scene.x = this.pos.x;
-    //     this.scene.y = this.pos.y;
-    //     ViewManager.instance.warView.scene.addChild(this.scene);
-    //     EventManager.instance.addNotice(GameEvent.PLAYER_BULLET_HIT_ENEMY, this, this.beHit);
-    //     EventManager.instance.addNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.beHit);
-
-    //     this.setDirection();
-    //     // Laya.timer.loop(2000, this, this.setFire);
-    // }
-
-
-
+    protected activeEnemy(s: Laya.Sprite): void {
+        //角色距离靠近至500，激活攻击
+        if (this.isActive) return;
+        if (this.isDeath) return;
+        if (this.box.owner == s) {
+            this.isActive = true;
+            this.setFire();
+            Laya.timer.loop(2000, this, this.setFire);
+        }
+    }
 
     // public setRun(): void {
     //     if (this.sRun) return;
@@ -62,7 +52,6 @@ export default class Tank extends Enemy {
 
     }
 
-
     protected tankShotComplete(): void {
         this.setIdle();
     }
@@ -77,7 +66,8 @@ export default class Tank extends Enemy {
         if (this.isBoss) {
             GameManager.instance.bossDeath = true;
         }
-        this.createGoods();
+        SoundManager.instance.playSound("boom");
+        // this.createGoods();
     }
 
     protected recover(): void {

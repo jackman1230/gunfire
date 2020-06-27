@@ -7,6 +7,8 @@ import { SoundManager } from "../Manager/SoundManager";
 export default class ChapterView extends PopUpView {
 
     public view: WXFUI_ChapterView;
+    private showSet: boolean = true;
+    private showVolume: boolean = true;
     constructor() { super() }
 
     createView(): void {
@@ -15,6 +17,11 @@ export default class ChapterView extends PopUpView {
         for (let t = 1; t <= GameManager.instance.maxLevel; t++) {
             this.view["m_level_" + t].on(Laya.Event.CLICK, this, this.chooseLevel, [t]);
         }
+
+        this.view.m_share.m_share1.onClick(this, this.shareHandle1);
+        this.view.m_share.m_share2.onClick(this, this.shareHandle2);
+        this.view.m_set.onClick(this, this.showSetView);
+        this.view.m_setView.m_vol.onClick(this, this.setVolume);
         this.updateView();
     }
 
@@ -40,7 +47,23 @@ export default class ChapterView extends PopUpView {
         if (l > GameManager.instance.gotoMaxLevel) return;//所点击的关卡超过所通过的最大关卡
         GameManager.instance.choiseLevel = l;
         ViewManager.instance.showBeforeWarView();
+    }
 
+    private setVolume(): void {
+        this.showVolume = !this.showVolume;
+        SoundManager.instance.offSound();
+    }
 
+    private showSetView(): void {
+        this.showSet = !this.showSet;
+        this.view.m_setView.visible = this.showSet;
+    }
+
+    private shareHandle1(): void {
+        ViewManager.instance.showTipsView("敬请期待！");
+    }
+
+    private shareHandle2(): void {
+        ViewManager.instance.showTipsView("敬请期待！");
     }
 }

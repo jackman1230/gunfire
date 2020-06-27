@@ -66,10 +66,6 @@ export default class Player extends Laya.Script {
         this.roleSprite.addChild(this.rolePlayer.displayObject);
         this.roleSprite.addComponent(PlayerBody);
 
-        this.setStay();
-
-
-
         EventManager.instance.addNotice(GameEvent.PLAYER_COLLISION_GROUND, this, this.colliGround);
         EventManager.instance.addNotice(GameEvent.ENEMY_BULLET_HIT_PLAYER, this, this.beHit);
         EventManager.instance.addNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.beHit);
@@ -94,6 +90,7 @@ export default class Player extends Laya.Script {
         this.playerCtlView.view.m_ctl.m_mask.on(Laya.Event.MOUSE_UP, this, this.addCtlViewMouseUp);
         Laya.stage.on(Laya.Event.MOUSE_UP, this, this.addStageMouseUp);
 
+        this.addCtlViewMouseUp();
     }
 
     private addCtlViewMouseUp(): void {
@@ -110,8 +107,17 @@ export default class Player extends Laya.Script {
         var pos: Laya.Point = this.playerCtlView.view.m_ctl.globalToLocal(Laya.stage.mouseX, Laya.stage.mouseY)
         pos.x += 131;
         pos.y += 131;
+
         this.playerCtlView.view.m_ctl.m_dirBtn.x = pos.x;
         this.playerCtlView.view.m_ctl.m_dirBtn.y = pos.y;
+        if (pos.x > 130)
+            this.playerCtlView.view.m_ctl.m_dirBtn.x = 130;
+        if (pos.x < -130)
+            this.playerCtlView.view.m_ctl.m_dirBtn.x = -130;
+        if (pos.y > 130)
+            this.playerCtlView.view.m_ctl.m_dirBtn.y = 130;
+        if (pos.y < -130)
+            this.playerCtlView.view.m_ctl.m_dirBtn.y = -130;
         this.faceType = GameManager.instance.roleInfo.direction = ViewManager.instance.getPlayerDirection(pos);
         if (this.faceType > 0) {
             this.rolePlayer.skewY = 180;
@@ -256,21 +262,19 @@ export default class Player extends Laya.Script {
 
     private jummpTween: laya.utils.Tween;
     public setJump(): void {
-        // if (this.sBoom) return;
         this.keyJump = true;
         this.setBoomComplete();
         this.bodyLeg.url = "ui://Game/legJump";
-        // this.roleBody.linearDamping = 0;
-        // this.roleCol.refresh();
-        // this.roleBody.setVelocity({ x: 0, y: -10 });
+
+        this.jummpTween = Laya.Tween.to(this.roleSprite, { y: this.roleSprite.y - this.jumpHigh }, 350, null, Laya.Handler.create(this, this.jumpHighHandle));
+    }
+
+    private jumpHighHandle(): void {
         EventManager.instance.dispatcherEvt(GameEvent.PLAYER_JUMP);
-        // this.jummpTween = Laya.Tween.to(this.roleBody, { y: this.roleBody.y - this.jumpHigh }, 350, null, Laya.Handler.create(this, this.jumpEnd));
     }
 
     private jumpEnd(): void {
         console.log("PLAYER_COLLISION_GROUND---");
-
-        // this.jummpTween = Laya.Tween.to(this.roleSprite, { y: this.roleSprite.y + this.jumpHigh }, 350, null, Laya.Handler.create(this, () => {
         this.keyJump = false;
         if (this.sBoom) {
             this.setBoomComplete();
@@ -465,7 +469,9 @@ export default class Player extends Laya.Script {
     private changeWeaponType(type: number): void {
         this.weaponType = GameManager.instance.roleInfo.weaponType = type;
         if (this.sFire) {
-            this.body.url = "ui://Game/player_fire_" + this.weaponType + "_" + Math.abs(this.faceType);
+            Laya.timer.clear(this, this.stillFire);
+            this.sFire = false;
+            this.setFire();
         } else
             this.body.url = "ui://Game/player_stay_" + this.weaponType + "_" + Math.abs(this.faceType);
     }

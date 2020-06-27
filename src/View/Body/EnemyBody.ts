@@ -8,7 +8,7 @@ export default class EnemyBody extends Laya.Script {
     private selfCollider: Laya.BoxCollider;//角色碰撞体
     private selfBody: Laya.RigidBody;//角色刚体
 
-    public activeDis: number = 500;
+    public activeDis: number = 600;
 
     constructor() { super(); }
 
@@ -16,9 +16,6 @@ export default class EnemyBody extends Laya.Script {
         this.selfCollider = this.owner.getComponent(Laya.BoxCollider);
         this.selfBody = this.selfCollider.rigidBody;
 
-
-        // this.selfCollider.label = "enemy";
-        // this.selfBody.label = "enemy";
     }
 
     onDisable(): void {

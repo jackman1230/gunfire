@@ -40,5 +40,7 @@
     </component>
     <loader id="n27_dr1t" name="title" xy="567,40" pivot="0.5,0.5" size="199,63" url="ui://bq3h5insn8quly" align="center" vAlign="middle"/>
     <component id="n28_dr1t" name="share" src="dr1to2" fileName="Component/view/share.xml" xy="1121,25"/>
+    <component id="n31_ugvi" name="set" src="dr1to5" fileName="Component/btn/setting.xml" xy="35,25"/>
+    <component id="n32_ugvi" name="setView" src="ugvixpg" fileName="Component/view/setting.xml" xy="122,37"/>
   </displayList>
 </component>

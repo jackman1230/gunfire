@@ -37,10 +37,12 @@ export class WarView {
     }
 
     public dispose(): void {
+        this.scene.removeChildren();
         this.scene.removeSelf();
+        this.warView.removeChildren();
+        fairygui.GRoot.inst.removeChildren();
         this.warView.dispose();
-        this.scene = null;
-        this.warView = null;
+        Laya.Physics.I.worldRoot = null;
         this.recover();
     }
 

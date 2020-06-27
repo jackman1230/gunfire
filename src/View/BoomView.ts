@@ -55,6 +55,7 @@ export default class BoomView {
 
         this.setBoomViewPos();
 
+        EventManager.instance.addNotice(GameEvent.CLEAR_WAR_VIEW, this, this.dispose);
 
         // EventManager.instance.addNotice(GameEvent.BULLET_DISPOSE, this, this.dispose);
     }
@@ -62,8 +63,6 @@ export default class BoomView {
     private setBoomViewPos(): void {
         this.scene.x = this.pos.x - this.scene.width / 2;
         this.scene.y = this.pos.y - this.scene.height / 2;
-        // this.scene.x = p.x;
-        // this.scene.y = p.y;
     }
 
     private showComplete(): void {
@@ -76,12 +75,9 @@ export default class BoomView {
     }
 
     private dispose(): void {
-        // if (s == this.scene) {
-        // EventManager.instance.offNotice(GameEvent.BULLET_DISPOSE, this, this.dispose);
+        EventManager.instance.offNotice(GameEvent.CLEAR_WAR_VIEW, this, this.dispose);
         Laya.Pool.recover("boomView", this);
-        this.view.dispose();
+        if (this.view) this.view.dispose();
         this.scene.removeSelf();
-        // console.log("销毁子弹--enemyBullet");
-        // }
     }
 }

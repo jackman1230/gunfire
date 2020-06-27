@@ -5,17 +5,19 @@ import Player from "../View/Player";
 import { EventManager } from "./EventManager";
 import GameEvent from "../Control/GameEvent";
 import { SoundManager } from "./SoundManager";
+import { SaveManager } from "./SaveManager";
 
 export class GameManager {
     private static _instance: GameManager;
     private playerInfo: PlayerInfo;//角色数据
-    public curLevel: number = 0;//当前正在战斗的关卡
+    public curLevel: number = 1;//当前正在战斗的关卡
     public curChapter: number = 1;//当前第几个章节
     public curLvData: any;//当前关卡数据
     public levelData: any;//levelData.json 中的所有数据
     public maxLevel: number = 10;//当前章节最大关卡数
     public maxChapter: number = 1;//章节最大数
     public gotoMaxLevel: number = 1;//当前章节所通过的最大关卡
+    public gotoMaxChapter: number = 1;//当前所通过的最大章节
     public choiseLevel: number = 1;//当前选择的关卡
 
     public bossDeath: boolean = false;//当前关卡boss是否阵亡
@@ -40,25 +42,33 @@ export class GameManager {
     }
 
     private initChapterConfig(): void {
-        this.curChapter = 1;
+        var l: string = SaveManager.instance.getGameData("level");
+        var c: string = SaveManager.instance.getGameData("chapter");
+        if (l && c && l.length > 0 && c.length > 0) {
+            this.curChapter = Number(c);
+            this.curLevel = Number(l);
+        } else {
+            this.curChapter = 1;
+            this.curLevel = 1
+        }
         this.levelData = Laya.loader.getRes("res/LevelData.json");
         this.maxLevel = this.levelData["chapter_" + this.curChapter].maxLevelNum;
         this.maxChapter = this.levelData["maxChapter"];
     }
     /**跳到指定关卡 */
     public goPointToLevel(l: number): void {
-        this.curLevel = --l;
-        this.gotoNextLevel();
+        this.curLevel = l;
+        this.goLevelGame();
     }
 
     public enterGame(): void {
-        this.curLevel = --this.choiseLevel;
-        this.gotoNextLevel();
+        this.curLevel = this.choiseLevel;
+        this.goLevelGame();
     }
 
     /**返回首页 */
     public goBack(): void {
-
+        this.goFirstPage();
     }
 
     /**返回首页 */
@@ -90,34 +100,41 @@ export class GameManager {
     }
 
     public victoryGame(): void {
+        EventManager.instance.dispatcherEvt(GameEvent.CLEAR_WAR_VIEW);
         this.bossDeath = false;
+        this.curLevel++;
         if (this.gotoMaxLevel <= this.curLevel)
-            this.gotoMaxLevel++;
+            this.gotoMaxLevel = this.curLevel;
+        if (this.curLevel > this.maxLevel && this.curChapter == this.gotoMaxChapter) {
+            this.gotoMaxChapter++;
+            this.curLevel = 1;
+        }
         ViewManager.instance.showAfterWarView(1);
-
+        SaveManager.instance.saveGameData("level", this.gotoMaxLevel + "");
+        SaveManager.instance.saveGameData("chapter", this.gotoMaxChapter + "");
+        SoundManager.instance.playSound("gameOver");
     }
 
     /**重新开始当前关卡 */
     public restartGame(): void {//
         ViewManager.instance.hidePopUpView(null, true);
-        this.curLevel--;
-        if (this.curLevel < 0) this.curLevel = 0;
-        this.gotoNextLevel();
+        // this.curLevel--;
+        if (this.curLevel < 1) this.curLevel = 1;
+        this.goLevelGame();
     }
 
     public gotoNextLevel(): void {
-        this.curLevel++;
-        if (this.curLevel > this.maxLevel) {
-            this.curChapter++;
-        }
+        ViewManager.instance.hidePopUpView(ViewManager.instance.afterWar);
+        this.goLevelGame();
+    }
+    private goLevelGame(): void {
         if (this.levelData["chapter_" + this.curChapter]) {
             this.maxLevel = this.levelData["chapter_" + this.curChapter].maxLevelNum;
             this.curLevelData = this.levelData["chapter_" + this.curChapter]["level_" + this.curLevel];
             this.playerInfo.curlvCoin = 0;
             ViewManager.instance.createWarView();
-            SoundManager.instance.playBGM();
+            // SoundManager.instance.playBGM();
         }
-
     }
 
     private initRoleData(): void {
@@ -126,7 +143,7 @@ export class GameManager {
         this.playerInfo.bombNum = this.levelData.role.bombNum;
         this.playerInfo.weaponType = this.levelData.role.weaponType;
         this.playerInfo.blood = this.levelData.role.blood;
-        this.playerInfo.bulletNum = this.levelData.role.bulletNum;
+        // this.playerInfo.bulletNum = this.levelData.role.bulletNum;
         this.playerInfo.addBombNum = this.levelData.role.addBombNum;
         this.playerInfo.addMacNum = this.levelData.role.addMacNum;
         this.playerInfo.addRifNum = this.levelData.role.addRifNum;
@@ -152,7 +169,7 @@ export class GameManager {
                 d.direction = t.direction;
                 d.isBoss = t.isBoss;
                 d.type = t.type;
-                if (d.type == GameData.ENEMY_TANK_1 || d.type == GameData.ENEMY_TANK_2) {
+                if (d.type == GameData.ENEMY_TANK_1 || d.type == GameData.ENEMY_TANK_2 || d.type == GameData.ENEMY_TANK_3 || d.type == GameData.ENEMY_TANK_4) {
                     ViewManager.instance.createTank(d);
                 } else if (d.type == GameData.ENEMY_CHOPPER) {
                     ViewManager.instance.createChopper(d);

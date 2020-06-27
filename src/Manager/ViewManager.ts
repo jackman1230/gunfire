@@ -23,6 +23,8 @@ import BeforeWar from "../View/BeforeWar";
 import PopUpView from "../View/PopUpView";
 import { GameManager } from "./GameManager";
 import TipsPopView from "../View/TipsPopView";
+import { EventManager } from "./EventManager";
+import GameEvent from "../Control/GameEvent";
 
 export class ViewManager {
 
@@ -165,7 +167,7 @@ export class ViewManager {
     public showAfterWarView(type: number): void {
         this.afterWar.view.m_ctl.selectedIndex = type - 1;
         this.afterWar.updateCoin();
-        this.showPopUpView(this.afterWar);
+        this.showPopUpView(this.afterWar, true, true, false);
     }
 
     public showBeforeWarView(): void {
@@ -206,7 +208,7 @@ export class ViewManager {
 
     public curPopView: PopUpView[] = [];
     /**显示弹窗 */
-    public showPopUpView(p: PopUpView, showMask: boolean = true, hideOther: boolean = false): void {
+    public showPopUpView(p: PopUpView, showMask: boolean = true, hideOther: boolean = false, clickMaskHide: boolean = true): void {
         if (hideOther) {
             for (let i = 0; i < this.curPopView.length; i++) {
                 var t: PopUpView = this.curPopView[i];
@@ -214,7 +216,7 @@ export class ViewManager {
             }
             this.curPopView.length = 0;
         }
-        p.showView(showMask);
+        p.showView(showMask, clickMaskHide);
         this.curPopView.push(p);
     }
     /**隐藏弹窗 */

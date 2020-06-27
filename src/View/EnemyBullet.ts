@@ -44,6 +44,7 @@ export default class EnemyBullet {
 
         this.setBulletPos();
 
+        EventManager.instance.addNotice(GameEvent.CLEAR_WAR_VIEW, this, this.disposeAll);
         EventManager.instance.addNotice(GameEvent.BULLET_DISPOSE, this, this.dispose);
         EventManager.instance.addNotice(GameEvent.ENEMY_BULLET_HIT_PLAYER, this, this.bulletHitPlayer);
         EventManager.instance.addNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.dispose);
@@ -79,21 +80,18 @@ export default class EnemyBullet {
         }
     }
     private disposeAll(): void {
-        // EventManager.instance.offNotice(GameEvent.ENEMY_BULLET_HIT_PLAYER, this, this.bulletHitPlayer);
-        // EventManager.instance.offNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.dispose);
-        // console.log("enemyBullet--disposeAll");
+        EventManager.instance.offNotice(GameEvent.CLEAR_WAR_VIEW, this, this.disposeAll);
+        EventManager.instance.offNotice(GameEvent.BULLET_DISPOSE, this, this.dispose);
+        EventManager.instance.offNotice(GameEvent.ENEMY_BULLET_HIT_PLAYER, this, this.bulletHitPlayer);
+        EventManager.instance.offNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.dispose);
 
-        Laya.Pool.recover("enemyBullet", this);
-        this.view.displayObject.destroy();
         this.scene.removeSelf();
-        // console.log("销毁子弹--enemyBullet");
+        this.view.dispose();
+        Laya.Pool.recover("enemyBullet", this);
     }
 
     private dispose(s: Laya.Sprite): void {
         if (s == this.box.owner) {
-            EventManager.instance.offNotice(GameEvent.BULLET_DISPOSE, this, this.dispose);
-            EventManager.instance.offNotice(GameEvent.ENEMY_BULLET_HIT_PLAYER, this, this.bulletHitPlayer);
-            EventManager.instance.offNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.dispose);
             this.disposeAll();
         }
     }

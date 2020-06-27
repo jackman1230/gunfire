@@ -652,7 +652,7 @@
     <component id="dr1to2" name="share.xml" path="/Component/view/" exported="true"/>
     <component id="dr1to3" name="shareBtn1.xml" path="/Component/btn/"/>
     <component id="dr1to4" name="shareBtn2.xml" path="/Component/btn/"/>
-    <component id="dr1to5" name="setting.xml" path="/Component/btn/"/>
+    <component id="dr1to5" name="setBtn.xml" path="/Component/btn/"/>
     <component id="mtpio6" name="PopUpView.xml" path="/Component/view/" exported="true"/>
     <image id="mtpio8" name="mask2.png" path="/Component/view/" scale="9grid" scale9grid="25,25,50,50"/>
     <image id="10sixob" name="goods_5.png" path="/Component/goods/" exported="true"/>
@@ -695,6 +695,9 @@
     <component id="tvmxxpd" name="player_boom_3.xml" path="/Component/player/" exported="true"/>
     <component id="tvmxxpe" name="bullet2.xml" path="/Component/bullet/"/>
     <component id="ugvixpf" name="TipsPopView.xml" path="/Component/view/" exported="true"/>
+    <component id="ugvixpg" name="setting.xml" path="/Component/view/" exported="true"/>
+    <component id="ugvixpi" name="volume.xml" path="/Component/view/" exported="true"/>
+    <component id="cdcoxpj" name="enemy_fire_14.xml" path="/Component/enemy/" exported="true"/>
   </resources>
   <publish name="Game" path="..\bin\res" packageCount="2" genCode="true" codePath="..\src\fui"/>
 </packageDescription>

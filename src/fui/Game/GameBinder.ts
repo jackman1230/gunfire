@@ -1,5 +1,6 @@
 /** This is an automatically generated class by FairyGUI. Please do not modify it. **/
 
+import WXFUI_enemy_fire_14 from "./WXFUI_enemy_fire_14";
 import WXFUI_jumpBtn from "./WXFUI_jumpBtn";
 import WXFUI_fireBtn from "./WXFUI_fireBtn";
 import WXFUI_throwBtn from "./WXFUI_throwBtn";
@@ -28,6 +29,7 @@ import WXFUI_nextChapter from "./WXFUI_nextChapter";
 import WXFUI_share from "./WXFUI_share";
 import WXFUI_shareBtn1 from "./WXFUI_shareBtn1";
 import WXFUI_shareBtn2 from "./WXFUI_shareBtn2";
+import WXFUI_setBtn from "./WXFUI_setBtn";
 import WXFUI_enemy11 from "./WXFUI_enemy11";
 import WXFUI_enemy12 from "./WXFUI_enemy12";
 import WXFUI_Bomb from "./WXFUI_Bomb";
@@ -75,11 +77,14 @@ import WXFUI_player_stay_3_3 from "./WXFUI_player_stay_3_3";
 import WXFUI_player_boom_3 from "./WXFUI_player_boom_3";
 import WXFUI_bullet2 from "./WXFUI_bullet2";
 import WXFUI_TipsPopView from "./WXFUI_TipsPopView";
+import WXFUI_setting from "./WXFUI_setting";
+import WXFUI_volume from "./WXFUI_volume";
 import WXFUI_bullet1 from "./WXFUI_bullet1";
 import WXFUI_zidan from "./WXFUI_zidan";
 
 export default class GameBinder{
 	public static bindAll():void {
+		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy_fire_14.URL, WXFUI_enemy_fire_14);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_jumpBtn.URL, WXFUI_jumpBtn);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_fireBtn.URL, WXFUI_fireBtn);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_throwBtn.URL, WXFUI_throwBtn);
@@ -108,6 +113,7 @@ export default class GameBinder{
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_share.URL, WXFUI_share);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_shareBtn1.URL, WXFUI_shareBtn1);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_shareBtn2.URL, WXFUI_shareBtn2);
+		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_setBtn.URL, WXFUI_setBtn);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy11.URL, WXFUI_enemy11);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy12.URL, WXFUI_enemy12);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_Bomb.URL, WXFUI_Bomb);
@@ -155,6 +161,8 @@ export default class GameBinder{
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_boom_3.URL, WXFUI_player_boom_3);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_bullet2.URL, WXFUI_bullet2);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_TipsPopView.URL, WXFUI_TipsPopView);
+		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_setting.URL, WXFUI_setting);
+		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_volume.URL, WXFUI_volume);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_bullet1.URL, WXFUI_bullet1);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_zidan.URL, WXFUI_zidan);
 	}

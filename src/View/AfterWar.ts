@@ -26,7 +26,8 @@ export default class AfterWar extends PopUpView {
     }
     private continueGame(): void {
         SoundManager.instance.playSound("btn_click");
-        ViewManager.instance.showChapterView();
+        // ViewManager.instance.showChapterView();
+        GameManager.instance.gotoNextLevel();
     }
 
     private restartGame(): void {

@@ -47,6 +47,7 @@ export default class GoodsView {
         ViewManager.instance.warView.scene.addChild(this.scene);
         this.setBombPos();
 
+        EventManager.instance.addNotice(GameEvent.CLEAR_WAR_VIEW, this, this.clearView);
         EventManager.instance.addNotice(GameEvent.PLAYER_GET_GOODS, this, this.dispose);
 
     }
@@ -62,13 +63,18 @@ export default class GoodsView {
     private dispose(s: Laya.Sprite): void {
         if (s == this.box.owner) {
             SoundManager.instance.playSound("get_goods");
-            EventManager.instance.offNotice(GameEvent.PLAYER_GET_GOODS, this, this.dispose);
-            EventManager.instance.dispatcherEvt(GameEvent.CHANGE_PLAYER_GOODS, this.type);
-
-            this.scene.removeSelf();
-            this.view.dispose();
-            Laya.Pool.recover("goods", this);
+            this.clearView();
         }
+    }
+    private clearView(): void {
+        EventManager.instance.offNotice(GameEvent.CLEAR_WAR_VIEW, this, this.clearView);
+        EventManager.instance.offNotice(GameEvent.PLAYER_GET_GOODS, this, this.dispose);
+        EventManager.instance.dispatcherEvt(GameEvent.CHANGE_PLAYER_GOODS, this.type);
+
+        this.view.removeChildren();
+        if (this.view) this.view.dispose();
+        this.scene.removeSelf();
+        Laya.Pool.recover("goods", this);
     }
 
 

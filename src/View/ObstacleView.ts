@@ -47,7 +47,6 @@ export default class ObstacleView {
     public initView(): void {
         this.load.url = "ui://Game/obstacle_" + this.type;
         this.scene.addChild(this.view.displayObject);
-        // this.scene.addComponent(EnemyBody);
         this.box = this.scene.getComponent(Laya.PolygonCollider);
 
         this.isDeath = false;
@@ -55,6 +54,8 @@ export default class ObstacleView {
         this.scene.x = this.pos.x;
         this.scene.y = this.pos.y;
         ViewManager.instance.warView.scene.addChild(this.scene);
+
+        EventManager.instance.addNotice(GameEvent.CLEAR_WAR_VIEW, this, this.dispose);
         EventManager.instance.addNotice(GameEvent.PLAYER_BOMB_HIT_OBSTACLE, this, this.beHit);
         EventManager.instance.addNotice(GameEvent.PLAYER_BULLET_HIT_OBSTACLE, this, this.beHit);
 
@@ -84,14 +85,11 @@ export default class ObstacleView {
         Laya.timer.clearAll(this);
         this.load.url = "ui://Game/boom_" + ViewManager.instance.getBoomAniTypeByObsType(this.type);;
         this.load.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
-        SoundManager.instance.playSound("obstacleBoom")
-        // var p: Laya.Point = new Laya.Point();
-        // p.x = this.scene.x + this.scene.width / 2;
-        // p.y = this.scene.y + this.scene.height / 2;
-        // ViewManager.instance.createGoods(1, p);
+        SoundManager.instance.playSound("obstacleBoom");
     }
 
     protected dispose(): void {
+        EventManager.instance.offNotice(GameEvent.CLEAR_WAR_VIEW, this, this.dispose);
         EventManager.instance.offNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.beHit);
         EventManager.instance.offNotice(GameEvent.PLAYER_BULLET_HIT_ENEMY, this, this.beHit);
         Laya.timer.clearAll(this);

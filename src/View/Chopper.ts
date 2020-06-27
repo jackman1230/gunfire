@@ -21,6 +21,17 @@ export default class Chopper extends Enemy {
         Laya.Scene.load("ChopperBody.scene", Laya.Handler.create(this, this.loadComplete));
     };
 
+    protected activeEnemy(s: Laya.Sprite): void {
+        //角色距离靠近至500，激活攻击
+        if (this.isActive) return;
+        if (this.isDeath) return;
+        if (this.box.owner == s) {
+            this.isActive = true;
+            this.setFire();
+            Laya.timer.loop(2000, this, this.setFire);
+        }
+    }
+
     public setFire(): void {
         var p: Laya.Point = new Laya.Point(this.view.width / 2, this.view.height)
         ViewManager.instance.createChopperBomb(BombData.BOMB_CHOPPER, ViewManager.instance.getBodyCenterPos(this.scene), p);
@@ -39,18 +50,12 @@ export default class Chopper extends Enemy {
         if (this.isBoss) {
             GameManager.instance.bossDeath = true;
         }
-        this.createGoods();
+        SoundManager.instance.playSound("boom");
+        // this.createGoods();
     }
 
     protected recover(): void {
         Laya.Pool.recover("chopper", this);
     }
 
-    public get component(): fairygui.GComponent {
-        return this.enemy.component;
-    }
-
-    public get bodyLoader(): fairygui.GLoader {
-        return this.enemy.component.getChildAt(0).asLoader;
-    }
 }

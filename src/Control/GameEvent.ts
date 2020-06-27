@@ -51,6 +51,8 @@ export default class GameEvent {
 
     public static BUY_SHOP_ITEM_FREE: string = "BUY_SHOP_ITEM_FREE";
 
+    public static CLEAR_WAR_VIEW: string = "CLEAR_WAR_VIEW";
+
 
     constructor() { }
 

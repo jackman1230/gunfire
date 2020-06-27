@@ -47,14 +47,14 @@ export default class PlayerBody extends Laya.Script {
     }
 
     onTriggerEnter(other: Laya.BoxCollider, self: Laya.BoxCollider, contact: any): void {
-        this.lastBox = other;
-        // // console.log(this.lastBox.label);
-        if (!this.keyJump)
-            this.setSpeedZero();
-        if ((this.lastBox.label == "ground" || this.lastBox.label == "obstacle") && this.startJump) {
-            console.log("jumpend");
+        // this.lastBox = other;
+        // console.log("onTriggerEnter---");
+        // if (!this.keyJump)
+        this.setSpeedZero();
+        if ((other.label == "ground" || other.label == "obstacle") && this.keyJump) {
+            //     console.log("jumpend");
             this.keyJump = false;
-            this.startJump = false;
+            //     this.startJump = false;
             EventManager.instance.dispatcherEvt(GameEvent.PLAYER_COLLISION_GROUND);
         }
         if (other.label == "goods") {
@@ -63,12 +63,12 @@ export default class PlayerBody extends Laya.Script {
     }
     onTriggerExit(): void {
         // console.log("onTriggerExit--");
-        if (this.lastBox.label == "ground" || this.lastBox.label == "obstacle") {
-            if (this.keyJump) {
-                console.log("jumpstart");
-                this.startJump = true;
-            }
-        }
+        // if (this.lastBox.label == "ground" || this.lastBox.label == "obstacle") {
+        //     if (this.keyJump) {
+        //         console.log("jumpstart");
+        //         this.startJump = true;
+        //     }
+        // }
     }
 
     onTriggerStay(other: Laya.BoxCollider, self: Laya.BoxCollider, contact: any): void {
@@ -83,17 +83,19 @@ export default class PlayerBody extends Laya.Script {
     }
     /**防止斜坡有加速度，将速度设置为0 */
     private setSpeedZero(): void {
-        if (this.playerState == 0) {
-            this.selfBody.linearDamping = 999;
-            this.selfBody.setVelocity({ x: 0, y: 0 });
-        } else if (this.playerState == 1) {
+        if (Laya.Physics.I.world == null) return;
+        if (this.keyJump) {
+            this.selfBody.linearVelocity = { x: 0, y: 0 };
+            this.selfBody.angularVelocity = 0;
+            this.selfBody.angularDamping = 0;
+            // this.selfBody.setAngle({ x: 0, y: 0 });
             this.selfBody.linearDamping = 0;
-            this.selfBody.setVelocity({ x: 0, y: 0 });
-        } else if (this.playerState == 2) {
-            // if (this.key) return;
-            this.selfBody.linearDamping = 0;
-            this.selfBody.setVelocity({ x: 0, y: -10 });
+            this.selfBody.setVelocity({ x: 0, y: 6 });
         } else {
+            this.selfBody.linearVelocity = { x: 0, y: 0 };
+            this.selfBody.angularVelocity = 0;
+            this.selfBody.angularDamping = 0;
+            // this.selfBody.setAngle({ x: 0, y: 0 });
             this.selfBody.linearDamping = 0;
             this.selfBody.setVelocity({ x: 0, y: 0 });
         }
