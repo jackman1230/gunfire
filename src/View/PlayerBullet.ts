@@ -41,7 +41,7 @@ export default class PlayerBullet {
         this.box.label = this.body.label = "PlayerBullet" + this.bulletType;
         this.setBulletPos();
 
-
+        EventManager.instance.addNotice(GameEvent.CLEAR_WAR_VIEW, this, this.disposeAll);
         EventManager.instance.addNotice(GameEvent.BULLET_DISPOSE, this, this.disposeBullet);
         EventManager.instance.addNotice(GameEvent.PLAYER_BULLET_HIT_ENEMY, this, this.hitEnemy);
         EventManager.instance.addNotice(GameEvent.PLAYER_BULLET_HIT_OBSTACLE, this, this.hitEnemy);
@@ -56,13 +56,14 @@ export default class PlayerBullet {
         }
     }
 
-    private disposeAll(): void {
+    public disposeAll(): void {
+        EventManager.instance.offNotice(GameEvent.CLEAR_WAR_VIEW, this, this.disposeAll);
         EventManager.instance.offNotice(GameEvent.BULLET_DISPOSE, this, this.disposeBullet);
         EventManager.instance.offNotice(GameEvent.PLAYER_BULLET_HIT_ENEMY, this, this.hitEnemy);
         EventManager.instance.offNotice(GameEvent.PLAYER_BULLET_HIT_OBSTACLE, this, this.hitEnemy);
-        Laya.Pool.recover("PlayerBullet", this);
-        this.view.dispose();
         this.scene.removeSelf();
+        this.view.dispose();
+        Laya.Pool.recover("PlayerBullet", this);
     }
     private disposeBullet(s: Laya.Sprite): void {
         if (s == this.body.owner) {
@@ -115,24 +116,24 @@ export default class PlayerBullet {
             if (this.direction > 0) {
                 if (this.direction == 2) {//右下
                     this.view.setSkew(25, 25);
-                    this.body.setVelocity({ x: 10, y: 7 });
+                    this.body.setVelocity({ x: 11, y: 7 });
                 } else if (this.direction == 3) {//右上
                     this.view.setSkew(-25, -25);
-                    this.body.setVelocity({ x: 10, y: -7 });
+                    this.body.setVelocity({ x: 11, y: -7 });
                 } else {
                     this.view.setSkew(0, 0);//右
-                    this.body.setVelocity({ x: 10, y: 0 });
+                    this.body.setVelocity({ x: 11, y: 0 });
                 }
             } else {
                 if (this.direction == -2) {//左下
                     this.view.setSkew(155, 155);
-                    this.body.setVelocity({ x: -10, y: 7 });
+                    this.body.setVelocity({ x: -11, y: 7 });
                 } else if (this.direction == -3) {//左上
                     this.view.setSkew(205, 205);
-                    this.body.setVelocity({ x: -10, y: -7 });
+                    this.body.setVelocity({ x: -11, y: -7 });
                 } else {
                     this.view.setSkew(180, 180);//左
-                    this.body.setVelocity({ x: -10, y: 0 });
+                    this.body.setVelocity({ x: -11, y: 0 });
                 }
             }
         }

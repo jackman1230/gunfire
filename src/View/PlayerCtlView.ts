@@ -14,11 +14,6 @@ export default class PlayerCtlView {
 
     createView(): void {
         this.view = fairygui.UIPackage.createObject("Game", "PlayerCtlView") as WXFUI_PlayerCtlView;
-        // this.view.m_bomb.onClick(this, this.useBomb);
-        // this.view.m_fire.on(Laya.Event.MOUSE_DOWN, this, this.onFire);
-        // this.view.m_fire.on(Laya.Event.MOUSE_DOWN, this, this.onFire);
-
-        // Math.atan2
     }
 
 }

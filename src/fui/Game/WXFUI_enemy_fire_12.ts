@@ -4,7 +4,7 @@
 
 export default class WXFUI_enemy_fire_12 extends fairygui.GComponent {
 
-	public m_tank:fairygui.GMovieClip;
+	public m_tank:fairygui.GLoader;
 	public m_fire:fairygui.GMovieClip;
 
 	public static URL:string = "ui://bq3h5insqz5ukt";
@@ -18,7 +18,7 @@ export default class WXFUI_enemy_fire_12 extends fairygui.GComponent {
 	}
 
 	protected onConstruct(): void {
-		this.m_tank = <fairygui.GMovieClip><any>(this.getChild("tank"));
+		this.m_tank = <fairygui.GLoader><any>(this.getChild("tank"));
 		this.m_fire = <fairygui.GMovieClip><any>(this.getChild("fire"));
 	}
 }

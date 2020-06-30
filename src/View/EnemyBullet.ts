@@ -32,7 +32,7 @@ export default class EnemyBullet {
         this.view = fairygui.UIPackage.createObject("Game", "zidan") as WXFUI_zidan;
         this.scene = s;
         // console.log("enemyBullet.scene--loadComplete", this.box.id);
-        if (this.bulletType == GameData.ENEMY_TANK_1 || this.bulletType == GameData.ENEMY_TANK_2) {
+        if (this.bulletType == GameData.ENEMY_TANK_1 || this.bulletType == GameData.ENEMY_TANK_2 || this.bulletType == GameData.ENEMY_TANK_3 || this.bulletType == GameData.ENEMY_TANK_4) {
             this.view.m_zidan.url = "ui://Game/zhadan_4";
         } else
             this.view.m_zidan.url = "ui://Game/zidan3";
@@ -79,7 +79,7 @@ export default class EnemyBullet {
             this.view.m_zidan.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.disposeAll));
         }
     }
-    private disposeAll(): void {
+    public disposeAll(): void {
         EventManager.instance.offNotice(GameEvent.CLEAR_WAR_VIEW, this, this.disposeAll);
         EventManager.instance.offNotice(GameEvent.BULLET_DISPOSE, this, this.dispose);
         EventManager.instance.offNotice(GameEvent.ENEMY_BULLET_HIT_PLAYER, this, this.bulletHitPlayer);

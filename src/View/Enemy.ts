@@ -61,7 +61,7 @@ export default class Enemy {
         this.isBoss = d.isBoss;
         this.isActive = false;
         this.isDeath = false;
-        Laya.timer.clearAll(this);
+        Laya.timer.clear(this, this.setFire);
     }
 
     public loadComplete(s: Laya.Sprite) {
@@ -77,8 +77,7 @@ export default class Enemy {
         this.scene.addChild(this.enemy.displayObject);
         this.scene.addComponent(EnemyBody);
         this.box = this.scene.getComponent(Laya.BoxCollider);
-        this.body = this.scene.getComponent(Laya.RigidBody)
-        this.isDeath = false;
+        this.body = this.scene.getComponent(Laya.RigidBody);
         this.scene.x = this.pos.x;
         this.scene.y = this.pos.y;
         ViewManager.instance.warView.scene.addChild(this.scene);
@@ -87,9 +86,7 @@ export default class Enemy {
         EventManager.instance.addNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.beHit);
         EventManager.instance.addNotice(GameEvent.PAUSE_GAME, this, this.pauseGame);
         EventManager.instance.addNotice(GameEvent.ACTIVE_ENEMY, this, this.activeEnemy);
-        EventManager.instance.addNotice(GameEvent.CLEAR_WAR_VIEW, this, this.dispose);
-
-
+        EventManager.instance.addNotice(GameEvent.CLEAR_WAR_VIEW, this, this.clearWarView);
 
         this.setDirection();
         this.setStay();
@@ -226,6 +223,10 @@ export default class Enemy {
             this.bodyLoader.url = "ui://Game/enemy_fire_5";
             this.bodyLoader.component.getChildAt(0).asLoader.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.morComplete));
             this.bodyLoader.component.getChildAt(1).asMovieClip.setPlaySettings(0, -1, 1, 0);
+        } else if (this.enemyType == GameData.ENEMY_JUNGUAN) {//机枪
+            SoundManager.instance.playSound("enemy_fire");
+            this.bodyLoader.url = "ui://Game/enemy_fire_6";
+            this.bodyLoader.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.shot2Complete));
         } else {
             console.log("没有对应的敌人攻击效果");
         }
@@ -253,26 +254,29 @@ export default class Enemy {
     }
     protected tankeComplete(): void {
     }
-
     public setStay(): void {
         this.setIdle();
     }
-
-
     protected setBoomComplete(): void {
         this.setStay();
-        // console.log("rengshouliudan");
     }
 
     public setDeath(): void {
         if (this.isDeath) return;
         this.isDeath = true;
-        Laya.timer.clearAll(this);
+        Laya.timer.clear(this, this.setFire);
         var s: number = this.getRandomDeath();
         SoundManager.instance.playSound("die_" + s);
-        this.enemy.url = "ui://Game/death_" + s;
+        if (this.enemyType == GameData.ENEMY_JUNGUAN) {
+            this.enemy.url = "ui://Game/death_" + this.enemyType;
+        } else
+            this.enemy.url = "ui://Game/death_" + s;
+
         this.enemy.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
         this.createGoods();
+        if (this.isBoss) {
+            GameManager.instance.bossDeath = true;
+        }
     }
 
     protected createGoods(): void {
@@ -296,15 +300,21 @@ export default class Enemy {
         }
     }
 
-    protected dispose(): void {
-        EventManager.instance.offNotice(GameEvent.CLEAR_WAR_VIEW, this, this.dispose);
+    private clearWarView(): void {
+        this.dispose();
+    }
+
+    public dispose(): void {
+        EventManager.instance.offNotice(GameEvent.CLEAR_WAR_VIEW, this, this.clearWarView);
         EventManager.instance.offNotice(GameEvent.ACTIVE_ENEMY, this, this.activeEnemy);
         EventManager.instance.offNotice(GameEvent.PAUSE_GAME, this, this.pauseGame);
         EventManager.instance.offNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.beHit);
         EventManager.instance.offNotice(GameEvent.PLAYER_BULLET_HIT_ENEMY, this, this.beHit);
-        Laya.timer.clearAll(this);
-        this.scene.removeSelf();
-        if (this.view) this.view.dispose();
+        Laya.timer.clear(this, this.setFire);
+        if (this.scene)
+            this.scene.removeSelf();
+        if (this.view)
+            this.view.dispose();
         this.recover();
     }
 

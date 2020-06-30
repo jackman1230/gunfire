@@ -23,8 +23,6 @@ export default class WXFUI_ChapterView extends fairygui.GComponent {
 	public m_level_6:WXFUI_LevelItem;
 	public m_level_7:WXFUI_LevelItem;
 	public m_level_8:WXFUI_LevelItem;
-	public m_level_9:WXFUI_LevelItem;
-	public m_level_10:WXFUI_LevelItem;
 	public m_title:fairygui.GLoader;
 	public m_share:WXFUI_share;
 	public m_set:WXFUI_setBtn;
@@ -55,8 +53,6 @@ export default class WXFUI_ChapterView extends fairygui.GComponent {
 		this.m_level_6 = <WXFUI_LevelItem><any>(this.getChild("level_6"));
 		this.m_level_7 = <WXFUI_LevelItem><any>(this.getChild("level_7"));
 		this.m_level_8 = <WXFUI_LevelItem><any>(this.getChild("level_8"));
-		this.m_level_9 = <WXFUI_LevelItem><any>(this.getChild("level_9"));
-		this.m_level_10 = <WXFUI_LevelItem><any>(this.getChild("level_10"));
 		this.m_title = <fairygui.GLoader><any>(this.getChild("title"));
 		this.m_share = <WXFUI_share><any>(this.getChild("share"));
 		this.m_set = <WXFUI_setBtn><any>(this.getChild("set"));

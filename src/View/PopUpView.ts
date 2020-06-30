@@ -1,6 +1,8 @@
 
 import WXFUI_PopUpView from "../fui/Game/WXFUI_PopUpView";
 import { ViewManager } from "../Manager/ViewManager";
+import WXFUI_SuspendView from "../fui/Game/WXFUI_SuspendView";
+import { GameManager } from "../Manager/GameManager";
 
 export default class PopUpView {
 
@@ -13,7 +15,7 @@ export default class PopUpView {
     }
 
     public showView(showMask: boolean = true, clickMaskHide: boolean = true): void {
-        Laya.Tween.clearAll(this);
+        Laya.Tween.clearTween(this.tween);
         this.v.addChild(this.view);
         fairygui.GRoot.inst.addChild(this.v);
         this.view.setPivot(0.5, 0.5);

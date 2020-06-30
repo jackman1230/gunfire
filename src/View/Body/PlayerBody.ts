@@ -51,7 +51,7 @@ export default class PlayerBody extends Laya.Script {
         // console.log("onTriggerEnter---");
         // if (!this.keyJump)
         this.setSpeedZero();
-        if ((other.label == "ground" || other.label == "obstacle") && this.keyJump) {
+        if ((other.label == "ground" || other.label == "obstacle" || other.label == "board") && this.keyJump) {
             //     console.log("jumpend");
             this.keyJump = false;
             //     this.startJump = false;

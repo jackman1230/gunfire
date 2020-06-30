@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="1334,750">
+<component size="1334,750" opaque="false">
   <displayList>
     <image id="n0_iasd" name="n0" src="dhhtiw" fileName="assets/playerInfo/左上角底框。(1).png" xy="113,44"/>
     <image id="n2_iasd" name="n2" src="dhhtiz" fileName="assets/playerInfo/雪灰(1).png" xy="165,51"/>

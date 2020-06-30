@@ -66,17 +66,21 @@ export default class Player extends Laya.Script {
         this.roleSprite.addChild(this.rolePlayer.displayObject);
         this.roleSprite.addComponent(PlayerBody);
 
-        EventManager.instance.addNotice(GameEvent.PLAYER_COLLISION_GROUND, this, this.colliGround);
-        EventManager.instance.addNotice(GameEvent.ENEMY_BULLET_HIT_PLAYER, this, this.beHit);
-        EventManager.instance.addNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.beHit);
-        EventManager.instance.addNotice(GameEvent.CHANGE_PLAYER_WEAPON, this, this.changeWeaponType);
-        EventManager.instance.addNotice(GameEvent.PLAYER_DEATH, this, this.setDeath);
 
 
 
         if (!this.playerCtlView) this.playerCtlView = new PlayerCtlView();
         fairygui.GRoot.inst.addChild(this.playerCtlView.view);
         // this.playerCtlView = ViewManager.instance.playerCtlView;
+
+        EventManager.instance.addNotice(GameEvent.PLAYER_COLLISION_GROUND, this, this.colliGround);
+        EventManager.instance.addNotice(GameEvent.ENEMY_BULLET_HIT_PLAYER, this, this.beHit);
+        EventManager.instance.addNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.beHit);
+        EventManager.instance.addNotice(GameEvent.CHANGE_PLAYER_WEAPON, this, this.changeWeaponType);
+        EventManager.instance.addNotice(GameEvent.PLAYER_DEATH, this, this.setDeath);
+        // EventManager.instance.addNotice(GameEvent.CLEAR_WAR_VIEW, this, this.dispose);
+
+        // Laya.stage.on(Laya.Event.CLICK, this, this.playerClick);
 
         Laya.stage.on(Laya.Event.KEY_DOWN, this, this.keyDowmEvent);
         Laya.stage.on(Laya.Event.KEY_UP, this, this.keyUpEvent);
@@ -92,6 +96,7 @@ export default class Player extends Laya.Script {
 
         this.addCtlViewMouseUp();
     }
+
 
     private addCtlViewMouseUp(): void {
         this.playerCtlView.view.m_ctl.m_dirBtn.y = this.playerCtlView.view.m_ctl.m_dirBtn.x = 0;
@@ -308,8 +313,7 @@ export default class Player extends Laya.Script {
             if (this.roleSprite.x > ViewManager.instance.warView.warView.width - this.roleSprite.width - 20)
                 this.roleSprite.x = ViewManager.instance.warView.warView.width - this.roleSprite.width - 20;
             if (GameManager.instance.bossDeath) {
-                if (this.roleSprite.x > ViewManager.instance.warView.warView.width - 300) {
-                    // EventManager.instance.dispatcherEvt(GameEvent.VICITORY_LEVEL);
+                if (this.roleSprite.x > ViewManager.instance.warView.warView.width - 450) {
                     GameManager.instance.victoryGame();
                 }
             }
@@ -532,24 +536,26 @@ export default class Player extends Laya.Script {
     }
 
     public dispose(): void {
-
         this.playerCtlView.view.m_fire.off(Laya.Event.MOUSE_DOWN, this, this.setFire);
         this.playerCtlView.view.m_fire.off(Laya.Event.MOUSE_UP, this, this.setFireEnd);
         this.playerCtlView.view.m_bomb.off(Laya.Event.CLICK, this, this.onClickBomb);
         this.playerCtlView.view.m_jump.off(Laya.Event.CLICK, this, this.onClickJump);
+        this.playerCtlView.view.m_ctl.m_mask.off(Laya.Event.MOUSE_DOWN, this, this.addMouseDown);
+        this.playerCtlView.view.m_ctl.m_mask.off(Laya.Event.MOUSE_UP, this, this.addCtlViewMouseUp);
 
+        Laya.stage.off(Laya.Event.MOUSE_UP, this, this.addStageMouseUp);
         EventManager.instance.offNotice(GameEvent.PLAYER_COLLISION_GROUND, this, this.colliGround);
         EventManager.instance.offNotice(GameEvent.ENEMY_BULLET_HIT_PLAYER, this, this.beHit);
         EventManager.instance.offNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.beHit);
         EventManager.instance.offNotice(GameEvent.CHANGE_PLAYER_WEAPON, this, this.changeWeaponType);
         EventManager.instance.offNotice(GameEvent.PLAYER_DEATH, this, this.setDeath);
+        // EventManager.instance.offNotice(GameEvent.CLEAR_WAR_VIEW, this, this.dispose);
 
 
         Laya.timer.clearAll(this);
         this.roleSprite.removeSelf();
         this.rolePlayer.dispose();
-        this.rolePlayer = null;
-        this.roleSprite = null;
+        // this.playerCtlView = null;
         this.recover();
     }
 

@@ -88,13 +88,15 @@ export default class ObstacleView {
         SoundManager.instance.playSound("obstacleBoom");
     }
 
-    protected dispose(): void {
+    public dispose(): void {
         EventManager.instance.offNotice(GameEvent.CLEAR_WAR_VIEW, this, this.dispose);
         EventManager.instance.offNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.beHit);
         EventManager.instance.offNotice(GameEvent.PLAYER_BULLET_HIT_ENEMY, this, this.beHit);
         Laya.timer.clearAll(this);
-        this.scene.removeSelf();
-        this.view.dispose();
+        if (this.scene)
+            this.scene.removeSelf();
+        if (this.view)
+            this.view.dispose();
         Laya.Pool.recover("obstacle", this);
     }
 }

@@ -10,37 +10,31 @@
     <component id="n17_dr1t" name="level_1" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="38,340">
       <gearXY controller="chapter" default="38,340"/>
     </component>
-    <component id="n18_dr1t" name="level_2" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="160,225">
+    <component id="n18_dr1t" name="level_2" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="266,205">
       <gearDisplay controller="chapter" pages=""/>
-      <gearXY controller="chapter" pages="0" values="160,225" default="38,340"/>
+      <gearXY controller="chapter" pages="0" values="266,205" default="38,340"/>
     </component>
-    <component id="n19_dr1t" name="level_3" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="358,180">
-      <gearXY controller="chapter" pages="0" values="358,180" default="38,340"/>
+    <component id="n19_dr1t" name="level_3" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="488,241">
+      <gearXY controller="chapter" pages="0" values="488,241" default="38,340"/>
     </component>
-    <component id="n20_dr1t" name="level_4" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="525,272">
-      <gearXY controller="chapter" pages="0,1" values="525,272|201,319" default="38,340"/>
+    <component id="n20_dr1t" name="level_4" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="660,388">
+      <gearXY controller="chapter" pages="0,1" values="660,388|201,319" default="38,340"/>
     </component>
-    <component id="n21_dr1t" name="level_5" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="665,380">
-      <gearXY controller="chapter" pages="0,1" values="665,380|890,267" default="38,340"/>
+    <component id="n21_dr1t" name="level_5" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="870,424">
+      <gearXY controller="chapter" pages="0,1" values="870,424|890,267" default="38,340"/>
     </component>
-    <component id="n22_dr1t" name="level_6" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="877,403">
-      <gearXY controller="chapter" pages="0,1" values="877,403|236,184" default="38,340"/>
+    <component id="n22_dr1t" name="level_6" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="1080,463">
+      <gearXY controller="chapter" pages="0,1" values="1080,463|236,184" default="38,340"/>
     </component>
-    <component id="n23_dr1t" name="level_7" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="1072,463">
-      <gearXY controller="chapter" pages="0,1" values="1072,463|338,344" default="38,340"/>
+    <component id="n23_dr1t" name="level_7" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="1208,282">
+      <gearXY controller="chapter" pages="0,1" values="1208,282|338,344" default="38,340"/>
     </component>
-    <component id="n24_dr1t" name="level_8" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="1194,382">
-      <gearXY controller="chapter" pages="0,1" values="1194,382|422,175" default="38,340"/>
-    </component>
-    <component id="n25_dr1t" name="level_9" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="1141,179">
-      <gearXY controller="chapter" pages="0,1" values="1141,179|650,139" default="38,340"/>
-    </component>
-    <component id="n26_dr1t" name="level_10" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="937,206">
-      <gearXY controller="chapter" pages="0,1" values="937,206|667,250" default="38,340"/>
+    <component id="n24_dr1t" name="level_8" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="944,221">
+      <gearXY controller="chapter" pages="0,1" values="944,221|422,175" default="38,340"/>
     </component>
     <loader id="n27_dr1t" name="title" xy="567,40" pivot="0.5,0.5" size="199,63" url="ui://bq3h5insn8quly" align="center" vAlign="middle"/>
     <component id="n28_dr1t" name="share" src="dr1to2" fileName="Component/view/share.xml" xy="1121,25"/>
-    <component id="n31_ugvi" name="set" src="dr1to5" fileName="Component/btn/setting.xml" xy="35,25"/>
+    <component id="n31_ugvi" name="set" src="dr1to5" fileName="Component/btn/setBtn.xml" xy="35,25"/>
     <component id="n32_ugvi" name="setView" src="ugvixpg" fileName="Component/view/setting.xml" xy="122,37"/>
   </displayList>
 </component>

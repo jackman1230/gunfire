@@ -14,10 +14,10 @@ export class GameManager {
     public curChapter: number = 1;//当前第几个章节
     public curLvData: any;//当前关卡数据
     public levelData: any;//levelData.json 中的所有数据
-    public maxLevel: number = 10;//当前章节最大关卡数
+    public maxLevel: number = 8;//当前章节最大关卡数
     public maxChapter: number = 1;//章节最大数
-    public gotoMaxLevel: number = 1;//当前章节所通过的最大关卡
-    public gotoMaxChapter: number = 1;//当前所通过的最大章节
+    public gotoMaxLevel: number = 1;//所通过的最大关卡
+    public gotoMaxChapter: number = 1;//所通过的最大章节
     public choiseLevel: number = 1;//当前选择的关卡
 
     public bossDeath: boolean = false;//当前关卡boss是否阵亡
@@ -34,8 +34,9 @@ export class GameManager {
     }
 
     public startGame(): void {
-        this.initChapterConfig();
+        this.levelData = Laya.loader.getRes("res/LevelData.json");
         this.initRoleData();
+        this.initChapterConfig();
         ViewManager.instance.initPopUpView();
         ViewManager.instance.showChapterView();
         // this.gotoNextLevel();
@@ -44,21 +45,19 @@ export class GameManager {
     private initChapterConfig(): void {
         var l: string = SaveManager.instance.getGameData("level");
         var c: string = SaveManager.instance.getGameData("chapter");
-        if (l && c && l.length > 0 && c.length > 0) {
-            this.curChapter = Number(c);
-            this.curLevel = Number(l);
+        var coin: string = SaveManager.instance.getGameData("coin");
+        if (coin && coin.length > 0)
+            this.roleInfo.totalCoin = Number(coin);
+
+        if (l && l.length > 0) {
+            this.curLevel = this.gotoMaxLevel = Number(l);
+            this.curChapter = this.gotoMaxChapter = Math.ceil(this.curLevel / this.maxLevel);
         } else {
-            this.curChapter = 1;
-            this.curLevel = 1
+            this.gotoMaxChapter = this.curChapter = 1;
+            this.gotoMaxLevel = this.curLevel = 1;
         }
-        this.levelData = Laya.loader.getRes("res/LevelData.json");
         this.maxLevel = this.levelData["chapter_" + this.curChapter].maxLevelNum;
         this.maxChapter = this.levelData["maxChapter"];
-    }
-    /**跳到指定关卡 */
-    public goPointToLevel(l: number): void {
-        this.curLevel = l;
-        this.goLevelGame();
     }
 
     public enterGame(): void {
@@ -73,17 +72,13 @@ export class GameManager {
 
     /**返回首页 */
     public goFirstPage(): void {
+        EventManager.instance.dispatcherEvt(GameEvent.CLEAR_WAR_VIEW);
         ViewManager.instance.hidePopUpView(null, true);
         ViewManager.instance.showChapterView();
         Laya.SoundManager.stopMusic();
     }
 
-    /**暂停后继续游戏 */
-    public goContinueGame(): void {
-
-    }
-
-    /**暂停游戏 */
+    /**暂停/继续游戏 */
     public suspendGame(): void {
         this.isPauseGame = this.isPauseGame == false ? true : false;
         if (GameManager.instance.isPauseGame) {
@@ -95,30 +90,34 @@ export class GameManager {
             Laya.physicsTimer.resume();
             Laya.timer.resume();
         }
-
         EventManager.instance.dispatcherEvt(GameEvent.PAUSE_GAME);
     }
 
     public victoryGame(): void {
-        EventManager.instance.dispatcherEvt(GameEvent.CLEAR_WAR_VIEW);
         this.bossDeath = false;
         this.curLevel++;
-        if (this.gotoMaxLevel <= this.curLevel)
+        if (this.gotoMaxLevel < this.curLevel) {//通过了新的关卡
             this.gotoMaxLevel = this.curLevel;
-        if (this.curLevel > this.maxLevel && this.curChapter == this.gotoMaxChapter) {
-            this.gotoMaxChapter++;
-            this.curLevel = 1;
+            if (this.gotoMaxLevel % this.maxLevel == 1) {//通过了新的章节
+                this.gotoMaxChapter++;
+                if (this.gotoMaxChapter > this.maxChapter)
+                    this.gotoMaxChapter = this.maxChapter;
+                this.curChapter = this.gotoMaxChapter;
+            }
+        } else {
+            this.curChapter = Math.ceil(this.curLevel / this.maxLevel);
         }
         ViewManager.instance.showAfterWarView(1);
         SaveManager.instance.saveGameData("level", this.gotoMaxLevel + "");
         SaveManager.instance.saveGameData("chapter", this.gotoMaxChapter + "");
+        SaveManager.instance.saveGameData("coin", this.roleInfo.totalCoin + "");
         SoundManager.instance.playSound("gameOver");
     }
 
     /**重新开始当前关卡 */
     public restartGame(): void {//
+        // EventManager.instance.dispatcherEvt(GameEvent.CLEAR_WAR_VIEW);
         ViewManager.instance.hidePopUpView(null, true);
-        // this.curLevel--;
         if (this.curLevel < 1) this.curLevel = 1;
         this.goLevelGame();
     }
@@ -128,12 +127,22 @@ export class GameManager {
         this.goLevelGame();
     }
     private goLevelGame(): void {
+        EventManager.instance.dispatcherEvt(GameEvent.CLEAR_WAR_VIEW);
+        ViewManager.instance.hidePopUpView(null, true);
+        if (this.gotoMaxLevel >= this.maxLevel * this.maxChapter) {
+            ViewManager.instance.showTipsView("您已通关！敬请期待后续章节");
+            return;
+        }
         if (this.levelData["chapter_" + this.curChapter]) {
+            var l: number = (this.curLevel % this.maxLevel);
+            if (l == 0) l = 8;
             this.maxLevel = this.levelData["chapter_" + this.curChapter].maxLevelNum;
-            this.curLevelData = this.levelData["chapter_" + this.curChapter]["level_" + this.curLevel];
+            this.curLevelData = this.levelData["chapter_" + this.curChapter]["level_" + l];
             this.playerInfo.curlvCoin = 0;
+            this.roleInfo.blood = 3;
             ViewManager.instance.createWarView();
-            // SoundManager.instance.playBGM();
+        } else {
+            ViewManager.instance.showTipsView("您已通关！敬请期待后续章节");
         }
     }
 

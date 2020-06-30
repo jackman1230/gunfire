@@ -5,6 +5,7 @@ import Enemy from "./Enemy";
 import { EnemyInfo } from "../Data/PlayerData";
 import { GameManager } from "../Manager/GameManager";
 import { SoundManager } from "../Manager/SoundManager";
+import { GameData } from "../Data/GameData";
 
 export default class Tank extends Enemy {
     constructor() { super() }
@@ -26,28 +27,30 @@ export default class Tank extends Enemy {
         }
     }
 
-    // public setRun(): void {
-    //     if (this.sRun) return;
-    //     this.bodyLoader.url = "ui://Game/enemy_run_" + this.enemyType;
-    //     this.bodyLoader.content.setPlaySettings(0, -1, 0, 0);
-    // }
+    public beHit(s: any): void {
+        if (this.isDeath) return;
+        if (s.o == this.box.owner) {
+            this.blood -= s.d;
+            Laya.timer.clear(this, this.setColor);
+            if (this.blood <= 0) {
+                this.setDeath();
+            } else {
+                this.bodyLoader.component.getChildAt(0).asLoader.content.color = "#ff0000";
+                Laya.timer.once(200, this, this.setColor);
+            }
+        }
+    }
 
-    // public stillRun(): void {
-    //     if (this.direction == 1) {
-    //         this.scene.x += this.speed;
-    //         if (this.scene.x >= Laya.Browser.clientWidth / 2) {
-    //             this.scene.x = Laya.Browser.clientWidth / 2;
-    //         }
-    //     } else {
-    //         this.scene.x -= this.speed;
-    //         if (this.scene.x < 1)
-    //             this.scene.x = 1;
-    //     }
-    // }
+    protected setColor(): void {
+        this.bodyLoader.component.getChildAt(0).asLoader.content.color = "#ffffff";
+    }
 
     public setFire(): void {
         this.bodyLoader.url = "ui://Game/enemy_fire_" + this.enemyType;
-        this.bodyLoader.component.getChildAt(0).asMovieClip.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.tankShotComplete));
+        if (this.enemyType == GameData.ENEMY_TANK_1 || this.enemyType == GameData.ENEMY_TANK_2) {
+            this.bodyLoader.component.getChildAt(0).asLoader.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.tankShotComplete));
+        }
+        SoundManager.instance.playSound("tank_fire");
         ViewManager.instance.createEnemyBullet(this.enemyType, this.direction, ViewManager.instance.getBodyCenterPos(this.scene));
 
     }
@@ -60,14 +63,21 @@ export default class Tank extends Enemy {
         if (this.isDeath) return;
         this.isDeath = true;
         Laya.timer.clearAll(this);
-        this.enemy.url = "ui://Game/boom_5";
-        this.enemy.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
-
+        this.bodyLoader.url = "";
+        var ani: fairygui.GMovieClip = fairygui.UIPackage.createObject("Game", "boom_5").asMovieClip;
+        ani.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
+        ani.x = 20;
+        ani.y = -100;
+        this.bodyLoader.displayObject.addChild(ani.displayObject);
         if (this.isBoss) {
             GameManager.instance.bossDeath = true;
         }
         SoundManager.instance.playSound("boom");
         // this.createGoods();
+    }
+
+    private getDeathBoomPos(): void {
+
     }
 
     protected recover(): void {

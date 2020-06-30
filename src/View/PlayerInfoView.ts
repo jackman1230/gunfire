@@ -5,6 +5,7 @@ import GameEvent from "../Control/GameEvent";
 import { GoodsType, GameData } from "../Data/GameData";
 import { PlayerData } from "../Data/PlayerData";
 import { SoundManager } from "../Manager/SoundManager";
+import { ViewManager } from "../Manager/ViewManager";
 
 export default class PlayerInfoView {
 
@@ -30,13 +31,21 @@ export default class PlayerInfoView {
         this.updateGreNum();
 
         this.view.m_pause.onClick(this, this.pauseGame);
+        // Laya.stage.on(Laya.Event.CLICK, this, this.click);
 
     }
+
+    // private click(e: Event): void {
+    //     console.log(e);
+    // }
 
 
     private pauseGame(): void {
         SoundManager.instance.playSound("btn_press");
-        GameManager.instance.suspendGame();
+        ViewManager.instance.showSuspendView();
+        Laya.timer.once(300, this, () => {//展示暂停界面后
+            GameManager.instance.suspendGame();
+        })
     }
 
     private changePlayerGoods(t: number): void {

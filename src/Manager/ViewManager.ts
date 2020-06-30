@@ -179,7 +179,7 @@ export class ViewManager {
     }
 
     public showChapterView(): void {
-        this.chapterView.view.m_chapter.selectedIndex = GameManager.instance.curChapter - 1;
+        this.chapterView.view.m_chapter.selectedIndex = 0;
         this.chapterView.updateView();
         this.showPopUpView(this.chapterView, false, true);
     }
@@ -341,13 +341,19 @@ export class ViewManager {
         "13": [125, 15],//武器机枪，方向右
         "14": [],//武器火箭筒，方向右
         "15": [70, -20],//武器迫击炮，方向右
-        "111": [165, 15],//武器坦克，方向右
+        "111": [-25, 15],//武器坦克11，方向右
+        "112": [-5, 25],//武器坦克12，方向右
+        "113": [-75, 15],//武器坦克13，方向右
+        "114": [-35, 15],//武器坦克14，方向右
         "-11": [-100, 10],//武器手枪，方向左
         "-12": [0, -50],//武器手雷，方向左
         "-13": [-75, 15],//武器机枪，方向左
         "-14": [],//武器火箭筒，方向左
         "-15": [0, -20],//武器迫击炮，方向左
-        "-111": [0, 15],//武器坦克，方向左
+        "-111": [0, 15],//武器坦克11，方向左
+        "-112": [-50, 30],//武器坦克12，方向左
+        "-113": [20, 20],//武器坦克13，方向左
+        "-114": [-20, 10],//武器坦克14，方向左
     }
 
     public getEnemyBulletOffSetPos(dir: number, weaponType: number): Laya.Point {

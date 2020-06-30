@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="256,130">
   <displayList>
-    <movieclip id="n0_qz5u" name="tank" src="et35h6" fileName="Component/enemy/chopper/tankeAni2.jta" xy="0,0"/>
+    <loader id="n0_qz5u" name="tank" xy="0,1" size="256,130" url="ui://bq3h5inset35h6"/>
     <movieclip id="n1_qz5u" name="fire" src="dnw6gz" fileName="Component/enemy/chopper/tankeFire.jta" xy="-83,-12"/>
   </displayList>
 </component>

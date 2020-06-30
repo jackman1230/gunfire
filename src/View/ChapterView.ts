@@ -22,17 +22,31 @@ export default class ChapterView extends PopUpView {
         this.view.m_share.m_share2.onClick(this, this.shareHandle2);
         this.view.m_set.onClick(this, this.showSetView);
         this.view.m_setView.m_vol.onClick(this, this.setVolume);
+        this.view.m_last.onClick(this, this.lastHandle);
+        this.view.m_next.onClick(this, this.nextHandle);
+
         this.updateView();
     }
 
     public updateView(): void {
-        this.view.m_last.visible = GameManager.instance.curChapter <= 1 ? false : true;
-        this.view.m_next.visible = GameManager.instance.curChapter >= GameManager.instance.maxChapter ? false : true;
+        this.view.m_title.url = "ui://Game/chapter_" + GameManager.instance.curChapter;
+        if (GameManager.instance.curChapter < GameManager.instance.gotoMaxChapter) {
+            this.view.m_next.visible = true;
+        } else {
+            this.view.m_next.visible = false;
+        }
+        if (GameManager.instance.curChapter > 1) {
+            this.view.m_last.visible = true;
+        } else {
+            this.view.m_last.visible = false;
+        }
 
+        var c: number = GameManager.instance.curChapter;
         for (let i = 1; i <= GameManager.instance.maxLevel; i++) {
-            if (i < GameManager.instance.gotoMaxLevel) {
+            var index: number = i + (c - 1) * GameManager.instance.maxLevel;
+            if (index < GameManager.instance.gotoMaxLevel) {
                 this.view["m_level_" + i].m_ctl.selectedIndex = 1;
-            } else if (i == GameManager.instance.gotoMaxLevel) {
+            } else if (index == GameManager.instance.gotoMaxLevel) {
                 this.view["m_level_" + i].m_ctl.selectedIndex = 2;
             } else
                 this.view["m_level_" + i].m_ctl.selectedIndex = 0;
@@ -44,8 +58,8 @@ export default class ChapterView extends PopUpView {
     public chooseLevel(l: number): void {
         SoundManager.instance.playSound("btn_click");
         console.log("选择第" + GameManager.instance.curChapter + "章，" + "第" + l + "关");
-        if (l > GameManager.instance.gotoMaxLevel) return;//所点击的关卡超过所通过的最大关卡
-        GameManager.instance.choiseLevel = l;
+        if (l + (GameManager.instance.curChapter - 1) * GameManager.instance.maxLevel > GameManager.instance.gotoMaxLevel) return;//所点击的关卡超过所通过的最大关卡
+        GameManager.instance.choiseLevel = l + (GameManager.instance.curChapter - 1) * GameManager.instance.maxLevel;
         ViewManager.instance.showBeforeWarView();
     }
 
@@ -65,5 +79,14 @@ export default class ChapterView extends PopUpView {
 
     private shareHandle2(): void {
         ViewManager.instance.showTipsView("敬请期待！");
+    }
+    private lastHandle(): void {
+        GameManager.instance.curChapter--;
+        this.updateView();
+    }
+
+    private nextHandle(): void {
+        GameManager.instance.curChapter++;
+        this.updateView();
     }
 }
