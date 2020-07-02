@@ -6,6 +6,7 @@ import { EnemyInfo } from "../Data/PlayerData";
 import { GameManager } from "../Manager/GameManager";
 import { SoundManager } from "../Manager/SoundManager";
 import { GameData } from "../Data/GameData";
+import EnemyBody from "./Body/EnemyBody";
 
 export default class Tank extends Enemy {
     constructor() { super() }
@@ -22,9 +23,33 @@ export default class Tank extends Enemy {
         if (this.isDeath) return;
         if (this.box.owner == s) {
             this.isActive = true;
-            this.setFire();
-            Laya.timer.loop(2000, this, this.setFire);
+            this.doActive();
+            Laya.timer.loop(2000, this, this.doActive);
         }
+    }
+
+    private doActive(): void {
+        this.setFire();
+        this.setRun();
+    }
+
+    public initView(): void {
+        super.initView();
+        var b: EnemyBody = this.scene.getComponent(EnemyBody);
+        b.activeDis = 800;
+    }
+
+    public setRun(): void {
+        var roleDir: number = ViewManager.instance.rolePlayer.direction;
+        var roleX: number = ViewManager.instance.rolePlayer.roleSprite.x;
+        if (roleX > this.scene.x) {
+            this.direction = 1;
+            this.setDirection();
+        } else {
+            this.direction = -1;
+            this.setDirection();
+        }
+        Laya.Tween.to(this.scene, { x: this.scene.x + this.getRandomX() }, 2000);
     }
 
     public beHit(s: any): void {
@@ -63,6 +88,7 @@ export default class Tank extends Enemy {
         if (this.isDeath) return;
         this.isDeath = true;
         Laya.timer.clearAll(this);
+        Laya.Tween.clearAll(this.scene);
         this.bodyLoader.url = "";
         var ani: fairygui.GMovieClip = fairygui.UIPackage.createObject("Game", "boom_5").asMovieClip;
         ani.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
@@ -82,5 +108,16 @@ export default class Tank extends Enemy {
 
     protected recover(): void {
         Laya.Pool.recover("tank", this);
+    }
+
+    private randomX: boolean = false;
+    private getRandomX(): number {
+        this.randomX = !this.randomX;
+        var r: number = Math.random();
+        if (this.randomX) {
+            return (r * 20 + 50);
+        } else {
+            return (r * -20 - 50);
+        }
     }
 }

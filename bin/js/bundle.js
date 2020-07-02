@@ -13,11 +13,11 @@
     GameConfig.screenMode = "none";
     GameConfig.alignV = "top";
     GameConfig.alignH = "left";
-    GameConfig.startScene = "BoardBody.scene";
+    GameConfig.startScene = "GoodsBody.scene";
     GameConfig.sceneRoot = "";
     GameConfig.debug = false;
     GameConfig.stat = true;
-    GameConfig.physicsDebug = false;
+    GameConfig.physicsDebug = true;
     GameConfig.exportSceneToJson = true;
     GameConfig.init();
 
@@ -33,8 +33,8 @@
             this.warView.m_bg.url = "res/map_" + GameManager.instance.curLevelData.mapIndex + ".jpg";
             Laya.Physics.I.worldRoot = this.scene;
             ViewManager.instance.createPlayer();
-            GameManager.instance.createObstacleData();
             GameManager.instance.createEnemyData();
+            GameManager.instance.createObstacleData();
             this.warView.x = GameManager.instance.curLvData.warViewPos[0];
             this.warView.y = GameManager.instance.curLvData.warViewPos[1];
             this.warView.displayObject.addChild(this.scene);
@@ -44,16 +44,22 @@
             this.warView.x -= moveX;
         }
         dispose() {
-            this.scene.removeChildren();
-            this.scene.removeSelf();
-            this.warView.displayObject.removeChildren();
-            fairygui.GRoot.inst.removeChildren();
-            this.warView.dispose();
-            Laya.Physics.I.worldRoot = null;
+            if (this.scene) {
+                this.scene.removeChildren();
+                this.scene.removeSelf();
+            }
+            if (this.warView) {
+                this.warView.displayObject.removeChildren();
+                this.warView.dispose();
+            }
             this.recover();
         }
         recover() {
             Laya.Pool.recover("warView", this);
+        }
+        removeView() {
+            this.warView.displayObject.removeChild(this.scene);
+            Laya.stage.removeChild(this.warView.displayObject);
         }
     }
 
@@ -117,12 +123,9 @@
             this.keyJump = false;
         }
         onEnable() {
+            console.log("onEnableonEnableonEnableonEnableonEnable");
             this.selfCollider = this.owner.getComponent(Laya.BoxCollider);
             this.selfBody = this.selfCollider.rigidBody;
-            EventManager.instance.addNotice(GameEvent.PLAYER_JUMP, this, this.jump);
-            EventManager.instance.addNotice(GameEvent.PLAYER_RUN, this, this.run);
-            EventManager.instance.addNotice(GameEvent.PLAYER_STAY, this, this.stay);
-            EventManager.instance.addNotice(GameEvent.PLAYER_DEATH, this, this.death);
         }
         jump() {
             this.keyJump = true;
@@ -251,9 +254,9 @@
     ObstacleType.ObstacleType_SHABAO = 1;
     ObstacleType.ObstacleType_YOUGUAN = 2;
     ObstacleType.ObstacleType_MICHE = 3;
-    ObstacleType.ObstacleType_XIAOCHE = 4;
+    ObstacleType.ObstacleType_DACHE = 4;
     ObstacleType.ObstacleType_CHE = 5;
-    ObstacleType.ObstacleType_DACHE = 6;
+    ObstacleType.ObstacleType_6 = 6;
     ObstacleType.ObstacleType_7 = 7;
     ObstacleType.ObstacleType_8 = 8;
     ObstacleType.ObstacleType_9 = 9;
@@ -333,11 +336,6 @@
             this.roleSprite = s;
             this.rolePlayer = fairygui.UIPackage.createObject("Game", "Player");
             this.rolePlayer.setPivot(0.5, 0.5);
-            ViewManager.instance.warView.scene.addChild(this.roleSprite);
-            var d = GameManager.instance.curLvData;
-            this.roleSprite.x = d.rolePos[0];
-            this.roleSprite.y = d.rolePos[1];
-            this.weaponType = GameManager.instance.roleInfo.weaponType;
             this.body = this.rolePlayer.getChildAt(0);
             this.rolePlayer.m_fireType.selectedIndex = 0;
             this.rolePlayer.m_firePos1.visible = this.rolePlayer.m_firePos2.visible = this.rolePlayer.m_firePos3.visible = false;
@@ -345,6 +343,7 @@
             this.roleCol = this.roleSprite.getComponent(Laya.BoxCollider);
             this.roleSprite.addChild(this.rolePlayer.displayObject);
             this.roleSprite.addComponent(PlayerBody);
+            this.bodyScript = this.roleSprite.getComponent(PlayerBody);
             if (!this.playerCtlView)
                 this.playerCtlView = new PlayerCtlView();
             fairygui.GRoot.inst.addChild(this.playerCtlView.view);
@@ -363,6 +362,14 @@
             this.playerCtlView.view.m_ctl.m_mask.on(Laya.Event.MOUSE_UP, this, this.addCtlViewMouseUp);
             Laya.stage.on(Laya.Event.MOUSE_UP, this, this.addStageMouseUp);
             this.addCtlViewMouseUp();
+            this.resetPos();
+        }
+        resetPos() {
+            var d = GameManager.instance.curLvData;
+            this.roleSprite.x = d.rolePos[0];
+            this.roleSprite.y = d.rolePos[1];
+            this.weaponType = GameManager.instance.roleInfo.weaponType;
+            ViewManager.instance.warView.scene.addChild(this.roleSprite);
         }
         addCtlViewMouseUp() {
             this.playerCtlView.view.m_ctl.m_dirBtn.y = this.playerCtlView.view.m_ctl.m_dirBtn.x = 0;
@@ -522,7 +529,7 @@
             this.jummpTween = Laya.Tween.to(this.roleSprite, { y: this.roleSprite.y - this.jumpHigh }, 350, null, Laya.Handler.create(this, this.jumpHighHandle));
         }
         jumpHighHandle() {
-            EventManager.instance.dispatcherEvt(GameEvent.PLAYER_JUMP);
+            this.bodyScript.keyJump = true;
         }
         jumpEnd() {
             console.log("PLAYER_COLLISION_GROUND---");
@@ -663,30 +670,16 @@
             this.sBoom = true;
             EventManager.instance.dispatcherEvt(GameEvent.USE_PLAYER_BOMB);
             this.body.url = "ui://Game/player_boom_" + this.weaponType;
-            this.bodybody.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.setBoomComplete));
+            this.bodybody.content.setPlaySettings(0, -1, 1, -1);
+            Laya.timer.once(700, this, this.setBoomComplete);
             ViewManager.instance.createBomb(PlayerData.WEAPON_GRE, this.direction, ViewManager.instance.getBodyCenterPos(this.roleSprite), true);
-            if (this.sRun) {
-                this.bodyLeg.url = "ui://Game/legMove";
-                this.bodyLeg.content.setPlaySettings(0, -1, 0, 0);
-                return;
-            }
-            if (this.keyJump)
-                this.bodyLeg.url = "ui://Game/legJump";
         }
         setBoomComplete() {
             this.sBoom = false;
-            if (this.keyJump)
-                return;
             if (this.sFire)
                 this.body.url = "ui://Game/player_fire_" + this.weaponType + "_" + Math.abs(this.faceType);
             else
                 this.body.url = "ui://Game/player_stay_" + this.weaponType + "_" + Math.abs(this.faceType);
-            if (this.sRun) {
-                this.bodyLeg.url = "ui://Game/legMove";
-                return;
-            }
-            if (this.keyJump)
-                this.bodyLeg.url = "ui://Game/legJump";
         }
         stopMove() {
             EventManager.instance.dispatcherEvt(GameEvent.PLAYER_STAY);
@@ -784,8 +777,11 @@
             EventManager.instance.offNotice(GameEvent.CHANGE_PLAYER_WEAPON, this, this.changeWeaponType);
             EventManager.instance.offNotice(GameEvent.PLAYER_DEATH, this, this.setDeath);
             Laya.timer.clearAll(this);
+            this.roleSprite.removeChildren();
             this.roleSprite.removeSelf();
             this.rolePlayer.dispose();
+            this.roleSprite.destroy();
+            this.roleSprite = null;
             this.recover();
         }
         recover() {
@@ -879,6 +875,10 @@
             this.scene.x = this.pos.x;
             this.scene.y = this.pos.y;
             ViewManager.instance.warView.scene.addChild(this.scene);
+            if (this.enemyType == GameData.ENEMY_JUNGUAN) {
+                var t = this.scene.getComponent(EnemyBody);
+                t.activeDis = 900;
+            }
             EventManager.instance.addNotice(GameEvent.PLAYER_BULLET_HIT_ENEMY, this, this.beHit);
             EventManager.instance.addNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.beHit);
             EventManager.instance.addNotice(GameEvent.PAUSE_GAME, this, this.pauseGame);
@@ -935,18 +935,6 @@
             else {
                 this.bodyLoader.skewY = 180;
             }
-        }
-        setLeft() {
-            if (this.direction == -1)
-                return;
-            this.direction = -1;
-            this.bodyLoader.skewY = 0;
-        }
-        setRight() {
-            if (this.direction == 1)
-                return;
-            this.direction = 1;
-            this.bodyLoader.skewY = 180;
         }
         setIdle() {
             if (this.isDeath)
@@ -1078,6 +1066,7 @@
             else
                 this.enemy.url = "ui://Game/death_" + s;
             this.enemy.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
+            Laya.timer.once(500, this, this.dispose);
             this.createGoods();
             if (this.isBoss) {
                 GameManager.instance.bossDeath = true;
@@ -1657,9 +1646,14 @@
         setDeath() {
             this.isDeath = true;
             Laya.timer.clearAll(this);
-            this.load.url = "ui://Game/boom_" + ViewManager.instance.getBoomAniTypeByObsType(this.type);
-            ;
-            this.load.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
+            this.load.url = "";
+            var boomAniType = ViewManager.instance.getBoomAniTypeByObsType(this.type);
+            var boomAni = fairygui.UIPackage.createObject("Game", "boom_" + boomAniType).asMovieClip;
+            var p = this.getBoomAniPos(this.type);
+            boomAni.x = p.x;
+            boomAni.y = p.y;
+            this.load.displayObject.addChild(boomAni.displayObject);
+            boomAni.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
             SoundManager.instance.playSound("obstacleBoom");
         }
         dispose() {
@@ -1673,15 +1667,72 @@
                 this.view.dispose();
             Laya.Pool.recover("obstacle", this);
         }
+        getBoomAniPos(type) {
+            var p = new Laya.Point();
+            if (type == ObstacleType.ObstacleType_SHABAO) {
+                p.x = 10;
+                p.y = -10;
+            }
+            else if (type == ObstacleType.ObstacleType_YOUGUAN) {
+                p.x = -10;
+                p.y = -10;
+            }
+            else if (type == ObstacleType.ObstacleType_MICHE) {
+                p.x = -20;
+                p.y = -180;
+            }
+            else if (type == ObstacleType.ObstacleType_DACHE) {
+                p.x = 250;
+                p.y = -40;
+            }
+            else if (type == ObstacleType.ObstacleType_CHE) {
+                p.x = 50;
+                p.y = -100;
+            }
+            else if (type == ObstacleType.ObstacleType_6) {
+                p.x = -50;
+                p.y = -100;
+            }
+            else if (type == ObstacleType.ObstacleType_7) {
+                p.x = -40;
+                p.y = -200;
+            }
+            else if (type == ObstacleType.ObstacleType_8) {
+                p.x = -60;
+                p.y = -220;
+            }
+            else if (type == ObstacleType.ObstacleType_9) {
+                p.x = -10;
+                p.y = -10;
+            }
+            else if (type == ObstacleType.ObstacleType_10) {
+                p.x = 20;
+                p.y = -120;
+            }
+            else if (type == ObstacleType.ObstacleType_11) {
+                p.x = -30;
+                p.y = -150;
+            }
+            return p;
+        }
     }
 
     class Chopper extends Enemy {
-        constructor() { super(); }
+        constructor() {
+            super();
+            this.stillFire = 0;
+            this.randomY = false;
+        }
         createView(d) {
             super.initData(d);
             Laya.Scene.load("ChopperBody.scene", Laya.Handler.create(this, this.loadComplete));
         }
         ;
+        initView() {
+            super.initView();
+            var b = this.scene.getComponent(EnemyBody);
+            b.activeDis = 800;
+        }
         activeEnemy(s) {
             if (this.isActive)
                 return;
@@ -1689,20 +1740,41 @@
                 return;
             if (this.box.owner == s) {
                 this.isActive = true;
-                this.setFire();
-                Laya.timer.loop(2000, this, this.setFire);
+                this.setRun();
+                this.setStillFire();
+                Laya.timer.loop(4000, this, this.setStillFire);
+                Laya.timer.loop(4000, this, this.setRun);
             }
         }
+        setRun() {
+            var roleX = ViewManager.instance.rolePlayer.roleSprite.x;
+            if (this.scene.x > roleX) {
+                Laya.Tween.to(this.scene, { x: roleX - this.getDis(), y: this.scene.y + this.getRandomY() }, 2000);
+            }
+            else {
+                Laya.Tween.to(this.scene, { x: roleX + this.getDis(), y: this.scene.y + this.getRandomY() }, 2000);
+            }
+        }
+        setStillFire() {
+            this.setFire();
+            Laya.timer.loop(300, this, this.setFire);
+        }
         setFire() {
+            this.stillFire++;
             var p = new Laya.Point(this.view.width / 2, this.view.height);
             ViewManager.instance.createChopperBomb(BombData.BOMB_CHOPPER, ViewManager.instance.getBodyCenterPos(this.scene), p);
             SoundManager.instance.playSound("bombDrop");
+            if (this.stillFire >= 5) {
+                this.stillFire = 0;
+                Laya.timer.clear(this, this.setFire);
+            }
         }
         setDeath() {
             if (this.isDeath)
                 return;
             this.isDeath = true;
             Laya.timer.clearAll(this);
+            Laya.Tween.clearAll(this.scene);
             this.enemy.url = "ui://Game/boom_5";
             this.enemy.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
             if (this.isBoss) {
@@ -1710,13 +1782,36 @@
             }
             SoundManager.instance.playSound("boom");
         }
+        clearWarView() {
+            this.dispose();
+        }
+        dispose() {
+            super.dispose();
+            Laya.timer.clearAll(this);
+        }
         recover() {
             Laya.Pool.recover("chopper", this);
+        }
+        getDis() {
+            return (Math.random() * 200 + 100);
+        }
+        getRandomY() {
+            this.randomY = !this.randomY;
+            var r = Math.random();
+            if (this.randomY) {
+                return (r * 20 + 30);
+            }
+            else {
+                return (r * -20 - 30);
+            }
         }
     }
 
     class Tank extends Enemy {
-        constructor() { super(); }
+        constructor() {
+            super();
+            this.randomX = false;
+        }
         createView(d) {
             super.initData(d);
             Laya.Scene.load("TankBody" + this.enemyType + ".scene", Laya.Handler.create(this, this.loadComplete));
@@ -1729,9 +1824,31 @@
                 return;
             if (this.box.owner == s) {
                 this.isActive = true;
-                this.setFire();
-                Laya.timer.loop(2000, this, this.setFire);
+                this.doActive();
+                Laya.timer.loop(2000, this, this.doActive);
             }
+        }
+        doActive() {
+            this.setFire();
+            this.setRun();
+        }
+        initView() {
+            super.initView();
+            var b = this.scene.getComponent(EnemyBody);
+            b.activeDis = 800;
+        }
+        setRun() {
+            var roleDir = ViewManager.instance.rolePlayer.direction;
+            var roleX = ViewManager.instance.rolePlayer.roleSprite.x;
+            if (roleX > this.scene.x) {
+                this.direction = 1;
+                this.setDirection();
+            }
+            else {
+                this.direction = -1;
+                this.setDirection();
+            }
+            Laya.Tween.to(this.scene, { x: this.scene.x + this.getRandomX() }, 2000);
         }
         beHit(s) {
             if (this.isDeath)
@@ -1767,6 +1884,7 @@
                 return;
             this.isDeath = true;
             Laya.timer.clearAll(this);
+            Laya.Tween.clearAll(this.scene);
             this.bodyLoader.url = "";
             var ani = fairygui.UIPackage.createObject("Game", "boom_5").asMovieClip;
             ani.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
@@ -1782,6 +1900,16 @@
         }
         recover() {
             Laya.Pool.recover("tank", this);
+        }
+        getRandomX() {
+            this.randomX = !this.randomX;
+            var r = Math.random();
+            if (this.randomX) {
+                return (r * 20 + 50);
+            }
+            else {
+                return (r * -20 - 50);
+            }
         }
     }
 
@@ -1879,10 +2007,14 @@
             EventManager.instance.addNotice(GameEvent.USE_PLAYER_BOMB, this, this.decBombNum);
             EventManager.instance.addNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.decPlayerBlood);
             EventManager.instance.addNotice(GameEvent.ENEMY_BULLET_HIT_PLAYER, this, this.decPlayerBlood);
+            this.updateAllView();
+            this.view.m_pause.onClick(this, this.pauseGame);
+        }
+        updateAllView() {
             this.updateBulletNum();
             this.updatePlayerBlood();
             this.updateGreNum();
-            this.view.m_pause.onClick(this, this.pauseGame);
+            this.updateCoin();
         }
         pauseGame() {
             SoundManager.instance.playSound("btn_press");
@@ -2160,24 +2292,30 @@
             ViewManager.instance.showBeforeWarView();
         }
         setVolume() {
+            SoundManager.instance.playSound("btn_click");
             this.showVolume = !this.showVolume;
             SoundManager.instance.offSound();
         }
         showSetView() {
+            SoundManager.instance.playSound("btn_click");
             this.showSet = !this.showSet;
             this.view.m_setView.visible = this.showSet;
         }
         shareHandle1() {
+            SoundManager.instance.playSound("btn_click");
             ViewManager.instance.showTipsView("敬请期待！");
         }
         shareHandle2() {
+            SoundManager.instance.playSound("btn_click");
             ViewManager.instance.showTipsView("敬请期待！");
         }
         lastHandle() {
+            SoundManager.instance.playSound("btn_click");
             GameManager.instance.curChapter--;
             this.updateView();
         }
         nextHandle() {
+            SoundManager.instance.playSound("btn_click");
             GameManager.instance.curChapter++;
             this.updateView();
         }
@@ -2277,7 +2415,6 @@
         }
         buyItem(d) {
             SoundManager.instance.playSound("btn_press");
-            GameManager.instance.roleInfo.totalCoin = 20000;
             if (GameManager.instance.roleInfo.totalCoin < d.coin) {
                 ViewManager.instance.showTipsView("金币不足！");
                 return;
@@ -2289,6 +2426,7 @@
             }
         }
         buyItemByFree(d) {
+            SoundManager.instance.playSound("btn_press");
             ViewManager.instance.showTipsView("敬请期待！@_@");
             EventManager.instance.dispatcherEvt(GameEvent.BUY_SHOP_ITEM_FREE, d);
         }
@@ -2339,6 +2477,7 @@
             this.bulletArr = [];
             this.enemyArr = [];
             this.isChecking = false;
+            this.warAllView = [];
             this.curPopView = [];
             this.playerBulletPos = {
                 "11": [135, -22],
@@ -2402,10 +2541,13 @@
             Laya.stage.removeChild(this.loadingView.displayObject);
         }
         createPlayer() {
-            if (this.player)
-                this.player.dispose();
-            this.player = Laya.Pool.getItemByClass("player", Player);
-            this.player.createView();
+            if (!this.player) {
+                this.player = new Player();
+                this.player.createView();
+            }
+            else {
+                this.player.resetPos();
+            }
         }
         createWarView() {
             if (this.warView)
@@ -2457,6 +2599,7 @@
         showPlayerInfoView() {
             if (!this.playerInfoView)
                 this.playerInfoView = new PlayerInfoView();
+            this.playerInfoView.updateAllView();
             fairygui.GRoot.inst.addChild(this.playerInfoView.view);
         }
         showPlayerCtlView() {
@@ -2520,11 +2663,10 @@
                     p.hideAllView();
             }
         }
-        disposeWarView() {
-            if (this.rolePlayer)
-                this.rolePlayer.dispose();
-            if (this.warView)
-                this.warView.dispose();
+        removeWarView() {
+            if (this.warView) {
+                this.warView.removeView();
+            }
         }
         get rolePlayer() {
             return this.player;
@@ -2665,6 +2807,7 @@
         goFirstPage() {
             EventManager.instance.dispatcherEvt(GameEvent.CLEAR_WAR_VIEW);
             ViewManager.instance.hidePopUpView(null, true);
+            ViewManager.instance.removeWarView();
             ViewManager.instance.showChapterView();
             Laya.SoundManager.stopMusic();
         }
@@ -2711,15 +2854,19 @@
         }
         gotoNextLevel() {
             ViewManager.instance.hidePopUpView(ViewManager.instance.afterWar);
-            this.goLevelGame();
-        }
-        goLevelGame() {
-            EventManager.instance.dispatcherEvt(GameEvent.CLEAR_WAR_VIEW);
-            ViewManager.instance.hidePopUpView(null, true);
-            if (this.gotoMaxLevel >= this.maxLevel * this.maxChapter) {
+            if (this.gotoMaxLevel > this.maxLevel * this.maxChapter) {
                 ViewManager.instance.showTipsView("您已通关！敬请期待后续章节");
                 return;
             }
+            this.goLevelGame();
+        }
+        goLevelGame() {
+            ViewManager.instance.hidePopUpView(null, true);
+            if (this.curLevel > this.maxLevel * this.maxChapter) {
+                ViewManager.instance.showTipsView("您已通关！敬请期待后续章节");
+                return;
+            }
+            EventManager.instance.dispatcherEvt(GameEvent.CLEAR_WAR_VIEW);
             if (this.levelData["chapter_" + this.curChapter]) {
                 var l = (this.curLevel % this.maxLevel);
                 if (l == 0)

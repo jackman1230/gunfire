@@ -26,13 +26,17 @@ export default class PlayerInfoView {
         // EventManager.instance.addNotice(GameEvent.BUY_SHOP_ITEM_FREE, this, this.decPlayerBlood);
 
 
-        this.updateBulletNum();
-        this.updatePlayerBlood();
-        this.updateGreNum();
+        this.updateAllView();
 
         this.view.m_pause.onClick(this, this.pauseGame);
         // Laya.stage.on(Laya.Event.CLICK, this, this.click);
 
+    }
+    public updateAllView(): void {
+        this.updateBulletNum();
+        this.updatePlayerBlood();
+        this.updateGreNum();
+        this.updateCoin();
     }
 
     // private click(e: Event): void {

@@ -48,6 +48,8 @@ export class ViewManager {
     public playerInfoView: PlayerInfoView;
     public playerCtlView: PlayerCtlView;
 
+    public warAllView: any[] = [];
+
     constructor() {
 
     }
@@ -75,10 +77,13 @@ export class ViewManager {
     }
 
     public createPlayer(): void {
-        if (this.player) this.player.dispose();
-
-        this.player = Laya.Pool.getItemByClass("player", Player);
-        this.player.createView();
+        if (!this.player) {
+            this.player = new Player();
+            this.player.createView();
+        } else {
+            this.player.resetPos();
+        }
+        // this.player = Laya.Pool.getItemByClass("player", Player);
     }
 
     public createWarView(): void {
@@ -152,6 +157,7 @@ export class ViewManager {
     /**创建人物信息界面 */
     public showPlayerInfoView(): void {
         if (!this.playerInfoView) this.playerInfoView = new PlayerInfoView();
+        this.playerInfoView.updateAllView();
         fairygui.GRoot.inst.addChild(this.playerInfoView.view);
     }
 
@@ -233,11 +239,11 @@ export class ViewManager {
         }
     }
 
-    public disposeWarView(): void {
-        if (this.rolePlayer)
-            this.rolePlayer.dispose();
-        if (this.warView)
-            this.warView.dispose();
+    public removeWarView(): void {
+        if (this.warView) {
+            this.warView.removeView();
+        }
+
     }
 
     public get rolePlayer(): Player {

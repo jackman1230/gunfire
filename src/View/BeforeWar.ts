@@ -40,7 +40,7 @@ export default class BeforeWar extends PopUpView {
 
     private buyItem(d: any): void {
         SoundManager.instance.playSound("btn_press");
-        GameManager.instance.roleInfo.totalCoin = 20000;
+        // GameManager.instance.roleInfo.totalCoin = 20000;
         if (GameManager.instance.roleInfo.totalCoin < d.coin) {
             ViewManager.instance.showTipsView("金币不足！");
             return;
@@ -53,6 +53,7 @@ export default class BeforeWar extends PopUpView {
     }
 
     private buyItemByFree(d: any): void {
+        SoundManager.instance.playSound("btn_press");
         ViewManager.instance.showTipsView("敬请期待！@_@");
         EventManager.instance.dispatcherEvt(GameEvent.BUY_SHOP_ITEM_FREE, d);
     }

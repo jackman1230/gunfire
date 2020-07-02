@@ -64,28 +64,34 @@ export default class ChapterView extends PopUpView {
     }
 
     private setVolume(): void {
+        SoundManager.instance.playSound("btn_click");
         this.showVolume = !this.showVolume;
         SoundManager.instance.offSound();
     }
 
     private showSetView(): void {
+        SoundManager.instance.playSound("btn_click");
         this.showSet = !this.showSet;
         this.view.m_setView.visible = this.showSet;
     }
 
     private shareHandle1(): void {
+        SoundManager.instance.playSound("btn_click");
         ViewManager.instance.showTipsView("敬请期待！");
     }
 
     private shareHandle2(): void {
+        SoundManager.instance.playSound("btn_click");
         ViewManager.instance.showTipsView("敬请期待！");
     }
     private lastHandle(): void {
+        SoundManager.instance.playSound("btn_click");
         GameManager.instance.curChapter--;
         this.updateView();
     }
 
     private nextHandle(): void {
+        SoundManager.instance.playSound("btn_click");
         GameManager.instance.curChapter++;
         this.updateView();
     }

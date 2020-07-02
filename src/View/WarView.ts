@@ -23,8 +23,8 @@ export class WarView {
 
 
         ViewManager.instance.createPlayer();//创建人物
-        GameManager.instance.createObstacleData();//创建当前关卡的障碍物
         GameManager.instance.createEnemyData();//创建当前关卡的敌人
+        GameManager.instance.createObstacleData();//创建当前关卡的障碍物
 
         this.warView.x = GameManager.instance.curLvData.warViewPos[0];
         this.warView.y = GameManager.instance.curLvData.warViewPos[1];
@@ -37,17 +37,24 @@ export class WarView {
     }
 
     public dispose(): void {
-        this.scene.removeChildren();
-        this.scene.removeSelf();
-        this.warView.displayObject.removeChildren();
-        fairygui.GRoot.inst.removeChildren();
-        this.warView.dispose();
-        Laya.Physics.I.worldRoot = null;
+        if (this.scene) {
+            this.scene.removeChildren();
+            this.scene.removeSelf();
+        }
+        if (this.warView) {
+            this.warView.displayObject.removeChildren();
+            this.warView.dispose();
+        }
         this.recover();
     }
 
     public recover(): void {
         Laya.Pool.recover("warView", this);
+    }
+
+    public removeView(): void {
+        this.warView.displayObject.removeChild(this.scene);
+        Laya.stage.removeChild(this.warView.displayObject);
     }
 
 }

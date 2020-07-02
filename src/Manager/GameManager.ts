@@ -74,6 +74,7 @@ export class GameManager {
     public goFirstPage(): void {
         EventManager.instance.dispatcherEvt(GameEvent.CLEAR_WAR_VIEW);
         ViewManager.instance.hidePopUpView(null, true);
+        ViewManager.instance.removeWarView();
         ViewManager.instance.showChapterView();
         Laya.SoundManager.stopMusic();
     }
@@ -124,15 +125,19 @@ export class GameManager {
 
     public gotoNextLevel(): void {
         ViewManager.instance.hidePopUpView(ViewManager.instance.afterWar);
-        this.goLevelGame();
-    }
-    private goLevelGame(): void {
-        EventManager.instance.dispatcherEvt(GameEvent.CLEAR_WAR_VIEW);
-        ViewManager.instance.hidePopUpView(null, true);
-        if (this.gotoMaxLevel >= this.maxLevel * this.maxChapter) {
+        if (this.gotoMaxLevel > this.maxLevel * this.maxChapter) {
             ViewManager.instance.showTipsView("您已通关！敬请期待后续章节");
             return;
         }
+        this.goLevelGame();
+    }
+    private goLevelGame(): void {
+        ViewManager.instance.hidePopUpView(null, true);
+        if (this.curLevel > this.maxLevel * this.maxChapter) {
+            ViewManager.instance.showTipsView("您已通关！敬请期待后续章节");
+            return;
+        }
+        EventManager.instance.dispatcherEvt(GameEvent.CLEAR_WAR_VIEW);
         if (this.levelData["chapter_" + this.curChapter]) {
             var l: number = (this.curLevel % this.maxLevel);
             if (l == 0) l = 8;

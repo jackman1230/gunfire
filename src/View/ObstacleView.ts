@@ -6,7 +6,7 @@ import WXFUI_enemy from "../fui/Game/WXFUI_enemy";
 import EnemyBody from "./Body/EnemyBody";
 import GameEvent from "../Control/GameEvent";
 import { EventManager } from "../Manager/EventManager";
-import { GameData } from "../Data/GameData";
+import { GameData, ObstacleType } from "../Data/GameData";
 import { ObstacleInfo } from "../Data/PlayerData";
 import { SoundManager } from "../Manager/SoundManager";
 
@@ -79,12 +79,17 @@ export default class ObstacleView {
         this.load.color = "#ffffff";
     }
 
-
     public setDeath(): void {
         this.isDeath = true;
         Laya.timer.clearAll(this);
-        this.load.url = "ui://Game/boom_" + ViewManager.instance.getBoomAniTypeByObsType(this.type);;
-        this.load.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
+        this.load.url = "";
+        var boomAniType: number = ViewManager.instance.getBoomAniTypeByObsType(this.type);
+        var boomAni: fairygui.GMovieClip = fairygui.UIPackage.createObject("Game", "boom_" + boomAniType).asMovieClip;
+        var p: Laya.Point = this.getBoomAniPos(this.type);
+        boomAni.x = p.x;
+        boomAni.y = p.y;
+        this.load.displayObject.addChild(boomAni.displayObject);
+        boomAni.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
         SoundManager.instance.playSound("obstacleBoom");
     }
 
@@ -98,5 +103,44 @@ export default class ObstacleView {
         if (this.view)
             this.view.dispose();
         Laya.Pool.recover("obstacle", this);
+    }
+
+    private getBoomAniPos(type: number): Laya.Point {
+        var p: Laya.Point = new Laya.Point();
+        if (type == ObstacleType.ObstacleType_SHABAO) {
+            p.x = 10;
+            p.y = -10;
+        } else if (type == ObstacleType.ObstacleType_YOUGUAN) {
+            p.x = -10;
+            p.y = -10;
+        } else if (type == ObstacleType.ObstacleType_MICHE) {
+            p.x = -20;
+            p.y = -180;
+        } else if (type == ObstacleType.ObstacleType_DACHE) {
+            p.x = 250;
+            p.y = -40;
+        } else if (type == ObstacleType.ObstacleType_CHE) {
+            p.x = 50;
+            p.y = -100;
+        } else if (type == ObstacleType.ObstacleType_6) {
+            p.x = -50;
+            p.y = -100;
+        } else if (type == ObstacleType.ObstacleType_7) {
+            p.x = -40;
+            p.y = -200;
+        } else if (type == ObstacleType.ObstacleType_8) {
+            p.x = -60;
+            p.y = -220;
+        } else if (type == ObstacleType.ObstacleType_9) {
+            p.x = -10;
+            p.y = -10;
+        } else if (type == ObstacleType.ObstacleType_10) {
+            p.x = 20;
+            p.y = -120;
+        } else if (type == ObstacleType.ObstacleType_11) {
+            p.x = -30;
+            p.y = -150;
+        }
+        return p;
     }
 }

@@ -81,6 +81,10 @@ export default class Enemy {
         this.scene.x = this.pos.x;
         this.scene.y = this.pos.y;
         ViewManager.instance.warView.scene.addChild(this.scene);
+        if (this.enemyType == GameData.ENEMY_JUNGUAN) {
+            var t: EnemyBody = this.scene.getComponent(EnemyBody);
+            t.activeDis = 900;
+        }
 
         EventManager.instance.addNotice(GameEvent.PLAYER_BULLET_HIT_ENEMY, this, this.beHit);
         EventManager.instance.addNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.beHit);
@@ -140,18 +144,6 @@ export default class Enemy {
         } else {
             this.bodyLoader.skewY = 180;
         }
-    }
-
-    public setLeft(): void {
-        if (this.direction == -1) return;
-        this.direction = -1;
-        this.bodyLoader.skewY = 0;
-    }
-
-    public setRight(): void {
-        if (this.direction == 1) return;
-        this.direction = 1;
-        this.bodyLoader.skewY = 180;
     }
 
     public setIdle(): void {
@@ -273,6 +265,7 @@ export default class Enemy {
             this.enemy.url = "ui://Game/death_" + s;
 
         this.enemy.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
+        Laya.timer.once(500, this, this.dispose);
         this.createGoods();
         if (this.isBoss) {
             GameManager.instance.bossDeath = true;
@@ -300,7 +293,7 @@ export default class Enemy {
         }
     }
 
-    private clearWarView(): void {
+    protected clearWarView(): void {
         this.dispose();
     }
 

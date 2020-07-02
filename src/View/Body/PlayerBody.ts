@@ -7,20 +7,17 @@ export default class PlayerBody extends Laya.Script {
     private selfBody: Laya.RigidBody;//角色刚体
     private lastBox: Laya.BoxCollider;
 
-    private playerState: number = 0;
-    private startJump: boolean = false;
-    private keyJump: boolean = false;
+    public playerState: number = 0;
+    public startJump: boolean = false;
+    public keyJump: boolean = false;
 
     constructor() { super(); }
 
     onEnable(): void {
+        console.log("onEnableonEnableonEnableonEnableonEnable");
+
         this.selfCollider = this.owner.getComponent(Laya.BoxCollider);
         this.selfBody = this.selfCollider.rigidBody;
-
-        EventManager.instance.addNotice(GameEvent.PLAYER_JUMP, this, this.jump);
-        EventManager.instance.addNotice(GameEvent.PLAYER_RUN, this, this.run);
-        EventManager.instance.addNotice(GameEvent.PLAYER_STAY, this, this.stay);
-        EventManager.instance.addNotice(GameEvent.PLAYER_DEATH, this, this.death);
 
     }
 
@@ -47,14 +44,11 @@ export default class PlayerBody extends Laya.Script {
     }
 
     onTriggerEnter(other: Laya.BoxCollider, self: Laya.BoxCollider, contact: any): void {
-        // this.lastBox = other;
-        // console.log("onTriggerEnter---");
-        // if (!this.keyJump)
+
         this.setSpeedZero();
         if ((other.label == "ground" || other.label == "obstacle" || other.label == "board") && this.keyJump) {
-            //     console.log("jumpend");
+
             this.keyJump = false;
-            //     this.startJump = false;
             EventManager.instance.dispatcherEvt(GameEvent.PLAYER_COLLISION_GROUND);
         }
         if (other.label == "goods") {
@@ -62,20 +56,10 @@ export default class PlayerBody extends Laya.Script {
         }
     }
     onTriggerExit(): void {
-        // console.log("onTriggerExit--");
-        // if (this.lastBox.label == "ground" || this.lastBox.label == "obstacle") {
-        //     if (this.keyJump) {
-        //         console.log("jumpstart");
-        //         this.startJump = true;
-        //     }
-        // }
     }
 
     onTriggerStay(other: Laya.BoxCollider, self: Laya.BoxCollider, contact: any): void {
-        // if (this.isJump == false) {
-        // console.log("onTriggerStay---");
-        // this.setSpeedZero();
-        // }
+
     }
 
     onUpdate(): void {

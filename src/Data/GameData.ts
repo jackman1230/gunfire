@@ -71,12 +71,12 @@ export class ObstacleType {
     public static ObstacleType_YOUGUAN: number = 2;
     /**障碍物--米车 */
     public static ObstacleType_MICHE: number = 3;
-    /**障碍物--小车 */
-    public static ObstacleType_XIAOCHE: number = 4;
+    /**障碍物--大车 */
+    public static ObstacleType_DACHE: number = 4;
     /**障碍物--车 */
     public static ObstacleType_CHE: number = 5;
-    /**障碍物--大车 */
-    public static ObstacleType_DACHE: number = 6;
+    /**障碍物--木围栏 */
+    public static ObstacleType_6: number = 6;
     /**障碍物--空车 */
     public static ObstacleType_7: number = 7;
     /**障碍物--吊篮 */

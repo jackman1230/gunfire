@@ -35,7 +35,7 @@
             "switchAble":true,
             "searchKey":"RigidBody",
             "removeAble":true,
-            "props":{"type":"dynamic","linearDamping":0,"label":"goods","gravityScale":1,"allowRotation":false},
+            "props":{"type":"dynamic","linearDamping":1,"label":"goods","gravityScale":1,"allowRotation":false},
             "nodeParent":2,
             "label":"RigidBody",
             "isDirectory":false,

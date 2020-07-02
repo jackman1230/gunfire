@@ -20,7 +20,7 @@
             "switchAble":true,
             "searchKey":"PolygonCollider",
             "removeAble":true,
-            "props":{"y":-94,"x":0,"points":"0,91,180,93,178,324,50,324","label":"obstacle"},
+            "props":{"y":-94,"x":0,"points":"0,91,180,93,178,324,50,324","label":"obstacle","friction":0},
             "nodeParent":2,
             "label":"PolygonCollider",
             "isDirectory":false,
