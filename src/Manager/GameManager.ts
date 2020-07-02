@@ -43,6 +43,7 @@ export class GameManager {
     }
 
     private initChapterConfig(): void {
+        this.maxChapter = this.levelData["maxChapter"];
         var l: string = SaveManager.instance.getGameData("level");
         var c: string = SaveManager.instance.getGameData("chapter");
         var coin: string = SaveManager.instance.getGameData("coin");
@@ -52,12 +53,13 @@ export class GameManager {
         if (l && l.length > 0) {
             this.curLevel = this.gotoMaxLevel = Number(l);
             this.curChapter = this.gotoMaxChapter = Math.ceil(this.curLevel / this.maxLevel);
+            if (this.curChapter > this.maxChapter)
+                this.curChapter = this.gotoMaxChapter = this.maxChapter;
         } else {
             this.gotoMaxChapter = this.curChapter = 1;
             this.gotoMaxLevel = this.curLevel = 1;
         }
         this.maxLevel = this.levelData["chapter_" + this.curChapter].maxLevelNum;
-        this.maxChapter = this.levelData["maxChapter"];
     }
 
     public enterGame(): void {

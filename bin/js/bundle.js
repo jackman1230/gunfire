@@ -13,7 +13,7 @@
     GameConfig.screenMode = "none";
     GameConfig.alignV = "top";
     GameConfig.alignH = "left";
-    GameConfig.startScene = "GoodsBody.scene";
+    GameConfig.startScene = "map_8.scene";
     GameConfig.sceneRoot = "";
     GameConfig.debug = false;
     GameConfig.stat = true;
@@ -2781,6 +2781,7 @@
             ViewManager.instance.showChapterView();
         }
         initChapterConfig() {
+            this.maxChapter = this.levelData["maxChapter"];
             var l = SaveManager.instance.getGameData("level");
             var c = SaveManager.instance.getGameData("chapter");
             var coin = SaveManager.instance.getGameData("coin");
@@ -2789,13 +2790,14 @@
             if (l && l.length > 0) {
                 this.curLevel = this.gotoMaxLevel = Number(l);
                 this.curChapter = this.gotoMaxChapter = Math.ceil(this.curLevel / this.maxLevel);
+                if (this.curChapter > this.maxChapter)
+                    this.curChapter = this.gotoMaxChapter = this.maxChapter;
             }
             else {
                 this.gotoMaxChapter = this.curChapter = 1;
                 this.gotoMaxLevel = this.curLevel = 1;
             }
             this.maxLevel = this.levelData["chapter_" + this.curChapter].maxLevelNum;
-            this.maxChapter = this.levelData["maxChapter"];
         }
         enterGame() {
             this.curLevel = this.choiseLevel;
