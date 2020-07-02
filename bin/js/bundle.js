@@ -13,11 +13,11 @@
     GameConfig.screenMode = "none";
     GameConfig.alignV = "top";
     GameConfig.alignH = "left";
-    GameConfig.startScene = "map_8.scene";
+    GameConfig.startScene = "ObstacleView_5.scene";
     GameConfig.sceneRoot = "";
     GameConfig.debug = false;
-    GameConfig.stat = true;
-    GameConfig.physicsDebug = true;
+    GameConfig.stat = false;
+    GameConfig.physicsDebug = false;
     GameConfig.exportSceneToJson = true;
     GameConfig.init();
 
@@ -2619,6 +2619,7 @@
             this.showPopUpView(this.suspendView);
         }
         showChapterView() {
+            SoundManager.instance.stopBGM();
             this.chapterView.view.m_chapter.selectedIndex = 0;
             this.chapterView.updateView();
             this.showPopUpView(this.chapterView, false, true);
@@ -2878,6 +2879,7 @@
                 this.playerInfo.curlvCoin = 0;
                 this.roleInfo.blood = 3;
                 ViewManager.instance.createWarView();
+                SoundManager.instance.playBGM();
             }
             else {
                 ViewManager.instance.showTipsView("您已通关！敬请期待后续章节");

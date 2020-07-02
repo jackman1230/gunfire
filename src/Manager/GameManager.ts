@@ -148,6 +148,7 @@ export class GameManager {
             this.playerInfo.curlvCoin = 0;
             this.roleInfo.blood = 3;
             ViewManager.instance.createWarView();
+            SoundManager.instance.playBGM();
         } else {
             ViewManager.instance.showTipsView("您已通关！敬请期待后续章节");
         }

@@ -25,6 +25,7 @@ import { GameManager } from "./GameManager";
 import TipsPopView from "../View/TipsPopView";
 import { EventManager } from "./EventManager";
 import GameEvent from "../Control/GameEvent";
+import { SoundManager } from "./SoundManager";
 
 export class ViewManager {
 
@@ -185,6 +186,7 @@ export class ViewManager {
     }
 
     public showChapterView(): void {
+        SoundManager.instance.stopBGM();
         this.chapterView.view.m_chapter.selectedIndex = 0;
         this.chapterView.updateView();
         this.showPopUpView(this.chapterView, false, true);

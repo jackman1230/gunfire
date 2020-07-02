@@ -45,8 +45,8 @@ import Scene=Laya.Scene;]]>   </codeImportsTS>
    <isRemoteProject>false   </isRemoteProject>
    <idePath/>
    <ver>2.0   </ver>
-   <stat>true   </stat>
-   <physicsDebug>true   </physicsDebug>
+   <stat>false   </stat>
+   <physicsDebug>false   </physicsDebug>
    <toJsonScene>true   </toJsonScene>
    <compressTexture>false   </compressTexture>
    <libProjectPath/>

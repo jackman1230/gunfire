@@ -99,16 +99,16 @@
         "$basePath/project.config.json",
         "$basePath/weapp-adapter.js"
     ],
-    "packfileTargetValue": "",
+    "packfileTargetValue": "D:\\littleGame\\gunfire\\bin",
     "packfileNoteList": [
         ""
     ],
     "clearReleaseDir": true,
-    "compile": false,
+    "compile": true,
     "forceCompile": false,
     "onlyIndexJS": true,
     "projectType": "ts",
-    "pubTime": 1593663647347,
+    "pubTime": 1593677694774,
     "uesEnginePlugin": false,
     "wxOptimize": {
         "useOptimizeOpen": false,

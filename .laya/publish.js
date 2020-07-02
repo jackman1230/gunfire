@@ -1,14 +1,9 @@
-// v1.6.1
+// v1.5.0
 //是否使用IDE自带的node环境和插件，设置false后，则使用自己环境(使用命令行方式执行)
 const useIDENode = process.argv[0].indexOf("LayaAir") > -1 ? true : false;
-const useCMDNode = process.argv[1].indexOf("layaair2-cmd") > -1 ? true : false;
-
-function useOtherNode(){
-	return useIDENode||useCMDNode;
-}
 //获取Node插件和工作路径
-let ideModuleDir = useOtherNode() ? process.argv[1].replace("gulp\\bin\\gulp.js", "").replace("gulp/bin/gulp.js", "") : "";
-let workSpaceDir = useOtherNode() ? process.argv[2].replace("--gulpfile=", "").replace("\\.laya\\publish.js", "").replace("/.laya/publish.js", "") + "/" : "./../";
+let ideModuleDir = useIDENode ? process.argv[1].replace("gulp\\bin\\gulp.js", "").replace("gulp/bin/gulp.js", "") : "";
+let workSpaceDir = useIDENode ? process.argv[2].replace("--gulpfile=", "").replace("\\.laya\\publish.js", "").replace("/.laya/publish.js", "") + "/" : "./../";
 
 //引用插件模块
 const gulp = require(ideModuleDir + "gulp");
@@ -22,7 +17,6 @@ const revdel = require(ideModuleDir + "gulp-rev-delete-original");
 const revCollector = require(ideModuleDir + 'gulp-rev-collector');
 const del = require(ideModuleDir + "del");
 const requireDir = require(ideModuleDir + 'require-dir');
-const babel = require(ideModuleDir + 'gulp-babel');
 
 global.ideModuleDir = ideModuleDir;
 global.workSpaceDir = workSpaceDir;
@@ -47,51 +41,23 @@ const QUICKGAMELIST = ["xmgame", "oppogame", "vivogame"];
 let config,
 	releaseDir,
 	binPath,
-	platform = "web",
-	isOpendataProj = false,
-	platformCopyTask = [],// 平台脚本拷贝任务
-	platformTask = []; // 平台需要执行的任务
-//任务对照列表
-const copyTasks = {
-	"biligame": "copyPlatformFile_Bili",
-	"Alipaygame": "copyPlatformFile_Alipay",
-	"vivogame": "copyPlatformFile_VIVO",
-	"oppogame": "preCreate_OPPO",
-	"xmgame": "copyPlatformFile_XM",
-	"bdgame": "copyPlatformFile_BD",
-	"qqgame": "copyPlatformFile_QQ",
-	"wxgame": "copyPlatformFile_WX",
-	"web": "copyLibsJsFile"
-}
-const tasks = {
-	"biligame": "buildBiliProj",
-	"Alipaygame": "buildAlipayProj",
-	"vivogame": "buildVivoProj",
-	"oppogame": "buildOPPOProj",
-	"xmgame": "buildXiaomiProj",
-	"bdgame": "buildBDProj",
-	"qqgame": "buildQQProj",
-	"wxgame": "buildWXProj",
-	"web": "packfile"
-}
-
-if (!useOtherNode() && process.argv.length > 5 && process.argv[4] == "--config") {
-	platform = process.argv[5].replace(".json", "");
-}
-if (useOtherNode() && process.argv.length >= 4 && process.argv[3].startsWith("--config") && process.argv[3].endsWith(".json")) {
-	platform = process.argv[3].match(/(\w+).json/)[1];
-	platformCopyTask.push(copyTasks[platform]);
-	platformTask.push(tasks[platform]);
-}
-
+	platform,
+	isOpendataProj = false;
 gulp.task("loadConfig", function () {
+	platform = "web"
+	if (!useIDENode && process.argv.length > 5 && process.argv[4] == "--config") {
+		platform = process.argv[5].replace(".json", "");
+	}
+	if (useIDENode && process.argv.length >= 4 && process.argv[3].startsWith("--config") && process.argv[3].endsWith(".json")) {
+		platform = process.argv[3].match(/(\w+).json/)[1];
+	}
 	let _path;
-	if (!useOtherNode()) {
+	if (!useIDENode) {
 		_path = platform + ".json";
 		releaseDir = "../release/" + platform;
 		binPath = "../bin/";
 	}
-	if (useOtherNode()) {
+	if (useIDENode) {
 		_path = path.join(workSpaceDir, ".laya", `${platform}.json`);
 		releaseDir = path.join(workSpaceDir, "release", platform).replace(/\\/g, "/");
 		binPath = path.join(workSpaceDir, "bin").replace(/\\/g, "/");
@@ -122,7 +88,7 @@ gulp.task("loadConfig", function () {
 // 清理release文件夹
 gulp.task("clearReleaseDir", ["compile"], function (cb) {
 	if (config.clearReleaseDir) {
-		let delList = [`${releaseDir}/**`, releaseDir + "_pack", config.packfileTargetValue];
+		let delList = [releaseDir, releaseDir + "_pack", config.packfileTargetValue];
 		// 小米快游戏，使用即存的项目，删掉Laya工程文件，保留小米环境项目文件
 		if (platform === "xmgame") {
 			let xmProjSrc = path.join(releaseDir, config.xmInfo.projName);
@@ -139,16 +105,6 @@ gulp.task("clearReleaseDir", ["compile"], function (cb) {
 			// 这里不是node-glob语法，详见: https://github.com/sindresorhus/del
 			delList = [`${vvProjSrc}/**`, `!${vvProjSrc}`, `!${vvProjSrc}/sign/**`, `!${vvProjSrc}/{game.js,manifest.json}`];
 			delList = delList.concat(`${vvProj}/engine/**`, `${vvProj}/config/**`);
-		}
-		// 保留平台配置文件
-		if (config.keepPlatformFile) {
-			if (platform === "wxgame" || platform === "qqgame") {
-				delList = delList.concat(`!${releaseDir}`, `!${releaseDir}/{game.js,game.json,project.config.json,weapp-adapter.js}`);
-			} else if (platform === "bdgame") {
-				delList = delList.concat(`!${releaseDir}`, `!${releaseDir}/{game.js,game.json,project.swan.json,swan-game-adapter.js}`);
-			} else if (platform === "Alipaygame") {
-				delList = delList.concat(`!${releaseDir}`, `!${releaseDir}/{game.js,game.json,my-adapter.js}`);
-			}
 		}
 		del(delList, { force: true }).then(paths => {
 			cb();
@@ -237,20 +193,8 @@ gulp.task("copyLibsJsFile", ["copyFile"], function () {
 	return stream.pipe(gulp.dest(releaseDir));
 });
 
-// es6toes5
-gulp.task("es6toes5", platformCopyTask, function() {
-	if (config.es6toes5) {
-		return gulp.src(`${releaseDir}/**/*.js`, { base: releaseDir })
-		.pipe(babel({
-			presets: ['@babel/env'],
-			compact: true
-		})) 
-		.pipe(gulp.dest(releaseDir));
-	}
-})
-
 // 压缩json
-gulp.task("compressJson", ["es6toes5"], function () {
+gulp.task("compressJson", ["copyLibsJsFile"], function () {
 	if (config.compressJson) {
 		return gulp.src(config.compressJsonFilter, { base: releaseDir })
 			.pipe(jsonminify())
@@ -324,8 +268,7 @@ gulp.task("version2", ["version1"], function () {
 		let indexJSPath;
 		let versionCon = fs.readFileSync(versionPath, "utf8");
 		versionCon = JSON.parse(versionCon);
-		let indexJsStr = (versionCon && versionCon["index.js"]) ? versionCon["index.js"] :  "index.js";
-		indexJSPath = releaseDir + "/" + indexJsStr;
+		indexJSPath = releaseDir + "/" + versionCon["index.js"];
 		// 替换config.packfileFullValue中的路径
 		let packfileStr = JSON.stringify(config.packfileFullValue).replace(/\\\\/g, "/");
 		let tempPackfile = `${workSpaceDir}/.laya/configTemp.json`;
@@ -366,6 +309,6 @@ gulp.task("packfile", ["version2"], function() {
 });
 
 // 起始任务
-gulp.task("publish", platformTask , function () {
+gulp.task("publish", ["buildXiaomiProj", "buildOPPOProj", "buildVivoProj", "buildWXProj", "buildBDProj", "buildQQProj"], function () {
 	console.log("All tasks completed!");
 });
