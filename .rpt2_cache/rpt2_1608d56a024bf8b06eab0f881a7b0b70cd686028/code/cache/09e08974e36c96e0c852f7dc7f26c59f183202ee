@@ -1,0 +1,8 @@
+{
+  "code": "import BombView from \"./BombView\";\r\nimport { EventManager } from \"../Manager/EventManager\";\r\nimport GameEvent from \"../Control/GameEvent\";\r\nexport default class ChopperBomb extends BombView {\r\n    constructor() { super(); }\r\n    createView(type, dir, s, p, offPos) {\r\n        this.bombType = type;\r\n        this.parentPos = s;\r\n        this.offPos = offPos;\r\n        Laya.Scene.load(\"ChopperBomb.scene\", Laya.Handler.create(this, this.loadComplete));\r\n    }\r\n    setBombPos() {\r\n        this.body.setVelocity({ x: 0, y: 5 });\r\n        this.scene.x = this.parentPos.x + 165;\r\n        this.scene.y = this.parentPos.y + 85;\r\n    }\r\n    dispose(s) {\r\n        if (s.s == this.box.owner) {\r\n            this.showBoomView();\r\n            this.disposeAll();\r\n        }\r\n    }\r\n    disposeAll() {\r\n        EventManager.instance.offNotice(GameEvent.CLEAR_WAR_VIEW, this, this.disposeAll);\r\n        EventManager.instance.offNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.dispose);\r\n        EventManager.instance.offNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.dispose);\r\n        EventManager.instance.offNotice(GameEvent.BOMB_DISPOSE, this, this.dispose);\r\n        this.scene.removeSelf();\r\n        if (this.view)\r\n            this.view.dispose();\r\n        Laya.Pool.recover(\"ChopperBomb\", this);\r\n    }\r\n}\r\n",
+  "references": [
+    "D:/littleGame/gunfire/src/View/BombView.ts",
+    "D:/littleGame/gunfire/src/Manager/EventManager.ts",
+    "D:/littleGame/gunfire/src/Control/GameEvent.ts"
+  ]
+}

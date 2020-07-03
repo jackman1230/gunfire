@@ -1,0 +1,6 @@
+{
+  "code": "export default class WXFUI_dirCtlView extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"dirCtlView\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_bg = (this.getChild(\"bg\"));\r\n        this.m_dirBtn = (this.getChild(\"dirBtn\"));\r\n        this.m_mask = (this.getChild(\"mask\"));\r\n    }\r\n}\r\nWXFUI_dirCtlView.URL = \"ui://bq3h5insiasdl1\";\r\n",
+  "references": [
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_dirBtn.ts"
+  ]
+}

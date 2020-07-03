@@ -16,7 +16,7 @@
 		"packageName":"wxfui"
 	},
 	"compressDesc":false,
-	"fileExtension":"wxfui",
+	"fileExtension":"proto",
 	"packageCount":2,
-	"path":"..\\bin\\res"
+	"path":"..\\bin\\res\\loading"
 }

@@ -1,0 +1,4 @@
+{
+  "code": "export default class WXFUI_obstacleView extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"obstacleView\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_load = (this.getChild(\"load\"));\r\n    }\r\n}\r\nWXFUI_obstacleView.URL = \"ui://bq3h5insqz5uku\";\r\n",
+  "references": []
+}

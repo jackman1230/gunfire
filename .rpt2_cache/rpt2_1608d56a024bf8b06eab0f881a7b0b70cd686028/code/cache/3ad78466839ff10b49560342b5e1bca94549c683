@@ -1,0 +1,9 @@
+{
+  "code": "import WXFUI_PopUpView from \"../fui/Game/WXFUI_PopUpView\";\r\nexport default class PopUpView {\r\n    constructor() {\r\n        this.v = WXFUI_PopUpView.createInstance();\r\n    }\r\n    showView(showMask = true, clickMaskHide = true) {\r\n        Laya.Tween.clearTween(this.tween);\r\n        this.v.addChild(this.view);\r\n        fairygui.GRoot.inst.addChild(this.v);\r\n        this.view.setPivot(0.5, 0.5);\r\n        this.view.setScale(0.4, 0.4);\r\n        this.tween = Laya.Tween.to(this.view, { scaleX: 1, scaleY: 1 }, 250, null, Laya.Handler.create(this, this.showComplete, [showMask, clickMaskHide]));\r\n    }\r\n    showComplete(s, c) {\r\n        if (s) {\r\n            this.v.m_mask.visible = true;\r\n            if (c)\r\n                this.v.m_mask.on(Laya.Event.CLICK, this, this.hideAllView);\r\n        }\r\n        this.view.setScale(1, 1);\r\n    }\r\n    hideAllView() {\r\n        this.v.m_mask.off(Laya.Event.CLICK, this, this.hideAllView);\r\n        fairygui.GRoot.inst.removeChild(this.v);\r\n    }\r\n}\r\n",
+  "references": [
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_PopUpView.ts",
+    "D:/littleGame/gunfire/src/Manager/ViewManager.ts",
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_SuspendView.ts",
+    "D:/littleGame/gunfire/src/Manager/GameManager.ts"
+  ]
+}

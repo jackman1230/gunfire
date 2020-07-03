@@ -1,0 +1,11 @@
+{
+  "code": "export default class PlayerCtlView {\r\n    constructor() { this.createView(); }\r\n    createView() {\r\n        this.view = fairygui.UIPackage.createObject(\"Game\", \"PlayerCtlView\");\r\n    }\r\n}\r\n",
+  "references": [
+    "D:/littleGame/gunfire/src/Manager/GameManager.ts",
+    "D:/littleGame/gunfire/src/Manager/EventManager.ts",
+    "D:/littleGame/gunfire/src/Control/GameEvent.ts",
+    "D:/littleGame/gunfire/src/Data/GameData.ts",
+    "D:/littleGame/gunfire/src/Data/PlayerData.ts",
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_PlayerCtlView.ts"
+  ]
+}

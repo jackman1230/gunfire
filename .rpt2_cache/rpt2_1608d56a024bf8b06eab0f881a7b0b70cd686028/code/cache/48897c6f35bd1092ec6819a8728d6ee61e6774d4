@@ -1,0 +1,9 @@
+{
+  "code": "export default class WXFUI_AfterWar extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"AfterWar\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_ctl = this.getController(\"ctl\");\r\n        this.m_n20 = (this.getChild(\"n20\"));\r\n        this.m_coin = (this.getChild(\"coin\"));\r\n        this.m_n24 = (this.getChild(\"n24\"));\r\n        this.m_n26 = (this.getChild(\"n26\"));\r\n        this.m_n29 = (this.getChild(\"n29\"));\r\n        this.m_continue_1 = (this.getChild(\"continue_1\"));\r\n        this.m_continue_2 = (this.getChild(\"continue_2\"));\r\n        this.m_continue_3 = (this.getChild(\"continue_3\"));\r\n        this.m_return = (this.getChild(\"return\"));\r\n    }\r\n}\r\nWXFUI_AfterWar.URL = \"ui://bq3h5insdr1tnq\";\r\n",
+  "references": [
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_continueBtn2.ts",
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_continueBtn4.ts",
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_continueBtn3.ts",
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_backBtn.ts"
+  ]
+}

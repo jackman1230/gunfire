@@ -1,0 +1,7 @@
+{
+  "code": "export default class BoomBody extends Laya.Script {\r\n    constructor() { super(); }\r\n    onEnable() {\r\n        this.selfCollider = this.owner.getComponent(Laya.CircleCollider);\r\n        this.selfBody = this.selfCollider.rigidBody;\r\n        this.self = this.owner;\r\n        this.oriPosX = this.self.x;\r\n    }\r\n    onDisable() {\r\n    }\r\n    onTriggerEnter(other, self, contact) {\r\n    }\r\n    onTriggerExit() {\r\n    }\r\n    onTriggerStay(other, self, contact) {\r\n    }\r\n    onUpdate() {\r\n    }\r\n}\r\n",
+  "references": [
+    "D:/littleGame/gunfire/src/Manager/EventManager.ts",
+    "D:/littleGame/gunfire/src/Control/GameEvent.ts"
+  ]
+}

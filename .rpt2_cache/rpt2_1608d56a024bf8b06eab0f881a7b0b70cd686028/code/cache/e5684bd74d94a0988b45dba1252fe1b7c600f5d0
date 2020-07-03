@@ -1,0 +1,6 @@
+{
+  "code": "export default class WXFUI_PlayerInfoView extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"PlayerInfoView\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_n0 = (this.getChild(\"n0\"));\r\n        this.m_n2 = (this.getChild(\"n2\"));\r\n        this.m_n3 = (this.getChild(\"n3\"));\r\n        this.m_n4 = (this.getChild(\"n4\"));\r\n        this.m_blood_1 = (this.getChild(\"blood_1\"));\r\n        this.m_blood_2 = (this.getChild(\"blood_2\"));\r\n        this.m_blood_3 = (this.getChild(\"blood_3\"));\r\n        this.m_n7 = (this.getChild(\"n7\"));\r\n        this.m_pause = (this.getChild(\"pause\"));\r\n        this.m_coin = (this.getChild(\"coin\"));\r\n        this.m_bullet = (this.getChild(\"bullet\"));\r\n        this.m_gre = (this.getChild(\"gre\"));\r\n    }\r\n}\r\nWXFUI_PlayerInfoView.URL = \"ui://bq3h5insiasdkz\";\r\n",
+  "references": [
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_susBtn.ts"
+  ]
+}

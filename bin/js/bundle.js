@@ -2982,17 +2982,37 @@
             return this._instance;
         }
         loadLoadingAssetsData() {
-            AssetsManager.loadingAssetsData.push({ url: "res/loading_atlas0.png", type: Laya.Loader.IMAGE }, { url: "res/loading_atlas_n8quey.jpg", type: Laya.Loader.IMAGE }, { url: "res/loading.wxfui", type: Laya.Loader.BUFFER });
-            Laya.loader.create(AssetsManager.loadingAssetsData, Laya.Handler.create(this, this.loadingAssetsComplete));
+            AssetsManager.loadingAssetsData.push({ url: "res/loading/loading_atlas0.png", type: Laya.Loader.IMAGE }, { url: "res/loading/loading_atlas_n8quey.jpg", type: Laya.Loader.IMAGE }, { url: "res/loading/loading.proto", type: Laya.Loader.BUFFER });
+            if (Laya.Browser.onPC) {
+                Laya.loader.create(AssetsManager.loadingAssetsData, Laya.Handler.create(this, this.loadingAssetsComplete));
+            }
+            else {
+                Laya.loader.create(AssetsManager.loadingAssetsData, Laya.Handler.create(this, this.onLoaded));
+            }
+        }
+        onLoaded() {
+            const loadTask = wx["loadSubpackage"]({
+                name: 'wxgame_pack',
+                success: function (res) {
+                    AssetsManager.instance.loadingAssetsComplete();
+                },
+                fail: function (res) {
+                }
+            });
+            loadTask.onProgressUpdate(res => {
+                console.log('下载进度', res.progress);
+                console.log('已经下载的数据长度', res.totalBytesWritten);
+                console.log('预期需要下载的数据总长度', res.totalBytesExpectedToWrite);
+            });
         }
         loadingAssetsComplete() {
-            fairygui.UIPackage.addPackage("res/loading");
+            fairygui.UIPackage.addPackage("res/loading/loading");
             console.log("loading界面资源加载完成--显示loading界面，并开始加载游戏资源");
             ViewManager.instance.createLoaningView();
             this.loadAssetsData();
         }
         loadAssetsData() {
-            AssetsManager.assetsData.push({ url: "res/Game_atlas0.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_1.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_2.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_3.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_4.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_5.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_6.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_7.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas_n8qun1.jpg", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas_n8qun7.png", type: Laya.Loader.IMAGE }, { url: "res/LevelData.json", type: Laya.Loader.JSON }, { url: "res/map_1.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_2.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_3.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_4.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_5.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_6.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_7.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_8.jpg", type: Laya.Loader.IMAGE }, { url: "res/Game.wxfui", type: Laya.Loader.BUFFER });
+            AssetsManager.assetsData.push({ url: "res/Game_atlas0.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_1.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_2.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_3.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_4.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_5.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_6.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_7.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas_n8qun1.jpg", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas_n8qun7.png", type: Laya.Loader.IMAGE }, { url: "res/LevelData.json", type: Laya.Loader.JSON }, { url: "res/map_1.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_2.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_3.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_4.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_5.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_6.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_7.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_8.jpg", type: Laya.Loader.IMAGE }, { url: "res/Game.proto", type: Laya.Loader.BUFFER });
             console.log(AssetsManager.assetsData);
             Laya.loader.create(AssetsManager.assetsData, Laya.Handler.create(this, this.loadComplete), Laya.Handler.create(this, this.onloadingProgress));
         }
@@ -4197,7 +4217,7 @@
                 Laya.Stat.show();
             Laya.alertGlobalError = true;
             Laya.ResourceVersion.enable("version.json", Laya.Handler.create(this, this.onVersionLoaded), Laya.ResourceVersion.FILENAME_VERSION);
-            fairygui.UIConfig.packageFileExtension = "wxfui";
+            fairygui.UIConfig.packageFileExtension = "proto";
             GameBinder.bindAll();
             loadingBinder.bindAll();
             AssetsManager.instance.loadLoadingAssetsData();

@@ -1,0 +1,6 @@
+{
+  "code": "export default class WXFUI_setting extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"setting\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_vol = (this.getChild(\"vol\"));\r\n    }\r\n}\r\nWXFUI_setting.URL = \"ui://bq3h5insugvixpg\";\r\n",
+  "references": [
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_volume.ts"
+  ]
+}
