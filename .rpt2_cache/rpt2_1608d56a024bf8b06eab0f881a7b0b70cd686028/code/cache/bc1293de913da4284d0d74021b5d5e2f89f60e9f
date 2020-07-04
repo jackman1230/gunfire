@@ -1,7 +1,0 @@
-{
-  "code": "import WXFUI_loadingView from \"./WXFUI_loadingView\";\r\nimport WXFUI_loadingBar from \"./WXFUI_loadingBar\";\r\nexport default class loadingBinder {\r\n    static bindAll() {\r\n        fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_loadingView.URL, WXFUI_loadingView);\r\n        fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_loadingBar.URL, WXFUI_loadingBar);\r\n    }\r\n}\r\n",
-  "references": [
-    "D:/littleGame/gunfire/src/fui/loading/WXFUI_loadingView.ts",
-    "D:/littleGame/gunfire/src/fui/loading/WXFUI_loadingBar.ts"
-  ]
-}

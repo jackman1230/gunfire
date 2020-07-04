@@ -1,8 +1,0 @@
-{
-  "code": "export class SaveManager {\r\n    constructor() {\r\n    }\r\n    static get instance() {\r\n        if (this._instance == null)\r\n            this._instance = new SaveManager();\r\n        return this._instance;\r\n    }\r\n    saveGameData(key, value) {\r\n        localStorage.setItem(key, value);\r\n    }\r\n    getGameData(key) {\r\n        return localStorage.getItem(key);\r\n    }\r\n}\r\n",
-  "references": [
-    "D:/littleGame/gunfire/src/Manager/GameManager.ts",
-    "D:/littleGame/gunfire/src/Manager/ViewManager.ts",
-    "D:/littleGame/gunfire/src/fui/Game/GameBinder.ts"
-  ]
-}

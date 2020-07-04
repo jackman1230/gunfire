@@ -1,4 +1,0 @@
-{
-  "code": "export default class WXFUI_fireBtn extends fairygui.GButton {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"fireBtn\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_button = this.getController(\"button\");\r\n        this.m_n3 = (this.getChild(\"n3\"));\r\n        this.m_n4 = (this.getChild(\"n4\"));\r\n    }\r\n}\r\nWXFUI_fireBtn.URL = \"ui://bq3h5inscqp93o\";\r\n",
-  "references": []
-}

@@ -1,2 +1,0 @@
-stop();
-d.type = "water";

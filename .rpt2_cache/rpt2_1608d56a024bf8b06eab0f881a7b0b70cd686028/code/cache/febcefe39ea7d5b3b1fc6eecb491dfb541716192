@@ -1,9 +1,0 @@
-{
-  "code": "export default class WXFUI_PlayerCtlView extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"PlayerCtlView\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_ctl = (this.getChild(\"ctl\"));\r\n        this.m_fire = (this.getChild(\"fire\"));\r\n        this.m_jump = (this.getChild(\"jump\"));\r\n        this.m_bomb = (this.getChild(\"bomb\"));\r\n    }\r\n}\r\nWXFUI_PlayerCtlView.URL = \"ui://bq3h5insiasdl0\";\r\n",
-  "references": [
-    "D:/littleGame/gunfire/src/fui/Game/WXFUI_dirCtlView.ts",
-    "D:/littleGame/gunfire/src/fui/Game/WXFUI_fireBtn.ts",
-    "D:/littleGame/gunfire/src/fui/Game/WXFUI_jumpBtn.ts",
-    "D:/littleGame/gunfire/src/fui/Game/WXFUI_throwBtn.ts"
-  ]
-}

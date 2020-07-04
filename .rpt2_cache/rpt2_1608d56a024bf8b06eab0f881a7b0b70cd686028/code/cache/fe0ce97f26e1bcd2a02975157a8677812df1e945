@@ -1,4 +1,0 @@
-{
-  "code": "export default class WXFUI_loadingBar extends fairygui.GProgressBar {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"loading\", \"loadingBar\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_n0 = (this.getChild(\"n0\"));\r\n        this.m_bar = (this.getChild(\"bar\"));\r\n        this.m_title = (this.getChild(\"title\"));\r\n    }\r\n}\r\nWXFUI_loadingBar.URL = \"ui://nr80du74n8quim\";\r\n",
-  "references": []
-}

@@ -1,4 +1,0 @@
-{
-  "code": "export default class WXFUI_goodsView extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"goodsView\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_load = (this.getChild(\"load\"));\r\n    }\r\n}\r\nWXFUI_goodsView.URL = \"ui://bq3h5insqz5ukq\";\r\n",
-  "references": []
-}

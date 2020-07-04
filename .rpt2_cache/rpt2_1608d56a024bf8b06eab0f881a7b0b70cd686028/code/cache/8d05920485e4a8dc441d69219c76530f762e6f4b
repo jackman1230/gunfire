@@ -1,4 +1,0 @@
-{
-  "code": "export default class WXFUI_TipsPopView extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"TipsPopView\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_tips = (this.getChild(\"tips\"));\r\n        this.m_play = this.getTransition(\"play\");\r\n    }\r\n}\r\nWXFUI_TipsPopView.URL = \"ui://bq3h5insugvixpf\";\r\n",
-  "references": []
-}

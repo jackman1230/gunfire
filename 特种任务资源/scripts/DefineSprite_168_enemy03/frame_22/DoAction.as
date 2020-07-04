@@ -1,1 +1,0 @@
-this.check_point();

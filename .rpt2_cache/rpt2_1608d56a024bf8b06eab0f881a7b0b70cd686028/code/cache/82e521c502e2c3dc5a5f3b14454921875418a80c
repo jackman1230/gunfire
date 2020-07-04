@@ -1,4 +1,0 @@
-{
-  "code": "export default class WXFUI_player_stay_2_3 extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"player_stay_2_3\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_xs = (this.getChild(\"xs\"));\r\n        this.m_ss = (this.getChild(\"ss\"));\r\n    }\r\n}\r\nWXFUI_player_stay_2_3.URL = \"ui://bq3h5instvmxxp9\";\r\n",
-  "references": []
-}

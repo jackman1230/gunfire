@@ -1,6 +1,0 @@
-{
-  "code": "import { GameData } from \"../Data/GameData\";\r\nexport class SoundManager {\r\n    constructor() {\r\n        this.isOpenSound = true;\r\n    }\r\n    static get instance() {\r\n        if (this._instance == null) {\r\n            this._instance = new SoundManager();\r\n            Laya.SoundManager.useAudioMusic = false;\r\n        }\r\n        return this._instance;\r\n    }\r\n    playSound(n) {\r\n        var s = GameData.SOUND_FONT + n + \".mp3\";\r\n        Laya.SoundManager.playSound(s);\r\n    }\r\n    playBGM() {\r\n        Laya.SoundManager.playMusic(\"res/sound/bgm.mp3\");\r\n    }\r\n    stopBGM() {\r\n        Laya.SoundManager.stopMusic();\r\n    }\r\n    offSound() {\r\n        this.isOpenSound = !this.isOpenSound;\r\n        if (this.isOpenSound) {\r\n            Laya.SoundManager.setMusicVolume(1);\r\n            Laya.SoundManager.setSoundVolume(1);\r\n        }\r\n        else {\r\n            Laya.SoundManager.setMusicVolume(0);\r\n            Laya.SoundManager.setSoundVolume(0);\r\n        }\r\n    }\r\n}\r\n",
-  "references": [
-    "D:/littleGame/gunfire/src/Data/GameData.ts"
-  ]
-}

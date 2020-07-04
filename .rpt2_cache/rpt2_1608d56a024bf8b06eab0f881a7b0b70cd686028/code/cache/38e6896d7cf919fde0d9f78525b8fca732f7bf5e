@@ -1,8 +1,0 @@
-{
-  "code": "export default class WXFUI_SuspendView extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"SuspendView\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_bg = (this.getChild(\"bg\"));\r\n        this.m_back = (this.getChild(\"back\"));\r\n        this.m_continue = (this.getChild(\"continue\"));\r\n        this.m_restart = (this.getChild(\"restart\"));\r\n    }\r\n}\r\nWXFUI_SuspendView.URL = \"ui://bq3h5insn8qul6\";\r\n",
-  "references": [
-    "D:/littleGame/gunfire/src/fui/Game/WXFUI_backHomeBtn.ts",
-    "D:/littleGame/gunfire/src/fui/Game/WXFUI_continueBtn2.ts",
-    "D:/littleGame/gunfire/src/fui/Game/WXFUI_restartBtn.ts"
-  ]
-}

@@ -1,0 +1,1 @@
+{"type":"Scene","props":{"width":131,"height":70},"compId":2,"child":[{"type":"Script","props":{"y":-3,"x":0,"points":"1,3,130,3,130,73,0,74","label":"obstacle","friction":0,"runtime":"laya.physics.PolygonCollider"},"compId":4},{"type":"Script","props":{"y":0,"x":0,"type":"static","label":"obstacle","runtime":"laya.physics.RigidBody"},"compId":5}],"loadList":[],"loadList3D":[]}

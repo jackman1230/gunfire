@@ -1,1 +1,0 @@
-this.stand();

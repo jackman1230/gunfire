@@ -17,11 +17,11 @@ export class AssetsManager {
 
     public loadLoadingAssetsData(): void {
         AssetsManager.loadingAssetsData.push(
-            { url: "res/loading/loading_atlas0.png", type: Laya.Loader.IMAGE },
-            { url: "res/loading/loading_atlas_n8quey.jpg", type: Laya.Loader.IMAGE },
-            { url: "res/loading/loading.proto", type: Laya.Loader.BUFFER }
+            { url: "loading/loading_atlas0.png", type: Laya.Loader.IMAGE },
+            { url: "loading/loading_atlas_n8quey.jpg", type: Laya.Loader.IMAGE },
+            { url: "loading/loading.proto", type: Laya.Loader.BUFFER }
         );
-        if (Laya.Browser.onPC) {
+        if (!Laya.Browser.onWeiXin) {
             Laya.loader.create(AssetsManager.loadingAssetsData, Laya.Handler.create(this, this.loadingAssetsComplete));
         } else {
             Laya.loader.create(AssetsManager.loadingAssetsData, Laya.Handler.create(this, this.onLoaded));
@@ -30,8 +30,9 @@ export class AssetsManager {
 
     private onLoaded(): void {
         //小游戏官方的分包加载方式
-        const loadTask = wx["loadSubpackage"]({
-            name: 'wxgame_pack', // name 可以填 name 或者 root
+        let wxLoad = Laya.Browser.window.wx;
+        const loadTask = wxLoad["loadSubpackage"]({
+            name: 'res', // name 可以填 name 或者 root
             success: function (res) {
                 // 分包加载成功后通过 success 回调
                 AssetsManager.instance.loadingAssetsComplete();
@@ -41,15 +42,15 @@ export class AssetsManager {
             }
         })
 
-        loadTask.onProgressUpdate(res => {
-            console.log('下载进度', res.progress)
-            console.log('已经下载的数据长度', res.totalBytesWritten)
-            console.log('预期需要下载的数据总长度', res.totalBytesExpectedToWrite)
-        })
+        // loadTask.onProgressUpdate(res => {
+        //     console.log('下载进度', res.progress)
+        //     console.log('已经下载的数据长度', res.totalBytesWritten)
+        //     console.log('预期需要下载的数据总长度', res.totalBytesExpectedToWrite)
+        // })
     }
 
     private loadingAssetsComplete(): void {
-        fairygui.UIPackage.addPackage("res/loading/loading");
+        fairygui.UIPackage.addPackage("loading/loading");
         console.log("loading界面资源加载完成--显示loading界面，并开始加载游戏资源");
         ViewManager.instance.createLoaningView();
         this.loadAssetsData();

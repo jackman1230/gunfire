@@ -1,0 +1,1 @@
+{"type":"View","props":{"width":90,"mouseEnabled":false,"height":90},"compId":2,"child":[{"type":"Script","props":{"y":0,"x":0,"radius":45,"isSensor":true,"friction":0,"density":0,"runtime":"laya.physics.CircleCollider"},"compId":5},{"type":"Script","props":{"type":"dynamic","gravityScale":0,"runtime":"laya.physics.RigidBody"},"compId":6}],"loadList":[],"loadList3D":[]}
