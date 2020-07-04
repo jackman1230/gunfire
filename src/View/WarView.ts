@@ -2,9 +2,9 @@ import WXFUI_WarView from "../fui/Game/WXFUI_WarView";
 import { ViewManager } from "../Manager/ViewManager";
 import ObstacleView from "./ObstacleView";
 import { ObstacleType, GameData } from "../Data/GameData";
-import Player from "./Player";
 import { GameManager } from "../Manager/GameManager";
 import { EnemyInfo } from "../Data/PlayerData";
+import { ui } from "../ui/layaMaxUI";
 
 export class WarView {
 
@@ -12,15 +12,35 @@ export class WarView {
     public scene: Laya.Sprite;//地图场景
     constructor() { }
     public createView() {
-        Laya.Scene.load("map_" + GameManager.instance.curLevelData.mapIndex + ".scene", Laya.Handler.create(this, this.loadComplete));
+        var index: number = GameManager.instance.curLevelData.mapIndex;
+        if (index == 1) {
+            this.scene = new ui.map_1UI();
+        } else if (index == 2) {
+            this.scene = new ui.map_2UI();
+        } else if (index == 3) {
+            this.scene = new ui.map_3UI();
+        } else if (index == 4) {
+            this.scene = new ui.map_4UI();
+        } else if (index == 5) {
+            this.scene = new ui.map_5UI();
+        } else if (index == 6) {
+            this.scene = new ui.map_6UI();
+        } else if (index == 7) {
+            this.scene = new ui.map_7UI();
+        } else if (index == 8) {
+            this.scene = new ui.map_8UI();
+        } else {
+            return;
+        }
+        this.loadComplete();
+        // Laya.Scene.load("map_" + GameManager.instance.curLevelData.mapIndex + ".scene", Laya.Handler.create(this, this.loadComplete));
     };
 
-    private loadComplete(s: Laya.Scene): void {
-        this.scene = s;
+    private loadComplete(): void {
+        // this.scene = s;
         this.warView = fairygui.UIPackage.createObject("Game", "WarView") as WXFUI_WarView;
         this.warView.m_bg.url = "res/map_" + GameManager.instance.curLevelData.mapIndex + ".jpg";
         Laya.Physics.I.worldRoot = this.scene;
-
 
         ViewManager.instance.createPlayer();//创建人物
         GameManager.instance.createEnemyData();//创建当前关卡的敌人

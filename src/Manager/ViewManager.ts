@@ -1,7 +1,6 @@
 
 import { WarView } from "../View/WarView";
 import WXFUI_Player from "../fui/Game/WXFUI_Player";
-import Player from "../View/Player";
 import Enemy from "../View/Enemy";
 import EnemyBullet from "../View/EnemyBullet";
 import PlayerBullet from "../View/PlayerBullet";
@@ -26,6 +25,8 @@ import TipsPopView from "../View/TipsPopView";
 import { EventManager } from "./EventManager";
 import GameEvent from "../Control/GameEvent";
 import { SoundManager } from "./SoundManager";
+import { ui } from "../ui/layaMaxUI";
+import { Player } from "../View/Player";
 
 export class ViewManager {
 

@@ -5,6 +5,7 @@ import GameEvent from "../Control/GameEvent";
 import { EventManager } from "../Manager/EventManager";
 import Enemy from "./Enemy";
 import { GameData } from "../Data/GameData";
+import { ui } from "../ui/layaMaxUI";
 
 export default class EnemyBullet {
     public scene: Laya.Sprite;
@@ -25,12 +26,14 @@ export default class EnemyBullet {
         this.bulletType = type;
         this.direction = dir;
         this.parentPos = s;
-        Laya.Scene.load("Bullet.scene", Laya.Handler.create(this, this.loadComplete));
+        this.scene = new ui.BulletUI();
+        this.loadComplete()
+        // Laya.Scene.load("Bullet.scene", Laya.Handler.create(this, this.loadComplete));
     }
 
-    private loadComplete(s: Laya.Scene): void {
+    private loadComplete(): void {
         this.view = fairygui.UIPackage.createObject("Game", "zidan") as WXFUI_zidan;
-        this.scene = s;
+        // this.scene = s;
         // console.log("enemyBullet.scene--loadComplete", this.box.id);
         if (this.bulletType == GameData.ENEMY_TANK_1 || this.bulletType == GameData.ENEMY_TANK_2 || this.bulletType == GameData.ENEMY_TANK_3 || this.bulletType == GameData.ENEMY_TANK_4) {
             this.view.m_zidan.url = "ui://Game/zhadan_4";
@@ -85,7 +88,10 @@ export default class EnemyBullet {
         EventManager.instance.offNotice(GameEvent.ENEMY_BULLET_HIT_PLAYER, this, this.bulletHitPlayer);
         EventManager.instance.offNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.dispose);
 
-        this.scene.removeSelf();
+        if (this.scene) {
+            this.scene.removeSelf();
+            this.scene = null;
+        }
         this.view.dispose();
         Laya.Pool.recover("enemyBullet", this);
     }

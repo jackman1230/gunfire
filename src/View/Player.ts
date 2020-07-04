@@ -11,8 +11,9 @@ import { PlayerData } from "../Data/PlayerData";
 import { SoundManager } from "../Manager/SoundManager";
 import PlayerCtlView from "./PlayerCtlView";
 import PlayerBullet from "./PlayerBullet";
+import { ui } from "../ui/layaMaxUI";
 
-export default class Player extends Laya.Script {
+export class Player extends Laya.Script {
 
     public rolePlayer: WXFUI_Player;
     public body: fairygui.GLoader;
@@ -42,11 +43,13 @@ export default class Player extends Laya.Script {
     constructor() { super() }
 
     public createView() {
-        Laya.Scene.load("PlayerBody.scene", Laya.Handler.create(this, this.loadComplete));
+        this.roleSprite = new ui.PlayerBodyUI();
+        this.loadComplete();
+        // Laya.Scene.load("PlayerBody.scene", Laya.Handler.create(this, this.loadComplete));
     };
 
-    private loadComplete(s: Laya.Sprite): void {
-        this.roleSprite = s;
+    private loadComplete(): void {
+        // this.roleSprite = s;
         this.rolePlayer = fairygui.UIPackage.createObject("Game", "Player") as WXFUI_Player;
         this.rolePlayer.setPivot(0.5, 0.5);
 
@@ -281,6 +284,7 @@ export default class Player extends Laya.Script {
     private jumpEnd(): void {
         console.log("PLAYER_COLLISION_GROUND---");
         this.keyJump = false;
+        if (GameManager.instance.roleInfo.isDeath = true) return;
         if (this.sBoom) {
             this.setBoomComplete();
         } else if (this.sFire) {

@@ -10,6 +10,7 @@ import { GameData, ShotDirectionData } from "../Data/GameData";
 import { EnemyInfo } from "../Data/PlayerData";
 import { GameManager } from "../Manager/GameManager";
 import { SoundManager } from "../Manager/SoundManager";
+import { ui } from "../ui/layaMaxUI";
 
 export default class Enemy {
     //常规兵种
@@ -46,7 +47,9 @@ export default class Enemy {
 
     public createView(d: EnemyInfo) {
         this.initData(d);
-        Laya.Scene.load("EnemyBody.scene", Laya.Handler.create(this, this.loadComplete));
+        this.scene = new ui.EnemyBodyUI();
+        // Laya.Scene.load("EnemyBody.scene", Laya.Handler.create(this, this.loadComplete));
+        this.loadComplete();
     };
 
     protected initData(d: EnemyInfo): void {
@@ -64,8 +67,8 @@ export default class Enemy {
         Laya.timer.clear(this, this.setFire);
     }
 
-    public loadComplete(s: Laya.Sprite) {
-        this.scene = s;
+    public loadComplete() {
+        // this.scene = s;
         this.view = fairygui.UIPackage.createObject("Game", "enemy") as fairygui.GComponent;
         this.view.setPivot(0.5, 0.5);
         this.enemy = this.view.getChildAt(0) as fairygui.GLoader;

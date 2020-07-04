@@ -7,14 +7,24 @@ import { GameManager } from "../Manager/GameManager";
 import { SoundManager } from "../Manager/SoundManager";
 import { GameData } from "../Data/GameData";
 import EnemyBody from "./Body/EnemyBody";
+import { ui } from "../ui/layaMaxUI";
 
 export default class Tank extends Enemy {
     constructor() { super() }
 
     public createView(d: EnemyInfo) {
         super.initData(d);
-
-        Laya.Scene.load("TankBody" + this.enemyType + ".scene", Laya.Handler.create(this, this.loadComplete));
+        if (this.enemyType == 11) {
+            this.scene = new ui.TankBody11UI();
+        } else if (this.enemyType == 12) {
+            this.scene = new ui.TankBody12UI();
+        } else if (this.enemyType == 13) {
+            this.scene = new ui.TankBody13UI();
+        } else if (this.enemyType == 14) {
+            this.scene = new ui.TankBody14UI();
+        }
+        this.loadComplete();
+        // Laya.Scene.load("TankBody" + this.enemyType + ".scene", Laya.Handler.create(this, this.loadComplete));
     };
 
     protected activeEnemy(s: Laya.Sprite): void {

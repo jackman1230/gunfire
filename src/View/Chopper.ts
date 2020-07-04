@@ -11,6 +11,7 @@ import { EnemyInfo } from "../Data/PlayerData";
 import { BombData } from "../Data/GameData";
 import { GameManager } from "../Manager/GameManager";
 import { SoundManager } from "../Manager/SoundManager";
+import { ui } from "../ui/layaMaxUI";
 
 export default class Chopper extends Enemy {
 
@@ -18,7 +19,9 @@ export default class Chopper extends Enemy {
 
     public createView(d: EnemyInfo) {
         super.initData(d);
-        Laya.Scene.load("ChopperBody.scene", Laya.Handler.create(this, this.loadComplete));
+        this.scene = new ui.ChopperBodyUI();
+        this.loadComplete();
+        // Laya.Scene.load("ChopperBody.scene", Laya.Handler.create(this, this.loadComplete));
     };
 
     public initView(): void {

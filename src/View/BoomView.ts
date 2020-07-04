@@ -4,6 +4,7 @@ import { EventManager } from "../Manager/EventManager";
 import Enemy from "./Enemy";
 import WXFUI_BoomView from "../fui/Game/WXFUI_BoomView";
 import BoomBody from "./Body/BoomBody";
+import { ui } from "../ui/layaMaxUI";
 
 export default class BoomView {
     public scene: Laya.Sprite;
@@ -26,16 +27,18 @@ export default class BoomView {
         this.boomType = type;
         this.isPlayer = b;
         this.pos = s;
-        Laya.Scene.load("BoomBody.scene", Laya.Handler.create(this, this.loadComplete));
+        this.scene = new ui.BoomBodyUI();
+        this.loadComplete();
+        // Laya.Scene.load("BoomBody.scene", Laya.Handler.create(this, this.loadComplete));
     }
 
-    private loadComplete(s: Laya.Scene): void {
+    private loadComplete(): void {
         // console.log("boomBody.scene--loadComplete");
 
         this.view = fairygui.UIPackage.createObject("Game", "BoomView") as WXFUI_BoomView;
         // this.boom = this.view.getChildAt(0).asLoader;
 
-        this.scene = s;
+        // this.scene = s;
         this.scene.addComponent(BoomBody);
         this.body = this.scene.getComponent(Laya.RigidBody);
         this.box = this.scene.getComponent(Laya.CircleCollider);

@@ -5,6 +5,7 @@ import { GameManager } from "../Manager/GameManager";
 import { EventManager } from "../Manager/EventManager";
 import BulletBody from "./Body/BulletBody";
 import { GameData } from "../Data/GameData";
+import { ui } from "../ui/layaMaxUI";
 
 export default class PlayerBullet {
     public scene: Laya.Sprite;
@@ -26,14 +27,16 @@ export default class PlayerBullet {
         this.view = fairygui.UIPackage.createObject("Game", "zidan") as WXFUI_zidan;
         this.view.m_zidan.url = "ui://Game/playerzidan" + this.bulletType;
         if (this.bulletType == GameData.WEAPON_RIFLE) {
-            Laya.Scene.load("BulletRifle.scene", Laya.Handler.create(this, this.loadComplete));
+            // Laya.Scene.load("BulletRifle.scene", Laya.Handler.create(this, this.loadComplete));
+            this.scene = new ui.BulletRifleUI();
         } else {
-            Laya.Scene.load("Bullet.scene", Laya.Handler.create(this, this.loadComplete));
+            this.scene = new ui.BulletUI();
+            // Laya.Scene.load("Bullet.scene", Laya.Handler.create(this, this.loadComplete));
         }
+        this.loadComplete();
     }
 
-    private loadComplete(s: Laya.Scene): void {
-        this.scene = s;
+    private loadComplete(): void {
         ViewManager.instance.warView.scene.addChild(this.scene);
         this.scene.addComponent(BulletBody);
         this.body = this.scene.getComponent(Laya.RigidBody);
@@ -61,7 +64,10 @@ export default class PlayerBullet {
         EventManager.instance.offNotice(GameEvent.BULLET_DISPOSE, this, this.disposeBullet);
         EventManager.instance.offNotice(GameEvent.PLAYER_BULLET_HIT_ENEMY, this, this.hitEnemy);
         EventManager.instance.offNotice(GameEvent.PLAYER_BULLET_HIT_OBSTACLE, this, this.hitEnemy);
-        this.scene.removeSelf();
+        if (this.scene) {
+            this.scene.removeSelf();
+            this.scene = null;
+        }
         this.view.dispose();
         Laya.Pool.recover("PlayerBullet", this);
     }

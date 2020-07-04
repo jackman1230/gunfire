@@ -4,6 +4,7 @@ import WXFUI_goodsView from "../fui/Game/WXFUI_goodsView";
 import { ViewManager } from "../Manager/ViewManager";
 import { GoodsType } from "../Data/GameData";
 import { SoundManager } from "../Manager/SoundManager";
+import { ui } from "../ui/layaMaxUI";
 
 export default class GoodsView {
 
@@ -24,12 +25,14 @@ export default class GoodsView {
     createView(type: number, s: Laya.Point): void {
         this.type = type;
         this.pos = s;
-        Laya.Scene.load("GoodsBody.scene", Laya.Handler.create(this, this.loadComplete));
+        this.scene = new ui.GoodsBodyUI();
+        this.loadComplete();
+        // Laya.Scene.load("GoodsBody.scene", Laya.Handler.create(this, this.loadComplete));
     }
 
-    protected loadComplete(s: Laya.Scene): void {
+    protected loadComplete(): void {
         // console.log("GoodsBody.scene--loadComplete", s);
-        this.scene = s;
+        // this.scene = s;
         this.body = this.scene.getComponent(Laya.RigidBody);
         this.box = this.scene.getComponent(Laya.BoxCollider);
 

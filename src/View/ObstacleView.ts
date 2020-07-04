@@ -9,6 +9,7 @@ import { EventManager } from "../Manager/EventManager";
 import { GameData, ObstacleType } from "../Data/GameData";
 import { ObstacleInfo } from "../Data/PlayerData";
 import { SoundManager } from "../Manager/SoundManager";
+import { ui } from "../ui/layaMaxUI";
 
 export default class ObstacleView {
     public scene: Laya.Sprite;
@@ -32,15 +33,39 @@ export default class ObstacleView {
         this.type = d.type;
         this.blood = d.blood;
         this.pos = d.pos;
-
-        Laya.Scene.load("ObstacleView_" + this.type + ".scene", Laya.Handler.create(this, this.loadComplete));
+        if (this.type == ObstacleType.ObstacleType_SHABAO) {
+            this.scene = new ui.ObstacleView_1UI();
+        } else if (this.type == ObstacleType.ObstacleType_YOUGUAN) {
+            this.scene = new ui.ObstacleView_2UI();
+        } else if (this.type == ObstacleType.ObstacleType_MICHE) {
+            this.scene = new ui.ObstacleView_3UI();
+        } else if (this.type == ObstacleType.ObstacleType_DACHE) {
+            this.scene = new ui.ObstacleView_4UI();
+        } else if (this.type == ObstacleType.ObstacleType_CHE) {
+            this.scene = new ui.ObstacleView_5UI();
+        } else if (this.type == ObstacleType.ObstacleType_6) {
+            this.scene = new ui.ObstacleView_6UI();
+        } else if (this.type == ObstacleType.ObstacleType_7) {
+            this.scene = new ui.ObstacleView_7UI();
+        } else if (this.type == ObstacleType.ObstacleType_8) {
+            this.scene = new ui.ObstacleView_8UI();
+        } else if (this.type == ObstacleType.ObstacleType_9) {
+            this.scene = new ui.ObstacleView_9UI();
+        } else if (this.type == ObstacleType.ObstacleType_10) {
+            this.scene = new ui.ObstacleView_10UI();
+        } else if (this.type == ObstacleType.ObstacleType_11) {
+            this.scene = new ui.ObstacleView_11UI();
+        } else
+            return;
+        this.loadComplete();
+        // Laya.Scene.load("ObstacleView_" + this.type + ".scene", Laya.Handler.create(this, this.loadComplete));
     };
 
-    public loadComplete(s: Laya.Sprite) {
+    public loadComplete() {
         this.view = fairygui.UIPackage.createObject("Game", "obstacleView") as fairygui.GComponent;
         this.view.setPivot(0.5, 0.5);
         this.load = this.view.getChildAt(0) as fairygui.GLoader;
-        this.scene = s;
+        // this.scene = s;
         this.initView();
     };
 

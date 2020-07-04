@@ -2,6 +2,7 @@
 import BombView from "./BombView";
 import { EventManager } from "../Manager/EventManager";
 import GameEvent from "../Control/GameEvent";
+import { ui } from "../ui/layaMaxUI";
 
 export default class ChopperBomb extends BombView {
 
@@ -11,7 +12,9 @@ export default class ChopperBomb extends BombView {
         this.bombType = type;
         this.parentPos = s;
         this.offPos = offPos;
-        Laya.Scene.load("ChopperBomb.scene", Laya.Handler.create(this, this.loadComplete));
+        this.scene = new ui.ChopperBombUI();
+        this.loadComplete();
+        // Laya.Scene.load("ChopperBomb.scene", Laya.Handler.create(this, this.loadComplete));
     }
 
 

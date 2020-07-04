@@ -8,6 +8,7 @@ import { BombData } from "../Data/GameData";
 import BombBody from "./Body/BombBody";
 import BoomView from "./BoomView";
 import { SoundManager } from "../Manager/SoundManager";
+import { ui } from "../ui/layaMaxUI";
 
 export default class BombView {
     public scene: Laya.Sprite;
@@ -32,12 +33,12 @@ export default class BombView {
         this.parentPos = s;
         this.isPlayer = p;
         this.offPos = offPos;
-        Laya.Scene.load("BombBody.scene", Laya.Handler.create(this, this.loadComplete));
+        this.scene = new ui.BombBodyUI();
+        this.loadComplete();
+        // Laya.Scene.load("BombBody.scene", Laya.Handler.create(this, this.loadComplete));
     }
 
-    protected loadComplete(s: Laya.Scene): void {
-        // console.log("bomb.scene--loadComplete", this.bombType);
-
+    protected loadComplete(): void {
         this.view = fairygui.UIPackage.createObject("Game", "Bomb") as WXFUI_Bomb;
         this.view.m_boom.visible = this.view.m_boom2.visible = false;
         if (this.bombType == BombData.BOMB_MOR) {
@@ -47,7 +48,6 @@ export default class BombView {
             this.view.m_boom2.visible = true;
             this.trans = this.view.getTransitionAt(1);
         }
-        this.scene = s;
         this.scene.addComponent(BombBody);
         this.body = this.scene.getComponent(Laya.RigidBody);
         this.box = this.scene.getComponent(Laya.BoxCollider);
