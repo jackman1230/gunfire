@@ -76,7 +76,9 @@ export default class GoodsView {
 
         this.view.removeChildren();
         if (this.view) this.view.dispose();
-        this.scene.removeSelf();
+        if (this.scene) {
+            this.scene.removeSelf();
+        }
         Laya.Pool.recover("goods", this);
     }
 

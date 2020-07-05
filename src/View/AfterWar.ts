@@ -2,7 +2,6 @@
 import WXFUI_AfterWar from "../fui/Game/WXFUI_AfterWar";
 import PopUpView from "./PopUpView";
 import { GameManager } from "../Manager/GameManager";
-import { ViewManager } from "../Manager/ViewManager";
 import { SoundManager } from "../Manager/SoundManager";
 
 export default class AfterWar extends PopUpView {

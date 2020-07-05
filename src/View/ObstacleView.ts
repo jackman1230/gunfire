@@ -1,9 +1,6 @@
 
-import WXFUI_Player from "../fui/Game/WXFUI_Player";
-import PlayerAni from "./PlayerAni";
+
 import { ViewManager } from "../Manager/ViewManager";
-import WXFUI_enemy from "../fui/Game/WXFUI_enemy";
-import EnemyBody from "./Body/EnemyBody";
 import GameEvent from "../Control/GameEvent";
 import { EventManager } from "../Manager/EventManager";
 import { GameData, ObstacleType } from "../Data/GameData";
@@ -57,6 +54,7 @@ export default class ObstacleView {
             this.scene = new ui.ObstacleView_11UI();
         } else
             return;
+        // this.scene = Laya.Pool.getItemByClass("ObstacleView_" + this.type + "UI");
         this.loadComplete();
         // Laya.Scene.load("ObstacleView_" + this.type + ".scene", Laya.Handler.create(this, this.loadComplete));
     };

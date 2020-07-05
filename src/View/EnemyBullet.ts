@@ -3,7 +3,6 @@ import BulletBody from "./Body/BulletBody";
 import { ViewManager } from "../Manager/ViewManager";
 import GameEvent from "../Control/GameEvent";
 import { EventManager } from "../Manager/EventManager";
-import Enemy from "./Enemy";
 import { GameData } from "../Data/GameData";
 import { ui } from "../ui/layaMaxUI";
 
@@ -90,7 +89,7 @@ export default class EnemyBullet {
 
         if (this.scene) {
             this.scene.removeSelf();
-            this.scene = null;
+            // Laya.Pool.recover("EnemyBulletUI", this.scene);
         }
         this.view.dispose();
         Laya.Pool.recover("enemyBullet", this);

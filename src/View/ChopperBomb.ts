@@ -35,7 +35,9 @@ export default class ChopperBomb extends BombView {
         EventManager.instance.offNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.dispose);
         EventManager.instance.offNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.dispose);
         EventManager.instance.offNotice(GameEvent.BOMB_DISPOSE, this, this.dispose);
-        this.scene.removeSelf();
+        if (this.scene) {
+            this.scene.removeSelf();
+        }
         if (this.view) this.view.dispose();
         Laya.Pool.recover("ChopperBomb", this);
     }

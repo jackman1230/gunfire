@@ -1,6 +1,5 @@
 import { GameManager } from "./GameManager";
 import { ViewManager } from "./ViewManager";
-import GameBinder from "../fui/Game/GameBinder";
 
 export class AssetsManager {
     private static _instance: AssetsManager;
@@ -68,14 +67,6 @@ export class AssetsManager {
             { url: "res/Game_atlas0_7.png", type: Laya.Loader.IMAGE },
             { url: "res/Game_atlas_n8qun1.jpg", type: Laya.Loader.IMAGE },
             { url: "res/Game_atlas_n8qun7.png", type: Laya.Loader.IMAGE },
-            // { url: "res/Game_atlas0_9.png", type: Laya.Loader.IMAGE },
-            // { url: "res/Game_atlas0_10.png", type: Laya.Loader.IMAGE },
-            // { url: "res/Game_atlas0_11.png", type: Laya.Loader.IMAGE },
-            // { url: "res/Game_atlas0_12.png", type: Laya.Loader.IMAGE },
-            // { url: "res/Game_atlas0_13.png", type: Laya.Loader.IMAGE },
-            // { url: "res/Game_atlas0_14.png", type: Laya.Loader.IMAGE },
-            // { url: "res/Game_atlas0_15.png", type: Laya.Loader.IMAGE },
-            // { url: "res/Game_atlas0_16.png", type: Laya.Loader.IMAGE },
             { url: "res/LevelData.json", type: Laya.Loader.JSON },
             { url: "res/map_1.jpg", type: Laya.Loader.IMAGE },
             { url: "res/map_2.jpg", type: Laya.Loader.IMAGE },
@@ -85,8 +76,26 @@ export class AssetsManager {
             { url: "res/map_6.jpg", type: Laya.Loader.IMAGE },
             { url: "res/map_7.jpg", type: Laya.Loader.IMAGE },
             { url: "res/map_8.jpg", type: Laya.Loader.IMAGE },
-            { url: "res/Game.proto", type: Laya.Loader.BUFFER }
-
+            { url: "res/Game.proto", type: Laya.Loader.BUFFER },
+            { url: "res/sound/bgm.mp3", type: Laya.Loader.SOUND },
+            { url: "res/sound/BombDrop.mp3", type: Laya.Loader.SOUND },
+            { url: "res/sound/boom.mp3", type: Laya.Loader.SOUND },
+            { url: "res/sound/btn_click.mp3", type: Laya.Loader.SOUND },
+            { url: "res/sound/btn_press.mp3", type: Laya.Loader.SOUND },
+            { url: "res/sound/die_1.mp3", type: Laya.Loader.SOUND },
+            { url: "res/sound/die_2.mp3", type: Laya.Loader.SOUND },
+            { url: "res/sound/die_3.mp3", type: Laya.Loader.SOUND },
+            { url: "res/sound/die_4.mp3", type: Laya.Loader.SOUND },
+            { url: "res/sound/enemy_fire.mp3", type: Laya.Loader.SOUND },
+            { url: "res/sound/gameOver.mp3", type: Laya.Loader.SOUND },
+            { url: "res/sound/get_goods.mp3", type: Laya.Loader.SOUND },
+            { url: "res/sound/obstacleBoom.mp3", type: Laya.Loader.SOUND },
+            { url: "res/sound/obstacleBoom2.mp3", type: Laya.Loader.SOUND },
+            { url: "res/sound/tank_fire.mp3", type: Laya.Loader.SOUND },
+            { url: "res/sound/weapon_1.mp3", type: Laya.Loader.SOUND },
+            { url: "res/sound/weapon_2.mp3", type: Laya.Loader.SOUND },
+            { url: "res/sound/weapon_3.mp3", type: Laya.Loader.SOUND },
+            { url: "res/sound/weapon_10.mp3", type: Laya.Loader.SOUND }
         );
         console.log(AssetsManager.assetsData);
 

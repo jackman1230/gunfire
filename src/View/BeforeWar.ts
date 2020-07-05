@@ -3,7 +3,6 @@ import PopUpView from "./PopUpView";
 import { GameManager } from "../Manager/GameManager";
 import { ViewManager } from "../Manager/ViewManager";
 import { SoundManager } from "../Manager/SoundManager";
-import { GoodsType } from "../Data/GameData";
 import { EventManager } from "../Manager/EventManager";
 import GameEvent from "../Control/GameEvent";
 
@@ -40,7 +39,6 @@ export default class BeforeWar extends PopUpView {
 
     private buyItem(d: any): void {
         SoundManager.instance.playSound("btn_press");
-        // GameManager.instance.roleInfo.totalCoin = 20000;
         if (GameManager.instance.roleInfo.totalCoin < d.coin) {
             ViewManager.instance.showTipsView("金币不足！");
             return;

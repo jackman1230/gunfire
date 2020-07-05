@@ -1,6 +1,4 @@
 import { ViewManager } from "../Manager/ViewManager";
-import GameEvent from "../Control/GameEvent";
-import { EventManager } from "../Manager/EventManager";
 import Enemy from "./Enemy";
 import { EnemyInfo } from "../Data/PlayerData";
 import { GameManager } from "../Manager/GameManager";
@@ -112,8 +110,9 @@ export default class Tank extends Enemy {
         // this.createGoods();
     }
 
-    private getDeathBoomPos(): void {
-
+    protected clearWarView(): void {
+        this.dispose();
+        Laya.timer.clearAll(this);
     }
 
     protected recover(): void {

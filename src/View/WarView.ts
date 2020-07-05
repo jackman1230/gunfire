@@ -1,9 +1,6 @@
 import WXFUI_WarView from "../fui/Game/WXFUI_WarView";
 import { ViewManager } from "../Manager/ViewManager";
-import ObstacleView from "./ObstacleView";
-import { ObstacleType, GameData } from "../Data/GameData";
 import { GameManager } from "../Manager/GameManager";
-import { EnemyInfo } from "../Data/PlayerData";
 import { ui } from "../ui/layaMaxUI";
 
 export class WarView {

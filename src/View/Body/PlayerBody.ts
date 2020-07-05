@@ -14,8 +14,6 @@ export default class PlayerBody extends Laya.Script {
     constructor() { super(); }
 
     onEnable(): void {
-        console.log("onEnableonEnableonEnableonEnableonEnable");
-
         this.selfCollider = this.owner.getComponent(Laya.BoxCollider);
         this.selfBody = this.selfCollider.rigidBody;
 

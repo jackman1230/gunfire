@@ -1,7 +1,6 @@
 import WXFUI_zidan from "../fui/Game/WXFUI_zidan";
 import { ViewManager } from "../Manager/ViewManager";
 import GameEvent from "../Control/GameEvent";
-import { GameManager } from "../Manager/GameManager";
 import { EventManager } from "../Manager/EventManager";
 import BulletBody from "./Body/BulletBody";
 import { GameData } from "../Data/GameData";
@@ -29,7 +28,9 @@ export default class PlayerBullet {
         if (this.bulletType == GameData.WEAPON_RIFLE) {
             // Laya.Scene.load("BulletRifle.scene", Laya.Handler.create(this, this.loadComplete));
             this.scene = new ui.BulletRifleUI();
+            // this.scene = Laya.Pool.getItemByClass("BulletRifleUI", ui.BulletRifleUI);
         } else {
+            // this.scene = Laya.Pool.getItemByClass("BulletUI", ui.BulletUI);
             this.scene = new ui.BulletUI();
             // Laya.Scene.load("Bullet.scene", Laya.Handler.create(this, this.loadComplete));
         }
@@ -66,7 +67,11 @@ export default class PlayerBullet {
         EventManager.instance.offNotice(GameEvent.PLAYER_BULLET_HIT_OBSTACLE, this, this.hitEnemy);
         if (this.scene) {
             this.scene.removeSelf();
-            this.scene = null;
+            // if (this.bulletType == GameData.WEAPON_RIFLE) {
+            //     Laya.Pool.recover("BulletRifleUI", this.scene);
+            // } else {
+            //     Laya.Pool.recover("BulletUI", this.scene);
+            // }
         }
         this.view.dispose();
         Laya.Pool.recover("PlayerBullet", this);

@@ -1,7 +1,6 @@
-import BulletBody from "./Body/BulletBody";
+
 import { ViewManager } from "../Manager/ViewManager";
 import GameEvent from "../Control/GameEvent";
-import { GameManager } from "../Manager/GameManager";
 import { EventManager } from "../Manager/EventManager";
 import WXFUI_Bomb from "../fui/Game/WXFUI_Bomb";
 import { BombData } from "../Data/GameData";

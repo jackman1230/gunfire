@@ -1,8 +1,5 @@
 
 import WXFUI_PopUpView from "../fui/Game/WXFUI_PopUpView";
-import { ViewManager } from "../Manager/ViewManager";
-import WXFUI_SuspendView from "../fui/Game/WXFUI_SuspendView";
-import { GameManager } from "../Manager/GameManager";
 
 export default class PopUpView {
 

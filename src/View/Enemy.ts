@@ -1,8 +1,6 @@
 
-import WXFUI_Player from "../fui/Game/WXFUI_Player";
-import PlayerAni from "./PlayerAni";
+
 import { ViewManager } from "../Manager/ViewManager";
-import WXFUI_enemy from "../fui/Game/WXFUI_enemy";
 import EnemyBody from "./Body/EnemyBody";
 import GameEvent from "../Control/GameEvent";
 import { EventManager } from "../Manager/EventManager";
@@ -107,7 +105,7 @@ export default class Enemy {
         if (this.box.owner == s) {
             this.isActive = true;
             this.setFire();
-            Laya.timer.loop(2000, this, this.setFire);
+            Laya.timer.loop(3000, this, this.setFire);
         }
     }
 

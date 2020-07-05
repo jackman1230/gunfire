@@ -1,6 +1,5 @@
 
 import { WarView } from "../View/WarView";
-import WXFUI_Player from "../fui/Game/WXFUI_Player";
 import Enemy from "../View/Enemy";
 import EnemyBullet from "../View/EnemyBullet";
 import PlayerBullet from "../View/PlayerBullet";
@@ -20,12 +19,8 @@ import ChapterView from "../View/ChapterView";
 import AfterWar from "../View/AfterWar";
 import BeforeWar from "../View/BeforeWar";
 import PopUpView from "../View/PopUpView";
-import { GameManager } from "./GameManager";
 import TipsPopView from "../View/TipsPopView";
-import { EventManager } from "./EventManager";
-import GameEvent from "../Control/GameEvent";
 import { SoundManager } from "./SoundManager";
-import { ui } from "../ui/layaMaxUI";
 import { Player } from "../View/Player";
 
 export class ViewManager {
@@ -83,7 +78,7 @@ export class ViewManager {
             this.player = new Player();
             this.player.createView();
         } else {
-            this.player.resetPos();
+            this.player.resetData();
         }
         // this.player = Laya.Pool.getItemByClass("player", Player);
     }

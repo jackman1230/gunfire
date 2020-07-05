@@ -1,7 +1,6 @@
 import { ViewManager } from "../Manager/ViewManager";
 import GameEvent from "../Control/GameEvent";
 import { EventManager } from "../Manager/EventManager";
-import Enemy from "./Enemy";
 import WXFUI_BoomView from "../fui/Game/WXFUI_BoomView";
 import BoomBody from "./Body/BoomBody";
 import { ui } from "../ui/layaMaxUI";

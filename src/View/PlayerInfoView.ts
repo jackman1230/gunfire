@@ -20,8 +20,8 @@ export default class PlayerInfoView {
         EventManager.instance.addNotice(GameEvent.CHANGE_PLAYER_GOODS, this, this.changePlayerGoods);
         EventManager.instance.addNotice(GameEvent.USE_PLAYER_BULLET, this, this.usePlyerBullet);
         EventManager.instance.addNotice(GameEvent.USE_PLAYER_BOMB, this, this.decBombNum);
-        EventManager.instance.addNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.decPlayerBlood);
-        EventManager.instance.addNotice(GameEvent.ENEMY_BULLET_HIT_PLAYER, this, this.decPlayerBlood);
+        // EventManager.instance.addNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.decPlayerBlood);
+        EventManager.instance.addNotice(GameEvent.DEC_PLAYER_BLOOD, this, this.updatePlayerBlood);
         // EventManager.instance.addNotice(GameEvent.BUY_SHOP_ITEM, this, this.buyShopItem);
         // EventManager.instance.addNotice(GameEvent.BUY_SHOP_ITEM_FREE, this, this.decPlayerBlood);
 
@@ -87,8 +87,8 @@ export default class PlayerInfoView {
     }
 
     private decPlayerBlood(): void {
-        GameManager.instance.roleInfo.blood--;
-        if (GameManager.instance.roleInfo.blood < 0) GameManager.instance.roleInfo.blood = 0;
+        // GameManager.instance.roleInfo.blood--;
+        // if (GameManager.instance.roleInfo.blood < 0) GameManager.instance.roleInfo.blood = 0;
         this.updatePlayerBlood();
     }
 
@@ -120,9 +120,6 @@ export default class PlayerInfoView {
     }
 
     public updatePlayerBlood(): void {
-        if (GameManager.instance.roleInfo.blood <= 0) {
-            EventManager.instance.dispatcherEvt(GameEvent.PLAYER_DEATH);
-        }
         for (let i = 3; i > 0; i--) {
             if (i <= GameManager.instance.roleInfo.blood) {
                 this.view["m_blood_" + i].visible = true;

@@ -1,7 +1,6 @@
 import { ViewManager } from "./ViewManager";
 import { PlayerInfo, EnemyInfo, ObstacleInfo, PlayerData } from "../Data/PlayerData";
 import { GameData, GoodsType } from "../Data/GameData";
-import Player from "../View/Player";
 import { EventManager } from "./EventManager";
 import GameEvent from "../Control/GameEvent";
 import { SoundManager } from "./SoundManager";
@@ -127,7 +126,7 @@ export class GameManager {
 
     public gotoNextLevel(): void {
         ViewManager.instance.hidePopUpView(ViewManager.instance.afterWar);
-        if (this.gotoMaxLevel > this.maxLevel * this.maxChapter) {
+        if (this.curLevel > this.maxLevel * this.maxChapter) {
             ViewManager.instance.showTipsView("您已通关！敬请期待后续章节");
             return;
         }
@@ -147,6 +146,7 @@ export class GameManager {
             this.curLevelData = this.levelData["chapter_" + this.curChapter]["level_" + l];
             this.playerInfo.curlvCoin = 0;
             this.roleInfo.blood = 3;
+            this.roleInfo.isDeath = false;
             ViewManager.instance.createWarView();
             SoundManager.instance.playBGM();
         } else {

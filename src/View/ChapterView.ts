@@ -18,8 +18,6 @@ export default class ChapterView extends PopUpView {
             this.view["m_level_" + t].on(Laya.Event.CLICK, this, this.chooseLevel, [t]);
         }
 
-        // this.view.m_share.m_share1.onClick(this, this.shareHandle1);
-        // this.view.m_share.m_share2.onClick(this, this.shareHandle2);
         this.view.m_set.onClick(this, this.showSetView);
         this.view.m_setView.m_vol.onClick(this, this.setVolume);
         this.view.m_last.onClick(this, this.lastHandle);
@@ -74,16 +72,6 @@ export default class ChapterView extends PopUpView {
         this.showSet = !this.showSet;
         this.view.m_setView.visible = this.showSet;
     }
-
-    // private shareHandle1(): void {
-    //     SoundManager.instance.playSound("btn_click");
-    //     ViewManager.instance.showTipsView("敬请期待！");
-    // }
-
-    // private shareHandle2(): void {
-    //     SoundManager.instance.playSound("btn_click");
-    //     ViewManager.instance.showTipsView("敬请期待！");
-    // }
     private lastHandle(): void {
         SoundManager.instance.playSound("btn_click");
         GameManager.instance.curChapter--;

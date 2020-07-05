@@ -1,11 +1,7 @@
 
-import WXFUI_Player from "../fui/Game/WXFUI_Player";
-import PlayerAni from "./PlayerAni";
+
 import { ViewManager } from "../Manager/ViewManager";
-import WXFUI_enemy from "../fui/Game/WXFUI_enemy";
 import EnemyBody from "./Body/EnemyBody";
-import GameEvent from "../Control/GameEvent";
-import { EventManager } from "../Manager/EventManager";
 import Enemy from "./Enemy";
 import { EnemyInfo } from "../Data/PlayerData";
 import { BombData } from "../Data/GameData";
@@ -19,6 +15,7 @@ export default class Chopper extends Enemy {
 
     public createView(d: EnemyInfo) {
         super.initData(d);
+        // this.scene = new ui.ChopperBodyUI();
         this.scene = new ui.ChopperBodyUI();
         this.loadComplete();
         // Laya.Scene.load("ChopperBody.scene", Laya.Handler.create(this, this.loadComplete));
@@ -39,7 +36,7 @@ export default class Chopper extends Enemy {
             this.setRun();
             this.setStillFire();
             Laya.timer.loop(4000, this, this.setStillFire);
-            Laya.timer.loop(4000, this, this.setRun);
+            Laya.timer.loop(5000, this, this.setRun);
         }
     }
 
@@ -86,10 +83,6 @@ export default class Chopper extends Enemy {
 
     protected clearWarView(): void {
         this.dispose();
-    }
-
-    public dispose(): void {
-        super.dispose();
         Laya.timer.clearAll(this);
     }
 

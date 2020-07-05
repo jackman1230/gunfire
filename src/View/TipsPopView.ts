@@ -1,5 +1,5 @@
 
-import { ViewManager } from "../Manager/ViewManager";
+
 import WXFUI_TipsPopView from "../fui/Game/WXFUI_TipsPopView";
 
 export default class TipsPopView {
