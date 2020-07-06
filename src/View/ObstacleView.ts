@@ -118,8 +118,8 @@ export default class ObstacleView {
 
     public dispose(): void {
         EventManager.instance.offNotice(GameEvent.CLEAR_WAR_VIEW, this, this.dispose);
-        EventManager.instance.offNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.beHit);
-        EventManager.instance.offNotice(GameEvent.PLAYER_BULLET_HIT_ENEMY, this, this.beHit);
+        EventManager.instance.offNotice(GameEvent.PLAYER_BOMB_HIT_OBSTACLE, this, this.beHit);
+        EventManager.instance.offNotice(GameEvent.PLAYER_BULLET_HIT_OBSTACLE, this, this.beHit);
         Laya.timer.clearAll(this);
         if (this.scene)
             this.scene.removeSelf();

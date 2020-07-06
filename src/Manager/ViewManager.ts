@@ -178,7 +178,12 @@ export class ViewManager {
     }
 
     public showSuspendView(): void {
-        this.showPopUpView(this.suspendView);
+        // this.showPopUpView(this.suspendView);
+        this.suspendView.showViewNoTween();
+    };
+    public hideSuspendView(): void {
+        // this.showPopUpView(this.suspendView);
+        this.suspendView.hideAllView();
     }
 
     public showChapterView(): void {
@@ -186,6 +191,10 @@ export class ViewManager {
         this.chapterView.view.m_chapter.selectedIndex = 0;
         this.chapterView.updateView();
         this.showPopUpView(this.chapterView, false, true);
+    }
+
+    public playerVicToryLevel(): void {
+        this.player.victoryGame();
     }
 
     public initPopUpView(): void {
@@ -293,10 +302,18 @@ export class ViewManager {
             return -2;// 左下
         } else if ((rad >= 6 * Math.PI / 8 && rad < Math.PI) || (rad >= -Math.PI && rad < -6 * Math.PI / 8)) {
             return -1;// 左
-        } else if (rad >= -6 * Math.PI / 8 && rad < -4 * Math.PI / 8) {
-            return -3;// 左上
+        } else if (rad >= -6 * Math.PI / 8 && rad < -5 * Math.PI / 8) {
+            // console.log("左斜上");
+            return -3;// 左斜上
+        } else if (rad >= -5 * Math.PI / 8 && rad < -4 * Math.PI / 8) {
+            // console.log("左上");
+            return -4;// 左上
+        } else if (rad >= -4 * Math.PI / 8 && rad < -3 * Math.PI / 8) {
+            // console.log("右上");
+            return 4;// 右上
         } else {
-            return 3;// 右上
+            // console.log("右斜上");
+            return 3;// 右斜上
         }
 
         // else if (rad >= -5 * Math.PI / 8 && rad < -3 * Math.PI / 8) {
@@ -318,6 +335,9 @@ export class ViewManager {
         "31": [115, -95],//武器手枪，方向 右上
         "32": [120, -50],//武器机枪，方向 右上
         "33": [25, 130],//武器来福枪，方向 右上
+        "41": [-30, -185],//武器手枪，方向 上
+        "42": [-30, -185],//武器机枪，方向 上
+        "43": [50, 200],//武器来福枪，方向 上
         "14": [20, -60],//武器手雷，方向右
         "-11": [-200, -22],//武器手枪，方向 左
         "-12": [-210, 0],//武器机枪，方向 左
@@ -329,6 +349,9 @@ export class ViewManager {
         "-31": [-190, -90],//武器手枪，方向 左上
         "-32": [-180, -50],//武器机枪，方向 左上
         "-33": [255, 130],//武器来福枪，方向 左上
+        "-41": [-30, -185],//武器手枪，方向 上
+        "-42": [-30, -185],//武器机枪，方向 上
+        "-43": [55, 200],//武器来福枪，方向 上
     }
     /**角色子弹坐标偏移 */
     public getPlayerBulletOffSetPos(dir: number, weaponType: number): Laya.Point {

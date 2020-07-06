@@ -110,6 +110,7 @@ export default class Enemy {
     }
 
     protected pauseGame(): void {
+        if (this.isDeath) return;
         this.bodyLoader.playing = !GameManager.instance.isPauseGame;
         if (this.enemyType == GameData.ENEMY_MOR) {
             this.bodyLoader.component.getChildAt(0).asLoader.playing = !GameManager.instance.isPauseGame;
@@ -120,6 +121,7 @@ export default class Enemy {
     public beHit(s: any): void {
         if (this.isDeath) return;
         if (s.o == this.box.owner) {
+            // console.log("enemyBehit");
             this.blood -= s.d;
             Laya.timer.clear(this, this.setColor);
             if (this.blood <= 0) {
@@ -269,7 +271,9 @@ export default class Enemy {
         Laya.timer.once(500, this, this.dispose);
         this.createGoods();
         if (this.isBoss) {
-            GameManager.instance.bossDeath = true;
+            // GameManager.instance.bossDeath = true;
+            // EventManager.instance.dispatcherEvt(GameEvent.VICITORY_LEVEL);
+            GameManager.instance.victoryGame();
         }
     }
 

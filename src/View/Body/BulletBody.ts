@@ -45,7 +45,8 @@ export default class BulletBody extends Laya.Script {
                 EventManager.instance.dispatcherEvt(GameEvent.PLAYER_BULLET_HIT_OBSTACLE, { o: other.owner, s: self.owner, d: this.damage });
             }
             return;
-        } else if (self.label == "enemyBullet") {
+        }
+        if (self.label == "enemyBullet") {
             if (other.label == "player") {
                 // console.log("敌人子弹击中主角--ID=", other.id, self.id);
                 this.selfCollider.destroy();

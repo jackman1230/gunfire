@@ -32,20 +32,15 @@ export default class EnemyBullet {
 
     private loadComplete(): void {
         this.view = fairygui.UIPackage.createObject("Game", "zidan") as WXFUI_zidan;
-        // this.scene = s;
-        // console.log("enemyBullet.scene--loadComplete", this.box.id);
         if (this.bulletType == GameData.ENEMY_TANK_1 || this.bulletType == GameData.ENEMY_TANK_2 || this.bulletType == GameData.ENEMY_TANK_3 || this.bulletType == GameData.ENEMY_TANK_4) {
             this.view.m_zidan.url = "ui://Game/zhadan_4";
         } else
             this.view.m_zidan.url = "ui://Game/zidan3";
 
-
         this.scene.addChild(this.view.displayObject);
         ViewManager.instance.warView.scene.addChild(this.scene);
 
-
         this.setBulletPos();
-
         EventManager.instance.addNotice(GameEvent.CLEAR_WAR_VIEW, this, this.disposeAll);
         EventManager.instance.addNotice(GameEvent.BULLET_DISPOSE, this, this.dispose);
         EventManager.instance.addNotice(GameEvent.ENEMY_BULLET_HIT_PLAYER, this, this.bulletHitPlayer);
@@ -73,8 +68,8 @@ export default class EnemyBullet {
 
     private bulletHitPlayer(s: any): void {
         if (s.s == this.box.owner) {
-            EventManager.instance.offNotice(GameEvent.ENEMY_BULLET_HIT_PLAYER, this, this.bulletHitPlayer);
-            EventManager.instance.offNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.dispose);
+            // EventManager.instance.offNotice(GameEvent.ENEMY_BULLET_HIT_PLAYER, this, this.bulletHitPlayer);
+            // EventManager.instance.offNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.dispose);
 
             this.body.setVelocity({ x: 0, y: 0 });
             this.view.m_zidan.url = "ui://Game/bulletDisAni";
@@ -89,7 +84,6 @@ export default class EnemyBullet {
 
         if (this.scene) {
             this.scene.removeSelf();
-            // Laya.Pool.recover("EnemyBulletUI", this.scene);
         }
         this.view.dispose();
         Laya.Pool.recover("enemyBullet", this);

@@ -3,7 +3,7 @@
     "role": {
         "blood": 3,
         "bombNum": 10,
-        "weaponType": 1,
+        "weaponType": 3,
         "addBombNum": 10,
         "addMacNum": 200,
         "addRifNum": 50
@@ -220,7 +220,7 @@
                     "activeDis": 500,
                     "pos": [
                         2563,
-                        371
+                        351
                     ],
                     "isBoss": false,
                     "expRate": [

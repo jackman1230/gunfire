@@ -20,21 +20,29 @@ export default class SuspendView extends PopUpView {
     }
 
     private goFirstPage(): void {
-        GameManager.instance.suspendGame();
         SoundManager.instance.playSound("btn_click");
-        GameManager.instance.goFirstPage();
+        GameManager.instance.suspendGame();
+        Laya.timer.frameOnce(1, this, () => {
+            ViewManager.instance.hideSuspendView();
+            GameManager.instance.goFirstPage();
+        })
     }
 
     private continueGame(): void {
-        GameManager.instance.suspendGame();
         SoundManager.instance.playSound("btn_click");
-        ViewManager.instance.hidePopUpView(null, true);
+        GameManager.instance.suspendGame();
+        Laya.timer.frameOnce(1, this, () => {
+            ViewManager.instance.hideSuspendView();
+        })
     }
 
     private restartGame(): void {
-        GameManager.instance.suspendGame();
         SoundManager.instance.playSound("btn_click");
-        GameManager.instance.restartGame();
+        GameManager.instance.suspendGame();
+        Laya.timer.frameOnce(1, this, () => {
+            ViewManager.instance.hideSuspendView();
+            GameManager.instance.restartGame();
+        })
     }
 
 }

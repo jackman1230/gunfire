@@ -27,11 +27,17 @@ export default class PlayerBullet {
         this.view.m_zidan.url = "ui://Game/playerzidan" + this.bulletType;
         if (this.bulletType == GameData.WEAPON_RIFLE) {
             // Laya.Scene.load("BulletRifle.scene", Laya.Handler.create(this, this.loadComplete));
-            this.scene = new ui.BulletRifleUI();
+            if (this.direction == 4 || this.direction == -4) {
+                this.scene = new ui.BulletRifleUpUI();
+            } else
+                this.scene = new ui.BulletRifleUI();
             // this.scene = Laya.Pool.getItemByClass("BulletRifleUI", ui.BulletRifleUI);
         } else {
             // this.scene = Laya.Pool.getItemByClass("BulletUI", ui.BulletUI);
-            this.scene = new ui.BulletUI();
+            if (this.direction == 4 || this.direction == -4) {
+                this.scene = new ui.BulletUpUI();
+            } else
+                this.scene = new ui.BulletUI();
             // Laya.Scene.load("Bullet.scene", Laya.Handler.create(this, this.loadComplete));
         }
         this.loadComplete();
@@ -99,6 +105,10 @@ export default class PlayerBullet {
                 } else if (this.direction == 3) {//右上
                     this.scene.y = c.y - this.scene.height;
                     this.view.setSkew(-15, -15);
+                } else if (this.direction == 4) {//上
+                    this.scene.y = c.y - this.scene.height;
+                    this.scene.x = c.x - this.scene.width / 2;
+                    this.view.setSkew(-90, -90);
                 } else {
                     this.scene.y = c.y - this.scene.height / 2;
                     this.view.setSkew(0, 0);//右
@@ -111,6 +121,10 @@ export default class PlayerBullet {
                 } else if (this.direction == -3) {//左上
                     this.scene.y = c.y - this.scene.height;
                     this.view.setSkew(195, 195);
+                } else if (this.direction == -4) {//上
+                    this.scene.y = c.y - this.scene.height;
+                    this.scene.x = c.x - this.scene.width / 2;
+                    this.view.setSkew(270, 270);
                 } else {
                     this.scene.y = c.y - this.scene.height / 2;
                     this.view.setSkew(180, 180);//左
@@ -118,19 +132,28 @@ export default class PlayerBullet {
             }
             this.view.m_zidan.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.disposeAll));
         } else {
-            var y: number = ViewManager.instance.bulletRandomY();
-            this.scene.x = c.x + p.x;
-            this.scene.y = c.y - y + p.y;
+            if (this.direction == 1 || this.direction == -1) {
+                var y: number = ViewManager.instance.bulletRandomY();
+                this.scene.x = c.x + p.x;
+                this.scene.y = c.y - y + p.y;
+            } else {
+                this.scene.x = c.x + p.x;
+                this.scene.y = c.y + p.y;
+            }
             this.scene.addChild(this.view.displayObject);
             var b: BulletBody = this.scene.getComponent(BulletBody);
             b.onAwake();
             if (this.direction > 0) {
                 if (this.direction == 2) {//右下
                     this.view.setSkew(25, 25);
-                    this.body.setVelocity({ x: 11, y: 7 });
+                    this.body.setVelocity({ x: 11, y: 8 });
                 } else if (this.direction == 3) {//右上
                     this.view.setSkew(-25, -25);
-                    this.body.setVelocity({ x: 11, y: -7 });
+                    this.body.setVelocity({ x: 11, y: -8 });
+                } else if (this.direction == 4) {//上
+                    // this.scene.y = c.y - this.scene.height;
+                    this.view.setSkew(-90, -90);
+                    this.body.setVelocity({ x: 0, y: -9 });
                 } else {
                     this.view.setSkew(0, 0);//右
                     this.body.setVelocity({ x: 11, y: 0 });
@@ -138,10 +161,14 @@ export default class PlayerBullet {
             } else {
                 if (this.direction == -2) {//左下
                     this.view.setSkew(155, 155);
-                    this.body.setVelocity({ x: -11, y: 7 });
+                    this.body.setVelocity({ x: -11, y: 8 });
                 } else if (this.direction == -3) {//左上
                     this.view.setSkew(205, 205);
-                    this.body.setVelocity({ x: -11, y: -7 });
+                    this.body.setVelocity({ x: -11, y: -8 });
+                } else if (this.direction == -4) {//上
+                    // this.scene.y = c.y - this.scene.height;
+                    this.view.setSkew(270, 270);
+                    this.body.setVelocity({ x: 0, y: -9 });
                 } else {
                     this.view.setSkew(180, 180);//左
                     this.body.setVelocity({ x: -11, y: 0 });

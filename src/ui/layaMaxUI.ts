@@ -49,6 +49,24 @@ export module ui {
         }
     }
     REG("ui.BulletRifleUI",BulletRifleUI);
+    export class BulletRifleUpUI extends Laya.View {
+        public static  uiView:any ={"type":"View","props":{"width":197,"height":347},"compId":2,"child":[{"type":"Script","props":{"y":0,"x":0,"width":197,"isSensor":true,"height":347,"friction":0,"runtime":"laya.physics.BoxCollider"},"compId":3},{"type":"Script","props":{"gravityScale":0,"allowRotation":false,"runtime":"laya.physics.RigidBody"},"compId":4}],"loadList":[],"loadList3D":[]};
+        constructor(){ super()}
+        createChildren():void {
+            super.createChildren();
+            this.createView(BulletRifleUpUI.uiView);
+        }
+    }
+    REG("ui.BulletRifleUpUI",BulletRifleUpUI);
+    export class BulletUpUI extends Laya.View {
+        public static  uiView:any ={"type":"View","props":{"width":15,"height":30},"compId":2,"child":[{"type":"Script","props":{"y":0,"x":0,"width":15,"isSensor":true,"height":30,"friction":0,"runtime":"laya.physics.BoxCollider"},"compId":3},{"type":"Script","props":{"gravityScale":0,"allowRotation":false,"runtime":"laya.physics.RigidBody"},"compId":4}],"loadList":[],"loadList3D":[]};
+        constructor(){ super()}
+        createChildren():void {
+            super.createChildren();
+            this.createView(BulletUpUI.uiView);
+        }
+    }
+    REG("ui.BulletUpUI",BulletUpUI);
     export class ChopperBodyUI extends Laya.View {
         public static  uiView:any ={"type":"View","props":{"width":332,"height":172},"compId":2,"child":[{"type":"Script","props":{"y":0,"x":0,"width":332,"label":"enemy","isSensor":true,"height":172,"friction":0,"density":0,"runtime":"laya.physics.BoxCollider"},"compId":3},{"type":"Script","props":{"label":"enemy","gravityScale":0,"allowRotation":false,"runtime":"laya.physics.RigidBody"},"compId":4}],"loadList":[],"loadList3D":[]};
         constructor(){ super()}

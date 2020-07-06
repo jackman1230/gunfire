@@ -31,13 +31,6 @@
     <image id="cqp91t" name="932.png" path="/assets/player/手榴弹-爆炸/"/>
     <image id="cqp91u" name="930.png" path="/assets/player/手榴弹-爆炸/"/>
     <image id="cqp91v" name="928.png" path="/assets/player/手榴弹-爆炸/"/>
-    <image id="cqp91z" name="1579.png" path="/assets/player/上-手枪/"/>
-    <image id="cqp920" name="1577.png" path="/assets/player/上-手枪/"/>
-    <image id="cqp921" name="1575.png" path="/assets/player/上-手枪/"/>
-    <image id="cqp922" name="1573.png" path="/assets/player/上-手枪/"/>
-    <image id="cqp923" name="1571.png" path="/assets/player/上-手枪/"/>
-    <image id="cqp924" name="1569.png" path="/assets/player/上-手枪/"/>
-    <image id="cqp925" name="1566.png" path="/assets/player/上-手枪/"/>
     <image id="cqp926" name="1408.png" path="/assets/player/上身-跑-机枪/"/>
     <image id="cqp927" name="1406.png" path="/assets/player/上身-跑-机枪/"/>
     <image id="cqp928" name="1404.png" path="/assets/player/上身-跑-机枪/"/>
@@ -676,10 +669,7 @@
     <component id="tvmxxou" name="enemy14.xml" path="/Component/enemy/" exported="true"/>
     <component id="tvmxxov" name="enemy_fire_13.xml" path="/Component/enemy/" exported="true"/>
     <movieclip id="tvmxxow" name="enemyStay_6.jta" path="/Component/enemy/enemyAni/" exported="true"/>
-    <image id="tvmxxox" name="994.png" path="/assets/player/斜上-手枪/"/>
-    <image id="tvmxxoy" name="992.png" path="/assets/player/斜上-手枪/"/>
-    <image id="tvmxxoz" name="990.png" path="/assets/player/斜上-手枪/"/>
-    <movieclip id="tvmxxp0" name="fire_1_3.jta" path="/Component/player/playerAni/"/>
+    <movieclip id="tvmxxp0" name="fire_up_1.jta" path="/Component/player/playerAni/" exported="true"/>
     <component id="tvmxxp1" name="player_fire_2_2.xml" path="/Component/player/" exported="true"/>
     <component id="tvmxxp2" name="player_fire_2_3.xml" path="/Component/player/" exported="true"/>
     <component id="tvmxxp3" name="player_fire_1_2.xml" path="/Component/player/" exported="true"/>
@@ -698,6 +688,33 @@
     <component id="ugvixpg" name="setting.xml" path="/Component/view/" exported="true"/>
     <component id="ugvixpi" name="volume.xml" path="/Component/view/" exported="true"/>
     <component id="cdcoxpj" name="enemy_fire_14.xml" path="/Component/enemy/" exported="true"/>
+    <component id="sj2vxpk" name="player_stay_1_4.xml" path="/Component/player/" exported="true"/>
+    <component id="cde5xpl" name="player_fire_1_4.xml" path="/Component/player/" exported="true"/>
+    <component id="cde5xpm" name="player_fire_2_4.xml" path="/Component/player/" exported="true"/>
+    <component id="cde5xpn" name="player_fire_3_4.xml" path="/Component/player/" exported="true"/>
+    <image id="cde5xpp" name="994.png" path="/assets/player/上-手枪-静止/"/>
+    <image id="cde5xpq" name="992.png" path="/assets/player/上-手枪-静止/"/>
+    <image id="cde5xpt" name="1228.png" path="/assets/player/上-机枪/"/>
+    <image id="cde5xpu" name="1226.png" path="/assets/player/上-机枪/"/>
+    <image id="cde5xpv" name="1224.png" path="/assets/player/上-机枪/"/>
+    <image id="cde5xpw" name="1004.png" path="/assets/player/上-机枪-静止/"/>
+    <image id="cde5xpx" name="1002.png" path="/assets/player/上-机枪-静止/"/>
+    <image id="cde5xpy" name="1238.png" path="/assets/player/上-来福/"/>
+    <image id="cde5xpz" name="1236.png" path="/assets/player/上-来福/"/>
+    <image id="cde5xq0" name="1234.png" path="/assets/player/上-来福/"/>
+    <movieclip id="cde5xq1" name="stay_up_1.jta" path="/Component/player/playerAni/" exported="true"/>
+    <movieclip id="cde5xq2" name="stay_up_2.jta" path="/Component/player/playerAni/" exported="true"/>
+    <image id="cde5xq5" name="1203.png" path="/assets/player/上-手枪/"/>
+    <image id="cde5xq6" name="1201.png" path="/assets/player/上-手枪/"/>
+    <image id="cde5xq7" name="1199.png" path="/assets/player/上-手枪/"/>
+    <movieclip id="cde5xq8" name="fire_up_2.jta" path="/Component/player/playerAni/" exported="true"/>
+    <movieclip id="cde5xq9" name="fire_up_3.jta" path="/Component/player/playerAni/" exported="true"/>
+    <image id="cde5xqe" name="1243.png" path="/assets/player/上-来福/"/>
+    <image id="cde5xqf" name="1241.png" path="/assets/player/上-来福/"/>
+    <component id="cde5xqg" name="player_stay_2_4.xml" path="/Component/player/" exported="true"/>
+    <component id="cde5xqh" name="player_stay_3_4.xml" path="/Component/player/" exported="true"/>
+    <image id="cde5xqi" name="1232.png" path="/assets/player/上-机枪/"/>
+    <image id="cde5xqj" name="1230.png" path="/assets/player/上-机枪/"/>
   </resources>
   <publish name="Game" path="..\bin\res" packageCount="2" genCode="true" codePath="..\src\fui"/>
 </packageDescription>

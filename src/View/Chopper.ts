@@ -75,7 +75,9 @@ export default class Chopper extends Enemy {
         this.enemy.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
 
         if (this.isBoss) {
-            GameManager.instance.bossDeath = true;
+            // GameManager.instance.bossDeath = true;
+            // EventManager.instance.dispatcherEvt(GameEvent.VICITORY_LEVEL);
+            GameManager.instance.victoryGame();
         }
         SoundManager.instance.playSound("boom");
         // this.createGoods();

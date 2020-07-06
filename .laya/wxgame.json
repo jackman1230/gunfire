@@ -82,12 +82,12 @@
         ""
     ],
     "clearReleaseDir": true,
-    "compile": false,
+    "compile": true,
     "forceCompile": false,
     "onlyIndexJS": true,
     "es6toes5": false,
     "projectType": "ts",
-    "pubTime": 1593853214969,
+    "pubTime": 1593939695957,
     "uesEnginePlugin": false,
     "wxOptimize": {
         "useOptimizeOpen": false,

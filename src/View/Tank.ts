@@ -104,7 +104,8 @@ export default class Tank extends Enemy {
         ani.y = -100;
         this.bodyLoader.displayObject.addChild(ani.displayObject);
         if (this.isBoss) {
-            GameManager.instance.bossDeath = true;
+            // EventManager.instance.dispatcherEvt(GameEvent.VICITORY_LEVEL);
+            GameManager.instance.victoryGame();
         }
         SoundManager.instance.playSound("boom");
         // this.createGoods();

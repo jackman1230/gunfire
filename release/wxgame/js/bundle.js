@@ -2,7 +2,8 @@
     'use strict';
 
     class GameConfig {
-        constructor() { }
+        constructor() {
+        }
         static init() {
             var reg = Laya.ClassUtils.regClass;
         }
@@ -13,7 +14,7 @@
     GameConfig.screenMode = "none";
     GameConfig.alignV = "top";
     GameConfig.alignH = "left";
-    GameConfig.startScene = "ChopperBomb.scene";
+    GameConfig.startScene = "BoardBody.scene";
     GameConfig.sceneRoot = "";
     GameConfig.debug = false;
     GameConfig.stat = false;
@@ -25,7 +26,9 @@
     var ui;
     (function (ui) {
         class BoardBodyUI extends Laya.View {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(BoardBodyUI.uiView);
@@ -35,7 +38,9 @@
         ui.BoardBodyUI = BoardBodyUI;
         REG("ui.BoardBodyUI", BoardBodyUI);
         class BombBodyUI extends Laya.View {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(BombBodyUI.uiView);
@@ -45,7 +50,9 @@
         ui.BombBodyUI = BombBodyUI;
         REG("ui.BombBodyUI", BombBodyUI);
         class BoomBodyUI extends Laya.View {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(BoomBodyUI.uiView);
@@ -55,7 +62,9 @@
         ui.BoomBodyUI = BoomBodyUI;
         REG("ui.BoomBodyUI", BoomBodyUI);
         class BulletUI extends Laya.View {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(BulletUI.uiView);
@@ -65,7 +74,9 @@
         ui.BulletUI = BulletUI;
         REG("ui.BulletUI", BulletUI);
         class BulletRifleUI extends Laya.View {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(BulletRifleUI.uiView);
@@ -75,7 +86,9 @@
         ui.BulletRifleUI = BulletRifleUI;
         REG("ui.BulletRifleUI", BulletRifleUI);
         class ChopperBodyUI extends Laya.View {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(ChopperBodyUI.uiView);
@@ -85,7 +98,9 @@
         ui.ChopperBodyUI = ChopperBodyUI;
         REG("ui.ChopperBodyUI", ChopperBodyUI);
         class ChopperBombUI extends Laya.View {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(ChopperBombUI.uiView);
@@ -95,7 +110,9 @@
         ui.ChopperBombUI = ChopperBombUI;
         REG("ui.ChopperBombUI", ChopperBombUI);
         class EnemyBodyUI extends Laya.View {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(EnemyBodyUI.uiView);
@@ -105,7 +122,9 @@
         ui.EnemyBodyUI = EnemyBodyUI;
         REG("ui.EnemyBodyUI", EnemyBodyUI);
         class GoodsBodyUI extends Laya.View {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(GoodsBodyUI.uiView);
@@ -115,7 +134,9 @@
         ui.GoodsBodyUI = GoodsBodyUI;
         REG("ui.GoodsBodyUI", GoodsBodyUI);
         class map_1UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(map_1UI.uiView);
@@ -125,7 +146,9 @@
         ui.map_1UI = map_1UI;
         REG("ui.map_1UI", map_1UI);
         class map_2UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(map_2UI.uiView);
@@ -135,7 +158,9 @@
         ui.map_2UI = map_2UI;
         REG("ui.map_2UI", map_2UI);
         class map_3UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(map_3UI.uiView);
@@ -145,7 +170,9 @@
         ui.map_3UI = map_3UI;
         REG("ui.map_3UI", map_3UI);
         class map_4UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(map_4UI.uiView);
@@ -155,7 +182,9 @@
         ui.map_4UI = map_4UI;
         REG("ui.map_4UI", map_4UI);
         class map_5UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(map_5UI.uiView);
@@ -165,7 +194,9 @@
         ui.map_5UI = map_5UI;
         REG("ui.map_5UI", map_5UI);
         class map_6UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(map_6UI.uiView);
@@ -175,7 +206,9 @@
         ui.map_6UI = map_6UI;
         REG("ui.map_6UI", map_6UI);
         class map_7UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(map_7UI.uiView);
@@ -185,7 +218,9 @@
         ui.map_7UI = map_7UI;
         REG("ui.map_7UI", map_7UI);
         class map_8UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(map_8UI.uiView);
@@ -195,7 +230,9 @@
         ui.map_8UI = map_8UI;
         REG("ui.map_8UI", map_8UI);
         class ObstacleView_1UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(ObstacleView_1UI.uiView);
@@ -205,7 +242,9 @@
         ui.ObstacleView_1UI = ObstacleView_1UI;
         REG("ui.ObstacleView_1UI", ObstacleView_1UI);
         class ObstacleView_10UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(ObstacleView_10UI.uiView);
@@ -215,7 +254,9 @@
         ui.ObstacleView_10UI = ObstacleView_10UI;
         REG("ui.ObstacleView_10UI", ObstacleView_10UI);
         class ObstacleView_11UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(ObstacleView_11UI.uiView);
@@ -225,7 +266,9 @@
         ui.ObstacleView_11UI = ObstacleView_11UI;
         REG("ui.ObstacleView_11UI", ObstacleView_11UI);
         class ObstacleView_2UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(ObstacleView_2UI.uiView);
@@ -235,7 +278,9 @@
         ui.ObstacleView_2UI = ObstacleView_2UI;
         REG("ui.ObstacleView_2UI", ObstacleView_2UI);
         class ObstacleView_3UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(ObstacleView_3UI.uiView);
@@ -245,7 +290,9 @@
         ui.ObstacleView_3UI = ObstacleView_3UI;
         REG("ui.ObstacleView_3UI", ObstacleView_3UI);
         class ObstacleView_4UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(ObstacleView_4UI.uiView);
@@ -255,7 +302,9 @@
         ui.ObstacleView_4UI = ObstacleView_4UI;
         REG("ui.ObstacleView_4UI", ObstacleView_4UI);
         class ObstacleView_5UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(ObstacleView_5UI.uiView);
@@ -265,7 +314,9 @@
         ui.ObstacleView_5UI = ObstacleView_5UI;
         REG("ui.ObstacleView_5UI", ObstacleView_5UI);
         class ObstacleView_6UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(ObstacleView_6UI.uiView);
@@ -275,7 +326,9 @@
         ui.ObstacleView_6UI = ObstacleView_6UI;
         REG("ui.ObstacleView_6UI", ObstacleView_6UI);
         class ObstacleView_7UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(ObstacleView_7UI.uiView);
@@ -285,7 +338,9 @@
         ui.ObstacleView_7UI = ObstacleView_7UI;
         REG("ui.ObstacleView_7UI", ObstacleView_7UI);
         class ObstacleView_8UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(ObstacleView_8UI.uiView);
@@ -295,7 +350,9 @@
         ui.ObstacleView_8UI = ObstacleView_8UI;
         REG("ui.ObstacleView_8UI", ObstacleView_8UI);
         class ObstacleView_9UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(ObstacleView_9UI.uiView);
@@ -305,7 +362,9 @@
         ui.ObstacleView_9UI = ObstacleView_9UI;
         REG("ui.ObstacleView_9UI", ObstacleView_9UI);
         class PlayerBodyUI extends Laya.View {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(PlayerBodyUI.uiView);
@@ -315,7 +374,9 @@
         ui.PlayerBodyUI = PlayerBodyUI;
         REG("ui.PlayerBodyUI", PlayerBodyUI);
         class TankBody11UI extends Laya.View {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(TankBody11UI.uiView);
@@ -325,7 +386,9 @@
         ui.TankBody11UI = TankBody11UI;
         REG("ui.TankBody11UI", TankBody11UI);
         class TankBody12UI extends Laya.View {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(TankBody12UI.uiView);
@@ -335,7 +398,9 @@
         ui.TankBody12UI = TankBody12UI;
         REG("ui.TankBody12UI", TankBody12UI);
         class TankBody13UI extends Laya.View {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(TankBody13UI.uiView);
@@ -345,7 +410,9 @@
         ui.TankBody13UI = TankBody13UI;
         REG("ui.TankBody13UI", TankBody13UI);
         class TankBody14UI extends Laya.View {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(TankBody14UI.uiView);
@@ -447,7 +514,8 @@
     EventManager.eventDispatcher = new Laya.EventDispatcher();
 
     class GameEvent {
-        constructor() { }
+        constructor() {
+        }
     }
     GameEvent.PLAYER_DEATH = "PLAYER_DEATH";
     GameEvent.PLAYER_JUMP = "PLAYER_JUMP";
@@ -481,6 +549,7 @@
         constructor() {
             super();
             this.activeDis = 600;
+            this.isActive = false;
         }
         onAwake() {
             this.selfCollider = this.owner.getComponent(Laya.BoxCollider);
@@ -495,8 +564,11 @@
         onTriggerStay(other, self, contact) {
         }
         onUpdate() {
+            if (this.isActive)
+                return;
             var p = this.selfBody.getWorldCenter();
             if (Math.abs(ViewManager.instance.rolePlayer.roleSprite.x - p.x) < this.activeDis) {
+                this.isActive = true;
                 EventManager.instance.dispatcherEvt(GameEvent.ACTIVE_ENEMY, this.owner);
             }
         }
@@ -531,6 +603,7 @@
     GameData.RANDOM_COIN = 200;
     GameData.BOMB_DAMAGE = 5;
     GameData.SOUND_FONT = "res/sound/";
+    GameData.VICTORY_LEVEL_COIN = 1000;
     class BombData {
     }
     BombData.BOMB_MY_GRE = 1;
@@ -577,11 +650,13 @@
             return this._instance;
         }
         playSound(n) {
+            if (!this.isOpenSound)
+                return;
             var s = GameData.SOUND_FONT + n + ".mp3";
             Laya.SoundManager.playSound(s);
         }
         playBGM() {
-            Laya.SoundManager.playMusic("res/sound/bgm.mp3");
+            this.bgm = Laya.SoundManager.playMusic("res/sound/bgm.mp3");
         }
         stopBGM() {
             Laya.SoundManager.stopMusic();
@@ -589,12 +664,12 @@
         offSound() {
             this.isOpenSound = !this.isOpenSound;
             if (this.isOpenSound) {
-                Laya.SoundManager.setMusicVolume(1);
-                Laya.SoundManager.setSoundVolume(1);
+                Laya.SoundManager.soundMuted = false;
+                Laya.SoundManager.musicMuted = false;
             }
             else {
-                Laya.SoundManager.setMusicVolume(0);
-                Laya.SoundManager.setSoundVolume(0);
+                Laya.SoundManager.musicMuted = true;
+                Laya.SoundManager.soundMuted = true;
             }
         }
     }
@@ -671,7 +746,7 @@
             if (this.box.owner == s) {
                 this.isActive = true;
                 this.setFire();
-                Laya.timer.loop(2000, this, this.setFire);
+                Laya.timer.loop(3000, this, this.setFire);
             }
         }
         pauseGame() {
@@ -937,7 +1012,7 @@
                 }
                 return;
             }
-            else if (self.label == "enemyBullet") {
+            if (self.label == "enemyBullet") {
                 if (other.label == "player") {
                     this.selfCollider.destroy();
                     EventManager.instance.dispatcherEvt(GameEvent.ENEMY_BULLET_HIT_PLAYER, { o: other.owner, s: self.owner });
@@ -1015,8 +1090,6 @@
         }
         bulletHitPlayer(s) {
             if (s.s == this.box.owner) {
-                EventManager.instance.offNotice(GameEvent.ENEMY_BULLET_HIT_PLAYER, this, this.bulletHitPlayer);
-                EventManager.instance.offNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.dispose);
                 this.body.setVelocity({ x: 0, y: 0 });
                 this.view.m_zidan.url = "ui://Game/bulletDisAni";
                 this.view.m_zidan.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.disposeAll));
@@ -1029,7 +1102,6 @@
             EventManager.instance.offNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.dispose);
             if (this.scene) {
                 this.scene.removeSelf();
-                this.scene = null;
             }
             this.view.dispose();
             Laya.Pool.recover("enemyBullet", this);
@@ -1088,7 +1160,6 @@
             EventManager.instance.offNotice(GameEvent.PLAYER_BULLET_HIT_OBSTACLE, this, this.hitEnemy);
             if (this.scene) {
                 this.scene.removeSelf();
-                this.scene = null;
             }
             this.view.dispose();
             Laya.Pool.recover("PlayerBullet", this);
@@ -1199,13 +1270,13 @@
                 }
             }
             else if (self.label == "enemyBomb" && other.label == "player") {
-                this.owner.removeSelf();
                 EventManager.instance.dispatcherEvt(GameEvent.ENEMY_BOMB_HIT_PLAYER, { o: other.owner, s: self.owner });
+                this.owner.removeSelf();
                 return;
             }
             if (other.label == "ground") {
-                this.owner.removeSelf();
                 EventManager.instance.dispatcherEvt(GameEvent.BOMB_DISPOSE, { o: other.owner, s: self.owner });
+                this.owner.removeSelf();
                 return;
             }
         }
@@ -1474,8 +1545,8 @@
         }
         dispose() {
             EventManager.instance.offNotice(GameEvent.CLEAR_WAR_VIEW, this, this.dispose);
-            EventManager.instance.offNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.beHit);
-            EventManager.instance.offNotice(GameEvent.PLAYER_BULLET_HIT_ENEMY, this, this.beHit);
+            EventManager.instance.offNotice(GameEvent.PLAYER_BOMB_HIT_OBSTACLE, this, this.beHit);
+            EventManager.instance.offNotice(GameEvent.PLAYER_BULLET_HIT_OBSTACLE, this, this.beHit);
             Laya.timer.clearAll(this);
             if (this.scene)
                 this.scene.removeSelf();
@@ -1560,7 +1631,7 @@
                 this.setRun();
                 this.setStillFire();
                 Laya.timer.loop(4000, this, this.setStillFire);
-                Laya.timer.loop(4000, this, this.setRun);
+                Laya.timer.loop(5000, this, this.setRun);
             }
         }
         setRun() {
@@ -1601,9 +1672,6 @@
         }
         clearWarView() {
             this.dispose();
-        }
-        dispose() {
-            super.dispose();
             Laya.timer.clearAll(this);
         }
         recover() {
@@ -1725,7 +1793,9 @@
             }
             SoundManager.instance.playSound("boom");
         }
-        getDeathBoomPos() {
+        clearWarView() {
+            this.dispose();
+            Laya.timer.clearAll(this);
         }
         recover() {
             Laya.Pool.recover("tank", this);
@@ -1767,7 +1837,9 @@
             EventManager.instance.offNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.dispose);
             EventManager.instance.offNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.dispose);
             EventManager.instance.offNotice(GameEvent.BOMB_DISPOSE, this, this.dispose);
-            this.scene.removeSelf();
+            if (this.scene) {
+                this.scene.removeSelf();
+            }
             if (this.view)
                 this.view.dispose();
             Laya.Pool.recover("ChopperBomb", this);
@@ -1819,7 +1891,9 @@
             this.view.removeChildren();
             if (this.view)
                 this.view.dispose();
-            this.scene.removeSelf();
+            if (this.scene) {
+                this.scene.removeSelf();
+            }
             Laya.Pool.recover("goods", this);
         }
         setBombPos() {
@@ -1870,8 +1944,7 @@
             EventManager.instance.addNotice(GameEvent.CHANGE_PLAYER_GOODS, this, this.changePlayerGoods);
             EventManager.instance.addNotice(GameEvent.USE_PLAYER_BULLET, this, this.usePlyerBullet);
             EventManager.instance.addNotice(GameEvent.USE_PLAYER_BOMB, this, this.decBombNum);
-            EventManager.instance.addNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.decPlayerBlood);
-            EventManager.instance.addNotice(GameEvent.ENEMY_BULLET_HIT_PLAYER, this, this.decPlayerBlood);
+            EventManager.instance.addNotice(GameEvent.DEC_PLAYER_BLOOD, this, this.updatePlayerBlood);
             this.updateAllView();
             this.view.m_pause.onClick(this, this.pauseGame);
         }
@@ -1884,9 +1957,7 @@
         pauseGame() {
             SoundManager.instance.playSound("btn_press");
             ViewManager.instance.showSuspendView();
-            Laya.timer.once(300, this, () => {
-                GameManager.instance.suspendGame();
-            });
+            GameManager.instance.suspendGame();
         }
         changePlayerGoods(t) {
             if (t == GoodsType.GoodsType_MED) {
@@ -1927,9 +1998,6 @@
             }
         }
         decPlayerBlood() {
-            GameManager.instance.roleInfo.blood--;
-            if (GameManager.instance.roleInfo.blood < 0)
-                GameManager.instance.roleInfo.blood = 0;
             this.updatePlayerBlood();
         }
         usePlyerBullet() {
@@ -1956,9 +2024,6 @@
             this.view.m_coin.text = GameManager.instance.roleInfo.totalCoin + "";
         }
         updatePlayerBlood() {
-            if (GameManager.instance.roleInfo.blood <= 0) {
-                EventManager.instance.dispatcherEvt(GameEvent.PLAYER_DEATH);
-            }
             for (let i = 3; i > 0; i--) {
                 if (i <= GameManager.instance.roleInfo.blood) {
                     this.view["m_blood_" + i].visible = true;
@@ -2039,6 +2104,11 @@
             this.view.setScale(0.4, 0.4);
             this.tween = Laya.Tween.to(this.view, { scaleX: 1, scaleY: 1 }, 250, null, Laya.Handler.create(this, this.showComplete, [showMask, clickMaskHide]));
         }
+        showViewNoTween() {
+            this.view.setScale(1, 1);
+            this.v.addChild(this.view);
+            fairygui.GRoot.inst.addChild(this.v);
+        }
         showComplete(s, c) {
             if (s) {
                 this.v.m_mask.visible = true;
@@ -2062,19 +2132,27 @@
             this.view.m_restart.onClick(this, this.restartGame);
         }
         goFirstPage() {
-            GameManager.instance.suspendGame();
             SoundManager.instance.playSound("btn_click");
-            GameManager.instance.goFirstPage();
+            GameManager.instance.suspendGame();
+            Laya.timer.frameOnce(1, this, () => {
+                ViewManager.instance.hideSuspendView();
+                GameManager.instance.goFirstPage();
+            });
         }
         continueGame() {
-            GameManager.instance.suspendGame();
             SoundManager.instance.playSound("btn_click");
-            ViewManager.instance.hidePopUpView(null, true);
+            GameManager.instance.suspendGame();
+            Laya.timer.frameOnce(1, this, () => {
+                ViewManager.instance.hideSuspendView();
+            });
         }
         restartGame() {
-            GameManager.instance.suspendGame();
             SoundManager.instance.playSound("btn_click");
-            GameManager.instance.restartGame();
+            GameManager.instance.suspendGame();
+            Laya.timer.frameOnce(1, this, () => {
+                ViewManager.instance.hideSuspendView();
+                GameManager.instance.restartGame();
+            });
         }
     }
 
@@ -2341,7 +2419,6 @@
             this.keyJump = false;
         }
         onEnable() {
-            console.log("onEnableonEnableonEnableonEnableonEnable");
             this.selfCollider = this.owner.getComponent(Laya.BoxCollider);
             this.selfBody = this.selfCollider.rigidBody;
         }
@@ -2414,6 +2491,7 @@
             this.jumpHigh = 200;
             this.weaponType = 1;
             this.faceType = 1;
+            this.curTouchId = 0;
             this.stillFireNum = 1;
         }
         createView() {
@@ -2435,11 +2513,16 @@
             if (!this.playerCtlView)
                 this.playerCtlView = new PlayerCtlView();
             fairygui.GRoot.inst.addChild(this.playerCtlView.view);
+            this.playerCtlView.view.m_ctl.m_dirBtn.y = this.playerCtlView.view.m_ctl.m_dirBtn.x = 0;
+            this.addEvent();
+            this.resetData();
+            this.setStay();
+        }
+        addEvent() {
             EventManager.instance.addNotice(GameEvent.PLAYER_COLLISION_GROUND, this, this.colliGround);
             EventManager.instance.addNotice(GameEvent.ENEMY_BULLET_HIT_PLAYER, this, this.beHit);
             EventManager.instance.addNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.beHit);
             EventManager.instance.addNotice(GameEvent.CHANGE_PLAYER_WEAPON, this, this.changeWeaponType);
-            EventManager.instance.addNotice(GameEvent.PLAYER_DEATH, this, this.setDeath);
             Laya.stage.on(Laya.Event.KEY_DOWN, this, this.keyDowmEvent);
             Laya.stage.on(Laya.Event.KEY_UP, this, this.keyUpEvent);
             this.playerCtlView.view.m_fire.on(Laya.Event.MOUSE_DOWN, this, this.setFire);
@@ -2448,24 +2531,35 @@
             this.playerCtlView.view.m_jump.on(Laya.Event.CLICK, this, this.onClickJump);
             this.playerCtlView.view.m_ctl.m_mask.on(Laya.Event.MOUSE_DOWN, this, this.addMouseDown);
             this.playerCtlView.view.m_ctl.m_mask.on(Laya.Event.MOUSE_UP, this, this.addCtlViewMouseUp);
-            Laya.stage.on(Laya.Event.MOUSE_UP, this, this.addStageMouseUp);
-            this.addCtlViewMouseUp();
-            this.resetPos();
         }
-        resetPos() {
+        resetData() {
+            this.addEvent();
+            this.playerCtlView.view.m_ctl.m_dirBtn.y = this.playerCtlView.view.m_ctl.m_dirBtn.x = 0;
             var d = GameManager.instance.curLvData;
             this.roleSprite.x = d.rolePos[0];
             this.roleSprite.y = d.rolePos[1];
-            this.weaponType = GameManager.instance.roleInfo.weaponType;
+            this.sBoom = false;
+            this.sFire = false;
+            this.keyJump = false;
+            this.changeWeaponType(GameManager.instance.roleInfo.weaponType);
             ViewManager.instance.warView.scene.addChild(this.roleSprite);
         }
-        addCtlViewMouseUp() {
+        addCtlViewMouseUp(e) {
+            if (this.curTouchId != e.touchId)
+                return;
+            this.playerCtlView.view.m_ctl.m_mask.off(Laya.Event.MOUSE_MOVE, this, this.onMoveHandle);
             this.playerCtlView.view.m_ctl.m_dirBtn.y = this.playerCtlView.view.m_ctl.m_dirBtn.x = 0;
-            this.setStay();
+            this.stopMove();
         }
         addMouseDown(e) {
+            this.curTouchId = e.touchId;
             this.setDirection();
-            this.playerCtlView.view.m_ctl.m_mask.on(Laya.Event.MOUSE_MOVE, this, this.setDirection);
+            this.playerCtlView.view.m_ctl.m_mask.on(Laya.Event.MOUSE_MOVE, this, this.onMoveHandle);
+        }
+        onMoveHandle(e) {
+            if (e.touchId != this.curTouchId)
+                return;
+            this.setDirection();
         }
         setDirection() {
             var pos = this.playerCtlView.view.m_ctl.globalToLocal(Laya.stage.mouseX, Laya.stage.mouseY);
@@ -2509,9 +2603,6 @@
                 }
             }
             this.setPlayerDir();
-        }
-        addStageMouseUp() {
-            this.playerCtlView.view.m_ctl.m_mask.off(Laya.Event.MOUSE_MOVE, this, this.setDirection);
         }
         keyUpEvent(e) {
             var keyCode = e["keyCode"];
@@ -2620,22 +2711,13 @@
             this.bodyScript.keyJump = true;
         }
         jumpEnd() {
-            console.log("PLAYER_COLLISION_GROUND---");
             this.keyJump = false;
-            if (GameManager.instance.roleInfo.isDeath = true)
+            this.stopMove();
+            if (GameManager.instance.roleInfo.isDeath)
                 return;
             if (this.sBoom) {
                 this.setBoomComplete();
             }
-            else if (this.sFire) {
-                this.body.url = "ui://Game/player_fire_" + this.weaponType + "_" + this.direction;
-            }
-            if (this.sRun) {
-                this.bodyLeg.url = "ui://Game/legMove";
-                this.bodyLeg.content.rewind();
-                return;
-            }
-            this.stopMove();
         }
         setRun() {
             EventManager.instance.dispatcherEvt(GameEvent.PLAYER_RUN);
@@ -2657,6 +2739,7 @@
                     this.roleSprite.x = ViewManager.instance.warView.warView.width - this.roleSprite.width - 20;
                 if (GameManager.instance.bossDeath) {
                     if (this.roleSprite.x > ViewManager.instance.warView.warView.width - 450) {
+                        this.victoryGame();
                         GameManager.instance.victoryGame();
                     }
                 }
@@ -2674,8 +2757,6 @@
         }
         setFire() {
             if (this.sFire)
-                return;
-            if (this.sBoom)
                 return;
             if (this.stillRifle)
                 return;
@@ -2707,8 +2788,6 @@
                 this.bodyLeg.url = "ui://Game/legJump";
         }
         stillFire() {
-            if (this.sBoom)
-                return;
             this.setFireAniSkew();
             this.stillFireNum++;
             if (this.stillFireNum % 2 == 0) {
@@ -2748,13 +2827,6 @@
             this.rolePlayer.m_firePos1.visible = this.rolePlayer.m_firePos2.visible = false;
             this.body.url = "ui://Game/player_stay_" + this.weaponType + "_" + Math.abs(this.faceType);
             this.body.content.setPlaySettings(0, -1, 0, 0);
-            if (this.sRun) {
-                this.bodyLeg.url = "ui://Game/legMove";
-                this.bodyLeg.content.setPlaySettings(0, -1, 0, 0);
-                return;
-            }
-            if (this.keyJump)
-                this.bodyLeg.url = "ui://Game/legJump";
         }
         setBoom() {
             this.sBoom = true;
@@ -2772,12 +2844,14 @@
                 this.body.url = "ui://Game/player_stay_" + this.weaponType + "_" + Math.abs(this.faceType);
         }
         stopMove() {
-            EventManager.instance.dispatcherEvt(GameEvent.PLAYER_STAY);
+            Laya.timer.clear(this, this.stillRun);
             this.keyLeft = false;
             this.keyRight = false;
             this.sRun = false;
+            if (GameManager.instance.roleInfo.isDeath)
+                return;
+            EventManager.instance.dispatcherEvt(GameEvent.PLAYER_STAY);
             this.bodyLeg.url = "ui://Game/legStay";
-            Laya.timer.clear(this, this.stillRun);
         }
         setStay() {
             if (this.faceType > 0) {
@@ -2807,11 +2881,19 @@
                 return;
             GameManager.instance.roleInfo.isDeath = true;
             Laya.timer.clearAll(this);
-            EventManager.instance.offNotice(GameEvent.ENEMY_BULLET_HIT_PLAYER, this, this.beHit);
-            EventManager.instance.offNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.beHit);
+            this.removeEvent();
+            this.rolePlayer.m_firePos1.visible = this.rolePlayer.m_firePos2.visible = false;
             this.body.url = "ui://Game/player_death";
             this.body.content.setPlaySettings(0, -1, 1, this.body.content.frameCount - 1, Laya.Handler.create(this, this.deathComplete));
             this.playDeathSound();
+            ViewManager.instance.showAfterWarView(2);
+        }
+        victoryGame() {
+            this.setStay();
+            this.removeEvent();
+            GameManager.instance.roleInfo.curlvCoin += GameData.VICTORY_LEVEL_COIN;
+            GameManager.instance.roleInfo.totalCoin += GameData.VICTORY_LEVEL_COIN;
+            ViewManager.instance.playerInfoView.updateCoin();
         }
         playDeathSound() {
             var s = 1;
@@ -2830,9 +2912,19 @@
         }
         deathComplete() {
         }
-        beHit() {
+        disposeEnemyBullet(s) {
+        }
+        beHit(s) {
+            this.disposeEnemyBullet(s);
             if (GameManager.instance.roleInfo.isDeath)
                 return;
+            GameManager.instance.roleInfo.blood--;
+            EventManager.instance.dispatcherEvt(GameEvent.DEC_PLAYER_BLOOD);
+            if (GameManager.instance.roleInfo.blood <= 0) {
+                GameManager.instance.roleInfo.blood = 0;
+                this.setDeath();
+                return;
+            }
             Laya.timer.clear(this, this.setColor);
             this.bodyLeg.color = "#ff0000";
             this.bodybody.color = "#ff0000";
@@ -2854,18 +2946,7 @@
             return this.bodyComponent.getChildAt(1).asLoader;
         }
         dispose() {
-            this.playerCtlView.view.m_fire.off(Laya.Event.MOUSE_DOWN, this, this.setFire);
-            this.playerCtlView.view.m_fire.off(Laya.Event.MOUSE_UP, this, this.setFireEnd);
-            this.playerCtlView.view.m_bomb.off(Laya.Event.CLICK, this, this.onClickBomb);
-            this.playerCtlView.view.m_jump.off(Laya.Event.CLICK, this, this.onClickJump);
-            this.playerCtlView.view.m_ctl.m_mask.off(Laya.Event.MOUSE_DOWN, this, this.addMouseDown);
-            this.playerCtlView.view.m_ctl.m_mask.off(Laya.Event.MOUSE_UP, this, this.addCtlViewMouseUp);
-            Laya.stage.off(Laya.Event.MOUSE_UP, this, this.addStageMouseUp);
-            EventManager.instance.offNotice(GameEvent.PLAYER_COLLISION_GROUND, this, this.colliGround);
-            EventManager.instance.offNotice(GameEvent.ENEMY_BULLET_HIT_PLAYER, this, this.beHit);
-            EventManager.instance.offNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.beHit);
-            EventManager.instance.offNotice(GameEvent.CHANGE_PLAYER_WEAPON, this, this.changeWeaponType);
-            EventManager.instance.offNotice(GameEvent.PLAYER_DEATH, this, this.setDeath);
+            this.removeEvent();
             Laya.timer.clearAll(this);
             this.roleSprite.removeChildren();
             this.roleSprite.removeSelf();
@@ -2873,6 +2954,20 @@
             this.roleSprite.destroy();
             this.roleSprite = null;
             this.recover();
+        }
+        removeEvent() {
+            this.playerCtlView.view.m_fire.off(Laya.Event.MOUSE_DOWN, this, this.setFire);
+            this.playerCtlView.view.m_fire.off(Laya.Event.MOUSE_UP, this, this.setFireEnd);
+            this.playerCtlView.view.m_bomb.off(Laya.Event.CLICK, this, this.onClickBomb);
+            this.playerCtlView.view.m_jump.off(Laya.Event.CLICK, this, this.onClickJump);
+            this.playerCtlView.view.m_ctl.m_mask.off(Laya.Event.MOUSE_DOWN, this, this.addMouseDown);
+            this.playerCtlView.view.m_ctl.m_mask.off(Laya.Event.MOUSE_UP, this, this.addCtlViewMouseUp);
+            Laya.stage.off(Laya.Event.KEY_DOWN, this, this.keyDowmEvent);
+            Laya.stage.off(Laya.Event.KEY_UP, this, this.keyUpEvent);
+            EventManager.instance.offNotice(GameEvent.PLAYER_COLLISION_GROUND, this, this.colliGround);
+            EventManager.instance.offNotice(GameEvent.ENEMY_BULLET_HIT_PLAYER, this, this.beHit);
+            EventManager.instance.offNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.beHit);
+            EventManager.instance.offNotice(GameEvent.CHANGE_PLAYER_WEAPON, this, this.changeWeaponType);
         }
         recover() {
             Laya.Pool.recover("player", this);
@@ -2953,7 +3048,7 @@
                 this.player.createView();
             }
             else {
-                this.player.resetPos();
+                this.player.resetData();
             }
         }
         createWarView() {
@@ -3023,7 +3118,11 @@
             this.showPopUpView(this.beforeWar);
         }
         showSuspendView() {
-            this.showPopUpView(this.suspendView);
+            this.suspendView.showViewNoTween();
+        }
+        ;
+        hideSuspendView() {
+            this.suspendView.hideAllView();
         }
         showChapterView() {
             SoundManager.instance.stopBGM();
@@ -3222,7 +3321,7 @@
             Laya.SoundManager.stopMusic();
         }
         suspendGame() {
-            this.isPauseGame = this.isPauseGame == false ? true : false;
+            this.isPauseGame = !this.isPauseGame;
             if (GameManager.instance.isPauseGame) {
                 Laya.updateTimer.pause();
                 Laya.physicsTimer.pause();
@@ -3264,7 +3363,7 @@
         }
         gotoNextLevel() {
             ViewManager.instance.hidePopUpView(ViewManager.instance.afterWar);
-            if (this.gotoMaxLevel > this.maxLevel * this.maxChapter) {
+            if (this.curLevel > this.maxLevel * this.maxChapter) {
                 ViewManager.instance.showTipsView("您已通关！敬请期待后续章节");
                 return;
             }
@@ -3285,6 +3384,7 @@
                 this.curLevelData = this.levelData["chapter_" + this.curChapter]["level_" + l];
                 this.playerInfo.curlvCoin = 0;
                 this.roleInfo.blood = 3;
+                this.roleInfo.isDeath = false;
                 ViewManager.instance.createWarView();
                 SoundManager.instance.playBGM();
             }
@@ -3415,7 +3515,7 @@
             this.loadAssetsData();
         }
         loadAssetsData() {
-            AssetsManager.assetsData.push({ url: "res/Game_atlas0.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_1.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_2.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_3.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_4.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_5.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_6.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_7.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas_n8qun1.jpg", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas_n8qun7.png", type: Laya.Loader.IMAGE }, { url: "res/LevelData.json", type: Laya.Loader.JSON }, { url: "res/map_1.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_2.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_3.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_4.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_5.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_6.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_7.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_8.jpg", type: Laya.Loader.IMAGE }, { url: "res/Game.proto", type: Laya.Loader.BUFFER });
+            AssetsManager.assetsData.push({ url: "res/Game_atlas0.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_1.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_2.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_3.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_4.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_5.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_6.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_7.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas_n8qun1.jpg", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas_n8qun7.png", type: Laya.Loader.IMAGE }, { url: "res/LevelData.json", type: Laya.Loader.JSON }, { url: "res/map_1.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_2.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_3.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_4.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_5.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_6.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_7.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_8.jpg", type: Laya.Loader.IMAGE }, { url: "res/Game.proto", type: Laya.Loader.BUFFER }, { url: "res/sound/bgm.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/BombDrop.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/boom.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/btn_click.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/btn_press.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/die_1.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/die_2.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/die_3.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/die_4.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/enemy_fire.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/gameOver.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/get_goods.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/obstacleBoom.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/obstacleBoom2.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/tank_fire.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/weapon_1.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/weapon_2.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/weapon_3.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/weapon_10.mp3", type: Laya.Loader.SOUND });
             console.log(AssetsManager.assetsData);
             Laya.loader.create(AssetsManager.assetsData, Laya.Handler.create(this, this.loadComplete), Laya.Handler.create(this, this.onloadingProgress));
         }

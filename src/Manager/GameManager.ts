@@ -19,7 +19,7 @@ export class GameManager {
     public gotoMaxChapter: number = 1;//所通过的最大章节
     public choiseLevel: number = 1;//当前选择的关卡
 
-    public bossDeath: boolean = false;//当前关卡boss是否阵亡
+    // public bossDeath: boolean = false;//当前关卡boss是否阵亡
 
     public isPauseGame: boolean = false;
 
@@ -82,7 +82,7 @@ export class GameManager {
 
     /**暂停/继续游戏 */
     public suspendGame(): void {
-        this.isPauseGame = this.isPauseGame == false ? true : false;
+        this.isPauseGame = !this.isPauseGame;
         if (GameManager.instance.isPauseGame) {
             Laya.updateTimer.pause();
             Laya.physicsTimer.pause();
@@ -96,7 +96,7 @@ export class GameManager {
     }
 
     public victoryGame(): void {
-        this.bossDeath = false;
+        ViewManager.instance.playerVicToryLevel();
         this.curLevel++;
         if (this.gotoMaxLevel < this.curLevel) {//通过了新的关卡
             this.gotoMaxLevel = this.curLevel;

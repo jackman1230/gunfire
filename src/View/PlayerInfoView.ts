@@ -47,9 +47,9 @@ export default class PlayerInfoView {
     private pauseGame(): void {
         SoundManager.instance.playSound("btn_press");
         ViewManager.instance.showSuspendView();
-        Laya.timer.once(300, this, () => {//展示暂停界面后
-            GameManager.instance.suspendGame();
-        })
+        GameManager.instance.suspendGame();
+        // Laya.timer.once(300, this, () => {//展示暂停界面后
+        // })
     }
 
     private changePlayerGoods(t: number): void {

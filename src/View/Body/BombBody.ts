@@ -40,15 +40,15 @@ export default class BombBody extends Laya.Script {
             }
         } else if (self.label == "enemyBomb" && other.label == "player") {
             // console.log("敌人扔雷击中主角-主角ID=", other.id);
-            this.owner.removeSelf();
             EventManager.instance.dispatcherEvt(GameEvent.ENEMY_BOMB_HIT_PLAYER, { o: other.owner, s: self.owner });
+            this.owner.removeSelf();
             // EventManager.instance.dispatcherEvt(GameEvent.BOMB_DISPOSE, this.owner);
             return;
         }
         if (other.label == "ground") {
             // console.log("雷撞墙了=", this.self.x, this.self.y);
-            this.owner.removeSelf();
             EventManager.instance.dispatcherEvt(GameEvent.BOMB_DISPOSE, { o: other.owner, s: self.owner });
+            this.owner.removeSelf();
             return;
         }
     }

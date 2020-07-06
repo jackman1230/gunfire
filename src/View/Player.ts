@@ -99,6 +99,7 @@ export class Player extends Laya.Script {
         this.sFire = false;
         this.keyJump = false;
         this.changeWeaponType(GameManager.instance.roleInfo.weaponType);
+        GameManager.instance.roleInfo.bulletNum = 100;
         ViewManager.instance.warView.scene.addChild(this.roleSprite);
 
     }
@@ -165,10 +166,6 @@ export class Player extends Laya.Script {
         }
         this.setPlayerDir();
     }
-
-    // private addStageMouseUp(): void {
-    //     this.playerCtlView.view.m_ctl.m_mask.off(Laya.Event.MOUSE_MOVE, this, this.setDirection);
-    // }
 
     private keyUpEvent(e: any): void {
         var keyCode: number = e["keyCode"];
@@ -270,6 +267,7 @@ export class Player extends Laya.Script {
     }
 
     private colliGround(): void {
+        // console.log("colliGroundcolliGround");
         if (this.keyJump)
             this.jumpEnd();
 
@@ -277,15 +275,18 @@ export class Player extends Laya.Script {
 
     private jummpTween: laya.utils.Tween;
     public setJump(): void {
-        this.keyJump = true;
+        this.keyJump = this.bodyScript.keyJump = true;
         this.setBoomComplete();
         this.bodyLeg.url = "ui://Game/legJump";
 
-        this.jummpTween = Laya.Tween.to(this.roleSprite, { y: this.roleSprite.y - this.jumpHigh }, 350, null, Laya.Handler.create(this, this.jumpHighHandle));
+        this.roleBody.setVelocity({ x: 0, y: -11 });
+        this.roleCol.refresh();
+        Laya.timer.once(200, this, this.jumpHighHandle);
+        // this.jummpTween = Laya.Tween.to(this.roleSprite, { y: this.roleSprite.y - this.jumpHigh }, 350, null, Laya.Handler.create(this, this.jumpHighHandle));
     }
 
     private jumpHighHandle(): void {
-        this.bodyScript.keyJump = true;
+        this.bodyScript.keyJumpEnd = true;
         // EventManager.instance.dispatcherEvt(GameEvent.PLAYER_JUMP);
     }
 
@@ -296,27 +297,20 @@ export class Player extends Laya.Script {
         if (this.sBoom) {
             this.setBoomComplete();
         }
-        // else if (this.sFire) {
-        //     this.body.url = "ui://Game/player_fire_" + this.weaponType + "_" + this.direction;
-        // }
-        // if (this.sRun) {
-        //     this.bodyLeg.url = "ui://Game/legMove";
-        //     this.bodyLeg.content.rewind();
-        //     return;
-        // }
     }
 
     public setRun(): void {
-        EventManager.instance.dispatcherEvt(GameEvent.PLAYER_RUN);
+        // EventManager.instance.dispatcherEvt(GameEvent.PLAYER_RUN);
         if (this.sFire) {
             this.body.url = "ui://Game/player_fire_" + this.weaponType + "_" + Math.abs(this.faceType);
         } else {
             this.body.url = "ui://Game/player_stay_" + this.weaponType + "_" + Math.abs(this.faceType);
         }
-        this.bodyLeg.url = "ui://Game/legMove";
         this.sRun = true;
         Laya.timer.clear(this, this.stillRun);
         Laya.timer.frameLoop(1, this, this.stillRun);
+        if (!this.keyJump)
+            this.bodyLeg.url = "ui://Game/legMove";
     }
 
     public stillRun(): void {
@@ -324,12 +318,6 @@ export class Player extends Laya.Script {
             this.roleSprite.x += this.speed;
             if (this.roleSprite.x > ViewManager.instance.warView.warView.width - this.roleSprite.width - 20)
                 this.roleSprite.x = ViewManager.instance.warView.warView.width - this.roleSprite.width - 20;
-            if (GameManager.instance.bossDeath) {
-                if (this.roleSprite.x > ViewManager.instance.warView.warView.width - 450) {
-                    this.victoryGame();
-                    GameManager.instance.victoryGame();
-                }
-            }
             if (Math.abs(ViewManager.instance.warView.warView.x) + Laya.stage.width > ViewManager.instance.warView.warView.width - 20)
                 return;
             if (this.roleSprite.x - Math.abs(ViewManager.instance.warView.warView.x) >= Laya.stage.width / 2) {
@@ -359,8 +347,8 @@ export class Player extends Laya.Script {
         var b: PlayerBullet = ViewManager.instance.createBullet();
         if (this.weaponType == PlayerData.WEAPON_RIFLE) {//如果是来福枪
             this.stillRifle = true;
-            Laya.timer.once(700, this, this.rilfeComplete);
-            Laya.timer.loop(800, this, this.stillFire);
+            Laya.timer.once(600, this, this.rilfeComplete);
+            Laya.timer.loop(700, this, this.stillFire);
         } else {//如果是子弹枪
             this.stillRifle = false;
             Laya.timer.loop(150, this, this.stillFire);
@@ -401,6 +389,9 @@ export class Player extends Laya.Script {
         } else if (Math.abs(this.faceType) == 3) {
             this.rolePlayer.m_firePos1.setSkew(200, 200);
             this.rolePlayer.m_firePos2.setSkew(200, 200);
+        } else if (Math.abs(this.faceType) == 4) {
+            this.rolePlayer.m_firePos1.setSkew(270, 270);
+            this.rolePlayer.m_firePos2.setSkew(270, 270);
         }
     }
 
@@ -474,6 +465,10 @@ export class Player extends Laya.Script {
             this.setFire();
         } else
             this.body.url = "ui://Game/player_stay_" + this.weaponType + "_" + Math.abs(this.faceType);
+        if (this.sRun) {
+            this.bodyLeg.url = "ui://Game/legMove";
+        }
+
     }
 
     private setDeath(): void {
@@ -485,10 +480,10 @@ export class Player extends Laya.Script {
         this.body.url = "ui://Game/player_death";
         this.body.content.setPlaySettings(0, -1, 1, this.body.content.frameCount - 1, Laya.Handler.create(this, this.deathComplete));
         this.playDeathSound();
-        ViewManager.instance.showAfterWarView(2);
+        ViewManager.instance.showAfterWarView(3);
     }
 
-    private victoryGame(): void {
+    public victoryGame(): void {
         this.setStay();
         this.removeEvent();
         GameManager.instance.roleInfo.curlvCoin += GameData.VICTORY_LEVEL_COIN;
@@ -515,7 +510,12 @@ export class Player extends Laya.Script {
         // EventManager.instance.dispatcherEvt(GameEvent.PLAYER_DEATH)
     }
 
-    public beHit(): void {
+    private disposeEnemyBullet(s: any): void {
+
+    }
+    public beHit(s: any): void {
+        this.disposeEnemyBullet(s);
+        // console.log("playerBehit");
         if (GameManager.instance.roleInfo.isDeath) return;
         GameManager.instance.roleInfo.blood--;
         EventManager.instance.dispatcherEvt(GameEvent.DEC_PLAYER_BLOOD);

@@ -21,6 +21,12 @@ export default class PopUpView {
 
     }
 
+    public showViewNoTween(): void {
+        this.view.setScale(1, 1);
+        this.v.addChild(this.view);
+        fairygui.GRoot.inst.addChild(this.v);
+    }
+
     private showComplete(s: boolean, c: boolean): void {
         if (s) {
             // console.log("showComplete---");

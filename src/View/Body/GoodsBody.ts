@@ -18,7 +18,7 @@ export default class GoodsBody extends Laya.Script {
         this.self = this.owner as Laya.Sprite;
         this.oriPosX = this.self.x;
         // console.log("oriPosX--" + this.oriPosX);
-        
+
         // this.selfBody.linearDamping = 9;
     }
 
@@ -27,7 +27,11 @@ export default class GoodsBody extends Laya.Script {
     }
 
     onTriggerEnter(other: Laya.BoxCollider, self: Laya.BoxCollider, contact: any): void {
+        if ((other.label == "ground" || other.label == "obstacle" || other.label == "board")) {
+            this.selfBody.type = "static";
+            console.log("onTriggerEnter--");
 
+        }
     }
     onTriggerExit(): void {
     }

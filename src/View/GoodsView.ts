@@ -5,6 +5,7 @@ import { ViewManager } from "../Manager/ViewManager";
 import { GoodsType } from "../Data/GameData";
 import { SoundManager } from "../Manager/SoundManager";
 import { ui } from "../ui/layaMaxUI";
+import GoodsBody from "./Body/GoodsBody";
 
 export default class GoodsView {
 
@@ -31,10 +32,9 @@ export default class GoodsView {
     }
 
     protected loadComplete(): void {
-        // console.log("GoodsBody.scene--loadComplete", s);
-        // this.scene = s;
         this.body = this.scene.getComponent(Laya.RigidBody);
         this.box = this.scene.getComponent(Laya.BoxCollider);
+        this.scene.addComponent(GoodsBody);
 
         this.view = fairygui.UIPackage.createObject("Game", "goodsView") as WXFUI_goodsView;
         this.mc = fairygui.UIPackage.createObject("Game", "createGoodsAni").asMovieClip;

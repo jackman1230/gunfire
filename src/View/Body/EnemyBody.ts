@@ -9,6 +9,7 @@ export default class EnemyBody extends Laya.Script {
     private selfBody: Laya.RigidBody;//角色刚体
 
     public activeDis: number = 600;
+    private isActive: boolean = false;
 
     constructor() { super(); }
 
@@ -35,8 +36,10 @@ export default class EnemyBody extends Laya.Script {
 
     onUpdate(): void {
         // this.setSpeedZero();
+        if (this.isActive) return;
         var p: Laya.Point = this.selfBody.getWorldCenter();
         if (Math.abs(ViewManager.instance.rolePlayer.roleSprite.x - p.x) < this.activeDis) {
+            this.isActive = true;
             EventManager.instance.dispatcherEvt(GameEvent.ACTIVE_ENEMY, this.owner);
         }
     }
