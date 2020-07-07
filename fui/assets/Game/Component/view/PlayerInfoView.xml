@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1334,750" opaque="false">
   <displayList>
-    <image id="n0_iasd" name="n0" src="dhhtiw" fileName="assets/playerInfo/左上角底框。(1).png" xy="113,44"/>
-    <image id="n2_iasd" name="n2" src="dhhtiz" fileName="assets/playerInfo/雪灰(1).png" xy="165,51"/>
-    <image id="n3_iasd" name="n3" src="dhhtiz" fileName="assets/playerInfo/雪灰(1).png" xy="236,51"/>
-    <image id="n4_iasd" name="n4" src="dhhtiz" fileName="assets/playerInfo/雪灰(1).png" xy="307,51"/>
-    <image id="n1_iasd" name="blood_1" src="dhhtiy" fileName="assets/playerInfo/血量(1).png" xy="165,51"/>
-    <image id="n5_iasd" name="blood_2" src="dhhtiy" fileName="assets/playerInfo/血量(1).png" xy="235,51"/>
-    <image id="n6_iasd" name="blood_3" src="dhhtiy" fileName="assets/playerInfo/血量(1).png" xy="307,51"/>
-    <image id="n7_iasd" name="n7" src="dhhtj3" fileName="assets/playerInfo/金币(1).png" xy="206,154"/>
-    <component id="n8_iasd" name="pause" src="iasdl3" fileName="Component/btn/susBtn.xml" xy="1058,55"/>
-    <text id="n9_iasd" name="coin" xy="231,154" size="105,27" font="ui://bq3h5insfmzphw" fontSize="12" autoSize="none" singleLine="true" text="0"/>
-    <text id="n10_iasd" name="bullet" xy="488,83" size="86,25" font="ui://bq3h5insfmzphw" fontSize="10" vAlign="middle" autoSize="none" singleLine="true" text=""/>
-    <text id="n11_iasd" name="gre" xy="602,83" size="86,25" font="ui://bq3h5insfmzphw" fontSize="10" vAlign="middle" autoSize="none" singleLine="true" text=""/>
+    <image id="n0_iasd" name="n0" src="dhhtiw" fileName="assets/playerInfo/左上角底框。(1).png" xy="113,0"/>
+    <image id="n2_iasd" name="n2" src="dhhtiz" fileName="assets/playerInfo/雪灰(1).png" xy="165,12"/>
+    <image id="n3_iasd" name="n3" src="dhhtiz" fileName="assets/playerInfo/雪灰(1).png" xy="236,12"/>
+    <image id="n4_iasd" name="n4" src="dhhtiz" fileName="assets/playerInfo/雪灰(1).png" xy="307,12"/>
+    <image id="n1_iasd" name="blood_1" src="dhhtiy" fileName="assets/playerInfo/血量(1).png" xy="165,12"/>
+    <image id="n5_iasd" name="blood_2" src="dhhtiy" fileName="assets/playerInfo/血量(1).png" xy="235,12"/>
+    <image id="n6_iasd" name="blood_3" src="dhhtiy" fileName="assets/playerInfo/血量(1).png" xy="307,12"/>
+    <image id="n7_iasd" name="n7" src="dhhtj3" fileName="assets/playerInfo/金币(1).png" xy="206,108"/>
+    <component id="n8_iasd" name="pause" src="iasdl3" fileName="Component/btn/susBtn.xml" xy="1050,45"/>
+    <text id="n9_iasd" name="coin" xy="231,108" size="105,27" font="ui://bq3h5insfmzphw" fontSize="12" autoSize="none" singleLine="true" text="0"/>
+    <text id="n10_iasd" name="bullet" xy="488,39" size="86,25" font="ui://bq3h5insfmzphw" fontSize="10" vAlign="middle" autoSize="none" singleLine="true" text=""/>
+    <text id="n11_iasd" name="gre" xy="602,39" size="86,25" font="ui://bq3h5insfmzphw" fontSize="10" vAlign="middle" autoSize="none" singleLine="true" text=""/>
   </displayList>
 </component>

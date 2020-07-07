@@ -60,7 +60,9 @@ export class ViewManager {
         this.loadingView = WXFUI_loadingView.createInstance();
         this.loadingView.m_bar.text = "0%";
         this.loadingView.m_bar.value = 0;
-        Laya.stage.addChild(this.loadingView.displayObject);
+        Laya.stage.addChild(fairygui.GRoot.inst.displayObject);
+        this.loadingView.x = this.getLayoutWidth();
+        fairygui.GRoot.inst.addChild(this.loadingView);
     }
 
     public setLoadongProgress(p: number): void {
@@ -261,9 +263,7 @@ export class ViewManager {
         return (s.getComponent(Laya.RigidBody) as Laya.RigidBody).getWorldCenter();
     }
 
-
     public updateViewPort(moveX: number): void {
-        // this.bgView.updateViewPort(moveX);
         this.warView.updateViewPort(moveX);
     }
     /**根据导弹类型，获取导弹爆炸效果 */
@@ -390,6 +390,46 @@ export class ViewManager {
             return new Laya.Point(this.enemyBulletPos[s][0], this.enemyBulletPos[s][1]);
         else
             return new Laya.Point(0, 0);
+    }
+
+    /**获取设备高度 */
+    // private getHeight(): number {
+    //     if (Laya.Browser.onWeiXin) {
+    //         let wxInfo = wx.getSystemInfoSync();
+    //         console.log('wx height:', wxInfo.windowHeight, ', widht:', wxInfo.windowWidth);
+    //         let h: number = 750 * wxInfo.windowHeight / wxInfo.windowWidth;
+    //         console.log('h:', h);
+    //         if (h > 1334) {
+    //             return h;
+    //         }
+    //     } else {
+    //         return Laya.Browser.clientHeight;
+    //     }
+    // }
+    /**获取设备宽度(因为是横屏所以返回高度) */
+    public getLayoutWidth(): number {
+        let h: number = 0;
+        let offX: number = 0;
+        if (Laya.Browser.onWeiXin) {
+            let wxInfo = wx.getSystemInfoSync();
+            h = (wxInfo.windowWidth / 750) * 1334;//游戏所展示的宽度
+            console.log('wx height:', wxInfo.windowHeight, ', width:', wxInfo.windowWidth);
+            offX = (wxInfo.windowHeight - h) / (wxInfo.windowWidth / 750);
+        } else {
+            h = (Laya.Browser.height / 750) * 1334;//游戏所展示的宽度
+            //按浏览器比例适配后，所需要偏移的X值
+            offX = (Laya.Browser.width - h) / (Laya.Browser.height / 750);
+        }
+        return Math.floor(offX / 2);
+    }
+
+    public getProportion(): number {
+        if (Laya.Browser.onWeiXin) {
+            let wxInfo = wx.getSystemInfoSync();
+            return wxInfo.windowWidth / 750;
+        } else {
+            return Laya.Browser.height / 750;
+        }
     }
 
 }

@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<component size="60,44">
-  <displayList>
-    <component id="n4_ugvi" name="vol" src="ugvixpi" fileName="Component/view/volume.xml" xy="0,0"/>
-  </displayList>
-</component>

@@ -2,9 +2,9 @@
 <component size="1334,750">
   <controller name="chapter" pages="0,,1,,2,,3," selected="0"/>
   <displayList>
-    <image id="n12_dr1t" name="n12" src="n8qun1" fileName="assets/otherView/选择关卡页面/背景.jpg" xy="-145,0"/>
+    <image id="n12_dr1t" name="bg" src="n8qun1" fileName="assets/otherView/选择关卡页面/背景.jpg" xy="-145,0" pivot="0.5,0.5"/>
     <image id="n14_dr1t" name="n14" src="n8qun4" fileName="assets/otherView/选择关卡页面/章头底框.png" xy="458,31"/>
-    <loader id="n13_dr1t" name="map" xy="32,121" size="1270,508" url="ui://bq3h5insn8qun7"/>
+    <loader id="n13_dr1t" name="map" xy="32,123" size="1270,508" url="ui://bq3h5insn8qun7"/>
     <component id="n15_dr1t" name="last" src="dr1tnz" fileName="Component/btn/lastChapter.xml" xy="15,604"/>
     <component id="n16_dr1t" name="next" src="dr1to0" fileName="Component/btn/nextChapter.xml" xy="1093,608"/>
     <component id="n17_dr1t" name="level_1" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="38,340">
@@ -34,6 +34,6 @@
     </component>
     <loader id="n27_dr1t" name="title" xy="567,40" pivot="0.5,0.5" size="199,63" url="ui://bq3h5insn8quly" align="center" vAlign="middle"/>
     <component id="n31_ugvi" name="set" src="dr1to5" fileName="Component/btn/setBtn.xml" xy="35,25"/>
-    <component id="n32_ugvi" name="setView" src="ugvixpg" fileName="Component/view/setting.xml" xy="122,37"/>
+    <component id="n32_ugvi" name="setView" src="ugvixpi" fileName="Component/view/volume.xml" xy="122,25"/>
   </displayList>
 </component>

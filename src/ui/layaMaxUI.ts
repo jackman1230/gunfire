@@ -41,7 +41,7 @@ export module ui {
     }
     REG("ui.BulletUI",BulletUI);
     export class BulletRifleUI extends Laya.View {
-        public static  uiView:any ={"type":"View","props":{"width":347,"height":197},"compId":2,"child":[{"type":"Script","props":{"y":0,"x":0,"width":347,"isSensor":true,"height":197,"friction":0,"runtime":"laya.physics.BoxCollider"},"compId":3},{"type":"Script","props":{"gravityScale":0,"allowRotation":false,"runtime":"laya.physics.RigidBody"},"compId":4}],"loadList":[],"loadList3D":[]};
+        public static  uiView:any ={"type":"View","props":{"width":347,"height":197},"compId":2,"child":[{"type":"Script","props":{"y":0,"x":0,"width":347,"isSensor":true,"height":197,"friction":0,"density":0,"runtime":"laya.physics.BoxCollider"},"compId":3},{"type":"Script","props":{"gravityScale":0,"allowRotation":false,"runtime":"laya.physics.RigidBody"},"compId":4}],"loadList":[],"loadList3D":[]};
         constructor(){ super()}
         createChildren():void {
             super.createChildren();
@@ -50,7 +50,7 @@ export module ui {
     }
     REG("ui.BulletRifleUI",BulletRifleUI);
     export class BulletRifleUpUI extends Laya.View {
-        public static  uiView:any ={"type":"View","props":{"width":197,"height":347},"compId":2,"child":[{"type":"Script","props":{"y":0,"x":0,"width":197,"isSensor":true,"height":347,"friction":0,"runtime":"laya.physics.BoxCollider"},"compId":3},{"type":"Script","props":{"gravityScale":0,"allowRotation":false,"runtime":"laya.physics.RigidBody"},"compId":4}],"loadList":[],"loadList3D":[]};
+        public static  uiView:any ={"type":"View","props":{"width":197,"height":347},"compId":2,"child":[{"type":"Script","props":{"y":0,"x":0,"width":197,"isSensor":true,"height":347,"friction":0,"density":0,"runtime":"laya.physics.BoxCollider"},"compId":3},{"type":"Script","props":{"gravityScale":0,"allowRotation":false,"runtime":"laya.physics.RigidBody"},"compId":4}],"loadList":[],"loadList3D":[]};
         constructor(){ super()}
         createChildren():void {
             super.createChildren();

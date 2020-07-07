@@ -30,8 +30,14 @@ export default class PlayerInfoView {
 
         this.view.m_pause.onClick(this, this.pauseGame);
         // Laya.stage.on(Laya.Event.CLICK, this, this.click);
-
+        this.layout();
     }
+
+    private layout(): void {
+        var w: number = ViewManager.instance.getLayoutWidth();
+        this.view.x = w;
+    }
+    
     public updateAllView(): void {
         this.updateBulletNum();
         this.updatePlayerBlood();

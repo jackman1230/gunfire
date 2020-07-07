@@ -3141,7 +3141,7 @@
             this.beforeWar.createView();
             this.suspendView.createView();
             this.chapterView.createView();
-            Laya.stage.addChild(fairygui.GRoot.inst.displayObject);
+            // Laya.stage.addChild(fairygui.GRoot.inst.displayObject);
         }
         showTipsView(str) {
             this.tipsView.showView(str);

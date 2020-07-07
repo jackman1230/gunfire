@@ -4,7 +4,10 @@
 
 export default class WXFUI_volume extends fairygui.GComponent {
 
-	public m_n3:fairygui.GImage;
+	public m_ctl:fairygui.Controller;
+	public m_n4:fairygui.GImage;
+	public m_n5:fairygui.GImage;
+	public m_n6:fairygui.GImage;
 
 	public static URL:string = "ui://bq3h5insugvixpi";
 
@@ -17,6 +20,9 @@ export default class WXFUI_volume extends fairygui.GComponent {
 	}
 
 	protected onConstruct(): void {
-		this.m_n3 = <fairygui.GImage><any>(this.getChild("n3"));
+		this.m_ctl = this.getController("ctl");
+		this.m_n4 = <fairygui.GImage><any>(this.getChild("n4"));
+		this.m_n5 = <fairygui.GImage><any>(this.getChild("n5"));
+		this.m_n6 = <fairygui.GImage><any>(this.getChild("n6"));
 	}
 }

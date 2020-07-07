@@ -99,7 +99,7 @@ export class Player extends Laya.Script {
         this.sFire = false;
         this.keyJump = false;
         this.changeWeaponType(GameManager.instance.roleInfo.weaponType);
-        GameManager.instance.roleInfo.bulletNum = 100;
+        // GameManager.instance.roleInfo.bulletNum = 100;
         ViewManager.instance.warView.scene.addChild(this.roleSprite);
 
     }
@@ -313,6 +313,7 @@ export class Player extends Laya.Script {
             this.bodyLeg.url = "ui://Game/legMove";
     }
 
+    public tweenRun: boolean = false;
     public stillRun(): void {
         if (this.direction == 1) {
             this.roleSprite.x += this.speed;
@@ -320,8 +321,11 @@ export class Player extends Laya.Script {
                 this.roleSprite.x = ViewManager.instance.warView.warView.width - this.roleSprite.width - 20;
             if (Math.abs(ViewManager.instance.warView.warView.x) + Laya.stage.width > ViewManager.instance.warView.warView.width - 20)
                 return;
+            if (this.tweenRun) return;
             if (this.roleSprite.x - Math.abs(ViewManager.instance.warView.warView.x) >= Laya.stage.width / 2) {
-                ViewManager.instance.updateViewPort(this.speed);
+                var dis: number = this.roleSprite.x - Math.abs(ViewManager.instance.warView.warView.x) - Laya.stage.width / 2;
+                // ViewManager.instance.updateViewPort(this.speed);
+                ViewManager.instance.updateViewPort(dis);
             }
         } else if (this.direction == -1) {
             this.roleSprite.x -= this.speed;
@@ -329,6 +333,7 @@ export class Player extends Laya.Script {
                 this.roleSprite.x = Math.abs(ViewManager.instance.warView.warView.x);
         }
     }
+
 
     public setFire(): void {
         if (this.sFire) return;

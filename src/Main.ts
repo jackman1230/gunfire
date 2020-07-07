@@ -11,7 +11,7 @@ class Main {
 		Laya.init(1334, 750, Laya["WebGL"]);
 		Laya["Physics"] && Laya["Physics"].enable();
 		Laya["DebugPanel"] && Laya["DebugPanel"].enable();
-		Laya.stage.scaleMode = Laya.Stage.SCALE_EXACTFIT;
+		Laya.stage.scaleMode = Laya.Stage.SCALE_FIXED_HEIGHT;
 		Laya.stage.screenMode = Laya.Stage.SCREEN_HORIZONTAL;
 		Laya.stage.alignV = Laya.Stage.ALIGN_CENTER;
 		Laya.stage.alignH = Laya.Stage.ALIGN_MIDDLE;

@@ -50,7 +50,12 @@ export class WarView {
     }
 
     public updateViewPort(moveX: number): void {
-        this.warView.x -= moveX;
+        Laya.Tween.to(this.warView, { x: this.warView.x - moveX }, 550, Laya.Ease.circOut);
+        Laya.timer.once(600, this, () => {
+            ViewManager.instance.player.tweenRun = false;
+        });
+
+        // this.warView.x -= moveX;
     }
 
     public dispose(): void {
