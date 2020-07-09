@@ -38,6 +38,7 @@ export class GameManager {
         this.initChapterConfig();
         ViewManager.instance.initPopUpView();
         ViewManager.instance.showChapterView();
+        SoundManager.instance.playBGM();
         // this.gotoNextLevel();
     }
 
@@ -64,6 +65,16 @@ export class GameManager {
     public enterGame(): void {
         this.curLevel = this.choiseLevel;
         this.goLevelGame();
+    }
+
+    /**观看视频后。原地复活继续游戏 */
+    public continueGameByVideo(): void {
+        this.roleInfo.isDeath = false;
+        this.roleInfo.blood = 3;
+        this.roleInfo.isInvincible = true;
+        ViewManager.instance.playerInfoView.updatePlayerBlood();
+        ViewManager.instance.hidePopUpView(ViewManager.instance.afterWar);
+        ViewManager.instance.player.playerRes();
     }
 
     /**返回首页 */
@@ -148,7 +159,6 @@ export class GameManager {
             this.roleInfo.blood = 3;
             this.roleInfo.isDeath = false;
             ViewManager.instance.createWarView();
-            SoundManager.instance.playBGM();
         } else {
             ViewManager.instance.showTipsView("您已通关！敬请期待后续章节");
         }

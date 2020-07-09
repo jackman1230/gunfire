@@ -27,6 +27,7 @@ export class PlayerInfo {
     public totalCoin: number = 0;
     public curlvCoin: number = 0;
     public direction: number = 0;
+    public isInvincible: boolean = false;
 
     constructor() {
     }

@@ -3,10 +3,6 @@
   <resources>
     <component id="gww20" name="Bomb.xml" path="/Component/bullet/" exported="true"/>
     <component id="cqp92" name="PlayerAction.xml" path="/Component/player/"/>
-    <image id="cqp93" name="1462.png" path="/assets/player/蹲-机枪/"/>
-    <image id="cqp94" name="1460.png" path="/assets/player/蹲-机枪/"/>
-    <image id="cqp95" name="1458.png" path="/assets/player/蹲-机枪/"/>
-    <image id="cqp96" name="1456.png" path="/assets/player/蹲-机枪/"/>
     <image id="cqp97" name="1391.png" path="/assets/player/走-手枪/"/>
     <image id="cqp98" name="1389.png" path="/assets/player/走-手枪/"/>
     <image id="cqp99" name="1387.png" path="/assets/player/走-手枪/"/>
@@ -39,9 +35,6 @@
     <image id="cqp92b" name="1398.png" path="/assets/player/上身-跑-机枪/"/>
     <image id="cqp92c" name="1396.png" path="/assets/player/上身-跑-机枪/"/>
     <image id="cqp92d" name="1394.png" path="/assets/player/上身-跑-机枪/"/>
-    <image id="cqp93a" name="1453.png" path="/assets/player/蹲-手枪/"/>
-    <image id="cqp93b" name="1451.png" path="/assets/player/蹲-手枪/"/>
-    <image id="cqp93c" name="1449.png" path="/assets/player/蹲-手枪/"/>
     <movieclip id="cqp93f" name="legMove.jta" path="/Component/player/playerAni/" exported="true"/>
     <component id="cqp93n" name="jumpBtn.xml" path="/Component/btn/"/>
     <component id="cqp93o" name="fireBtn.xml" path="/Component/btn/"/>
@@ -622,7 +615,6 @@
     <image id="n8qund" name="下一章.png" path="/assets/otherView/otherPng/" exported="true"/>
     <image id="n8qune" name="上一章.png" path="/assets/otherView/otherPng/" exported="true"/>
     <image id="n8qunf" name="share1.png" path="/assets/otherView/otherPng/" exported="true"/>
-    <image id="n8qung" name="Volume.png" path="/assets/otherView/otherPng/" exported="true"/>
     <image id="n8qunh" name="setting.png" path="/assets/otherView/otherPng/" exported="true"/>
     <component id="dr1tni" name="backHomeBtn.xml" path="/Component/btn/"/>
     <component id="dr1tnj" name="restartBtn.xml" path="/Component/btn/"/>
@@ -720,6 +712,27 @@
     <image id="cde5xqn" name="soundOff.png" path="/assets/otherView/选择关卡页面/"/>
     <image id="cde5xqo" name="soundBg.png" path="/assets/otherView/选择关卡页面/"/>
     <component id="cde5xqp" name="star.xml" path="/Component/view/" exported="true"/>
+    <image id="mujaxqq" name="椭圆 7.png" path="/assets/otherView/otherPng/"/>
+    <component id="unfjxqr" name="abandon.xml" path="/Component/btn/"/>
+    <component id="unfjxqs" name="player_stay_1_5.xml" path="/Component/player/" exported="true"/>
+    <movieclip id="unfjxqt" name="stay_down_1.jta" path="/Component/player/playerAni/" exported="true"/>
+    <movieclip id="unfjxqu" name="stay_down_2.jta" path="/Component/player/playerAni/" exported="true"/>
+    <image id="unfjxqv" name="1084.png" path="/assets/player/蹲-手枪/"/>
+    <image id="unfjxqw" name="1082.png" path="/assets/player/蹲-手枪/"/>
+    <image id="unfjxqx" name="1080.png" path="/assets/player/蹲-手枪/"/>
+    <image id="unfjxqy" name="1093.png" path="/assets/player/蹲-机枪/"/>
+    <image id="unfjxqz" name="1091.png" path="/assets/player/蹲-机枪/"/>
+    <image id="unfjxr0" name="1089.png" path="/assets/player/蹲-机枪/"/>
+    <image id="unfjxr1" name="1087.png" path="/assets/player/蹲-机枪/"/>
+    <image id="unfjxr2" name="legDown.png" path="/Component/player/playerAni/" exported="true"/>
+    <movieclip id="unfjxr3" name="fire_down_2.jta" path="/Component/player/playerAni/" exported="true"/>
+    <image id="unfjxr4" name="1287.png" path="/assets/player/蹲-机枪-开火/"/>
+    <image id="unfjxr5" name="1285.png" path="/assets/player/蹲-机枪-开火/"/>
+    <component id="unfjxr6" name="player_stay_2_5.xml" path="/Component/player/" exported="true"/>
+    <component id="unfjxr7" name="player_stay_3_5.xml" path="/Component/player/" exported="true"/>
+    <component id="unfjxr8" name="player_fire_2_5.xml" path="/Component/player/" exported="true"/>
+    <component id="unfjxr9" name="player_fire_1_5.xml" path="/Component/player/" exported="true"/>
+    <component id="unfjxra" name="player_fire_3_5.xml" path="/Component/player/" exported="true"/>
   </resources>
   <publish name="Game" path="..\bin\res" packageCount="2" genCode="true" codePath="..\src\fui"/>
 </packageDescription>

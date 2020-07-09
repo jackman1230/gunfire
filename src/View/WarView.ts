@@ -50,10 +50,20 @@ export class WarView {
     }
 
     public updateViewPort(moveX: number): void {
-        Laya.Tween.to(this.warView, { x: this.warView.x - moveX }, 550, Laya.Ease.circOut);
-        Laya.timer.once(600, this, () => {
-            ViewManager.instance.player.tweenRun = false;
-        });
+        // ViewManager.instance.warView.warView.width - this.roleSprite.width - 20;
+        // if (this.warView.x - moveX > Laya.stage.width - ViewManager.instance.warView.warView.width - 20) {
+        Laya.Tween.to(this.warView, { x: this.warView.x - moveX }, 500, Laya.Ease.linearIn);
+        // Laya.timer.once(900, this, () => {
+        //     ViewManager.instance.player.tweenRun = false;
+        // });
+        // } else {
+        //     Laya.Tween.to(this.warView, { x: Laya.stage.width - ViewManager.instance.warView.warView.width - 20 }, 450, Laya.Ease.circOut);
+        //     Laya.timer.once(500, this, () => {
+        //         ViewManager.instance.player.tweenRun = false;
+        //     });
+        // }
+        // console.log("moveX--", (this.warView.x - moveX));
+        // console.log("warView--", this.warView.x);
 
         // this.warView.x -= moveX;
     }

@@ -3,7 +3,7 @@
     "role": {
         "blood": 3,
         "bombNum": 10,
-        "weaponType": 3,
+        "weaponType": 1,
         "addBombNum": 10,
         "addMacNum": 200,
         "addRifNum": 50

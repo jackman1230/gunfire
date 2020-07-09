@@ -72,7 +72,7 @@ export class ViewManager {
     }
 
     public hideLoadingView(): void {
-        Laya.stage.removeChild(this.loadingView.displayObject);
+        fairygui.GRoot.inst.removeChild(this.loadingView);
     }
 
     public createPlayer(): void {
@@ -171,7 +171,7 @@ export class ViewManager {
      */
     public showAfterWarView(type: number): void {
         this.afterWar.view.m_ctl.selectedIndex = type - 1;
-        this.afterWar.updateCoin();
+        this.afterWar.updateView(type);
         this.showPopUpView(this.afterWar, true, true, false);
     }
 
@@ -189,7 +189,7 @@ export class ViewManager {
     }
 
     public showChapterView(): void {
-        SoundManager.instance.stopBGM();
+        // SoundManager.instance.stopBGM();
         this.chapterView.view.m_chapter.selectedIndex = 0;
         this.chapterView.updateView();
         this.showPopUpView(this.chapterView, false, true);
@@ -297,9 +297,9 @@ export class ViewManager {
         if ((rad >= -2 * Math.PI / 8 && rad < 0) || (rad >= 0 && rad < 2 * Math.PI / 8)) {
             return 1;// 右
         } else if (rad >= 2 * Math.PI / 8 && rad < 4 * Math.PI / 8) {
-            return 2;// 右下
+            return 5;// 右下
         } else if (rad >= 4 * Math.PI / 8 && rad < 6 * Math.PI / 8) {
-            return -2;// 左下
+            return -5;// 左下
         } else if ((rad >= 6 * Math.PI / 8 && rad < Math.PI) || (rad >= -Math.PI && rad < -6 * Math.PI / 8)) {
             return -1;// 左
         } else if (rad >= -6 * Math.PI / 8 && rad < -5 * Math.PI / 8) {
@@ -324,7 +324,7 @@ export class ViewManager {
         // }
     }
 
-    /**角色子弹坐标偏移 */
+    /**角色子弹坐标偏移 第一位是方向，第二位是武器类型*/
     private playerBulletPos: object = {
         "11": [135, -22],//武器手枪，方向 右
         "12": [150, 0],//武器机枪，方向 右
@@ -338,6 +338,9 @@ export class ViewManager {
         "41": [-30, -185],//武器手枪，方向 上
         "42": [-30, -185],//武器机枪，方向 上
         "43": [50, 200],//武器来福枪，方向 上
+        "51": [135, -30],//武器手枪，方向 右蹲下
+        "52": [150, -30],//武器机枪，方向 右蹲下
+        "53": [50, 70],//武器来福枪，方向 右蹲下
         "14": [20, -60],//武器手雷，方向右
         "-11": [-200, -22],//武器手枪，方向 左
         "-12": [-210, 0],//武器机枪，方向 左
@@ -352,6 +355,9 @@ export class ViewManager {
         "-41": [-30, -185],//武器手枪，方向 上
         "-42": [-30, -185],//武器机枪，方向 上
         "-43": [55, 200],//武器来福枪，方向 上
+        "-51": [-200, -30],//武器手枪，方向 左蹲下
+        "-52": [-235, -30],//武器机枪，方向 左蹲下
+        "-53": [240, 80],//武器来福枪，方向 左蹲下
     }
     /**角色子弹坐标偏移 */
     public getPlayerBulletOffSetPos(dir: number, weaponType: number): Laya.Point {
@@ -412,9 +418,9 @@ export class ViewManager {
         let offX: number = 0;
         if (Laya.Browser.onWeiXin) {
             let wxInfo = wx.getSystemInfoSync();
-            h = (wxInfo.windowWidth / 750) * 1334;//游戏所展示的宽度
+            h = (wxInfo.windowHeight / 750) * 1334;//游戏所展示的宽度
             console.log('wx height:', wxInfo.windowHeight, ', width:', wxInfo.windowWidth);
-            offX = (wxInfo.windowHeight - h) / (wxInfo.windowWidth / 750);
+            offX = (wxInfo.windowWidth - h) / (wxInfo.windowHeight / 750);
         } else {
             h = (Laya.Browser.height / 750) * 1334;//游戏所展示的宽度
             //按浏览器比例适配后，所需要偏移的X值
@@ -426,7 +432,7 @@ export class ViewManager {
     public getProportion(): number {
         if (Laya.Browser.onWeiXin) {
             let wxInfo = wx.getSystemInfoSync();
-            return wxInfo.windowWidth / 750;
+            return wxInfo.windowHeight / 750;
         } else {
             return Laya.Browser.height / 750;
         }

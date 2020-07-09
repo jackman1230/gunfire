@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="95,105">
-  <controller name="ctl" pages="0,,1,,2," selected="2"/>
+  <controller name="ctl" pages="0,,1,,2," selected="0"/>
   <displayList>
     <image id="n12_dr1t" name="n12" src="n8qun6" fileName="assets/otherView/选择关卡页面/所在关卡图标.png" xy="0,0">
       <gearDisplay controller="ctl" pages="2"/>
@@ -15,5 +15,6 @@
       <gearDisplay controller="ctl" pages="1"/>
     </image>
     <component id="n16_cde5" name="star" src="cde5xqp" fileName="Component/view/star.xml" xy="-3,95"/>
+    <text id="n17_muja" name="numF" xy="56,53" pivot="0.5,0.5" size="18,27" font="ui://bq3h5insdr1tny" fontSize="12" text="1"/>
   </displayList>
 </component>

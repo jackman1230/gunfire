@@ -27,10 +27,9 @@ export default class GoodsBody extends Laya.Script {
     }
 
     onTriggerEnter(other: Laya.BoxCollider, self: Laya.BoxCollider, contact: any): void {
-        if ((other.label == "ground" || other.label == "obstacle" || other.label == "board")) {
+        if ((other.label == "ground" || other.label == "board")) {
             this.selfBody.type = "static";
-            console.log("onTriggerEnter--");
-
+            // console.log("onTriggerEnter--");
         }
     }
     onTriggerExit(): void {

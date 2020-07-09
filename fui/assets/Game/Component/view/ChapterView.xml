@@ -33,7 +33,6 @@
       <gearXY controller="chapter" pages="0,1" values="944,221|422,175" default="38,340"/>
     </component>
     <loader id="n27_dr1t" name="title" xy="567,40" pivot="0.5,0.5" size="199,63" url="ui://bq3h5insn8quly" align="center" vAlign="middle"/>
-    <component id="n31_ugvi" name="set" src="dr1to5" fileName="Component/btn/setBtn.xml" xy="35,25"/>
-    <component id="n32_ugvi" name="setView" src="ugvixpi" fileName="Component/view/volume.xml" xy="122,25"/>
+    <component id="n32_ugvi" name="setView" src="ugvixpi" fileName="Component/view/volume.xml" xy="1228,82"/>
   </displayList>
 </component>

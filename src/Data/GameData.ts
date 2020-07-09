@@ -33,6 +33,8 @@ export class GameData {
     public static RANDOM_COIN: number = 200;
     /**人物手榴弹的伤害*/
     public static BOMB_DAMAGE: number = 5;
+    /**障碍物爆炸的伤害*/
+    public static OBSTACLE_DAMAGE: number = 10;
     /**声音文件开头的路径 */
     public static SOUND_FONT: string = "res/sound/";
     /**通过一关获得的金币 */

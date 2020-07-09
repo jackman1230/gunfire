@@ -5,5 +5,5 @@
     <image id="n5_dr1t" name="n5" src="n8qumz" fileName="assets/otherView/暂停界面/形状 31.png" xy="0,0"/>
     <image id="n4_dr1t" name="n4" src="n8qumt" fileName="assets/otherView/暂停界面/重新开始.png" xy="-22,71"/>
   </displayList>
-  <Button downEffect="scale" downEffectValue="0.98"/>
+  <Button downEffect="scale" downEffectValue="0.90"/>
 </component>

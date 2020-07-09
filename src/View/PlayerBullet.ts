@@ -46,6 +46,8 @@ export default class PlayerBullet {
     private loadComplete(): void {
         ViewManager.instance.warView.scene.addChild(this.scene);
         this.scene.addComponent(BulletBody);
+        console.log("BulletBody---");
+        
         this.body = this.scene.getComponent(Laya.RigidBody);
         this.box = this.scene.getComponent(Laya.BoxCollider);
         this.box.label = this.body.label = "PlayerBullet" + this.bulletType;
@@ -90,13 +92,14 @@ export default class PlayerBullet {
 
     private setBulletPos(): void {
         var p: Laya.Point = ViewManager.instance.getPlayerBulletOffSetPos(this.direction, this.bulletType);
-        var c: Laya.Point = (ViewManager.instance.rolePlayer.roleSprite.getComponent(Laya.RigidBody) as Laya.RigidBody).getWorldCenter();
+        var c: Laya.Point = ViewManager.instance.rolePlayer.roleBody.getWorldCenter();
         if (this.bulletType == GameData.WEAPON_RIFLE) {
             this.view.x = p.x;
             this.view.y = p.y;
             this.scene.addChild(this.view.displayObject);
             var b: BulletBody = this.scene.getComponent(BulletBody);
             b.onAwake();
+            console.log("onAwake---");
             if (this.direction > 0) {
                 this.scene.x = c.x + 45;
                 if (this.direction == 2) {//右下
@@ -140,6 +143,8 @@ export default class PlayerBullet {
                 this.scene.x = c.x + p.x;
                 this.scene.y = c.y + p.y;
             }
+            // console.log("scene--", this.scene.x, this.scene.y);
+
             this.scene.addChild(this.view.displayObject);
             var b: BulletBody = this.scene.getComponent(BulletBody);
             b.onAwake();
@@ -153,10 +158,10 @@ export default class PlayerBullet {
                 } else if (this.direction == 4) {//上
                     // this.scene.y = c.y - this.scene.height;
                     this.view.setSkew(-90, -90);
-                    this.body.setVelocity({ x: 0, y: -9 });
+                    this.body.setVelocity({ x: 0, y: -10 });
                 } else {
                     this.view.setSkew(0, 0);//右
-                    this.body.setVelocity({ x: 11, y: 0 });
+                    this.body.setVelocity({ x: 12, y: 0 });
                 }
             } else {
                 if (this.direction == -2) {//左下
@@ -168,10 +173,10 @@ export default class PlayerBullet {
                 } else if (this.direction == -4) {//上
                     // this.scene.y = c.y - this.scene.height;
                     this.view.setSkew(270, 270);
-                    this.body.setVelocity({ x: 0, y: -9 });
+                    this.body.setVelocity({ x: 0, y: -10 });
                 } else {
                     this.view.setSkew(180, 180);//左
-                    this.body.setVelocity({ x: -11, y: 0 });
+                    this.body.setVelocity({ x: -12, y: 0 });
                 }
             }
         }

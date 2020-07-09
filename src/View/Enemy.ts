@@ -16,6 +16,7 @@ export default class Enemy {
     public view: fairygui.GComponent;
     public enemy: fairygui.GLoader;
     // public enemyLoader: fairygui.GLoader;
+    private enemyScript: EnemyBody;
 
     public enemyType: number = 5;
 
@@ -82,16 +83,18 @@ export default class Enemy {
         this.scene.x = this.pos.x;
         this.scene.y = this.pos.y;
         ViewManager.instance.warView.scene.addChild(this.scene);
+        this.enemyScript = this.scene.getComponent(EnemyBody)
         if (this.enemyType == GameData.ENEMY_JUNGUAN) {
-            var t: EnemyBody = this.scene.getComponent(EnemyBody);
-            t.activeDis = 900;
+            this.enemyScript.activeDis = 900;
         }
 
         EventManager.instance.addNotice(GameEvent.PLAYER_BULLET_HIT_ENEMY, this, this.beHit);
-        EventManager.instance.addNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.beHit);
+        // EventManager.instance.addNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.beHit);
         EventManager.instance.addNotice(GameEvent.PAUSE_GAME, this, this.pauseGame);
         EventManager.instance.addNotice(GameEvent.ACTIVE_ENEMY, this, this.activeEnemy);
         EventManager.instance.addNotice(GameEvent.CLEAR_WAR_VIEW, this, this.clearWarView);
+        EventManager.instance.addNotice(GameEvent.OBSTACLE_BOOM, this, this.obstacleBoom);
+
 
         this.setDirection();
         this.setStay();
@@ -118,10 +121,18 @@ export default class Enemy {
         }
     }
 
+    private obstacleBoom(s: Laya.Sprite): void {
+        //障碍物爆炸的时候有敌人站在上面，敌人直接死亡
+        if (this.enemyScript.obstacleBox && this.enemyScript.obstacleBox.owner && s == this.enemyScript.obstacleBox.owner)
+            this.setDeath();
+        // if (s == this.enemyScript.obstacleBox.owner) {
+        // }
+
+    }
+
     public beHit(s: any): void {
         if (this.isDeath) return;
         if (s.o == this.box.owner) {
-            // console.log("enemyBehit");
             this.blood -= s.d;
             Laya.timer.clear(this, this.setColor);
             if (this.blood <= 0) {
@@ -138,7 +149,11 @@ export default class Enemy {
     }
 
     protected setColor(): void {
-        this.bodyLoader.color = "#ffffff";
+        if (this.enemyType == GameData.ENEMY_MOR) {
+            this.bodyLoader.component.getChildAt(0).asLoader.content.color = "#ffffff";
+            this.bodyLoader.component.getChildAt(1).asMovieClip.color = "#ffffff";
+        } else
+            this.bodyLoader.color = "#ffffff";
     }
 
     public setDirection(): void {
@@ -177,7 +192,7 @@ export default class Enemy {
         if (this.isDeath) return;
         if (this.sRun) return;
         this.bodyLoader.url = "ui://Game/enemy_run_" + this.enemyType;
-        this.bodyLoader.content.setPlaySettings(0, -1, 0, 0);
+        // this.bodyLoader.content.setPlaySettings(0, -1, 0, 0);
     }
 
     public stillRun(): void {
@@ -195,7 +210,6 @@ export default class Enemy {
     }
 
     public setFire(): void {
-        // Laya.timer.once(3000, this, this.setFire);
         if (this.isDeath) return;
         if (this.enemyType == GameData.ENEMY_PIS || this.enemyType == GameData.ENEMY_GRE) {
             if (this.getRandomFire() == 1) {//手枪
@@ -228,6 +242,25 @@ export default class Enemy {
 
     }
 
+    public setDeath(): void {
+        if (this.isDeath) return;
+        this.isDeath = true;
+        Laya.timer.clear(this, this.setFire);
+        var s: number = this.getRandomDeath();
+        SoundManager.instance.playSound("die_" + s);
+        if (this.enemyType == GameData.ENEMY_JUNGUAN) {
+            this.enemy.url = "ui://Game/death_" + this.enemyType;
+        } else
+            this.enemy.url = "ui://Game/death_" + s;
+
+        this.enemy.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
+        Laya.timer.once(500, this, this.dispose);
+        this.createGoods();
+        if (this.isBoss) {
+            GameManager.instance.victoryGame();
+        }
+    }
+
     protected morComplete(): void {
         ViewManager.instance.createBomb(GameData.ENEMY_MOR, this.direction, ViewManager.instance.getBodyCenterPos(this.scene), false);
         this.setIdle();
@@ -256,26 +289,7 @@ export default class Enemy {
         this.setStay();
     }
 
-    public setDeath(): void {
-        if (this.isDeath) return;
-        this.isDeath = true;
-        Laya.timer.clear(this, this.setFire);
-        var s: number = this.getRandomDeath();
-        SoundManager.instance.playSound("die_" + s);
-        if (this.enemyType == GameData.ENEMY_JUNGUAN) {
-            this.enemy.url = "ui://Game/death_" + this.enemyType;
-        } else
-            this.enemy.url = "ui://Game/death_" + s;
 
-        this.enemy.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
-        Laya.timer.once(500, this, this.dispose);
-        this.createGoods();
-        if (this.isBoss) {
-            // GameManager.instance.bossDeath = true;
-            // EventManager.instance.dispatcherEvt(GameEvent.VICITORY_LEVEL);
-            GameManager.instance.victoryGame();
-        }
-    }
 
     protected createGoods(): void {
         if (this.expRate.length > 0) {
@@ -306,9 +320,11 @@ export default class Enemy {
         EventManager.instance.offNotice(GameEvent.CLEAR_WAR_VIEW, this, this.clearWarView);
         EventManager.instance.offNotice(GameEvent.ACTIVE_ENEMY, this, this.activeEnemy);
         EventManager.instance.offNotice(GameEvent.PAUSE_GAME, this, this.pauseGame);
-        EventManager.instance.offNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.beHit);
+        // EventManager.instance.offNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.beHit);
         EventManager.instance.offNotice(GameEvent.PLAYER_BULLET_HIT_ENEMY, this, this.beHit);
-        Laya.timer.clear(this, this.setFire);
+        EventManager.instance.offNotice(GameEvent.OBSTACLE_BOOM, this, this.obstacleBoom);
+
+        Laya.timer.clearAll(this);
         if (this.scene)
             this.scene.removeSelf();
         if (this.view)

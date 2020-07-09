@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="102,32">
-  <controller name="ctl" pages="0,,1,,2,,3," selected="3"/>
+  <controller name="ctl" pages="0,,1,,2,,3," selected="1"/>
   <displayList>
-    <image id="n18_cde5" name="n18" src="cde5xql" fileName="assets/otherView/选择关卡页面/star_dark.png" xy="34,0"/>
-    <image id="n19_cde5" name="n19" src="cde5xql" fileName="assets/otherView/选择关卡页面/star_dark.png" xy="69,0"/>
-    <image id="n16_cde5" name="n16" src="cde5xql" fileName="assets/otherView/选择关卡页面/star_dark.png" xy="0,0"/>
-    <image id="n17_cde5" name="n17" src="cde5xqk" fileName="assets/otherView/选择关卡页面/star_light.png" xy="0,0">
+    <image id="n18_cde5" name="n18" src="cde5xql" fileName="assets/otherView/选择关卡页面/star_dark.png" xy="34,0">
       <gearDisplay controller="ctl" pages="1,2,3"/>
+    </image>
+    <image id="n19_cde5" name="n19" src="cde5xql" fileName="assets/otherView/选择关卡页面/star_dark.png" xy="69,0">
+      <gearDisplay controller="ctl" pages="1,2,3"/>
+    </image>
+    <image id="n16_cde5" name="n16" src="cde5xql" fileName="assets/otherView/选择关卡页面/star_dark.png" xy="0,0">
+      <gearDisplay controller="ctl" pages="1,2,3"/>
+    </image>
+    <image id="n17_cde5" name="n17" src="cde5xqk" fileName="assets/otherView/选择关卡页面/star_light.png" xy="0,0">
+      <gearDisplay controller="ctl" pages="2,3"/>
     </image>
     <image id="n20_cde5" name="n20" src="cde5xqk" fileName="assets/otherView/选择关卡页面/star_light.png" xy="69,0">
       <gearDisplay controller="ctl" pages="3"/>

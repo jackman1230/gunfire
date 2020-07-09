@@ -70,6 +70,11 @@ export default class PlayerBody extends Laya.Script {
 
     onUpdate(): void {
         // this.setSpeedZero();
+        // console.log("player--", (this.owner as Laya.Sprite).y);
+        if ((this.owner as Laya.Sprite).y > 800) {
+            EventManager.instance.dispatcherEvt(GameEvent.GOTO_HOLE);
+        }
+
     }
     /**防止斜坡有加速度，将速度设置为0 */
     private setSpeedZero(): void {

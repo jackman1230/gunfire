@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="91,91">
-  <controller name="firePos" exported="true" pages="0,,1,,2,,3," selected="1"/>
-  <controller name="fireType" pages="0,,1,,2," selected="0"/>
+  <controller name="firePos" exported="true" pages="0,,1,,2,,3,,4," selected="4"/>
+  <controller name="fireType" pages="0,,1,,2," selected="2"/>
   <displayList>
-    <loader id="n12_msdc" name="body" xy="45,45" pivot="0.5,0.5" anchor="true" size="91,91" url="ui://bq3h5inscqp93w" align="center" vAlign="middle" autoSize="true"/>
-    <loader id="n13_yqv7" name="firePos1" xy="-77,44" pivot="0.5,0.5" anchor="true" size="58,28" skew="-90,-90" url="ui://bq3h5insyqv7at" autoSize="true">
+    <loader id="n12_msdc" name="body" xy="45,45" pivot="0.5,0.5" anchor="true" size="91,91" url="ui://bq3h5insunfjxra" align="center" vAlign="middle" autoSize="true"/>
+    <loader id="n13_yqv7" name="firePos1" xy="-77,32" pivot="0.5,0.5" anchor="true" size="58,28" skew="180,180" url="ui://bq3h5insyqv7at" autoSize="true">
       <gearDisplay controller="fireType" pages="0"/>
-      <gearXY controller="firePos" pages="0,1,2,3" values="-69,17|-77,44|-58,-26|45,-92"/>
+      <gearXY controller="firePos" pages="0,1,2,3,4" values="-69,17|-77,44|-58,-26|45,-92|-77,32"/>
     </loader>
-    <loader id="n14_yqv7" name="firePos2" xy="-51,82" pivot="0.5,0.5" anchor="true" size="50,50" skew="270,270" url="ui://bq3h5instvmxxpe" align="center" vAlign="middle" autoSize="true">
+    <loader id="n14_yqv7" name="firePos2" xy="-84,37" pivot="0.5,0.5" anchor="true" size="50,50" skew="180,180" url="ui://bq3h5instvmxxpe" align="center" vAlign="middle" autoSize="true">
       <gearDisplay controller="fireType" pages="1"/>
-      <gearXY controller="firePos" pages="0,1,2,3" values="-49,47|-51,82|-49,19|45,-110"/>
+      <gearXY controller="firePos" pages="0,1,2,3,4" values="-49,47|-51,82|-49,19|45,-110|-84,37"/>
     </loader>
-    <loader id="n16_tvmx" name="firePos3" xy="-52,87" pivot="0.5,0.5" anchor="true" size="50,50" skew="200,200" align="center" vAlign="middle" autoSize="true">
+    <loader id="n16_tvmx" name="firePos3" xy="-72,14" pivot="0.5,0.5" anchor="true" size="50,50" skew="200,200" align="center" vAlign="middle" autoSize="true">
       <gearDisplay controller="fireType" pages="2"/>
       <gearXY controller="firePos" pages="0,1,2" values="-58,42|-52,87|-72,14" default="-72,14"/>
     </loader>

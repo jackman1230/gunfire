@@ -37,30 +37,31 @@ export default class PlayerInfoView {
         var w: number = ViewManager.instance.getLayoutWidth();
         this.view.x = w;
     }
-    
+
     public updateAllView(): void {
         this.updateBulletNum();
         this.updatePlayerBlood();
         this.updateGreNum();
         this.updateCoin();
+        this.updateLevel();
     }
 
-    // private click(e: Event): void {
-    //     console.log(e);
-    // }
+    private updateLevel(): void {
+        this.view.m_level.text = " 第" + GameManager.instance.curLevel + "关 ";
+    }
 
 
     private pauseGame(): void {
         SoundManager.instance.playSound("btn_press");
         ViewManager.instance.showSuspendView();
         GameManager.instance.suspendGame();
-        // Laya.timer.once(300, this, () => {//展示暂停界面后
-        // })
     }
 
     private changePlayerGoods(t: number): void {
         if (t == GoodsType.GoodsType_MED) {
             GameManager.instance.roleInfo.blood++;
+            if (GameManager.instance.roleInfo.blood > 3)
+                GameManager.instance.roleInfo.blood = 3;
             this.updatePlayerBlood();
         } else if (t == GoodsType.GoodsType_MAC) {
             if (GameManager.instance.roleInfo.weaponType == PlayerData.WEAPON_MAC) {

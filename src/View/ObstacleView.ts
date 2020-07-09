@@ -7,9 +7,12 @@ import { GameData, ObstacleType } from "../Data/GameData";
 import { ObstacleInfo } from "../Data/PlayerData";
 import { SoundManager } from "../Manager/SoundManager";
 import { ui } from "../ui/layaMaxUI";
+import BoomView from "./BoomView";
+import ObstacleBoomBody from "./Body/ObstacleBoomBody";
 
 export default class ObstacleView {
     public scene: Laya.Sprite;
+    // public boomSp: Laya.Sprite;
     public view: fairygui.GComponent;
     public load: fairygui.GLoader;
 
@@ -113,8 +116,14 @@ export default class ObstacleView {
         boomAni.y = p.y;
         this.load.displayObject.addChild(boomAni.displayObject);
         boomAni.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
-        SoundManager.instance.playSound("obstacleBoom");
+        EventManager.instance.dispatcherEvt(GameEvent.OBSTACLE_BOOM, this.box.owner);
+        // this.boomSp = new ui.ObstacleBoomBodyUI();
+        // this.load.displayObject.addChild(this.boomSp);
+        // this.boomSp.addComponent(ObstacleBoomBody);
+        // this.boomSp.x = (this.load.width - this.boomSp.width) / 2;
+        // this.boomSp.y = (this.load.height - this.boomSp.height) / 2;
     }
+
 
     public dispose(): void {
         EventManager.instance.offNotice(GameEvent.CLEAR_WAR_VIEW, this, this.dispose);
@@ -125,6 +134,8 @@ export default class ObstacleView {
             this.scene.removeSelf();
         if (this.view)
             this.view.dispose();
+        // if (this.boomSp)
+        //     this.boomSp.removeSelf();
         Laya.Pool.recover("obstacle", this);
     }
 

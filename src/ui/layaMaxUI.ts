@@ -167,7 +167,7 @@ export module ui {
     }
     REG("ui.map_7UI",map_7UI);
     export class map_8UI extends Laya.Scene {
-        public static  uiView:any ={"type":"Scene","props":{"width":50,"height":50},"compId":2,"child":[{"type":"BoardBody","props":{"y":674,"x":909,"name":"board_1","runtime":"ui.BoardBodyUI"},"compId":67},{"type":"BoardBody","props":{"y":674,"x":1343,"name":"board_2","runtime":"ui.BoardBodyUI"},"compId":68},{"type":"BoardBody","props":{"y":674,"x":1778,"name":"board_3","runtime":"ui.BoardBodyUI"},"compId":69},{"type":"Script","props":{"y":425,"x":29,"points":"0,-340,0,250,780,250","label":"ground","friction":0,"runtime":"laya.physics.ChainCollider"},"compId":12},{"type":"Script","props":{"y":-167,"x":-1848,"type":"static","label":"ground","group":0,"runtime":"laya.physics.RigidBody"},"compId":13},{"type":"Script","props":{"y":280,"x":2221,"points":"50,540,50,400,2429,400,2429,-300","label":"ground","friction":0,"runtime":"laya.physics.ChainCollider"},"compId":73}],"loadList":[],"loadList3D":[]};
+        public static  uiView:any ={"type":"Scene","props":{"width":50,"height":50},"compId":2,"child":[{"type":"BoardBody","props":{"y":674,"x":854,"name":"board_1","runtime":"ui.BoardBodyUI"},"compId":67},{"type":"BoardBody","props":{"y":674,"x":1306,"name":"board_2","runtime":"ui.BoardBodyUI"},"compId":68},{"type":"BoardBody","props":{"y":674,"x":1768,"name":"board_3","runtime":"ui.BoardBodyUI"},"compId":69},{"type":"Script","props":{"y":425,"x":29,"points":"0,-340,0,250,780,250","label":"ground","friction":0,"runtime":"laya.physics.ChainCollider"},"compId":12},{"type":"Script","props":{"y":-167,"x":-1848,"type":"static","label":"ground","group":0,"runtime":"laya.physics.RigidBody"},"compId":13},{"type":"Script","props":{"y":280,"x":2221,"points":"50,540,50,400,2429,400,2429,-300","label":"ground","friction":0,"runtime":"laya.physics.ChainCollider"},"compId":73}],"loadList":[],"loadList3D":[]};
         constructor(){ super()}
         createChildren():void {
             super.createChildren();
@@ -175,6 +175,15 @@ export module ui {
         }
     }
     REG("ui.map_8UI",map_8UI);
+    export class ObstacleBoomBodyUI extends Laya.View {
+        public static  uiView:any ={"type":"View","props":{"width":150,"mouseEnabled":false,"height":150},"compId":2,"child":[{"type":"Script","props":{"y":0,"x":0,"radius":75,"isSensor":true,"friction":0,"density":0,"runtime":"laya.physics.CircleCollider"},"compId":5},{"type":"Script","props":{"type":"dynamic","gravityScale":0,"runtime":"laya.physics.RigidBody"},"compId":6}],"loadList":[],"loadList3D":[]};
+        constructor(){ super()}
+        createChildren():void {
+            super.createChildren();
+            this.createView(ObstacleBoomBodyUI.uiView);
+        }
+    }
+    REG("ui.ObstacleBoomBodyUI",ObstacleBoomBodyUI);
     export class ObstacleView_1UI extends Laya.Scene {
         public static  uiView:any ={"type":"Scene","props":{"width":182,"height":96},"compId":2,"child":[{"type":"Script","props":{"y":0,"x":0,"points":"55,17,116,17,185,97,-1,97","label":"obstacle","isSensor":false,"friction":0,"runtime":"laya.physics.PolygonCollider"},"compId":4},{"type":"Script","props":{"y":0,"x":0,"type":"static","label":"obstacle","gravityScale":1,"runtime":"laya.physics.RigidBody"},"compId":5}],"loadList":[],"loadList3D":[]};
         constructor(){ super()}
@@ -275,7 +284,7 @@ export module ui {
     }
     REG("ui.ObstacleView_9UI",ObstacleView_9UI);
     export class PlayerBodyUI extends Laya.View {
-        public static  uiView:any ={"type":"View","props":{"width":91,"height":91},"compId":2,"child":[{"type":"Script","props":{"width":91,"label":"player","isSensor":false,"height":91,"friction":0,"density":20,"runtime":"laya.physics.BoxCollider"},"compId":3},{"type":"Script","props":{"label":"player","group":0,"gravityScale":2,"allowRotation":false,"runtime":"laya.physics.RigidBody"},"compId":4}],"loadList":[],"loadList3D":[]};
+        public static  uiView:any ={"type":"View","props":{"width":90,"height":90},"compId":2,"child":[{"type":"Script","props":{"y":0,"x":0,"width":90,"label":"player","isSensor":false,"height":90,"friction":0,"density":20,"runtime":"laya.physics.BoxCollider"},"compId":3},{"type":"Script","props":{"type":"dynamic","label":"player","group":0,"gravityScale":2,"allowRotation":false,"runtime":"laya.physics.RigidBody"},"compId":4}],"loadList":[],"loadList3D":[]};
         constructor(){ super()}
         createChildren():void {
             super.createChildren();

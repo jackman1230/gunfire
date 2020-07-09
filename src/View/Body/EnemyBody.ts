@@ -8,8 +8,9 @@ export default class EnemyBody extends Laya.Script {
     private selfCollider: Laya.BoxCollider;//角色碰撞体
     private selfBody: Laya.RigidBody;//角色刚体
 
-    public activeDis: number = 600;
+    public activeDis: number = 650;
     private isActive: boolean = false;
+    public obstacleBox: Laya.PolygonCollider;
 
     constructor() { super(); }
 
@@ -22,12 +23,30 @@ export default class EnemyBody extends Laya.Script {
     onDisable(): void {
     }
 
-    onTriggerEnter(other: Laya.BoxCollider, self: Laya.BoxCollider, contact: any): void {
-        // if (other.label == "PlayerBullet") {
-        //     console.log("behit--", this.selfBody.id);
+    onTriggerEnter(other: Laya.PolygonCollider, self: Laya.BoxCollider, contact: any): void {
+
+        if (other.label == "obstacle") {
+            this.obstacleBox = other;
+        }
+
+        // if ((other.label == "ground" || other.label == "board" || other.label == "obstacle")) {
+        // this.otherBox = other;
+        //     // this.selfBody.type = "static";
+        //     this.selfBody.linearDamping = 9999;
+        //     this.selfCollider.refresh();
+        // console.log("onTriggerEnter--", other.label);
+        // console.log("other--", other.owner);
         // }
     }
     onTriggerExit(): void {
+
+        // if ((this.otherBox.label == "ground" || this.otherBox.label == "board" || this.otherBox.label == "obstacle")) {
+        //     console.log("this.otherBox--", this.otherBox.owner);
+        //     console.log("this.otherBox.label--", this.otherBox.label);
+        //     // this.selfBody.type = "dynamic";
+        //     this.selfBody.linearDamping = 0;
+        //     this.selfCollider.refresh();
+        // }
     }
 
     onTriggerStay(other: Laya.BoxCollider, self: Laya.BoxCollider, contact: any): void {
@@ -48,9 +67,9 @@ export default class EnemyBody extends Laya.Script {
         this.selfBody.linearVelocity = { x: 0, y: 0 };
         this.selfBody.angularVelocity = 0;
         this.selfBody.setVelocity({ x: 0, y: 0 });
-        this.selfBody.linearDamping = 0;
         this.selfBody.angularDamping = 0;
         this.selfBody.setAngle({ x: 0, y: 0 });
+        this.selfBody.linearDamping = 0;
         this.selfCollider.refresh();
     }
 }

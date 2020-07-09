@@ -4,5 +4,5 @@
   <displayList>
     <image id="n4_dr1t" name="n4" src="n8qumv" fileName="assets/otherView/暂停界面/继续游戏.png" xy="0,0"/>
   </displayList>
-  <Button downEffect="scale" downEffectValue="0.98"/>
+  <Button downEffect="scale" downEffectValue="0.90"/>
 </component>

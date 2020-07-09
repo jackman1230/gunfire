@@ -3,7 +3,6 @@
 import WXFUI_lastChapter from "./WXFUI_lastChapter";
 import WXFUI_nextChapter from "./WXFUI_nextChapter";
 import WXFUI_LevelItem from "./WXFUI_LevelItem";
-import WXFUI_setBtn from "./WXFUI_setBtn";
 import WXFUI_volume from "./WXFUI_volume";
 
 export default class WXFUI_ChapterView extends fairygui.GComponent {
@@ -23,7 +22,6 @@ export default class WXFUI_ChapterView extends fairygui.GComponent {
 	public m_level_7:WXFUI_LevelItem;
 	public m_level_8:WXFUI_LevelItem;
 	public m_title:fairygui.GLoader;
-	public m_set:WXFUI_setBtn;
 	public m_setView:WXFUI_volume;
 
 	public static URL:string = "ui://bq3h5insdr1tnw";
@@ -52,7 +50,6 @@ export default class WXFUI_ChapterView extends fairygui.GComponent {
 		this.m_level_7 = <WXFUI_LevelItem><any>(this.getChild("level_7"));
 		this.m_level_8 = <WXFUI_LevelItem><any>(this.getChild("level_8"));
 		this.m_title = <fairygui.GLoader><any>(this.getChild("title"));
-		this.m_set = <WXFUI_setBtn><any>(this.getChild("set"));
 		this.m_setView = <WXFUI_volume><any>(this.getChild("setView"));
 	}
 }

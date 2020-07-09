@@ -19,24 +19,25 @@ export class Player extends Laya.Script {
 
     public direction: number = 1;//方向1为右，-1为左
 
-    private sRun: boolean = false;//人物是否在跑
+    public sRun: boolean = false;//人物是否在跑
     private sFire: boolean = false;
     private sBoom: boolean = false;
     private keyRight: boolean = false;
     private keyLeft: boolean = false;
     private keyJump: boolean = false;
     private stillRifle: boolean = false;
+    private isSquatDown: boolean = false;
 
     private speed: number = 5;
     private jumpHigh: number = 200;
     public weaponType: number = 1;
 
     public roleSprite: Laya.Sprite;
-    private roleBody: Laya.RigidBody;
-    private roleCol: Laya.BoxCollider;
-    private bodyScript: PlayerBody;
+    public roleBody: Laya.RigidBody;
+    public roleBox: Laya.BoxCollider;
+    public bodyScript: PlayerBody;
 
-    private playerCtlView: PlayerCtlView;
+    public playerCtlView: PlayerCtlView;
     public faceType: number = 1;//面朝向
 
     constructor() { super() }
@@ -57,7 +58,7 @@ export class Player extends Laya.Script {
         this.rolePlayer.m_firePos1.visible = this.rolePlayer.m_firePos2.visible = this.rolePlayer.m_firePos3.visible = false;
 
         this.roleBody = this.roleSprite.getComponent(Laya.RigidBody);
-        this.roleCol = this.roleSprite.getComponent(Laya.BoxCollider);
+        this.roleBox = this.roleSprite.getComponent(Laya.BoxCollider);
 
         this.roleSprite.addChild(this.rolePlayer.displayObject);
         this.roleSprite.addComponent(PlayerBody);
@@ -77,15 +78,19 @@ export class Player extends Laya.Script {
         EventManager.instance.addNotice(GameEvent.ENEMY_BULLET_HIT_PLAYER, this, this.beHit);
         EventManager.instance.addNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.beHit);
         EventManager.instance.addNotice(GameEvent.CHANGE_PLAYER_WEAPON, this, this.changeWeaponType);
+        EventManager.instance.addNotice(GameEvent.GOTO_HOLE, this, this.gotoHole);
 
         Laya.stage.on(Laya.Event.KEY_DOWN, this, this.keyDowmEvent);
         Laya.stage.on(Laya.Event.KEY_UP, this, this.keyUpEvent);
         this.playerCtlView.view.m_fire.on(Laya.Event.MOUSE_DOWN, this, this.setFire);
         this.playerCtlView.view.m_fire.on(Laya.Event.MOUSE_UP, this, this.setFireEnd);
+        this.playerCtlView.view.m_fire.on(Laya.Event.MOUSE_OUT, this, this.setFireEnd);
         this.playerCtlView.view.m_bomb.on(Laya.Event.CLICK, this, this.onClickBomb);
         this.playerCtlView.view.m_jump.on(Laya.Event.CLICK, this, this.onClickJump);
         this.playerCtlView.view.m_ctl.m_mask.on(Laya.Event.MOUSE_DOWN, this, this.addMouseDown);
         this.playerCtlView.view.m_ctl.m_mask.on(Laya.Event.MOUSE_UP, this, this.addCtlViewMouseUp);
+        this.playerCtlView.view.m_ctl.m_mask.on(Laya.Event.MOUSE_OUT, this, this.addCtlViewMouseUp);
+        // this.playerCtlView.view.m_ctl.m_mask.on(Laya.Event.MOUSE_UP, this, this.addCtlViewMouseUp);
 
     }
 
@@ -96,31 +101,67 @@ export class Player extends Laya.Script {
         this.roleSprite.x = d.rolePos[0];
         this.roleSprite.y = d.rolePos[1];
         this.sBoom = false;
-        this.sFire = false;
         this.keyJump = false;
+        this.setFireEnd();
+        this.jumpEnd();
         this.changeWeaponType(GameManager.instance.roleInfo.weaponType);
-        // GameManager.instance.roleInfo.bulletNum = 100;
         ViewManager.instance.warView.scene.addChild(this.roleSprite);
+        GameManager.instance.roleInfo.bulletNum = 100;
+        Laya.timer.clearAll(this);
+        Laya.timer.loop(500, this, this.moveMap);
+        this.setFaceRight();
 
     }
+    //原地复活加无敌
+    public playerRes(): void {
+        this.addCtlViewMouseUp(null);
+        this.addEvent();
+        this.playerCtlView.view.m_ctl.m_dirBtn.y = this.playerCtlView.view.m_ctl.m_dirBtn.x = 0;
+        Laya.timer.clearAll(this);
+        Laya.timer.loop(500, this, this.moveMap);
+        this.setFaceRight();
+        Laya.timer.once(3000, this, this.cancleInvincible);
+        this.bodyLeg.color = "#ffff00";
+        this.bodybody.color = "#ffff00";
+    }
 
+    private cancleInvincible(): void {
+        GameManager.instance.roleInfo.isInvincible = false;
+        this.setColor();
+    }
+    //掉到洞里面去了
+    private gotoHole(): void {
+        this.setDeath();
+    }
+
+    //取消方向控制
     private addCtlViewMouseUp(e: Laya.Event): void {
-        // console.log("curTouchId--", e.touchId);
-        if (this.curTouchId != e.touchId) return;
         this.playerCtlView.view.m_ctl.m_mask.off(Laya.Event.MOUSE_MOVE, this, this.onMoveHandle);
         this.playerCtlView.view.m_ctl.m_dirBtn.y = this.playerCtlView.view.m_ctl.m_dirBtn.x = 0;
+        this.setFaceDirection();
+        this.setStandUp();
         this.stopMove();
     }
+
+    private setFaceDirection(): void {
+        if (this.faceType > 0) {
+            this.faceType = this.direction = 1;
+            this.setFaceRight();
+        } else {
+            this.faceType = this.direction = -1;
+            this.setFaceLeft();
+        }
+    }
+
+
     private curTouchId: number = 0;
     private addMouseDown(e: Laya.Event): void {
         this.curTouchId = e.touchId;
-        // console.log("curTouchId--", e.touchId);
         this.setDirection();
         this.playerCtlView.view.m_ctl.m_mask.on(Laya.Event.MOUSE_MOVE, this, this.onMoveHandle);
     }
 
     private onMoveHandle(e: Laya.Event): void {
-        // console.log("curTouchId--", e.touchId);
         if (e.touchId != this.curTouchId) return;
         this.setDirection();
     }
@@ -140,108 +181,82 @@ export class Player extends Laya.Script {
             this.playerCtlView.view.m_ctl.m_dirBtn.y = 130;
         if (pos.y < -130)
             this.playerCtlView.view.m_ctl.m_dirBtn.y = -130;
-        this.faceType = GameManager.instance.roleInfo.direction = ViewManager.instance.getPlayerDirection(pos);
+        var face: number = ViewManager.instance.getPlayerDirection(pos);
+        if (face == this.faceType) return;
+        this.faceType = GameManager.instance.roleInfo.direction = face;
+        this.setFaceType();
+    }
+
+    private setFaceType(): void {
         if (this.faceType > 0) {
-            this.rolePlayer.skewY = 180;
-            this.keyRight = true;
-            this.keyLeft = false;
+            this.setFaceRight();
             if (this.faceType == 1) {
                 this.direction = 1;
                 this.setRightRun();
+                this.setStandUp();
             } else {
                 this.sRun = false;
                 Laya.timer.clear(this, this.stillRun);
+                if (this.faceType == 5) {
+                    this.setSquatDown();
+                } else
+                    this.setStandUp();
             }
         } else {
-            this.keyLeft = true;
-            this.keyRight = false;
-            this.rolePlayer.skewY = 0;
+            this.setFaceLeft();
             if (this.faceType == -1) {
                 this.direction = -1;
                 this.setLeftRun();
+                this.setStandUp();
             } else {
                 this.sRun = false;
                 Laya.timer.clear(this, this.stillRun);
+                if (this.faceType == -5) {
+                    this.setSquatDown();
+                } else
+                    this.setStandUp();
             }
         }
+    }
+
+    //蹲下
+    private setSquatDown(): void {
+        if (this.isSquatDown) return
+        this.isSquatDown = true;
+        this.roleSprite.y += 20;
+        this.roleBox.height = 70;
+        this.rolePlayer.y = -20;
+        console.log("setSquatDown");
+
+    }
+    private setStandUp(): void {
+        if (!this.isSquatDown) return;
+        this.isSquatDown = false;
+        this.roleSprite.y -= 20;
+        this.roleBox.height = 90;
+        this.rolePlayer.y = 0;
+        console.log("setStandUp");
+    }
+    private setFaceRight(): void {
+        this.rolePlayer.skewY = 180;
+        this.keyRight = true;
+        this.keyLeft = false;
         this.setPlayerDir();
     }
 
-    private keyUpEvent(e: any): void {
-        var keyCode: number = e["keyCode"];
-        switch (keyCode) {
-            case 87:
-                this.setFireEnd();
-                break;
-            case 65:
-                this.keyLeft = false;
-                if (this.keyRight == false) {
-                    this.sRun = false;
-                    if (this.keyJump == false)
-                        this.stopMove();
-                }
-                break;
-            case 68:
-                this.keyRight = false;
-                if (this.keyLeft == false) {
-                    this.sRun = false;
-                    if (this.keyJump == false)
-                        this.stopMove();
-                }
-                break;
-
-        }
-    }
-
-    private keyDowmEvent(e: any): void {
-        var keyCode: number = e["keyCode"];
-        // console.log(keyCode);
-        switch (keyCode) {
-            case 87:
-                this.setFire();
-                console.log("上");
-                break;
-            case 83:
-                console.log("下");
-                break;
-            case 65:
-                this.keyLeft = true;
-                this.rolePlayer.skewY = 0;
-                if (this.sRun) return;
-                this.setRun();
-                this.stillRun();
-                break;
-            case 68:
-                this.keyRight = true;
-                this.rolePlayer.skewY = 180;
-                if (this.sRun) return;
-                this.setRun();
-                this.stillRun();
-                break;
-            case 32:
-                // console.log("跳");
-                // if (this.keyJump) return;
-                // this.setJump();
-                break;
-            case 81:
-
-                break;
-            case 69:
-                console.log("切枪");
-
-                // this.changeWeaponType(2);
-                break;
-        }
+    private setFaceLeft(): void {
+        this.keyLeft = true;
+        this.keyRight = false;
+        this.rolePlayer.skewY = 0;
+        this.setPlayerDir();
     }
     private onClickBomb(): void {
-        console.log("扔雷");
         if (this.sBoom) return;
         if (GameManager.instance.roleInfo.bombNum <= 0) return;
         this.setBoom();
     }
 
     private onClickJump(): void {
-        console.log("跳");
         if (this.keyJump) return;
         this.setJump();
     }
@@ -259,15 +274,15 @@ export class Player extends Laya.Script {
     }
 
     private setPlayerDir(): void {
-        if (!this.sFire) {
-            this.body.url = "ui://Game/player_stay_" + this.weaponType + "_" + Math.abs(this.faceType);
-        } else {
+        if (this.sFire) {
             this.body.url = "ui://Game/player_fire_" + this.weaponType + "_" + Math.abs(this.faceType);
+        } else {
+            if (this.keyJump) return;
+            this.body.url = "ui://Game/player_stay_" + this.weaponType + "_" + Math.abs(this.faceType);
         }
     }
 
     private colliGround(): void {
-        // console.log("colliGroundcolliGround");
         if (this.keyJump)
             this.jumpEnd();
 
@@ -280,7 +295,7 @@ export class Player extends Laya.Script {
         this.bodyLeg.url = "ui://Game/legJump";
 
         this.roleBody.setVelocity({ x: 0, y: -11 });
-        this.roleCol.refresh();
+        this.roleBox.refresh();
         Laya.timer.once(200, this, this.jumpHighHandle);
         // this.jummpTween = Laya.Tween.to(this.roleSprite, { y: this.roleSprite.y - this.jumpHigh }, 350, null, Laya.Handler.create(this, this.jumpHighHandle));
     }
@@ -301,32 +316,50 @@ export class Player extends Laya.Script {
 
     public setRun(): void {
         // EventManager.instance.dispatcherEvt(GameEvent.PLAYER_RUN);
+        // this.roleBody.type = "dynamic";
         if (this.sFire) {
             this.body.url = "ui://Game/player_fire_" + this.weaponType + "_" + Math.abs(this.faceType);
-        } else {
-            this.body.url = "ui://Game/player_stay_" + this.weaponType + "_" + Math.abs(this.faceType);
         }
+        if (this.keyJump)
+            this.bodyLeg.url = "ui://Game/legJump";
+        else
+            this.bodyLeg.url = "ui://Game/legMove";
+        // else {
+        //     this.body.url = "ui://Game/player_stay_" + this.weaponType + "_" + Math.abs(this.faceType);
+        // }
         this.sRun = true;
         Laya.timer.clear(this, this.stillRun);
         Laya.timer.frameLoop(1, this, this.stillRun);
-        if (!this.keyJump)
-            this.bodyLeg.url = "ui://Game/legMove";
     }
 
-    public tweenRun: boolean = false;
+    private moveMap(): void {
+        if (Math.abs(ViewManager.instance.warView.warView.x) + Laya.stage.width > ViewManager.instance.warView.warView.width - 200)
+            return;
+        if (this.roleSprite.x - Math.abs(ViewManager.instance.warView.warView.x) - this.roleSprite.width / 2 >= Laya.stage.width / 2) {
+            var dis: number = this.roleSprite.x - Math.abs(ViewManager.instance.warView.warView.x) - Laya.stage.width / 2;
+            // ViewManager.instance.updateViewPort(this.speed);
+            // this.tweenRun = true;
+            ViewManager.instance.updateViewPort(dis);
+        }
+    }
+
+    // public tweenRun: boolean = false;
     public stillRun(): void {
         if (this.direction == 1) {
             this.roleSprite.x += this.speed;
-            if (this.roleSprite.x > ViewManager.instance.warView.warView.width - this.roleSprite.width - 20)
-                this.roleSprite.x = ViewManager.instance.warView.warView.width - this.roleSprite.width - 20;
-            if (Math.abs(ViewManager.instance.warView.warView.x) + Laya.stage.width > ViewManager.instance.warView.warView.width - 20)
-                return;
-            if (this.tweenRun) return;
-            if (this.roleSprite.x - Math.abs(ViewManager.instance.warView.warView.x) >= Laya.stage.width / 2) {
-                var dis: number = this.roleSprite.x - Math.abs(ViewManager.instance.warView.warView.x) - Laya.stage.width / 2;
-                // ViewManager.instance.updateViewPort(this.speed);
-                ViewManager.instance.updateViewPort(dis);
+            if (this.roleSprite.x > ViewManager.instance.warView.warView.width - this.roleSprite.width - 200) {
+                this.roleSprite.x = ViewManager.instance.warView.warView.width - this.roleSprite.width - 200;
+                // return;
             }
+            if (Math.abs(ViewManager.instance.warView.warView.x) + Laya.stage.width > ViewManager.instance.warView.warView.width - 200)
+                return;
+            // if (this.tweenRun) return;
+            // if (this.roleSprite.x - Math.abs(ViewManager.instance.warView.warView.x) - this.roleSprite.width / 2 >= Laya.stage.width / 2) {
+            //     var dis: number = this.roleSprite.x - Math.abs(ViewManager.instance.warView.warView.x) - Laya.stage.width / 2;
+            //     // ViewManager.instance.updateViewPort(this.speed);
+            //     this.tweenRun = true;
+            //     ViewManager.instance.updateViewPort(dis);
+            // }
         } else if (this.direction == -1) {
             this.roleSprite.x -= this.speed;
             if (this.roleSprite.x < Math.abs(ViewManager.instance.warView.warView.x))
@@ -397,6 +430,9 @@ export class Player extends Laya.Script {
         } else if (Math.abs(this.faceType) == 4) {
             this.rolePlayer.m_firePos1.setSkew(270, 270);
             this.rolePlayer.m_firePos2.setSkew(270, 270);
+        } else if (Math.abs(this.faceType) == 5) {
+            this.rolePlayer.m_firePos1.setSkew(180, 180);
+            this.rolePlayer.m_firePos2.setSkew(180, 180);
         }
     }
 
@@ -410,14 +446,7 @@ export class Player extends Laya.Script {
         this.stillFireNum = 1;
         this.rolePlayer.m_firePos1.visible = this.rolePlayer.m_firePos2.visible = false;
         this.body.url = "ui://Game/player_stay_" + this.weaponType + "_" + Math.abs(this.faceType);
-        this.body.content.setPlaySettings(0, -1, 0, 0);
-        // if (this.sRun) {
-        //     this.bodyLeg.url = "ui://Game/legMove";
-        //     this.bodyLeg.content.setPlaySettings(0, -1, 0, 0);
-        //     return;
-        // }
-        // if (this.keyJump)
-        //     this.bodyLeg.url = "ui://Game/legJump";
+        // this.body.content.setPlaySettings(0, -1, 0, 0);
     }
 
     public setBoom(): void {
@@ -445,8 +474,9 @@ export class Player extends Laya.Script {
         this.keyRight = false;
         this.sRun = false;
         if (GameManager.instance.roleInfo.isDeath) return;
-        EventManager.instance.dispatcherEvt(GameEvent.PLAYER_STAY);
+        // EventManager.instance.dispatcherEvt(GameEvent.PLAYER_STAY);
         this.bodyLeg.url = "ui://Game/legStay";
+        // this.roleBody.type = "static";
     }
 
     public setStay(): void {
@@ -457,8 +487,8 @@ export class Player extends Laya.Script {
             this.direction = -1;
             this.rolePlayer.skewY = 0;
         }
-        this.body.url = "ui://Game/player_stay_" + this.weaponType + "_" + Math.abs(this.faceType);
         Laya.timer.clear(this, this.stillFire);
+        this.body.url = "ui://Game/player_stay_" + this.weaponType + "_" + Math.abs(this.faceType);
         this.stopMove();
     }
 
@@ -481,6 +511,7 @@ export class Player extends Laya.Script {
         GameManager.instance.roleInfo.isDeath = true;
         Laya.timer.clearAll(this);
         this.removeEvent();
+        this.setFireEnd();
         this.rolePlayer.m_firePos1.visible = this.rolePlayer.m_firePos2.visible = false;
         this.body.url = "ui://Game/player_death";
         this.body.content.setPlaySettings(0, -1, 1, this.body.content.frameCount - 1, Laya.Handler.create(this, this.deathComplete));
@@ -491,6 +522,7 @@ export class Player extends Laya.Script {
     public victoryGame(): void {
         this.setStay();
         this.removeEvent();
+        this.rolePlayer.m_firePos1.visible = this.rolePlayer.m_firePos2.visible = false;
         GameManager.instance.roleInfo.curlvCoin += GameData.VICTORY_LEVEL_COIN;
         GameManager.instance.roleInfo.totalCoin += GameData.VICTORY_LEVEL_COIN;
         ViewManager.instance.playerInfoView.updateCoin();
@@ -521,6 +553,7 @@ export class Player extends Laya.Script {
     public beHit(s: any): void {
         this.disposeEnemyBullet(s);
         // console.log("playerBehit");
+        if (GameManager.instance.roleInfo.isInvincible) return;
         if (GameManager.instance.roleInfo.isDeath) return;
         GameManager.instance.roleInfo.blood--;
         EventManager.instance.dispatcherEvt(GameEvent.DEC_PLAYER_BLOOD);
@@ -530,6 +563,7 @@ export class Player extends Laya.Script {
             return;
         }
         Laya.timer.clear(this, this.setColor);
+        // this.rolePlayer.m_body.color = "#ff0000";
         this.bodyLeg.color = "#ff0000";
         this.bodybody.color = "#ff0000";
         Laya.timer.once(200, this, this.setColor);
@@ -567,10 +601,13 @@ export class Player extends Laya.Script {
     private removeEvent(): void {
         this.playerCtlView.view.m_fire.off(Laya.Event.MOUSE_DOWN, this, this.setFire);
         this.playerCtlView.view.m_fire.off(Laya.Event.MOUSE_UP, this, this.setFireEnd);
+        this.playerCtlView.view.m_fire.off(Laya.Event.MOUSE_OUT, this, this.setFireEnd);
         this.playerCtlView.view.m_bomb.off(Laya.Event.CLICK, this, this.onClickBomb);
         this.playerCtlView.view.m_jump.off(Laya.Event.CLICK, this, this.onClickJump);
         this.playerCtlView.view.m_ctl.m_mask.off(Laya.Event.MOUSE_DOWN, this, this.addMouseDown);
         this.playerCtlView.view.m_ctl.m_mask.off(Laya.Event.MOUSE_UP, this, this.addCtlViewMouseUp);
+        this.playerCtlView.view.m_ctl.m_mask.off(Laya.Event.MOUSE_OUT, this, this.addCtlViewMouseUp);
+
         Laya.stage.off(Laya.Event.KEY_DOWN, this, this.keyDowmEvent);
         Laya.stage.off(Laya.Event.KEY_UP, this, this.keyUpEvent);
 
@@ -583,6 +620,74 @@ export class Player extends Laya.Script {
 
     protected recover(): void {
         Laya.Pool.recover("player", this);
+    }
+
+
+    private keyUpEvent(e: any): void {
+        var keyCode: number = e["keyCode"];
+        switch (keyCode) {
+            case 87:
+                this.setFireEnd();
+                break;
+            case 65:
+                this.keyLeft = false;
+                if (this.keyRight == false) {
+                    this.sRun = false;
+                    if (this.keyJump == false)
+                        this.stopMove();
+                }
+                break;
+            case 68:
+                this.keyRight = false;
+                if (this.keyLeft == false) {
+                    this.sRun = false;
+                    if (this.keyJump == false)
+                        this.stopMove();
+                }
+                break;
+
+        }
+    }
+
+    private keyDowmEvent(e: any): void {
+        var keyCode: number = e["keyCode"];
+        switch (keyCode) {
+            case 87:
+                // this.setFire();
+                console.log("上");
+                // this.setStandUp();
+                // this.isSquatDown = false;
+                // this.roleSprite.y -= 20;
+                // this.roleBox.height = 90;
+                // this.rolePlayer.y = 0;
+                this.faceType = 5;
+                this.setFaceType();
+                break;
+            case 83:
+                console.log("下");
+                // this.isSquatDown = true;
+                // this.roleSprite.y += 20;
+                // this.roleBox.height = 70;
+                // this.rolePlayer.y = -20;
+                // this.setSquatDown();
+                this.faceType = -5;
+                this.setFaceType();
+                break;
+            case 65:
+                this.keyLeft = true;
+                this.rolePlayer.skewY = 0;
+                if (this.sRun) return;
+                this.setRun();
+                this.stillRun();
+                break;
+            case 68:
+                this.keyRight = true;
+                this.rolePlayer.skewY = 180;
+                if (this.sRun) return;
+                this.setRun();
+                this.stillRun();
+                break;
+        }
     }
 
 }

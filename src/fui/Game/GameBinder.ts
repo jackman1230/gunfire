@@ -35,7 +35,6 @@ import WXFUI_nextChapter from "./WXFUI_nextChapter";
 import WXFUI_share from "./WXFUI_share";
 import WXFUI_shareBtn1 from "./WXFUI_shareBtn1";
 import WXFUI_shareBtn2 from "./WXFUI_shareBtn2";
-import WXFUI_setBtn from "./WXFUI_setBtn";
 import WXFUI_enemy11 from "./WXFUI_enemy11";
 import WXFUI_enemy12 from "./WXFUI_enemy12";
 import WXFUI_Bomb from "./WXFUI_Bomb";
@@ -85,6 +84,13 @@ import WXFUI_player_boom_3 from "./WXFUI_player_boom_3";
 import WXFUI_bullet2 from "./WXFUI_bullet2";
 import WXFUI_TipsPopView from "./WXFUI_TipsPopView";
 import WXFUI_volume from "./WXFUI_volume";
+import WXFUI_abandon from "./WXFUI_abandon";
+import WXFUI_player_stay_1_5 from "./WXFUI_player_stay_1_5";
+import WXFUI_player_stay_2_5 from "./WXFUI_player_stay_2_5";
+import WXFUI_player_stay_3_5 from "./WXFUI_player_stay_3_5";
+import WXFUI_player_fire_2_5 from "./WXFUI_player_fire_2_5";
+import WXFUI_player_fire_1_5 from "./WXFUI_player_fire_1_5";
+import WXFUI_player_fire_3_5 from "./WXFUI_player_fire_3_5";
 import WXFUI_bullet1 from "./WXFUI_bullet1";
 import WXFUI_zidan from "./WXFUI_zidan";
 
@@ -125,7 +131,6 @@ export default class GameBinder{
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_share.URL, WXFUI_share);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_shareBtn1.URL, WXFUI_shareBtn1);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_shareBtn2.URL, WXFUI_shareBtn2);
-		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_setBtn.URL, WXFUI_setBtn);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy11.URL, WXFUI_enemy11);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy12.URL, WXFUI_enemy12);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_Bomb.URL, WXFUI_Bomb);
@@ -175,6 +180,13 @@ export default class GameBinder{
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_bullet2.URL, WXFUI_bullet2);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_TipsPopView.URL, WXFUI_TipsPopView);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_volume.URL, WXFUI_volume);
+		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_abandon.URL, WXFUI_abandon);
+		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_1_5.URL, WXFUI_player_stay_1_5);
+		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_2_5.URL, WXFUI_player_stay_2_5);
+		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_3_5.URL, WXFUI_player_stay_3_5);
+		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_2_5.URL, WXFUI_player_fire_2_5);
+		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_1_5.URL, WXFUI_player_fire_1_5);
+		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_3_5.URL, WXFUI_player_fire_3_5);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_bullet1.URL, WXFUI_bullet1);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_zidan.URL, WXFUI_zidan);
 	}

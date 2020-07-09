@@ -1,12 +1,7 @@
 {
 	"backgroundColor": 6710886,
 	"auxline2": true,
-	"libview.firstColumnWidth": 243,
-	"doc.activeDoc": "ui://nr80du74n8quil",
 	"canvasColor": 10066329,
-	"test.device": "iPhone Xs Max",
-	"auxline1": true,
-	"test.orientation": "landscape",
 	"libview.expandedNodes": [
 		"bq3h5ins",
 		"/",
@@ -69,7 +64,8 @@
 		"nr80du74",
 		"/Component/view/"
 	],
-	"libview.currentGroup": "",
+	"libview.twoColumn": false,
+	"auxline1": true,
 	"doc.openedDocs": [
 		"ui://bq3h5insgww20",
 		"ui://bq3h5insoqgwam",
@@ -167,5 +163,9 @@
 		"ui://bq3h5insdhkten",
 		"ui://bq3h5instvmxxpb"
 	],
-	"libview.twoColumn": false
+	"test.device": "iPhone Xs Max",
+	"libview.firstColumnWidth": 243,
+	"test.orientation": "landscape",
+	"libview.currentGroup": "",
+	"doc.activeDoc": "ui://bq3h5insqz5uku"
 }

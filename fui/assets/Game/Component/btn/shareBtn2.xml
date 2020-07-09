@@ -4,5 +4,5 @@
   <displayList>
     <image id="n6_dr1t" name="n6" src="n8qun2" fileName="assets/otherView/otherPng/share2.png" xy="5,5"/>
   </displayList>
-  <Button downEffect="scale" downEffectValue="0.98"/>
+  <Button downEffect="scale" downEffectValue="0.90"/>
 </component>

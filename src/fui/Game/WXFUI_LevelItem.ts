@@ -10,6 +10,7 @@ export default class WXFUI_LevelItem extends fairygui.GComponent {
 	public m_n14:fairygui.GImage;
 	public m_n15:fairygui.GImage;
 	public m_star:WXFUI_star;
+	public m_numF:fairygui.GTextField;
 
 	public static URL:string = "ui://bq3h5insdr1tnx";
 
@@ -28,5 +29,6 @@ export default class WXFUI_LevelItem extends fairygui.GComponent {
 		this.m_n14 = <fairygui.GImage><any>(this.getChild("n14"));
 		this.m_n15 = <fairygui.GImage><any>(this.getChild("n15"));
 		this.m_star = <WXFUI_star><any>(this.getChild("star"));
+		this.m_numF = <fairygui.GTextField><any>(this.getChild("numF"));
 	}
 }

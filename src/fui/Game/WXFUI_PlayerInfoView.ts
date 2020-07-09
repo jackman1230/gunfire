@@ -16,6 +16,7 @@ export default class WXFUI_PlayerInfoView extends fairygui.GComponent {
 	public m_coin:fairygui.GTextField;
 	public m_bullet:fairygui.GTextField;
 	public m_gre:fairygui.GTextField;
+	public m_level:fairygui.GTextField;
 
 	public static URL:string = "ui://bq3h5insiasdkz";
 
@@ -40,5 +41,6 @@ export default class WXFUI_PlayerInfoView extends fairygui.GComponent {
 		this.m_coin = <fairygui.GTextField><any>(this.getChild("coin"));
 		this.m_bullet = <fairygui.GTextField><any>(this.getChild("bullet"));
 		this.m_gre = <fairygui.GTextField><any>(this.getChild("gre"));
+		this.m_level = <fairygui.GTextField><any>(this.getChild("level"));
 	}
 }

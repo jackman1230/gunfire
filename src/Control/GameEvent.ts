@@ -53,6 +53,10 @@ export default class GameEvent {
 
     public static CLEAR_WAR_VIEW: string = "CLEAR_WAR_VIEW";
 
+    public static GOTO_HOLE: string = "GOTO_HOLE";
+
+    public static OBSTACLE_BOOM: string = "OBSTACLE_BOOM";
+
 
     constructor() { }
 
