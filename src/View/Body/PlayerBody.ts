@@ -20,30 +20,10 @@ export default class PlayerBody extends Laya.Script {
 
     }
 
-    private jump(): void {
-        this.keyJump = true;
-        this.playerState = 2;
-        this.setSpeedZero();
-        // this.jumpEnd = false;
-    }
-    private run(): void {
-        this.playerState = 1;
-        this.setSpeedZero();
-    }
-    private death(): void {
-        // this.playerState = 5;
-        // this.setSpeedZero();
-    }
-    private stay(): void {
-        this.playerState = 0;
-        this.setSpeedZero();
-    }
-
     onDisable(): void {
     }
 
     onTriggerEnter(other: Laya.BoxCollider, self: Laya.BoxCollider, contact: any): void {
-
         this.setSpeedZero();
         if ((other.label == "ground" || other.label == "obstacle" || other.label == "board") && this.keyJumpEnd) {
             this.keyJump = false;

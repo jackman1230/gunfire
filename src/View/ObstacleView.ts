@@ -116,7 +116,6 @@ export default class ObstacleView {
         boomAni.y = p.y;
         this.load.displayObject.addChild(boomAni.displayObject);
         boomAni.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
-        EventManager.instance.dispatcherEvt(GameEvent.OBSTACLE_BOOM, this.box.owner);
         // this.boomSp = new ui.ObstacleBoomBodyUI();
         // this.load.displayObject.addChild(this.boomSp);
         // this.boomSp.addComponent(ObstacleBoomBody);
@@ -137,6 +136,8 @@ export default class ObstacleView {
         // if (this.boomSp)
         //     this.boomSp.removeSelf();
         Laya.Pool.recover("obstacle", this);
+        EventManager.instance.dispatcherEvt(GameEvent.OBSTACLE_BOOM, this.box.owner);
+
     }
 
     private getBoomAniPos(type: number): Laya.Point {

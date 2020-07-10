@@ -14,8 +14,12 @@ export default class PlayerCtlView {
     }
 
     private layout(): void {
-        var w: number = ViewManager.instance.getLayoutWidth();
-        this.view.x = w;
+        // var w: number = ViewManager.instance.getProportion();
+
+        let wxInfo = wx.getSystemInfoSync();
+        var h:number = (wxInfo.windowHeight / 750) * 1334;//游戏所展示的宽度
+        this.view.x = 930 * (wxInfo.windowWidth/h);
+        this.view.y = 375;
     }
 
 }

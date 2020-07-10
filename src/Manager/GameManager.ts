@@ -5,6 +5,7 @@ import { EventManager } from "./EventManager";
 import GameEvent from "../Control/GameEvent";
 import { SoundManager } from "./SoundManager";
 import { SaveManager } from "./SaveManager";
+import Enemy from "../View/Enemy";
 
 export class GameManager {
     private static _instance: GameManager;
@@ -18,6 +19,8 @@ export class GameManager {
     public gotoMaxLevel: number = 1;//所通过的最大关卡
     public gotoMaxChapter: number = 1;//所通过的最大章节
     public choiseLevel: number = 1;//当前选择的关卡
+
+    public enemyArr: Enemy[] = [];
 
     // public bossDeath: boolean = false;//当前关卡boss是否阵亡
 
@@ -84,6 +87,7 @@ export class GameManager {
 
     /**返回首页 */
     public goFirstPage(): void {
+        this.enemyArr.length = 0;
         EventManager.instance.dispatcherEvt(GameEvent.CLEAR_WAR_VIEW);
         ViewManager.instance.hidePopUpView(null, true);
         ViewManager.instance.removeWarView();
@@ -187,6 +191,7 @@ export class GameManager {
         for (const key in enemyArr) {
             if (enemyArr.hasOwnProperty(key)) {
                 var t = enemyArr[key];
+                var e: Enemy;
                 var d: EnemyInfo = new EnemyInfo();
                 d.expRate = t.expRate.concat();
                 d.pos = new Laya.Point(t.pos[0], t.pos[1]);
@@ -197,12 +202,13 @@ export class GameManager {
                 d.isBoss = t.isBoss;
                 d.type = t.type;
                 if (d.type == GameData.ENEMY_TANK_1 || d.type == GameData.ENEMY_TANK_2 || d.type == GameData.ENEMY_TANK_3 || d.type == GameData.ENEMY_TANK_4) {
-                    ViewManager.instance.createTank(d);
+                    e = ViewManager.instance.createTank(d);
                 } else if (d.type == GameData.ENEMY_CHOPPER) {
-                    ViewManager.instance.createChopper(d);
+                    e = ViewManager.instance.createChopper(d);
                 } else {
-                    ViewManager.instance.createEnemy(d);
+                    e = ViewManager.instance.createEnemy(d);
                 }
+                this.enemyArr.push(e);
             }
         }
     }
@@ -231,6 +237,25 @@ export class GameManager {
             GameManager.instance.roleInfo.bulletNum += d.num;
         } else if (d.type == GoodsType.GoodsType_GRE) {
             GameManager.instance.roleInfo.bombNum += d.num;
+        }
+    }
+
+    public useWeaponPan(x: number, y: number, dir: number): boolean {
+        for (let i = 0; i < this.enemyArr.length; i++) {
+            var e: Enemy = this.enemyArr[i];
+            if (e.isDeath) continue;
+            if (e.isActive == false) continue;
+            if (dir > 0) {
+                if (e.scene.x > x && e.scene.x - x < 150) {
+                    if (Math.abs(y - e.scene.y) < 30)
+                        return true;
+                }
+            } else {
+                if (e.scene.x < x && x - e.scene.x < 150)
+                    if (Math.abs(y - e.scene.y) < 30)
+                        return true;
+            }
+            return false;
         }
     }
 

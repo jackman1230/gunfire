@@ -46,7 +46,7 @@ export default class PlayerBullet {
     private loadComplete(): void {
         ViewManager.instance.warView.scene.addChild(this.scene);
         this.scene.addComponent(BulletBody);
-        console.log("BulletBody---");
+        // console.log("BulletBody---");
         
         this.body = this.scene.getComponent(Laya.RigidBody);
         this.box = this.scene.getComponent(Laya.BoxCollider);

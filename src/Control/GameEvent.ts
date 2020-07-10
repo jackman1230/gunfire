@@ -15,6 +15,8 @@ export default class GameEvent {
 
     public static PLAYER_BULLET_HIT_OBSTACLE: string = "PLAYER_BULLET_HIT_OBSTACLE";
 
+    public static PLAYER_PAN_HIT_ENEMY: string = "PLAYER_PAN_HIT_ENEMY";
+
     public static ENEMY_BULLET_HIT_PLAYER: string = "ENEMY_BULLET_HIT_PLAYER";
 
     public static ACTIVE_ENEMY: string = "ACTIVE_ENEMY";
@@ -56,6 +58,8 @@ export default class GameEvent {
     public static GOTO_HOLE: string = "GOTO_HOLE";
 
     public static OBSTACLE_BOOM: string = "OBSTACLE_BOOM";
+
+    public static CHANGE_SIZE: string = "CHANGE_SIZE";
 
 
     constructor() { }

@@ -31,7 +31,7 @@ export default class Enemy {
 
     protected speed: number = 10;
     protected jumpHigh: number = 200;
-    protected isDeath: boolean = false;
+    public isDeath: boolean = false;
 
     protected blood: number = 1;
     protected damage: number;
@@ -40,7 +40,7 @@ export default class Enemy {
     protected expRate: number[] = [];
     protected enemyData: EnemyInfo;
     protected isBoss: boolean = false;
-    protected isActive: boolean = false;
+    public isActive: boolean = false;
 
     constructor() { }
 
@@ -94,6 +94,9 @@ export default class Enemy {
         EventManager.instance.addNotice(GameEvent.ACTIVE_ENEMY, this, this.activeEnemy);
         EventManager.instance.addNotice(GameEvent.CLEAR_WAR_VIEW, this, this.clearWarView);
         EventManager.instance.addNotice(GameEvent.OBSTACLE_BOOM, this, this.obstacleBoom);
+        EventManager.instance.addNotice(GameEvent.PLAYER_PAN_HIT_ENEMY, this, this.beHit);
+
+
 
 
         this.setDirection();
@@ -123,8 +126,16 @@ export default class Enemy {
 
     private obstacleBoom(s: Laya.Sprite): void {
         //障碍物爆炸的时候有敌人站在上面，敌人直接死亡
-        if (this.enemyScript.obstacleBox && this.enemyScript.obstacleBox.owner && s == this.enemyScript.obstacleBox.owner)
-            this.setDeath();
+        if (this.enemyScript.obstacleBox && this.enemyScript.obstacleBox.owner && s == this.enemyScript.obstacleBox.owner) {
+            this.body.gravityScale = 2;
+            this.box.density = 5;
+            this.body.setVelocity({ x: 0, y: 1 });
+            this.box.refresh();
+            this.enemyScript.isDrop = true;
+            console.log("obstacleBoom--");
+
+        }
+        // this.setDeath();
         // if (s == this.enemyScript.obstacleBox.owner) {
         // }
 
@@ -323,6 +334,7 @@ export default class Enemy {
         // EventManager.instance.offNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.beHit);
         EventManager.instance.offNotice(GameEvent.PLAYER_BULLET_HIT_ENEMY, this, this.beHit);
         EventManager.instance.offNotice(GameEvent.OBSTACLE_BOOM, this, this.obstacleBoom);
+        EventManager.instance.offNotice(GameEvent.PLAYER_PAN_HIT_ENEMY, this, this.beHit);
 
         Laya.timer.clearAll(this);
         if (this.scene)

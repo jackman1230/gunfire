@@ -39,6 +39,8 @@ export class GameData {
     public static SOUND_FONT: string = "res/sound/";
     /**通过一关获得的金币 */
     public static VICTORY_LEVEL_COIN: number = 1000;
+    /**平底锅的伤害*/
+    public static PAN_DAMAGE: number = 5;
 
 }
 

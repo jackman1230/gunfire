@@ -11,6 +11,7 @@ export default class EnemyBody extends Laya.Script {
     public activeDis: number = 650;
     private isActive: boolean = false;
     public obstacleBox: Laya.PolygonCollider;
+    public isDrop: boolean = false;
 
     constructor() { super(); }
 
@@ -29,14 +30,18 @@ export default class EnemyBody extends Laya.Script {
             this.obstacleBox = other;
         }
 
-        // if ((other.label == "ground" || other.label == "board" || other.label == "obstacle")) {
-        // this.otherBox = other;
-        //     // this.selfBody.type = "static";
-        //     this.selfBody.linearDamping = 9999;
-        //     this.selfCollider.refresh();
-        // console.log("onTriggerEnter--", other.label);
-        // console.log("other--", other.owner);
-        // }
+        if ((other.label == "ground" || other.label == "board" || other.label == "obstacle")) {
+            // this.otherBox = other;
+            //     // this.selfBody.type = "static";
+            this.selfBody.gravityScale = 0;
+            this.selfCollider.density = 0;
+            this.selfBody.setVelocity({ x: 0, y: 0 });
+            this.selfCollider.refresh();
+            if (this.isDrop)
+                ((this.selfBody.owner) as Laya.Sprite).y -= 8;
+            // console.log("onTriggerEnter--", other.label);
+            // console.log("other--", other.owner);
+        }
     }
     onTriggerExit(): void {
 

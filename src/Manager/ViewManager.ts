@@ -22,6 +22,9 @@ import PopUpView from "../View/PopUpView";
 import TipsPopView from "../View/TipsPopView";
 import { SoundManager } from "./SoundManager";
 import { Player } from "../View/Player";
+import { EventManager } from "./EventManager";
+import GameEvent from "../Control/GameEvent";
+import PlayerPan from "../View/PlayerPan";
 
 export class ViewManager {
 
@@ -43,7 +46,8 @@ export class ViewManager {
     public tipsView: TipsPopView;
     public popUpView: PopUpView;
     public playerInfoView: PlayerInfoView;
-    public playerCtlView: PlayerCtlView;
+    public playerPan: PlayerPan;
+    // public playerCtlView: PlayerCtlView;
 
     public warAllView: any[] = [];
 
@@ -55,6 +59,15 @@ export class ViewManager {
             this._instance = new ViewManager();
         return this._instance;
     }
+
+    public addStageSizeChange(): void {
+        Laya.stage.on(Laya.Event.RESIZE, this, this.changeSize);
+    }
+
+    private changeSize(): void {
+        EventManager.instance.dispatcherEvt(GameEvent.CHANGE_SIZE);
+    }
+
 
     public createLoaningView(): void {
         this.loadingView = WXFUI_loadingView.createInstance();
@@ -91,7 +104,7 @@ export class ViewManager {
         this.warView = Laya.Pool.getItemByClass("warView", WarView);
         this.warView.createView();
 
-        // this.showPlayerCtlView();
+        this.showPlayerCtlView();
         this.showPlayerInfoView();
     }
     /**创建步兵扔的雷 */
@@ -131,26 +144,44 @@ export class ViewManager {
     }
 
     /**创建步兵敌人 */
-    public createEnemy(d: any): void {
+    public createEnemy(d: any): Enemy {
         var b: Enemy = Laya.Pool.getItemByClass("enemy", Enemy);
         b.createView(d);
+        return b;
     }
 
     /**创建直升机 */
-    public createChopper(d: EnemyInfo): void {
+    public createChopper(d: EnemyInfo): Chopper {
         var b: Chopper = Laya.Pool.getItemByClass("chopper", Chopper);
         b.createView(d);
+        return b;
     }
     /**创建坦克 */
-    public createTank(d: EnemyInfo): void {
+    public createTank(d: EnemyInfo): Tank {
         var b: Tank = Laya.Pool.getItemByClass("tank", Tank);
         b.createView(d);
+        return b;
     }
 
     /**创建掉落物品 */
     public createGoods(type: number, s: Laya.Point): void {
         var b: GoodsView = Laya.Pool.getItemByClass("goods", GoodsView);
         b.createView(type, s);
+    }
+
+    public showPlayerPanBody(): void {
+        if (!this.playerPan) this.playerPan = new PlayerPan();
+        if (this.player.direction > 0)
+            this.playerPan.scene.x = this.rolePlayer.roleSprite.width;
+        else {
+            this.playerPan.scene.x = - this.playerPan.scene.width;
+        }
+        this.player.roleSprite.addChild(this.playerPan.scene);
+    }
+
+    public hidePlayerPanBody(): void {
+        if (this.playerPan)
+            this.player.roleSprite.removeChild(this.playerPan.scene);
     }
 
     /**创建人物信息界面 */
@@ -162,8 +193,10 @@ export class ViewManager {
 
     /**创建人物操作界面 */
     public showPlayerCtlView(): void {
-        if (!this.playerCtlView) this.playerCtlView = new PlayerCtlView();
-        fairygui.GRoot.inst.addChild(this.playerCtlView.view);
+        if (this.player.playerCtlView)
+            fairygui.GRoot.inst.addChild(this.player.playerCtlView.view);
+        if (this.player.playerDirView)
+            fairygui.GRoot.inst.addChild(this.player.playerDirView.view);
     }
     /**
      * 显示关卡战斗之后界面
@@ -412,7 +445,7 @@ export class ViewManager {
     //         return Laya.Browser.clientHeight;
     //     }
     // }
-    /**获取设备宽度(因为是横屏所以返回高度) */
+    /**获取宽度(因为是横屏所以返回高度) */
     public getLayoutWidth(): number {
         let h: number = 0;
         let offX: number = 0;
