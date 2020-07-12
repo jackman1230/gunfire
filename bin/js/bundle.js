@@ -594,7 +594,7 @@
     GameData.SOUND_FONT = "res/sound/";
     GameData.VICTORY_LEVEL_COIN = 1000;
     GameData.PAN_DAMAGE = 5;
-    GameData.SHOW_ENEMY_NAME = true;
+    GameData.SHOW_ENEMY_NAME = false;
     class BombData {
     }
     BombData.BOMB_MY_GRE = 1;
@@ -2052,8 +2052,21 @@
             this.layout();
         }
         layout() {
-            var w = ViewManager.instance.getLayoutWidth();
-            this.view.x = w;
+            if (Laya.Browser.onWeiXin) {
+                let wxInfo = wx.getSystemInfoSync();
+                var h = (wxInfo.windowHeight / 750) * 1334;
+                this.view.x = 100;
+                if ((wxInfo.windowWidth / wxInfo.windowHeight) > 2) {
+                    this.view.m_pause.x = 1050;
+                }
+                else
+                    this.view.m_pause.x = 950;
+            }
+            else {
+                var h = (Laya.Browser.height / 750) * 1334;
+                this.view.x = 100 * (Laya.Browser.width / h);
+            }
+            this.view.y = 0;
         }
         updateAllView() {
             this.updateBulletNum();
@@ -2611,14 +2624,14 @@
         layout() {
             if (Laya.Browser.onWeiXin) {
                 let wxInfo = wx.getSystemInfoSync();
-                var h = (wxInfo.windowHeight / 750) * 1334;
-                this.view.x = 930 * (wxInfo.windowWidth / h);
-                this.view.y = 375;
+                this.view.x = wxInfo.windowWidth - this.view.width * (wxInfo.windowWidth / 1334) - 50;
+                this.view.y = 385;
+                console.log("this.view--", this.view.x);
             }
             else {
                 var h = (Laya.Browser.height / 750) * 1334;
                 this.view.x = 930 * (Laya.Browser.width / h);
-                this.view.y = 375;
+                this.view.y = 385;
             }
         }
     }
@@ -2633,13 +2646,13 @@
             if (Laya.Browser.onWeiXin) {
                 let wxInfo = wx.getSystemInfoSync();
                 var h = (wxInfo.windowHeight / 750) * 1334;
-                this.view.x = 320 * (wxInfo.windowWidth / h);
-                this.view.y = 710;
+                this.view.x = 300;
+                this.view.y = 720;
             }
             else {
                 var h = (Laya.Browser.height / 750) * 1334;
                 this.view.x = 320 * (Laya.Browser.width / h);
-                this.view.y = 710;
+                this.view.y = 720;
             }
         }
     }
@@ -2719,10 +2732,12 @@
             this.jumpEnd();
             this.changeWeaponType(GameManager.instance.roleInfo.weaponType);
             ViewManager.instance.warView.scene.addChild(this.roleSprite);
+            GameManager.instance.roleInfo.bulletNum = 0;
             Laya.timer.clearAll(this);
             Laya.timer.loop(500, this, this.moveMap);
             this.setStay();
-            this.setStandUp();
+            this.faceType = 1;
+            this.setFaceDirection();
         }
         playerRes() {
             this.addCtlViewMouseUp(null);
@@ -2849,7 +2864,6 @@
             this.roleSprite.y += 20;
             this.roleBox.height = 70;
             this.rolePlayer.y = -20;
-            console.log("setSquatDown");
         }
         setStandUp() {
             if (!this.isSquatDown)
@@ -2858,7 +2872,6 @@
             this.roleSprite.y -= 20;
             this.roleBox.height = 90;
             this.rolePlayer.y = 0;
-            console.log("setStandUp");
         }
         setFaceRight() {
             this.rolePlayer.skewY = 180;
@@ -2897,6 +2910,8 @@
             this.stillRun();
         }
         setPlayerDir() {
+            if (this.usePan)
+                return;
             if (this.sFire) {
                 this.body.url = "ui://Game/player_fire_" + this.weaponType + "_" + Math.abs(this.faceType);
             }
@@ -2970,11 +2985,15 @@
                 return;
             if (this.stillRifle)
                 return;
+            if (this.usePan)
+                return;
             if (GameManager.instance.roleInfo.isDeath)
                 return;
             this.playWeaponSound();
             var p = GameManager.instance.useWeaponPan(this.roleSprite.x, this.roleSprite.y, this.direction);
             if (p) {
+                Laya.timer.clear(this, this.stillFire);
+                this.sFire = false;
                 this.setPanFire();
                 return;
             }
@@ -3004,6 +3023,7 @@
                 this.bodyLeg.url = "ui://Game/legJump";
         }
         stillFire() {
+            this.playWeaponSound();
             var p = GameManager.instance.useWeaponPan(this.roleSprite.x, this.roleSprite.y, this.direction);
             if (p) {
                 Laya.timer.clear(this, this.stillFire);
@@ -3023,7 +3043,6 @@
             if (this.weaponType != PlayerData.WEAPON_PIS) {
                 EventManager.instance.dispatcherEvt(GameEvent.USE_PLAYER_BULLET);
             }
-            this.playWeaponSound();
         }
         rilfeComplete() {
             this.stillRifle = false;
@@ -3036,18 +3055,18 @@
             }
         }
         setPanFire() {
+            this.usePan = true;
+            this.rolePlayer.m_firePos1.visible = this.rolePlayer.m_firePos2.visible = false;
             if (this.faceType == 5) {
                 this.body.url = "ui://Game/player_fire_5_5";
             }
             else {
                 this.body.url = "ui://Game/player_fire_5_1";
             }
-            this.usePan = true;
-            this.bodybody.content.setPlaySettings(0, -1, 1, 0);
-            Laya.timer.once(500, this, this.panFireComplete);
-            Laya.timer.frameOnce(2, this, () => {
+            this.bodybody.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, () => {
                 ViewManager.instance.showPlayerPanBody();
-            });
+            }));
+            Laya.timer.once(700, this, this.panFireComplete);
             if (this.sRun) {
                 this.bodyLeg.url = "ui://Game/legMove";
                 return;
@@ -3111,17 +3130,19 @@
         setBoom() {
             this.sBoom = true;
             EventManager.instance.dispatcherEvt(GameEvent.USE_PLAYER_BOMB);
-            this.body.url = "ui://Game/player_boom_" + this.weaponType;
+            this.bodybody.url = "ui://Game/rush_boom_" + this.weaponType;
             this.bodybody.content.setPlaySettings(0, -1, 1, -1);
-            Laya.timer.once(700, this, this.setBoomComplete);
+            Laya.timer.once(600, this, this.setBoomComplete);
             ViewManager.instance.createBomb(PlayerData.WEAPON_GRE, this.direction, ViewManager.instance.getBodyCenterPos(this.roleSprite), true);
         }
         setBoomComplete() {
             this.sBoom = false;
             if (this.sFire)
                 this.body.url = "ui://Game/player_fire_" + this.weaponType + "_" + Math.abs(this.faceType);
-            else
-                this.body.url = "ui://Game/player_stay_" + this.weaponType + "_" + Math.abs(this.faceType);
+            else {
+                this.bodybody.url = "ui://Game/body_" + this.weaponType;
+                this.bodybody.content.setPlaySettings(0, -1, 0, -1);
+            }
         }
         stopMove() {
             if (GameManager.instance.roleInfo.isDeath)
@@ -3297,8 +3318,7 @@
             switch (keyCode) {
                 case 87:
                     console.log("上");
-                    this.faceType = 3;
-                    this.setFaceType();
+                    this.setBoom();
                     break;
                 case 83:
                     console.log("下");
@@ -3934,6 +3954,8 @@
                 if (e.isDeath)
                     continue;
                 if (e.isActive == false)
+                    continue;
+                if (e.enemyType > GameData.ENEMY_CHOPPER)
                     continue;
                 if (dir > 0) {
                     if (e.scene.x > x && e.scene.x - x < 150) {

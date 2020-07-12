@@ -34,8 +34,20 @@ export default class PlayerInfoView {
     }
 
     private layout(): void {
-        var w: number = ViewManager.instance.getLayoutWidth();
-        this.view.x = w;
+        if (Laya.Browser.onWeiXin) {
+            let wxInfo = wx.getSystemInfoSync();
+            var h: number = (wxInfo.windowHeight / 750) * 1334;//游戏所展示的宽度
+            // this.view.x = 100 * (wxInfo.windowWidth / h);
+            this.view.x = 100;
+            if ((wxInfo.windowWidth / wxInfo.windowHeight) > 2) {
+                this.view.m_pause.x = 1050;
+            } else
+                this.view.m_pause.x = 950;
+        } else {
+            var h: number = (Laya.Browser.height / 750) * 1334;//游戏所展示的宽度
+            this.view.x = 100 * (Laya.Browser.width / h);
+        }
+        this.view.y = 0;
     }
 
     public updateAllView(): void {

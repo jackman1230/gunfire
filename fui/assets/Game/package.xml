@@ -760,6 +760,8 @@
     <movieclip id="unfjxrz" name="fire_5_2.jta" path="/Component/player/playerAni/"/>
     <component id="unfjxs0" name="player_fire_5_5.xml" path="/Component/player/" exported="true"/>
     <component id="unfjxs1" name="player_death.xml" path="/Component/player/" exported="true"/>
+    <movieclip id="oys6xs2" name="rush_boom_3.jta" path="/Component/player/playerAni/" exported="true"/>
+    <movieclip id="oys6xs3" name="body_3.jta" path="/Component/player/playerAni/" exported="true"/>
   </resources>
   <publish name="Game" path="..\bin\res" packageCount="2" genCode="true" codePath="..\src\fui"/>
 </packageDescription>

@@ -115,11 +115,12 @@ export class Player extends Laya.Script {
         this.jumpEnd();
         this.changeWeaponType(GameManager.instance.roleInfo.weaponType);
         ViewManager.instance.warView.scene.addChild(this.roleSprite);
-        // GameManager.instance.roleInfo.bulletNum = 100;
+        GameManager.instance.roleInfo.bulletNum = 0;
         Laya.timer.clearAll(this);
         Laya.timer.loop(500, this, this.moveMap);
         this.setStay();
-        this.setStandUp();
+        this.faceType = 1;
+        this.setFaceDirection();
 
     }
     //原地复活加无敌
@@ -214,8 +215,6 @@ export class Player extends Laya.Script {
             this.playerDirView.view.m_dirBtn.y = 130;
         if (pos.y < -130)
             this.playerDirView.view.m_dirBtn.y = -130;
-        // var face: number = ;
-        // if (face == this.faceType) return;
         this.faceType = GameManager.instance.roleInfo.direction = ViewManager.instance.getPlayerDirection(pos);
         this.setFaceType();
     }
@@ -259,7 +258,7 @@ export class Player extends Laya.Script {
         this.roleSprite.y += 20;
         this.roleBox.height = 70;
         this.rolePlayer.y = -20;
-        console.log("setSquatDown");
+        // console.log("setSquatDown");
 
     }
     private setStandUp(): void {
@@ -268,7 +267,7 @@ export class Player extends Laya.Script {
         this.roleSprite.y -= 20;
         this.roleBox.height = 90;
         this.rolePlayer.y = 0;
-        console.log("setStandUp");
+        // console.log("setStandUp");
     }
     private setFaceRight(): void {
         this.rolePlayer.skewY = 180;
@@ -307,6 +306,7 @@ export class Player extends Laya.Script {
     }
 
     private setPlayerDir(): void {
+        if (this.usePan) return;
         if (this.sFire) {
             this.body.url = "ui://Game/player_fire_" + this.weaponType + "_" + Math.abs(this.faceType);
         } else {
@@ -399,10 +399,13 @@ export class Player extends Laya.Script {
     public setFire(): void {
         if (this.sFire) return;
         if (this.stillRifle) return;
+        if (this.usePan) return;
         if (GameManager.instance.roleInfo.isDeath) return;
         this.playWeaponSound();
         var p: boolean = GameManager.instance.useWeaponPan(this.roleSprite.x, this.roleSprite.y, this.direction);
         if (p) {
+            Laya.timer.clear(this, this.stillFire);
+            this.sFire = false;
             this.setPanFire();
             return;
         }
@@ -434,6 +437,7 @@ export class Player extends Laya.Script {
     private stillFireNum: number = 1;
     private stillFire(): void {
         // if (this.sBoom) return;
+        this.playWeaponSound();
         var p: boolean = GameManager.instance.useWeaponPan(this.roleSprite.x, this.roleSprite.y, this.direction);
         if (p) {
             Laya.timer.clear(this, this.stillFire);
@@ -452,7 +456,6 @@ export class Player extends Laya.Script {
         if (this.weaponType != PlayerData.WEAPON_PIS) {
             EventManager.instance.dispatcherEvt(GameEvent.USE_PLAYER_BULLET);
         }
-        this.playWeaponSound();
     }
 
     private rilfeComplete(): void {
@@ -467,17 +470,19 @@ export class Player extends Laya.Script {
 
     private usePan: boolean = false;
     private setPanFire(): void {
+        // ViewManager.instance.showTipsView("使用平底锅");
+        this.usePan = true;
+        this.rolePlayer.m_firePos1.visible = this.rolePlayer.m_firePos2.visible = false;
         if (this.faceType == 5) {
             this.body.url = "ui://Game/player_fire_5_5";
         } else {
             this.body.url = "ui://Game/player_fire_5_1";
         }
-        this.usePan = true;
-        this.bodybody.content.setPlaySettings(0, -1, 1, 0);
-        Laya.timer.once(500, this, this.panFireComplete);
-        Laya.timer.frameOnce(2, this, () => {
+        this.bodybody.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, () => {
+            // console.log("showPlayerPanBody--", new Date().getTime());
             ViewManager.instance.showPlayerPanBody();
-        });
+        }));
+        Laya.timer.once(700, this, this.panFireComplete);
         if (this.sRun) {
             this.bodyLeg.url = "ui://Game/legMove";
             return;
@@ -488,6 +493,7 @@ export class Player extends Laya.Script {
 
     private panFireComplete(): void {
         this.usePan = false;
+        // console.log("hidePlayerPanBody--", new Date().getTime());
         ViewManager.instance.hidePlayerPanBody();
         if (this.keyFire) {
             this.setFire();
@@ -541,9 +547,14 @@ export class Player extends Laya.Script {
         this.sBoom = true;
         // this.rolePlayer["m_firePos" + this.weaponType].visible = false;
         EventManager.instance.dispatcherEvt(GameEvent.USE_PLAYER_BOMB);
-        this.body.url = "ui://Game/player_boom_" + this.weaponType;
+        this.bodybody.url = "ui://Game/rush_boom_" + this.weaponType;
         this.bodybody.content.setPlaySettings(0, -1, 1, -1);
-        Laya.timer.once(700, this, this.setBoomComplete);
+        // if (this.sRun) {
+        //     Laya.timer.frameOnce(1, this, () => {
+        // this.bodyLeg.url = "ui://Game/legMove";
+        //     })
+        // }
+        Laya.timer.once(600, this, this.setBoomComplete);
         ViewManager.instance.createBomb(PlayerData.WEAPON_GRE, this.direction, ViewManager.instance.getBodyCenterPos(this.roleSprite), true);
     }
 
@@ -551,8 +562,10 @@ export class Player extends Laya.Script {
         this.sBoom = false;
         if (this.sFire)
             this.body.url = "ui://Game/player_fire_" + this.weaponType + "_" + Math.abs(this.faceType);
-        else
-            this.body.url = "ui://Game/player_stay_" + this.weaponType + "_" + Math.abs(this.faceType);
+        else {
+            this.bodybody.url = "ui://Game/body_" + this.weaponType;
+            this.bodybody.content.setPlaySettings(0, -1, 0, -1);
+        }
     }
 
 
@@ -754,8 +767,9 @@ export class Player extends Laya.Script {
                 // this.roleSprite.y -= 20;
                 // this.roleBox.height = 90;
                 // this.rolePlayer.y = 0;
-                this.faceType = 3;
-                this.setFaceType();
+                // this.faceType = 3;
+                // this.setFaceType();
+                this.setBoom();
                 break;
             case 83:
                 console.log("下");

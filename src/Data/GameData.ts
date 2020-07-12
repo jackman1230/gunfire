@@ -43,7 +43,7 @@ export class GameData {
     public static PAN_DAMAGE: number = 5;
 
     /**显示每个关卡敌人编号和障碍物编号，方便改变坐标*/
-    public static SHOW_ENEMY_NAME: Boolean = true;
+    public static SHOW_ENEMY_NAME: Boolean = false;
 
 }
 

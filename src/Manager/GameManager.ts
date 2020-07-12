@@ -251,6 +251,7 @@ export class GameManager {
             var e: Enemy = this.enemyArr[i];
             if (e.isDeath) continue;
             if (e.isActive == false) continue;
+            if (e.enemyType > GameData.ENEMY_CHOPPER) continue;
             if (dir > 0) {
                 if (e.scene.x > x && e.scene.x - x < 150) {
                     if (Math.abs(y - e.scene.y) < 30)

@@ -19,12 +19,13 @@ export default class PlayerDirView {
         if (Laya.Browser.onWeiXin) {
             let wxInfo = wx.getSystemInfoSync();
             var h: number = (wxInfo.windowHeight / 750) * 1334;//游戏所展示的宽度
-            this.view.x = 320 * (wxInfo.windowWidth / h);
-            this.view.y = 710;
+            // this.view.x = 320 * (wxInfo.windowWidth / h);
+            this.view.x = 300;
+            this.view.y = 720;
         } else {
             var h: number = (Laya.Browser.height / 750) * 1334;//游戏所展示的宽度
             this.view.x = 320 * (Laya.Browser.width / h);
-            this.view.y = 710;
+            this.view.y = 720;
         }
     }
 
