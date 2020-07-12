@@ -42,6 +42,8 @@ export default class Enemy {
     protected isBoss: boolean = false;
     public isActive: boolean = false;
 
+    public name: string = ""
+
     constructor() { }
 
     public createView(d: EnemyInfo) {
@@ -63,6 +65,7 @@ export default class Enemy {
         this.isBoss = d.isBoss;
         this.isActive = false;
         this.isDeath = false;
+        this.name = d.name;
         Laya.timer.clear(this, this.setFire);
     }
 
@@ -73,6 +76,7 @@ export default class Enemy {
         this.enemy = this.view.getChildAt(0) as fairygui.GLoader;
         this.initView();
     };
+
 
     public initView(): void {
         this.enemy.url = "ui://Game/enemy" + this.enemyType;
@@ -89,7 +93,7 @@ export default class Enemy {
         }
 
         EventManager.instance.addNotice(GameEvent.PLAYER_BULLET_HIT_ENEMY, this, this.beHit);
-        // EventManager.instance.addNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.beHit);
+        EventManager.instance.addNotice(GameEvent.PLAYER_BOMB_HIT_ENEMY, this, this.beHit);
         EventManager.instance.addNotice(GameEvent.PAUSE_GAME, this, this.pauseGame);
         EventManager.instance.addNotice(GameEvent.ACTIVE_ENEMY, this, this.activeEnemy);
         EventManager.instance.addNotice(GameEvent.CLEAR_WAR_VIEW, this, this.clearWarView);
@@ -102,6 +106,9 @@ export default class Enemy {
         this.setDirection();
         this.setStay();
         // Laya.timer.loop(2000, this, this.setFire);
+
+        this.showEnemyName();
+
     }
 
     protected activeEnemy(s: Laya.Sprite): void {
@@ -367,5 +374,16 @@ export default class Enemy {
         if (r > 0.5) return 3;
         if (r > 0.25) return 2;
         return 1;
+    }
+
+    private showEnemyName(): void {
+        if (!GameData.SHOW_ENEMY_NAME) return;
+        var txt: Laya.Text = new Laya.Text();
+        txt.width = 50;
+        txt.height = 30;
+        txt.fontSize = 20;
+        txt.color = "#ffff00";
+        txt.text = this.name;
+        this.enemy.displayObject.addChild(txt);
     }
 }

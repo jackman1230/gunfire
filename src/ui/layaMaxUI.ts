@@ -41,7 +41,7 @@ export module ui {
     }
     REG("ui.BulletUI",BulletUI);
     export class BulletPanUI extends Laya.View {
-        public static  uiView:any ={"type":"View","props":{"width":80,"height":80},"compId":2,"child":[{"type":"Script","props":{"y":0,"x":0,"width":80,"isSensor":true,"height":80,"friction":0,"runtime":"laya.physics.BoxCollider"},"compId":3},{"type":"Script","props":{"gravityScale":0,"allowRotation":false,"runtime":"laya.physics.RigidBody"},"compId":4}],"loadList":[],"loadList3D":[]};
+        public static  uiView:any ={"type":"View","props":{"width":180,"height":80},"compId":2,"child":[{"type":"Script","props":{"y":0,"x":0,"width":180,"isSensor":true,"height":80,"friction":0,"runtime":"laya.physics.BoxCollider"},"compId":3},{"type":"Script","props":{"gravityScale":0,"allowRotation":false,"runtime":"laya.physics.RigidBody"},"compId":4}],"loadList":[],"loadList3D":[]};
         constructor(){ super()}
         createChildren():void {
             super.createChildren();
@@ -230,7 +230,7 @@ export module ui {
     }
     REG("ui.ObstacleView_2UI",ObstacleView_2UI);
     export class ObstacleView_3UI extends Laya.Scene {
-        public static  uiView:any ={"type":"Scene","props":{"width":452,"height":236},"compId":2,"child":[{"type":"Script","props":{"y":0,"x":0,"points":"0,165,41,165,43,50,405,50,404,174,445,174,445,239,0,239","label":"obstacle","friction":0,"runtime":"laya.physics.PolygonCollider"},"compId":4},{"type":"Script","props":{"y":0,"x":0,"type":"static","label":"obstacle","runtime":"laya.physics.RigidBody"},"compId":5}],"loadList":[],"loadList3D":[]};
+        public static  uiView:any ={"type":"Scene","props":{"width":292,"height":145},"compId":2,"child":[{"type":"Script","props":{"y":-94,"x":0,"points":"0,165,41,165,43,121,260,121,260,170,291,170,290,239,0,239","label":"obstacle","friction":0,"runtime":"laya.physics.PolygonCollider"},"compId":4},{"type":"Script","props":{"y":0,"x":0,"type":"static","label":"obstacle","runtime":"laya.physics.RigidBody"},"compId":5}],"loadList":[],"loadList3D":[]};
         constructor(){ super()}
         createChildren():void {
             super.createChildren();
@@ -248,7 +248,7 @@ export module ui {
     }
     REG("ui.ObstacleView_4UI",ObstacleView_4UI);
     export class ObstacleView_5UI extends Laya.Scene {
-        public static  uiView:any ={"type":"Scene","props":{"width":292,"height":145},"compId":2,"child":[{"type":"Script","props":{"y":-94,"x":0,"points":"0,165,41,165,43,121,260,121,260,170,291,170,290,239,0,239","label":"obstacle","friction":0,"runtime":"laya.physics.PolygonCollider"},"compId":4},{"type":"Script","props":{"y":0,"x":0,"type":"static","label":"obstacle","runtime":"laya.physics.RigidBody"},"compId":5}],"loadList":[],"loadList3D":[]};
+        public static  uiView:any ={"type":"Scene","props":{"width":452,"height":236},"compId":2,"child":[{"type":"Script","props":{"y":0,"x":0,"points":"0,165,41,165,43,50,405,50,404,174,445,174,445,239,0,239","label":"obstacle","friction":0,"runtime":"laya.physics.PolygonCollider"},"compId":4},{"type":"Script","props":{"y":0,"x":0,"type":"static","label":"obstacle","runtime":"laya.physics.RigidBody"},"compId":5}],"loadList":[],"loadList3D":[]};
         constructor(){ super()}
         createChildren():void {
             super.createChildren();

@@ -172,9 +172,9 @@ export class ViewManager {
     public showPlayerPanBody(): void {
         if (!this.playerPan) this.playerPan = new PlayerPan();
         if (this.player.direction > 0)
-            this.playerPan.scene.x = this.rolePlayer.roleSprite.width;
+            this.playerPan.scene.x = 0;
         else {
-            this.playerPan.scene.x = - this.playerPan.scene.width;
+            this.playerPan.scene.x = -this.playerPan.scene.width;
         }
         this.player.roleSprite.addChild(this.playerPan.scene);
     }

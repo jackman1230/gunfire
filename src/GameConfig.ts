@@ -10,11 +10,11 @@ export default class GameConfig{
     static screenMode:string="none";
     static alignV:string="top";
     static alignH:string="left";
-    static startScene:any="BulletPan.scene";
+    static startScene:any="ObstacleView_5.scene";
     static sceneRoot:string="";
     static debug:boolean=false;
     static stat:boolean=false;
-    static physicsDebug:boolean=true;
+    static physicsDebug:boolean=false;
     static exportSceneToJson:boolean=true;
     constructor(){}
     static init(){

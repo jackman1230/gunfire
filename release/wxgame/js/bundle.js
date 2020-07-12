@@ -14,11 +14,11 @@
     GameConfig.screenMode = "none";
     GameConfig.alignV = "top";
     GameConfig.alignH = "left";
-    GameConfig.startScene = "BulletPan.scene";
+    GameConfig.startScene = "BoardBody.scene";
     GameConfig.sceneRoot = "";
     GameConfig.debug = false;
     GameConfig.stat = false;
-    GameConfig.physicsDebug = true;
+    GameConfig.physicsDebug = false;
     GameConfig.exportSceneToJson = true;
     GameConfig.init();
 
@@ -2649,10 +2649,17 @@
             this.layout();
         }
         layout() {
-            let wxInfo = wx.getSystemInfoSync();
-            var h = (wxInfo.windowHeight / 750) * 1334;
-            this.view.x = 930 * (wxInfo.windowWidth / h);
-            this.view.y = 375;
+            if (Laya.Browser.onWeiXin) {
+                let wxInfo = wx.getSystemInfoSync();
+                var h = (wxInfo.windowHeight / 750) * 1334;
+                this.view.x = 930 * (wxInfo.windowWidth / h);
+                this.view.y = 375;
+            }
+            else {
+                var h = (Laya.Browser.height / 750) * 1334;
+                this.view.x = 930 * (Laya.Browser.width / h);
+                this.view.y = 375;
+            }
         }
     }
 
@@ -2663,10 +2670,17 @@
             this.layout();
         }
         layout() {
-            let wxInfo = wx.getSystemInfoSync();
-            var h = (wxInfo.windowHeight / 750) * 1334;
-            this.view.x = 320 * (wxInfo.windowWidth / h);
-            this.view.y = 710;
+            if (Laya.Browser.onWeiXin) {
+                let wxInfo = wx.getSystemInfoSync();
+                var h = (wxInfo.windowHeight / 750) * 1334;
+                this.view.x = 320 * (wxInfo.windowWidth / h);
+                this.view.y = 710;
+            }
+            else {
+                var h = (Laya.Browser.height / 750) * 1334;
+                this.view.x = 320 * (Laya.Browser.width / h);
+                this.view.y = 710;
+            }
         }
     }
 

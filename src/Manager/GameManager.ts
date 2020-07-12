@@ -201,6 +201,7 @@ export class GameManager {
                 d.direction = t.direction;
                 d.isBoss = t.isBoss;
                 d.type = t.type;
+                d.name = key;
                 if (d.type == GameData.ENEMY_TANK_1 || d.type == GameData.ENEMY_TANK_2 || d.type == GameData.ENEMY_TANK_3 || d.type == GameData.ENEMY_TANK_4) {
                     e = ViewManager.instance.createTank(d);
                 } else if (d.type == GameData.ENEMY_CHOPPER) {
@@ -224,6 +225,7 @@ export class GameManager {
                 d.pos = new Laya.Point(t.pos[0], t.pos[1]);
                 d.blood = t.blood;
                 d.type = t.type;
+                d.name = key;
                 ViewManager.instance.createObstacle(d);
             }
         }
@@ -241,6 +243,10 @@ export class GameManager {
     }
 
     public useWeaponPan(x: number, y: number, dir: number): boolean {
+        if (dir > 0)
+            x -= 50;
+        else
+            x += 50;
         for (let i = 0; i < this.enemyArr.length; i++) {
             var e: Enemy = this.enemyArr[i];
             if (e.isDeath) continue;
@@ -255,8 +261,8 @@ export class GameManager {
                     if (Math.abs(y - e.scene.y) < 30)
                         return true;
             }
-            return false;
         }
+        return false;
     }
 
     public get roleInfo(): PlayerInfo {

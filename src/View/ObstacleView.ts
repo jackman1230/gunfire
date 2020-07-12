@@ -27,12 +27,16 @@ export default class ObstacleView {
 
     protected pos: Laya.Point;
 
+    private name: string = "";
+
     constructor() { }
 
     public createView(d: ObstacleInfo) {
         this.type = d.type;
         this.blood = d.blood;
         this.pos = d.pos;
+
+        this.name = d.name;
         if (this.type == ObstacleType.ObstacleType_SHABAO) {
             this.scene = new ui.ObstacleView_1UI();
         } else if (this.type == ObstacleType.ObstacleType_YOUGUAN) {
@@ -85,6 +89,8 @@ export default class ObstacleView {
         EventManager.instance.addNotice(GameEvent.PLAYER_BOMB_HIT_OBSTACLE, this, this.beHit);
         EventManager.instance.addNotice(GameEvent.PLAYER_BULLET_HIT_OBSTACLE, this, this.beHit);
 
+
+        this.showEnemyName();
     }
 
     public beHit(s: any): void {
@@ -177,5 +183,16 @@ export default class ObstacleView {
             p.y = -150;
         }
         return p;
+    }
+
+    private showEnemyName(): void {
+        if (!GameData.SHOW_ENEMY_NAME) return;
+        var txt: Laya.Text = new Laya.Text();
+        txt.width = 50;
+        txt.height = 30;
+        txt.fontSize = 20;
+        txt.color = "#ffff00";
+        txt.text = this.name;
+        this.load.displayObject.addChild(txt);
     }
 }

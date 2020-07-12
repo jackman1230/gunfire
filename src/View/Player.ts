@@ -75,9 +75,9 @@ export class Player extends Laya.Script {
         // fairygui.GRoot.inst.addChild(this.playerDirView.view);
 
         this.playerDirView.view.m_dirBtn.y = this.playerDirView.view.m_dirBtn.x = 0;
-        this.addEvent();
+        // this.addEvent();
         this.resetData();
-        this.setStay();
+        // this.setStay();
     }
 
     private addEvent(): void {
@@ -119,6 +119,7 @@ export class Player extends Laya.Script {
         Laya.timer.clearAll(this);
         Laya.timer.loop(500, this, this.moveMap);
         this.setStay();
+        this.setStandUp();
 
     }
     //原地复活加无敌
@@ -138,6 +139,10 @@ export class Player extends Laya.Script {
         Laya.timer.once(3000, this, this.cancleInvincible);
         this.bodyLeg.color = "#ffff00";
         this.bodybody.color = "#ffff00";
+        if (this.roleSprite.y > 800) {
+            this.roleSprite.y = 580;
+            this.roleSprite.x -= 200;
+        }
     }
 
     //取消无敌
@@ -177,6 +182,7 @@ export class Player extends Laya.Script {
 
     private keyFireUp(): void {
         this.keyFire = false;
+        if (GameManager.instance.roleInfo.isDeath) return;
         this.setFireEnd();
     }
 
@@ -208,9 +214,9 @@ export class Player extends Laya.Script {
             this.playerDirView.view.m_dirBtn.y = 130;
         if (pos.y < -130)
             this.playerDirView.view.m_dirBtn.y = -130;
-        var face: number = ViewManager.instance.getPlayerDirection(pos);
-        if (face == this.faceType) return;
-        this.faceType = GameManager.instance.roleInfo.direction = face;
+        // var face: number = ;
+        // if (face == this.faceType) return;
+        this.faceType = GameManager.instance.roleInfo.direction = ViewManager.instance.getPlayerDirection(pos);
         this.setFaceType();
     }
 
@@ -428,6 +434,13 @@ export class Player extends Laya.Script {
     private stillFireNum: number = 1;
     private stillFire(): void {
         // if (this.sBoom) return;
+        var p: boolean = GameManager.instance.useWeaponPan(this.roleSprite.x, this.roleSprite.y, this.direction);
+        if (p) {
+            Laya.timer.clear(this, this.stillFire);
+            this.sFire = false;
+            this.setPanFire();
+            return;
+        }
         this.setFireAniSkew();
         this.stillFireNum++;
         if (this.stillFireNum % 2 == 0) {
@@ -460,7 +473,8 @@ export class Player extends Laya.Script {
             this.body.url = "ui://Game/player_fire_5_1";
         }
         this.usePan = true;
-        this.bodybody.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.panFireComplete));
+        this.bodybody.content.setPlaySettings(0, -1, 1, 0);
+        Laya.timer.once(500, this, this.panFireComplete);
         Laya.timer.frameOnce(2, this, () => {
             ViewManager.instance.showPlayerPanBody();
         });
@@ -585,13 +599,14 @@ export class Player extends Laya.Script {
 
     private setDeath(): void {
         if (GameManager.instance.roleInfo.isDeath) return;
-        GameManager.instance.roleInfo.isDeath = true;
         Laya.timer.clearAll(this);
         this.removeEvent();
         this.setFireEnd();
+        this.stopMove();
         this.rolePlayer.m_firePos1.visible = this.rolePlayer.m_firePos2.visible = false;
+        GameManager.instance.roleInfo.isDeath = true;
         this.body.url = "ui://Game/player_death";
-        this.bodybody.content.setPlaySettings(0, -1, 1, this.body.content.frameCount - 1, Laya.Handler.create(this, this.deathComplete));
+        this.bodybody.content.setPlaySettings(0, -1, 1, this.bodybody.content.frameCount - 1, Laya.Handler.create(this, this.deathComplete));
         this.playDeathSound();
         ViewManager.instance.showAfterWarView(3);
     }
@@ -739,7 +754,7 @@ export class Player extends Laya.Script {
                 // this.roleSprite.y -= 20;
                 // this.roleBox.height = 90;
                 // this.rolePlayer.y = 0;
-                this.faceType = 5;
+                this.faceType = 3;
                 this.setFaceType();
                 break;
             case 83:
@@ -749,7 +764,7 @@ export class Player extends Laya.Script {
                 // this.roleBox.height = 70;
                 // this.rolePlayer.y = -20;
                 // this.setSquatDown();
-                this.faceType = -5;
+                this.faceType = 5;
                 this.setFaceType();
                 break;
             case 65:

@@ -16,10 +16,16 @@ export default class PlayerDirView {
     private layout(): void {
         // var p: number = ViewManager.instance.getProportion();
         // this.view.x = 300 * p;
-        let wxInfo = wx.getSystemInfoSync();
-        var h: number = (wxInfo.windowHeight / 750) * 1334;//游戏所展示的宽度
-        this.view.x = 320 * (wxInfo.windowWidth / h);
-        this.view.y = 710;
+        if (Laya.Browser.onWeiXin) {
+            let wxInfo = wx.getSystemInfoSync();
+            var h: number = (wxInfo.windowHeight / 750) * 1334;//游戏所展示的宽度
+            this.view.x = 320 * (wxInfo.windowWidth / h);
+            this.view.y = 710;
+        } else {
+            var h: number = (Laya.Browser.height / 750) * 1334;//游戏所展示的宽度
+            this.view.x = 320 * (Laya.Browser.width / h);
+            this.view.y = 710;
+        }
     }
 
 }

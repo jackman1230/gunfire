@@ -593,7 +593,7 @@
                     "damage": 1,
                     "activeDis": 500,
                     "pos": [
-                        885,
+                        1185,
                         574
                     ],
                     "isBoss": false,
@@ -741,7 +741,7 @@
                     "damage": 1,
                     "activeDis": 500,
                     "pos": [
-                        597,
+                        697,
                         584
                     ],
                     "isBoss": false,
@@ -904,7 +904,7 @@
                     "damage": 1,
                     "activeDis": 500,
                     "pos": [
-                        597,
+                        797,
                         584
                     ],
                     "isBoss": false,
@@ -1032,7 +1032,7 @@
                     "type": 11,
                     "blood": 10,
                     "pos": [
-                        437,
+                        637,
                         607
                     ]
                 },
@@ -1271,22 +1271,6 @@
                         1
                     ]
                 },
-                "enemy_6": {
-                    "type": 3,
-                    "direction": -1,
-                    "blood": 5,
-                    "damage": 1,
-                    "activeDis": 500,
-                    "pos": [
-                        3580,
-                        480
-                    ],
-                    "isBoss": false,
-                    "expRate": [
-                        5,
-                        1
-                    ]
-                },
                 "enemy_7": {
                     "type": 3,
                     "direction": -1,
@@ -1295,7 +1279,7 @@
                     "activeDis": 500,
                     "pos": [
                         3280,
-                        400
+                        600
                     ],
                     "isBoss": false,
                     "expRate": [
@@ -1324,14 +1308,6 @@
                     "pos": [
                         1690,
                         473
-                    ]
-                },
-                "obstacle_2": {
-                    "type": 1,
-                    "blood": 8,
-                    "pos": [
-                        3015,
-                        444
                     ]
                 }
             }
@@ -1400,7 +1376,7 @@
                     "activeDis": 500,
                     "pos": [
                         2327,
-                        74
+                        54
                     ],
                     "isBoss": false,
                     "expRate": [
@@ -1415,8 +1391,8 @@
                     "damage": 1,
                     "activeDis": 500,
                     "pos": [
-                        2563,
-                        91
+                        2463,
+                        51
                     ],
                     "isBoss": false,
                     "expRate": [
@@ -1431,8 +1407,8 @@
                     "damage": 1,
                     "activeDis": 500,
                     "pos": [
-                        2667,
-                        91
+                        2607,
+                        61
                     ],
                     "isBoss": false,
                     "expRate": [
@@ -1448,7 +1424,7 @@
                     "activeDis": 500,
                     "pos": [
                         2960,
-                        147
+                        127
                     ],
                     "isBoss": false,
                     "expRate": [
@@ -1480,7 +1456,7 @@
                     "activeDis": 500,
                     "pos": [
                         3254,
-                        51
+                        41
                     ],
                     "isBoss": false,
                     "expRate": [
@@ -1507,7 +1483,7 @@
                     "type": 1,
                     "blood": 8,
                     "pos": [
-                        854,
+                        904,
                         304
                     ]
                 },
@@ -1596,7 +1572,7 @@
                     "activeDis": 500,
                     "pos": [
                         2421,
-                        195
+                        175
                     ],
                     "isBoss": false,
                     "expRate": [
@@ -1644,7 +1620,7 @@
                     "activeDis": 500,
                     "pos": [
                         3075,
-                        250
+                        230
                     ],
                     "isBoss": false,
                     "expRate": []
@@ -1657,7 +1633,7 @@
                     "activeDis": 500,
                     "pos": [
                         3326,
-                        159
+                        139
                     ],
                     "isBoss": false,
                     "expRate": []
@@ -2002,7 +1978,7 @@
                     "damage": 1,
                     "activeDis": 500,
                     "pos": [
-                        885,
+                        1185,
                         574
                     ],
                     "isBoss": false,
@@ -2018,8 +1994,8 @@
                     "damage": 1,
                     "activeDis": 500,
                     "pos": [
-                        1050,
-                        387
+                        2050,
+                        257
                     ],
                     "isBoss": false,
                     "expRate": [
@@ -2034,8 +2010,8 @@
                     "damage": 1,
                     "activeDis": 500,
                     "pos": [
-                        1156,
-                        260
+                        2156,
+                        340
                     ],
                     "isBoss": false,
                     "expRate": [
@@ -2067,7 +2043,7 @@
                     "activeDis": 500,
                     "pos": [
                         1450,
-                        470
+                        506
                     ],
                     "isBoss": false,
                     "expRate": [
@@ -2099,7 +2075,7 @@
                     "activeDis": 500,
                     "pos": [
                         2053,
-                        466
+                        506
                     ],
                     "isBoss": false,
                     "expRate": [
@@ -2174,16 +2150,16 @@
                     "type": 8,
                     "blood": 8,
                     "pos": [
-                        941,
-                        405
+                        1991,
+                        305
                     ]
                 },
                 "obstacle_2": {
                     "type": 8,
                     "blood": 8,
                     "pos": [
-                        1100,
-                        276
+                        2150,
+                        376
                     ]
                 },
                 "obstacle_3": {
@@ -2206,7 +2182,7 @@
                     "type": 1,
                     "blood": 8,
                     "pos": [
-                        2863,
+                        2803,
                         561
                     ]
                 },
@@ -2246,7 +2222,7 @@
                     "damage": 1,
                     "activeDis": 500,
                     "pos": [
-                        597,
+                        797,
                         584
                     ],
                     "isBoss": false,
@@ -2279,7 +2255,7 @@
                     "activeDis": 500,
                     "pos": [
                         943,
-                        294
+                        274
                     ],
                     "isBoss": false,
                     "expRate": [
@@ -2406,7 +2382,7 @@
                     "type": 1,
                     "blood": 8,
                     "pos": [
-                        397,
+                        497,
                         577
                     ]
                 },
@@ -2470,7 +2446,7 @@
                     "damage": 1,
                     "activeDis": 500,
                     "pos": [
-                        597,
+                        827,
                         584
                     ],
                     "isBoss": false,
@@ -2486,7 +2462,7 @@
                     "damage": 1,
                     "activeDis": 500,
                     "pos": [
-                        723,
+                        873,
                         367
                     ],
                     "isBoss": false,
@@ -2669,7 +2645,7 @@
                     "type": 11,
                     "blood": 10,
                     "pos": [
-                        437,
+                        687,
                         607
                     ]
                 },
@@ -2677,7 +2653,7 @@
                     "type": 8,
                     "blood": 10,
                     "pos": [
-                        776,
+                        876,
                         389
                     ]
                 },
@@ -2733,7 +2709,7 @@
                     "damage": 1,
                     "activeDis": 500,
                     "pos": [
-                        650,
+                        850,
                         583
                     ],
                     "isBoss": false,
@@ -3116,8 +3092,8 @@
                     "damage": 1,
                     "activeDis": 500,
                     "pos": [
-                        2563,
-                        91
+                        2463,
+                        51
                     ],
                     "isBoss": false,
                     "expRate": [
@@ -3132,8 +3108,8 @@
                     "damage": 1,
                     "activeDis": 500,
                     "pos": [
-                        2667,
-                        91
+                        2607,
+                        61
                     ],
                     "isBoss": false,
                     "expRate": [
@@ -3149,7 +3125,7 @@
                     "activeDis": 500,
                     "pos": [
                         2960,
-                        147
+                        127
                     ],
                     "isBoss": false,
                     "expRate": [
@@ -3228,7 +3204,7 @@
                     "damage": 1,
                     "activeDis": 500,
                     "pos": [
-                        3531,
+                        3831,
                         352
                     ],
                     "isBoss": true,
@@ -3240,7 +3216,7 @@
                     "type": 1,
                     "blood": 8,
                     "pos": [
-                        854,
+                        904,
                         304
                     ]
                 },
@@ -3345,7 +3321,7 @@
                     "activeDis": 500,
                     "pos": [
                         2421,
-                        195
+                        175
                     ],
                     "isBoss": false,
                     "expRate": [
@@ -3377,7 +3353,7 @@
                     "activeDis": 500,
                     "pos": [
                         2868,
-                        150
+                        130
                     ],
                     "isBoss": false,
                     "expRate": [
@@ -3409,7 +3385,7 @@
                     "activeDis": 500,
                     "pos": [
                         3075,
-                        250
+                        230
                     ],
                     "isBoss": false,
                     "expRate": []
@@ -3422,7 +3398,7 @@
                     "activeDis": 500,
                     "pos": [
                         3326,
-                        159
+                        139
                     ],
                     "isBoss": false,
                     "expRate": []
@@ -3691,7 +3667,7 @@
                         2985,
                         315
                     ],
-                    "isBoss": true,
+                    "isBoss": false,
                     "expRate": []
                 },
                 "enemy_10": {
@@ -3841,7 +3817,7 @@
                     "damage": 1,
                     "activeDis": 500,
                     "pos": [
-                        885,
+                        1185,
                         574
                     ],
                     "isBoss": false,
@@ -3857,8 +3833,8 @@
                     "damage": 1,
                     "activeDis": 500,
                     "pos": [
-                        1050,
-                        387
+                        2050,
+                        257
                     ],
                     "isBoss": false,
                     "expRate": [
@@ -3873,8 +3849,8 @@
                     "damage": 1,
                     "activeDis": 500,
                     "pos": [
-                        1156,
-                        260
+                        2156,
+                        340
                     ],
                     "isBoss": false,
                     "expRate": [
@@ -3906,7 +3882,7 @@
                     "activeDis": 500,
                     "pos": [
                         1450,
-                        470
+                        506
                     ],
                     "isBoss": false,
                     "expRate": [
@@ -3921,8 +3897,8 @@
                     "damage": 1,
                     "activeDis": 500,
                     "pos": [
-                        1607,
-                        470
+                        1557,
+                        500
                     ],
                     "isBoss": false,
                     "expRate": [
@@ -3954,7 +3930,7 @@
                     "activeDis": 500,
                     "pos": [
                         2053,
-                        466
+                        506
                     ],
                     "isBoss": false,
                     "expRate": [
@@ -3969,10 +3945,10 @@
                     "damage": 1,
                     "activeDis": 500,
                     "pos": [
-                        2186,
-                        466
+                        2136,
+                        500
                     ],
-                    "isBoss": true,
+                    "isBoss": false,
                     "expRate": []
                 },
                 "enemy_10": {
@@ -4030,8 +4006,8 @@
                     "damage": 1,
                     "activeDis": 500,
                     "pos": [
-                        3432,
-                        360
+                        3232,
+                        430
                     ],
                     "isBoss": false,
                     "expRate": [
@@ -4046,8 +4022,8 @@
                     "damage": 1,
                     "activeDis": 500,
                     "pos": [
-                        3577,
-                        360
+                        3377,
+                        430
                     ],
                     "isBoss": false,
                     "expRate": [
@@ -4074,7 +4050,7 @@
                 "enemy_16": {
                     "type": 14,
                     "direction": -1,
-                    "blood": 30,
+                    "blood": 50,
                     "damage": 1,
                     "activeDis": 500,
                     "pos": [
@@ -4090,16 +4066,16 @@
                     "type": 8,
                     "blood": 8,
                     "pos": [
-                        941,
-                        405
+                        1991,
+                        305
                     ]
                 },
                 "obstacle_2": {
                     "type": 8,
                     "blood": 8,
                     "pos": [
-                        1100,
-                        276
+                        2150,
+                        376
                     ]
                 },
                 "obstacle_3": {
@@ -4124,6 +4100,14 @@
                     "pos": [
                         2863,
                         561
+                    ]
+                },
+                "obstacle_6": {
+                    "type": 5,
+                    "blood": 8,
+                    "pos": [
+                        3132,
+                        455
                     ]
                 },
                 "obstacle_7": {
@@ -4154,7 +4138,7 @@
                     "damage": 1,
                     "activeDis": 500,
                     "pos": [
-                        597,
+                        897,
                         584
                     ],
                     "isBoss": false,
@@ -4382,7 +4366,7 @@
                 "enemy_17": {
                     "type": 14,
                     "direction": -1,
-                    "blood": 30,
+                    "blood": 50,
                     "damage": 1,
                     "activeDis": 500,
                     "pos": [
@@ -4462,7 +4446,7 @@
                     "damage": 1,
                     "activeDis": 500,
                     "pos": [
-                        597,
+                        797,
                         584
                     ],
                     "isBoss": false,
@@ -4495,7 +4479,7 @@
                     "activeDis": 500,
                     "pos": [
                         1053,
-                        294
+                        264
                     ],
                     "isBoss": false,
                     "expRate": [
@@ -4586,7 +4570,7 @@
                 "enemy_9": {
                     "type": 12,
                     "direction": -1,
-                    "blood": 5,
+                    "blood": 25,
                     "damage": 1,
                     "activeDis": 500,
                     "pos": [
@@ -4690,7 +4674,7 @@
                 "enemy_17": {
                     "type": 14,
                     "direction": -1,
-                    "blood": 30,
+                    "blood": 50,
                     "damage": 1,
                     "activeDis": 500,
                     "pos": [
@@ -4706,7 +4690,7 @@
                     "type": 11,
                     "blood": 15,
                     "pos": [
-                        437,
+                        637,
                         607
                     ]
                 },

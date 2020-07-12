@@ -43,6 +43,7 @@ export class EnemyInfo {
     public pos: Laya.Point;
     public expRate: number[] = [];
     public isBoss: boolean = false;
+    public name: string = "";
 
     constructor() {
     }
@@ -53,6 +54,7 @@ export class ObstacleInfo {
     public type: number;
     public blood: number;
     public pos: Laya.Point;
+    public name: string = "";
 
     constructor() {
     }
