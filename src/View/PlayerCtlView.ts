@@ -19,7 +19,7 @@ export default class PlayerCtlView {
             let wxInfo = wx.getSystemInfoSync();
             // var h: number = (wxInfo.windowHeight / 750) * 1334;//游戏所展示的宽度
             // this.view.x = 930 * (wxInfo.windowWidth / h);
-            this.view.x = wxInfo.windowWidth - this.view.width * (wxInfo.windowWidth / 1334) - 50;
+            this.view.x = Laya.stage.width - this.view.width - 50 * (Laya.stage.width / 1334);
             this.view.y = 385;
             console.log("this.view--", this.view.x);
 

@@ -108,9 +108,9 @@ export class AssetsManager {
 
     private loadComplete(): void {
         fairygui.UIPackage.addPackage("res/Game");
-
-        console.log("资源加载完成");
+        // console.log("资源加载完成");
         ViewManager.instance.hideLoadingView();
+        moosnow.http.finishLoading();
         GameManager.instance.startGame();
     }
 }

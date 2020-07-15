@@ -38,7 +38,7 @@ export default class PlayerInfoView {
             let wxInfo = wx.getSystemInfoSync();
             var h: number = (wxInfo.windowHeight / 750) * 1334;//游戏所展示的宽度
             // this.view.x = 100 * (wxInfo.windowWidth / h);
-            this.view.x = 100;
+            this.view.x = 80 * (Laya.stage.width / 1334);
             if ((wxInfo.windowWidth / wxInfo.windowHeight) > 2) {
                 this.view.m_pause.x = 1050;
             } else

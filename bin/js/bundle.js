@@ -2055,7 +2055,7 @@
             if (Laya.Browser.onWeiXin) {
                 let wxInfo = wx.getSystemInfoSync();
                 var h = (wxInfo.windowHeight / 750) * 1334;
-                this.view.x = 100;
+                this.view.x = 80 * (Laya.stage.width / 1334);
                 if ((wxInfo.windowWidth / wxInfo.windowHeight) > 2) {
                     this.view.m_pause.x = 1050;
                 }
@@ -2624,7 +2624,7 @@
         layout() {
             if (Laya.Browser.onWeiXin) {
                 let wxInfo = wx.getSystemInfoSync();
-                this.view.x = wxInfo.windowWidth - this.view.width * (wxInfo.windowWidth / 1334) - 50;
+                this.view.x = Laya.stage.width - this.view.width - 50 * (Laya.stage.width / 1334);
                 this.view.y = 385;
                 console.log("this.view--", this.view.x);
             }
@@ -2646,7 +2646,7 @@
             if (Laya.Browser.onWeiXin) {
                 let wxInfo = wx.getSystemInfoSync();
                 var h = (wxInfo.windowHeight / 750) * 1334;
-                this.view.x = 300;
+                this.view.x = 300 * (Laya.stage.width / 1334);
                 this.view.y = 720;
             }
             else {
@@ -2730,6 +2730,7 @@
             this.usePan = false;
             this.setFireEnd();
             this.jumpEnd();
+            GameManager.instance.roleInfo.weaponType = 1;
             this.changeWeaponType(GameManager.instance.roleInfo.weaponType);
             ViewManager.instance.warView.scene.addChild(this.roleSprite);
             GameManager.instance.roleInfo.bulletNum = 0;

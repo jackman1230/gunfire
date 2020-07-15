@@ -113,6 +113,7 @@ export class Player extends Laya.Script {
         this.usePan = false;
         this.setFireEnd();
         this.jumpEnd();
+        GameManager.instance.roleInfo.weaponType = 1;
         this.changeWeaponType(GameManager.instance.roleInfo.weaponType);
         ViewManager.instance.warView.scene.addChild(this.roleSprite);
         GameManager.instance.roleInfo.bulletNum = 0;

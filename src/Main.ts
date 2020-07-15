@@ -2,6 +2,7 @@ import GameConfig from "./GameConfig";
 import { AssetsManager } from "./Manager/AssetsManager";
 import GameBinder from "./fui/Game/GameBinder";
 import loadingBinder from "./fui/loading/loadingBinder";
+import { MooSnowSDK } from "./Manager/MooSnowSDK";
 class Main {
 	constructor() {
 		//根据IDE设置初始化引擎		
@@ -30,8 +31,8 @@ class Main {
 		fairygui.UIConfig.packageFileExtension = "proto";
 		GameBinder.bindAll();
 		loadingBinder.bindAll();
+		MooSnowSDK.login();
 		AssetsManager.instance.loadLoadingAssetsData();
-
 
 	}
 
