@@ -41,7 +41,6 @@ export class GameManager {
         this.initChapterConfig();
         ViewManager.instance.initPopUpView();
         ViewManager.instance.showChapterView();
-        SoundManager.instance.playBGM();
         // this.gotoNextLevel();
     }
 
@@ -163,6 +162,7 @@ export class GameManager {
             this.roleInfo.blood = 3;
             this.roleInfo.isDeath = false;
             ViewManager.instance.createWarView();
+            SoundManager.instance.playBGM("bgm");
         } else {
             ViewManager.instance.showTipsView("您已通关！敬请期待后续章节");
         }
@@ -206,6 +206,8 @@ export class GameManager {
                     e = ViewManager.instance.createTank(d);
                 } else if (d.type == GameData.ENEMY_CHOPPER) {
                     e = ViewManager.instance.createChopper(d);
+                } else if (d.type == GameData.HOSTAGE) {
+                    ViewManager.instance.createHostage(d);
                 } else {
                     e = ViewManager.instance.createEnemy(d);
                 }

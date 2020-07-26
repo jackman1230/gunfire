@@ -5,6 +5,7 @@ import { ViewManager } from "../Manager/ViewManager";
 import { SoundManager } from "../Manager/SoundManager";
 import { EventManager } from "../Manager/EventManager";
 import GameEvent from "../Control/GameEvent";
+import WXFUI_ADItem from "../fui/Game/WXFUI_ADItem";
 
 export default class BeforeWar extends PopUpView {
 
@@ -35,6 +36,8 @@ export default class BeforeWar extends PopUpView {
                 // this.view.m_item_1.m_free.onClick(this, this.buyItem, [d]);
             }
         }
+
+        this.showADList();
     }
 
     private buyItem(d: any): void {
@@ -60,6 +63,33 @@ export default class BeforeWar extends PopUpView {
         SoundManager.instance.playSound("btn_click");
         GameManager.instance.enterGame();
         ViewManager.instance.hidePopUpView(this, true);
+    }
+
+    private showADList(): void {
+        this.view.m_ad.m_list.itemRenderer = Laya.Handler.create(this, this.setADItem, null, false);
+        this.view.m_ad.m_list.numItems = 10;
+        this.view.m_ad.m_list.width = 135 * 10;
+        this.view.m_ad.m_list.on(fairygui.Events.CLICK_ITEM, this, this.onClickItem);
+        this.adMoveLeft();
+
+    }
+
+    private setADItem(index: number, item: WXFUI_ADItem): void {
+
+    }
+
+    private onClickItem(e: WXFUI_ADItem): void {
+        console.log(this.view.m_ad.m_list.getChildIndex(e));
+
+    }
+
+    private adMoveLeft(): void {
+        Laya.Tween.to(this.view.m_ad.m_list, { x: this.view.m_ad.width - 135 * 10 }, 5000, null, Laya.Handler.create(this, this.adMoveRight));
+
+    }
+
+    private adMoveRight(): void {
+        Laya.Tween.to(this.view.m_ad.m_list, { x: 0 }, 5000, null, Laya.Handler.create(this, this.adMoveLeft));
     }
 
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="91,91">
   <displayList>
-    <loader id="n12_msdc" name="en" xy="45,45" pivot="0.5,0.5" anchor="true" size="161,110" align="center" vAlign="middle" autoSize="true"/>
+    <loader id="n12_msdc" name="en" xy="45,45" pivot="0.5,0.5" anchor="true" size="140,113" url="ui://bq3h5insyqv7bb" align="center" vAlign="middle" autoSize="true"/>
   </displayList>
 </component>

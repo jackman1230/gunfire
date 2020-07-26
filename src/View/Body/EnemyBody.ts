@@ -13,12 +13,14 @@ export default class EnemyBody extends Laya.Script {
     public obstacleBox: Laya.PolygonCollider;
     public isDrop: boolean = false;
 
+    private oriPosX: number;
+
     constructor() { super(); }
 
     onAwake(): void {
         this.selfCollider = this.owner.getComponent(Laya.BoxCollider);
         this.selfBody = this.selfCollider.rigidBody;
-
+        this.oriPosX = this.selfBody.getWorldCenter().x;
     }
 
     onDisable(): void {
@@ -61,8 +63,8 @@ export default class EnemyBody extends Laya.Script {
     onUpdate(): void {
         // this.setSpeedZero();
         if (this.isActive) return;
-        var p: Laya.Point = this.selfBody.getWorldCenter();
-        if (Math.abs(ViewManager.instance.rolePlayer.roleSprite.x - p.x) < this.activeDis) {
+        // var p: Laya.Point = this.selfBody.getWorldCenter();
+        if (Math.abs(ViewManager.instance.rolePlayer.roleSprite.x - this.oriPosX) < this.activeDis) {
             this.isActive = true;
             EventManager.instance.dispatcherEvt(GameEvent.ACTIVE_ENEMY, this.owner);
         }

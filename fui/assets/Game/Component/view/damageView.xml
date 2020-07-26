@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="156,49">
+  <displayList>
+    <text id="n5_8mn4" name="num" xy="0,0" size="156,49" font="ui://bq3h5ins8mn4xsl" fontSize="12" color="#ffffff" vAlign="middle" letterSpacing="3" autoSize="none" text="-15"/>
+  </displayList>
+  <transition name="ani">
+    <item time="0" type="Alpha" target="n5_8mn4" tween="true" startValue="1" endValue="0" duration="24"/>
+    <item time="0" type="XY" target="n5_8mn4" tween="true" startValue="0,0" endValue="0,-100" duration="24"/>
+  </transition>
+</component>

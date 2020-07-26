@@ -25,6 +25,9 @@ import { Player } from "../View/Player";
 import { EventManager } from "./EventManager";
 import GameEvent from "../Control/GameEvent";
 import PlayerPan from "../View/PlayerPan";
+import DamageView from "../View/DamageView";
+import AddGold from "../View/AddGold";
+import HostageView from "../View/HostageView";
 
 export class ViewManager {
 
@@ -163,20 +166,39 @@ export class ViewManager {
         return b;
     }
 
+    /**创建坦克 */
+    public createHostage(d: EnemyInfo): HostageView {
+        var b: HostageView = Laya.Pool.getItemByClass("hostage", HostageView);
+        b.createView(d);
+        return b;
+    }
+
     /**创建掉落物品 */
     public createGoods(type: number, s: Laya.Point): void {
         var b: GoodsView = Laya.Pool.getItemByClass("goods", GoodsView);
         b.createView(type, s);
     }
 
+    /**创建伤害数值 */
+    public createDamageView(d: number, s: Laya.Sprite): void {
+        var b: DamageView = Laya.Pool.getItemByClass("damageView", DamageView);
+        b.createView(d, s);
+    }
+
+    /**创建增加道具飘字 */
+    public createAddGold(goodsType: number, d: number, isBox: boolean = false): void {
+        var b: AddGold = Laya.Pool.getItemByClass("addGold", AddGold);
+        b.createView(goodsType, d, this.rolePlayer.roleSprite, isBox);
+    }
+
     public showPlayerPanBody(): void {
-        if (!this.playerPan) this.playerPan = new PlayerPan();
-        if (this.player.direction > 0)
-            this.playerPan.scene.x = 0;
-        else {
-            this.playerPan.scene.x = -this.playerPan.scene.width;
-        }
-        this.player.roleSprite.addChild(this.playerPan.scene);
+        // if (!this.playerPan) this.playerPan = new PlayerPan();
+        // if (this.player.direction > 0)
+        //     this.playerPan.scene.x = 0;
+        // else {
+        //     this.playerPan.scene.x = -this.playerPan.scene.width;
+        // }
+        // this.player.roleSprite.addChild(this.playerPan.scene);
     }
 
     public hidePlayerPanBody(): void {
@@ -222,7 +244,7 @@ export class ViewManager {
     }
 
     public showChapterView(): void {
-        // SoundManager.instance.stopBGM();
+        SoundManager.instance.playBGM("chapterBgm");
         this.chapterView.view.m_chapter.selectedIndex = 0;
         this.chapterView.updateView();
         this.showPopUpView(this.chapterView, false, true);
@@ -338,15 +360,19 @@ export class ViewManager {
         } else if (rad >= -6 * Math.PI / 8 && rad < -5 * Math.PI / 8) {
             // console.log("左斜上");
             return -3;// 左斜上
+            // return -1;
         } else if (rad >= -5 * Math.PI / 8 && rad < -4 * Math.PI / 8) {
             // console.log("左上");
             return -4;// 左上
+            // return -1;
         } else if (rad >= -4 * Math.PI / 8 && rad < -3 * Math.PI / 8) {
             // console.log("右上");
             return 4;// 右上
+            // return 1;
         } else {
             // console.log("右斜上");
             return 3;// 右斜上
+            // return 1;
         }
 
         // else if (rad >= -5 * Math.PI / 8 && rad < -3 * Math.PI / 8) {
@@ -359,9 +385,9 @@ export class ViewManager {
 
     /**角色子弹坐标偏移 第一位是方向，第二位是武器类型*/
     private playerBulletPos: object = {
-        "11": [135, -22],//武器手枪，方向 右
-        "12": [150, 0],//武器机枪，方向 右
-        "13": [50, 70],//武器来福枪，方向 右
+        "11": [35, 5],//武器手枪，方向 右
+        "12": [35, 0],//武器机枪，方向 右
+        "13": [0, 80],//武器来福枪，方向 右
         "21": [125, 25],//武器手枪，方向 右下
         "22": [115, 70],//武器机枪，方向 右下
         "23": [50, 5],//武器来福枪，方向 右下
@@ -371,13 +397,13 @@ export class ViewManager {
         "41": [-30, -185],//武器手枪，方向 上
         "42": [-30, -185],//武器机枪，方向 上
         "43": [50, 200],//武器来福枪，方向 上
-        "51": [135, -30],//武器手枪，方向 右蹲下
-        "52": [150, -30],//武器机枪，方向 右蹲下
-        "53": [50, 70],//武器来福枪，方向 右蹲下
+        "51": [35, 15],//武器手枪，方向 右蹲下
+        "52": [35, 15],//武器机枪，方向 右蹲下
+        "53": [0, 95],//武器来福枪，方向 右蹲下
         "14": [20, -60],//武器手雷，方向右
-        "-11": [-200, -22],//武器手枪，方向 左
-        "-12": [-210, 0],//武器机枪，方向 左
-        "-13": [240, 80],//武器来福枪，方向 左
+        "-11": [-195, 5],//武器手枪，方向 左
+        "-12": [-200, 0],//武器机枪，方向 左
+        "-13": [185, 85],//武器来福枪，方向 左
         "-14": [-20, -60],//武器手雷，方向 左
         "-21": [-190, 20],//武器手枪，方向 左下
         "-22": [-180, 15],//武器机枪，方向 左下
@@ -388,9 +414,9 @@ export class ViewManager {
         "-41": [-30, -185],//武器手枪，方向 上
         "-42": [-30, -185],//武器机枪，方向 上
         "-43": [55, 200],//武器来福枪，方向 上
-        "-51": [-200, -30],//武器手枪，方向 左蹲下
-        "-52": [-235, -30],//武器机枪，方向 左蹲下
-        "-53": [240, 80],//武器来福枪，方向 左蹲下
+        "-51": [-200, 17],//武器手枪，方向 左蹲下
+        "-52": [-205, 15],//武器机枪，方向 左蹲下
+        "-53": [200, 100],//武器来福枪，方向 左蹲下
     }
     /**角色子弹坐标偏移 */
     public getPlayerBulletOffSetPos(dir: number, weaponType: number): Laya.Point {

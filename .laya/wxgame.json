@@ -45,7 +45,7 @@
         ""
     ],
     "packfile": false,
-    "keepPlatformFile": false,
+    "keepPlatformFile": true,
     "packfileFilter": [
         "res\\atlas;res\\Game.proto;res\\Game_atlas0.png;res\\Game_atlas0_1.png;res\\Game_atlas0_2.png;res\\Game_atlas0_3.png;res\\Game_atlas0_4.png;res\\Game_atlas0_5.png;res\\Game_atlas0_6.png;res\\Game_atlas0_7.png;res\\Game_atlas_n8qun1.jpg;res\\Game_atlas_n8qun7.png;res\\LevelData.json;res\\map_1.jpg;res\\map_2.jpg;res\\map_3.jpg;res\\map_4.jpg;res\\map_5.jpg;res\\map_6.jpg;res\\map_7.jpg;res\\map_8.jpg;res\\sound"
     ],
@@ -87,7 +87,7 @@
     "onlyIndexJS": true,
     "es6toes5": false,
     "projectType": "ts",
-    "pubTime": 1594546896660,
+    "pubTime": 1594955755771,
     "uesEnginePlugin": false,
     "wxOptimize": {
         "useOptimizeOpen": false,

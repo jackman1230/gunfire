@@ -1,5 +1,6 @@
 import { GameManager } from "./GameManager";
 import { ViewManager } from "./ViewManager";
+import { MooSnowSDK } from "./MooSnowSDK";
 
 export class AssetsManager {
     private static _instance: AssetsManager;
@@ -64,7 +65,7 @@ export class AssetsManager {
             { url: "res/Game_atlas0_4.png", type: Laya.Loader.IMAGE },
             { url: "res/Game_atlas0_5.png", type: Laya.Loader.IMAGE },
             { url: "res/Game_atlas0_6.png", type: Laya.Loader.IMAGE },
-            { url: "res/Game_atlas0_7.png", type: Laya.Loader.IMAGE },
+            // { url: "res/Game_atlas0_7.png", type: Laya.Loader.IMAGE },
             { url: "res/Game_atlas_n8qun1.jpg", type: Laya.Loader.IMAGE },
             { url: "res/Game_atlas_n8qun7.png", type: Laya.Loader.IMAGE },
             { url: "res/LevelData.json", type: Laya.Loader.JSON },
@@ -77,6 +78,10 @@ export class AssetsManager {
             { url: "res/map_7.jpg", type: Laya.Loader.IMAGE },
             { url: "res/map_8.jpg", type: Laya.Loader.IMAGE },
             { url: "res/Game.proto", type: Laya.Loader.BUFFER },
+            { url: "res/zhujue_body.png", type: Laya.Loader.IMAGE },
+            { url: "res/zhujue_body.sk", type: Laya.Loader.BUFFER },
+            { url: "res/hero_arm.png", type: Laya.Loader.IMAGE },
+            { url: "res/hero_arm.sk", type: Laya.Loader.BUFFER },
             { url: "res/sound/bgm.mp3", type: Laya.Loader.SOUND },
             { url: "res/sound/BombDrop.mp3", type: Laya.Loader.SOUND },
             { url: "res/sound/boom.mp3", type: Laya.Loader.SOUND },
@@ -95,7 +100,8 @@ export class AssetsManager {
             { url: "res/sound/weapon_1.mp3", type: Laya.Loader.SOUND },
             { url: "res/sound/weapon_2.mp3", type: Laya.Loader.SOUND },
             { url: "res/sound/weapon_3.mp3", type: Laya.Loader.SOUND },
-            { url: "res/sound/weapon_10.mp3", type: Laya.Loader.SOUND }
+            { url: "res/sound/weapon_10.mp3", type: Laya.Loader.SOUND },
+            { url: "res/sound/chapterBgm.mp3", type: Laya.Loader.SOUND }
         );
         console.log(AssetsManager.assetsData);
 
@@ -112,6 +118,7 @@ export class AssetsManager {
         ViewManager.instance.hideLoadingView();
         moosnow.http.finishLoading();
         GameManager.instance.startGame();
+        MooSnowSDK.getAD();
     }
 }
 

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="139,641" mask="n4_s2x8">
+  <displayList>
+    <list id="n3_s2x8" name="list" xy="1,0" size="138,641" overflow="scroll" margin="2,2,2,2" defaultItem="ui://bq3h5inss2x8ir">
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+    </list>
+    <graph id="n4_s2x8" name="n4" xy="0,0" size="139,641" type="rect"/>
+  </displayList>
+</component>

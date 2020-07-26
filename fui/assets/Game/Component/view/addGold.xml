@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="156,49">
+  <displayList>
+    <text id="n5_8mn4" name="num" xy="0,0" size="156,49" group="n7_vmpq" font="ui://bq3h5ins8mn4xsy" fontSize="12" color="#ffffff" vAlign="middle" letterSpacing="3" autoSize="none" text="+156"/>
+    <loader id="n6_vmpq" name="icon" xy="-50,0" size="50,50" group="n7_vmpq" url="ui://bq3h5insfmzpil" align="right" vAlign="middle"/>
+    <group id="n7_vmpq" name="com" xy="-50,0" size="206,50" advanced="true"/>
+  </displayList>
+  <transition name="ani">
+    <item time="0" type="Alpha" target="n7_vmpq" tween="true" startValue="1" endValue="0" duration="30"/>
+    <item time="0" type="XY" target="n7_vmpq" tween="true" startValue="-50,0" endValue="-50,-100" duration="30"/>
+  </transition>
+</component>

@@ -1,5 +1,8 @@
 {
 	"objectStatus": {
+		"n1_dhkt": {
+			"hidden": true
+		},
 		"n0_cqp9": {
 			"hidden": true
 		}

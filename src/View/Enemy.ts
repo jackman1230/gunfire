@@ -162,6 +162,7 @@ export default class Enemy {
                 } else
                     this.bodyLoader.color = "#ff0000";
                 Laya.timer.once(200, this, this.setColor);
+                ViewManager.instance.createDamageView(s.d, this.scene);
             }
         }
     }
@@ -245,6 +246,7 @@ export default class Enemy {
         } else if (this.enemyType == GameData.ENEMY_FIRE) {//火箭筒
             SoundManager.instance.playSound("BombDrop");
             this.bodyLoader.url = "ui://Game/enemy_fire_4";
+            this.bodyLoader.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.shot4Complete));
         } else if (this.enemyType == GameData.ENEMY_MOR) {//迫击炮
             SoundManager.instance.playSound("BombDrop");
             this.bodyLoader.url = "ui://Game/enemy_fire_5";
@@ -284,13 +286,19 @@ export default class Enemy {
         this.setIdle();
     }
 
+    /**手枪攻击动作完成 */
     protected shotComplete(): void {
         ViewManager.instance.createEnemyBullet(GameData.ENEMY_PIS, this.direction, ViewManager.instance.getBodyCenterPos(this.scene));
         this.setIdle();
     }
-
+    /**机枪攻击动作完成 */
     protected shot2Complete(): void {
         ViewManager.instance.createEnemyBullet(GameData.ENEMY_MAC, this.direction, ViewManager.instance.getBodyCenterPos(this.scene));
+        this.setIdle();
+    }
+    /**火箭筒攻击动作完成 */
+    protected shot4Complete(): void {
+        ViewManager.instance.createEnemyBullet(GameData.ENEMY_FIRE, this.direction, ViewManager.instance.getBodyCenterPos(this.scene));
         this.setIdle();
     }
 

@@ -35,20 +35,20 @@
     <image id="cqp92b" name="1398.png" path="/assets/player/上身-跑-机枪/"/>
     <image id="cqp92c" name="1396.png" path="/assets/player/上身-跑-机枪/"/>
     <image id="cqp92d" name="1394.png" path="/assets/player/上身-跑-机枪/"/>
-    <movieclip id="cqp93f" name="legMove.jta" path="/Component/player/playerAni/" exported="true"/>
+    <movieclip id="cqp93f" name="legMove.jta" path="/Component/player/playerAni/"/>
     <component id="cqp93n" name="jumpBtn.xml" path="/Component/btn/"/>
     <component id="cqp93o" name="fireBtn.xml" path="/Component/btn/"/>
     <component id="cqp93p" name="throwBtn.xml" path="/Component/btn/"/>
-    <movieclip id="cqp93r" name="legJump.jta" path="/Component/player/playerAni/" exported="true"/>
-    <movieclip id="cqp93s" name="body_1.jta" path="/Component/player/playerAni/" exported="true"/>
-    <image id="cqp93t" name="legStay.png" path="/Component/player/playerAni/" exported="true"/>
+    <movieclip id="cqp93r" name="legJump.jta" path="/Component/player/playerAni/"/>
+    <movieclip id="cqp93s" name="body_1.jta" path="/Component/player/playerAni/"/>
+    <image id="cqp93t" name="legStay.png" path="/Component/player/playerAni/"/>
     <component id="cqp93u" name="player_run_1.xml" path="/Component/player/"/>
     <component id="cqp93v" name="player_jump_1.xml" path="/Component/player/"/>
-    <component id="cqp93w" name="player_stay_1_1.xml" path="/Component/player/" exported="true"/>
+    <component id="cqp93w" name="player_stay_1_1.xml" path="/Component/player/"/>
     <component id="cqp93y" name="player_jump_2.xml" path="/Component/player/"/>
     <component id="cqp93z" name="player_run_2.xml" path="/Component/player/"/>
-    <component id="cqp940" name="player_stay_2_1.xml" path="/Component/player/" exported="true"/>
-    <movieclip id="cqp941" name="body_2.jta" path="/Component/player/playerAni/" exported="true"/>
+    <component id="cqp940" name="player_stay_2_1.xml" path="/Component/player/"/>
+    <movieclip id="cqp941" name="body_2.jta" path="/Component/player/playerAni/"/>
     <image id="msdc42" name="946.png" path="/assets/player/下身-跑/"/>
     <image id="msdc43" name="944.png" path="/assets/player/下身-跑/"/>
     <image id="msdc44" name="942.png" path="/assets/player/下身-跑/"/>
@@ -102,9 +102,9 @@
     <image id="msdc5g" name="987.png" path="/assets/player/静止-机枪/"/>
     <image id="msdc5h" name="985.png" path="/assets/player/静止-机枪/"/>
     <image id="msdc5i" name="983.png" path="/assets/player/静止-机枪/"/>
-    <component id="msdc5j" name="player_fire_1_1.xml" path="/Component/player/" exported="true"/>
-    <component id="msdc5k" name="player_fire_2_1.xml" path="/Component/player/" exported="true"/>
-    <movieclip id="msdc5l" name="fire_1.jta" path="/Component/player/playerAni/" exported="true"/>
+    <component id="msdc5j" name="player_fire_1_1.xml" path="/Component/player/"/>
+    <component id="msdc5k" name="player_fire_2_1.xml" path="/Component/player/"/>
+    <movieclip id="msdc5l" name="fire_1.jta" path="/Component/player/playerAni/"/>
     <image id="msdc5m" name="1282.png" path="/assets/player/开火-手枪/"/>
     <image id="msdc5n" name="1280.png" path="/assets/player/开火-手枪/"/>
     <image id="msdc5o" name="1278.png" path="/assets/player/开火-手枪/"/>
@@ -112,8 +112,8 @@
     <image id="msdc5q" name="1274.png" path="/assets/player/开火-手枪/"/>
     <image id="msdc5r" name="1272.png" path="/assets/player/开火-手枪/"/>
     <image id="msdc5s" name="1270.png" path="/assets/player/开火-手枪/"/>
-    <movieclip id="msdc61" name="fire_3.jta" path="/Component/player/playerAni/" exported="true"/>
-    <movieclip id="msdc62" name="fire_2.jta" path="/Component/player/playerAni/" exported="true"/>
+    <movieclip id="msdc61" name="fire_3.jta" path="/Component/player/playerAni/"/>
+    <movieclip id="msdc62" name="fire_2.jta" path="/Component/player/playerAni/"/>
     <image id="msdc63" name="1039.png" path="/assets/player/开火-机枪/"/>
     <image id="msdc64" name="1037.png" path="/assets/player/开火-机枪/"/>
     <image id="msdc65" name="1035.png" path="/assets/player/开火-机枪/"/>
@@ -130,11 +130,11 @@
     <image id="msdc6g" name="1290.png" path="/assets/player/开火-来福/"/>
     <image id="msdc6h" name="1287.png" path="/assets/player/开火-来福/"/>
     <image id="msdc6i" name="1285.png" path="/assets/player/开火-来福/"/>
-    <component id="msdc6j" name="Player.xml" path="/Component/player/" exported="true"/>
-    <component id="msdc6k" name="player_boom_1.xml" path="/Component/player/" exported="true"/>
-    <component id="msdc6l" name="player_boom_2.xml" path="/Component/player/" exported="true"/>
-    <movieclip id="msdc6m" name="rush_boom_1.jta" path="/Component/player/playerAni/" exported="true"/>
-    <movieclip id="msdc6n" name="rush_boom_2.jta" path="/Component/player/playerAni/" exported="true"/>
+    <component id="msdc6j" name="Player.xml" path="/Component/player/"/>
+    <component id="msdc6k" name="player_boom_1.xml" path="/Component/player/"/>
+    <component id="msdc6l" name="player_boom_2.xml" path="/Component/player/"/>
+    <movieclip id="msdc6m" name="rush_boom_1.jta" path="/Component/player/playerAni/"/>
+    <movieclip id="msdc6n" name="rush_boom_2.jta" path="/Component/player/playerAni/"/>
     <image id="oqgw6p" name="689.png" path="/assets/enemy/机枪兵/开火/"/>
     <image id="oqgw6q" name="687.png" path="/assets/enemy/机枪兵/开火/"/>
     <image id="oqgw6r" name="685.png" path="/assets/enemy/机枪兵/开火/"/>
@@ -377,7 +377,7 @@
     <movieclip id="ke5wdv" name="boom_3.jta" path="/Component/enemy/bomb/" exported="true"/>
     <movieclip id="ke5wdw" name="boom_4.jta" path="/Component/enemy/bomb/" exported="true"/>
     <movieclip id="ke5wdx" name="boom_5.jta" path="/Component/enemy/bomb/" exported="true"/>
-    <component id="ke5wdy" name="player_fire_3_1.xml" path="/Component/player/" exported="true"/>
+    <component id="ke5wdy" name="player_fire_3_1.xml" path="/Component/player/"/>
     <movieclip id="ke5wdz" name="playerzidan3.jta" path="/assets/zadan/" exported="true"/>
     <movieclip id="ke5we1" name="zhadan_2.jta" path="/Component/enemy/bomb/" exported="true"/>
     <image id="ke5we2" name="1837.png" path="/assets/bomb/仍手榴弹/"/>
@@ -393,12 +393,12 @@
     <image id="ke5wed" name="507.png" path="/assets/goods/"/>
     <image id="ke5wee" name="505.png" path="/assets/goods/"/>
     <image id="ke5wef" name="zhadan_1.png" path="/assets/zadan/" exported="true"/>
-    <movieclip id="dhkteh" name="player_deathAni.jta" path="/Component/player/playerAni/" exported="true"/>
+    <movieclip id="dhkteh" name="player_deathAni.jta" path="/Component/player/playerAni/"/>
     <component id="dhktei" name="enemyStay_5.xml" path="/Component/enemy/" exported="true"/>
     <component id="dhktej" name="enemy_fire_5.xml" path="/Component/enemy/" exported="true"/>
     <movieclip id="dhktel" name="enemy_fire5(1).jta" path="/Component/enemy/enemyAni/" exported="true"/>
     <component id="dhktem" name="enemy5.xml" path="/Component/enemy/" exported="true"/>
-    <component id="dhkten" name="player_stay_3_1.xml" path="/Component/player/" exported="true"/>
+    <component id="dhkten" name="player_stay_3_1.xml" path="/Component/player/"/>
     <image id="dhkteo" name="879.png" path="/assets/enemy/军官/开火/"/>
     <image id="dhktep" name="877.png" path="/assets/enemy/军官/开火/"/>
     <image id="dhkteq" name="874.png" path="/assets/enemy/军官/开火/"/>
@@ -661,28 +661,28 @@
     <component id="tvmxxou" name="enemy14.xml" path="/Component/enemy/" exported="true"/>
     <component id="tvmxxov" name="enemy_fire_13.xml" path="/Component/enemy/" exported="true"/>
     <movieclip id="tvmxxow" name="enemyStay_6.jta" path="/Component/enemy/enemyAni/" exported="true"/>
-    <movieclip id="tvmxxp0" name="fire_up_1.jta" path="/Component/player/playerAni/" exported="true"/>
-    <component id="tvmxxp1" name="player_fire_2_2.xml" path="/Component/player/" exported="true"/>
-    <component id="tvmxxp2" name="player_fire_2_3.xml" path="/Component/player/" exported="true"/>
-    <component id="tvmxxp3" name="player_fire_1_2.xml" path="/Component/player/" exported="true"/>
-    <component id="tvmxxp4" name="player_fire_1_3.xml" path="/Component/player/" exported="true"/>
-    <component id="tvmxxp5" name="player_fire_3_2.xml" path="/Component/player/" exported="true"/>
-    <component id="tvmxxp6" name="player_fire_3_3.xml" path="/Component/player/" exported="true"/>
-    <component id="tvmxxp7" name="player_stay_1_2.xml" path="/Component/player/" exported="true"/>
-    <component id="tvmxxp8" name="player_stay_1_3.xml" path="/Component/player/" exported="true"/>
-    <component id="tvmxxp9" name="player_stay_2_3.xml" path="/Component/player/" exported="true"/>
-    <component id="tvmxxpa" name="player_stay_2_2.xml" path="/Component/player/" exported="true"/>
-    <component id="tvmxxpb" name="player_stay_3_2.xml" path="/Component/player/" exported="true"/>
-    <component id="tvmxxpc" name="player_stay_3_3.xml" path="/Component/player/" exported="true"/>
-    <component id="tvmxxpd" name="player_boom_3.xml" path="/Component/player/" exported="true"/>
+    <movieclip id="tvmxxp0" name="fire_up_1.jta" path="/Component/player/playerAni/"/>
+    <component id="tvmxxp1" name="player_fire_2_2.xml" path="/Component/player/"/>
+    <component id="tvmxxp2" name="player_fire_2_3.xml" path="/Component/player/"/>
+    <component id="tvmxxp3" name="player_fire_1_2.xml" path="/Component/player/"/>
+    <component id="tvmxxp4" name="player_fire_1_3.xml" path="/Component/player/"/>
+    <component id="tvmxxp5" name="player_fire_3_2.xml" path="/Component/player/"/>
+    <component id="tvmxxp6" name="player_fire_3_3.xml" path="/Component/player/"/>
+    <component id="tvmxxp7" name="player_stay_1_2.xml" path="/Component/player/"/>
+    <component id="tvmxxp8" name="player_stay_1_3.xml" path="/Component/player/"/>
+    <component id="tvmxxp9" name="player_stay_2_3.xml" path="/Component/player/"/>
+    <component id="tvmxxpa" name="player_stay_2_2.xml" path="/Component/player/"/>
+    <component id="tvmxxpb" name="player_stay_3_2.xml" path="/Component/player/"/>
+    <component id="tvmxxpc" name="player_stay_3_3.xml" path="/Component/player/"/>
+    <component id="tvmxxpd" name="player_boom_3.xml" path="/Component/player/"/>
     <component id="tvmxxpe" name="bullet2.xml" path="/Component/bullet/"/>
     <component id="ugvixpf" name="TipsPopView.xml" path="/Component/view/" exported="true"/>
     <component id="ugvixpi" name="volume.xml" path="/Component/view/" exported="true"/>
     <component id="cdcoxpj" name="enemy_fire_14.xml" path="/Component/enemy/" exported="true"/>
-    <component id="sj2vxpk" name="player_stay_1_4.xml" path="/Component/player/" exported="true"/>
-    <component id="cde5xpl" name="player_fire_1_4.xml" path="/Component/player/" exported="true"/>
-    <component id="cde5xpm" name="player_fire_2_4.xml" path="/Component/player/" exported="true"/>
-    <component id="cde5xpn" name="player_fire_3_4.xml" path="/Component/player/" exported="true"/>
+    <component id="sj2vxpk" name="player_stay_1_4.xml" path="/Component/player/"/>
+    <component id="cde5xpl" name="player_fire_1_4.xml" path="/Component/player/"/>
+    <component id="cde5xpm" name="player_fire_2_4.xml" path="/Component/player/"/>
+    <component id="cde5xpn" name="player_fire_3_4.xml" path="/Component/player/"/>
     <image id="cde5xpp" name="994.png" path="/assets/player/上-手枪-静止/"/>
     <image id="cde5xpq" name="992.png" path="/assets/player/上-手枪-静止/"/>
     <image id="cde5xpt" name="1228.png" path="/assets/player/上-机枪/"/>
@@ -693,17 +693,17 @@
     <image id="cde5xpy" name="1238.png" path="/assets/player/上-来福/"/>
     <image id="cde5xpz" name="1236.png" path="/assets/player/上-来福/"/>
     <image id="cde5xq0" name="1234.png" path="/assets/player/上-来福/"/>
-    <movieclip id="cde5xq1" name="stay_up_1.jta" path="/Component/player/playerAni/" exported="true"/>
-    <movieclip id="cde5xq2" name="stay_up_2.jta" path="/Component/player/playerAni/" exported="true"/>
+    <movieclip id="cde5xq1" name="stay_up_1.jta" path="/Component/player/playerAni/"/>
+    <movieclip id="cde5xq2" name="stay_up_2.jta" path="/Component/player/playerAni/"/>
     <image id="cde5xq5" name="1203.png" path="/assets/player/上-手枪/"/>
     <image id="cde5xq6" name="1201.png" path="/assets/player/上-手枪/"/>
     <image id="cde5xq7" name="1199.png" path="/assets/player/上-手枪/"/>
-    <movieclip id="cde5xq8" name="fire_up_2.jta" path="/Component/player/playerAni/" exported="true"/>
-    <movieclip id="cde5xq9" name="fire_up_3.jta" path="/Component/player/playerAni/" exported="true"/>
+    <movieclip id="cde5xq8" name="fire_up_2.jta" path="/Component/player/playerAni/"/>
+    <movieclip id="cde5xq9" name="fire_up_3.jta" path="/Component/player/playerAni/"/>
     <image id="cde5xqe" name="1243.png" path="/assets/player/上-来福/"/>
     <image id="cde5xqf" name="1241.png" path="/assets/player/上-来福/"/>
-    <component id="cde5xqg" name="player_stay_2_4.xml" path="/Component/player/" exported="true"/>
-    <component id="cde5xqh" name="player_stay_3_4.xml" path="/Component/player/" exported="true"/>
+    <component id="cde5xqg" name="player_stay_2_4.xml" path="/Component/player/"/>
+    <component id="cde5xqh" name="player_stay_3_4.xml" path="/Component/player/"/>
     <image id="cde5xqi" name="1232.png" path="/assets/player/上-机枪/"/>
     <image id="cde5xqj" name="1230.png" path="/assets/player/上-机枪/"/>
     <image id="cde5xqk" name="star_light.png" path="/assets/otherView/选择关卡页面/"/>
@@ -714,9 +714,9 @@
     <component id="cde5xqp" name="star.xml" path="/Component/view/" exported="true"/>
     <image id="mujaxqq" name="椭圆 7.png" path="/assets/otherView/otherPng/"/>
     <component id="unfjxqr" name="abandon.xml" path="/Component/btn/"/>
-    <component id="unfjxqs" name="player_stay_1_5.xml" path="/Component/player/" exported="true"/>
-    <movieclip id="unfjxqt" name="stay_down_1.jta" path="/Component/player/playerAni/" exported="true"/>
-    <movieclip id="unfjxqu" name="stay_down_2.jta" path="/Component/player/playerAni/" exported="true"/>
+    <component id="unfjxqs" name="player_stay_1_5.xml" path="/Component/player/"/>
+    <movieclip id="unfjxqt" name="stay_down_1.jta" path="/Component/player/playerAni/"/>
+    <movieclip id="unfjxqu" name="stay_down_2.jta" path="/Component/player/playerAni/"/>
     <image id="unfjxqv" name="1084.png" path="/assets/player/蹲-手枪/"/>
     <image id="unfjxqw" name="1082.png" path="/assets/player/蹲-手枪/"/>
     <image id="unfjxqx" name="1080.png" path="/assets/player/蹲-手枪/"/>
@@ -724,15 +724,15 @@
     <image id="unfjxqz" name="1091.png" path="/assets/player/蹲-机枪/"/>
     <image id="unfjxr0" name="1089.png" path="/assets/player/蹲-机枪/"/>
     <image id="unfjxr1" name="1087.png" path="/assets/player/蹲-机枪/"/>
-    <image id="unfjxr2" name="legDown.png" path="/Component/player/playerAni/" exported="true"/>
-    <movieclip id="unfjxr3" name="fire_down_2.jta" path="/Component/player/playerAni/" exported="true"/>
+    <image id="unfjxr2" name="legDown.png" path="/Component/player/playerAni/"/>
+    <movieclip id="unfjxr3" name="fire_down_2.jta" path="/Component/player/playerAni/"/>
     <image id="unfjxr4" name="1287.png" path="/assets/player/蹲-机枪-开火/"/>
     <image id="unfjxr5" name="1285.png" path="/assets/player/蹲-机枪-开火/"/>
-    <component id="unfjxr6" name="player_stay_2_5.xml" path="/Component/player/" exported="true"/>
-    <component id="unfjxr7" name="player_stay_3_5.xml" path="/Component/player/" exported="true"/>
-    <component id="unfjxr8" name="player_fire_2_5.xml" path="/Component/player/" exported="true"/>
-    <component id="unfjxr9" name="player_fire_1_5.xml" path="/Component/player/" exported="true"/>
-    <component id="unfjxra" name="player_fire_3_5.xml" path="/Component/player/" exported="true"/>
+    <component id="unfjxr6" name="player_stay_2_5.xml" path="/Component/player/"/>
+    <component id="unfjxr7" name="player_stay_3_5.xml" path="/Component/player/"/>
+    <component id="unfjxr8" name="player_fire_2_5.xml" path="/Component/player/"/>
+    <component id="unfjxr9" name="player_fire_1_5.xml" path="/Component/player/"/>
+    <component id="unfjxra" name="player_fire_3_5.xml" path="/Component/player/"/>
     <image id="unfjxrb" name="1137.png" path="/assets/player/开火-平底锅1/"/>
     <image id="unfjxrc" name="1135.png" path="/assets/player/开火-平底锅1/"/>
     <image id="unfjxrd" name="1133.png" path="/assets/player/开火-平底锅1/"/>
@@ -754,14 +754,64 @@
     <image id="unfjxrt" name="1263.png" path="/assets/player/蹲-平底锅-开火/"/>
     <image id="unfjxru" name="1261.png" path="/assets/player/蹲-平底锅-开火/"/>
     <image id="unfjxrv" name="1259.png" path="/assets/player/蹲-平底锅-开火/"/>
-    <movieclip id="unfjxrw" name="fire_down_5.jta" path="/Component/player/playerAni/" exported="true"/>
-    <component id="unfjxrx" name="player_fire_5_1.xml" path="/Component/player/" exported="true"/>
-    <movieclip id="unfjxry" name="fire_5_1.jta" path="/Component/player/playerAni/" exported="true"/>
+    <movieclip id="unfjxrw" name="fire_down_5.jta" path="/Component/player/playerAni/"/>
+    <component id="unfjxrx" name="player_fire_5_1.xml" path="/Component/player/"/>
+    <movieclip id="unfjxry" name="fire_5_1.jta" path="/Component/player/playerAni/"/>
     <movieclip id="unfjxrz" name="fire_5_2.jta" path="/Component/player/playerAni/"/>
-    <component id="unfjxs0" name="player_fire_5_5.xml" path="/Component/player/" exported="true"/>
-    <component id="unfjxs1" name="player_death.xml" path="/Component/player/" exported="true"/>
-    <movieclip id="oys6xs2" name="rush_boom_3.jta" path="/Component/player/playerAni/" exported="true"/>
-    <movieclip id="oys6xs3" name="body_3.jta" path="/Component/player/playerAni/" exported="true"/>
+    <component id="unfjxs0" name="player_fire_5_5.xml" path="/Component/player/"/>
+    <component id="unfjxs1" name="player_death.xml" path="/Component/player/"/>
+    <movieclip id="oys6xs2" name="rush_boom_3.jta" path="/Component/player/playerAni/"/>
+    <movieclip id="oys6xs3" name="body_3.jta" path="/Component/player/playerAni/"/>
+    <image id="s2x8io" name="remen.png" path="/Component/view/guanggao/"/>
+    <image id="s2x8ip" name="ditu.jpg" path="/Component/view/guanggao/"/>
+    <image id="s2x8iq" name="icon.png" path="/Component/view/guanggao/"/>
+    <component id="s2x8ir" name="ADItem.xml" path="/Component/view/guanggao/"/>
+    <component id="s2x8xs4" name="ADmove.xml" path="/Component/view/guanggao/"/>
+    <component id="s2x8xs5" name="ADListVer.xml" path="/Component/view/guanggao/"/>
+    <component id="s2x8xs6" name="ADListHor.xml" path="/Component/view/guanggao/"/>
+    <component id="s2x8xs7" name="ADremen.xml" path="/Component/view/guanggao/"/>
+    <image id="8mn4xs8" name="slice13_13.png" path="/Component/font/damage/"/>
+    <image id="8mn4xs9" name="slice12_12.png" path="/Component/font/damage/"/>
+    <image id="8mn4xsa" name="slice11_11.png" path="/Component/font/damage/"/>
+    <image id="8mn4xsb" name="slice10_10.png" path="/Component/font/damage/"/>
+    <image id="8mn4xsc" name="slice09_09.png" path="/Component/font/damage/"/>
+    <image id="8mn4xsd" name="slice08_08.png" path="/Component/font/damage/"/>
+    <image id="8mn4xse" name="slice07_07.png" path="/Component/font/damage/"/>
+    <image id="8mn4xsf" name="slice06_06.png" path="/Component/font/damage/"/>
+    <image id="8mn4xsg" name="slice05_05.png" path="/Component/font/damage/"/>
+    <image id="8mn4xsh" name="slice04_04.png" path="/Component/font/damage/"/>
+    <image id="8mn4xsi" name="slice03_03.png" path="/Component/font/damage/"/>
+    <image id="8mn4xsj" name="slice02_02.png" path="/Component/font/damage/"/>
+    <image id="8mn4xsk" name="slice01_01.png" path="/Component/font/damage/"/>
+    <font id="8mn4xsl" name="damageNum.fnt" path="/Component/font/" exported="true"/>
+    <component id="8mn4xsm" name="damageView.xml" path="/Component/view/" exported="true"/>
+    <image id="8mn4xsn" name="9.png" path="/Component/font/gold/"/>
+    <image id="8mn4xso" name="8.png" path="/Component/font/gold/"/>
+    <image id="8mn4xsp" name="7.png" path="/Component/font/gold/"/>
+    <image id="8mn4xsq" name="6.png" path="/Component/font/gold/"/>
+    <image id="8mn4xsr" name="5.png" path="/Component/font/gold/"/>
+    <image id="8mn4xss" name="4.png" path="/Component/font/gold/"/>
+    <image id="8mn4xst" name="3.png" path="/Component/font/gold/"/>
+    <image id="8mn4xsu" name="2.png" path="/Component/font/gold/"/>
+    <image id="8mn4xsv" name="1.png" path="/Component/font/gold/"/>
+    <image id="8mn4xsw" name="0.png" path="/Component/font/gold/"/>
+    <image id="8mn4xsx" name="+.png" path="/Component/font/gold/"/>
+    <font id="8mn4xsy" name="gold.fnt" path="/Component/font/" exported="true"/>
+    <component id="8mn4xsz" name="addGold.xml" path="/Component/view/" exported="true"/>
+    <image id="vmpqxt0" name="1502.png" path="/assets/enemy/人质/"/>
+    <image id="vmpqxt1" name="1500.png" path="/assets/enemy/人质/"/>
+    <image id="vmpqxt2" name="1498.png" path="/assets/enemy/人质/"/>
+    <image id="vmpqxt3" name="1496.png" path="/assets/enemy/人质/"/>
+    <image id="vmpqxt4" name="1494.png" path="/assets/enemy/人质/"/>
+    <image id="vmpqxt5" name="1492.png" path="/assets/enemy/人质/"/>
+    <image id="vmpqxt6" name="1490.png" path="/assets/enemy/人质/"/>
+    <image id="vmpqxt7" name="1488.png" path="/assets/enemy/人质/"/>
+    <image id="vmpqxt8" name="1486.png" path="/assets/enemy/人质/"/>
+    <image id="vmpqxt9" name="1484.png" path="/assets/enemy/人质/"/>
+    <movieclip id="vmpqxta" name="hostageAni.jta" path="/Component/enemy/renzhi/" exported="true"/>
+    <component id="vmpqxtc" name="hostage.xml" path="/Component/enemy/renzhi/" exported="true"/>
+    <movieclip id="vmpqxte" name="hostageIdle.jta" path="/Component/enemy/renzhi/" exported="true"/>
+    <image id="vmpqxti" name="goods_6.png" path="/Component/goods/" exported="true"/>
   </resources>
   <publish name="Game" path="..\bin\res" packageCount="2" genCode="true" codePath="..\src\fui"/>
 </packageDescription>

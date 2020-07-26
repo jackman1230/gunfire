@@ -1,0 +1,55 @@
+
+zhujue_body.png
+size: 256,64
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+calf_l
+  rotate: false
+  xy: 127, 2
+  size: 20, 26
+  orig: 20, 26
+  offset: 0, 0
+  index: -1
+calf_r
+  rotate: false
+  xy: 159, 39
+  size: 20, 23
+  orig: 20, 23
+  offset: 0, 0
+  index: -1
+head
+  rotate: false
+  xy: 2, 6
+  size: 59, 56
+  orig: 59, 56
+  offset: 0, 0
+  index: -1
+spine1
+  rotate: false
+  xy: 63, 17
+  size: 39, 45
+  orig: 39, 45
+  offset: 0, 0
+  index: -1
+spine2
+  rotate: false
+  xy: 104, 30
+  size: 26, 32
+  orig: 26, 32
+  offset: 0, 0
+  index: -1
+thigh_l
+  rotate: false
+  xy: 104, 2
+  size: 21, 26
+  orig: 21, 26
+  offset: 0, 0
+  index: -1
+thigh_r
+  rotate: false
+  xy: 132, 32
+  size: 25, 30
+  orig: 25, 30
+  offset: 0, 0
+  index: -1

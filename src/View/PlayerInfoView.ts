@@ -75,6 +75,7 @@ export default class PlayerInfoView {
             if (GameManager.instance.roleInfo.blood > 3)
                 GameManager.instance.roleInfo.blood = 3;
             this.updatePlayerBlood();
+            ViewManager.instance.createAddGold(t, 1);
         } else if (t == GoodsType.GoodsType_MAC) {
             if (GameManager.instance.roleInfo.weaponType == PlayerData.WEAPON_MAC) {
                 GameManager.instance.roleInfo.bulletNum += GameManager.instance.roleInfo.addMacNum;
@@ -84,6 +85,8 @@ export default class PlayerInfoView {
             }
             EventManager.instance.dispatcherEvt(GameEvent.CHANGE_PLAYER_WEAPON, GameManager.instance.roleInfo.weaponType);
             this.updateBulletNum();
+            ViewManager.instance.createAddGold(t, GameManager.instance.roleInfo.addMacNum);
+
         } else if (t == GoodsType.GoodsType_RIF) {
             if (GameManager.instance.roleInfo.weaponType == PlayerData.WEAPON_RIFLE) {
                 GameManager.instance.roleInfo.bulletNum += GameManager.instance.roleInfo.addRifNum;
@@ -93,15 +96,25 @@ export default class PlayerInfoView {
             }
             this.updateBulletNum();
             EventManager.instance.dispatcherEvt(GameEvent.CHANGE_PLAYER_WEAPON, GameManager.instance.roleInfo.weaponType);
-
+            ViewManager.instance.createAddGold(t, GameManager.instance.roleInfo.addRifNum);
         } else if (t == GoodsType.GoodsType_GRE) {
             GameManager.instance.roleInfo.bombNum += GameManager.instance.roleInfo.addBombNum;
             this.updateGreNum();
+            ViewManager.instance.createAddGold(t, GameManager.instance.roleInfo.addBombNum);
         } else if (t == GoodsType.GoodsType_COIN) {
             var coin: number = this.getRandomCoin();
             GameManager.instance.roleInfo.curlvCoin += coin;
             GameManager.instance.roleInfo.totalCoin += coin;
             this.updateCoin();
+            ViewManager.instance.createAddGold(t, coin);
+        } else if (t == GoodsType.GoodsType_BOX) {
+            let type: number = this.getRandomGoodsType();
+            if (type == GoodsType.GoodsType_COIN) {
+                var c: number = this.getRandomCoin();
+                ViewManager.instance.createAddGold(type, c, true);
+            } else {
+                ViewManager.instance.createAddGold(type, 0, true);
+            }
         }
     }
 
@@ -150,6 +163,10 @@ export default class PlayerInfoView {
 
     public getRandomCoin(): number {
         return Math.floor((Math.random() * 100) * GameData.RANDOM_COIN / 100);
+    }
+
+    public getRandomGoodsType(): number {
+        return Math.ceil(Math.random() * 5);
     }
 
 

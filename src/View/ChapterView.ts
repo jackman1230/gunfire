@@ -3,6 +3,7 @@ import { GameManager } from "../Manager/GameManager";
 import PopUpView from "./PopUpView";
 import { ViewManager } from "../Manager/ViewManager";
 import { SoundManager } from "../Manager/SoundManager";
+import WXFUI_ADItem from "../fui/Game/WXFUI_ADItem";
 
 export default class ChapterView extends PopUpView {
 
@@ -26,6 +27,8 @@ export default class ChapterView extends PopUpView {
         // this.view.m_bg.setScale(1.2, 1.2);
 
         this.updateView();
+
+        this.showADList();
     }
 
     public updateView(): void {
@@ -42,7 +45,7 @@ export default class ChapterView extends PopUpView {
             } else if (index == GameManager.instance.gotoMaxLevel) {
                 this.view["m_level_" + i].m_ctl.selectedIndex = 2;
                 this.view["m_level_" + i].m_star.m_ctl.selectedIndex = 1;
-            } else{
+            } else {
                 this.view["m_level_" + i].m_ctl.selectedIndex = 0;
                 this.view["m_level_" + i].m_star.m_ctl.selectedIndex = 0;
 
@@ -70,7 +73,7 @@ export default class ChapterView extends PopUpView {
         }
         SoundManager.instance.offSound();
     }
-    
+
     private lastHandle(): void {
         SoundManager.instance.playSound("btn_click");
         GameManager.instance.curChapter--;
@@ -87,5 +90,37 @@ export default class ChapterView extends PopUpView {
             GameManager.instance.curChapter = 1;
         }
         this.updateView();
+    }
+
+    private showADList(): void {
+        this.view.m_ad.m_list.itemRenderer = Laya.Handler.create(this, this.setADItem, null, false);
+        this.view.m_ad.m_list.numItems = 10;
+        this.view.m_ad.m_list.width = 135 * 10;
+        this.view.m_ad.m_list.on(fairygui.Events.CLICK_ITEM, this, this.onClickItem);
+        this.adMoveLeft();
+
+
+        this.view.m_ad_1.m_ani_1.play(null, -1);
+        this.view.m_ad_2.m_ani_1.play(null, -1);
+        this.view.m_ad_3.m_ani_1.play(null, -1);
+        this.view.m_ad_remen.m_ani_2.play(null, -1);
+    }
+
+    private setADItem(index: number, item: WXFUI_ADItem): void {
+
+    }
+
+    private onClickItem(e: WXFUI_ADItem): void {
+        console.log(this.view.m_ad.m_list.getChildIndex(e));
+
+    }
+
+    private adMoveLeft(): void {
+        Laya.Tween.to(this.view.m_ad.m_list, { x: this.view.m_ad.width - 135 * 10 }, 5000, null, Laya.Handler.create(this, this.adMoveRight));
+
+    }
+
+    private adMoveRight(): void {
+        Laya.Tween.to(this.view.m_ad.m_list, { x: 0 }, 5000, null, Laya.Handler.create(this, this.adMoveLeft));
     }
 }

@@ -13,7 +13,7 @@
     GameConfig.screenMode = "none";
     GameConfig.alignV = "top";
     GameConfig.alignH = "left";
-    GameConfig.startScene = "ObstacleView_5.scene";
+    GameConfig.startScene = "PlayerBody.scene";
     GameConfig.sceneRoot = "";
     GameConfig.debug = false;
     GameConfig.stat = false;
@@ -351,7 +351,7 @@
                 this.createView(PlayerBodyUI.uiView);
             }
         }
-        PlayerBodyUI.uiView = { "type": "View", "props": { "width": 90, "height": 90 }, "compId": 2, "child": [{ "type": "Script", "props": { "y": 0, "x": 0, "width": 90, "label": "player", "isSensor": false, "height": 90, "friction": 0, "density": 20, "runtime": "laya.physics.BoxCollider" }, "compId": 3 }, { "type": "Script", "props": { "type": "dynamic", "label": "player", "group": 0, "gravityScale": 2, "allowRotation": false, "runtime": "laya.physics.RigidBody" }, "compId": 4 }], "loadList": [], "loadList3D": [] };
+        PlayerBodyUI.uiView = { "type": "View", "props": { "width": 70, "height": 90 }, "compId": 2, "child": [{ "type": "Script", "props": { "y": 0, "x": 0, "width": 70, "label": "player", "isSensor": false, "height": 90, "friction": 0, "density": 20, "runtime": "laya.physics.BoxCollider" }, "compId": 3 }, { "type": "Script", "props": { "type": "dynamic", "label": "player", "group": 0, "gravityScale": 2, "allowRotation": false, "runtime": "laya.physics.RigidBody" }, "compId": 4 }], "loadList": [], "loadList3D": [] };
         ui.PlayerBodyUI = PlayerBodyUI;
         REG("ui.PlayerBodyUI", PlayerBodyUI);
         class TankBody11UI extends Laya.View {
@@ -520,6 +520,7 @@
     GameEvent.GOTO_HOLE = "GOTO_HOLE";
     GameEvent.OBSTACLE_BOOM = "OBSTACLE_BOOM";
     GameEvent.CHANGE_SIZE = "CHANGE_SIZE";
+    GameEvent.ROLE_ANI_COMPLETE = "ROLE_ANI_COMPLETE";
 
     class EnemyBody extends Laya.Script {
         constructor() {
@@ -1254,7 +1255,7 @@
                 this.view.m_zidan.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.disposeAll));
             }
             else {
-                if (this.direction == 1 || this.direction == -1) {
+                if (this.direction == 1 || this.direction == -1 || this.direction == 5 || this.direction == -5) {
                     var y = ViewManager.instance.bulletRandomY();
                     this.scene.x = c.x + p.x;
                     this.scene.y = c.y - y + p.y;
@@ -2657,6 +2658,107 @@
         }
     }
 
+    class PlayerSk {
+        constructor() {
+            this.weaponType = 1;
+            this.loadComplete1 = false;
+            this.loadComplete2 = false;
+            this.loadComplete3 = false;
+            this.aniName = "";
+            this.templet1 = new Laya.Templet();
+            this.templet1.loadAni("res/zhujue.sk");
+            this.templet1.on(Laya.Event.COMPLETE, this, this.parseComplete);
+            this.templet2 = new Laya.Templet();
+            this.templet2.loadAni("res/zhujue.sk");
+            this.templet2.on(Laya.Event.COMPLETE, this, this.parseComplete2);
+            this.templet3 = new Laya.Templet();
+            this.templet3.loadAni("res/zhujue.sk");
+            this.templet3.on(Laya.Event.COMPLETE, this, this.parseComplete3);
+        }
+        parseComplete() {
+            this.loadComplete1 = true;
+            this.skin1 = this.templet1.buildArmature(0);
+            this.skin1.showSkinByName("weapons2");
+            this.skin1.y = 110;
+            this.skin1.play("idle", true);
+            this.sendLoadComplete();
+        }
+        parseComplete2() {
+            this.loadComplete2 = true;
+            this.skin2 = this.templet2.buildArmature(0);
+            this.skin2.y = 110;
+            this.skin2.showSkinByName("weapons3");
+            this.skin2.play("idle", true);
+            this.sendLoadComplete();
+        }
+        parseComplete3() {
+            this.loadComplete3 = true;
+            this.skin3 = this.templet3.buildArmature(0);
+            this.skin3.y = 110;
+            this.skin3.showSkinByName("weapons4");
+            this.skin3.play("idle", true);
+            this.sendLoadComplete();
+        }
+        setIdle() {
+            this.role.play("idle", true, false);
+            this.aniName = "idle";
+        }
+        setRun() {
+            this.role.play("run", true, false);
+            this.aniName = "run";
+        }
+        setJump() {
+            this.role.play("jump", true, false);
+            this.aniName = "jump";
+        }
+        setCrouch() {
+            this.role.play("crouch", true, false);
+            this.aniName = "crouch";
+        }
+        setAttack1() {
+            this.role.play("attack1", true, false);
+            this.aniName = "attack1";
+        }
+        setAttack2() {
+            this.role.play("attack2", true, false);
+            this.aniName = "attack2";
+        }
+        setWeapon(type) {
+            console.log("ssss--", type);
+            this.weaponType = type;
+            ViewManager.instance.rolePlayer.roleSprite.removeChildren();
+            ViewManager.instance.rolePlayer.roleSprite.addChild(this.role);
+            this.role.play(this.aniName, true);
+        }
+        sendLoadComplete() {
+            if (this.loadComplete1 && this.loadComplete2 && this.loadComplete3) {
+                EventManager.instance.dispatcherEvt(GameEvent.ROLE_ANI_COMPLETE);
+            }
+        }
+        get role() {
+            if (this.weaponType == 1) {
+                return this.skin1;
+            }
+            else if (this.weaponType == 2) {
+                return this.skin2;
+            }
+            else if (this.weaponType == 3) {
+                return this.skin3;
+            }
+            return this.skin1;
+        }
+    }
+    PlayerSk.WEAPON_1 = "weapons1";
+    PlayerSk.WEAPON_2 = "weapons2";
+    PlayerSk.WEAPON_3 = "weapons3";
+    PlayerSk.WEAPON_4 = "weapons4";
+    PlayerSk.IDLE = "idle";
+    PlayerSk.RUN = "run";
+    PlayerSk.JUMP = "jump";
+    PlayerSk.CROUCH = "crouch";
+    PlayerSk.ATTACK_1 = "attack1";
+    PlayerSk.ATTACK_2 = "attack2";
+
     class Player extends Laya.Script {
         constructor() {
             super();
@@ -2675,29 +2777,22 @@
             this.faceType = 1;
             this.keyFire = false;
             this.curTouchId = 0;
-            this.stillFireNum = 1;
-            this.usePan = false;
         }
         createView() {
+            this.playerSk = new PlayerSk();
             this.roleSprite = new ui.PlayerBodyUI();
-            this.loadComplete();
-        }
-        ;
-        loadComplete() {
-            this.rolePlayer = fairygui.UIPackage.createObject("Game", "Player");
-            this.rolePlayer.setPivot(0.5, 0.5);
-            this.body = this.rolePlayer.getChildAt(0);
-            this.rolePlayer.m_fireType.selectedIndex = 0;
-            this.rolePlayer.m_firePos1.visible = this.rolePlayer.m_firePos2.visible = this.rolePlayer.m_firePos3.visible = false;
-            this.roleBody = this.roleSprite.getComponent(Laya.RigidBody);
-            this.roleBox = this.roleSprite.getComponent(Laya.BoxCollider);
-            this.roleSprite.addChild(this.rolePlayer.displayObject);
-            this.roleSprite.addComponent(PlayerBody);
-            this.bodyScript = this.roleSprite.getComponent(PlayerBody);
             if (!this.playerCtlView)
                 this.playerCtlView = new PlayerCtlView();
             if (!this.playerDirView)
                 this.playerDirView = new PlayerDirView();
+            EventManager.instance.addNotice(GameEvent.ROLE_ANI_COMPLETE, this, this.loadComplete);
+        }
+        ;
+        loadComplete() {
+            this.roleBody = this.roleSprite.getComponent(Laya.RigidBody);
+            this.roleBox = this.roleSprite.getComponent(Laya.BoxCollider);
+            this.roleSprite.addComponent(PlayerBody);
+            this.bodyScript = this.roleSprite.getComponent(PlayerBody);
             this.playerDirView.view.m_dirBtn.y = this.playerDirView.view.m_dirBtn.x = 0;
             this.resetData();
         }
@@ -2720,19 +2815,20 @@
         }
         resetData() {
             this.addEvent();
+            GameManager.instance.roleInfo.weaponType = 1;
+            this.changeWeaponType(GameManager.instance.roleInfo.weaponType);
+            ViewManager.instance.warView.scene.addChild(this.roleSprite);
             this.playerDirView.view.m_dirBtn.y = this.playerDirView.view.m_dirBtn.x = 0;
             var d = GameManager.instance.curLvData;
             this.roleSprite.x = d.rolePos[0];
             this.roleSprite.y = d.rolePos[1];
+            GameManager.instance.roleInfo.bulletNum = 0;
             this.sBoom = false;
             this.sRun = false;
             this.stillRifle = false;
-            this.usePan = false;
+            this.playerSk.role.visible = true;
             this.setFireEnd();
             this.jumpEnd();
-            this.changeWeaponType(GameManager.instance.roleInfo.weaponType);
-            ViewManager.instance.warView.scene.addChild(this.roleSprite);
-            GameManager.instance.roleInfo.bulletNum = 0;
             Laya.timer.clearAll(this);
             Laya.timer.loop(500, this, this.moveMap);
             this.setStay();
@@ -2745,7 +2841,7 @@
             this.sBoom = false;
             this.sRun = false;
             this.stillRifle = false;
-            this.usePan = false;
+            this.playerSk.role.visible = true;
             this.keyJump = false;
             this.keyFireUp();
             this.playerDirView.view.m_dirBtn.y = this.playerDirView.view.m_dirBtn.x = 0;
@@ -2753,8 +2849,6 @@
             Laya.timer.loop(500, this, this.moveMap);
             this.setStay();
             Laya.timer.once(3000, this, this.cancleInvincible);
-            this.bodyLeg.color = "#ffff00";
-            this.bodybody.color = "#ffff00";
             if (this.roleSprite.y > 800) {
                 this.roleSprite.y = 580;
                 this.roleSprite.x -= 200;
@@ -2826,8 +2920,8 @@
                 this.setFaceRight();
                 if (this.faceType == 1) {
                     this.direction = 1;
-                    this.setRightRun();
                     this.setStandUp();
+                    this.setRightRun();
                 }
                 else {
                     this.sRun = false;
@@ -2843,8 +2937,8 @@
                 this.setFaceLeft();
                 if (this.faceType == -1) {
                     this.direction = -1;
-                    this.setLeftRun();
                     this.setStandUp();
+                    this.setLeftRun();
                 }
                 else {
                     this.sRun = false;
@@ -2861,29 +2955,23 @@
             if (this.isSquatDown)
                 return;
             this.isSquatDown = true;
-            this.roleSprite.y += 20;
-            this.roleBox.height = 70;
-            this.rolePlayer.y = -20;
+            this.playerSk.setCrouch();
         }
         setStandUp() {
             if (!this.isSquatDown)
                 return;
             this.isSquatDown = false;
-            this.roleSprite.y -= 20;
-            this.roleBox.height = 90;
-            this.rolePlayer.y = 0;
+            this.playerSk.setIdle();
         }
         setFaceRight() {
-            this.rolePlayer.skewY = 180;
+            this.playerSk.role.skewY = 0;
             this.keyRight = true;
             this.keyLeft = false;
-            this.setPlayerDir();
         }
         setFaceLeft() {
             this.keyLeft = true;
             this.keyRight = false;
-            this.rolePlayer.skewY = 0;
-            this.setPlayerDir();
+            this.playerSk.role.skewY = 180;
         }
         onClickBomb() {
             if (this.sBoom)
@@ -2909,25 +2997,14 @@
             this.setRun();
             this.stillRun();
         }
-        setPlayerDir() {
-            if (this.usePan)
-                return;
-            if (this.sFire) {
-                this.body.url = "ui://Game/player_fire_" + this.weaponType + "_" + Math.abs(this.faceType);
-            }
-            else {
-                if (this.keyJump)
-                    return;
-                this.body.url = "ui://Game/player_stay_" + this.weaponType + "_" + Math.abs(this.faceType);
-            }
-        }
         colliGround() {
             this.jumpEnd();
         }
         setJump() {
+            this.isSquatDown = false;
             this.keyJump = this.bodyScript.keyJump = true;
             this.setBoomComplete();
-            this.bodyLeg.url = "ui://Game/legJump";
+            this.playerSk.setJump();
             this.roleBody.setVelocity({ x: 0, y: -11 });
             this.roleBox.refresh();
             Laya.timer.once(200, this, this.jumpHighHandle);
@@ -2945,14 +3022,7 @@
             }
         }
         setRun() {
-            if (this.sFire) {
-                this.body.url = "ui://Game/player_fire_" + this.weaponType + "_" + Math.abs(this.faceType);
-            }
-            if (this.keyJump)
-                this.bodyLeg.url = "ui://Game/legJump";
-            else {
-                this.bodyLeg.url = "ui://Game/legMove";
-            }
+            this.playerSk.setRun();
             this.sRun = true;
             Laya.timer.clear(this, this.stillRun);
             Laya.timer.frameLoop(1, this, this.stillRun);
@@ -2985,60 +3055,30 @@
                 return;
             if (this.stillRifle)
                 return;
-            if (this.usePan)
-                return;
             if (GameManager.instance.roleInfo.isDeath)
                 return;
             this.playWeaponSound();
-            var p = GameManager.instance.useWeaponPan(this.roleSprite.x, this.roleSprite.y, this.direction);
-            if (p) {
-                Laya.timer.clear(this, this.stillFire);
-                this.sFire = false;
-                this.setPanFire();
-                return;
-            }
-            this.body.url = "ui://Game/player_fire_" + this.weaponType + "_" + Math.abs(this.faceType);
-            this.rolePlayer.m_fireType.selectedIndex = this.weaponType - 1;
-            this.setFireAniSkew();
             Laya.timer.clear(this, this.stillFire);
-            this.rolePlayer["m_firePos" + this.weaponType].visible = true;
             if (this.weaponType != PlayerData.WEAPON_PIS) {
                 EventManager.instance.dispatcherEvt(GameEvent.USE_PLAYER_BULLET);
             }
             var b = ViewManager.instance.createBullet();
             if (this.weaponType == PlayerData.WEAPON_RIFLE) {
+                if (!this.isSquatDown && !this.keyJump)
+                    this.playerSk.setAttack2();
                 this.stillRifle = true;
                 Laya.timer.once(600, this, this.rilfeComplete);
             }
             else {
+                if (!this.isSquatDown && !this.keyJump)
+                    this.playerSk.setAttack1();
                 this.sFire = true;
                 this.stillRifle = false;
                 Laya.timer.loop(150, this, this.stillFire);
             }
-            if (this.sRun) {
-                this.bodyLeg.url = "ui://Game/legMove";
-                return;
-            }
-            if (this.keyJump)
-                this.bodyLeg.url = "ui://Game/legJump";
         }
         stillFire() {
             this.playWeaponSound();
-            var p = GameManager.instance.useWeaponPan(this.roleSprite.x, this.roleSprite.y, this.direction);
-            if (p) {
-                Laya.timer.clear(this, this.stillFire);
-                this.sFire = false;
-                this.setPanFire();
-                return;
-            }
-            this.setFireAniSkew();
-            this.stillFireNum++;
-            if (this.stillFireNum % 2 == 0) {
-                this.rolePlayer.m_firePos1.visible = this.rolePlayer.m_firePos2.visible = false;
-            }
-            else {
-                this.rolePlayer["m_firePos" + this.weaponType].visible = true;
-            }
             ViewManager.instance.createBullet();
             if (this.weaponType != PlayerData.WEAPON_PIS) {
                 EventManager.instance.dispatcherEvt(GameEvent.USE_PLAYER_BULLET);
@@ -3055,94 +3095,30 @@
             }
         }
         setPanFire() {
-            this.usePan = true;
-            this.rolePlayer.m_firePos1.visible = this.rolePlayer.m_firePos2.visible = false;
-            if (this.faceType == 5) {
-                this.body.url = "ui://Game/player_fire_5_5";
-            }
-            else {
-                this.body.url = "ui://Game/player_fire_5_1";
-            }
-            this.bodybody.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, () => {
-                ViewManager.instance.showPlayerPanBody();
-            }));
-            Laya.timer.once(700, this, this.panFireComplete);
-            if (this.sRun) {
-                this.bodyLeg.url = "ui://Game/legMove";
-                return;
-            }
-            if (this.keyJump)
-                this.bodyLeg.url = "ui://Game/legJump";
-        }
-        panFireComplete() {
-            this.usePan = false;
-            ViewManager.instance.hidePlayerPanBody();
-            if (this.keyFire) {
-                this.setFire();
-            }
-            else {
-                this.setFireEnd();
-                this.stopFire();
-            }
         }
         setFireEnd() {
             Laya.timer.clear(this, this.stillFire);
             this.sFire = false;
-            this.stillFireNum = 1;
-            this.rolePlayer.m_firePos1.visible = this.rolePlayer.m_firePos2.visible = false;
-            if ((this.weaponType == PlayerData.WEAPON_MAC || this.weaponType == PlayerData.WEAPON_PIS) && !this.usePan) {
-                this.stopFire();
+            if (this.sRun) {
+                this.playerSk.setRun();
+            }
+            else {
+                if (!this.isSquatDown)
+                    this.playerSk.setIdle();
             }
         }
         stopFire() {
-            this.body.url = "ui://Game/player_stay_" + this.weaponType + "_" + Math.abs(this.faceType);
-            if (this.keyJump) {
-                this.bodyLeg.url = "ui://Game/legJump";
-                return;
-            }
-            if (this.sRun) {
-                this.bodyLeg.url = "ui://Game/legMove";
-            }
         }
         setFireAniSkew() {
-            this.rolePlayer.m_firePos.selectedIndex = Math.abs(this.faceType) - 1;
-            if (Math.abs(this.faceType) == 1) {
-                this.rolePlayer.m_firePos1.setSkew(180, 180);
-                this.rolePlayer.m_firePos2.setSkew(180, 180);
-            }
-            else if (Math.abs(this.faceType) == 2) {
-                this.rolePlayer.m_firePos1.setSkew(160, 160);
-                this.rolePlayer.m_firePos2.setSkew(160, 160);
-            }
-            else if (Math.abs(this.faceType) == 3) {
-                this.rolePlayer.m_firePos1.setSkew(200, 200);
-                this.rolePlayer.m_firePos2.setSkew(200, 200);
-            }
-            else if (Math.abs(this.faceType) == 4) {
-                this.rolePlayer.m_firePos1.setSkew(270, 270);
-                this.rolePlayer.m_firePos2.setSkew(270, 270);
-            }
-            else if (Math.abs(this.faceType) == 5) {
-                this.rolePlayer.m_firePos1.setSkew(180, 180);
-                this.rolePlayer.m_firePos2.setSkew(180, 180);
-            }
         }
         setBoom() {
             this.sBoom = true;
             EventManager.instance.dispatcherEvt(GameEvent.USE_PLAYER_BOMB);
-            this.bodybody.url = "ui://Game/rush_boom_" + this.weaponType;
-            this.bodybody.content.setPlaySettings(0, -1, 1, -1);
             Laya.timer.once(600, this, this.setBoomComplete);
             ViewManager.instance.createBomb(PlayerData.WEAPON_GRE, this.direction, ViewManager.instance.getBodyCenterPos(this.roleSprite), true);
         }
         setBoomComplete() {
             this.sBoom = false;
-            if (this.sFire)
-                this.body.url = "ui://Game/player_fire_" + this.weaponType + "_" + Math.abs(this.faceType);
-            else {
-                this.bodybody.url = "ui://Game/body_" + this.weaponType;
-                this.bodybody.content.setPlaySettings(0, -1, 0, -1);
-            }
         }
         stopMove() {
             if (GameManager.instance.roleInfo.isDeath)
@@ -3151,19 +3127,18 @@
             this.keyLeft = false;
             this.keyRight = false;
             this.sRun = false;
-            this.bodyLeg.url = "ui://Game/legStay";
+            this.playerSk.setIdle();
         }
         setStay() {
             if (this.faceType > 0) {
                 this.direction = 1;
-                this.rolePlayer.skewY = 180;
+                this.playerSk.role.skewY = 0;
             }
             else {
                 this.direction = -1;
-                this.rolePlayer.skewY = 0;
+                this.playerSk.role.skewY = 180;
             }
             Laya.timer.clear(this, this.stillFire);
-            this.body.url = "ui://Game/player_stay_" + this.weaponType + "_" + Math.abs(this.faceType);
             this.stopMove();
         }
         changeWeaponType(type) {
@@ -3173,35 +3148,23 @@
                 this.sFire = false;
                 this.setFire();
             }
-            else {
-                this.body.url = "ui://Game/player_stay_" + this.weaponType + "_" + Math.abs(this.faceType);
-            }
-            if (this.keyJump) {
-                this.bodyLeg.url = "ui://Game/legJump";
-                return;
-            }
-            if (this.sRun) {
-                this.bodyLeg.url = "ui://Game/legMove";
-            }
+            this.playerSk.setWeapon(type);
         }
         setDeath() {
             if (GameManager.instance.roleInfo.isDeath)
                 return;
+            this.playerSk.role.visible = false;
             Laya.timer.clearAll(this);
             this.removeEvent();
             this.setFireEnd();
             this.stopMove();
-            this.rolePlayer.m_firePos1.visible = this.rolePlayer.m_firePos2.visible = false;
             GameManager.instance.roleInfo.isDeath = true;
-            this.body.url = "ui://Game/player_death";
-            this.bodybody.content.setPlaySettings(0, -1, 1, this.bodybody.content.frameCount - 1, Laya.Handler.create(this, this.deathComplete));
             this.playDeathSound();
             ViewManager.instance.showAfterWarView(3);
         }
         victoryGame() {
             this.setStay();
             this.removeEvent();
-            this.rolePlayer.m_firePos1.visible = this.rolePlayer.m_firePos2.visible = false;
             GameManager.instance.roleInfo.curlvCoin += GameData.VICTORY_LEVEL_COIN;
             GameManager.instance.roleInfo.totalCoin += GameData.VICTORY_LEVEL_COIN;
             ViewManager.instance.playerInfoView.updateCoin();
@@ -3238,34 +3201,14 @@
                 this.setDeath();
                 return;
             }
-            Laya.timer.clear(this, this.setColor);
-            this.bodyLeg.color = "#ff0000";
-            this.bodybody.color = "#ff0000";
-            Laya.timer.once(200, this, this.setColor);
         }
         setColor() {
-            if (GameManager.instance.roleInfo.isDeath)
-                return;
-            this.bodyLeg.color = "#ffffff";
-            this.bodybody.color = "#ffffff";
-        }
-        get bodyComponent() {
-            return this.body.component;
-        }
-        get bodyLeg() {
-            if (this.bodyComponent)
-                return this.bodyComponent.getChildAt(0).asLoader;
-        }
-        get bodybody() {
-            if (this.bodyComponent)
-                return this.bodyComponent.getChildAt(1).asLoader;
         }
         dispose() {
             this.removeEvent();
             Laya.timer.clearAll(this);
             this.roleSprite.removeChildren();
             this.roleSprite.removeSelf();
-            this.rolePlayer.dispose();
             this.roleSprite.destroy();
             this.roleSprite = null;
             this.recover();
@@ -3318,7 +3261,8 @@
             switch (keyCode) {
                 case 87:
                     console.log("上");
-                    this.setBoom();
+                    this.faceType = -5;
+                    this.setFaceType();
                     break;
                 case 83:
                     console.log("下");
@@ -3327,7 +3271,7 @@
                     break;
                 case 65:
                     this.keyLeft = true;
-                    this.rolePlayer.skewY = 0;
+                    this.playerSk.role.skewY = 180;
                     if (this.sRun)
                         return;
                     this.setRun();
@@ -3335,47 +3279,13 @@
                     break;
                 case 68:
                     this.keyRight = true;
-                    this.rolePlayer.skewY = 180;
+                    this.playerSk.role.skewY = 0;
                     if (this.sRun)
                         return;
                     this.setRun();
                     this.stillRun();
                     break;
             }
-        }
-    }
-
-    class BulletPanBody extends Laya.Script {
-        constructor() { super(); }
-        onDisable() {
-        }
-        onTriggerEnter(other, self, contact) {
-            if (other.label == "enemy") {
-                EventManager.instance.dispatcherEvt(GameEvent.PLAYER_PAN_HIT_ENEMY, { o: other.owner, s: self.owner, d: GameData.PAN_DAMAGE });
-                this.owner.removeSelf();
-            }
-        }
-        onTriggerExit() {
-        }
-        onTriggerStay(other, self, contact) {
-        }
-    }
-
-    class PlayerPan {
-        constructor() { this.createView(); }
-        createView() {
-            this.scene = new ui.BulletPanUI();
-            this.loadComplete();
-        }
-        loadComplete() {
-            this.scene.addComponent(BulletPanBody);
-        }
-        disposeAll() {
-            if (this.scene) {
-                this.scene.removeSelf();
-            }
-        }
-        setBulletPos() {
         }
     }
 
@@ -3387,9 +3297,9 @@
             this.warAllView = [];
             this.curPopView = [];
             this.playerBulletPos = {
-                "11": [135, -22],
-                "12": [150, 0],
-                "13": [50, 70],
+                "11": [35, 5],
+                "12": [35, 0],
+                "13": [0, 80],
                 "21": [125, 25],
                 "22": [115, 70],
                 "23": [50, 5],
@@ -3399,13 +3309,13 @@
                 "41": [-30, -185],
                 "42": [-30, -185],
                 "43": [50, 200],
-                "51": [135, -30],
-                "52": [150, -30],
-                "53": [50, 70],
+                "51": [35, 15],
+                "52": [35, 15],
+                "53": [0, 95],
                 "14": [20, -60],
-                "-11": [-200, -22],
-                "-12": [-210, 0],
-                "-13": [240, 80],
+                "-11": [-195, 5],
+                "-12": [-200, 0],
+                "-13": [185, 85],
                 "-14": [-20, -60],
                 "-21": [-190, 20],
                 "-22": [-180, 15],
@@ -3416,9 +3326,9 @@
                 "-41": [-30, -185],
                 "-42": [-30, -185],
                 "-43": [55, 200],
-                "-51": [-200, -30],
-                "-52": [-235, -30],
-                "-53": [240, 80],
+                "-51": [-200, 17],
+                "-52": [-205, 15],
+                "-53": [200, 100],
             };
             this.enemyBulletPos = {
                 "11": [105, 10],
@@ -3528,14 +3438,6 @@
             b.createView(type, s);
         }
         showPlayerPanBody() {
-            if (!this.playerPan)
-                this.playerPan = new PlayerPan();
-            if (this.player.direction > 0)
-                this.playerPan.scene.x = 0;
-            else {
-                this.playerPan.scene.x = -this.playerPan.scene.width;
-            }
-            this.player.roleSprite.addChild(this.playerPan.scene);
         }
         hidePlayerPanBody() {
             if (this.playerPan)
@@ -3671,16 +3573,16 @@
                 return -1;
             }
             else if (rad >= -6 * Math.PI / 8 && rad < -5 * Math.PI / 8) {
-                return -3;
+                return -1;
             }
             else if (rad >= -5 * Math.PI / 8 && rad < -4 * Math.PI / 8) {
-                return -4;
+                return -1;
             }
             else if (rad >= -4 * Math.PI / 8 && rad < -3 * Math.PI / 8) {
-                return 4;
+                return 1;
             }
             else {
-                return 3;
+                return 1;
             }
         }
         getPlayerBulletOffSetPos(dir, weaponType) {
@@ -4031,7 +3933,7 @@
             this.loadAssetsData();
         }
         loadAssetsData() {
-            AssetsManager.assetsData.push({ url: "res/Game_atlas0.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_1.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_2.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_3.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_4.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_5.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_6.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_7.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas_n8qun1.jpg", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas_n8qun7.png", type: Laya.Loader.IMAGE }, { url: "res/LevelData.json", type: Laya.Loader.JSON }, { url: "res/map_1.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_2.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_3.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_4.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_5.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_6.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_7.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_8.jpg", type: Laya.Loader.IMAGE }, { url: "res/Game.proto", type: Laya.Loader.BUFFER }, { url: "res/sound/bgm.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/BombDrop.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/boom.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/btn_click.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/btn_press.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/die_1.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/die_2.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/die_3.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/die_4.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/enemy_fire.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/gameOver.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/get_goods.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/obstacleBoom.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/obstacleBoom2.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/tank_fire.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/weapon_1.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/weapon_2.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/weapon_3.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/weapon_10.mp3", type: Laya.Loader.SOUND });
+            AssetsManager.assetsData.push({ url: "res/Game_atlas0.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_1.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_2.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_3.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_4.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_5.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas0_6.png", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas_n8qun1.jpg", type: Laya.Loader.IMAGE }, { url: "res/Game_atlas_n8qun7.png", type: Laya.Loader.IMAGE }, { url: "res/LevelData.json", type: Laya.Loader.JSON }, { url: "res/map_1.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_2.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_3.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_4.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_5.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_6.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_7.jpg", type: Laya.Loader.IMAGE }, { url: "res/map_8.jpg", type: Laya.Loader.IMAGE }, { url: "res/Game.proto", type: Laya.Loader.BUFFER }, { url: "res/zhujue.png", type: Laya.Loader.IMAGE }, { url: "res/zhujue.sk", type: Laya.Loader.BUFFER }, { url: "res/sound/bgm.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/BombDrop.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/boom.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/btn_click.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/btn_press.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/die_1.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/die_2.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/die_3.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/die_4.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/enemy_fire.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/gameOver.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/get_goods.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/obstacleBoom.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/obstacleBoom2.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/tank_fire.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/weapon_1.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/weapon_2.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/weapon_3.mp3", type: Laya.Loader.SOUND }, { url: "res/sound/weapon_10.mp3", type: Laya.Loader.SOUND });
             console.log(AssetsManager.assetsData);
             Laya.loader.create(AssetsManager.assetsData, Laya.Handler.create(this, this.loadComplete), Laya.Handler.create(this, this.onloadingProgress));
         }
@@ -4040,8 +3942,8 @@
         }
         loadComplete() {
             fairygui.UIPackage.addPackage("res/Game");
-            console.log("资源加载完成");
             ViewManager.instance.hideLoadingView();
+            moosnow.http.finishLoading();
             GameManager.instance.startGame();
         }
     }
@@ -4060,76 +3962,6 @@
         }
     }
     WXFUI_enemy_fire_14.URL = "ui://bq3h5inscdcoxpj";
-
-    class WXFUI_player_fire_1_4 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_fire_1_4"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_fire_1_4.URL = "ui://bq3h5inscde5xpl";
-
-    class WXFUI_player_fire_2_4 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_fire_2_4"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_fire_2_4.URL = "ui://bq3h5inscde5xpm";
-
-    class WXFUI_player_fire_3_4 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_fire_3_4"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_fire_3_4.URL = "ui://bq3h5inscde5xpn";
-
-    class WXFUI_player_stay_2_4 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_stay_2_4"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_stay_2_4.URL = "ui://bq3h5inscde5xqg";
-
-    class WXFUI_player_stay_3_4 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_stay_3_4"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_stay_3_4.URL = "ui://bq3h5inscde5xqh";
 
     class WXFUI_star extends fairygui.GComponent {
         constructor() {
@@ -4196,34 +4028,6 @@
     }
     WXFUI_throwBtn.URL = "ui://bq3h5inscqp93p";
 
-    class WXFUI_player_stay_1_1 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_stay_1_1"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_stay_1_1.URL = "ui://bq3h5inscqp93w";
-
-    class WXFUI_player_stay_2_1 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_stay_2_1"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_stay_2_1.URL = "ui://bq3h5inscqp940";
-
     class WXFUI_enemyStay_5 extends fairygui.GComponent {
         constructor() {
             super();
@@ -4264,20 +4068,6 @@
         }
     }
     WXFUI_enemy5.URL = "ui://bq3h5insdhktem";
-
-    class WXFUI_player_stay_3_1 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_stay_3_1"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_stay_3_1.URL = "ui://bq3h5insdhkten";
 
     class WXFUI_backHomeBtn extends fairygui.GButton {
         constructor() {
@@ -4654,94 +4444,6 @@
     }
     WXFUI_BoomView.URL = "ui://bq3h5inske5wdt";
 
-    class WXFUI_player_fire_3_1 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_fire_3_1"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_fire_3_1.URL = "ui://bq3h5inske5wdy";
-
-    class WXFUI_player_fire_1_1 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_fire_1_1"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_fire_1_1.URL = "ui://bq3h5insmsdc5j";
-
-    class WXFUI_player_fire_2_1 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_fire_2_1"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_fire_2_1.URL = "ui://bq3h5insmsdc5k";
-
-    class WXFUI_Player extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "Player"));
-        }
-        onConstruct() {
-            this.m_firePos = this.getController("firePos");
-            this.m_fireType = this.getController("fireType");
-            this.m_body = (this.getChild("body"));
-            this.m_firePos1 = (this.getChild("firePos1"));
-            this.m_firePos2 = (this.getChild("firePos2"));
-            this.m_firePos3 = (this.getChild("firePos3"));
-        }
-    }
-    WXFUI_Player.URL = "ui://bq3h5insmsdc6j";
-
-    class WXFUI_player_boom_1 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_boom_1"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_boom_1.URL = "ui://bq3h5insmsdc6k";
-
-    class WXFUI_player_boom_2 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_boom_2"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_boom_2.URL = "ui://bq3h5insmsdc6l";
-
     class WXFUI_enemy1 extends fairygui.GComponent {
         constructor() {
             super();
@@ -4887,20 +4589,6 @@
     }
     WXFUI_obstacleView.URL = "ui://bq3h5insqz5uku";
 
-    class WXFUI_player_stay_1_4 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_stay_1_4"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_stay_1_4.URL = "ui://bq3h5inssj2vxpk";
-
     class WXFUI_enemy6 extends fairygui.GComponent {
         constructor() {
             super();
@@ -4953,202 +4641,6 @@
     }
     WXFUI_enemy_fire_13.URL = "ui://bq3h5instvmxxov";
 
-    class WXFUI_player_fire_2_2 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_fire_2_2"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_fire_2_2.URL = "ui://bq3h5instvmxxp1";
-
-    class WXFUI_player_fire_2_3 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_fire_2_3"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_fire_2_3.URL = "ui://bq3h5instvmxxp2";
-
-    class WXFUI_player_fire_1_2 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_fire_1_2"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_fire_1_2.URL = "ui://bq3h5instvmxxp3";
-
-    class WXFUI_player_fire_1_3 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_fire_1_3"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_fire_1_3.URL = "ui://bq3h5instvmxxp4";
-
-    class WXFUI_player_fire_3_2 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_fire_3_2"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_fire_3_2.URL = "ui://bq3h5instvmxxp5";
-
-    class WXFUI_player_fire_3_3 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_fire_3_3"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_fire_3_3.URL = "ui://bq3h5instvmxxp6";
-
-    class WXFUI_player_stay_1_2 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_stay_1_2"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_stay_1_2.URL = "ui://bq3h5instvmxxp7";
-
-    class WXFUI_player_stay_1_3 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_stay_1_3"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_stay_1_3.URL = "ui://bq3h5instvmxxp8";
-
-    class WXFUI_player_stay_2_3 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_stay_2_3"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_stay_2_3.URL = "ui://bq3h5instvmxxp9";
-
-    class WXFUI_player_stay_2_2 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_stay_2_2"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_stay_2_2.URL = "ui://bq3h5instvmxxpa";
-
-    class WXFUI_player_stay_3_2 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_stay_3_2"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_stay_3_2.URL = "ui://bq3h5instvmxxpb";
-
-    class WXFUI_player_stay_3_3 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_stay_3_3"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_stay_3_3.URL = "ui://bq3h5instvmxxpc";
-
-    class WXFUI_player_boom_3 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_boom_3"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_boom_3.URL = "ui://bq3h5instvmxxpd";
-
-    class WXFUI_bullet2 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "bullet2"));
-        }
-        onConstruct() {
-            this.m_n3 = (this.getChild("n3"));
-            this.m_n4 = (this.getChild("n4"));
-        }
-    }
-    WXFUI_bullet2.URL = "ui://bq3h5instvmxxpe";
-
     class WXFUI_volume extends fairygui.GComponent {
         constructor() {
             super();
@@ -5179,146 +4671,6 @@
     }
     WXFUI_abandon.URL = "ui://bq3h5insunfjxqr";
 
-    class WXFUI_player_stay_1_5 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_stay_1_5"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_stay_1_5.URL = "ui://bq3h5insunfjxqs";
-
-    class WXFUI_player_stay_2_5 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_stay_2_5"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_stay_2_5.URL = "ui://bq3h5insunfjxr6";
-
-    class WXFUI_player_stay_3_5 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_stay_3_5"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_stay_3_5.URL = "ui://bq3h5insunfjxr7";
-
-    class WXFUI_player_fire_2_5 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_fire_2_5"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_fire_2_5.URL = "ui://bq3h5insunfjxr8";
-
-    class WXFUI_player_fire_1_5 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_fire_1_5"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_fire_1_5.URL = "ui://bq3h5insunfjxr9";
-
-    class WXFUI_player_fire_3_5 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_fire_3_5"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_fire_3_5.URL = "ui://bq3h5insunfjxra";
-
-    class WXFUI_player_fire_5_1 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_fire_5_1"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_fire_5_1.URL = "ui://bq3h5insunfjxrx";
-
-    class WXFUI_player_fire_5_5 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_fire_5_5"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_fire_5_5.URL = "ui://bq3h5insunfjxs0";
-
-    class WXFUI_player_death extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "player_death"));
-        }
-        onConstruct() {
-            this.m_xs = (this.getChild("xs"));
-            this.m_ss = (this.getChild("ss"));
-        }
-    }
-    WXFUI_player_death.URL = "ui://bq3h5insunfjxs1";
-
-    class WXFUI_bullet1 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
-        static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "bullet1"));
-        }
-        onConstruct() {
-            this.m_n0 = (this.getChild("n0"));
-            this.m_n1 = (this.getChild("n1"));
-        }
-    }
-    WXFUI_bullet1.URL = "ui://bq3h5insyqv7at";
-
     class WXFUI_zidan extends fairygui.GComponent {
         constructor() {
             super();
@@ -5335,21 +4687,13 @@
     class GameBinder {
         static bindAll() {
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy_fire_14.URL, WXFUI_enemy_fire_14);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_1_4.URL, WXFUI_player_fire_1_4);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_2_4.URL, WXFUI_player_fire_2_4);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_3_4.URL, WXFUI_player_fire_3_4);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_2_4.URL, WXFUI_player_stay_2_4);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_3_4.URL, WXFUI_player_stay_3_4);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_star.URL, WXFUI_star);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_jumpBtn.URL, WXFUI_jumpBtn);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_fireBtn.URL, WXFUI_fireBtn);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_throwBtn.URL, WXFUI_throwBtn);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_1_1.URL, WXFUI_player_stay_1_1);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_2_1.URL, WXFUI_player_stay_2_1);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemyStay_5.URL, WXFUI_enemyStay_5);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy_fire_5.URL, WXFUI_enemy_fire_5);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy5.URL, WXFUI_enemy5);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_3_1.URL, WXFUI_player_stay_3_1);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_backHomeBtn.URL, WXFUI_backHomeBtn);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_restartBtn.URL, WXFUI_restartBtn);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_BeforeWar.URL, WXFUI_BeforeWar);
@@ -5378,12 +4722,6 @@
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_dirBtn.URL, WXFUI_dirBtn);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_susBtn.URL, WXFUI_susBtn);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_BoomView.URL, WXFUI_BoomView);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_3_1.URL, WXFUI_player_fire_3_1);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_1_1.URL, WXFUI_player_fire_1_1);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_2_1.URL, WXFUI_player_fire_2_1);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_Player.URL, WXFUI_Player);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_boom_1.URL, WXFUI_player_boom_1);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_boom_2.URL, WXFUI_player_boom_2);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_PopUpView.URL, WXFUI_PopUpView);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_SuspendView.URL, WXFUI_SuspendView);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy1.URL, WXFUI_enemy1);
@@ -5397,38 +4735,13 @@
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy_fire_11.URL, WXFUI_enemy_fire_11);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy_fire_12.URL, WXFUI_enemy_fire_12);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_obstacleView.URL, WXFUI_obstacleView);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_1_4.URL, WXFUI_player_stay_1_4);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy6.URL, WXFUI_enemy6);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy13.URL, WXFUI_enemy13);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy14.URL, WXFUI_enemy14);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy_fire_13.URL, WXFUI_enemy_fire_13);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_2_2.URL, WXFUI_player_fire_2_2);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_2_3.URL, WXFUI_player_fire_2_3);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_1_2.URL, WXFUI_player_fire_1_2);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_1_3.URL, WXFUI_player_fire_1_3);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_3_2.URL, WXFUI_player_fire_3_2);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_3_3.URL, WXFUI_player_fire_3_3);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_1_2.URL, WXFUI_player_stay_1_2);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_1_3.URL, WXFUI_player_stay_1_3);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_2_3.URL, WXFUI_player_stay_2_3);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_2_2.URL, WXFUI_player_stay_2_2);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_3_2.URL, WXFUI_player_stay_3_2);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_3_3.URL, WXFUI_player_stay_3_3);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_boom_3.URL, WXFUI_player_boom_3);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_bullet2.URL, WXFUI_bullet2);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_TipsPopView.URL, WXFUI_TipsPopView);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_volume.URL, WXFUI_volume);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_abandon.URL, WXFUI_abandon);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_1_5.URL, WXFUI_player_stay_1_5);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_2_5.URL, WXFUI_player_stay_2_5);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_stay_3_5.URL, WXFUI_player_stay_3_5);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_2_5.URL, WXFUI_player_fire_2_5);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_1_5.URL, WXFUI_player_fire_1_5);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_3_5.URL, WXFUI_player_fire_3_5);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_5_1.URL, WXFUI_player_fire_5_1);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_fire_5_5.URL, WXFUI_player_fire_5_5);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_player_death.URL, WXFUI_player_death);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_bullet1.URL, WXFUI_bullet1);
             fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_zidan.URL, WXFUI_zidan);
         }
     }
@@ -5455,6 +4768,74 @@
         }
     }
 
+    class MooSnowSDK {
+        static login() {
+            moosnow.platform.login(() => {
+                console.log('登录成功 ');
+            });
+            MooSnowSDK.showAutoBanner();
+        }
+        static finishLoading() {
+            moosnow.http.finishLoading();
+        }
+        static startGame(lv) {
+            moosnow.http.startGame(lv + "");
+        }
+        static endGame(lv, isWin) {
+            moosnow.http.endGame(lv + "", isWin);
+        }
+        static videoPoint(type, lv) {
+            moosnow.http.videoPoint(type + "", "原地复活", lv + "");
+        }
+        static getAD(r) {
+            moosnow.ad.getAd((r) => {
+                console.log('广告数据 ', r);
+            });
+        }
+        static showBanner() {
+            moosnow.platform.showBanner(true, (isOpend) => {
+                console.log('用户是否点击了banner ', isOpend);
+            });
+        }
+        static hideBanner() {
+            moosnow.platform.hideBanner();
+        }
+        static showAutoBanner() {
+            moosnow.platform.showAutoBanner();
+        }
+        static showVideo() {
+            moosnow.platform.showVideo(res => {
+                switch (res) {
+                    case moosnow.VIDEO_STATUS.NOTEND:
+                        console.log('视频未观看完成 ');
+                        break;
+                    case moosnow.VIDEO_STATUS.ERR:
+                        console.log('获取视频错误 ');
+                        break;
+                    case moosnow.VIDEO_STATUS.END:
+                        console.log('观看视频结束 ');
+                    default:
+                        break;
+                }
+            });
+        }
+        static getMistouchPosNum() {
+            var misTouchPosNum = 0;
+            moosnow.http.getMistouchPosNum((res) => {
+                misTouchPosNum = res;
+            });
+        }
+        static getMisTouchNum() {
+            var misTouchNum = 0;
+            moosnow.http.getMisTouchNum((res) => {
+                misTouchNum = res;
+            });
+        }
+        static setPoint(str) {
+            moosnow.http.point(str);
+        }
+    }
+
     class Main {
         constructor() {
             Laya.init(1334, 750, Laya["WebGL"]);
@@ -5476,6 +4857,7 @@
             fairygui.UIConfig.packageFileExtension = "proto";
             GameBinder.bindAll();
             loadingBinder.bindAll();
+            MooSnowSDK.login();
             AssetsManager.instance.loadLoadingAssetsData();
         }
         onVersionLoaded() {

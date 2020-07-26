@@ -112,6 +112,15 @@ export module ui {
         }
     }
     REG("ui.GoodsBodyUI",GoodsBodyUI);
+    export class HostageBodyUI extends Laya.View {
+        public static  uiView:any ={"type":"View","props":{"width":76,"height":130},"compId":2,"child":[{"type":"Script","props":{"y":0,"x":0,"width":76,"label":"enemy","isSensor":true,"height":130,"friction":0,"density":0,"runtime":"laya.physics.BoxCollider"},"compId":3},{"type":"Script","props":{"label":"enemy","group":0,"gravityScale":0,"allowRotation":false,"runtime":"laya.physics.RigidBody"},"compId":4}],"loadList":[],"loadList3D":[]};
+        constructor(){ super()}
+        createChildren():void {
+            super.createChildren();
+            this.createView(HostageBodyUI.uiView);
+        }
+    }
+    REG("ui.HostageBodyUI",HostageBodyUI);
     export class map_1UI extends Laya.Scene {
         public static  uiView:any ={"type":"Scene","props":{"width":50,"height":50},"compId":2,"child":[{"type":"Script","props":{"y":579,"x":1872,"points":"-825,-335,-825,-16,-4,-16,138,-42,262,-89,555,-89,615,-102,676,-138,923,-138,1348,30,1560,69,1559,-72,1600,5,1960,7,2197,96,3133,96","label":"ground","friction":0,"runtime":"laya.physics.ChainCollider"},"compId":12},{"type":"Script","props":{"y":0,"x":-800,"type":"static","label":"ground","group":0,"runtime":"laya.physics.RigidBody"},"compId":13}],"loadList":[],"loadList3D":[]};
         constructor(){ super()}
@@ -293,7 +302,7 @@ export module ui {
     }
     REG("ui.ObstacleView_9UI",ObstacleView_9UI);
     export class PlayerBodyUI extends Laya.View {
-        public static  uiView:any ={"type":"View","props":{"width":90,"height":90},"compId":2,"child":[{"type":"Script","props":{"y":0,"x":0,"width":90,"label":"player","isSensor":false,"height":90,"friction":0,"density":20,"runtime":"laya.physics.BoxCollider"},"compId":3},{"type":"Script","props":{"type":"dynamic","label":"player","group":0,"gravityScale":2,"allowRotation":false,"runtime":"laya.physics.RigidBody"},"compId":4}],"loadList":[],"loadList3D":[]};
+        public static  uiView:any ={"type":"View","props":{"width":55,"height":90},"compId":2,"child":[{"type":"Script","props":{"y":0,"x":0,"width":55,"label":"player","isSensor":false,"height":90,"friction":0,"density":20,"runtime":"laya.physics.BoxCollider"},"compId":3},{"type":"Script","props":{"type":"dynamic","label":"player","group":0,"gravityScale":2,"allowRotation":false,"runtime":"laya.physics.RigidBody"},"compId":4}],"loadList":[],"loadList3D":[]};
         constructor(){ super()}
         createChildren():void {
             super.createChildren();

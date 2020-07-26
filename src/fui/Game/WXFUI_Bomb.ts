@@ -6,8 +6,10 @@ export default class WXFUI_Bomb extends fairygui.GComponent {
 
 	public m_boom:fairygui.GLoader;
 	public m_boom2:fairygui.GLoader;
+	public m_boom3:fairygui.GLoader;
 	public m_z2:fairygui.Transition;
 	public m_t3:fairygui.Transition;
+	public m_t4:fairygui.Transition;
 
 	public static URL:string = "ui://bq3h5insgww20";
 
@@ -22,7 +24,9 @@ export default class WXFUI_Bomb extends fairygui.GComponent {
 	protected onConstruct(): void {
 		this.m_boom = <fairygui.GLoader><any>(this.getChild("boom"));
 		this.m_boom2 = <fairygui.GLoader><any>(this.getChild("boom2"));
+		this.m_boom3 = <fairygui.GLoader><any>(this.getChild("boom3"));
 		this.m_z2 = this.getTransition("z2");
 		this.m_t3 = this.getTransition("t3");
+		this.m_t4 = this.getTransition("t4");
 	}
 }

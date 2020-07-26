@@ -21,6 +21,8 @@ export default class GameEvent {
 
     public static ACTIVE_ENEMY: string = "ACTIVE_ENEMY";
 
+    public static ACTIVE_HOSTAGE: string = "ACTIVE_HOSTAGE";
+
     public static BOMB_DISPOSE: string = "BOMB_DISPOSE";
 
     public static PLAYER_BOMB_HIT_ENEMY: string = "PLAYER_BOMB_HIT_ENEMY";
@@ -60,6 +62,8 @@ export default class GameEvent {
     public static OBSTACLE_BOOM: string = "OBSTACLE_BOOM";
 
     public static CHANGE_SIZE: string = "CHANGE_SIZE";
+
+    public static ROLE_ANI_COMPLETE: string = "ROLE_ANI_COMPLETE";
 
 
     constructor() { }

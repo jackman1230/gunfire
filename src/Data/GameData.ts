@@ -29,6 +29,8 @@ export class GameData {
     public static ENEMY_TANK_3: number = 13;
     /**敌人武器类型-装甲坦克 */
     public static ENEMY_TANK_4: number = 14;
+    /**人质 */
+    public static HOSTAGE: number = 30;
     /**掉落随机金币最大值*/
     public static RANDOM_COIN: number = 200;
     /**人物手榴弹的伤害*/
@@ -111,6 +113,8 @@ export class GoodsType {
     public static GoodsType_GRE: number = 4;
     /**物资--金币 */
     public static GoodsType_COIN: number = 5;
+    /**物资--宝箱 */
+    public static GoodsType_BOX: number = 6;
 
 }
 

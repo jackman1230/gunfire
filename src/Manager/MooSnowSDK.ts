@@ -44,7 +44,7 @@ export class MooSnowSDK {
     /**
     * 获取广告
     */
-    public static getAD(r): void {
+    public static getAD(): void {
         moosnow.ad.getAd((r) => {
             console.log('广告数据 ', r)
         })

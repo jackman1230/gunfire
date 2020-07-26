@@ -47,7 +47,7 @@ export default class PlayerBullet {
         ViewManager.instance.warView.scene.addChild(this.scene);
         this.scene.addComponent(BulletBody);
         // console.log("BulletBody---");
-        
+
         this.body = this.scene.getComponent(Laya.RigidBody);
         this.box = this.scene.getComponent(Laya.BoxCollider);
         this.box.label = this.body.label = "PlayerBullet" + this.bulletType;
@@ -135,7 +135,7 @@ export default class PlayerBullet {
             }
             this.view.m_zidan.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.disposeAll));
         } else {
-            if (this.direction == 1 || this.direction == -1) {
+            if (this.direction == 1 || this.direction == -1 || this.direction == 5 || this.direction == -5) {
                 var y: number = ViewManager.instance.bulletRandomY();
                 this.scene.x = c.x + p.x;
                 this.scene.y = c.y - y + p.y;

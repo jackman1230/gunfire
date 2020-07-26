@@ -34,5 +34,10 @@
     </component>
     <loader id="n27_dr1t" name="title" xy="567,40" pivot="0.5,0.5" size="199,63" url="ui://bq3h5insn8quly" align="center" vAlign="middle"/>
     <component id="n32_ugvi" name="setView" src="ugvixpi" fileName="Component/view/volume.xml" xy="1228,82"/>
+    <component id="n35_s2x8" name="ad" src="s2x8xs6" fileName="Component/view/guanggao/ADListHor.xml" xy="257,581"/>
+    <component id="n39_s2x8" name="ad_1" src="s2x8xs4" fileName="Component/view/guanggao/ADmove.xml" xy="84,59"/>
+    <component id="n36_s2x8" name="ad_2" src="s2x8xs4" fileName="Component/view/guanggao/ADmove.xml" xy="270,369"/>
+    <component id="n37_s2x8" name="ad_3" src="s2x8xs4" fileName="Component/view/guanggao/ADmove.xml" xy="692,210"/>
+    <component id="n38_s2x8" name="ad_remen" src="s2x8xs7" fileName="Component/view/guanggao/ADremen.xml" xy="959,78"/>
   </displayList>
 </component>

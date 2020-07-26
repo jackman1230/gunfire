@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="134,160">
+  <displayList>
+    <component id="n1_s2x8" name="ad" src="s2x8ir" fileName="Component/view/guanggao/ADItem.xml" xy="0,0" pivot="0.5,0.5"/>
+  </displayList>
+  <transition name="ani_1" autoPlayRepeat="0">
+    <item time="0" type="Scale" target="n1_s2x8" tween="true" startValue="1,1" endValue="0.8,0.8" duration="18" ease="Linear"/>
+    <item time="18" type="Scale" target="n1_s2x8" tween="true" startValue="0.8,0.8" endValue="1,1" duration="18" ease="Linear"/>
+  </transition>
+  <transition name="ani_2" autoPlayRepeat="0">
+    <item time="0" type="Rotation" target="n1_s2x8" tween="true" startValue="0" endValue="-20" duration="18" ease="Linear"/>
+    <item time="18" type="Rotation" target="n1_s2x8" tween="true" startValue="-20" endValue="0" duration="18" ease="Linear"/>
+    <item time="36" type="Rotation" target="n1_s2x8" tween="true" startValue="0" endValue="20" duration="18"/>
+    <item time="54" type="Rotation" target="n1_s2x8" tween="true" startValue="20" endValue="0" duration="18"/>
+  </transition>
+</component>

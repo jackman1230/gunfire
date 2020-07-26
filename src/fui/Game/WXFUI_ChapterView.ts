@@ -4,6 +4,9 @@ import WXFUI_lastChapter from "./WXFUI_lastChapter";
 import WXFUI_nextChapter from "./WXFUI_nextChapter";
 import WXFUI_LevelItem from "./WXFUI_LevelItem";
 import WXFUI_volume from "./WXFUI_volume";
+import WXFUI_ADListHor from "./WXFUI_ADListHor";
+import WXFUI_ADmove from "./WXFUI_ADmove";
+import WXFUI_ADremen from "./WXFUI_ADremen";
 
 export default class WXFUI_ChapterView extends fairygui.GComponent {
 
@@ -23,6 +26,11 @@ export default class WXFUI_ChapterView extends fairygui.GComponent {
 	public m_level_8:WXFUI_LevelItem;
 	public m_title:fairygui.GLoader;
 	public m_setView:WXFUI_volume;
+	public m_ad:WXFUI_ADListHor;
+	public m_ad_1:WXFUI_ADmove;
+	public m_ad_2:WXFUI_ADmove;
+	public m_ad_3:WXFUI_ADmove;
+	public m_ad_remen:WXFUI_ADremen;
 
 	public static URL:string = "ui://bq3h5insdr1tnw";
 
@@ -51,5 +59,10 @@ export default class WXFUI_ChapterView extends fairygui.GComponent {
 		this.m_level_8 = <WXFUI_LevelItem><any>(this.getChild("level_8"));
 		this.m_title = <fairygui.GLoader><any>(this.getChild("title"));
 		this.m_setView = <WXFUI_volume><any>(this.getChild("setView"));
+		this.m_ad = <WXFUI_ADListHor><any>(this.getChild("ad"));
+		this.m_ad_1 = <WXFUI_ADmove><any>(this.getChild("ad_1"));
+		this.m_ad_2 = <WXFUI_ADmove><any>(this.getChild("ad_2"));
+		this.m_ad_3 = <WXFUI_ADmove><any>(this.getChild("ad_3"));
+		this.m_ad_remen = <WXFUI_ADremen><any>(this.getChild("ad_remen"));
 	}
 }

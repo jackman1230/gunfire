@@ -24,8 +24,9 @@ export class SoundManager {
         Laya.SoundManager.playSound(s);
         // }
     }
-    public playBGM(): void {
-        this.bgm = Laya.SoundManager.playMusic("res/sound/bgm.mp3");
+    public playBGM(name: string): void {
+        var s: string = "res/sound/" + name + ".mp3";
+        this.bgm = Laya.SoundManager.playMusic(s);
     }
 
     public stopBGM(): void {
