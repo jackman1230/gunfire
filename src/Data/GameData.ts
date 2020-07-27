@@ -60,6 +60,8 @@ export class BombData {
     public static BOMB_TANK: number = 4;
     /**敌人迫击炮的导弹 */
     public static BOMB_MOR: number = 5;
+    /**敌人火箭筒的导弹 */
+    public static BOMB_FIRE: number = 6;
 
 }
 
@@ -115,6 +117,8 @@ export class GoodsType {
     public static GoodsType_COIN: number = 5;
     /**物资--宝箱 */
     public static GoodsType_BOX: number = 6;
+    /**物资--宝箱 */
+    public static GoodsType_OPEN_BOX: number = 7;
 
 }
 

@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1334,750" opaque="false">
   <displayList>
-    <image id="n0_iasd" name="n0" src="dhhtiw" fileName="assets/playerInfo/左上角底框。(1).png" xy="0,0"/>
     <image id="n2_iasd" name="n2" src="dhhtiz" fileName="assets/playerInfo/雪灰(1).png" xy="51,12"/>
     <image id="n3_iasd" name="n3" src="dhhtiz" fileName="assets/playerInfo/雪灰(1).png" xy="122,12"/>
     <image id="n4_iasd" name="n4" src="dhhtiz" fileName="assets/playerInfo/雪灰(1).png" xy="193,12"/>
     <image id="n1_iasd" name="blood_1" src="dhhtiy" fileName="assets/playerInfo/血量(1).png" xy="51,12"/>
     <image id="n5_iasd" name="blood_2" src="dhhtiy" fileName="assets/playerInfo/血量(1).png" xy="121,12"/>
     <image id="n6_iasd" name="blood_3" src="dhhtiy" fileName="assets/playerInfo/血量(1).png" xy="193,12"/>
-    <image id="n7_iasd" name="n7" src="dhhtj3" fileName="assets/playerInfo/金币(1).png" xy="92,108"/>
+    <image id="n7_iasd" name="n7" src="dhhtj3" fileName="assets/playerInfo/金币(1).png" xy="291,30" size="30,31" aspect="true"/>
     <component id="n8_iasd" name="pause" src="iasdl3" fileName="Component/btn/susBtn.xml" xy="950,45"/>
-    <text id="n9_iasd" name="coin" xy="117,108" size="105,27" font="ui://bq3h5insfmzphw" fontSize="12" autoSize="none" singleLine="true" text="0"/>
-    <text id="n10_iasd" name="bullet" xy="374,39" size="86,25" font="ui://bq3h5insfmzphw" fontSize="10" vAlign="middle" autoSize="none" singleLine="true" text=""/>
-    <text id="n11_iasd" name="gre" xy="488,39" size="86,25" font="ui://bq3h5insfmzphw" fontSize="10" vAlign="middle" autoSize="none" singleLine="true" text=""/>
-    <text id="n12_unfj" name="level" xy="245,108" size="133,35" font="SimHei" fontSize="30" color="#ffffff" vAlign="middle" letterSpacing="2" autoSize="none" text="第3关"/>
+    <text id="n9_iasd" name="coin" xy="326,23" size="201,41" font="ui://bq3h5insfmzphw" fontSize="16" vAlign="middle" autoSize="none" singleLine="true" text="01231"/>
+    <text id="n10_iasd" name="bullet" xy="94,76" size="105,41" font="ui://bq3h5insfmzphw" fontSize="16" vAlign="middle" autoSize="none" singleLine="true" text="123"/>
+    <text id="n11_iasd" name="gre" xy="252,77" size="123,41" font="ui://bq3h5insfmzphw" fontSize="16" vAlign="middle" autoSize="none" singleLine="true" text="123"/>
+    <text id="n12_unfj" name="level" xy="51,138" size="133,35" font="SimHei" fontSize="30" color="#ffffff" vAlign="middle" letterSpacing="2" autoSize="none" text="第3关"/>
+    <image id="n13_vmpq" name="n13" src="vmpqxtl" fileName="assets/playerInfo/shoulei.png" xy="51,66" size="40,60" aspect="true"/>
+    <image id="n14_vmpq" name="n14" src="vmpqxtk" fileName="assets/playerInfo/danjia.png" xy="196,67" size="50,60" aspect="true"/>
   </displayList>
 </component>

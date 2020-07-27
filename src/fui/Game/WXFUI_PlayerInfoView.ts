@@ -4,7 +4,6 @@ import WXFUI_susBtn from "./WXFUI_susBtn";
 
 export default class WXFUI_PlayerInfoView extends fairygui.GComponent {
 
-	public m_n0:fairygui.GImage;
 	public m_n2:fairygui.GImage;
 	public m_n3:fairygui.GImage;
 	public m_n4:fairygui.GImage;
@@ -17,6 +16,8 @@ export default class WXFUI_PlayerInfoView extends fairygui.GComponent {
 	public m_bullet:fairygui.GTextField;
 	public m_gre:fairygui.GTextField;
 	public m_level:fairygui.GTextField;
+	public m_n13:fairygui.GImage;
+	public m_n14:fairygui.GImage;
 
 	public static URL:string = "ui://bq3h5insiasdkz";
 
@@ -29,7 +30,6 @@ export default class WXFUI_PlayerInfoView extends fairygui.GComponent {
 	}
 
 	protected onConstruct(): void {
-		this.m_n0 = <fairygui.GImage><any>(this.getChild("n0"));
 		this.m_n2 = <fairygui.GImage><any>(this.getChild("n2"));
 		this.m_n3 = <fairygui.GImage><any>(this.getChild("n3"));
 		this.m_n4 = <fairygui.GImage><any>(this.getChild("n4"));
@@ -42,5 +42,7 @@ export default class WXFUI_PlayerInfoView extends fairygui.GComponent {
 		this.m_bullet = <fairygui.GTextField><any>(this.getChild("bullet"));
 		this.m_gre = <fairygui.GTextField><any>(this.getChild("gre"));
 		this.m_level = <fairygui.GTextField><any>(this.getChild("level"));
+		this.m_n13 = <fairygui.GImage><any>(this.getChild("n13"));
+		this.m_n14 = <fairygui.GImage><any>(this.getChild("n14"));
 	}
 }

@@ -6,7 +6,7 @@
     <group id="n7_vmpq" name="com" xy="-50,0" size="206,50" advanced="true"/>
   </displayList>
   <transition name="ani">
-    <item time="0" type="Alpha" target="n7_vmpq" tween="true" startValue="1" endValue="0" duration="30"/>
-    <item time="0" type="XY" target="n7_vmpq" tween="true" startValue="-50,0" endValue="-50,-100" duration="30"/>
+    <item time="0" type="XY" target="n7_vmpq" tween="true" startValue="-50,0" endValue="-50,-100" duration="24"/>
+    <item time="24" type="Alpha" target="n7_vmpq" tween="true" startValue="1" endValue="0" duration="12"/>
   </transition>
 </component>

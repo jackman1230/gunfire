@@ -113,7 +113,7 @@ export module ui {
     }
     REG("ui.GoodsBodyUI",GoodsBodyUI);
     export class HostageBodyUI extends Laya.View {
-        public static  uiView:any ={"type":"View","props":{"width":76,"height":130},"compId":2,"child":[{"type":"Script","props":{"y":0,"x":0,"width":76,"label":"enemy","isSensor":true,"height":130,"friction":0,"density":0,"runtime":"laya.physics.BoxCollider"},"compId":3},{"type":"Script","props":{"label":"enemy","group":0,"gravityScale":0,"allowRotation":false,"runtime":"laya.physics.RigidBody"},"compId":4}],"loadList":[],"loadList3D":[]};
+        public static  uiView:any ={"type":"View","props":{"width":76,"height":130},"compId":2,"child":[{"type":"Script","props":{"y":0,"x":0,"width":76,"label":"hostage","isSensor":true,"height":130,"friction":0,"density":0,"runtime":"laya.physics.BoxCollider"},"compId":3},{"type":"Script","props":{"label":"hostage","group":0,"gravityScale":0,"allowRotation":false,"runtime":"laya.physics.RigidBody"},"compId":4}],"loadList":[],"loadList3D":[]};
         constructor(){ super()}
         createChildren():void {
             super.createChildren();
@@ -302,7 +302,7 @@ export module ui {
     }
     REG("ui.ObstacleView_9UI",ObstacleView_9UI);
     export class PlayerBodyUI extends Laya.View {
-        public static  uiView:any ={"type":"View","props":{"width":55,"height":90},"compId":2,"child":[{"type":"Script","props":{"y":0,"x":0,"width":55,"label":"player","isSensor":false,"height":90,"friction":0,"density":20,"runtime":"laya.physics.BoxCollider"},"compId":3},{"type":"Script","props":{"type":"dynamic","label":"player","group":0,"gravityScale":2,"allowRotation":false,"runtime":"laya.physics.RigidBody"},"compId":4}],"loadList":[],"loadList3D":[]};
+        public static  uiView:any ={"type":"View","props":{"width":55,"height":105},"compId":2,"child":[{"type":"Script","props":{"y":0,"x":0,"width":55,"label":"player","isSensor":false,"height":105,"friction":0,"density":20,"runtime":"laya.physics.BoxCollider"},"compId":3},{"type":"Script","props":{"type":"dynamic","label":"player","group":0,"gravityScale":2,"allowRotation":false,"runtime":"laya.physics.RigidBody"},"compId":4}],"loadList":[],"loadList3D":[]};
         constructor(){ super()}
         createChildren():void {
             super.createChildren();

@@ -73,7 +73,7 @@ export default class BulletBody extends Laya.Script {
     onUpdate(): void {
         if (this.bulletType == GameData.WEAPON_RIFLE) return;
         if (this.self.x > this.disposeRight || this.self.x < this.disposeLeft) {
-            console.log("this.self--", this.self.x);
+            // console.log("this.self--", this.self.x);
             this.owner.removeSelf();
             EventManager.instance.dispatcherEvt(GameEvent.BULLET_DISPOSE, this.owner);
         }

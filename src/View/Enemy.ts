@@ -4,7 +4,7 @@ import { ViewManager } from "../Manager/ViewManager";
 import EnemyBody from "./Body/EnemyBody";
 import GameEvent from "../Control/GameEvent";
 import { EventManager } from "../Manager/EventManager";
-import { GameData, ShotDirectionData } from "../Data/GameData";
+import { GameData, ShotDirectionData, BombData } from "../Data/GameData";
 import { EnemyInfo } from "../Data/PlayerData";
 import { GameManager } from "../Manager/GameManager";
 import { SoundManager } from "../Manager/SoundManager";
@@ -282,7 +282,7 @@ export default class Enemy {
     }
 
     protected morComplete(): void {
-        ViewManager.instance.createBomb(GameData.ENEMY_MOR, this.direction, ViewManager.instance.getBodyCenterPos(this.scene), false);
+        ViewManager.instance.createBomb(BombData.BOMB_MOR, this.direction, ViewManager.instance.getBodyCenterPos(this.scene), false);
         this.setIdle();
     }
 
@@ -298,12 +298,12 @@ export default class Enemy {
     }
     /**火箭筒攻击动作完成 */
     protected shot4Complete(): void {
-        ViewManager.instance.createEnemyBullet(GameData.ENEMY_FIRE, this.direction, ViewManager.instance.getBodyCenterPos(this.scene));
+        ViewManager.instance.createBomb(BombData.BOMB_FIRE, this.direction, ViewManager.instance.getBodyCenterPos(this.scene), false);
         this.setIdle();
     }
 
     protected bombComplete(): void {
-        ViewManager.instance.createBomb(GameData.ENEMY_GRE, this.direction, ViewManager.instance.getBodyCenterPos(this.scene), false);
+        ViewManager.instance.createBomb(BombData.BOMB_ENEMY_GRE, this.direction, ViewManager.instance.getBodyCenterPos(this.scene), false);
         this.setIdle();
     }
     protected tankeComplete(): void {

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1334,750">
+  <displayList>
+    <loader id="n16_vmpq" name="box" xy="417,-116" size="500,481" url="ui://bq3h5insvmpqxu1"/>
+    <component id="n17_vmpq" name="bar" src="vmpqxu5" fileName="Component/enemy/renzhi/loadingBar.xml" xy="233,306">
+      <ProgressBar value="50" max="100"/>
+    </component>
+    <text id="n18_vmpq" name="n18" xy="289,378" pivot="0.5,0.5" size="755,86" font="SimHei" fontSize="50" color="#ffffff" align="center" vAlign="middle" autoSize="none" text="请快速点击按钮打开宝箱"/>
+    <component id="n19_vmpq" name="clickBtn" src="vmpqxu9" fileName="Component/enemy/renzhi/openChestBtn.xml" xy="575,630"/>
+  </displayList>
+  <transition name="t0"/>
+</component>

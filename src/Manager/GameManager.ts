@@ -22,6 +22,8 @@ export class GameManager {
 
     public enemyArr: Enemy[] = [];
 
+    public misTouchNum: number = 0;
+
     // public bossDeath: boolean = false;//当前关卡boss是否阵亡
 
     public isPauseGame: boolean = false;

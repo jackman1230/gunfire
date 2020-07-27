@@ -64,6 +64,9 @@ import WXFUI_TipsPopView from "./WXFUI_TipsPopView";
 import WXFUI_volume from "./WXFUI_volume";
 import WXFUI_abandon from "./WXFUI_abandon";
 import WXFUI_hostage from "./WXFUI_hostage";
+import WXFUI_ClickChestView from "./WXFUI_ClickChestView";
+import WXFUI_loadingBar from "./WXFUI_loadingBar";
+import WXFUI_openChestBtn from "./WXFUI_openChestBtn";
 import WXFUI_zidan from "./WXFUI_zidan";
 
 export default class GameBinder{
@@ -132,6 +135,9 @@ export default class GameBinder{
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_volume.URL, WXFUI_volume);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_abandon.URL, WXFUI_abandon);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_hostage.URL, WXFUI_hostage);
+		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_ClickChestView.URL, WXFUI_ClickChestView);
+		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_loadingBar.URL, WXFUI_loadingBar);
+		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_openChestBtn.URL, WXFUI_openChestBtn);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_zidan.URL, WXFUI_zidan);
 	}
 }

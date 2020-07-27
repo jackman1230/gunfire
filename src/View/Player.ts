@@ -9,7 +9,7 @@ import { SoundManager } from "../Manager/SoundManager";
 import PlayerCtlView from "./PlayerCtlView";
 import PlayerBullet from "./PlayerBullet";
 import { ui } from "../ui/layaMaxUI";
-import { GameData } from "../Data/GameData";
+import { GameData, BombData } from "../Data/GameData";
 import PlayerDirView from "./PlayerDirView";
 import { PlayerSk } from "./PlayerSk";
 
@@ -524,7 +524,7 @@ export class Player extends Laya.Script {
         //     })
         // }
         Laya.timer.once(600, this, this.setBoomComplete);
-        ViewManager.instance.createBomb(PlayerData.WEAPON_GRE, this.direction, ViewManager.instance.getBodyCenterPos(this.roleSprite), true);
+        ViewManager.instance.createBomb(BombData.BOMB_MY_GRE, this.direction, ViewManager.instance.getBodyCenterPos(this.roleSprite), true);
     }
 
     private setBoomComplete(): void {
@@ -720,7 +720,7 @@ export class Player extends Laya.Script {
                 // this.faceType = 3;
                 // this.setFaceType();
                 // this.setBoom();
-                this.faceType = -5;
+                this.faceType = 4;
                 this.setFaceType();
                 break;
             case 83:

@@ -70,6 +70,7 @@ export default class Tank extends Enemy {
             } else {
                 this.bodyLoader.component.getChildAt(0).asLoader.content.color = "#ff0000";
                 Laya.timer.once(200, this, this.setColor);
+                ViewManager.instance.createDamageView(s.d, this.scene);
             }
         }
     }

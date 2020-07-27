@@ -6,6 +6,7 @@ import { GoodsType, GameData } from "../Data/GameData";
 import { PlayerData } from "../Data/PlayerData";
 import { SoundManager } from "../Manager/SoundManager";
 import { ViewManager } from "../Manager/ViewManager";
+import { MooSnowSDK } from "../Manager/MooSnowSDK";
 
 export default class PlayerInfoView {
 
@@ -75,7 +76,7 @@ export default class PlayerInfoView {
             if (GameManager.instance.roleInfo.blood > 3)
                 GameManager.instance.roleInfo.blood = 3;
             this.updatePlayerBlood();
-            ViewManager.instance.createAddGold(t, 1);
+            ViewManager.instance.createAddGold(t, 1, true);
         } else if (t == GoodsType.GoodsType_MAC) {
             if (GameManager.instance.roleInfo.weaponType == PlayerData.WEAPON_MAC) {
                 GameManager.instance.roleInfo.bulletNum += GameManager.instance.roleInfo.addMacNum;
@@ -85,7 +86,7 @@ export default class PlayerInfoView {
             }
             EventManager.instance.dispatcherEvt(GameEvent.CHANGE_PLAYER_WEAPON, GameManager.instance.roleInfo.weaponType);
             this.updateBulletNum();
-            ViewManager.instance.createAddGold(t, GameManager.instance.roleInfo.addMacNum);
+            ViewManager.instance.createAddGold(t, GameManager.instance.roleInfo.addMacNum, true);
 
         } else if (t == GoodsType.GoodsType_RIF) {
             if (GameManager.instance.roleInfo.weaponType == PlayerData.WEAPON_RIFLE) {
@@ -96,31 +97,34 @@ export default class PlayerInfoView {
             }
             this.updateBulletNum();
             EventManager.instance.dispatcherEvt(GameEvent.CHANGE_PLAYER_WEAPON, GameManager.instance.roleInfo.weaponType);
-            ViewManager.instance.createAddGold(t, GameManager.instance.roleInfo.addRifNum);
+            ViewManager.instance.createAddGold(t, GameManager.instance.roleInfo.addRifNum, true);
         } else if (t == GoodsType.GoodsType_GRE) {
             GameManager.instance.roleInfo.bombNum += GameManager.instance.roleInfo.addBombNum;
             this.updateGreNum();
-            ViewManager.instance.createAddGold(t, GameManager.instance.roleInfo.addBombNum);
+            ViewManager.instance.createAddGold(t, GameManager.instance.roleInfo.addBombNum, true);
         } else if (t == GoodsType.GoodsType_COIN) {
             var coin: number = this.getRandomCoin();
             GameManager.instance.roleInfo.curlvCoin += coin;
             GameManager.instance.roleInfo.totalCoin += coin;
             this.updateCoin();
-            ViewManager.instance.createAddGold(t, coin);
+            ViewManager.instance.createAddGold(t, coin, true);
         } else if (t == GoodsType.GoodsType_BOX) {
-            let type: number = this.getRandomGoodsType();
-            if (type == GoodsType.GoodsType_COIN) {
-                var c: number = this.getRandomCoin();
-                ViewManager.instance.createAddGold(type, c, true);
+            GameManager.instance.misTouchNum++;
+            if (GameManager.instance.misTouchNum % (MooSnowSDK.misTouchNum + 1) == 0) {
+                ViewManager.instance.showClickChestView();
+                GameManager.instance.misTouchNum = 0;
             } else {
-                ViewManager.instance.createAddGold(type, 0, true);
+                let type: number = this.getRandomGoodsType();
+                this.changePlayerGoods(type);
             }
+        } else if (t == GoodsType.GoodsType_OPEN_BOX) {
+            // ViewManager.instance.showClickChestView();
+            let type: number = this.getRandomGoodsType();
+            this.changePlayerGoods(type);
         }
     }
 
     private decPlayerBlood(): void {
-        // GameManager.instance.roleInfo.blood--;
-        // if (GameManager.instance.roleInfo.blood < 0) GameManager.instance.roleInfo.blood = 0;
         this.updatePlayerBlood();
     }
 

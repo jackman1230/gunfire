@@ -14,10 +14,6 @@ import GoodsView from "../View/GoodsView";
 import PlayerInfoView from "../View/PlayerInfoView";
 import PlayerCtlView from "../View/PlayerCtlView";
 import WXFUI_loadingView from "../fui/loading/WXFUI_loadingView";
-import SuspendView from "../View/SuspendView";
-import ChapterView from "../View/ChapterView";
-import AfterWar from "../View/AfterWar";
-import BeforeWar from "../View/BeforeWar";
 import PopUpView from "../View/PopUpView";
 import TipsPopView from "../View/TipsPopView";
 import { SoundManager } from "./SoundManager";
@@ -28,6 +24,12 @@ import PlayerPan from "../View/PlayerPan";
 import DamageView from "../View/DamageView";
 import AddGold from "../View/AddGold";
 import HostageView from "../View/HostageView";
+import SuspendView from "../View/PopView/SuspendView";
+import ChapterView from "../View/PopView/ChapterView";
+import AfterWar from "../View/PopView/AfterWar";
+import BeforeWar from "../View/PopView/BeforeWar";
+import ClickChestView from "../View/PopView/ClickChestView";
+import { GameManager } from "./GameManager";
 
 export class ViewManager {
 
@@ -45,6 +47,7 @@ export class ViewManager {
     public chapterView: ChapterView;
     public afterWar: AfterWar;
     public beforeWar: BeforeWar;
+    public clickChestView: ClickChestView;
 
     public tipsView: TipsPopView;
     public popUpView: PopUpView;
@@ -113,9 +116,9 @@ export class ViewManager {
     /**创建步兵扔的雷 */
     public createBomb(type: number, dir: number, parentPos: Laya.Point, b: boolean): void {
         var bomb: BombView = Laya.Pool.getItemByClass("bombView", BombView);
-        if (b)
-            bomb.createView(BombData.BOMB_MY_GRE, dir, parentPos, b, this.getPlayerBulletOffSetPos(dir, type));
-        else
+        if (b)//自己扔雷
+            bomb.createView(BombData.BOMB_MY_GRE, dir, parentPos, b, this.getPlayerBulletOffSetPos(dir, 4));
+        else//敌人扔雷，或者迫击炮导弹，或者火箭筒导弹
             bomb.createView(type, dir, parentPos, b, this.getEnemyBulletOffSetPos(dir, type));
     }
     /**创建飞机的导弹 */
@@ -235,8 +238,13 @@ export class ViewManager {
     }
 
     public showSuspendView(): void {
-        // this.showPopUpView(this.suspendView);
         this.suspendView.showViewNoTween();
+    };
+
+    public showClickChestView(): void {
+        this.clickChestView.showViewNoTween();
+        GameManager.instance.suspendGame();
+        this.clickChestView.updateView();
     };
     public hideSuspendView(): void {
         // this.showPopUpView(this.suspendView);
@@ -259,6 +267,7 @@ export class ViewManager {
         this.beforeWar = new BeforeWar()
         this.suspendView = new SuspendView();
         this.chapterView = new ChapterView();
+        this.clickChestView = new ClickChestView();
         this.popUpView = new PopUpView();
         this.tipsView = new TipsPopView();
 
@@ -266,6 +275,7 @@ export class ViewManager {
         this.beforeWar.createView();
         this.suspendView.createView();
         this.chapterView.createView();
+        this.clickChestView.createView();
 
         Laya.stage.addChild(fairygui.GRoot.inst.displayObject);
 
@@ -385,38 +395,38 @@ export class ViewManager {
 
     /**角色子弹坐标偏移 第一位是方向，第二位是武器类型*/
     private playerBulletPos: object = {
-        "11": [35, 5],//武器手枪，方向 右
-        "12": [35, 0],//武器机枪，方向 右
-        "13": [0, 80],//武器来福枪，方向 右
+        "11": [65, -5],//武器手枪，方向 右
+        "12": [65, 0],//武器机枪，方向 右
+        "13": [30, 80],//武器来福枪，方向 右
         "21": [125, 25],//武器手枪，方向 右下
         "22": [115, 70],//武器机枪，方向 右下
         "23": [50, 5],//武器来福枪，方向 右下
         "31": [115, -95],//武器手枪，方向 右上
         "32": [120, -50],//武器机枪，方向 右上
         "33": [25, 130],//武器来福枪，方向 右上
-        "41": [-30, -185],//武器手枪，方向 上
-        "42": [-30, -185],//武器机枪，方向 上
+        "41": [-35, -135],//武器手枪，方向 上
+        "42": [-35, -135],//武器机枪，方向 上
         "43": [50, 200],//武器来福枪，方向 上
-        "51": [35, 15],//武器手枪，方向 右蹲下
-        "52": [35, 15],//武器机枪，方向 右蹲下
-        "53": [0, 95],//武器来福枪，方向 右蹲下
-        "14": [20, -60],//武器手雷，方向右
-        "-11": [-195, 5],//武器手枪，方向 左
-        "-12": [-200, 0],//武器机枪，方向 左
-        "-13": [185, 85],//武器来福枪，方向 左
-        "-14": [-20, -60],//武器手雷，方向 左
+        "51": [65, 15],//武器手枪，方向 右蹲下
+        "52": [65, 15],//武器机枪，方向 右蹲下
+        "53": [30, 95],//武器来福枪，方向 右蹲下
+        "14": [40, -30],//武器手雷，方向右
+        "-11": [-145, -5],//武器手枪，方向 左
+        "-12": [-150, 0],//武器机枪，方向 左
+        "-13": [235, 85],//武器来福枪，方向 左
+        "-14": [-60, -30],//武器手雷，方向 左
         "-21": [-190, 20],//武器手枪，方向 左下
         "-22": [-180, 15],//武器机枪，方向 左下
         "-23": [250, 20],//武器来福枪，方向 左下
         "-31": [-190, -90],//武器手枪，方向 左上
         "-32": [-180, -50],//武器机枪，方向 左上
         "-33": [255, 130],//武器来福枪，方向 左上
-        "-41": [-30, -185],//武器手枪，方向 上
-        "-42": [-30, -185],//武器机枪，方向 上
-        "-43": [55, 200],//武器来福枪，方向 上
-        "-51": [-200, 17],//武器手枪，方向 左蹲下
-        "-52": [-205, 15],//武器机枪，方向 左蹲下
-        "-53": [200, 100],//武器来福枪，方向 左蹲下
+        "-41": [-20, -135],//武器手枪，方向 上
+        "-42": [-20, -135],//武器机枪，方向 上
+        "-43": [70, 200],//武器来福枪，方向 上
+        "-51": [-170, 17],//武器手枪，方向 左蹲下
+        "-52": [-175, 15],//武器机枪，方向 左蹲下
+        "-53": [245, 100],//武器来福枪，方向 左蹲下
     }
     /**角色子弹坐标偏移 */
     public getPlayerBulletOffSetPos(dir: number, weaponType: number): Laya.Point {
@@ -431,8 +441,8 @@ export class ViewManager {
         "11": [105, 10],//武器手枪，方向右
         "12": [10, -40],//武器手雷，方向右
         "13": [125, 15],//武器机枪，方向右
-        "14": [],//武器火箭筒，方向右
         "15": [70, -20],//武器迫击炮，方向右
+        "16": [130, 0],//武器火箭筒，方向右
         "111": [-25, 15],//武器坦克11，方向右
         "112": [-5, 25],//武器坦克12，方向右
         "113": [-75, 15],//武器坦克13，方向右
@@ -440,8 +450,8 @@ export class ViewManager {
         "-11": [-100, 10],//武器手枪，方向左
         "-12": [0, -50],//武器手雷，方向左
         "-13": [-75, 15],//武器机枪，方向左
-        "-14": [],//武器火箭筒，方向左
         "-15": [0, -20],//武器迫击炮，方向左
+        "-16": [-20, 0],//武器火箭筒，方向左
         "-111": [0, 15],//武器坦克11，方向左
         "-112": [-50, 30],//武器坦克12，方向左
         "-113": [20, 20],//武器坦克13，方向左

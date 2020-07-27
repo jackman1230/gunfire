@@ -812,6 +812,32 @@
     <component id="vmpqxtc" name="hostage.xml" path="/Component/enemy/renzhi/" exported="true"/>
     <movieclip id="vmpqxte" name="hostageIdle.jta" path="/Component/enemy/renzhi/" exported="true"/>
     <image id="vmpqxti" name="goods_6.png" path="/Component/goods/" exported="true"/>
+    <image id="vmpqxtj" name="zhadan_6.png" path="/assets/zadan/" exported="true"/>
+    <image id="vmpqxtk" name="danjia.png" path="/assets/playerInfo/"/>
+    <image id="vmpqxtl" name="shoulei.png" path="/assets/playerInfo/"/>
+    <image id="vmpqxtm" name="bao9.png" path="/assets/chest/"/>
+    <image id="vmpqxtn" name="bao8.png" path="/assets/chest/"/>
+    <image id="vmpqxto" name="bao7.png" path="/assets/chest/"/>
+    <image id="vmpqxtp" name="bao6.png" path="/assets/chest/"/>
+    <image id="vmpqxtq" name="bao5.png" path="/assets/chest/"/>
+    <image id="vmpqxtr" name="bao4.png" path="/assets/chest/"/>
+    <image id="vmpqxts" name="bao3.png" path="/assets/chest/"/>
+    <image id="vmpqxtt" name="bao2.png" path="/assets/chest/"/>
+    <image id="vmpqxtu" name="bao15.png" path="/assets/chest/"/>
+    <image id="vmpqxtv" name="bao14.png" path="/assets/chest/"/>
+    <image id="vmpqxtw" name="bao13.png" path="/assets/chest/"/>
+    <image id="vmpqxtx" name="bao12.png" path="/assets/chest/"/>
+    <image id="vmpqxty" name="bao11.png" path="/assets/chest/"/>
+    <image id="vmpqxtz" name="bao10.png" path="/assets/chest/"/>
+    <image id="vmpqxu0" name="bao1.png" path="/assets/chest/"/>
+    <movieclip id="vmpqxu1" name="chestClose.jta" path="/Component/enemy/renzhi/" exported="true"/>
+    <movieclip id="vmpqxu2" name="chestOpen.jta" path="/Component/enemy/renzhi/" exported="true"/>
+    <component id="vmpqxu4" name="ClickChestView.xml" path="/Component/enemy/renzhi/" exported="true"/>
+    <component id="vmpqxu5" name="loadingBar.xml" path="/Component/enemy/renzhi/"/>
+    <image id="vmpqxu6" name="jiazaikuang.png" path="/Component/enemy/renzhi/load/切图/"/>
+    <image id="vmpqxu7" name="加载条.png" path="/Component/enemy/renzhi/load/切图/" scale="9grid" scale9grid="60,7,332,16"/>
+    <image id="vmpqxu8" name="clickImg.png" path="/Component/enemy/renzhi/"/>
+    <component id="vmpqxu9" name="openChestBtn.xml" path="/Component/enemy/renzhi/"/>
   </resources>
   <publish name="Game" path="..\bin\res" packageCount="2" genCode="true" codePath="..\src\fui"/>
 </packageDescription>

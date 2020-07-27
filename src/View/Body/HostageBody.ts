@@ -11,7 +11,7 @@ export default class HostageBody extends Laya.Script {
     private oriPosX: number;
     private self: Laya.Sprite;
 
-    public activeDis: number = 100;
+    public activeDis: number = 150;
     private isActive: boolean = false;
 
     constructor() { super(); }
@@ -40,8 +40,6 @@ export default class HostageBody extends Laya.Script {
     onUpdate(): void {
         // this.setSpeedZero();
         if (this.isActive) return;
-        console.log("this.oriPosX", this.oriPosX);
-        console.log("xxx", ViewManager.instance.rolePlayer.roleSprite.x);
 
         if (Math.abs(ViewManager.instance.rolePlayer.roleSprite.x - this.oriPosX) < this.activeDis) {
             this.isActive = true;

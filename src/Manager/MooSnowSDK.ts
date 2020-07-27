@@ -1,6 +1,10 @@
 
 export class MooSnowSDK {
 
+    public static misTouchNum: number = 0;
+
+    public static mistouchPos: number = 0;
+
 
     public static login(): void {
         moosnow.platform.login(() => {
@@ -102,7 +106,9 @@ export class MooSnowSDK {
     public static getMistouchPosNum(): void {
         var misTouchPosNum = 0;
         moosnow.http.getMistouchPosNum((res) => {
-            misTouchPosNum = res;		//位移次数间隔
+            MooSnowSDK.mistouchPos = misTouchPosNum = res;		//位移次数间隔
+            console.log("误点位移次数间隔", res);
+
         })
     }
 
@@ -114,7 +120,8 @@ export class MooSnowSDK {
     public static getMisTouchNum(): void {
         var misTouchNum = 0;
         moosnow.http.getMisTouchNum((res) => {
-            misTouchNum = res;		//误点次数间隔
+            MooSnowSDK.misTouchNum = misTouchNum = res;		//误点次数间隔
+            console.log("误点次数间隔", res);
         })
     }
     /**

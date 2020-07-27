@@ -39,14 +39,18 @@ export default class BombView {
 
     protected loadComplete(): void {
         this.view = fairygui.UIPackage.createObject("Game", "Bomb") as WXFUI_Bomb;
-        this.view.m_boom.visible = this.view.m_boom2.visible = false;
+        this.view.m_boom3.visible = this.view.m_boom.visible = this.view.m_boom2.visible = false;
         if (this.bombType == BombData.BOMB_MOR) {
             this.view.m_boom.visible = true;
             this.trans = this.view.getTransitionAt(0);
         } else if (this.bombType == BombData.BOMB_ENEMY_GRE || this.bombType == BombData.BOMB_MY_GRE) {
             this.view.m_boom2.visible = true;
             this.trans = this.view.getTransitionAt(1);
+        } else if (this.bombType == BombData.BOMB_FIRE) {
+            this.view.m_boom3.visible = true;
+            this.trans = this.view.getTransitionAt(2);
         }
+
         this.scene.addComponent(BombBody);
         this.body = this.scene.getComponent(Laya.RigidBody);
         this.box = this.scene.getComponent(Laya.BoxCollider);
@@ -55,7 +59,7 @@ export default class BombView {
         } else {
             this.box.label = this.body.label = "enemyBomb";
         }
-        this.view.m_boom.url = this.view.m_boom2.url = "ui://Game/zhadan_" + this.bombType;
+        this.view.m_boom3.url = this.view.m_boom.url = this.view.m_boom2.url = "ui://Game/zhadan_" + this.bombType;
         if (this.bombType == BombData.BOMB_ENEMY_GRE)
             this.view.m_boom2.content.setPlaySettings(0, -1, 0, 0);
 
@@ -75,13 +79,25 @@ export default class BombView {
 
     protected setBombPos(): void {
         if (this.direction == 1) {
-            this.body.setVelocity({ x: 7, y: -6 });
-            if (this.bombType == BombData.BOMB_MOR)
+            if (this.bombType == BombData.BOMB_MOR) {
+                this.body.setVelocity({ x: 7, y: -6 });
                 this.trans.play(null, 1, 0, 0, 1.25);
+            } else if (this.bombType == BombData.BOMB_FIRE) {
+                this.body.setVelocity({ x: 12, y: 0 });
+                this.trans.play(null, 1, 0, 0, 1.25);
+            } else if (this.bombType == BombData.BOMB_MY_GRE || this.bombType == BombData.BOMB_ENEMY_GRE) {
+                this.body.setVelocity({ x: 7, y: -6 });
+            }
         } else {
-            this.body.setVelocity({ x: -7, y: -6 });
-            if (this.bombType == BombData.BOMB_MOR)
+            if (this.bombType == BombData.BOMB_MOR) {
+                this.body.setVelocity({ x: -7, y: -6 });
                 this.trans.play(null, 1, 0, 1.5, 2.75);
+            } else if (this.bombType == BombData.BOMB_FIRE) {
+                this.body.setVelocity({ x: -12, y: 0 });
+                this.trans.play(null, 1, 0, 1.5, 2.75);
+            } else if (this.bombType == BombData.BOMB_MY_GRE || this.bombType == BombData.BOMB_ENEMY_GRE) {
+                this.body.setVelocity({ x: -7, y: -6 });
+            }
         }
         this.scene.x = this.parentPos.x + this.offPos.x;
         this.scene.y = this.parentPos.y + this.offPos.y;

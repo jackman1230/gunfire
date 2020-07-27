@@ -38,7 +38,7 @@ export class PlayerSk {
     public static ATTACK_2: string = "attack2";
     constructor() {
         this.role = new Laya.Sprite();
-
+        this.role.x = 30;
 
         this.templet1 = new Laya.Templet();
         this.templet1.loadAni("res/zhujue_body.sk");
@@ -55,10 +55,6 @@ export class PlayerSk {
         this.weapon3 = new Laya.Templet();
         this.weapon3.loadAni("res/hero_arm.sk");
         this.weapon3.on(Laya.Event.COMPLETE, this, this.weaponComplete3);
-
-        // this.templet3 = new Laya.Templet();
-        // this.templet3.loadAni("res/zhujue.sk");
-        // this.templet3.on(Laya.Event.COMPLETE, this, this.parseComplete3);
     }
 
     public parseComplete(): void {
@@ -142,6 +138,7 @@ export class PlayerSk {
     public setWeapon(type: number): void {
         console.log("ssss--", type);
         this.weaponType = type;
+        this.arm.stop();
         this.role.removeChildren();
         this.role.addChild(this.body);
         this.role.addChild(this.arm);
