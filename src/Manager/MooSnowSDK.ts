@@ -1,3 +1,4 @@
+import { GameManager } from "./GameManager";
 
 export class MooSnowSDK {
 
@@ -50,7 +51,9 @@ export class MooSnowSDK {
     */
     public static getAD(): void {
         moosnow.ad.getAd((r) => {
-            console.log('广告数据 ', r)
+            console.log('广告数据 ', r);
+            GameManager.instance.adList = r.indexLeft.concat();
+            GameManager.instance.setADlist();
         })
     }
 

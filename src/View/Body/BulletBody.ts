@@ -71,22 +71,11 @@ export default class BulletBody extends Laya.Script {
     }
 
     onUpdate(): void {
-        if (this.bulletType == GameData.WEAPON_RIFLE) return;
-        if (this.self.x > this.disposeRight || this.self.x < this.disposeLeft) {
-            // console.log("this.self--", this.self.x);
+        // if (this.bulletType == GameData.WEAPON_RIFLE) return;
+        if (this.self.x > this.disposeRight || this.self.x < this.disposeLeft || this.self.y < -50 || this.self.y > Laya.stage.height + 50) {
+            console.log("BULLET_DISPOSE--", this.self.x);
             this.owner.removeSelf();
             EventManager.instance.dispatcherEvt(GameEvent.BULLET_DISPOSE, this.owner);
         }
-        // if (this.selfBody.label.indexOf("PlayerBullet") > -1 || this.selfBody.label.indexOf("enemyBullet") > -1) {
-        //     if (this.oriPosX < this.self.x) {
-        //         if (Math.abs(this.self.x - this.oriPosX) > Laya.stage.width * 0.7) {
-        //         }
-        //     } else {
-        //         if (Math.abs(this.oriPosX - this.self.x) > Laya.stage.width * 0.7) {
-        //             this.owner.removeSelf();
-        //             EventManager.instance.dispatcherEvt(GameEvent.BULLET_DISPOSE, this.owner);
-        //         }
-        //     }
-        // }
     }
 }

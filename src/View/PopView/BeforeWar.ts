@@ -39,8 +39,8 @@ export default class BeforeWar extends PopUpView {
         }
 
         this.view.m_ad.m_list.itemRenderer = Laya.Handler.create(this, this.setADItem, null, false);
-        this.view.m_ad.m_list.numItems = 10;
-        this.view.m_ad.m_list.width = 135 * 10;
+        this.view.m_ad.m_list.numItems = GameManager.instance.adList.length;
+        this.view.m_ad.m_list.width = 136 * GameManager.instance.adList.length;
         this.view.m_ad.m_list.on(fairygui.Events.CLICK_ITEM, this, this.onClickItem);
         // this.showADList();
     }
@@ -82,21 +82,29 @@ export default class BeforeWar extends PopUpView {
     }
 
     private setADItem(index: number, item: WXFUI_ADItem): void {
-
+        var d: any = GameManager.instance.adList[index];
+        item.data = d;
+        item.m_icon.url = d.img;
+        item.m_name.text = d.title;
     }
 
     private onClickItem(e: WXFUI_ADItem): void {
-        console.log(this.view.m_ad.m_list.getChildIndex(e));
-
+        var m: moosnowAdRow = e.data as moosnowAdRow;
+        console.log("ad--", m);
+        moosnow.platform.navigate2Mini(m, (res) => {
+            console.log('跳转成功 ', res)
+        }, (res) => {
+            console.log('跳转失败 ', res)
+        });
     }
 
     private adMoveLeft(): void {
-        Laya.Tween.to(this.view.m_ad.m_list, { x: this.view.m_ad.width - 135 * 10 }, 5000, null, Laya.Handler.create(this, this.adMoveRight));
+        Laya.Tween.to(this.view.m_ad.m_list, { x: this.view.m_ad.width - 136 * GameManager.instance.adList.length }, GameManager.instance.adTime, null, Laya.Handler.create(this, this.adMoveRight));
 
     }
 
     private adMoveRight(): void {
-        Laya.Tween.to(this.view.m_ad.m_list, { x: 0 }, 5000, null, Laya.Handler.create(this, this.adMoveLeft));
+        Laya.Tween.to(this.view.m_ad.m_list, { x: 0 }, GameManager.instance.adTime, null, Laya.Handler.create(this, this.adMoveLeft));
     }
 
     public hideAllView(): void {

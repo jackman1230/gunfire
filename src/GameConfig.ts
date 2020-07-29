@@ -10,11 +10,11 @@ export default class GameConfig{
     static screenMode:string="none";
     static alignV:string="top";
     static alignH:string="left";
-    static startScene:any="map_1.scene";
+    static startScene:any="BulletSan.scene";
     static sceneRoot:string="";
     static debug:boolean=false;
     static stat:boolean=false;
-    static physicsDebug:boolean=false;
+    static physicsDebug:boolean=true;
     static exportSceneToJson:boolean=true;
     constructor(){}
     static init(){

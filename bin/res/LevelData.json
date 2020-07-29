@@ -122,8 +122,8 @@
                     "damage": 1,
                     "activeDis": 500,
                     "pos": [
-                        3900,
-                        480
+                        2800,
+                        320
                     ],
                     "isBoss": false,
                     "expRate": [
@@ -180,22 +180,6 @@
                     "isBoss": false,
                     "expRate": []
                 },
-                "enemy_2": {
-                    "type": 5,
-                    "direction": -1,
-                    "blood": 5,
-                    "damage": 1,
-                    "activeDis": 500,
-                    "pos": [
-                        1363,
-                        341
-                    ],
-                    "isBoss": false,
-                    "expRate": [
-                        1,
-                        1
-                    ]
-                },
                 "enemy_3": {
                     "type": 3,
                     "direction": -1,
@@ -251,7 +235,7 @@
                     "damage": 1,
                     "activeDis": 500,
                     "pos": [
-                        2463,
+                        3063,
                         351
                     ],
                     "isBoss": false,
@@ -1416,8 +1400,8 @@
                     "damage": 1,
                     "activeDis": 500,
                     "pos": [
-                        3900,
-                        480
+                        2800,
+                        320
                     ],
                     "isBoss": false,
                     "expRate": [
@@ -3191,8 +3175,8 @@
                     "damage": 1,
                     "activeDis": 500,
                     "pos": [
-                        3900,
-                        480
+                        2800,
+                        320
                     ],
                     "isBoss": false,
                     "expRate": [

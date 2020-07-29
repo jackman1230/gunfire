@@ -85,7 +85,9 @@ export default class BombView {
             } else if (this.bombType == BombData.BOMB_FIRE) {
                 this.body.setVelocity({ x: 12, y: 0 });
                 this.trans.play(null, 1, 0, 0, 1.25);
-            } else if (this.bombType == BombData.BOMB_MY_GRE || this.bombType == BombData.BOMB_ENEMY_GRE) {
+            } else if (this.bombType == BombData.BOMB_MY_GRE) {
+                this.body.setVelocity({ x: 10, y: -7 });
+            } else if (this.bombType == BombData.BOMB_ENEMY_GRE) {
                 this.body.setVelocity({ x: 7, y: -6 });
             }
         } else {
@@ -95,7 +97,9 @@ export default class BombView {
             } else if (this.bombType == BombData.BOMB_FIRE) {
                 this.body.setVelocity({ x: -12, y: 0 });
                 this.trans.play(null, 1, 0, 1.5, 2.75);
-            } else if (this.bombType == BombData.BOMB_MY_GRE || this.bombType == BombData.BOMB_ENEMY_GRE) {
+            } else if (this.bombType == BombData.BOMB_MY_GRE) {
+                this.body.setVelocity({ x: -10, y: -7 });
+            } else if (this.bombType == BombData.BOMB_ENEMY_GRE) {
                 this.body.setVelocity({ x: -7, y: -6 });
             }
         }

@@ -12,6 +12,7 @@ import WXFUI_enemy_fire_5 from "./WXFUI_enemy_fire_5";
 import WXFUI_enemy5 from "./WXFUI_enemy5";
 import WXFUI_backHomeBtn from "./WXFUI_backHomeBtn";
 import WXFUI_restartBtn from "./WXFUI_restartBtn";
+import WXFUI_continueBtn from "./WXFUI_continueBtn";
 import WXFUI_BeforeWar from "./WXFUI_BeforeWar";
 import WXFUI_buyItem from "./WXFUI_buyItem";
 import WXFUI_enterBtn from "./WXFUI_enterBtn";
@@ -67,6 +68,8 @@ import WXFUI_hostage from "./WXFUI_hostage";
 import WXFUI_ClickChestView from "./WXFUI_ClickChestView";
 import WXFUI_loadingBar from "./WXFUI_loadingBar";
 import WXFUI_openChestBtn from "./WXFUI_openChestBtn";
+import WXFUI_ADListView from "./WXFUI_ADListView";
+import WXFUI_sandan from "./WXFUI_sandan";
 import WXFUI_zidan from "./WXFUI_zidan";
 
 export default class GameBinder{
@@ -83,6 +86,7 @@ export default class GameBinder{
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy5.URL, WXFUI_enemy5);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_backHomeBtn.URL, WXFUI_backHomeBtn);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_restartBtn.URL, WXFUI_restartBtn);
+		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_continueBtn.URL, WXFUI_continueBtn);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_BeforeWar.URL, WXFUI_BeforeWar);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_buyItem.URL, WXFUI_buyItem);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enterBtn.URL, WXFUI_enterBtn);
@@ -138,6 +142,8 @@ export default class GameBinder{
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_ClickChestView.URL, WXFUI_ClickChestView);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_loadingBar.URL, WXFUI_loadingBar);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_openChestBtn.URL, WXFUI_openChestBtn);
+		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_ADListView.URL, WXFUI_ADListView);
+		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_sandan.URL, WXFUI_sandan);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_zidan.URL, WXFUI_zidan);
 	}
 }

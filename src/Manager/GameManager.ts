@@ -23,6 +23,10 @@ export class GameManager {
     public enemyArr: Enemy[] = [];
 
     public misTouchNum: number = 0;
+    public adOriList: any[] = [];
+    public adList: any[] = [];
+    public adListRever: any[] = [];
+    public adTime: number = 0;
 
     // public bossDeath: boolean = false;//当前关卡boss是否阵亡
 
@@ -246,6 +250,15 @@ export class GameManager {
         }
     }
 
+    public setADlist(): void {
+        this.adOriList = this.adList.concat();//热门游戏需要用到的数组
+        if (this.adList.length <= 5) {
+            this.adList.push(...this.adList);
+        }
+        this.adTime = this.adList.length * 500;
+        this.adListRever = this.adList.concat().reverse();
+    }
+
     public useWeaponPan(x: number, y: number, dir: number): boolean {
         if (dir > 0)
             x -= 50;
@@ -286,7 +299,7 @@ export class GameManager {
         if (type == GameData.WEAPON_PIS) {
             return 1;
         } else if (type == GameData.WEAPON_RIFLE) {
-            return 5;
+            return 2;
         } else if (type == GameData.WEAPON_MAC) {
             return 2;
         } else {

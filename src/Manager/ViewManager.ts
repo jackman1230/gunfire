@@ -30,6 +30,8 @@ import AfterWar from "../View/PopView/AfterWar";
 import BeforeWar from "../View/PopView/BeforeWar";
 import ClickChestView from "../View/PopView/ClickChestView";
 import { GameManager } from "./GameManager";
+import ADListView from "../View/PopView/ADListView";
+import PlayerSanBullet from "../View/PlayerSanBullet";
 
 export class ViewManager {
 
@@ -48,6 +50,7 @@ export class ViewManager {
     public afterWar: AfterWar;
     public beforeWar: BeforeWar;
     public clickChestView: ClickChestView;
+    public adListView: ADListView;
 
     public tipsView: TipsPopView;
     public popUpView: PopUpView;
@@ -126,11 +129,19 @@ export class ViewManager {
         var bomb: ChopperBomb = Laya.Pool.getItemByClass("ChopperBomb", ChopperBomb);
         bomb.createView(type, null, parentPos, null, s);
     }
-    /**创建主角子弹 */
+    /**创建主角单发子弹 */
     public createBullet(): PlayerBullet {
         var b: PlayerBullet = Laya.Pool.getItemByClass("PlayerBullet", PlayerBullet);
         b.createView(this.rolePlayer.weaponType, this.rolePlayer.faceType);
         return b;
+    }
+
+    /**创建主角散弹子弹 */
+    public createSanBullet(): void {
+        for (let i = 0; i < 3; i++) {
+            var b: PlayerSanBullet = Laya.Pool.getItemByClass("PlayerSanBullet", PlayerSanBullet);
+            b.createView(this.rolePlayer.weaponType, this.rolePlayer.faceType, i);
+        }
     }
     /**
      * 创建敌人子弹
@@ -188,10 +199,21 @@ export class ViewManager {
         b.createView(d, s);
     }
 
+    private addGoodsArr: AddGold[] = [];
     /**创建增加道具飘字 */
     public createAddGold(goodsType: number, d: number, isBox: boolean = false): void {
         var b: AddGold = Laya.Pool.getItemByClass("addGold", AddGold);
         b.createView(goodsType, d, this.rolePlayer.roleSprite, isBox);
+        this.addGoodsArr.push(b);
+    }
+
+    public clearAddGold(): void {
+        for (let i = 0; i < this.addGoodsArr.length; i++) {
+            var e: AddGold = this.addGoodsArr[i];
+            if (e && e.view && e.view.parent) {
+                e.view.parent.removeChild(e.view);
+            }
+        }
     }
 
     public showPlayerPanBody(): void {
@@ -242,10 +264,16 @@ export class ViewManager {
     };
 
     public showClickChestView(): void {
+        // console.log("showClickChestView");
         this.clickChestView.showViewNoTween();
         GameManager.instance.suspendGame();
         this.clickChestView.updateView();
     };
+
+    public showADListView(): void {
+        this.showPopUpView(this.adListView, false, false, false);
+    };
+
     public hideSuspendView(): void {
         // this.showPopUpView(this.suspendView);
         this.suspendView.hideAllView();
@@ -268,6 +296,7 @@ export class ViewManager {
         this.suspendView = new SuspendView();
         this.chapterView = new ChapterView();
         this.clickChestView = new ClickChestView();
+        this.adListView = new ADListView()
         this.popUpView = new PopUpView();
         this.tipsView = new TipsPopView();
 
@@ -276,6 +305,7 @@ export class ViewManager {
         this.suspendView.createView();
         this.chapterView.createView();
         this.clickChestView.createView();
+        this.adListView.createView();
 
         Laya.stage.addChild(fairygui.GRoot.inst.displayObject);
 
@@ -396,13 +426,13 @@ export class ViewManager {
     /**角色子弹坐标偏移 第一位是方向，第二位是武器类型*/
     private playerBulletPos: object = {
         "11": [65, -5],//武器手枪，方向 右
-        "12": [65, 0],//武器机枪，方向 右
+        "12": [70, -10],//武器机枪，方向 右
         "13": [30, 80],//武器来福枪，方向 右
         "21": [125, 25],//武器手枪，方向 右下
         "22": [115, 70],//武器机枪，方向 右下
         "23": [50, 5],//武器来福枪，方向 右下
-        "31": [115, -95],//武器手枪，方向 右上
-        "32": [120, -50],//武器机枪，方向 右上
+        "31": [55, -95],//武器手枪，方向 右上
+        "32": [50, -110],//武器机枪，方向 右上
         "33": [25, 130],//武器来福枪，方向 右上
         "41": [-35, -135],//武器手枪，方向 上
         "42": [-35, -135],//武器机枪，方向 上
@@ -412,14 +442,14 @@ export class ViewManager {
         "53": [30, 95],//武器来福枪，方向 右蹲下
         "14": [40, -30],//武器手雷，方向右
         "-11": [-145, -5],//武器手枪，方向 左
-        "-12": [-150, 0],//武器机枪，方向 左
+        "-12": [-145, -10],//武器机枪，方向 左
         "-13": [235, 85],//武器来福枪，方向 左
         "-14": [-60, -30],//武器手雷，方向 左
         "-21": [-190, 20],//武器手枪，方向 左下
         "-22": [-180, 15],//武器机枪，方向 左下
         "-23": [250, 20],//武器来福枪，方向 左下
-        "-31": [-190, -90],//武器手枪，方向 左上
-        "-32": [-180, -50],//武器机枪，方向 左上
+        "-31": [-105, -90],//武器手枪，方向 左上
+        "-32": [-100, -90],//武器机枪，方向 左上
         "-33": [255, 130],//武器来福枪，方向 左上
         "-41": [-20, -135],//武器手枪，方向 上
         "-42": [-20, -135],//武器机枪，方向 上

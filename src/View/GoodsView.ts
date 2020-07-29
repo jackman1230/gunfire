@@ -67,12 +67,12 @@ export default class GoodsView {
         if (s == this.box.owner) {
             SoundManager.instance.playSound("get_goods");
             this.clearView();
+            this.dispatcherEvt();
         }
     }
     private clearView(): void {
         EventManager.instance.offNotice(GameEvent.CLEAR_WAR_VIEW, this, this.clearView);
         EventManager.instance.offNotice(GameEvent.PLAYER_GET_GOODS, this, this.dispose);
-        EventManager.instance.dispatcherEvt(GameEvent.CHANGE_PLAYER_GOODS, this.type);
 
         this.view.removeChildren();
         if (this.view) this.view.dispose();
@@ -80,6 +80,11 @@ export default class GoodsView {
             this.scene.removeSelf();
         }
         Laya.Pool.recover("goods", this);
+    }
+
+    private dispatcherEvt(): void {
+        EventManager.instance.dispatcherEvt(GameEvent.CHANGE_PLAYER_GOODS, this.type);
+
     }
 
 

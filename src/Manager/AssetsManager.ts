@@ -52,6 +52,9 @@ export class AssetsManager {
     private loadingAssetsComplete(): void {
         fairygui.UIPackage.addPackage("loading/loading");
         console.log("loading界面资源加载完成--显示loading界面，并开始加载游戏资源");
+        MooSnowSDK.getMistouchPosNum();
+        MooSnowSDK.getMisTouchNum();
+        MooSnowSDK.getAD();
         ViewManager.instance.createLoaningView();
         this.loadAssetsData();
     }
@@ -114,13 +117,9 @@ export class AssetsManager {
 
     private loadComplete(): void {
         fairygui.UIPackage.addPackage("res/Game");
-        // console.log("资源加载完成");
         ViewManager.instance.hideLoadingView();
         moosnow.http.finishLoading();
         GameManager.instance.startGame();
-        MooSnowSDK.getMistouchPosNum();
-        MooSnowSDK.getMisTouchNum();
-        MooSnowSDK.getAD();
     }
 }
 

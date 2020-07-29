@@ -378,7 +378,7 @@
     <movieclip id="ke5wdw" name="boom_4.jta" path="/Component/enemy/bomb/" exported="true"/>
     <movieclip id="ke5wdx" name="boom_5.jta" path="/Component/enemy/bomb/" exported="true"/>
     <component id="ke5wdy" name="player_fire_3_1.xml" path="/Component/player/"/>
-    <movieclip id="ke5wdz" name="playerzidan3.jta" path="/assets/zadan/" exported="true"/>
+    <movieclip id="ke5wdz" name="playerzidan30.jta" path="/assets/zadan/"/>
     <movieclip id="ke5we1" name="zhadan_2.jta" path="/Component/enemy/bomb/" exported="true"/>
     <image id="ke5we2" name="1837.png" path="/assets/bomb/仍手榴弹/"/>
     <image id="ke5we3" name="1835.png" path="/assets/bomb/仍手榴弹/"/>
@@ -838,6 +838,9 @@
     <image id="vmpqxu7" name="加载条.png" path="/Component/enemy/renzhi/load/切图/" scale="9grid" scale9grid="60,7,332,16"/>
     <image id="vmpqxu8" name="clickImg.png" path="/Component/enemy/renzhi/"/>
     <component id="vmpqxu9" name="openChestBtn.xml" path="/Component/enemy/renzhi/"/>
+    <component id="vmpqxua" name="ADListView.xml" path="/Component/view/guanggao/" exported="true"/>
+    <image id="vmpqxuc" name="playerzidan3.png" path="/assets/zadan/" exported="true"/>
+    <component id="vmpqxud" name="sandan.xml" path="/Component/bullet/" exported="true"/>
   </resources>
   <publish name="Game" path="..\bin\res" packageCount="2" genCode="true" codePath="..\src\fui"/>
 </packageDescription>

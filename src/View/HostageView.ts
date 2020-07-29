@@ -25,6 +25,7 @@ export default class HostageView {
     createView(d: EnemyInfo): void {
         this.scene = new ui.HostageBodyUI();
         this.pos = d.pos;
+        this.isActive = false;
         this.loadComplete();
     }
 

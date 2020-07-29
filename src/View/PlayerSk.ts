@@ -168,7 +168,7 @@ export class PlayerSk {
         this.skin1.y = this.skin2.y = this.skin3.y = 62;
     }
 
-    private setUp(): void {
+    public setUp(): void {
         this.arm.rotation = 0;
         this.skin1.y = this.skin2.y = this.skin3.y = 47
     }

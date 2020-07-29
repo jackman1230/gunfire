@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1334,750" opaque="false">
-  <controller name="ctl" pages="0,,1,,2," selected="2"/>
+  <controller name="ctl" pages="0,,1,,2," selected="0"/>
   <displayList>
     <image id="n20_dr1t" name="n20" src="n8qumh" fileName="assets/otherView/战后结算页面/切图/金币.png" xy="606,159">
       <gearDisplay controller="ctl" pages="0"/>

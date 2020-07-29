@@ -109,13 +109,17 @@ export default class PlayerInfoView {
             this.updateCoin();
             ViewManager.instance.createAddGold(t, coin, true);
         } else if (t == GoodsType.GoodsType_BOX) {
-            GameManager.instance.misTouchNum++;
-            if (GameManager.instance.misTouchNum % (MooSnowSDK.misTouchNum + 1) == 0) {
-                ViewManager.instance.showClickChestView();
-                GameManager.instance.misTouchNum = 0;
-            } else {
-                let type: number = this.getRandomGoodsType();
+            let type: number = this.getRandomGoodsType();
+            if (MooSnowSDK.misTouchNum == 0) {//没有误触，直接开箱
                 this.changePlayerGoods(type);
+            } else if (MooSnowSDK.misTouchNum > 0) {
+                GameManager.instance.misTouchNum++;
+                if (GameManager.instance.misTouchNum >= MooSnowSDK.misTouchNum) {
+                    GameManager.instance.misTouchNum = 0;
+                    ViewManager.instance.showClickChestView();
+                } else {
+                    this.changePlayerGoods(type);
+                }
             }
         } else if (t == GoodsType.GoodsType_OPEN_BOX) {
             // ViewManager.instance.showClickChestView();

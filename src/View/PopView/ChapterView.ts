@@ -31,10 +31,15 @@ export default class ChapterView extends PopUpView {
 
         this.updateView();
 
+        this.view.m_ad_1.onClick(this, this.onClickADItem, [1]);
+        this.view.m_ad_2.onClick(this, this.onClickADItem, [2]);
+        this.view.m_ad_3.onClick(this, this.onClickADItem, [3]);
+
         this.view.m_ad.m_list.itemRenderer = Laya.Handler.create(this, this.setADItem, null, false);
-        this.view.m_ad.m_list.numItems = 10;
-        this.view.m_ad.m_list.width = 135 * 10;
+        this.view.m_ad.m_list.numItems = GameManager.instance.adList.length;
+        this.view.m_ad.m_list.width = 136 * GameManager.instance.adList.length;
         this.view.m_ad.m_list.on(fairygui.Events.CLICK_ITEM, this, this.onClickItem);
+        this.view.m_ad_remen.onClick(this, this.showReMenAD);
 
 
         EventManager.instance.addNotice(GameEvent.PAUSE_GAME, this, this.pauseGame);
@@ -107,30 +112,73 @@ export default class ChapterView extends PopUpView {
         this.updateView();
     }
 
+    private showReMenAD(): void {
+        ViewManager.instance.showADListView();
+    }
+
     private showADList(): void {
+        Laya.Tween.clearTween(this.view.m_ad.m_list);
+        Laya.timer.clear(this, this.changeAD);
         this.adMoveLeft();
         this.view.m_ad_1.m_ani_1.play(null, -1);
         this.view.m_ad_2.m_ani_1.play(null, -1);
         this.view.m_ad_3.m_ani_1.play(null, -1);
         this.view.m_ad_remen.m_ani_2.play(null, -1);
+        this.changeAD();
+        Laya.timer.loop(3000, this, this.changeAD);
+    }
+
+    private changeAD(): void {
+        this.view.m_ad_1.data = this.getRandomAdData();
+        this.view.m_ad_2.data = this.getRandomAdData();
+        this.view.m_ad_3.data = this.getRandomAdData();
+
+        this.view.m_ad_3.m_ad.m_icon.url = this.view.m_ad_3.data["img"];
+        this.view.m_ad_3.m_ad.m_name.text = this.view.m_ad_3.data["title"];
+
+        this.view.m_ad_2.m_ad.m_icon.url = this.view.m_ad_2.data["img"];
+        this.view.m_ad_2.m_ad.m_name.text = this.view.m_ad_2.data["title"];
+
+        this.view.m_ad_1.m_ad.m_icon.url = this.view.m_ad_1.data["img"];
+        this.view.m_ad_1.m_ad.m_name.text = this.view.m_ad_1.data["title"];
     }
 
     private setADItem(index: number, item: WXFUI_ADItem): void {
+        var d: any = GameManager.instance.adList[index];
+        if (!d) return;
+        item.data = d;
+        item.m_icon.url = d.img;
+        item.m_name.text = d.title;
+    }
 
+
+    private onClickADItem(index: number): void {
+        var m: moosnowAdRow = this.view["m_ad_" + index].data as moosnowAdRow;
+        console.log("onClickADItem--", m);
+        moosnow.platform.navigate2Mini(m, (res) => {
+            console.log('跳转成功 ', res)
+        }, (res) => {
+            console.log('跳转失败 ', res)
+        });
     }
 
     private onClickItem(e: WXFUI_ADItem): void {
-        console.log(this.view.m_ad.m_list.getChildIndex(e));
-
+        var m: moosnowAdRow = e.data as moosnowAdRow;
+        console.log("ad--", m);
+        moosnow.platform.navigate2Mini(m, (res) => {
+            console.log('跳转成功 ', res)
+        }, (res) => {
+            console.log('跳转失败 ', res)
+        });
     }
 
     private adMoveLeft(): void {
-        Laya.Tween.to(this.view.m_ad.m_list, { x: this.view.m_ad.width - 135 * 10 }, 5000, null, Laya.Handler.create(this, this.adMoveRight));
+        Laya.Tween.to(this.view.m_ad.m_list, { x: this.view.m_ad.width - 136 * GameManager.instance.adList.length }, GameManager.instance.adTime, null, Laya.Handler.create(this, this.adMoveRight));
 
     }
 
     private adMoveRight(): void {
-        Laya.Tween.to(this.view.m_ad.m_list, { x: 0 }, 5000, null, Laya.Handler.create(this, this.adMoveLeft));
+        Laya.Tween.to(this.view.m_ad.m_list, { x: 0 }, GameManager.instance.adTime, null, Laya.Handler.create(this, this.adMoveLeft));
     }
 
     private pauseGame(): void {
@@ -147,10 +195,16 @@ export default class ChapterView extends PopUpView {
         this.view.m_ad_3.m_ani_1.stop(null);
         this.view.m_ad_remen.m_ani_2.stop(null);
         Laya.Tween.clearTween(this.view.m_ad.m_list);
+        Laya.timer.clear(this, this.changeAD);
     }
 
     public hideAllView(): void {
         super.hideAllView();
         this.hideADList();
+    }
+
+    private getRandomAdData(): any {
+        var r: number = Math.floor(Math.random() * GameManager.instance.adList.length);
+        return GameManager.instance.adList[r];
     }
 }

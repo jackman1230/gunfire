@@ -153,8 +153,8 @@ export default class PlayerBullet {
                     this.view.setSkew(25, 25);
                     this.body.setVelocity({ x: 11, y: 8 });
                 } else if (this.direction == 3) {//右上
-                    this.view.setSkew(-25, -25);
-                    this.body.setVelocity({ x: 11, y: -8 });
+                    this.view.setSkew(-35, -35);
+                    this.body.setVelocity({ x: 11, y: -9 });
                 } else if (this.direction == 4) {//上
                     // this.scene.y = c.y - this.scene.height;
                     this.view.setSkew(-90, -90);
@@ -168,8 +168,8 @@ export default class PlayerBullet {
                     this.view.setSkew(155, 155);
                     this.body.setVelocity({ x: -11, y: 8 });
                 } else if (this.direction == -3) {//左上
-                    this.view.setSkew(205, 205);
-                    this.body.setVelocity({ x: -11, y: -8 });
+                    this.view.setSkew(215, 215);
+                    this.body.setVelocity({ x: -11, y: -9 });
                 } else if (this.direction == -4) {//上
                     // this.scene.y = c.y - this.scene.height;
                     this.view.setSkew(270, 270);

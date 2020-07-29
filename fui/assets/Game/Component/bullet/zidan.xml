@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="67,18" pivot="0.5,0.5">
   <displayList>
-    <loader id="n1_yqv7" name="zidan" xy="4,-89" pivot="0,0.5" size="347,197" url="ui://bq3h5inske5wdz" align="center" vAlign="middle" autoSize="true"/>
+    <loader id="n1_yqv7" name="zidan" xy="4,-6" pivot="0,0.5" size="32,32" url="ui://bq3h5insvmpqxuc" align="center" vAlign="middle" autoSize="true"/>
   </displayList>
 </component>
