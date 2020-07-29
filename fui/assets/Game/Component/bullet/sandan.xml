@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="28,28" pivot="0.5,0.5">
+  <displayList>
+    <loader id="n1_yqv7" name="zidan" xy="-2,-2" pivot="0,0.5" size="32,32" url="ui://bq3h5insvmpqxuc" align="center" vAlign="middle" autoSize="true"/>
+  </displayList>
+</component>

@@ -13,11 +13,11 @@
     GameConfig.screenMode = "none";
     GameConfig.alignV = "top";
     GameConfig.alignH = "left";
-    GameConfig.startScene = "BulletSan.scene";
+    GameConfig.startScene = "BoardBody.scene";
     GameConfig.sceneRoot = "";
     GameConfig.debug = false;
     GameConfig.stat = false;
-    GameConfig.physicsDebug = true;
+    GameConfig.physicsDebug = false;
     GameConfig.exportSceneToJson = true;
     GameConfig.init();
 
@@ -2729,14 +2729,14 @@
         resetData() {
             this.addEvent();
             ViewManager.instance.clearAddGold();
-            GameManager.instance.roleInfo.weaponType = 3;
+            GameManager.instance.roleInfo.weaponType = 1;
             this.changeWeaponType(GameManager.instance.roleInfo.weaponType);
             ViewManager.instance.warView.scene.addChild(this.roleSprite);
             this.playerDirView.view.m_dirBtn.y = this.playerDirView.view.m_dirBtn.x = 0;
             var d = GameManager.instance.curLvData;
             this.roleSprite.x = d.rolePos[0];
             this.roleSprite.y = d.rolePos[1];
-            GameManager.instance.roleInfo.bulletNum = 1000;
+            GameManager.instance.roleInfo.bulletNum = 0;
             this.sBoom = false;
             this.sRun = false;
             this.playerSk.role.visible = true;
@@ -4174,7 +4174,7 @@
         getBulletOffSetPos(d) {
             var p = new Laya.Point();
             if (d == 1) {
-                p.x = 70;
+                p.x = 75;
                 p.y = -20;
             }
             else if (d == -1) {

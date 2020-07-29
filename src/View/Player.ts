@@ -99,7 +99,7 @@ export class Player extends Laya.Script {
     public resetData(): void {
         this.addEvent();
         ViewManager.instance.clearAddGold();
-        GameManager.instance.roleInfo.weaponType = 3;
+        GameManager.instance.roleInfo.weaponType = 1;
         this.changeWeaponType(GameManager.instance.roleInfo.weaponType);
         ViewManager.instance.warView.scene.addChild(this.roleSprite);
         this.playerDirView.view.m_dirBtn.y = this.playerDirView.view.m_dirBtn.x = 0;
@@ -107,8 +107,8 @@ export class Player extends Laya.Script {
         this.roleSprite.x = d.rolePos[0];
         this.roleSprite.y = d.rolePos[1];
 
-        GameManager.instance.roleInfo.bulletNum = 1000;
-        // GameManager.instance.roleInfo.bulletNum = 0;
+        // GameManager.instance.roleInfo.bulletNum = 1000;
+        GameManager.instance.roleInfo.bulletNum = 0;
         this.sBoom = false;
         this.sRun = false;
         // this.stillRifle = false;
