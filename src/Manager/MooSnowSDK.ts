@@ -1,4 +1,5 @@
 import { GameManager } from "./GameManager";
+import { ViewManager } from "./ViewManager";
 
 export class MooSnowSDK {
 
@@ -54,6 +55,7 @@ export class MooSnowSDK {
             console.log('广告数据 ', r);
             GameManager.instance.adList = r.indexLeft.concat();
             GameManager.instance.setADlist();
+
         })
     }
 
@@ -64,10 +66,15 @@ export class MooSnowSDK {
      * @param position banner的位置，默认底部
      * @param style 自定义样式
      */
-    public static showBanner(): void {
-        moosnow.platform.showBanner(true, (isOpend) => {
+    public static showBanner(isWuChu: boolean): void {
+        moosnow.platform.showBanner(false, (isOpend) => {
             //目前仅支持微信平台
-            console.log('用户是否点击了banner ', isOpend)
+            console.log('用户是否点击了banner ', isOpend);
+            if (isOpend) {
+                if (isWuChu) {
+                    MooSnowSDK.hideBanner();
+                }
+            }
         });
     }
 
@@ -82,18 +89,28 @@ export class MooSnowSDK {
 
     /**
      * 显示平台video广告
+     * type:1看视频得奖励，2看视频原地复活
      */
-    public static showVideo(): void {
+    public static showVideo(type: number, data: any): void {
+        var d: any = data;
         moosnow.platform.showVideo(res => {
             switch (res) {
                 case moosnow.VIDEO_STATUS.NOTEND:
                     console.log('视频未观看完成 ')
+                    ViewManager.instance.showTipsView("未看完视频无法获得奖励哦");
                     break;
                 case moosnow.VIDEO_STATUS.ERR:
                     console.log('获取视频错误 ')
+                    ViewManager.instance.showTipsView("视频获取失败，请稍后再试");
                     break;
                 case moosnow.VIDEO_STATUS.END:
                     console.log('观看视频结束 ')
+                    if (type == 1 && data) {
+                        GameManager.instance.buyShopItem(d);
+                        ViewManager.instance.beforeWar.updateView();
+                    } else {
+                        GameManager.instance.continueGameByVideo();
+                    }
                 default:
                     break;
             }

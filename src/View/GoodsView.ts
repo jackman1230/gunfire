@@ -17,6 +17,7 @@ export default class GoodsView {
 
     protected box: Laya.BoxCollider;
     protected body: Laya.RigidBody;
+    private script: GoodsBody;
 
     protected pos: Laya.Point;
     protected mc: fairygui.GMovieClip;
@@ -35,6 +36,7 @@ export default class GoodsView {
         this.body = this.scene.getComponent(Laya.RigidBody);
         this.box = this.scene.getComponent(Laya.BoxCollider);
         this.scene.addComponent(GoodsBody);
+        this.script = this.scene.getComponent(GoodsBody);
 
         this.view = fairygui.UIPackage.createObject("Game", "goodsView") as WXFUI_goodsView;
         this.mc = fairygui.UIPackage.createObject("Game", "createGoodsAni").asMovieClip;
@@ -77,6 +79,7 @@ export default class GoodsView {
         this.view.removeChildren();
         if (this.view) this.view.dispose();
         if (this.scene) {
+            this.script.isRemove = true;
             this.scene.removeSelf();
         }
         Laya.Pool.recover("goods", this);

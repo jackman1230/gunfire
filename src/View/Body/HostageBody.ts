@@ -14,6 +14,8 @@ export default class HostageBody extends Laya.Script {
     public activeDis: number = 150;
     private isActive: boolean = false;
 
+    // public isRemove: boolean = false;
+
     constructor() { super(); }
 
     onEnable(): void {
@@ -21,6 +23,7 @@ export default class HostageBody extends Laya.Script {
         this.selfBody = this.selfCollider.rigidBody;
         this.self = this.owner as Laya.Sprite;
         this.oriPosX = this.selfBody.getWorldCenter().x;
+        // this.isRemove = false;
     }
 
 

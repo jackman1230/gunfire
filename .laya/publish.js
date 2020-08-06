@@ -1,14 +1,15 @@
-// v1.7.0
+// v1.7.1
 //是否使用IDE自带的node环境和插件，设置false后，则使用自己环境(使用命令行方式执行)
 const useIDENode = process.argv[0].indexOf("LayaAir") > -1 ? true : false;
 const useCMDNode = process.argv[1].indexOf("layaair2-cmd") > -1 ? true : false;
-
 function useOtherNode(){
 	return useIDENode||useCMDNode;
 }
 //获取Node插件和工作路径
-let ideModuleDir = useOtherNode() ? process.argv[1].replace("gulp\\bin\\gulp.js", "").replace("gulp/bin/gulp.js", "") : "";
-let workSpaceDir = useOtherNode() ? process.argv[2].replace("--gulpfile=", "").replace("\\.laya\\publish.js", "").replace("/.laya/publish.js", "") + "/" : "./../";
+const ideModuleDir = useOtherNode() ? process.argv[1].replace("gulp\\bin\\gulp.js", "").replace("gulp/bin/gulp.js", "") : "";
+const workSpaceDir = useOtherNode() ? process.argv[2].replace("--gulpfile=", "").replace("\\.laya\\publish.js", "").replace("/.laya/publish.js", "") + "/" : "./../";
+global.ideModuleDir = ideModuleDir;
+global.workSpaceDir = workSpaceDir;
 
 //引用插件模块
 const gulp = require(ideModuleDir + "gulp");
@@ -23,9 +24,6 @@ const revCollector = require(ideModuleDir + 'gulp-rev-collector');
 const del = require(ideModuleDir + "del");
 const requireDir = require(ideModuleDir + 'require-dir');
 const babel = require(ideModuleDir + 'gulp-babel');
-
-global.ideModuleDir = ideModuleDir;
-global.workSpaceDir = workSpaceDir;
 
 // 结合compile.js使用
 global.publish = true;
@@ -50,18 +48,19 @@ let config,
 	platform = "web",
 	isOpendataProj = false,
 	platformCopyTask = [],// 平台脚本拷贝任务
-	platformTask = []; // 平台需要执行的任务
+	platformTask = [], // 平台需要执行的任务
+	commandSuffix = ".cmd";
 //任务对照列表
 const copyTasks = {
 	"biligame": "copyPlatformFile_Bili",
 	"Alipaygame": "copyPlatformFile_Alipay",
 	"vivogame": "copyPlatformFile_VIVO",
-	"oppogame": "preCreate_OPPO",
+	"oppogame": "copyPlatformFile_OPPO",
 	"xmgame": "copyPlatformFile_XM",
 	"bdgame": "copyPlatformFile_BD",
 	"qqgame": "copyPlatformFile_QQ",
 	"wxgame": "copyPlatformFile_WX",
-	"web": "copyLibsJsFile"
+	"web": "copyPlatformLibsJsFile"
 }
 const tasks = {
 	"biligame": "buildBiliProj",
@@ -117,6 +116,17 @@ gulp.task("loadConfig", function () {
 			isOpendataProj = projInfo.layaProType === 12;
 		} catch (e) {}
 	}
+	// 其他变量的初始化
+	let layarepublicPath = path.join(ideModuleDir, "../", "code", "layarepublic");
+	if (!fs.existsSync(layarepublicPath)) {
+		layarepublicPath = path.join(ideModuleDir, "../", "out", "layarepublic");
+	}
+	global.layarepublicPath = layarepublicPath;
+
+	if (process.platform === "darwin") {
+		commandSuffix = "";
+	}
+	global.commandSuffix = commandSuffix;
 });
 
 // 清理release文件夹
@@ -141,7 +151,7 @@ gulp.task("clearReleaseDir", ["compile"], function (cb) {
 			// 不要删掉manifest.json/main.js文件
 			// 这里不是node-glob语法，详见: https://github.com/sindresorhus/del
 			delList = [`${vvProjSrc}/**`, `!${vvProjSrc}`, `!${vvProjSrc}/sign/**`, `!${vvProjSrc}/{game.js,manifest.json}`];
-			delList = delList.concat(`${vvProj}/engine/**`, `${vvProj}/config/**`);
+			delList = delList.concat(`${vvProj}/engine/**`, `${vvProj}/laya-library/**`, `${vvProj}/config/**`);
 		}
 		// 保留平台配置文件
 		if (config.keepPlatformFile) {
@@ -166,7 +176,7 @@ gulp.task("copyFile", ["clearReleaseDir"], function () {
 	let baseCopyFilter = [`${workSpaceDir}/bin/**/*.*`, `!${workSpaceDir}/bin/indexmodule.html`, `!${workSpaceDir}/bin/import/*.*`];
 	// 只拷贝index.js中引用的类库
 	if (config.onlyIndexJS) {
-		baseCopyFilter = baseCopyFilter.concat(`!${workSpaceDir}/bin/libs/*.*`);
+		baseCopyFilter = baseCopyFilter.concat(`!${workSpaceDir}/bin/libs/**/*.*`);
 	}
 	if (platform === "wxgame" && isOpendataProj) { // 开放域项目微信发布，仅拷贝用到的文件
 		config.copyFilesFilter = [`${workSpaceDir}/bin/js/bundle.js`, `${workSpaceDir}/bin/index.js`, `${workSpaceDir}/bin/game.js`];
@@ -201,8 +211,41 @@ gulp.task("copyFile", ["clearReleaseDir"], function () {
 	return stream.pipe(gulp.dest(releaseDir));
 });
 
+// 使用min版本引擎
+gulp.task("useMinJsLibs", ["copyFile"], function () {
+	if (!config.useMinJsLibs) {
+		return;
+	}
+	if (platform === "wxgame" && isOpendataProj) { // 开放域项目微信发布，拷贝文件时已经拷贝类库文件了
+		return;
+	}
+	// 开放域项目，as语言，没有libs目录，mac系统报错
+	let libs = path.join(workSpaceDir, "bin", "libs");
+	if (!fs.existsSync(libs)) {
+		return;
+	}
+	// 分析index.js
+	let indexJSPath = path.join(releaseDir, "index.js");
+	let indexJsContent = fs.readFileSync(indexJSPath, "utf8");
+	let libsList = indexJsContent.match(/loadLib\(['"]libs\/[\w-./]+\.(js|wasm)['"]\)/g);
+	if (!libsList) {
+		return;
+	}
+	let 
+		item,
+		libsName = "",
+		minLibsName = "";
+	for (let i = 0, len = libsList.length; i < len; i++) {
+		item = libsList[i];
+		libsName = item.match(/loadLib\(['"]libs\/([\w-./]+\.(js|wasm))['"]\)/);
+		minLibsName = `min/${libsName[1].replace(".js", ".min.js")}`;
+		indexJsContent = indexJsContent.replace(libsName[1], minLibsName);
+	}
+	fs.writeFileSync(indexJSPath, indexJsContent);
+});
+
 // copy libs中的js文件到release文件夹
-gulp.task("copyLibsJsFile", ["copyFile"], function () {
+gulp.task("copyLibsJsFile", ["useMinJsLibs"], function () {
 	if (!config.onlyIndexJS) {
 		return;
 	}
@@ -215,7 +258,7 @@ gulp.task("copyLibsJsFile", ["copyFile"], function () {
 		return;
 	}
 	// 分析index.js
-	let indexJSPath = path.join(workSpaceDir, "bin", "index.js");
+	let indexJSPath = path.join(releaseDir, "index.js");
 	let indexJsContent = fs.readFileSync(indexJSPath, "utf8");
 	let libsList = indexJsContent.match(/loadLib\(['"]libs\/[\w-./]+\.(js|wasm)['"]\)/g);
 	if (!libsList) {
@@ -239,6 +282,56 @@ gulp.task("copyLibsJsFile", ["copyFile"], function () {
 		copyLibsList = [`${workSpaceDir}/bin/libs/${libsStr}`];
 	}
 	var stream = gulp.src(copyLibsList, { base: `${workSpaceDir}/bin` });
+	return stream.pipe(gulp.dest(releaseDir));
+});
+
+gulp.task("copyPlatformLibsJsFile", ["copyLibsJsFile"], function () {
+	if (platform === "wxgame" && isOpendataProj) { // 开放域项目微信发布，拷贝文件时已经拷贝类库文件了
+		return;
+	}
+	// 开放域项目，as语言，没有libs目录，mac系统报错
+	let libs = path.join(workSpaceDir, "bin", "libs");
+	if (!fs.existsSync(libs)) {
+		return;
+	}
+	if (platform === "web") {
+		return;
+	}
+	
+	let platformLibName = "";
+	switch (platform) {
+		case "wxgame":
+			platformLibName = "laya.wxmini.js";
+			break;
+		case "qqgame":
+			platformLibName = "laya.qqmini.js";
+			break;
+		case "bdgame":
+			platformLibName = "laya.bdmini.js";
+			break;
+		case "Alipaygame":
+			platformLibName = "laya.Alipaymini.js";
+			break;
+		case "biligame":
+			platformLibName = "laya.bilimini.js";
+			break;
+		case "oppogame":
+			platformLibName = "laya.quickgamemini.js";
+			break;
+		case "vivogame":
+			platformLibName = "laya.vvmini.js";
+			break;
+		case "xmgame":
+			platformLibName = "laya.xmmini.js";
+			break;
+	}
+	let copyPath = `${workSpaceDir}/bin/libs`;
+	if (config.useMinJsLibs) {
+		platformLibName = platformLibName.replace(".js", ".min.js");
+		copyPath = path.join(copyPath, "min");
+	}
+	let copyLibPath = path.join(copyPath, platformLibName);
+	var stream = gulp.src(copyLibPath, { base: `${workSpaceDir}/bin` });
 	return stream.pipe(gulp.dest(releaseDir));
 });
 

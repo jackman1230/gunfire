@@ -2,12 +2,18 @@
 <component size="1334,750" opaque="false">
   <displayList>
     <image id="n11_dr1t" name="bg" src="n8qulo" fileName="assets/otherView/战前准备/切图/底框.png" xy="332,33"/>
-    <component id="n12_dr1t" name="item_1" src="dr1tnm" fileName="Component/view/buyItem.xml" xy="376,141"/>
-    <component id="n13_dr1t" name="item_2" src="dr1tnm" fileName="Component/view/buyItem.xml" xy="712,139"/>
-    <component id="n14_dr1t" name="item_3" src="dr1tnm" fileName="Component/view/buyItem.xml" xy="376,288"/>
-    <component id="n15_dr1t" name="item_4" src="dr1tnm" fileName="Component/view/buyItem.xml" xy="712,286"/>
+    <component id="n12_dr1t" name="item_1" src="dr1tnm" fileName="Component/view/buyItem.xml" xy="376,131"/>
+    <component id="n13_dr1t" name="item_2" src="dr1tnm" fileName="Component/view/buyItem.xml" xy="712,129"/>
+    <component id="n14_dr1t" name="item_3" src="dr1tnm" fileName="Component/view/buyItem.xml" xy="376,273"/>
+    <component id="n15_dr1t" name="item_4" src="dr1tnm" fileName="Component/view/buyItem.xml" xy="712,271"/>
     <component id="n16_dr1t" name="enter" src="dr1tnn" fileName="Component/btn/enterBtn.xml" xy="544,468"/>
-    <image id="n17_dr1t" name="n17" src="n8quln" fileName="assets/otherView/战前准备/切图/战前准备.png" xy="593,79"/>
+    <image id="n17_dr1t" name="n17" src="n8quln" fileName="assets/otherView/战前准备/切图/战前准备.png" xy="593,69"/>
     <component id="n18_s2x8" name="ad" src="s2x8xs6" fileName="Component/view/guanggao/ADListHor.xml" xy="257,565"/>
+    <image id="n19_l030" name="n19" src="vmpqxtk" fileName="assets/playerInfo/danjia.png" xy="597,395" size="35,42" aspect="true"/>
+    <image id="n20_l030" name="n20" src="dhhtj3" fileName="assets/playerInfo/金币(1).png" xy="417,404"/>
+    <image id="n21_l030" name="n21" src="vmpqxtl" fileName="assets/playerInfo/shoulei.png" xy="791,393" size="30,45" aspect="true"/>
+    <text id="n22_l030" name="coin" xy="448,401" size="133,29" font="ui://bq3h5insfmzphw" fontSize="12" vAlign="middle" autoSize="none" text="12345"/>
+    <text id="n23_l030" name="bulletNum" xy="641,401" size="131,29" font="ui://bq3h5insfmzphw" fontSize="12" vAlign="middle" autoSize="none" text="12345"/>
+    <text id="n24_l030" name="bombNum" xy="826,401" size="125,29" font="ui://bq3h5insfmzphw" fontSize="12" vAlign="middle" autoSize="none" text="12345"/>
   </displayList>
 </component>

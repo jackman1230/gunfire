@@ -16,6 +16,7 @@ export default class EnemyBullet {
 
     private body: Laya.RigidBody;
     private box: Laya.BoxCollider;
+    private script: BulletBody;
 
     private parentPos: Laya.Point;
 
@@ -53,6 +54,7 @@ export default class EnemyBullet {
         this.scene.x = this.parentPos.x + p.x;
         this.scene.y = this.parentPos.y + p.y;
         this.scene.addComponent(BulletBody);
+        this.script = this.scene.getComponent(BulletBody);
         this.body = this.scene.getComponent(Laya.RigidBody);
         this.box = this.scene.getComponent(Laya.BoxCollider);
         this.box.label = this.body.label = "enemyBullet";
@@ -83,6 +85,7 @@ export default class EnemyBullet {
         EventManager.instance.offNotice(GameEvent.ENEMY_BOMB_HIT_PLAYER, this, this.dispose);
 
         if (this.scene) {
+            this.script.isRemove = true;
             this.scene.removeSelf();
         }
         this.view.dispose();

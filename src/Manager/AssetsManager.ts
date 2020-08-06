@@ -16,11 +16,14 @@ export class AssetsManager {
     }
 
     public loadLoadingAssetsData(): void {
+
         AssetsManager.loadingAssetsData.push(
             { url: "loading/loading_atlas0.png", type: Laya.Loader.IMAGE },
             { url: "loading/loading_atlas_n8quey.jpg", type: Laya.Loader.IMAGE },
             { url: "loading/loading.proto", type: Laya.Loader.BUFFER }
         );
+
+        // this.setVersionUrl(AssetsManager.loadingAssetsData);
         if (!Laya.Browser.onWeiXin) {
             Laya.loader.create(AssetsManager.loadingAssetsData, Laya.Handler.create(this, this.loadingAssetsComplete));
         } else {
@@ -54,7 +57,8 @@ export class AssetsManager {
         console.log("loading界面资源加载完成--显示loading界面，并开始加载游戏资源");
         MooSnowSDK.getMistouchPosNum();
         MooSnowSDK.getMisTouchNum();
-        MooSnowSDK.getAD();
+        // Laya.timer.once(6000,this,()=>{
+        // })
         ViewManager.instance.createLoaningView();
         this.loadAssetsData();
     }
@@ -72,6 +76,7 @@ export class AssetsManager {
             { url: "res/Game_atlas_n8qun1.jpg", type: Laya.Loader.IMAGE },
             { url: "res/Game_atlas_n8qun7.png", type: Laya.Loader.IMAGE },
             { url: "res/LevelData.json", type: Laya.Loader.JSON },
+            { url: "res/LevelData2.json", type: Laya.Loader.JSON },
             { url: "res/map_1.jpg", type: Laya.Loader.IMAGE },
             { url: "res/map_2.jpg", type: Laya.Loader.IMAGE },
             { url: "res/map_3.jpg", type: Laya.Loader.IMAGE },
@@ -106,7 +111,9 @@ export class AssetsManager {
             { url: "res/sound/weapon_10.mp3", type: Laya.Loader.SOUND },
             { url: "res/sound/chapterBgm.mp3", type: Laya.Loader.SOUND }
         );
-        console.log(AssetsManager.assetsData);
+        // console.log(AssetsManager.assetsData);
+
+        // this.setVersionUrl(AssetsManager.assetsData);
 
         Laya.loader.create(AssetsManager.assetsData, Laya.Handler.create(this, this.loadComplete), Laya.Handler.create(this, this.onloadingProgress));
     }
@@ -121,5 +128,21 @@ export class AssetsManager {
         moosnow.http.finishLoading();
         GameManager.instance.startGame();
     }
+
+    private setVersionUrl(arr: any[]): void {
+        for (let i = 0; i < arr.length; i++) {
+            var t: any = arr[i];
+            t.url = this.getVersionUrl(t.url);
+        }
+    }
+
+    private getVersionUrl(s: string): string {
+        var v: any = Laya.loader.getRes("version.json");
+        if (v[s]) {
+            return v[s]
+        }
+        return s;
+    }
+
 }
 

@@ -3,8 +3,7 @@ if ((typeof swan !== 'undefined') && (typeof swanGlobal !== 'undefined')) {
 	require("libs/laya.bdmini.js");
 } else if (typeof wx!=="undefined") {
 	require("weapp-adapter.js");
-	require("libs/laya.wxmini.js");
-	require('utils/ald-game.js');
+	require("libs/laya-08f0cce6a1.wxmini.js");
 }
 window.loadLib = require;
-require("index.js");
+require("index-f3537ce4f1.js");

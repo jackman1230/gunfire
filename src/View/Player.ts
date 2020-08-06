@@ -23,7 +23,7 @@ export class Player extends Laya.Script {
     public direction: number = 1;//方向1为右，-1为左
 
     public sRun: boolean = false;//人物是否在跑
-    private sFire: boolean = false;//机枪，手枪连续射击
+    public sFire: boolean = false;//机枪，手枪连续射击
     private sBoom: boolean = false;
     private keyRight: boolean = false;
     private keyLeft: boolean = false;
@@ -99,7 +99,15 @@ export class Player extends Laya.Script {
     public resetData(): void {
         this.addEvent();
         ViewManager.instance.clearAddGold();
-        GameManager.instance.roleInfo.weaponType = 1;
+        if (GameManager.instance.buyWeaponType > 0) {
+            GameManager.instance.roleInfo.weaponType = GameManager.instance.buyWeaponType;
+            GameManager.instance.roleInfo.bulletNum = GameManager.instance.buyBullet;
+        } else {
+            GameManager.instance.roleInfo.weaponType = 1;
+            GameManager.instance.roleInfo.bulletNum = 0;
+        }
+        GameManager.instance.roleInfo.bombNum = GameManager.instance.buyGre;
+        ViewManager.instance.playerInfoView.updateAllView();
         this.changeWeaponType(GameManager.instance.roleInfo.weaponType);
         ViewManager.instance.warView.scene.addChild(this.roleSprite);
         this.playerDirView.view.m_dirBtn.y = this.playerDirView.view.m_dirBtn.x = 0;
@@ -108,7 +116,6 @@ export class Player extends Laya.Script {
         this.roleSprite.y = d.rolePos[1];
 
         // GameManager.instance.roleInfo.bulletNum = 1000;
-        GameManager.instance.roleInfo.bulletNum = 0;
         this.sBoom = false;
         this.sRun = false;
         // this.stillRifle = false;
@@ -120,9 +127,12 @@ export class Player extends Laya.Script {
         this.setStay();
         this.faceType = 1;
         this.setFaceDirection();
-
+        GameManager.instance.roleInfo.isInvincible = false;
         // this.setFaceUp();
 
+        GameManager.instance.buyBullet = 0;
+        GameManager.instance.buyGre = 10;
+        GameManager.instance.buyWeaponType = 0;
     }
     //原地复活加无敌
     public playerRes(): void {
@@ -286,7 +296,8 @@ export class Player extends Laya.Script {
         } else if (Math.abs(this.faceType) == 4) {
             this.playerSk.setFaceUp90();
         }
-        this.playerSk.setBodyIdle();
+        if (!this.keyJump)
+            this.playerSk.setBodyIdle();
     }
 
     private setFaceLeft(): void {
@@ -398,6 +409,7 @@ export class Player extends Laya.Script {
         }
         if (this.weaponType == PlayerData.WEAPON_RIFLE) {//如果是来福枪
             this.playerSk.setAttack2();
+            // this.playerSk.setAttack1();
             ViewManager.instance.createSanBullet();
         } else {//如果是子弹枪
             this.playerSk.setAttack1();
@@ -432,11 +444,11 @@ export class Player extends Laya.Script {
     private setFireEnd(): void {
         Laya.timer.clear(this, this.stillFire);
         this.sFire = false;
-        if (this.sRun) {
-            this.playerSk.setRun();
-        } else {
-            this.playerSk.setArmIdle();
-        }
+        this.playerSk.setArmIdle();
+        // if (this.sRun) {
+        //     this.playerSk.setRun();
+        // } else {
+        // }
     }
 
 
@@ -546,6 +558,7 @@ export class Player extends Laya.Script {
         GameManager.instance.roleInfo.blood--;
         EventManager.instance.dispatcherEvt(GameEvent.DEC_PLAYER_BLOOD);
         ViewManager.instance.createDamageView(0.2, this.roleSprite);
+        this.playerSk.beHit();
         if (GameManager.instance.roleInfo.blood <= 0) {
             GameManager.instance.roleInfo.blood = 0;
             this.setDeath();

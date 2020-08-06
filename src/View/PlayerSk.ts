@@ -1,6 +1,8 @@
 import { ViewManager } from "../Manager/ViewManager";
 import { EventManager } from "../Manager/EventManager";
 import GameEvent from "../Control/GameEvent";
+import { GameManager } from "../Manager/GameManager";
+import { GameData } from "../Data/GameData";
 
 export class PlayerSk {
     public role: Laya.Sprite;
@@ -142,7 +144,15 @@ export class PlayerSk {
         this.role.removeChildren();
         this.role.addChild(this.body);
         this.role.addChild(this.arm);
-        this.arm.play(this.aniName, true, false);
+        if (ViewManager.instance.player.sFire) {
+            if (GameManager.instance.roleInfo.weaponType == GameData.WEAPON_RIFLE) {
+                this.setAttack2();
+            } else {
+                this.setAttack1();
+            }
+        } else {
+            this.setArmIdle();
+        }
         ViewManager.instance.rolePlayer.roleSprite.addChild(this.role);
     }
 
@@ -171,6 +181,18 @@ export class PlayerSk {
     public setUp(): void {
         this.arm.rotation = 0;
         this.skin1.y = this.skin2.y = this.skin3.y = 47
+    }
+
+    public beHit(): void {
+        // this.clearBeHit();
+        // Laya.Tween.to(this.role, { x: 0 }, 100, Laya.Ease.backOut);
+        // Laya.timer.once(100, this, this.clearBeHit);
+        // ViewManager.instance.showShake(this.role, 30, 200, 5);
+    }
+
+    private clearBeHit(): void {
+        this.role.x = 30;
+        Laya.Tween.clearTween(this.role);
     }
 
 

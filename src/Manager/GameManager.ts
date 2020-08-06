@@ -27,6 +27,9 @@ export class GameManager {
     public adList: any[] = [];
     public adListRever: any[] = [];
     public adTime: number = 0;
+    public buyWeaponType: number = 0;
+    public buyBullet: number = 0;
+    public buyGre: number = 10;
 
     // public bossDeath: boolean = false;//当前关卡boss是否阵亡
 
@@ -43,10 +46,15 @@ export class GameManager {
 
     public startGame(): void {
         this.levelData = Laya.loader.getRes("res/LevelData.json");
+        var levelData2 = Laya.loader.getRes("res/LevelData2.json");
+        this.levelData["chapter_4"] = levelData2["chapter_4"];
+        this.levelData["chapter_5"] = levelData2["chapter_5"];
+        console.log(this.levelData);
         this.initRoleData();
         this.initChapterConfig();
         ViewManager.instance.initPopUpView();
         ViewManager.instance.showChapterView();
+        SoundManager.instance.addVisibleEvent();
         // this.gotoNextLevel();
     }
 
@@ -158,6 +166,7 @@ export class GameManager {
             ViewManager.instance.showTipsView("您已通关！敬请期待后续章节");
             return;
         }
+
         EventManager.instance.dispatcherEvt(GameEvent.CLEAR_WAR_VIEW);
         if (this.levelData["chapter_" + this.curChapter]) {
             var l: number = (this.curLevel % this.maxLevel);
@@ -169,6 +178,7 @@ export class GameManager {
             this.roleInfo.isDeath = false;
             ViewManager.instance.createWarView();
             SoundManager.instance.playBGM("bgm");
+            // this.buyBullet = this.buyWeaponType = 0; this.buyGre = 10;
         } else {
             ViewManager.instance.showTipsView("您已通关！敬请期待后续章节");
         }
@@ -243,11 +253,22 @@ export class GameManager {
         if (d.type == GoodsType.GoodsType_MED) {
             GameManager.instance.roleInfo.blood++;
         } else if (d.type == GoodsType.GoodsType_MAC) {
-            GameManager.instance.roleInfo.weaponType = PlayerData.WEAPON_MAC;
-            GameManager.instance.roleInfo.bulletNum += d.num;
+            if (this.buyWeaponType != PlayerData.WEAPON_MAC)
+                this.buyBullet = 0;
+            this.buyWeaponType = PlayerData.WEAPON_MAC;
+            this.buyBullet += d.num;
         } else if (d.type == GoodsType.GoodsType_GRE) {
-            GameManager.instance.roleInfo.bombNum += d.num;
+            this.buyGre += d.num;
+        } else if (d.type == GoodsType.GoodsType_RIF) {
+            if (this.buyWeaponType != PlayerData.WEAPON_RIFLE)
+                this.buyBullet = 0;
+            this.buyWeaponType = PlayerData.WEAPON_RIFLE;
+            this.buyBullet += d.num;
         }
+        if (this.buyBullet > 999)
+            this.buyBullet = 999;
+        if (this.buyGre > 999)
+            this.buyGre = 999;
     }
 
     public setADlist(): void {
@@ -257,6 +278,9 @@ export class GameManager {
         }
         this.adTime = this.adList.length * 500;
         this.adListRever = this.adList.concat().reverse();
+        EventManager.instance.dispatcherEvt(GameEvent.SHOW_AD_LIST);
+
+
     }
 
     public useWeaponPan(x: number, y: number, dir: number): boolean {

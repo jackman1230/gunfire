@@ -14,6 +14,12 @@ export default class WXFUI_BeforeWar extends fairygui.GComponent {
 	public m_enter:WXFUI_enterBtn;
 	public m_n17:fairygui.GImage;
 	public m_ad:WXFUI_ADListHor;
+	public m_n19:fairygui.GImage;
+	public m_n20:fairygui.GImage;
+	public m_n21:fairygui.GImage;
+	public m_coin:fairygui.GTextField;
+	public m_bulletNum:fairygui.GTextField;
+	public m_bombNum:fairygui.GTextField;
 
 	public static URL:string = "ui://bq3h5insdr1tnl";
 
@@ -34,5 +40,11 @@ export default class WXFUI_BeforeWar extends fairygui.GComponent {
 		this.m_enter = <WXFUI_enterBtn><any>(this.getChild("enter"));
 		this.m_n17 = <fairygui.GImage><any>(this.getChild("n17"));
 		this.m_ad = <WXFUI_ADListHor><any>(this.getChild("ad"));
+		this.m_n19 = <fairygui.GImage><any>(this.getChild("n19"));
+		this.m_n20 = <fairygui.GImage><any>(this.getChild("n20"));
+		this.m_n21 = <fairygui.GImage><any>(this.getChild("n21"));
+		this.m_coin = <fairygui.GTextField><any>(this.getChild("coin"));
+		this.m_bulletNum = <fairygui.GTextField><any>(this.getChild("bulletNum"));
+		this.m_bombNum = <fairygui.GTextField><any>(this.getChild("bombNum"));
 	}
 }

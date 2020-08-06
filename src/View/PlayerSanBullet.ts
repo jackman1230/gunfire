@@ -79,7 +79,7 @@ export default class PlayerSanBullet {
         b.onAwake();
         this.scene.x = c.x + p.x;
         this.scene.y = c.y + p.y;
-        console.log("onAwake---");
+        // console.log("onAwake---");
         if (this.direction > 0) {
             if (this.direction == 4) {//向上
                 if (this.bulletIndex == 0) {//left

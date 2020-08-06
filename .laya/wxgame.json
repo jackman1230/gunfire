@@ -19,20 +19,20 @@
     ],
     "compressJs": false,
     "compressJsFilter": [
-        "$basePath/**/*.js"
+        "$basePath/**/*.js",
+        "!$basePath/libs/min/**/*.js"
     ],
     "compressJsNoteList": [
+        "",
         ""
     ],
-    "version": false,
+    "version": true,
     "versionFilter": [
         "$basePath/**/*.*",
-        "!$basePath/*.html",
-        "!$basePath/{version.json,game.js,game.json,project.config.json,weapp-adapter.js,project.swan.json,swan-game-adapter.js,main.js,gameConfig.json}",
-        "!$basePath/layaforqq/**/*.*"
+        "!$basePath/*. html",
+        "!$basePath/{version.json,game.js,game.json,project.config.json,weapp-adapter.js,project.swan.json,swan-game-adapter.js,main.js,gameConfig.json,my-adapter.js}"
     ],
     "versionNoteList": [
-        "",
         "",
         "",
         ""
@@ -85,9 +85,10 @@
     "compile": false,
     "forceCompile": false,
     "onlyIndexJS": true,
+    "useMinJsLibs": false,
     "es6toes5": false,
     "projectType": "ts",
-    "pubTime": 1595837639830,
+    "pubTime": 1596674067214,
     "uesEnginePlugin": false,
     "wxOptimize": {
         "useOptimizeOpen": false,

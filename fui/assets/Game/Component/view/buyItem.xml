@@ -6,8 +6,12 @@
     <image id="n5_dr1t" name="n5" src="n8qulj" fileName="assets/otherView/战前准备/切图/金币.png" xy="107,5"/>
     <component id="n7_dr1t" name="buy" src="dr1tno" fileName="Component/btn/buyBtn.xml" xy="188,-2"/>
     <text id="n6_dr1t" name="coin" xy="129,4" size="69,24" font="SimHei" fontSize="20" color="#ffffff" vAlign="middle" autoSize="none" singleLine="true" text="2000"/>
-    <component id="n8_dr1t" name="free" src="dr1tnp" fileName="Component/btn/freeBtn.xml" xy="106,35"/>
-    <loader id="n9_dr1t" name="icon" xy="23,16" pivot="0.5,0.5" size="50,50" align="center" vAlign="middle"/>
+    <component id="n8_dr1t" name="free" src="dr1tnp" fileName="Component/btn/freeBtn.xml" xy="106,33"/>
+    <loader id="n9_dr1t" name="icon" xy="23,16" pivot="0.5,0.5" size="50,50" align="center" vAlign="middle" playing="false"/>
     <text id="n11_dr1t" name="info" xy="-10,86" size="121,24" font="SimHei" fontSize="16" color="#ffffff" align="center" vAlign="middle" leading="1" letterSpacing="-1" autoSize="none" singleLine="true" text="获得冲锋枪 x 1"/>
   </displayList>
+  <transition name="ani">
+    <item time="0" type="Scale" target="n8_dr1t" tween="true" startValue="1,1" endValue="0.8,0.8" duration="12"/>
+    <item time="12" type="Scale" target="n8_dr1t" tween="true" startValue="0.8,0.8" endValue="1,1" duration="12"/>
+  </transition>
 </component>

@@ -19,6 +19,7 @@ export default class HostageView {
     protected pos: Laya.Point;
 
     private isActive: boolean = false;
+    private script: HostageBody;
 
     constructor() { }
 
@@ -33,6 +34,7 @@ export default class HostageView {
         this.body = this.scene.getComponent(Laya.RigidBody);
         this.box = this.scene.getComponent(Laya.BoxCollider);
         this.scene.addComponent(HostageBody);
+        this.script = this.scene.getComponent(HostageBody);
         this.scene.x = this.pos.x;
         this.scene.y = this.pos.y;
         this.view = fairygui.UIPackage.createObject("Game", "hostage") as WXFUI_hostage;
@@ -61,6 +63,7 @@ export default class HostageView {
         this.view.removeChildren();
         if (this.view) this.view.dispose();
         if (this.scene) {
+            // this.script.isRemove = true;
             this.scene.removeSelf();
         }
         Laya.Pool.recover("hostage", this);

@@ -65,6 +65,8 @@ export default class GameEvent {
 
     public static ROLE_ANI_COMPLETE: string = "ROLE_ANI_COMPLETE";
 
+    public static SHOW_AD_LIST: string = "SHOW_AD_LIST";
+
 
     constructor() { }
 

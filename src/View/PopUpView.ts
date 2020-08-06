@@ -8,11 +8,13 @@ export default class PopUpView {
     public view: fairygui.GComponent;
 
     private tween: Laya.Tween;
+    protected isShow: boolean = false;
     constructor() {
         this.v = WXFUI_PopUpView.createInstance();
     }
 
     public showView(showMask: boolean = true, clickMaskHide: boolean = true): void {
+        this.isShow = true;
         this.layout();
         this.layoutMask();
         Laya.Tween.clearTween(this.tween);
@@ -24,6 +26,7 @@ export default class PopUpView {
     }
 
     public showViewNoTween(): void {
+        this.isShow = true;
         this.layout();
         this.layoutMask();
         this.view.setScale(1, 1);
@@ -55,6 +58,7 @@ export default class PopUpView {
 
     public hideAllView(): void {
         // console.log("hidePopUpView--", this.view);
+        this.isShow = false;
         this.v.m_mask.off(Laya.Event.CLICK, this, this.hideAllView);
         fairygui.GRoot.inst.removeChild(this.v);
         // this.tween = Laya.Tween.from(this.view, { scaleX: 0, scaleY: 0 }, 300, null, Laya.Handler.create(this, () => {

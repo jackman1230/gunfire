@@ -352,8 +352,10 @@ export default class Enemy {
         EventManager.instance.offNotice(GameEvent.PLAYER_PAN_HIT_ENEMY, this, this.beHit);
 
         Laya.timer.clearAll(this);
-        if (this.scene)
+        if (this.scene) {
+            this.enemyScript.isRemove = true;
             this.scene.removeSelf();
+        }
         if (this.view)
             this.view.dispose();
         this.recover();

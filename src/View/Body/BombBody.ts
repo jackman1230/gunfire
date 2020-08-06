@@ -1,6 +1,7 @@
 import { EventManager } from "../../Manager/EventManager";
 import GameEvent from "../../Control/GameEvent";
 import { GameData } from "../../Data/GameData";
+import { ViewManager } from "../../Manager/ViewManager";
 
 
 export default class BombBody extends Laya.Script {
@@ -11,6 +12,8 @@ export default class BombBody extends Laya.Script {
     private oriPosX: number;
     private self: Laya.Sprite;
 
+    private isRemove: boolean = false;
+
     constructor() { super(); }
 
     onEnable(): void {
@@ -18,6 +21,7 @@ export default class BombBody extends Laya.Script {
         this.selfBody = this.selfCollider.rigidBody;
         this.self = this.owner as Laya.Sprite;
         this.oriPosX = this.self.x;
+        this.isRemove = false;
         // console.log("oriPosX--" + this.oriPosX);
 
     }
@@ -27,22 +31,28 @@ export default class BombBody extends Laya.Script {
     }
 
     onTriggerEnter(other: Laya.BoxCollider, self: Laya.BoxCollider, contact: any): void {
+        if (this.isRemove) return;
         if (self.label == "PlayerBomb") {
             if (other.label == "enemy") {
                 // console.log("主角扔雷击中敌人-敌人ID=", other.id);
                 EventManager.instance.dispatcherEvt(GameEvent.PLAYER_BOMB_HIT_ENEMY, { o: other.owner, s: self.owner, d: GameData.BOMB_DAMAGE });
                 // EventManager.instance.dispatcherEvt(GameEvent.BOMB_DISPOSE, this.owner);
                 this.owner.removeSelf();
+                this.isRemove = true;
+                ViewManager.instance.showShake(ViewManager.instance.warView.warView.displayObject, 30, 300, 6);
             } else if (other.label == "obstacle") {
                 // console.log("主角扔雷击中障碍物", other.id);
                 // EventManager.instance.dispatcherEvt(GameEvent.BOMB_DISPOSE, this.owner);
                 EventManager.instance.dispatcherEvt(GameEvent.PLAYER_BOMB_HIT_OBSTACLE, { o: other.owner, s: self.owner, d: GameData.BOMB_DAMAGE });
                 this.owner.removeSelf();
+                this.isRemove = true;
+                ViewManager.instance.showShake(ViewManager.instance.warView.warView.displayObject, 30, 300, 6);
             }
         } else if (self.label == "enemyBomb" && other.label == "player") {
             // console.log("敌人扔雷击中主角-主角ID=", other.id);
             EventManager.instance.dispatcherEvt(GameEvent.ENEMY_BOMB_HIT_PLAYER, { o: other.owner, s: self.owner });
             this.owner.removeSelf();
+            this.isRemove = true;
             // EventManager.instance.dispatcherEvt(GameEvent.BOMB_DISPOSE, this.owner);
             return;
         }
@@ -50,6 +60,9 @@ export default class BombBody extends Laya.Script {
             // console.log("雷撞墙了=", this.self.x, this.self.y);
             EventManager.instance.dispatcherEvt(GameEvent.BOMB_DISPOSE, { o: other.owner, s: self.owner });
             this.owner.removeSelf();
+            this.isRemove = true;
+            if (self.label == "PlayerBomb")
+                ViewManager.instance.showShake(ViewManager.instance.warView.warView.displayObject, 30, 300, 6);
             return;
         }
     }

@@ -32,6 +32,8 @@ import ClickChestView from "../View/PopView/ClickChestView";
 import { GameManager } from "./GameManager";
 import ADListView from "../View/PopView/ADListView";
 import PlayerSanBullet from "../View/PlayerSanBullet";
+import Shake from "../View/Shake";
+import { MooSnowSDK } from "./MooSnowSDK";
 
 export class ViewManager {
 
@@ -122,7 +124,7 @@ export class ViewManager {
         if (b)//自己扔雷
             bomb.createView(BombData.BOMB_MY_GRE, dir, parentPos, b, this.getPlayerBulletOffSetPos(dir, 4));
         else//敌人扔雷，或者迫击炮导弹，或者火箭筒导弹
-            bomb.createView(type, dir, parentPos, b, this.getEnemyBulletOffSetPos(dir, type));
+            bomb.createView(type, dir, parentPos, false, this.getEnemyBulletOffSetPos(dir, type));
     }
     /**创建飞机的导弹 */
     public createChopperBomb(type: number, parentPos: Laya.Point, s: Laya.Point): void {
@@ -202,6 +204,8 @@ export class ViewManager {
     private addGoodsArr: AddGold[] = [];
     /**创建增加道具飘字 */
     public createAddGold(goodsType: number, d: number, isBox: boolean = false): void {
+        // console.log("createAddGold--", goodsType);
+
         var b: AddGold = Laya.Pool.getItemByClass("addGold", AddGold);
         b.createView(goodsType, d, this.rolePlayer.roleSprite, isBox);
         this.addGoodsArr.push(b);
@@ -308,6 +312,7 @@ export class ViewManager {
         this.adListView.createView();
 
         Laya.stage.addChild(fairygui.GRoot.inst.displayObject);
+        MooSnowSDK.getAD();
 
     }
 
@@ -535,6 +540,11 @@ export class ViewManager {
         } else {
             return Laya.Browser.height / 750;
         }
+    }
+    private shake: Shake;
+    public showShake(s: Laya.Sprite, intensity: number, duration: number, radius: number): void {
+        if (!this.shake) this.shake = new Shake();
+        this.shake.exe(s, intensity, duration, radius);
     }
 
 }

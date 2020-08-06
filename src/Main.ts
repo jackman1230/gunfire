@@ -23,7 +23,7 @@ class Main {
 		if (GameConfig.debug || Laya.Utils.getQueryString("debug") == "true") Laya.enableDebugPanel();
 		if (GameConfig.physicsDebug && Laya["PhysicsDebugDraw"]) Laya["PhysicsDebugDraw"].enable();
 		if (GameConfig.stat) Laya.Stat.show();
-		Laya.alertGlobalError = true;
+		// Laya.alertGlobalError = true;
 
 		//激活资源版本控制，version.json由IDE发布功能自动生成，如果没有也不影响后续流程
 		Laya.ResourceVersion.enable("version.json", Laya.Handler.create(this, this.onVersionLoaded), Laya.ResourceVersion.FILENAME_VERSION);
@@ -32,13 +32,14 @@ class Main {
 		GameBinder.bindAll();
 		loadingBinder.bindAll();
 		MooSnowSDK.login();
-		AssetsManager.instance.loadLoadingAssetsData();
+
 
 	}
 
 	onVersionLoaded(): void {
+		AssetsManager.instance.loadLoadingAssetsData();
 		//激活大小图映射，加载小图的时候，如果发现小图在大图合集里面，则优先加载大图合集，而不是小图
-		Laya.AtlasInfoManager.enable("fileconfig.json", Laya.Handler.create(this, this.onConfigLoaded));
+		// Laya.AtlasInfoManager.enable("fileconfig.json", Laya.Handler.create(this, this.onConfigLoaded));
 	}
 
 	onConfigLoaded(): void {

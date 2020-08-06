@@ -1,5 +1,7 @@
 import { EventManager } from "../../Manager/EventManager";
 import GameEvent from "../../Control/GameEvent";
+import { ViewManager } from "../../Manager/ViewManager";
+import { GameData } from "../../Data/GameData";
 
 
 export default class BoomBody extends Laya.Script {
@@ -9,6 +11,8 @@ export default class BoomBody extends Laya.Script {
 
     private oriPosX: number;
     private self: Laya.Sprite;
+
+    public isRemove: boolean = false;
 
     constructor() { super(); }
 
@@ -26,17 +30,23 @@ export default class BoomBody extends Laya.Script {
     }
 
     onTriggerEnter(other: Laya.BoxCollider, self: Laya.BoxCollider, contact: any): void {
-        // if (self.label == "PlayerBullet" && other.label == "enemy") {
-        //     console.log("主角击中敌人-敌人ID=", other.id);
-        //     this.owner.removeSelf();
-        //     EventManager.instance.dispatcherEvt(GameEvent.BULLET_HIT_ENEMY, this.owner);
-        //     return;
-        // }
-        // if (self.label == "enemyBullet" && other.label == "player") {
-        //     console.log("敌人击中主角-主角ID=", other.id);
-        //     this.owner.removeSelf();
-        //     EventManager.instance.dispatcherEvt(GameEvent.BULLET_HIT_ROLE, this.owner);
-        //     return;
+        // if (this.isRemove) return;
+        // if (self.label == "PlayerBomb") {
+        //     if (other.label == "enemy") {
+        //         // console.log("主角扔雷击中敌人-敌人ID=", other.id);
+        //         EventManager.instance.dispatcherEvt(GameEvent.PLAYER_BOMB_HIT_ENEMY, { o: other.owner, s: self.owner, d: GameData.BOMB_DAMAGE });
+        //         // EventManager.instance.dispatcherEvt(GameEvent.BOMB_DISPOSE, this.owner);
+        //         this.owner.removeSelf();
+        //         this.isRemove = true;
+        //         ViewManager.instance.showShake(ViewManager.instance.warView.warView.displayObject, 30, 300, 6);
+        //     } else if (other.label == "obstacle") {
+        //         // console.log("主角扔雷击中障碍物", other.id);
+        //         // EventManager.instance.dispatcherEvt(GameEvent.BOMB_DISPOSE, this.owner);
+        //         EventManager.instance.dispatcherEvt(GameEvent.PLAYER_BOMB_HIT_OBSTACLE, { o: other.owner, s: self.owner, d: GameData.BOMB_DAMAGE });
+        //         this.owner.removeSelf();
+        //         this.isRemove = true;
+        //         ViewManager.instance.showShake(ViewManager.instance.warView.warView.displayObject, 30, 300, 6);
+        //     }
         // }
     }
     onTriggerExit(): void {

@@ -6,6 +6,7 @@ import GameEvent from "../../Control/GameEvent";
 import { GoodsType } from "../../Data/GameData";
 import { GameManager } from "../../Manager/GameManager";
 import { ViewManager } from "../../Manager/ViewManager";
+import { MooSnowSDK } from "../../Manager/MooSnowSDK";
 
 
 
@@ -21,11 +22,14 @@ export default class ClickChestView extends PopUpView {
     }
 
     private timeOut: number;
+    private clickNum: number = 0;
+    private randomNum: number = 7;
     public updateView(): void {
         this.view.m_clickBtn.onClick(this, this.clickBtn);
         this.view.m_bar.value = 0;
         this.view.m_box.url = "ui://Game/chestClose";
-
+        this.clickNum = 0;
+        this.randomNum = this.getRandomValue();
     }
 
     private addTimeOut(): void {
@@ -47,6 +51,10 @@ export default class ClickChestView extends PopUpView {
             this.clickSuccess();
         }
         this.view.m_bar.m_title.text = this.view.m_bar.value + "%";
+        this.clickNum++;
+        if (this.clickNum == this.randomNum) {
+            MooSnowSDK.showBanner(true);
+        }
     }
 
     private decValue(): void {
@@ -63,10 +71,6 @@ export default class ClickChestView extends PopUpView {
         // this.view.m_box.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.boxAniComplete))
         ViewManager.instance.hidePopUpView(ViewManager.instance.clickChestView);
         EventManager.instance.dispatcherEvt(GameEvent.CHANGE_PLAYER_GOODS, GoodsType.GoodsType_OPEN_BOX);
-
-    }
-
-    private boxAniComplete(): void {
 
     }
 

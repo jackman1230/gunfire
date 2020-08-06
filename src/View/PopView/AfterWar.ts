@@ -3,6 +3,9 @@ import WXFUI_AfterWar from "../../fui/Game/WXFUI_AfterWar";
 import { SoundManager } from "../../Manager/SoundManager";
 import { GameManager } from "../../Manager/GameManager";
 import WXFUI_ADItem from "../../fui/Game/WXFUI_ADItem";
+import { EventManager } from "../../Manager/EventManager";
+import GameEvent from "../../Control/GameEvent";
+import { MooSnowSDK } from "../../Manager/MooSnowSDK";
 
 
 
@@ -28,19 +31,21 @@ export default class AfterWar extends PopUpView {
         this.view.m_ad_3.m_list.itemRenderer = Laya.Handler.create(this, this.setADItem3, null, false);
         this.view.m_ad_4.m_list.itemRenderer = Laya.Handler.create(this, this.setADItem4, null, false);
 
-        this.view.m_ad_1.m_list.numItems = this.view.m_ad_2.m_list.numItems = GameManager.instance.adList.length;
-        this.view.m_ad_3.m_list.numItems = this.view.m_ad_4.m_list.numItems = GameManager.instance.adListRever.length;
-        this.view.m_ad_1.m_list.height = this.view.m_ad_2.m_list.height = this.view.m_ad_3.m_list.height = this.view.m_ad_4.m_list.height = 160 * GameManager.instance.adList.length + 2;
         this.view.m_ad_1.m_list.on(fairygui.Events.CLICK_ITEM, this, this.onClickItem);
         this.view.m_ad_2.m_list.on(fairygui.Events.CLICK_ITEM, this, this.onClickItem);
         this.view.m_ad_3.m_list.on(fairygui.Events.CLICK_ITEM, this, this.onClickItem);
         this.view.m_ad_4.m_list.on(fairygui.Events.CLICK_ITEM, this, this.onClickItem);
+
+        EventManager.instance.addNotice(GameEvent.SHOW_AD_LIST, this, this.showADList);
+
+
     }
 
     public showView(s, c): void {
         super.showView(s, c);
         this.view.m_ad_1.m_list.y = 0;
         this.showADList();
+        MooSnowSDK.showBanner(false);
     }
 
     public updateView(type: number): void {
@@ -73,7 +78,8 @@ export default class AfterWar extends PopUpView {
     private continueGameByVideo(): void {
         SoundManager.instance.playSound("btn_click");
         // this.restartGame();
-        GameManager.instance.continueGameByVideo();
+        MooSnowSDK.showVideo(2, null);
+
     }
 
     private returnHandle(): void {
@@ -83,6 +89,12 @@ export default class AfterWar extends PopUpView {
 
     private _tweenNum: Laya.Tween;
     private showADList(): void {
+        if (GameManager.instance.adList.length < 1) return;
+        EventManager.instance.offNotice(GameEvent.SHOW_AD_LIST, this, this.showADList);
+        Laya.Tween.clearTween(this.view.m_ad_1.m_list);
+        this.view.m_ad_1.m_list.numItems = this.view.m_ad_2.m_list.numItems = GameManager.instance.adList.length;
+        this.view.m_ad_3.m_list.numItems = this.view.m_ad_4.m_list.numItems = GameManager.instance.adListRever.length;
+        this.view.m_ad_1.m_list.height = this.view.m_ad_2.m_list.height = this.view.m_ad_3.m_list.height = this.view.m_ad_4.m_list.height = 160 * GameManager.instance.adList.length + 2;
         this.adMoveUp();
     }
 
@@ -125,10 +137,6 @@ export default class AfterWar extends PopUpView {
         item.m_name.text = d.title;
     }
 
-    private set tweenNum(v: number) {
-
-    }
-
     private adMoveDown(): void {
         this._tweenNum = Laya.Tween.to(this.view.m_ad_1.m_list, { y: 0 }, GameManager.instance.adTime, null, Laya.Handler.create(this, this.adMoveUp));
         this._tweenNum.update = Laya.Handler.create(this, this.updateTween, null, false);
@@ -149,5 +157,6 @@ export default class AfterWar extends PopUpView {
     public hideAllView(): void {
         super.hideAllView();
         Laya.Tween.clearTween(this.view.m_ad_1.m_list);
+        MooSnowSDK.hideBanner();
     }
 }

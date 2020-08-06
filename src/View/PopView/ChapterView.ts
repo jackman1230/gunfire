@@ -6,6 +6,7 @@ import { EventManager } from "../../Manager/EventManager";
 import { SoundManager } from "../../Manager/SoundManager";
 import { ViewManager } from "../../Manager/ViewManager";
 import WXFUI_ADItem from "../../fui/Game/WXFUI_ADItem";
+import { MooSnowSDK } from "../../Manager/MooSnowSDK";
 
 
 export default class ChapterView extends PopUpView {
@@ -36,13 +37,16 @@ export default class ChapterView extends PopUpView {
         this.view.m_ad_3.onClick(this, this.onClickADItem, [3]);
 
         this.view.m_ad.m_list.itemRenderer = Laya.Handler.create(this, this.setADItem, null, false);
-        this.view.m_ad.m_list.numItems = GameManager.instance.adList.length;
+        // this.view.m_ad.m_list.numItems = GameManager.instance.adList.length;
         this.view.m_ad.m_list.width = 136 * GameManager.instance.adList.length;
         this.view.m_ad.m_list.on(fairygui.Events.CLICK_ITEM, this, this.onClickItem);
         this.view.m_ad_remen.onClick(this, this.showReMenAD);
 
 
         EventManager.instance.addNotice(GameEvent.PAUSE_GAME, this, this.pauseGame);
+        EventManager.instance.addNotice(GameEvent.SHOW_AD_LIST, this, this.showADList);
+
+        // MooSnowSDK.hideBanner();
     }
 
     public showView(s, c): void {
@@ -117,6 +121,10 @@ export default class ChapterView extends PopUpView {
     }
 
     private showADList(): void {
+        if (GameManager.instance.adList.length < 1) return;
+        EventManager.instance.offNotice(GameEvent.SHOW_AD_LIST, this, this.showADList);
+        this.view.m_ad.m_list.width = 136 * GameManager.instance.adList.length;
+        this.view.m_ad.m_list.numItems = GameManager.instance.adList.length;
         Laya.Tween.clearTween(this.view.m_ad.m_list);
         Laya.timer.clear(this, this.changeAD);
         this.adMoveLeft();

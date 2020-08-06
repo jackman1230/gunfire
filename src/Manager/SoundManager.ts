@@ -2,8 +2,9 @@ import { GameData } from "../Data/GameData";
 
 export class SoundManager {
     private static _instance: SoundManager;
-    private isOpenSound: boolean = true;
-    private bgm: Laya.SoundChannel;
+    public isOpenSound: boolean = true;
+    public bgm: Laya.SoundChannel;
+    private bgmName: string = "";
 
     public static get instance(): SoundManager {
         if (this._instance == null) {
@@ -12,6 +13,32 @@ export class SoundManager {
         }
         return this._instance;
     }
+
+    public addVisibleEvent(): void {
+        // Laya.stage.on(Laya.Event.FOCUS_CHANGE, this, this.playLastBgm)
+        if (Laya.Browser.onWeiXin) {
+            window["wx"].onShow(function () {
+                if (SoundManager.instance.bgm && SoundManager.instance.isOpenSound)
+                    SoundManager.instance.bgm.play();
+            })
+        }
+    }
+
+    private playLastBgm(): void {
+        if (Laya.stage.isFocused) {
+            if (this.bgmName) {
+                if (this.isOpenSound) {
+                    Laya.SoundManager.soundMuted = false;
+                    Laya.SoundManager.musicMuted = false;
+                    this.bgm = Laya.SoundManager.playMusic(this.bgmName);
+                }
+            }
+        } else {
+            console.log("Laya.stage.isFocused", Laya.stage.isFocused);
+        }
+    }
+
+
     public playSound(n: string) {
         if (!this.isOpenSound) return;
         var s: string = GameData.SOUND_FONT + n + ".mp3";
@@ -25,14 +52,15 @@ export class SoundManager {
         // }
     }
     public playBGM(name: string): void {
-        var s: string = "res/sound/" + name + ".mp3";
-        this.bgm = Laya.SoundManager.playMusic(s);
+        this.bgmName = "res/sound/" + name + ".mp3";
+        this.bgm = Laya.SoundManager.playMusic(this.bgmName);
     }
 
     public stopBGM(): void {
         Laya.SoundManager.stopMusic();
 
     }
+
 
     public offSound(): void {
         this.isOpenSound = !this.isOpenSound;
@@ -48,5 +76,17 @@ export class SoundManager {
             // Laya.SoundManager.setSoundVolume(0);
             // this.bgm.volume = 0.5;
         }
+    }
+
+    public addWXonAudioInterruptionEnd(): void {
+        // wx.createInnerAudioContext();
+        // Laya.SoundManager.autoStopMusic
+        // wx.onBackgroundAudioPlay(function(){
+        //     bgm.play();
+        // })
+
+        // wx.onAudioInterruptionEnd(function () {
+        //     bgm.play()
+        //   })
     }
 }

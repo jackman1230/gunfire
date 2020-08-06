@@ -5,4 +5,5 @@
     <image id="n6_dr1t" name="n6" src="n8qulp" fileName="assets/otherView/战前准备/切图/免费获得.png" xy="0,0"/>
   </displayList>
   <Button downEffect="scale" downEffectValue="0.90"/>
+  <transition name="t0"/>
 </component>

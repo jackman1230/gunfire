@@ -17,6 +17,7 @@ export default class PlayerBullet {
     private speed: number = 35;
     private body: Laya.RigidBody;
     private box: Laya.BoxCollider;
+    private script: BulletBody;
 
     constructor() { }
 
@@ -46,6 +47,7 @@ export default class PlayerBullet {
     private loadComplete(): void {
         ViewManager.instance.warView.scene.addChild(this.scene);
         this.scene.addComponent(BulletBody);
+        this.script = this.scene.getComponent(BulletBody);
         // console.log("BulletBody---");
 
         this.body = this.scene.getComponent(Laya.RigidBody);
@@ -74,12 +76,8 @@ export default class PlayerBullet {
         EventManager.instance.offNotice(GameEvent.PLAYER_BULLET_HIT_ENEMY, this, this.hitEnemy);
         EventManager.instance.offNotice(GameEvent.PLAYER_BULLET_HIT_OBSTACLE, this, this.hitEnemy);
         if (this.scene) {
+            this.script.isRemove = true;
             this.scene.removeSelf();
-            // if (this.bulletType == GameData.WEAPON_RIFLE) {
-            //     Laya.Pool.recover("BulletRifleUI", this.scene);
-            // } else {
-            //     Laya.Pool.recover("BulletUI", this.scene);
-            // }
         }
         this.view.dispose();
         Laya.Pool.recover("PlayerBullet", this);
@@ -99,7 +97,7 @@ export default class PlayerBullet {
             this.scene.addChild(this.view.displayObject);
             var b: BulletBody = this.scene.getComponent(BulletBody);
             b.onAwake();
-            console.log("onAwake---");
+            // console.log("onAwake---");
             if (this.direction > 0) {
                 this.scene.x = c.x + 45;
                 if (this.direction == 2) {//右下

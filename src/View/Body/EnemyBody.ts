@@ -13,6 +13,8 @@ export default class EnemyBody extends Laya.Script {
     public obstacleBox: Laya.PolygonCollider;
     public isDrop: boolean = false;
 
+    public isRemove: boolean = false;
+
     private oriPosX: number;
 
     constructor() { super(); }
@@ -21,13 +23,14 @@ export default class EnemyBody extends Laya.Script {
         this.selfCollider = this.owner.getComponent(Laya.BoxCollider);
         this.selfBody = this.selfCollider.rigidBody;
         this.oriPosX = this.selfBody.getWorldCenter().x;
+        this.isRemove = false;
     }
 
     onDisable(): void {
     }
 
     onTriggerEnter(other: Laya.PolygonCollider, self: Laya.BoxCollider, contact: any): void {
-
+        if (this.isRemove) return;
         if (other.label == "obstacle") {
             this.obstacleBox = other;
         }

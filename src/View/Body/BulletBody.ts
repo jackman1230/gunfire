@@ -16,6 +16,7 @@ export default class BulletBody extends Laya.Script {
     private bulletType: number = 0;
     private disposeLeft: number = 0;
     private disposeRight: number = 0;
+    public isRemove: boolean = false;
 
     constructor() { super(); }
 
@@ -24,6 +25,7 @@ export default class BulletBody extends Laya.Script {
         this.selfBody = this.selfCollider.rigidBody;
         this.self = this.owner as Laya.Sprite;
         this.oriPosX = this.self.x;
+        this.isRemove = false;
         var moveX: number = Math.abs(ViewManager.instance.warView.warView.x);
         this.disposeRight = Laya.stage.width + moveX - 30;
         this.disposeLeft = moveX - 20;
@@ -42,6 +44,7 @@ export default class BulletBody extends Laya.Script {
     }
 
     onTriggerEnter(other: Laya.BoxCollider, self: Laya.BoxCollider, contact: any): void {
+        if (this.isRemove) return;
         if (self.label.indexOf("PlayerBullet") > -1) {
             if (other.label == "enemy") {
                 // console.log("主角子弹击中敌人-敌人ID=", other.id);
@@ -71,10 +74,12 @@ export default class BulletBody extends Laya.Script {
     }
 
     onUpdate(): void {
+        if (this.isRemove) return;
         // if (this.bulletType == GameData.WEAPON_RIFLE) return;
         if (this.self.x > this.disposeRight || this.self.x < this.disposeLeft || this.self.y < -50 || this.self.y > Laya.stage.height + 50) {
-            console.log("BULLET_DISPOSE--", this.self.x);
+            // console.log("BULLET_DISPOSE--", this.self.x);
             this.owner.removeSelf();
+            this.isRemove = true;
             EventManager.instance.dispatcherEvt(GameEvent.BULLET_DISPOSE, this.owner);
         }
     }
