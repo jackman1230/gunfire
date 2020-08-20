@@ -14,15 +14,15 @@ export class SoundManager {
         return this._instance;
     }
 
-    public addVisibleEvent(): void {
-        // Laya.stage.on(Laya.Event.FOCUS_CHANGE, this, this.playLastBgm)
-        if (Laya.Browser.onWeiXin) {
-            window["wx"].onShow(function () {
-                if (SoundManager.instance.bgm && SoundManager.instance.isOpenSound)
-                    SoundManager.instance.bgm.play();
-            })
-        }
-    }
+    // public addVisibleEvent(): void {
+    //     // Laya.stage.on(Laya.Event.FOCUS_CHANGE, this, this.playLastBgm)
+    //     if (Laya.Browser.onWeiXin) {
+    //         window["wx"].onShow(function () {
+    //             if (SoundManager.instance.bgm && SoundManager.instance.isOpenSound)
+    //                 SoundManager.instance.bgm.play();
+    //         })
+    //     }
+    // }
 
     private playLastBgm(): void {
         if (Laya.stage.isFocused) {
@@ -53,40 +53,32 @@ export class SoundManager {
     }
     public playBGM(name: string): void {
         this.bgmName = "res/sound/" + name + ".mp3";
-        this.bgm = Laya.SoundManager.playMusic(this.bgmName);
+        // if (this.bgm) {
+        //     this.bgm.url = this.bgmName;
+        //     this.bgm.play();
+        // } else
+        //     this.bgm = 
+        Laya.SoundManager.playMusic(this.bgmName);
     }
 
     public stopBGM(): void {
         Laya.SoundManager.stopMusic();
-
     }
 
 
     public offSound(): void {
-        this.isOpenSound = !this.isOpenSound;
-        if (this.isOpenSound) {
-            // Laya.SoundManager.setMusicVolume(1);
-            // Laya.SoundManager.setSoundVolume(1);
-            Laya.SoundManager.soundMuted = false;
-            Laya.SoundManager.musicMuted = false;
-        } else {
-            Laya.SoundManager.musicMuted = true;
-            Laya.SoundManager.soundMuted = true;
-            // Laya.SoundManager.setMusicVolume(0);
-            // Laya.SoundManager.setSoundVolume(0);
-            // this.bgm.volume = 0.5;
-        }
+        this.isOpenSound = false;
+        Laya.SoundManager.soundMuted = true;
+        Laya.SoundManager.musicMuted = true;
+
     }
 
-    public addWXonAudioInterruptionEnd(): void {
-        // wx.createInnerAudioContext();
-        // Laya.SoundManager.autoStopMusic
-        // wx.onBackgroundAudioPlay(function(){
-        //     bgm.play();
-        // })
+    public openSound(): void {
+        this.isOpenSound = true;
+        Laya.SoundManager.soundMuted = false;
+        Laya.SoundManager.musicMuted = false;
 
-        // wx.onAudioInterruptionEnd(function () {
-        //     bgm.play()
-        //   })
     }
+
+
 }

@@ -50,6 +50,8 @@ export class Player extends Laya.Script {
     constructor() { super() }
 
     public createView() {
+        console.log("createViewPlayer");
+
         this.playerSk = new PlayerSk();
         this.roleSprite = new ui.PlayerBodyUI();
         if (!this.playerCtlView) this.playerCtlView = new PlayerCtlView();
@@ -63,6 +65,7 @@ export class Player extends Laya.Script {
     };
 
     public loadComplete(): void {
+        console.log("loadComplete");
         this.roleBody = this.roleSprite.getComponent(Laya.RigidBody);
         this.roleBox = this.roleSprite.getComponent(Laya.BoxCollider);
 
@@ -71,6 +74,7 @@ export class Player extends Laya.Script {
         this.bodyScript = this.roleSprite.getComponent(PlayerBody);
         this.playerDirView.view.m_dirBtn.y = this.playerDirView.view.m_dirBtn.x = 0;
         // this.addEvent();
+
         this.resetData();
         // this.setStay();
     }
@@ -106,14 +110,19 @@ export class Player extends Laya.Script {
             GameManager.instance.roleInfo.weaponType = 1;
             GameManager.instance.roleInfo.bulletNum = 0;
         }
+        ViewManager.instance.warView.scene.addChild(this.roleSprite);
         GameManager.instance.roleInfo.bombNum = GameManager.instance.buyGre;
         ViewManager.instance.playerInfoView.updateAllView();
         this.changeWeaponType(GameManager.instance.roleInfo.weaponType);
-        ViewManager.instance.warView.scene.addChild(this.roleSprite);
         this.playerDirView.view.m_dirBtn.y = this.playerDirView.view.m_dirBtn.x = 0;
         var d: any = GameManager.instance.curLvData;
         this.roleSprite.x = d.rolePos[0];
         this.roleSprite.y = d.rolePos[1];
+        // console.log("ddd--");
+        // console.log(this.roleSprite.x);
+
+        // Laya.timer.frameOnce(1, this, () => {
+        // })
 
         // GameManager.instance.roleInfo.bulletNum = 1000;
         this.sBoom = false;
@@ -122,17 +131,21 @@ export class Player extends Laya.Script {
         this.playerSk.role.visible = true;
         this.setFireEnd();
         this.jumpEnd();
-        Laya.timer.clearAll(this);
-        Laya.timer.loop(500, this, this.moveMap);
-        this.setStay();
         this.faceType = 1;
         this.setFaceDirection();
+        this.setStay();
         GameManager.instance.roleInfo.isInvincible = false;
-        // this.setFaceUp();
-
+        Laya.timer.clear(this, this.moveMap);
+        this.acMove = false;
         GameManager.instance.buyBullet = 0;
         GameManager.instance.buyGre = 10;
         GameManager.instance.buyWeaponType = 0;
+    }
+    private acMove: boolean = false;
+    private activeMove(): void {
+        if (this.acMove) return;
+        this.acMove = true;
+        Laya.timer.loop(500, this, this.moveMap);
     }
     //原地复活加无敌
     public playerRes(): void {
@@ -154,6 +167,7 @@ export class Player extends Laya.Script {
         if (this.roleSprite.y > 800) {
             this.roleSprite.y = 580;
             this.roleSprite.x -= 200;
+            // console.log("this.roleSprite.x222222", this.roleSprite.x);
         }
     }
 
@@ -364,6 +378,7 @@ export class Player extends Laya.Script {
 
     public setRun(): void {
         // this.faceUp = false;
+        this.activeMove();
         if (!this.keyJump)
             this.playerSk.setRun();
         this.sRun = true;
@@ -374,6 +389,8 @@ export class Player extends Laya.Script {
     private moveMap(): void {
         if (Math.abs(ViewManager.instance.warView.warView.x) + Laya.stage.width > ViewManager.instance.warView.warView.width - 200)
             return;
+        // console.log("ddd--22222");
+        // console.log(this.roleSprite.x);
         if (this.roleSprite.x - Math.abs(ViewManager.instance.warView.warView.x) - this.roleSprite.width / 2 >= Laya.stage.width / 2) {
             var dis: number = this.roleSprite.x - Math.abs(ViewManager.instance.warView.warView.x) - Laya.stage.width / 2;
             ViewManager.instance.updateViewPort(dis);
@@ -388,10 +405,13 @@ export class Player extends Laya.Script {
                 this.roleSprite.x = ViewManager.instance.warView.warView.width - this.roleSprite.width - 200;
                 // return;
             }
+
+            // console.log("this.roleSprite.x ", this.roleSprite.x);
             if (Math.abs(ViewManager.instance.warView.warView.x) + Laya.stage.width > ViewManager.instance.warView.warView.width - 200)
                 return;
         } else if (this.direction == -1) {
             this.roleSprite.x -= this.speed;
+            // console.log("this.roleSprite.x----", this.roleSprite.x);
             if (this.roleSprite.x < Math.abs(ViewManager.instance.warView.warView.x))
                 this.roleSprite.x = Math.abs(ViewManager.instance.warView.warView.x);
         }
@@ -518,6 +538,8 @@ export class Player extends Laya.Script {
     public victoryGame(): void {
         this.setStay();
         this.removeEvent();
+        Laya.timer.clearAll(this);
+        this.roleSprite.removeSelf();
         // this.rolePlayer.m_firePos1.visible = this.rolePlayer.m_firePos2.visible = false;
         GameManager.instance.roleInfo.curlvCoin += GameData.VICTORY_LEVEL_COIN;
         GameManager.instance.roleInfo.totalCoin += GameData.VICTORY_LEVEL_COIN;

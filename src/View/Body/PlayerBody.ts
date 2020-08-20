@@ -14,7 +14,7 @@ export default class PlayerBody extends Laya.Script {
 
     constructor() { super(); }
 
-    onEnable(): void {
+    onAwake(): void {
         this.selfCollider = this.owner.getComponent(Laya.BoxCollider);
         this.selfBody = this.selfCollider.rigidBody;
 
@@ -54,6 +54,8 @@ export default class PlayerBody extends Laya.Script {
         if ((this.owner as Laya.Sprite).y > 800) {
             EventManager.instance.dispatcherEvt(GameEvent.GOTO_HOLE);
         }
+        // console.log("onUpdate--", (this.owner as Laya.Sprite).x);
+
 
     }
     /**防止斜坡有加速度，将速度设置为0 */

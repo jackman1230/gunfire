@@ -5,6 +5,8 @@ import { GameManager } from "../../Manager/GameManager";
 import WXFUI_ADItem from "../../fui/Game/WXFUI_ADItem";
 import WXFUI_ADListView from "../../fui/Game/WXFUI_ADListView";
 import { ViewManager } from "../../Manager/ViewManager";
+import { EventManager } from "../../Manager/EventManager";
+import GameEvent from "../../Control/GameEvent";
 
 
 
@@ -26,22 +28,11 @@ export default class ADListView extends PopUpView {
         this.view.m_ad_2.m_list.itemRenderer = Laya.Handler.create(this, this.setADItem2, null, false);
 
 
-
-        if (GameManager.instance.adOriList.length > 6) {
-            this.ceil = Math.ceil(GameManager.instance.adOriList.length / 2);
-            this.floor = Math.floor(GameManager.instance.adOriList.length / 2);
-        } else {
-            this.ceil = GameManager.instance.adOriList.length;
-            this.floor = 0;
-        }
-        this.view.m_ad_1.m_list.numItems = this.ceil;
-        this.view.m_ad_2.m_list.numItems = this.floor;
-
-        this.view.m_ad_1.m_list.width = 136 * this.ceil + 2;
-        this.view.m_ad_2.m_list.width = 136 * this.floor + 2;
-
         this.view.m_ad_1.m_list.on(fairygui.Events.CLICK_ITEM, this, this.onClickItem);
         this.view.m_ad_2.m_list.on(fairygui.Events.CLICK_ITEM, this, this.onClickItem);
+
+        EventManager.instance.addNotice(GameEvent.SHOW_AD_LIST, this, this.showADList);
+
     }
 
     public showView(s, c): void {
@@ -72,14 +63,38 @@ export default class ADListView extends PopUpView {
     }
 
     private continueGame(): void {
+        SoundManager.instance.playSound("btn_click");
         ViewManager.instance.adListView.hideAllView();
     }
 
 
     private _tweenNum: Laya.Tween;
     private showADList(): void {
+        if (GameManager.instance.adList.length < 1) return;
+        EventManager.instance.offNotice(GameEvent.SHOW_AD_LIST, this, this.showADList);
+        if (GameManager.instance.adOriList.length > 12) {
+            this.ceil = Math.ceil(GameManager.instance.adOriList.length / 2);
+            this.floor = Math.floor(GameManager.instance.adOriList.length / 2);
+        } else {
+            this.ceil = GameManager.instance.adOriList.length;
+            this.floor = 0;
+        }
+
+        this.view.m_ad_1.m_list.width = 136 * this.ceil;
+        this.view.m_ad_2.m_list.width = 136 * this.floor;
+
+        this.view.m_ad_1.m_list.numItems = this.ceil;
+        this.view.m_ad_2.m_list.numItems = this.floor;
+
+        // this.view.m_ad_1.m_list.numItems = GameManager.instance.adOriList.length;
+        // this.view.m_ad_2.m_list.numItems = GameManager.instance.adOriList.length;
+        this.view.m_ad_2.m_list.x = this.view.m_ad_1.m_list.x = 0;
         if (this.ceil > 6)
             this.adMoveLeft();
+
+        // this.view.m_ad_1.m_list.width = 136 * GameManager.instance.adOriList.length;
+        // this.view.m_ad_2.m_list.width = 136 * GameManager.instance.adOriList.length;
+
     }
 
     private onClickItem(e: WXFUI_ADItem): void {
@@ -109,13 +124,13 @@ export default class ADListView extends PopUpView {
     }
 
     private adMoveLeft(): void {
-        this._tweenNum = Laya.Tween.to(this.view.m_ad_1.m_list, { x: this.view.m_ad_1.width - 136 * GameManager.instance.adOriList.length }, GameManager.instance.adTime, null, Laya.Handler.create(this, this.adMoveRight));
+        this._tweenNum = Laya.Tween.to(this.view.m_ad_1.m_list, { x: this.view.m_ad_1.width - 136 * this.ceil }, GameManager.instance.adTime / 2, null, Laya.Handler.create(this, this.adMoveRight));
         this._tweenNum.update = Laya.Handler.create(this, this.updateTween, null, false);
 
     }
 
     private adMoveRight(): void {
-        this._tweenNum = Laya.Tween.to(this.view.m_ad_1.m_list, { x: 0 }, GameManager.instance.adTime, null, Laya.Handler.create(this, this.adMoveLeft));
+        this._tweenNum = Laya.Tween.to(this.view.m_ad_1.m_list, { x: 0 }, GameManager.instance.adTime / 2, null, Laya.Handler.create(this, this.adMoveLeft));
         this._tweenNum.update = Laya.Handler.create(this, this.updateTween, null, false);
 
     }
@@ -127,6 +142,8 @@ export default class ADListView extends PopUpView {
 
     public hideAllView(): void {
         super.hideAllView();
+        if (this._tweenNum)
+            Laya.Tween.clear(this._tweenNum);
         Laya.Tween.clearTween(this.view.m_ad_1.m_list);
         Laya.timer.clearAll(this);
     }

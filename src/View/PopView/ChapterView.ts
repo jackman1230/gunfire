@@ -84,6 +84,7 @@ export default class ChapterView extends PopUpView {
         console.log("选择第" + GameManager.instance.curChapter + "章，" + "第" + l + "关");
         if (l + (GameManager.instance.curChapter - 1) * GameManager.instance.maxLevel > GameManager.instance.gotoMaxLevel) return;//所点击的关卡超过所通过的最大关卡
         GameManager.instance.choiseLevel = l + (GameManager.instance.curChapter - 1) * GameManager.instance.maxLevel;
+        console.log("选择第" + GameManager.instance.choiseLevel + "关");
         ViewManager.instance.showBeforeWarView();
     }
 
@@ -92,10 +93,11 @@ export default class ChapterView extends PopUpView {
         this.showVolume = !this.showVolume;
         if (this.showVolume) {
             this.view.m_setView.m_ctl.selectedIndex = 0;
+            SoundManager.instance.openSound();
         } else {
             this.view.m_setView.m_ctl.selectedIndex = 1;
+            SoundManager.instance.offSound();
         }
-        SoundManager.instance.offSound();
     }
 
     private lastHandle(): void {
@@ -117,6 +119,7 @@ export default class ChapterView extends PopUpView {
     }
 
     private showReMenAD(): void {
+        SoundManager.instance.playSound("btn_click");
         ViewManager.instance.showADListView();
     }
 
@@ -162,6 +165,7 @@ export default class ChapterView extends PopUpView {
 
     private onClickADItem(index: number): void {
         var m: moosnowAdRow = this.view["m_ad_" + index].data as moosnowAdRow;
+        if (!m) return;
         console.log("onClickADItem--", m);
         moosnow.platform.navigate2Mini(m, (res) => {
             console.log('跳转成功 ', res)
@@ -173,6 +177,8 @@ export default class ChapterView extends PopUpView {
     private onClickItem(e: WXFUI_ADItem): void {
         var m: moosnowAdRow = e.data as moosnowAdRow;
         console.log("ad--", m);
+        if (!m) return;
+
         moosnow.platform.navigate2Mini(m, (res) => {
             console.log('跳转成功 ', res)
         }, (res) => {

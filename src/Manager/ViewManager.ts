@@ -195,10 +195,12 @@ export class ViewManager {
         b.createView(type, s);
     }
 
+    private addDamageArr: DamageView[] = [];
     /**创建伤害数值 */
     public createDamageView(d: number, s: Laya.Sprite): void {
         var b: DamageView = Laya.Pool.getItemByClass("damageView", DamageView);
         b.createView(d, s);
+        this.addDamageArr.push(b);
     }
 
     private addGoodsArr: AddGold[] = [];
@@ -214,8 +216,15 @@ export class ViewManager {
     public clearAddGold(): void {
         for (let i = 0; i < this.addGoodsArr.length; i++) {
             var e: AddGold = this.addGoodsArr[i];
-            if (e && e.view && e.view.parent) {
-                e.view.parent.removeChild(e.view);
+            if (e && e.view && e.view.displayObject.parent) {
+                e.view.displayObject.parent.removeChild(e.view.displayObject);
+            }
+        }
+
+        for (let j = 0; j < this.addDamageArr.length; j++) {
+            var k: DamageView = this.addDamageArr[j];
+            if (k && k.view && k.view.parent) {
+                k.view.displayObject.parent.removeChild(k.view.displayObject);
             }
         }
     }
@@ -284,10 +293,10 @@ export class ViewManager {
     }
 
     public showChapterView(): void {
-        SoundManager.instance.playBGM("chapterBgm");
         this.chapterView.view.m_chapter.selectedIndex = 0;
         this.chapterView.updateView();
         this.showPopUpView(this.chapterView, false, true);
+        SoundManager.instance.playBGM("chapterBgm");
     }
 
     public playerVicToryLevel(): void {

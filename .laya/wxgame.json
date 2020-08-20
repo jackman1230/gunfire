@@ -30,16 +30,18 @@
     "versionFilter": [
         "$basePath/**/*.*",
         "!$basePath/*. html",
-        "!$basePath/{version.json,game.js,game.json,project.config.json,weapp-adapter.js,project.swan.json,swan-game-adapter.js,main.js,gameConfig.json,my-adapter.js}"
+        "!$basePath/{version.json,game.js,game.json,project.config.json,weapp-adapter.js,project.swan.json,swan-game-adapter.js,main.js,gameConfig.json,my-adapter.js}",
+        "!$basePath/utils/**/*.*"
     ],
     "versionNoteList": [
+        "",
         "",
         "",
         ""
     ],
     "exclude": false,
     "excludeFilter": [
-        "!$basePath/res/**/*.*"
+        "!$basePath/utils/*.*"
     ],
     "vexcludeNoteList": [
         ""
@@ -88,7 +90,7 @@
     "useMinJsLibs": false,
     "es6toes5": false,
     "projectType": "ts",
-    "pubTime": 1596674067214,
+    "pubTime": 1597908226426,
     "uesEnginePlugin": false,
     "wxOptimize": {
         "useOptimizeOpen": false,

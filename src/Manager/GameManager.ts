@@ -6,6 +6,7 @@ import GameEvent from "../Control/GameEvent";
 import { SoundManager } from "./SoundManager";
 import { SaveManager } from "./SaveManager";
 import Enemy from "../View/Enemy";
+import { MooSnowSDK } from "./MooSnowSDK";
 
 export class GameManager {
     private static _instance: GameManager;
@@ -52,9 +53,10 @@ export class GameManager {
         console.log(this.levelData);
         this.initRoleData();
         this.initChapterConfig();
+        SoundManager.instance.openSound();
         ViewManager.instance.initPopUpView();
         ViewManager.instance.showChapterView();
-        SoundManager.instance.addVisibleEvent();
+        // SoundManager.instance.addVisibleEvent();
         // this.gotoNextLevel();
     }
 
@@ -105,7 +107,7 @@ export class GameManager {
         ViewManager.instance.hidePopUpView(null, true);
         ViewManager.instance.removeWarView();
         ViewManager.instance.showChapterView();
-        Laya.SoundManager.stopMusic();
+        // Laya.SoundManager.stopMusic();
     }
 
     /**暂停/继续游戏 */
@@ -178,6 +180,7 @@ export class GameManager {
             this.roleInfo.isDeath = false;
             ViewManager.instance.createWarView();
             SoundManager.instance.playBGM("bgm");
+            MooSnowSDK.startGame(GameManager.instance.choiseLevel)
             // this.buyBullet = this.buyWeaponType = 0; this.buyGre = 10;
         } else {
             ViewManager.instance.showTipsView("您已通关！敬请期待后续章节");
@@ -249,7 +252,7 @@ export class GameManager {
         }
     }
 
-    public buyShopItem(d: any): void {
+    public buyShopItem(d: any, showTip: boolean = false): void {
         if (d.type == GoodsType.GoodsType_MED) {
             GameManager.instance.roleInfo.blood++;
         } else if (d.type == GoodsType.GoodsType_MAC) {
@@ -265,6 +268,10 @@ export class GameManager {
             this.buyWeaponType = PlayerData.WEAPON_RIFLE;
             this.buyBullet += d.num;
         }
+        if (showTip) {
+            ViewManager.instance.showTipsView("恭喜获得：" + d.name);
+        }
+
         if (this.buyBullet > 999)
             this.buyBullet = 999;
         if (this.buyGre > 999)
@@ -278,7 +285,10 @@ export class GameManager {
         }
         this.adTime = this.adList.length * 500;
         this.adListRever = this.adList.concat().reverse();
+        // Laya.timer.once(7000,this,()=>{
+
         EventManager.instance.dispatcherEvt(GameEvent.SHOW_AD_LIST);
+        // })
 
 
     }

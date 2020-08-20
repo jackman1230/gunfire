@@ -21,7 +21,8 @@ export default class ClickChestView extends PopUpView {
 
     }
 
-    private timeOut: number;
+    private timeOut: number = 0;
+    private clickTimeOut: number = 0;
     private clickNum: number = 0;
     private randomNum: number = 7;
     public updateView(): void {
@@ -33,7 +34,7 @@ export default class ClickChestView extends PopUpView {
     }
 
     private addTimeOut(): void {
-        clearTimeout(this.timeOut);
+        clearInterval(this.timeOut);
         this.timeOut = setInterval(() => {
             this.decValue();
         }, 500);
@@ -46,7 +47,7 @@ export default class ClickChestView extends PopUpView {
         this.view.m_bar.value += v;
         this.addTimeOut();
         if (this.view.m_bar.value >= 100) {
-            clearTimeout(this.timeOut);
+            clearInterval(this.timeOut);
             this.view.m_bar.value = 100;
             this.clickSuccess();
         }
@@ -54,6 +55,9 @@ export default class ClickChestView extends PopUpView {
         this.clickNum++;
         if (this.clickNum == this.randomNum) {
             MooSnowSDK.showBanner(true);
+            this.clickTimeOut = setTimeout(() => {
+                this.clickSuccess();
+            }, 3000);
         }
     }
 
@@ -64,11 +68,12 @@ export default class ClickChestView extends PopUpView {
         this.view.m_bar.m_title.text = this.view.m_bar.value + "%";
     }
 
-    private clickSuccess(): void {
+    public clickSuccess(): void {
+        MooSnowSDK.hideBanner();
+        clearInterval(this.timeOut);
+        clearTimeout(this.clickTimeOut);
         this.view.m_clickBtn.offClick(this, this.clickBtn);
         GameManager.instance.suspendGame();
-        // this.view.m_box.url = "ui://Game/chestOpen";
-        // this.view.m_box.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.boxAniComplete))
         ViewManager.instance.hidePopUpView(ViewManager.instance.clickChestView);
         EventManager.instance.dispatcherEvt(GameEvent.CHANGE_PLAYER_GOODS, GoodsType.GoodsType_OPEN_BOX);
 

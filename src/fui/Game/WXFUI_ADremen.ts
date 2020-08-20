@@ -5,7 +5,6 @@
 export default class WXFUI_ADremen extends fairygui.GComponent {
 
 	public m_n2:fairygui.GImage;
-	public m_name:fairygui.GTextField;
 	public m_ani_1:fairygui.Transition;
 	public m_ani_2:fairygui.Transition;
 
@@ -21,7 +20,6 @@ export default class WXFUI_ADremen extends fairygui.GComponent {
 
 	protected onConstruct(): void {
 		this.m_n2 = <fairygui.GImage><any>(this.getChild("n2"));
-		this.m_name = <fairygui.GTextField><any>(this.getChild("name"));
 		this.m_ani_1 = this.getTransition("ani_1");
 		this.m_ani_2 = this.getTransition("ani_2");
 	}

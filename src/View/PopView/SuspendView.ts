@@ -31,6 +31,7 @@ export default class SuspendView extends PopUpView {
     private goFirstPage(): void {
         SoundManager.instance.playSound("btn_click");
         GameManager.instance.suspendGame();
+        MooSnowSDK.endGame(GameManager.instance.choiseLevel, true);
         Laya.timer.frameOnce(1, this, () => {
             ViewManager.instance.hideSuspendView();
             GameManager.instance.goFirstPage();
@@ -48,6 +49,7 @@ export default class SuspendView extends PopUpView {
     private restartGame(): void {
         SoundManager.instance.playSound("btn_click");
         GameManager.instance.suspendGame();
+        MooSnowSDK.endGame(GameManager.instance.choiseLevel, true);
         Laya.timer.frameOnce(1, this, () => {
             ViewManager.instance.hideSuspendView();
             GameManager.instance.restartGame();

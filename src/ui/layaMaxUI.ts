@@ -193,7 +193,7 @@ export module ui {
         }
     }
     REG("ui.map_7UI",map_7UI);
-    export class map_8UI extends Scene {
+    export class map_8UI extends Laya.Scene {
         public static  uiView:any ={"type":"Scene","props":{"width":50,"height":50},"compId":2,"child":[{"type":"BoardBody","props":{"y":674,"x":854,"name":"board_1","runtime":"ui.BoardBodyUI"},"compId":67},{"type":"BoardBody","props":{"y":674,"x":1306,"name":"board_2","runtime":"ui.BoardBodyUI"},"compId":68},{"type":"BoardBody","props":{"y":674,"x":1768,"name":"board_3","runtime":"ui.BoardBodyUI"},"compId":69},{"type":"Script","props":{"y":425,"x":29,"points":"0,-340,0,250,780,250","label":"ground","friction":0,"runtime":"laya.physics.ChainCollider"},"compId":12},{"type":"Script","props":{"y":-167,"x":-1848,"type":"static","label":"ground","group":0,"runtime":"laya.physics.RigidBody"},"compId":13},{"type":"Script","props":{"y":280,"x":2221,"points":"50,540,50,400,2429,400,2429,-300","label":"ground","friction":0,"runtime":"laya.physics.ChainCollider"},"compId":73}],"loadList":[],"loadList3D":[]};
         constructor(){ super()}
         createChildren():void {

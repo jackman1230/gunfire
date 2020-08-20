@@ -22,7 +22,7 @@ export default class AfterWar extends PopUpView {
         this.view.m_continue_2.onClick(this, this.restartGame);
         this.view.m_continue_3.onClick(this, this.continueGameByVideo);
         this.view.m_return.onClick(this, this.returnHandle);
-        this.view.m_abandon.onClick(this, this.returnHandle);
+        this.view.m_abandon.onClick(this, this.abandonHandle);
 
         this.view.m_coin.text = " 0";
 
@@ -68,6 +68,7 @@ export default class AfterWar extends PopUpView {
         SoundManager.instance.playSound("btn_click");
         // ViewManager.instance.showChapterView();
         GameManager.instance.goFirstPage();
+        MooSnowSDK.endGame(GameManager.instance.choiseLevel, true);
     }
 
     private restartGame(): void {
@@ -80,6 +81,12 @@ export default class AfterWar extends PopUpView {
         // this.restartGame();
         MooSnowSDK.showVideo(2, null);
 
+    }
+
+    private abandonHandle(): void {
+        SoundManager.instance.playSound("btn_click");
+        GameManager.instance.goFirstPage();
+        MooSnowSDK.endGame(GameManager.instance.choiseLevel, false);
     }
 
     private returnHandle(): void {

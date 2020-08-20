@@ -762,7 +762,6 @@
     <component id="unfjxs1" name="player_death.xml" path="/Component/player/"/>
     <movieclip id="oys6xs2" name="rush_boom_3.jta" path="/Component/player/playerAni/"/>
     <movieclip id="oys6xs3" name="body_3.jta" path="/Component/player/playerAni/"/>
-    <image id="s2x8io" name="remen.png" path="/Component/view/guanggao/"/>
     <image id="s2x8ip" name="ditu.jpg" path="/Component/view/guanggao/"/>
     <image id="s2x8iq" name="icon.png" path="/Component/view/guanggao/"/>
     <component id="s2x8ir" name="ADItem.xml" path="/Component/view/guanggao/"/>
@@ -841,6 +840,10 @@
     <component id="vmpqxua" name="ADListView.xml" path="/Component/view/guanggao/" exported="true"/>
     <image id="vmpqxuc" name="playerzidan3.png" path="/assets/zadan/" exported="true"/>
     <component id="vmpqxud" name="sandan.xml" path="/Component/bullet/" exported="true"/>
+    <image id="lsmyxue" name="remen.png" path="/Component/view/guanggao/" exported="true"/>
+    <image id="iwc6xuf" name="2486_ls_level_0_1(UpRGB)(noise_scale)(Level3)(x2.000000).jpg" path="/Component/view/"/>
+    <image id="iwc6xug" name="免费获得2.png" path="/assets/otherView/战前准备/切图/"/>
+    <image id="iwc6xuh" name="继续游戏3.png" path="/assets/otherView/战后结算页面/切图/"/>
   </resources>
   <publish name="Game" path="..\bin\res" packageCount="2" genCode="true" codePath="..\src\fui"/>
 </packageDescription>

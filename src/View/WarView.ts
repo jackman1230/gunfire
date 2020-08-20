@@ -37,6 +37,8 @@ export class WarView {
         // this.scene = s;
         this.warView = fairygui.UIPackage.createObject("Game", "WarView") as WXFUI_WarView;
         this.warView.m_bg.url = "res/map_" + GameManager.instance.curLevelData.mapIndex + ".jpg";
+        this.warView.m_bg2.url = "res/map_" + GameManager.instance.curLevelData.mapIndex + "_2.jpg";
+
         Laya.Physics.I.worldRoot = this.scene;
 
         ViewManager.instance.createPlayer();//创建人物

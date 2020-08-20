@@ -1,5 +1,6 @@
 import { GameManager } from "./GameManager";
 import { ViewManager } from "./ViewManager";
+import { SoundManager } from "./SoundManager";
 
 export class MooSnowSDK {
 
@@ -43,9 +44,9 @@ export class MooSnowSDK {
          * @param level 关卡数	没有请填”0”
          * 注意：点击之后上报一次，type=0，观看完视频后应再上报一次，type=1。
          */
-    public static videoPoint(type: number, lv: number): void {
+    public static videoPoint(type: number, lv: number, str: string): void {
 
-        moosnow.http.videoPoint(type + "", "原地复活", lv + "")
+        moosnow.http.videoPoint(type + "", str, lv + "")
     }
     /**
     * 获取广告
@@ -73,6 +74,7 @@ export class MooSnowSDK {
             if (isOpend) {
                 if (isWuChu) {
                     MooSnowSDK.hideBanner();
+                    ViewManager.instance.clickChestView.clickSuccess();
                 }
             }
         });
@@ -93,6 +95,13 @@ export class MooSnowSDK {
      */
     public static showVideo(type: number, data: any): void {
         var d: any = data;
+        SoundManager.instance.offSound();
+        if (type == 1) {
+            MooSnowSDK.videoPoint(0, GameManager.instance.choiseLevel, "看视频获得物资");
+        } else {
+            MooSnowSDK.videoPoint(0, GameManager.instance.choiseLevel, "看视频原地复活");
+        }
+
         moosnow.platform.showVideo(res => {
             switch (res) {
                 case moosnow.VIDEO_STATUS.NOTEND:
@@ -106,14 +115,17 @@ export class MooSnowSDK {
                 case moosnow.VIDEO_STATUS.END:
                     console.log('观看视频结束 ')
                     if (type == 1 && data) {
-                        GameManager.instance.buyShopItem(d);
+                        GameManager.instance.buyShopItem(d, true);
                         ViewManager.instance.beforeWar.updateView();
+                        MooSnowSDK.videoPoint(1, GameManager.instance.choiseLevel, "看视频获得物资");
                     } else {
                         GameManager.instance.continueGameByVideo();
+                        MooSnowSDK.videoPoint(1, GameManager.instance.choiseLevel, "看视频原地复活");
                     }
                 default:
                     break;
             }
+            SoundManager.instance.openSound();
         })
     }
 

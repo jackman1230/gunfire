@@ -2,7 +2,7 @@
 <component size="142,48" pivot="0.5,0.5" extention="Button">
   <controller name="button" pages="0,up,1,down" selected="0"/>
   <displayList>
-    <image id="n6_dr1t" name="n6" src="n8qulp" fileName="assets/otherView/战前准备/切图/免费获得.png" xy="0,0"/>
+    <image id="n6_dr1t" name="n6" src="iwc6xug" fileName="assets/otherView/战前准备/切图/免费获得2.png" xy="0,0"/>
   </displayList>
   <Button downEffect="scale" downEffectValue="0.90"/>
   <transition name="t0"/>
