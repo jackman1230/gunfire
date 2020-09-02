@@ -34,6 +34,7 @@ import ADListView from "../View/PopView/ADListView";
 import PlayerSanBullet from "../View/PlayerSanBullet";
 import Shake from "../View/Shake";
 import { MooSnowSDK } from "./MooSnowSDK";
+import WXFUI_ADremen2 from "../fui/Game/WXFUI_ADremen2";
 
 export class ViewManager {
 
@@ -115,9 +116,24 @@ export class ViewManager {
         this.warView = Laya.Pool.getItemByClass("warView", WarView);
         this.warView.createView();
 
+
         this.showPlayerCtlView();
         this.showPlayerInfoView();
+
+        this.showADBtn();
     }
+
+    private adBtn: WXFUI_ADremen2;
+    private showADBtn(): void {
+        if (!this.adBtn)
+            this.adBtn = fairygui.UIPackage.createObject("Game", "ADremen2") as WXFUI_ADremen2;
+        this.adBtn.x = 80;
+        this.adBtn.y = 250;
+        fairygui.GRoot.inst.addChild(this.adBtn);
+        this.adBtn.onClick(this, this.showADListView);
+        this.adBtn.m_ani.play(null, -1);
+    }
+
     /**创建步兵扔的雷 */
     public createBomb(type: number, dir: number, parentPos: Laya.Point, b: boolean): void {
         var bomb: BombView = Laya.Pool.getItemByClass("bombView", BombView);
@@ -264,8 +280,8 @@ export class ViewManager {
      */
     public showAfterWarView(type: number): void {
         this.afterWar.view.m_ctl.selectedIndex = type - 1;
-        this.afterWar.updateView(type);
         this.showPopUpView(this.afterWar, true, true, false);
+        this.afterWar.updateView(type);
     }
 
     public showBeforeWarView(): void {
@@ -283,8 +299,9 @@ export class ViewManager {
         this.clickChestView.updateView();
     };
 
-    public showADListView(): void {
+    public showADListView(type: number = 0): void {
         this.showPopUpView(this.adListView, false, false, false);
+        this.adListView.type = type;
     };
 
     public hideSuspendView(): void {
@@ -360,6 +377,8 @@ export class ViewManager {
     public removeWarView(): void {
         if (this.warView) {
             this.warView.removeView();
+            this.adBtn.offClick(this, this.showADListView);
+            this.adBtn.m_ani.stop();
         }
 
     }

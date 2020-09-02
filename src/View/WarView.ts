@@ -2,6 +2,7 @@ import WXFUI_WarView from "../fui/Game/WXFUI_WarView";
 import { ViewManager } from "../Manager/ViewManager";
 import { GameManager } from "../Manager/GameManager";
 import { ui } from "../ui/layaMaxUI";
+import { SoundManager } from "../Manager/SoundManager";
 
 export class WarView {
 
@@ -49,8 +50,15 @@ export class WarView {
         this.warView.y = GameManager.instance.curLvData.warViewPos[1];
         this.warView.displayObject.addChild(this.scene);
         Laya.stage.addChildAt(this.warView.displayObject, 0);
+
     }
 
+
+
+    private showReMenAd(): void {
+        SoundManager.instance.playSound("btn_click");
+        ViewManager.instance.showADListView();
+    }
     public updateViewPort(moveX: number): void {
         // ViewManager.instance.warView.warView.width - this.roleSprite.width - 20;
         // if (this.warView.x - moveX > Laya.stage.width - ViewManager.instance.warView.warView.width - 20) {
@@ -79,6 +87,7 @@ export class WarView {
             this.warView.displayObject.removeChildren();
             this.warView.dispose();
         }
+
         this.recover();
     }
 

@@ -266,7 +266,6 @@
     <component id="oqgwak" name="leg.xml" path="/Component/player/"/>
     <component id="oqgwal" name="body.xml" path="/Component/player/"/>
     <component id="oqgwam" name="WarView.xml" path="/Component/view/" exported="true"/>
-    <image id="oqgwan" name="2487_ls_level_0_0.jpg" path="/Component/view/"/>
     <image id="yqv7ao" name="playerzidan2.png" path="/assets/zadan/" exported="true"/>
     <image id="yqv7ap" name="playerzidan1.png" path="/assets/zadan/" exported="true"/>
     <component id="yqv7at" name="bullet1.xml" path="/Component/bullet/"/>
@@ -768,7 +767,7 @@
     <component id="s2x8xs4" name="ADmove.xml" path="/Component/view/guanggao/"/>
     <component id="s2x8xs5" name="ADListVer.xml" path="/Component/view/guanggao/"/>
     <component id="s2x8xs6" name="ADListHor.xml" path="/Component/view/guanggao/"/>
-    <component id="s2x8xs7" name="ADremen.xml" path="/Component/view/guanggao/"/>
+    <component id="s2x8xs7" name="ADremen.xml" path="/Component/view/guanggao/" exported="true"/>
     <image id="8mn4xs8" name="slice13_13.png" path="/Component/font/damage/"/>
     <image id="8mn4xs9" name="slice12_12.png" path="/Component/font/damage/"/>
     <image id="8mn4xsa" name="slice11_11.png" path="/Component/font/damage/"/>
@@ -841,9 +840,17 @@
     <image id="vmpqxuc" name="playerzidan3.png" path="/assets/zadan/" exported="true"/>
     <component id="vmpqxud" name="sandan.xml" path="/Component/bullet/" exported="true"/>
     <image id="lsmyxue" name="remen.png" path="/Component/view/guanggao/" exported="true"/>
-    <image id="iwc6xuf" name="2486_ls_level_0_1(UpRGB)(noise_scale)(Level3)(x2.000000).jpg" path="/Component/view/"/>
     <image id="iwc6xug" name="免费获得2.png" path="/assets/otherView/战前准备/切图/"/>
     <image id="iwc6xuh" name="继续游戏3.png" path="/assets/otherView/战后结算页面/切图/"/>
+    <component id="ko37xui" name="ADReMenList.xml" path="/Component/view/guanggao/" exported="true"/>
+    <image id="ko37xuj" name="remen2.png" path="/Component/view/guanggao/" exported="true"/>
+    <component id="ko37xuk" name="ADremen2.xml" path="/Component/view/guanggao/" exported="true"/>
+    <image id="ko37xul" name="shou.png" path="/Component/view/guanggao/" exported="true"/>
+    <image id="ko37xum" name="remen3.png" path="/Component/view/guanggao/" exported="true"/>
+    <image id="ko37xun" name="cainibg.png" path="/Component/view/guanggao/" exported="true" scale="9grid" scale9grid="20,42,40,84"/>
+    <image id="ko37xuo" name="caini.png" path="/Component/view/guanggao/" exported="true"/>
+    <component id="ko37xup" name="ADListHorBig.xml" path="/Component/view/guanggao/"/>
+    <component id="ko37xuq" name="ADItemBig.xml" path="/Component/view/guanggao/"/>
   </resources>
   <publish name="Game" path="..\bin\res" packageCount="2" genCode="true" codePath="..\src\fui"/>
 </packageDescription>

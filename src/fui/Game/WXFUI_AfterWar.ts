@@ -6,6 +6,7 @@ import WXFUI_continueBtn4 from "./WXFUI_continueBtn4";
 import WXFUI_continueBtn3 from "./WXFUI_continueBtn3";
 import WXFUI_backBtn from "./WXFUI_backBtn";
 import WXFUI_ADListVer from "./WXFUI_ADListVer";
+import WXFUI_ADReMenList from "./WXFUI_ADReMenList";
 
 export default class WXFUI_AfterWar extends fairygui.GComponent {
 
@@ -23,6 +24,7 @@ export default class WXFUI_AfterWar extends fairygui.GComponent {
 	public m_ad_2:WXFUI_ADListVer;
 	public m_ad_3:WXFUI_ADListVer;
 	public m_ad_4:WXFUI_ADListVer;
+	public m_adHot:WXFUI_ADReMenList;
 
 	public static URL:string = "ui://bq3h5insdr1tnq";
 
@@ -49,5 +51,6 @@ export default class WXFUI_AfterWar extends fairygui.GComponent {
 		this.m_ad_2 = <WXFUI_ADListVer><any>(this.getChild("ad_2"));
 		this.m_ad_3 = <WXFUI_ADListVer><any>(this.getChild("ad_3"));
 		this.m_ad_4 = <WXFUI_ADListVer><any>(this.getChild("ad_4"));
+		this.m_adHot = <WXFUI_ADReMenList><any>(this.getChild("adHot"));
 	}
 }

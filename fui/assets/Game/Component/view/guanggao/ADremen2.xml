@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="143,131">
+  <displayList>
+    <image id="n3_ko37" name="n3" src="ko37xum" fileName="Component/view/guanggao/remen3.png" xy="0,0"/>
+    <image id="n4_ko37" name="n4" src="ko37xul" fileName="Component/view/guanggao/shou.png" xy="97,86" size="93,92"/>
+  </displayList>
+  <transition name="ani" autoPlayRepeat="0">
+    <item time="0" type="Size" target="n4_ko37" tween="true" startValue="130,130" endValue="50,50" duration="24"/>
+    <item time="24" type="Size" target="n4_ko37" tween="true" startValue="50,50" endValue="130,130" duration="24"/>
+  </transition>
+</component>

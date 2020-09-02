@@ -6,6 +6,7 @@ import WXFUI_ADItem from "../../fui/Game/WXFUI_ADItem";
 import { EventManager } from "../../Manager/EventManager";
 import GameEvent from "../../Control/GameEvent";
 import { MooSnowSDK } from "../../Manager/MooSnowSDK";
+import { ViewManager } from "../../Manager/ViewManager";
 
 
 
@@ -13,6 +14,9 @@ export default class AfterWar extends PopUpView {
 
     public view: WXFUI_AfterWar;
     private viewType: number = 1;
+
+    private hotNum: number = 6;
+    private adList: any[] = [];
     constructor() { super() }
 
     createView(): void {
@@ -38,7 +42,37 @@ export default class AfterWar extends PopUpView {
 
         EventManager.instance.addNotice(GameEvent.SHOW_AD_LIST, this, this.showADList);
 
+        this.view.m_adHot.m_jixu.onClick(this, this.hideADHot);
 
+
+    }
+
+    private clickHotAdItem(n: number): void {
+        var m: moosnowAdRow = this.view.m_adHot["m_ad_" + n].data as moosnowAdRow;
+        if (!m) return;
+        console.log("ad--", m);
+        moosnow.platform.navigate2Mini(m, (res) => {
+            console.log('跳转成功 ', res)
+        }, (res) => {
+            console.log('跳转失败 ', res)
+            // ViewManager.instance.showADListView();
+            this.changeAdItem(n);
+        });
+
+    }
+
+    private changeAdItem(n: number): void {
+        var d: any = this.getRandomAdItem();
+        if (!d) return;
+        this.view.m_adHot["m_ad_" + n].data = d;
+        this.view.m_adHot["m_ad_" + n].m_icon.url = d.img;
+        this.view.m_adHot["m_ad_" + n].m_name.text = d.title;
+    }
+
+    private hideADHot(): void {
+        // this.view.m_adHot.visible = false;
+        MooSnowSDK.hideBanner();
+        ViewManager.instance.showADListView(1);
     }
 
     public showView(s, c): void {
@@ -46,14 +80,35 @@ export default class AfterWar extends PopUpView {
         this.view.m_ad_1.m_list.y = 0;
         this.showADList();
         MooSnowSDK.showBanner(false);
+        this.view.m_adHot.visible = false;
+
     }
 
+    private showHotAdList(): void {
+        for (let i = 1; i <= 6; i++) {
+            var d: any = this.getRandomAdItem();
+            if (!d) continue;
+            this.view.m_adHot["m_ad_" + i].data = d;
+            this.view.m_adHot["m_ad_" + i].m_icon.url = d.img;
+            this.view.m_adHot["m_ad_" + i].m_name.text = d.title;
+            this.view.m_adHot["m_ad_" + i].onClick(this, this.clickHotAdItem, [i]);
+        }
+    }
+    /**
+     * 显示关卡战斗之后界面
+     * @param type 1胜利界面，2失败界面，3放弃界面
+     */
     public updateView(type: number): void {
         this.viewType = type;
         this.updateCoin();
         if (type == 3) {
             this.view.m_abandon.visible = false;
             Laya.timer.once(2000, this, this.showAbondon);
+            ViewManager.instance.showADListView();
+        } else if (type == 1) {
+            this.view.m_adHot.visible = true;
+            this.adList = GameManager.instance.adList.concat();
+            this.showHotAdList();
         }
     }
 
@@ -112,6 +167,7 @@ export default class AfterWar extends PopUpView {
             console.log('跳转成功 ', res)
         }, (res) => {
             console.log('跳转失败 ', res)
+            ViewManager.instance.showADListView();
         });
     }
 
@@ -165,5 +221,19 @@ export default class AfterWar extends PopUpView {
         super.hideAllView();
         Laya.Tween.clearTween(this.view.m_ad_1.m_list);
         MooSnowSDK.hideBanner();
+        for (let i = 1; i <= 6; i++) {
+            this.view.m_adHot["m_ad_" + i].offClick(this, this.clickHotAdItem, [i]);
+        }
+    }
+
+    private getRandomAdItem(): any {
+        if (this.adList.length > 0) {
+        } else {
+            this.adList = GameManager.instance.adList.concat();
+        }
+        var n: number = Math.floor(Math.random() * this.adList.length);
+        var d: any = this.adList.splice(n, 1)[0];
+        console.log("d---", d);
+        return d;
     }
 }

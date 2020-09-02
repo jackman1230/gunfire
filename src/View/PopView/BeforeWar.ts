@@ -110,6 +110,7 @@ export default class BeforeWar extends PopUpView {
             console.log('跳转成功 ', res)
         }, (res) => {
             console.log('跳转失败 ', res)
+            ViewManager.instance.showADListView();
         });
     }
 

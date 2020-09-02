@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1334,740">
-  <controller name="ctl" pages="0,,1," selected="0"/>
+  <controller name="ctl" pages="0,,1," selected="1"/>
   <displayList>
     <graph id="n6_vmpq" name="n6" xy="-83,-30" pivot="0.5,0.5" size="1500,800" type="rect" fillColor="#ff2bcfcf"/>
-    <component id="n8_vmpq" name="ad_1" src="s2x8xs6" fileName="Component/view/guanggao/ADListHor.xml" xy="54,33" scale="1.5,1.5"/>
-    <component id="n9_vmpq" name="ad_2" src="s2x8xs6" fileName="Component/view/guanggao/ADListHor.xml" xy="54,313" scale="1.5,1.5"/>
-    <component id="n10_vmpq" name="jixu" src="dr1tnk" fileName="Component/btn/continueBtn.xml" xy="495,618">
+    <component id="n8_vmpq" name="ad_1" src="ko37xup" fileName="Component/view/guanggao/ADListHorBig.xml" xy="61,10" size="1211,292"/>
+    <component id="n9_vmpq" name="ad_2" src="ko37xup" fileName="Component/view/guanggao/ADListHorBig.xml" xy="61,434" size="1211,292"/>
+    <component id="n10_vmpq" name="jixu" src="dr1tnk" fileName="Component/btn/continueBtn.xml" xy="495,309">
       <gearDisplay controller="ctl" pages="1"/>
     </component>
-    <text id="n12_vmpq" name="n12" xy="583,633" size="319,76" font="SimHei" fontSize="50" color="#ffffff" vAlign="middle" autoSize="none" strokeColor="#000000" text="秒后可关闭">
+    <text id="n12_vmpq" name="n12" xy="548,336" size="319,76" font="SimHei" fontSize="50" color="#ffffff" vAlign="middle" autoSize="none" strokeColor="#000000" text="秒后可关闭">
       <gearDisplay controller="ctl" pages="0"/>
     </text>
-    <text id="n13_vmpq" name="time" xy="463,633" size="101,76" font="SimHei" fontSize="50" color="#ff0000" align="center" vAlign="middle" autoSize="none" strokeColor="#000000" text="1">
+    <text id="n13_vmpq" name="time" xy="428,336" size="101,76" font="SimHei" fontSize="50" color="#ff0000" align="center" vAlign="middle" autoSize="none" strokeColor="#000000" text="1">
       <gearDisplay controller="ctl" pages="0"/>
     </text>
   </displayList>

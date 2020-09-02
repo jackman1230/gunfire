@@ -164,6 +164,19 @@ export class MooSnowSDK {
         moosnow.http.point(str);
     }
 
+    /**
+     * 微信平台 其他打点
+     * @param str 
+     */
+    public static getAllConfig(): any {
+        var data: any;
+        moosnow.http.getAllConfig(res => {
+            data = res;
+            console.log("游戏的所有配置数据", res);
+        });
+        return data;
+    }
+
 
 
 

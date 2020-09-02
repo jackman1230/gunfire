@@ -38,7 +38,7 @@ export default class ChapterView extends PopUpView {
 
         this.view.m_ad.m_list.itemRenderer = Laya.Handler.create(this, this.setADItem, null, false);
         // this.view.m_ad.m_list.numItems = GameManager.instance.adList.length;
-        this.view.m_ad.m_list.width = 136 * GameManager.instance.adList.length;
+        this.view.m_ad.m_list.width = 240 * GameManager.instance.adList.length;
         this.view.m_ad.m_list.on(fairygui.Events.CLICK_ITEM, this, this.onClickItem);
         this.view.m_ad_remen.onClick(this, this.showReMenAD);
 
@@ -46,6 +46,7 @@ export default class ChapterView extends PopUpView {
         EventManager.instance.addNotice(GameEvent.PAUSE_GAME, this, this.pauseGame);
         EventManager.instance.addNotice(GameEvent.SHOW_AD_LIST, this, this.showADList);
 
+        this.view.m_ad.m_n4.width = 1310;
         // MooSnowSDK.hideBanner();
     }
 
@@ -126,7 +127,7 @@ export default class ChapterView extends PopUpView {
     private showADList(): void {
         if (GameManager.instance.adList.length < 1) return;
         EventManager.instance.offNotice(GameEvent.SHOW_AD_LIST, this, this.showADList);
-        this.view.m_ad.m_list.width = 136 * GameManager.instance.adList.length;
+        this.view.m_ad.m_list.width = 240 * GameManager.instance.adList.length;
         this.view.m_ad.m_list.numItems = GameManager.instance.adList.length;
         Laya.Tween.clearTween(this.view.m_ad.m_list);
         Laya.timer.clear(this, this.changeAD);
@@ -134,7 +135,7 @@ export default class ChapterView extends PopUpView {
         this.view.m_ad_1.m_ani_1.play(null, -1);
         this.view.m_ad_2.m_ani_1.play(null, -1);
         this.view.m_ad_3.m_ani_1.play(null, -1);
-        this.view.m_ad_remen.m_ani_2.play(null, -1);
+        this.view.m_ad_remen.m_ani.play(null, -1);
         this.changeAD();
         Laya.timer.loop(3000, this, this.changeAD);
     }
@@ -171,6 +172,7 @@ export default class ChapterView extends PopUpView {
             console.log('跳转成功 ', res)
         }, (res) => {
             console.log('跳转失败 ', res)
+            ViewManager.instance.showADListView();
         });
     }
 
@@ -183,11 +185,12 @@ export default class ChapterView extends PopUpView {
             console.log('跳转成功 ', res)
         }, (res) => {
             console.log('跳转失败 ', res)
+            ViewManager.instance.showADListView();
         });
     }
 
     private adMoveLeft(): void {
-        Laya.Tween.to(this.view.m_ad.m_list, { x: this.view.m_ad.width - 136 * GameManager.instance.adList.length }, GameManager.instance.adTime, null, Laya.Handler.create(this, this.adMoveRight));
+        Laya.Tween.to(this.view.m_ad.m_list, { x: this.view.m_ad.width - 240 * GameManager.instance.adList.length }, GameManager.instance.adTime, null, Laya.Handler.create(this, this.adMoveRight));
 
     }
 
@@ -207,7 +210,7 @@ export default class ChapterView extends PopUpView {
         this.view.m_ad_1.m_ani_1.stop(null);
         this.view.m_ad_2.m_ani_1.stop(null);
         this.view.m_ad_3.m_ani_1.stop(null);
-        this.view.m_ad_remen.m_ani_2.stop(null);
+        this.view.m_ad_remen.m_ani.stop(null);
         Laya.Tween.clearTween(this.view.m_ad.m_list);
         Laya.timer.clear(this, this.changeAD);
     }

@@ -7,6 +7,7 @@ import WXFUI_ADListView from "../../fui/Game/WXFUI_ADListView";
 import { ViewManager } from "../../Manager/ViewManager";
 import { EventManager } from "../../Manager/EventManager";
 import GameEvent from "../../Control/GameEvent";
+import { MooSnowSDK } from "../../Manager/MooSnowSDK";
 
 
 
@@ -15,6 +16,7 @@ export default class ADListView extends PopUpView {
     public view: WXFUI_ADListView;
     private floor: number = 0;
     private ceil: number = 0;
+    public type: number = 0;
     constructor() { super() }
 
     createView(): void {
@@ -47,6 +49,12 @@ export default class ADListView extends PopUpView {
         this.timer = 4;
         this.showTxt();
         this.showTimer();
+
+        this.adMoveLeft();
+        var d: any = MooSnowSDK.getAllConfig();
+        if (d.exportAutoNavigate == 1) {//开启自动跳转一个随机游戏
+            this.gotoRandomGame();
+        }
     }
     private timer: number = 4;
     private showTimer(): void {
@@ -65,6 +73,9 @@ export default class ADListView extends PopUpView {
     private continueGame(): void {
         SoundManager.instance.playSound("btn_click");
         ViewManager.instance.adListView.hideAllView();
+        if (this.type == 1) {
+            GameManager.instance.goFirstPage();
+        }
     }
 
 
@@ -72,29 +83,13 @@ export default class ADListView extends PopUpView {
     private showADList(): void {
         if (GameManager.instance.adList.length < 1) return;
         EventManager.instance.offNotice(GameEvent.SHOW_AD_LIST, this, this.showADList);
-        if (GameManager.instance.adOriList.length > 12) {
-            this.ceil = Math.ceil(GameManager.instance.adOriList.length / 2);
-            this.floor = Math.floor(GameManager.instance.adOriList.length / 2);
-        } else {
-            this.ceil = GameManager.instance.adOriList.length;
-            this.floor = 0;
-        }
 
-        this.view.m_ad_1.m_list.width = 136 * this.ceil;
-        this.view.m_ad_2.m_list.width = 136 * this.floor;
+        this.view.m_ad_1.m_list.width = 240 * GameManager.instance.adList.length;
+        this.view.m_ad_2.m_list.width = 240 * GameManager.instance.adList.length;
 
-        this.view.m_ad_1.m_list.numItems = this.ceil;
-        this.view.m_ad_2.m_list.numItems = this.floor;
-
-        // this.view.m_ad_1.m_list.numItems = GameManager.instance.adOriList.length;
-        // this.view.m_ad_2.m_list.numItems = GameManager.instance.adOriList.length;
+        this.view.m_ad_1.m_list.numItems = GameManager.instance.adList.length;
+        this.view.m_ad_2.m_list.numItems = GameManager.instance.adList.length;
         this.view.m_ad_2.m_list.x = this.view.m_ad_1.m_list.x = 0;
-        if (this.ceil > 6)
-            this.adMoveLeft();
-
-        // this.view.m_ad_1.m_list.width = 136 * GameManager.instance.adOriList.length;
-        // this.view.m_ad_2.m_list.width = 136 * GameManager.instance.adOriList.length;
-
     }
 
     private onClickItem(e: WXFUI_ADItem): void {
@@ -116,7 +111,8 @@ export default class ADListView extends PopUpView {
         item.m_name.text = d.title;
     }
     private setADItem2(index: number, item: WXFUI_ADItem): void {
-        var d: any = GameManager.instance.adOriList[this.ceil + index];
+
+        var d: any = GameManager.instance.adListRever[index];
         if (!d) return;
         item.data = d;
         item.m_icon.url = d.img;
@@ -124,27 +120,38 @@ export default class ADListView extends PopUpView {
     }
 
     private adMoveLeft(): void {
-        this._tweenNum = Laya.Tween.to(this.view.m_ad_1.m_list, { x: this.view.m_ad_1.width - 136 * this.ceil }, GameManager.instance.adTime / 2, null, Laya.Handler.create(this, this.adMoveRight));
+        // console.log("adMoveLeft--");
+
+        this._tweenNum = Laya.Tween.to(this.view.m_ad_1.m_list, { x: this.view.m_ad_1.width - 240 * GameManager.instance.adOriList.length }, GameManager.instance.adTime, null, Laya.Handler.create(this, this.adMoveRight));
         this._tweenNum.update = Laya.Handler.create(this, this.updateTween, null, false);
 
     }
 
     private adMoveRight(): void {
-        this._tweenNum = Laya.Tween.to(this.view.m_ad_1.m_list, { x: 0 }, GameManager.instance.adTime / 2, null, Laya.Handler.create(this, this.adMoveLeft));
+        // console.log("adMoveRight--");
+        this._tweenNum = Laya.Tween.to(this.view.m_ad_1.m_list, { x: 0 }, GameManager.instance.adTime, null, Laya.Handler.create(this, this.adMoveLeft));
         this._tweenNum.update = Laya.Handler.create(this, this.updateTween, null, false);
 
     }
 
     private updateTween(): void {
-        if (this.floor > 6)
-            this.view.m_ad_2.m_list.x = this.view.m_ad_1.m_list.x;
+        // if (this.floor > 6)
+        this.view.m_ad_2.m_list.x = this.view.m_ad_1.m_list.x;
     }
 
     public hideAllView(): void {
         super.hideAllView();
-        if (this._tweenNum)
-            Laya.Tween.clear(this._tweenNum);
         Laya.Tween.clearTween(this.view.m_ad_1.m_list);
         Laya.timer.clearAll(this);
+    }
+
+    private gotoRandomGame(): void {
+        var n: number = Math.floor(Math.random() * GameManager.instance.adList.length);
+        var d: any = GameManager.instance.adList[n];
+        moosnow.platform.navigate2Mini(d, (res) => {
+            console.log('跳转成功 ', res)
+        }, (res) => {
+            console.log('跳转失败 ', res)
+        });
     }
 }

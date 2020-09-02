@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="820,165" mask="n4_s2x8">
+<component size="1300,165" mask="n4_s2x8">
   <displayList>
     <list id="n3_s2x8" name="list" xy="0,0" size="820,165" layout="row" overflow="scroll" scroll="horizontal" margin="2,2,2,2" colGap="2" defaultItem="ui://bq3h5inss2x8ir">
       <item/>
     </list>
-    <graph id="n4_s2x8" name="n4" xy="0,0" size="820,165" type="rect"/>
+    <graph id="n4_s2x8" name="n4" xy="0,0" size="1300,165" type="rect"/>
   </displayList>
 </component>
