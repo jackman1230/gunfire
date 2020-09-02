@@ -3,6 +3,6 @@
   <displayList>
     <image id="n0_s2x8" name="n0" src="s2x8iq" fileName="Component/view/guanggao/icon.png" xy="0,0" size="238,285" aspect="true"/>
     <loader id="n1_s2x8" name="icon" xy="10,17" pivot="0.5,0.5" size="220,204" align="center" vAlign="middle" fill="scale"/>
-    <text id="n2_s2x8" name="name" xy="-60,234" size="360,54" font="SimHei" fontSize="20" align="center" vAlign="middle" leading="0" letterSpacing="-2" autoSize="none" text=""/>
+    <text id="n2_s2x8" name="name" xy="-60,227" size="360,54" font="SimHei" fontSize="32" align="center" vAlign="middle" leading="0" letterSpacing="-2" autoSize="none" text="我"/>
   </displayList>
 </component>

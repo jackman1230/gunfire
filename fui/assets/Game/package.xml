@@ -851,6 +851,8 @@
     <image id="ko37xuo" name="caini.png" path="/Component/view/guanggao/" exported="true"/>
     <component id="ko37xup" name="ADListHorBig.xml" path="/Component/view/guanggao/"/>
     <component id="ko37xuq" name="ADItemBig.xml" path="/Component/view/guanggao/"/>
+    <component id="ihitxur" name="ADListHorBig2.xml" path="/Component/view/guanggao/"/>
+    <component id="ihitxus" name="ADItemBig2.xml" path="/Component/view/guanggao/"/>
   </resources>
   <publish name="Game" path="..\bin\res" packageCount="2" genCode="true" codePath="..\src\fui"/>
 </packageDescription>

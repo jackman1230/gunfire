@@ -5,30 +5,30 @@
     <image id="n12_dr1t" name="bg" src="n8qun1" fileName="assets/otherView/选择关卡页面/背景.jpg" xy="-145,0" pivot="0.5,0.5"/>
     <image id="n14_dr1t" name="n14" src="n8qun4" fileName="assets/otherView/选择关卡页面/章头底框.png" xy="458,31"/>
     <loader id="n13_dr1t" name="map" xy="32,123" size="1270,508" url="ui://bq3h5insn8qun7"/>
-    <component id="n17_dr1t" name="level_1" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="38,263">
-      <gearXY controller="chapter" pages="0" values="38,263" default="38,340"/>
+    <component id="n17_dr1t" name="level_1" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="38,260">
+      <gearXY controller="chapter" pages="0" values="38,260" default="38,340"/>
     </component>
-    <component id="n18_dr1t" name="level_2" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="266,185">
+    <component id="n18_dr1t" name="level_2" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="266,177">
       <gearDisplay controller="chapter" pages=""/>
-      <gearXY controller="chapter" pages="0" values="266,185" default="38,340"/>
+      <gearXY controller="chapter" pages="0" values="266,177" default="38,340"/>
     </component>
     <component id="n19_dr1t" name="level_3" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="488,215">
       <gearXY controller="chapter" pages="0" values="488,215" default="38,340"/>
     </component>
-    <component id="n20_dr1t" name="level_4" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="643,333">
-      <gearXY controller="chapter" pages="0,1" values="643,333|201,319" default="38,340"/>
+    <component id="n20_dr1t" name="level_4" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="629,333">
+      <gearXY controller="chapter" pages="0,1" values="629,333|201,319" default="38,340"/>
     </component>
-    <component id="n21_dr1t" name="level_5" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="870,343">
-      <gearXY controller="chapter" pages="0,1" values="870,343|890,267" default="38,340"/>
+    <component id="n21_dr1t" name="level_5" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="856,341">
+      <gearXY controller="chapter" pages="0,1" values="856,341|890,267" default="38,340"/>
     </component>
-    <component id="n22_dr1t" name="level_6" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="1053,299">
-      <gearXY controller="chapter" pages="0,1" values="1053,299|236,184" default="38,340"/>
+    <component id="n22_dr1t" name="level_6" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="1053,289">
+      <gearXY controller="chapter" pages="0,1" values="1053,289|236,184" default="38,340"/>
     </component>
     <component id="n23_dr1t" name="level_7" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="1205,248">
       <gearXY controller="chapter" pages="0,1" values="1205,248|338,344" default="38,340"/>
     </component>
-    <component id="n24_dr1t" name="level_8" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="929,181">
-      <gearXY controller="chapter" pages="0,1" values="929,181|422,175" default="38,340"/>
+    <component id="n24_dr1t" name="level_8" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="926,213">
+      <gearXY controller="chapter" pages="0,1" values="926,213|422,175" default="38,340"/>
     </component>
     <loader id="n27_dr1t" name="title" xy="567,40" pivot="0.5,0.5" size="199,63" url="ui://bq3h5insn8quly" align="center" vAlign="middle"/>
     <component id="n32_ugvi" name="setView" src="ugvixpi" fileName="Component/view/volume.xml" xy="1228,82"/>

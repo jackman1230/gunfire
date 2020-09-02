@@ -1,22 +1,35 @@
 {
-	"atlasSetting":{
-		"maxSize":1024,
-		"paging":true,
-		"sizeOption":"npot",
-		"trimImage":true
-	},
-	"binaryFormat":true,
-	"codeGeneration":{
-		"classNamePrefix":"WXFUI_",
-		"codePath":"..\\src\\fui",
-		"codeType":"TS-2.0",
-		"getMemberByName":true,
-		"ignoreNoname":false,
-		"memberNamePrefix":"m_",
-		"packageName":"wxfui"
-	},
-	"compressDesc":false,
-	"fileExtension":"proto",
-	"packageCount":2,
-	"path":"..\\bin\\res\\loading"
+  "path": "..\\bin\\res\\loading",
+  "branchPath": "",
+  "fileExtension": "proto",
+  "packageCount": 2,
+  "compressDesc": false,
+  "binaryFormat": true,
+  "jpegQuality": 80,
+  "compressPNG": false,
+  "codeGeneration": {
+    "allowGenCode": true,
+    "codePath": "..\\src\\fui",
+    "classNamePrefix": "WXFUI_",
+    "memberNamePrefix": "m_",
+    "packageName": "wxfui",
+    "ignoreNoname": false,
+    "getMemberByName": true,
+    "codeType": "TS-2.0"
+  },
+  "includeHighResolution": 0,
+  "branchProcessing": 0,
+  "seperatedAtlasForBranch": false,
+  "atlasSetting": {
+    "maxSize": 1024,
+    "paging": true,
+    "sizeOption": "npot",
+    "forceSquare": false,
+    "allowRotation": false,
+    "trimImage": true
+  },
+  "include2x": false,
+  "include3x": false,
+  "include4x": false,
+  "fileName": "Publish"
 }

@@ -283,7 +283,7 @@ export class GameManager {
         if (this.adList.length <= 5) {
             this.adList.push(...this.adList);
         }
-        this.adTime = this.adList.length * 500;
+        this.adTime = this.adList.length * 1200;
         this.adListRever = this.adList.concat().reverse();
         // Laya.timer.once(7000,this,()=>{
 

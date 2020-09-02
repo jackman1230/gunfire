@@ -1,4 +1,4 @@
-// v1.7.0
+// v1.8.1
 const ideModuleDir = global.ideModuleDir;
 const workSpaceDir = global.workSpaceDir;
 
@@ -13,7 +13,7 @@ const provider = "1109625052";
 let fullRemoteEngineList = ["laya.core.js", "laya.webgl.js", "laya.filter.js", "laya.ani.js", "laya.d3.js", "laya.html.js", "laya.particle.js", "laya.ui.js", "bytebuffer.js"];
 
 let copyLibsTask = ["copyPlatformLibsJsFile"];
-let packfiletask = ["packfile"];
+let versiontask = ["version2"];
 
 let 
     config,
@@ -36,30 +36,72 @@ gulp.task("preCreate_QQ", copyLibsTask, function() {
 });
 
 gulp.task("copyPlatformFile_QQ", ["preCreate_QQ"], function() {
-	let isHasPublish = 
+	let adapterPath = path.join(layarepublicPath, "LayaAirProjectPack", "lib", "data", "qqfiles");
+	let hasPublishPlatform = 
 		fs.existsSync(path.join(releaseDir, "game.js")) &&
 		fs.existsSync(path.join(releaseDir, "game.json")) &&
-		fs.existsSync(path.join(releaseDir, "project.config.json")) &&
-		fs.existsSync(path.join(releaseDir, "weapp-adapter.js"));
-	if (isHasPublish) {
-		return;
+		fs.existsSync(path.join(releaseDir, "project.config.json"));
+	let copyLibsList;
+	if (hasPublishPlatform) {
+		copyLibsList = [`${adapterPath}/weapp-adapter.js`];
+	} else {
+		copyLibsList = [`${adapterPath}/*.*`];
 	}
-	let adapterPath = path.join(layarepublicPath, "LayaAirProjectPack", "lib", "data", "qqfiles");
-	let stream = gulp.src(adapterPath + "/*.*");
+	var stream = gulp.src(copyLibsList);
 	return stream.pipe(gulp.dest(releaseDir));
 });
 
-gulp.task("modifyMinJs_QQ", packfiletask, function() {
+gulp.task("modifyFile_QQ", versiontask, function() {
+	// 修改game.json文件
+	let gameJsonPath = path.join(releaseDir, "game.json");
+	let content = fs.readFileSync(gameJsonPath, "utf8");
+	let conJson = JSON.parse(content);
+	conJson.deviceOrientation = config.qqInfo.orientation;
+	content = JSON.stringify(conJson, null, 4);
+	fs.writeFileSync(gameJsonPath, content, "utf8");
+
+	if (config.version) {
+		let versionPath = releaseDir + "/version.json";
+		versionCon = fs.readFileSync(versionPath, "utf8");
+		versionCon = JSON.parse(versionCon);
+	}
+	let indexJsStr = (versionCon && versionCon["index.js"]) ? versionCon["index.js"] :  "index.js";
+	// 百度小游戏项目，修改index.js
+	let filePath = path.join(releaseDir, indexJsStr);
+	if (!fs.existsSync(filePath)) {
+		return;
+	}
+	let fileContent = fs.readFileSync(filePath, "utf8");
+	fileContent = fileContent.replace(/loadLib(\(['"])/gm, "require$1./");
+	fs.writeFileSync(filePath, fileContent, "utf8");
+});
+
+gulp.task("modifyMinJs_QQ", ["modifyFile_QQ"], function() {
+	// 如果保留了平台文件，如果同时取消使用min类库，就会出现文件引用不正确的问题
+	if (config.keepPlatformFile) {
+		let fileJsPath = path.join(releaseDir, "game.js");
+		let content = fs.readFileSync(fileJsPath, "utf-8");
+		content = content.replace(/min\/laya(-[\w\d]+)?\.qqmini\.min\.js/gm, "laya.qqmini.js");
+		fs.writeFileSync(fileJsPath, content, 'utf-8');
+	}
 	if (!config.useMinJsLibs) {
 		return;
 	}
 	let fileJsPath = path.join(releaseDir, "game.js");
 	let content = fs.readFileSync(fileJsPath, "utf-8");
-	content = content.replace("laya.qqmini.js", "min/laya.qqmini.min.js");
+	content = content.replace(/(min\/)?laya(-[\w\d]+)?\.qqmini(\.min)?\.js/gm, "min/laya.qqmini.min.js");
 	fs.writeFileSync(fileJsPath, content, 'utf-8');
 });
 
 gulp.task("version_QQ", ["modifyMinJs_QQ"], function() {
+	// 如果保留了平台文件，如果同时开启版本管理，就会出现文件引用不正确的问题
+	if (config.keepPlatformFile) {
+		let fileJsPath = path.join(releaseDir, "game.js");
+		let content = fs.readFileSync(fileJsPath, "utf-8");
+		content = content.replace(/laya(-[\w\d]+)?\.qqmini/gm, "laya.qqmini");
+		content = content.replace(/index(-[\w\d]+)?\.js/gm, "index.js");
+		fs.writeFileSync(fileJsPath, content, 'utf-8');
+	}
 	if (config.version) {
 		let versionPath = releaseDir + "/version.json";
 		let gameJSPath = releaseDir + "/game.js";
@@ -118,14 +160,6 @@ gulp.task("pluginEngin_QQ", ["version_QQ"], function(cb) {
 		}
 		gameJsonContent = JSON.stringify(conJson, null, 4);
 		fs.writeFileSync(gameJsonPath, gameJsonContent, "utf8");
-		// 修改project.config.json
-		let projConfigPath = path.join(releaseDir, "project.config.json");
-		let projConfigcontent = fs.readFileSync(projConfigPath, "utf8");
-		let projConfigConJson = JSON.parse(projConfigcontent);
-		projConfigConJson.compileType = "gamePlugin";
-		projConfigConJson.pluginRoot = "laya-libs";
-		projConfigcontent = JSON.stringify(projConfigConJson, null, 4);
-		fs.writeFileSync(projConfigPath, projConfigcontent, "utf8");
 		resolve();
 	}).then(function() {
 		return new Promise(function(resolve, reject) {
@@ -136,14 +170,14 @@ gulp.task("pluginEngin_QQ", ["version_QQ"], function(cb) {
 			let item, fullRequireItem;
 			for (let i = 0, len = fullRemoteEngineList.length; i < len; i++) {
 				item = fullRemoteEngineList[i];
-				fullRequireItem = config.useMinJsLibs ? `loadLib("libs/min/${item}")` : `loadLib("libs/${item}")`;
+				fullRequireItem = config.useMinJsLibs ? `require("./libs/min/${item}")` : `require("./libs/${item}")`;
 				if (indexJsCon.includes(fullRequireItem)) {
 					localUseEngineList.push(item);
 					indexJsCon = indexJsCon.replace(fullRequireItem + ";", "").replace(fullRequireItem + ",", "").replace(fullRequireItem, "");
 				}
 			}
 			if (isOldAsProj || isNewTsProj) { // 如果as||ts_new语言，开发者将laya.js也写入index.js中了，将其删掉
-				fullRequireItem = `loadLib("laya.js")`;
+				fullRequireItem = `require("./laya.js")`;
 				if (indexJsCon.includes(fullRequireItem)) {
 					indexJsCon = indexJsCon.replace(fullRequireItem + ";", "").replace(fullRequireItem + ",", "").replace(fullRequireItem, "");
 				}
@@ -296,13 +330,20 @@ function canUsePluginEngine(version) {
 	const minVersionNum = "2.1.1";
 	let compileMacthList = minVersionNum.match(/^(\d+)\.(\d+)\.(\d+)/);
 	let matchList = version.match(/^(\d+)\.(\d+)\.(\d+)/);
-    if (matchList[1] > compileMacthList[1]) {
+	let 
+		s1n = Number(matchList[1]), // src first number
+		s2n = Number(matchList[2]),
+		s3n = Number(matchList[3]),
+		t1n = Number(compileMacthList[1]), // to first number
+		t2n = Number(compileMacthList[2]),
+		t3n = Number(compileMacthList[3]);
+    if (s1n > t1n) {
         return true;
 	}
-    if (matchList[1] === compileMacthList[1] && matchList[2] > compileMacthList[2]) {
+    if (s1n === t1n && s2n > t2n) {
         return true;
     }
-    if (matchList[1] === compileMacthList[1] && matchList[2] === compileMacthList[2] && matchList[3] >= compileMacthList[3]) {
+    if (s1n === t1n && s2n === t2n && s3n >= t3n) {
         return true;
     }
     return false;

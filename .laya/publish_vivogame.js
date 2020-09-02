@@ -1,4 +1,4 @@
-// v1.7.0
+// v1.8.0
 const ideModuleDir = global.ideModuleDir;
 const workSpaceDir = global.workSpaceDir;
 
@@ -14,7 +14,7 @@ const revCollector = require(ideModuleDir + 'gulp-rev-collector');
 let fullRemoteEngineList = ["laya.core.js", "laya.webgl.js", "laya.filter.js", "laya.ani.js", "laya.d3.js", "laya.html.js", "laya.particle.js", "laya.ui.js", "laya.d3Plugin.js", "bytebuffer.js", "laya.device.js", "laya.physics.js", "laya.physics3D.js", "laya.tiledmap.js", "worker.js", "workerloader.js"];
 
 let copyLibsTask = ["copyPlatformLibsJsFile"];
-let packfiletask = ["packfile"];
+let versiontask = ["version2"];
 
 let 
     config,
@@ -27,6 +27,7 @@ let
 let projSrc;
 let versionCon; // 版本管理version.json
 let commandSuffix,
+	opensslPath,
 	layarepublicPath;
 
 // 创建vivo项目前，拷贝vivo引擎库、修改index.js
@@ -34,6 +35,7 @@ gulp.task("preCreate_VIVO", copyLibsTask, function() {
 	releaseDir = global.releaseDir;
 	config = global.config;
 	commandSuffix = global.commandSuffix;
+	opensslPath = global.opensslPath;
 	layarepublicPath = global.layarepublicPath;
 	tempReleaseDir = global.tempReleaseDir;
 
@@ -49,7 +51,7 @@ gulp.task("copyPlatformFile_VIVO", ["preCreate_VIVO"], function() {
 });
 
 // 检查是否全局安装了qgame
-gulp.task("createGlobalQGame_VIVO", packfiletask, function() {
+gulp.task("createGlobalQGame_VIVO", versiontask, function() {
 	releaseDir = path.dirname(releaseDir);
 	projDir = path.join(releaseDir, config.vivoInfo.projName);
 	projSrc = path.join(projDir, "src");
@@ -297,7 +299,7 @@ gulp.task("generateSign_VIVO", ["clearTempDir_VIVO"], function() {
     }
 	// https://doc.quickapp.cn/tools/compiling-tools.html
 	return new Promise((resolve, reject) => {
-		let cmd = "openssl";
+		let cmd = `${opensslPath}`;
 		let args = ["req", "-newkey", "rsa:2048", "-nodes", "-keyout", "private.pem", 
 					"-x509", "-days", "3650", "-out", "certificate.pem"];
 		let opts = {
@@ -425,9 +427,16 @@ gulp.task("modifyFile_VIVO", ["deleteSignFile_VIVO"], function() {
 	}
 	let indexJsStr = (versionCon && versionCon["index.js"]) ? versionCon["index.js"] :  "index.js";
 	// 修改game.js文件
-	let content = `require("@qgame/adapter");\nif(!window.navigator)\n\twindow.navigator = {};\nwindow.navigator.userAgent = 'Mozilla/5.0 (Linux; Android 5.1.1; Nexus 6 Build/LYZ28E) AppleWebKit/603.1.30 (KHTML, like Gecko) Mobile/14E8301 VVGame NetType/WIFI Language/zh_CN';
-require("./libs/laya.vvmini.js");\nrequire("./index.js");`;
 	let gameJsPath = path.join(projSrc, "game.js");
+	let content = fs.existsSync(gameJsPath) && fs.readFileSync(gameJsPath, "utf8");
+	let reWriteMainJs = !fs.existsSync(gameJsPath) || !content.includes("vvmini");
+	if (reWriteMainJs) {
+		content = `require("@qgame/adapter");\nif(!window.navigator)\n\twindow.navigator = {};\nwindow.navigator.userAgent = 'Mozilla/5.0 (Linux; Android 5.1.1; Nexus 6 Build/LYZ28E) AppleWebKit/603.1.30 (KHTML, like Gecko) Mobile/14E8301 VVGame NetType/WIFI Language/zh_CN';
+require("./libs/laya.vvmini.js");\nrequire("./index.js");`;
+	} else {
+		// 额外的，如果有引擎插件相关代码，需要删掉
+		content = content.replace(/if\s\(window\.requirePlugin\)\s{\n[\w\"\.\-\/\(\);\s\n]*\n}\selse\s{\n[\w\"\.\-\/\(\);\s\n]*\n}\n/gm, "");
+	}
 	fs.writeFileSync(gameJsPath, content, "utf8");
 
 	// vivo项目，修改index.js
@@ -482,16 +491,24 @@ function getEngineVersion() {
 }
 
 gulp.task("modifyMinJs_VIVO", ["modifyFile_VIVO"], function() {
-	if (!config.useMinJsLibs) {
-		return;
-	}
 	let fileJsPath = path.join(projSrc, "game.js");
 	let content = fs.readFileSync(fileJsPath, "utf-8");
-	content = content.replace("laya.vvmini.js", "min/laya.vvmini.min.js");
+	if (!config.useMinJsLibs) { // 默认保留了平台文件，如果同时取消使用min类库，就会出现文件引用不正确的问题
+		content = content.replace(/min\/laya(-[\w\d]+)?\.vvmini\.min\.js/gm, "laya.vvmini.js");
+	} else {
+		content = content.replace(/(min\/)?laya(-[\w\d]+)?\.vvmini(\.min)?\.js/gm, "min/laya.vvmini.min.js");
+	}
 	fs.writeFileSync(fileJsPath, content, 'utf-8');
 });
 
 gulp.task("version_VIVO", ["modifyMinJs_VIVO"], function () {
+	// game.js默认不覆盖，如果同时开启版本管理，就会出现文件引用不正确的问题
+	let fileJsPath = path.join(projSrc, "game.js");
+	let content = fs.readFileSync(fileJsPath, "utf-8");
+	content = content.replace(/laya(-[\w\d]+)?\.xmmini/gm, "laya.xmmini");
+	content = content.replace(/index(-[\w\d]+)?\.js/gm, "index.js");
+	fs.writeFileSync(fileJsPath, content, 'utf-8');
+
 	if (config.version) {
 		let versionPath = projSrc + "/version.json";
 		let mainJSPath = projSrc + "/game.js";

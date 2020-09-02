@@ -1,4 +1,4 @@
-// v1.7.0
+// v1.8.0
 const ideModuleDir = global.ideModuleDir;
 const workSpaceDir = global.workSpaceDir;
 
@@ -9,7 +9,7 @@ const path = require("path");
 const revCollector = require(ideModuleDir + 'gulp-rev-collector');
 
 let copyLibsTask = ["copyPlatformLibsJsFile"];
-let packfiletask = ["packfile"];
+let versiontask = ["version2"];
 
 let 
     config,
@@ -26,34 +26,39 @@ gulp.task("preCreate_Alipay", copyLibsTask, function() {
 });
 
 gulp.task("copyPlatformFile_Alipay", ["preCreate_Alipay"], function() {
-	let isHasPublish = 
+	let adapterPath = path.join(layarepublicPath, "LayaAirProjectPack", "lib", "data", "Alipayfiles");
+	let hasPublishPlatform = 
 		fs.existsSync(path.join(releaseDir, "game.js")) &&
 		fs.existsSync(path.join(releaseDir, "game.json")) &&
-		fs.existsSync(path.join(releaseDir, "my-adapter.js"));
-	if (isHasPublish) {
-		return;
+		fs.existsSync(path.join(releaseDir, "project.config.json"));
+	let copyLibsList;
+	if (hasPublishPlatform) {
+		copyLibsList = [`${adapterPath}/my-adapter.js`];
+	} else {
+		copyLibsList = [`${adapterPath}/*.*`];
 	}
-	let AlipayAdapterPath = path.join(layarepublicPath, "LayaAirProjectPack", "lib", "data", "Alipayfiles");
-	let copyLibsList = [`${AlipayAdapterPath}/**/*.*`];
 	var stream = gulp.src(copyLibsList);
 	return stream.pipe(gulp.dest(releaseDir));
 });
 
-gulp.task("modifyFile_Alipay", packfiletask, function() {
+gulp.task("modifyFile_Alipay", versiontask, function() {
 	// 修改game.json文件
 	let gameJsonPath = path.join(releaseDir, "game.json");
 	let content = fs.readFileSync(gameJsonPath, "utf8");
 	let conJson = JSON.parse(content);
-	conJson.screenOrientation = config.AlipayInfo.screenOrientation;
+	conJson.screenOrientation = config.AlipayInfo.orientation;
 	content = JSON.stringify(conJson, null, 4);
 	fs.writeFileSync(gameJsonPath, content, "utf8");
 
 	// 修改game.js
 	let filePath = path.join(releaseDir, "game.js");
-	// 这个地方，1.x IDE和2.x IDE 不一致
-	let fileContent = `require("./my-adapter.js");
+	let fileContent = fs.existsSync(filePath) && fs.readFileSync(filePath, "utf8");
+	let reWriteMainJs = !fs.existsSync(filePath) || !fileContent.includes("Alipaymini");
+	if (reWriteMainJs) {
+		fileContent = `require("./my-adapter.js");
 require("./libs/laya.Alipaymini.js");\nrequire("./index.js");`;
-	fs.writeFileSync(filePath, fileContent, "utf8");
+		fs.writeFileSync(filePath, fileContent, "utf8");
+	}
 
 	if (config.version || config.enableVersion) {
 		let versionPath = releaseDir + "/version.json";
@@ -72,16 +77,31 @@ require("./libs/laya.Alipaymini.js");\nrequire("./index.js");`;
 })
 
 gulp.task("modifyMinJs_Alipay", ["modifyFile_Alipay"], function() {
+	// 如果保留了平台文件，如果同时取消使用min类库，就会出现文件引用不正确的问题
+	if (config.keepPlatformFile) {
+		let fileJsPath = path.join(releaseDir, "game.js");
+		let content = fs.readFileSync(fileJsPath, "utf-8");
+		content = content.replace(/min\/laya(-[\w\d]+)?\.Alipaymini\.min\.js/gm, "laya.Alipaymini.js");
+		fs.writeFileSync(fileJsPath, content, 'utf-8');
+	}
 	if (!config.useMinJsLibs) {
 		return;
 	}
 	let fileJsPath = path.join(releaseDir, "game.js");
 	let content = fs.readFileSync(fileJsPath, "utf-8");
-	content = content.replace("laya.Alipaymini.js", "min/laya.Alipaymini.min.js");
+	content = content.replace(/(min\/)?laya(-[\w\d]+)?\.Alipaymini(\.min)?\.js/gm, "min/laya.Alipaymini.min.js");
 	fs.writeFileSync(fileJsPath, content, 'utf-8');
 });
 
 gulp.task("version_Alipay", ["modifyMinJs_Alipay"], function () {
+	// 如果保留了平台文件，如果同时开启版本管理，就会出现文件引用不正确的问题
+	if (config.keepPlatformFile) {
+		let fileJsPath = path.join(releaseDir, "game.js");
+		let content = fs.readFileSync(fileJsPath, "utf-8");
+		content = content.replace(/laya(-[\w\d]+)?\.Alipaymini/gm, "laya.Alipaymini");
+		content = content.replace(/index(-[\w\d]+)?\.js/gm, "index.js");
+		fs.writeFileSync(fileJsPath, content, 'utf-8');
+	}
 	if (config.version) {
 		let versionPath = releaseDir + "/version.json";
 		let gameJSPath = releaseDir + "/game.js";

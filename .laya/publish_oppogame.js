@@ -1,4 +1,4 @@
-// v1.7.0
+// v1.8.1
 const ideModuleDir = global.ideModuleDir;
 const workSpaceDir = global.workSpaceDir;
 
@@ -9,9 +9,10 @@ const path = require("path");
 const childProcess = require("child_process");
 const del = require(ideModuleDir + "del");
 const revCollector = require(ideModuleDir + 'gulp-rev-collector');
+const iconv =  require(ideModuleDir + "iconv-lite");
 
 let copyLibsTask = ["copyPlatformLibsJsFile"];
-let packfiletask = ["packfile"];
+let versiontask = ["version2"];
 
 let 
     config,
@@ -21,6 +22,8 @@ let
 	projDir; // OPPO快游戏工程目录
 let versionCon; // 版本管理version.json
 let commandSuffix,
+	adbPath,
+	opensslPath,
 	layarepublicPath;
 
 // 创建OPPO项目前，拷贝OPPO引擎库、修改index.js
@@ -28,6 +31,8 @@ gulp.task("preCreate_OPPO", copyLibsTask, function() {
 	releaseDir = global.releaseDir;
 	config = global.config;
 	commandSuffix = global.commandSuffix;
+	adbPath = global.adbPath;
+	opensslPath = global.opensslPath;
 	layarepublicPath = global.layarepublicPath;
 	tempReleaseDir = global.tempReleaseDir;
 
@@ -39,7 +44,7 @@ gulp.task("copyPlatformFile_OPPO", ["preCreate_OPPO"], function() {
 });
 
 // 新建OPPO项目-OPPO项目与其他项目不同，需要安装OPPO quickgame node_modules，并打包成.rpk文件
-gulp.task("installModules_OPPO", packfiletask, function() {
+gulp.task("installModules_OPPO", versiontask, function() {
 	releaseDir = path.dirname(releaseDir);
 	projDir = path.join(releaseDir, config.oppoInfo.projName);
     // 如果IDE里对应OPPO包已经install node_modules了，忽略这一步
@@ -101,7 +106,7 @@ gulp.task("generateSign_OPPO", ["clearTempDir_OPPO"], function() {
     }
 	// https://doc.quickapp.cn/tools/compiling-tools.html
 	return new Promise((resolve, reject) => {
-		let cmd = "openssl";
+		let cmd = `${opensslPath}`;
 		let args = ["req", "-newkey", "rsa:2048", "-nodes", "-keyout", "private.pem", 
 					"-x509", "-days", "3650", "-out", "certificate.pem"];
 		let opts = {
@@ -195,10 +200,15 @@ gulp.task("modifyFile_OPPO", ["deleteSignFile_OPPO"], function() {
 	// 修改manifest.json文件
 	let manifestPath = path.join(projDir, "manifest.json");
 	let IDEManifestPath = path.join(toolkitPath, "tpl", "manifest.json");
-	if (!fs.existsSync(IDEManifestPath)) {
+	if (!fs.existsSync(IDEManifestPath) && !fs.existsSync(manifestPath)) {
 		return;
 	}
-	let manifestContent = fs.readFileSync(IDEManifestPath, "utf8");
+	let manifestContent;
+	if (fs.existsSync(manifestPath)) {
+		manifestContent = fs.readFileSync(manifestPath, "utf8");
+	} else {
+		manifestContent = fs.readFileSync(IDEManifestPath, "utf8");
+	}
 	let manifestJson = JSON.parse(manifestContent);
 	manifestJson.package = config.oppoInfo.package;
 	manifestJson.name = config.oppoInfo.name;
@@ -210,6 +220,8 @@ gulp.task("modifyFile_OPPO", ["deleteSignFile_OPPO"], function() {
 	manifestJson.icon = `./${path.basename(config.oppoInfo.icon)}`;
 	if (config.oppoInfo.subpack) {
 		manifestJson.subpackages = config.oppoSubpack;
+	} else {
+		delete manifestJson.subpackages;
 	}
 	fs.writeFileSync(manifestPath, JSON.stringify(manifestJson, null, 4), "utf8");
 
@@ -221,10 +233,11 @@ gulp.task("modifyFile_OPPO", ["deleteSignFile_OPPO"], function() {
 	let indexJsStr = (versionCon && versionCon["index.js"]) ? versionCon["index.js"] :  "index.js";
 	// OPPO项目，修改main.js
 	let filePath = path.join(projDir, "main.js");
-	// 这个地方，1.x IDE和2.x IDE 不一致
-	let fileContent = `window.navigator.userAgent = 'Mozilla/5.0 (Linux; Android 5.1.1; Nexus 6 Build/LYZ28E) AppleWebKit/603.1.30 (KHTML, like Gecko) Mobile/14E8301 OPPO MiniGame NetType/WIFI Language/zh_CN';
+	if (!fs.existsSync(filePath)) {
+		let fileContent = `window.navigator.userAgent = 'Mozilla/5.0 (Linux; Android 5.1.1; Nexus 6 Build/LYZ28E) AppleWebKit/603.1.30 (KHTML, like Gecko) Mobile/14E8301 OPPO MiniGame NetType/WIFI Language/zh_CN';
 require("./libs/laya.quickgamemini.js");\nrequire("index.js");`;
-	fs.writeFileSync(filePath, fileContent, "utf8");
+		fs.writeFileSync(filePath, fileContent, "utf8");
+	}
 
 	// OPPO项目，修改index.js
 	let indexFilePath = path.join(projDir, indexJsStr);
@@ -237,16 +250,24 @@ require("./libs/laya.quickgamemini.js");\nrequire("index.js");`;
 });
 
 gulp.task("modifyMinJs_OPPO", ["modifyFile_OPPO"], function() {
-	if (!config.useMinJsLibs) {
-		return;
-	}
 	let fileJsPath = path.join(projDir, "main.js");
 	let content = fs.readFileSync(fileJsPath, "utf-8");
-	content = content.replace("laya.quickgamemini.js", "min/laya.quickgamemini.min.js");
+	if (!config.useMinJsLibs) { // 默认保留了平台文件，如果同时取消使用min类库，就会出现文件引用不正确的问题
+		content = content.replace(/min\/laya(-[\w\d]+)?\.quickgamemini\.min\.js/gm, "laya.quickgamemini.js");
+	} else {
+		content = content.replace(/(min\/)?laya(-[\w\d]+)?\.quickgamemini(\.min)?\.js/gm, "min/laya.quickgamemini.min.js");
+	}
 	fs.writeFileSync(fileJsPath, content, 'utf-8');
 });
 
 gulp.task("version_OPPO", ["modifyMinJs_OPPO"], function () {
+	// main.js默认不覆盖，如果同时开启版本管理，就会出现文件引用不正确的问题
+	let fileJsPath = path.join(projDir, "main.js");
+	let content = fs.readFileSync(fileJsPath, "utf-8");
+	content = content.replace(/laya(-[\w\d]+)?\.quickgamemini/gm, "laya.quickgamemini");
+	content = content.replace(/index(-[\w\d]+)?\.js/gm, "index.js");
+	fs.writeFileSync(fileJsPath, content, 'utf-8');
+
 	if (config.version) {
 		let versionPath = projDir + "/version.json";
 		let mainJSPath = projDir + "/main.js";
@@ -279,7 +300,7 @@ gulp.task("buildRPK_OPPO", ["version_OPPO"], function() {
 			cwd: projDir,
 			shell: true
 		};
-		let cp = childProcess.spawn(cmd, args, opts);
+		let cp = childProcess.spawn(`"${cmd}"`, args, opts);
 		// let cp = childProcess.spawn('npx.cmd', ['-v']);
 		cp.stdout.on('data', (data) => {
 			console.log(`stdout: ${data}`);
@@ -287,6 +308,7 @@ gulp.task("buildRPK_OPPO", ["version_OPPO"], function() {
 
 		cp.stderr.on('data', (data) => {
 			console.log(`stderr: ${data}`);
+			console.log(`stderr(iconv): ${iconv.decode(data, 'gbk')}`);
 			// reject();
 		});
 
@@ -298,7 +320,7 @@ gulp.task("buildRPK_OPPO", ["version_OPPO"], function() {
 });
 
 gulp.task("pushRPK_OPPO", ["buildRPK_OPPO"], function() {
-	if (!config.oppoInfo.oppoDebug) {
+	if (!config.oppoInfo.adbDebug) {
         return;
     }
 	// 在OPPO轻游戏项目目录中执行:
@@ -306,7 +328,7 @@ gulp.task("pushRPK_OPPO", ["buildRPK_OPPO"], function() {
 	// adb push layarepublicPath/oppo/instant_app_settings.properties
 	// adb shell am start -n com.nearme.instant.platform/com.oppo.autotest.main.InstantAppActivity
 	return new Promise((resolve, reject) => {
-		let cmd = "adb";
+		let cmd = `${adbPath}`;
 		let sdGamesPath = config.oppoInfo.subpack ? "sdcard/subPkg" : "sdcard/games";
 		let args = ["push", `dist/${config.oppoInfo.package}${config.oppoInfo.useReleaseSign ? ".signed" : ""}.rpk`, sdGamesPath];
 		let opts = {
@@ -337,7 +359,7 @@ gulp.task("pushRPK_OPPO", ["buildRPK_OPPO"], function() {
 			} else {
 				fs.writeFileSync(oppoPropPath, "default_tab_index=2", "utf8");
 			}
-			let cmd = "adb";
+			let cmd = `${adbPath}`;
 			let args = ["push", oppoPropPath, "sdcard/"];
 			let opts = {
 				cwd: projDir,
@@ -361,7 +383,7 @@ gulp.task("pushRPK_OPPO", ["buildRPK_OPPO"], function() {
 		});
 	}).then(() => {
 		return new Promise((resolve, reject) => {
-			let cmd = "adb";
+			let cmd = `${adbPath}`;
 			let args = ["shell", "am", "start", "-n", "com.nearme.instant.platform/com.oppo.autotest.main.InstantAppActivity"];
 			let opts = {
 				cwd: projDir,
