@@ -29,10 +29,8 @@
     <component id="n23_dr1t" name="return" src="dr1tnr" fileName="Component/btn/backBtn.xml" xy="449,474">
       <gearDisplay controller="ctl" pages="1"/>
     </component>
-    <component id="n32_s2x8" name="ad_1" src="s2x8xs5" fileName="Component/view/guanggao/ADListVer.xml" xy="75,54"/>
-    <component id="n33_s2x8" name="ad_2" src="s2x8xs5" fileName="Component/view/guanggao/ADListVer.xml" xy="215,54"/>
-    <component id="n34_s2x8" name="ad_3" src="s2x8xs5" fileName="Component/view/guanggao/ADListVer.xml" xy="981,54"/>
-    <component id="n35_s2x8" name="ad_4" src="s2x8xs5" fileName="Component/view/guanggao/ADListVer.xml" xy="1120,54"/>
+    <component id="n32_s2x8" name="ad_1" src="s2x8xs5" fileName="Component/view/guanggao/ADListVer.xml" xy="80,10"/>
+    <component id="n33_s2x8" name="ad_2" src="s2x8xs5" fileName="Component/view/guanggao/ADListVer.xml" xy="988,10"/>
     <component id="n36_ko37" name="adHot" src="ko37xui" fileName="Component/view/guanggao/ADReMenList.xml" xy="0,5"/>
   </displayList>
 </component>

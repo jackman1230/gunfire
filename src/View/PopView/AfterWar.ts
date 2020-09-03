@@ -32,13 +32,9 @@ export default class AfterWar extends PopUpView {
 
         this.view.m_ad_1.m_list.itemRenderer = Laya.Handler.create(this, this.setADItem1, null, false);
         this.view.m_ad_2.m_list.itemRenderer = Laya.Handler.create(this, this.setADItem2, null, false);
-        this.view.m_ad_3.m_list.itemRenderer = Laya.Handler.create(this, this.setADItem3, null, false);
-        this.view.m_ad_4.m_list.itemRenderer = Laya.Handler.create(this, this.setADItem4, null, false);
 
         this.view.m_ad_1.m_list.on(fairygui.Events.CLICK_ITEM, this, this.onClickItem);
         this.view.m_ad_2.m_list.on(fairygui.Events.CLICK_ITEM, this, this.onClickItem);
-        this.view.m_ad_3.m_list.on(fairygui.Events.CLICK_ITEM, this, this.onClickItem);
-        this.view.m_ad_4.m_list.on(fairygui.Events.CLICK_ITEM, this, this.onClickItem);
 
         EventManager.instance.addNotice(GameEvent.SHOW_AD_LIST, this, this.showADList);
 
@@ -154,9 +150,9 @@ export default class AfterWar extends PopUpView {
         if (GameManager.instance.adList.length < 1) return;
         EventManager.instance.offNotice(GameEvent.SHOW_AD_LIST, this, this.showADList);
         Laya.Tween.clearTween(this.view.m_ad_1.m_list);
-        this.view.m_ad_1.m_list.numItems = this.view.m_ad_2.m_list.numItems = GameManager.instance.adList.length;
-        this.view.m_ad_3.m_list.numItems = this.view.m_ad_4.m_list.numItems = GameManager.instance.adListRever.length;
-        this.view.m_ad_1.m_list.height = this.view.m_ad_2.m_list.height = this.view.m_ad_3.m_list.height = this.view.m_ad_4.m_list.height = 160 * GameManager.instance.adList.length + 2;
+        this.view.m_ad_1.m_list.numItems = GameManager.instance.adList.length;
+        this.view.m_ad_2.m_list.numItems = GameManager.instance.adListRever.length;
+        this.view.m_ad_1.m_list.height = this.view.m_ad_2.m_list.height = 311 * GameManager.instance.adList.length + 2;
         this.adMoveUp();
     }
 
@@ -179,20 +175,6 @@ export default class AfterWar extends PopUpView {
         item.m_name.text = d.title;
     }
     private setADItem2(index: number, item: WXFUI_ADItem): void {
-        var d: any = GameManager.instance.adList[index];
-        if (!d) return;
-        item.data = d;
-        item.m_icon.url = d.img;
-        item.m_name.text = d.title;
-    }
-    private setADItem3(index: number, item: WXFUI_ADItem): void {
-        var d: any = GameManager.instance.adListRever[index];
-        if (!d) return;
-        item.data = d;
-        item.m_icon.url = d.img;
-        item.m_name.text = d.title;
-    }
-    private setADItem4(index: number, item: WXFUI_ADItem): void {
         var d: any = GameManager.instance.adListRever[index];
         if (!d) return;
         item.data = d;
@@ -207,14 +189,14 @@ export default class AfterWar extends PopUpView {
     }
 
     private adMoveUp(): void {
-        this._tweenNum = Laya.Tween.to(this.view.m_ad_1.m_list, { y: this.view.m_ad_1.height - 160 * GameManager.instance.adList.length }, GameManager.instance.adTime, null, Laya.Handler.create(this, this.adMoveDown));
+        this._tweenNum = Laya.Tween.to(this.view.m_ad_1.m_list, { y: this.view.m_ad_1.height - 311 * GameManager.instance.adList.length }, GameManager.instance.adTime, null, Laya.Handler.create(this, this.adMoveDown));
         this._tweenNum.update = Laya.Handler.create(this, this.updateTween, null, false);
 
     }
 
     private updateTween(): void {
         // console.log("updateTween--", this.view.m_ad_1.m_list.y);
-        this.view.m_ad_4.m_list.y = this.view.m_ad_3.m_list.y = this.view.m_ad_2.m_list.y = this.view.m_ad_1.m_list.y;
+        this.view.m_ad_2.m_list.y = this.view.m_ad_1.m_list.y;
     }
 
     public hideAllView(): void {

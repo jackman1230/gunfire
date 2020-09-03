@@ -52,7 +52,7 @@ export default class ADListView extends PopUpView {
 
         this.adMoveLeft();
         var d: any = MooSnowSDK.getAllConfig();
-        if (d.exportAutoNavigate == 1) {//开启自动跳转一个随机游戏
+        if (d && d.exportAutoNavigate && d.exportAutoNavigate != 0) {//开启自动跳转一个随机游戏
             this.gotoRandomGame();
         }
     }
@@ -148,6 +148,7 @@ export default class ADListView extends PopUpView {
     private gotoRandomGame(): void {
         var n: number = Math.floor(Math.random() * GameManager.instance.adList.length);
         var d: any = GameManager.instance.adList[n];
+        if (!d) return;
         moosnow.platform.navigate2Mini(d, (res) => {
             console.log('跳转成功 ', res)
         }, (res) => {

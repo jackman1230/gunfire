@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1334,740">
+  <displayList>
+    <loader id="n1_m5yy" name="hand" xy="528,103" size="278,468" url="ui://bq3h5insm5yyxvd"/>
+    <movieclip id="n0_m5yy" name="finger" src="m5yyxvl" fileName="Component/view/guanggao/QQAD/qqcon/fingerAni.jta" xy="490,138"/>
+    <component id="n2_m5yy" name="bar" src="m5yyxvk" fileName="Component/view/guanggao/QQAD/qqcon/clickBar.xml" xy="393,30">
+      <ProgressBar value="50" max="100"/>
+    </component>
+    <component id="n3_m5yy" name="btn" src="m5yyxvm" fileName="Component/view/guanggao/QQAD/qqcon/clickBtn.xml" xy="524,614"/>
+  </displayList>
+</component>

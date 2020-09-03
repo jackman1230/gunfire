@@ -853,6 +853,35 @@
     <component id="ko37xuq" name="ADItemBig.xml" path="/Component/view/guanggao/"/>
     <component id="ihitxur" name="ADListHorBig2.xml" path="/Component/view/guanggao/"/>
     <component id="ihitxus" name="ADItemBig2.xml" path="/Component/view/guanggao/"/>
+    <image id="m5yyxut" name="clickBtn.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/"/>
+    <image id="m5yyxuu" name="progressBar.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/"/>
+    <image id="m5yyxuv" name="progressBg.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/"/>
+    <image id="m5yyxux" name="效果图.jpg" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/"/>
+    <image id="m5yyxuy" name="bg.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/恭喜获得/"/>
+    <image id="m5yyxuz" name="box.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/恭喜获得/"/>
+    <image id="m5yyxv0" name="gxhd.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/恭喜获得/"/>
+    <image id="m5yyxv1" name="okBtn.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/恭喜获得/"/>
+    <image id="m5yyxv2" name="效果图2.jpg" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/恭喜获得/"/>
+    <image id="m5yyxv3" name="1.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/手指/"/>
+    <image id="m5yyxv4" name="10.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/手指/"/>
+    <image id="m5yyxv5" name="2.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/手指/"/>
+    <image id="m5yyxv6" name="3.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/手指/"/>
+    <image id="m5yyxv7" name="4.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/手指/"/>
+    <image id="m5yyxv8" name="5.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/手指/"/>
+    <image id="m5yyxv9" name="6.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/手指/"/>
+    <image id="m5yyxva" name="7.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/手指/"/>
+    <image id="m5yyxvb" name="8.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/手指/"/>
+    <image id="m5yyxvc" name="9.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/手指/"/>
+    <image id="m5yyxvd" name="hand1.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/捏橘子动画/" exported="true"/>
+    <image id="m5yyxve" name="hand2.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/捏橘子动画/" exported="true"/>
+    <image id="m5yyxvf" name="hand3.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/捏橘子动画/" exported="true"/>
+    <image id="m5yyxvg" name="hand4.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/捏橘子动画/" exported="true"/>
+    <image id="m5yyxvh" name="hand5.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/捏橘子动画/" exported="true"/>
+    <image id="m5yyxvi" name="hand6.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/捏橘子动画/" exported="true"/>
+    <component id="m5yyxvj" name="ClickADView.xml" path="/Component/view/guanggao/QQAD/qqcon/" exported="true"/>
+    <component id="m5yyxvk" name="clickBar.xml" path="/Component/view/guanggao/QQAD/qqcon/"/>
+    <movieclip id="m5yyxvl" name="fingerAni.jta" path="/Component/view/guanggao/QQAD/qqcon/"/>
+    <component id="m5yyxvm" name="clickBtn.xml" path="/Component/view/guanggao/QQAD/qqcon/"/>
   </resources>
   <publish name="Game" path="..\bin\res" packageCount="2" genCode="true" codePath="..\src\fui"/>
 </packageDescription>

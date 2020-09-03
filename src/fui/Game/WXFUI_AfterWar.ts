@@ -22,8 +22,6 @@ export default class WXFUI_AfterWar extends fgui.GComponent {
 	public m_return:WXFUI_backBtn;
 	public m_ad_1:WXFUI_ADListVer;
 	public m_ad_2:WXFUI_ADListVer;
-	public m_ad_3:WXFUI_ADListVer;
-	public m_ad_4:WXFUI_ADListVer;
 	public m_adHot:WXFUI_ADReMenList;
 	public static URL:string = "ui://bq3h5insdr1tnq";
 
@@ -44,8 +42,6 @@ export default class WXFUI_AfterWar extends fgui.GComponent {
 		this.m_return = <WXFUI_backBtn>(this.getChild("return"));
 		this.m_ad_1 = <WXFUI_ADListVer>(this.getChild("ad_1"));
 		this.m_ad_2 = <WXFUI_ADListVer>(this.getChild("ad_2"));
-		this.m_ad_3 = <WXFUI_ADListVer>(this.getChild("ad_3"));
-		this.m_ad_4 = <WXFUI_ADListVer>(this.getChild("ad_4"));
 		this.m_adHot = <WXFUI_ADReMenList>(this.getChild("adHot"));
 	}
 }
