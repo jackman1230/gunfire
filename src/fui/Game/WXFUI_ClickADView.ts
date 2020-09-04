@@ -5,6 +5,7 @@ import WXFUI_clickBtn from "./WXFUI_clickBtn";
 
 export default class WXFUI_ClickADView extends fgui.GComponent {
 
+	public m_n4:fgui.GGraph;
 	public m_hand:fgui.GLoader;
 	public m_finger:fgui.GMovieClip;
 	public m_bar:WXFUI_clickBar;
@@ -16,6 +17,7 @@ export default class WXFUI_ClickADView extends fgui.GComponent {
 	}
 
 	protected onConstruct():void {
+		this.m_n4 = <fgui.GGraph>(this.getChild("n4"));
 		this.m_hand = <fgui.GLoader>(this.getChild("hand"));
 		this.m_finger = <fgui.GMovieClip>(this.getChild("finger"));
 		this.m_bar = <WXFUI_clickBar>(this.getChild("bar"));

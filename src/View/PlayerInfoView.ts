@@ -72,9 +72,10 @@ export default class PlayerInfoView {
 
     private changePlayerGoods(t: number): void {
         if (t == GoodsType.GoodsType_MED) {
-            GameManager.instance.roleInfo.blood++;
-            if (GameManager.instance.roleInfo.blood > 3)
-                GameManager.instance.roleInfo.blood = 3;
+
+            GameManager.instance.roleInfo.blood += 2;
+            if (GameManager.instance.roleInfo.blood > GameManager.instance.oriBlood)
+                GameManager.instance.roleInfo.blood = GameManager.instance.oriBlood;
             this.updatePlayerBlood();
             ViewManager.instance.createAddGold(t, 1, true);
         } else if (t == GoodsType.GoodsType_MAC) {
@@ -169,13 +170,41 @@ export default class PlayerInfoView {
     }
 
     public updatePlayerBlood(): void {
-        for (let i = 3; i > 0; i--) {
-            if (i <= GameManager.instance.roleInfo.blood) {
-                this.view["m_blood_" + i].visible = true;
-            } else {
-                this.view["m_blood_" + i].visible = false;
-            }
+        if (GameManager.instance.roleInfo.blood == 6) {
+            this.view.m_blood_3.m_ctl.selectedIndex = this.view.m_blood_2.m_ctl.selectedIndex = this.view.m_blood_1.m_ctl.selectedIndex = 0;
+        } else if (GameManager.instance.roleInfo.blood == 5) {
+            this.view.m_blood_2.m_ctl.selectedIndex = this.view.m_blood_1.m_ctl.selectedIndex = 0;
+            this.view.m_blood_3.m_ctl.selectedIndex = 1;
+        } else if (GameManager.instance.roleInfo.blood == 4) {
+            this.view.m_blood_2.m_ctl.selectedIndex = this.view.m_blood_1.m_ctl.selectedIndex = 0;
+            this.view.m_blood_3.m_ctl.selectedIndex = 2;
+        } else if (GameManager.instance.roleInfo.blood == 3) {
+            this.view.m_blood_1.m_ctl.selectedIndex = 0;
+            this.view.m_blood_2.m_ctl.selectedIndex = 1;
+            this.view.m_blood_3.m_ctl.selectedIndex = 2;
+        } else if (GameManager.instance.roleInfo.blood == 2) {
+            this.view.m_blood_1.m_ctl.selectedIndex = 0;
+            this.view.m_blood_2.m_ctl.selectedIndex = 2;
+            this.view.m_blood_3.m_ctl.selectedIndex = 2;
+        } else if (GameManager.instance.roleInfo.blood == 1) {
+            this.view.m_blood_1.m_ctl.selectedIndex = 1;
+            this.view.m_blood_2.m_ctl.selectedIndex = 2;
+            this.view.m_blood_3.m_ctl.selectedIndex = 2;
+        } else {
+            this.view.m_blood_1.m_ctl.selectedIndex = 2;
+            this.view.m_blood_2.m_ctl.selectedIndex = 2;
+            this.view.m_blood_3.m_ctl.selectedIndex = 2;
         }
+
+        // var n: number = Math.floor(GameManager.instance.roleInfo.blood / 2);
+        // var t: number = GameManager.instance.roleInfo.blood % 2;
+        // for (let i = 3; i > 0; i--) {
+        //     if (t > 0)
+        //         this.view["m_blood_" + i].m_ctl.selectedIndex = 1;
+        //     if (i <= n) {
+        //         this.view["m_blood_" + i].m_ctl.selectedIndex = 0;
+        //     }
+        // }
     }
 
     public getRandomCoin(): number {

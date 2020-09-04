@@ -882,6 +882,10 @@
     <component id="m5yyxvk" name="clickBar.xml" path="/Component/view/guanggao/QQAD/qqcon/"/>
     <movieclip id="m5yyxvl" name="fingerAni.jta" path="/Component/view/guanggao/QQAD/qqcon/"/>
     <component id="m5yyxvm" name="clickBtn.xml" path="/Component/view/guanggao/QQAD/qqcon/"/>
+    <component id="tckhxvn" name="blood.xml" path="/Component/view/" exported="true"/>
+    <image id="tckhxvo" name="血量2.png" path="/assets/playerInfo/"/>
+    <image id="eko6xvp" name="wudi.png" path="/Component/view/guanggao/" exported="true"/>
+    <image id="eko6xvq" name="timg2.jpg" path="/Component/view/guanggao/"/>
   </resources>
   <publish name="Game" path="..\bin\res" packageCount="2" genCode="true" codePath="..\src\fui"/>
 </packageDescription>

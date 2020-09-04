@@ -32,9 +32,13 @@ export class GameManager {
     public buyBullet: number = 0;
     public buyGre: number = 10;
 
+    public platform: number = 0;
+
     // public bossDeath: boolean = false;//当前关卡boss是否阵亡
 
     public isPauseGame: boolean = false;
+
+    public oriBlood: number = 6;
 
     constructor() {
     }
@@ -50,6 +54,8 @@ export class GameManager {
         var levelData2 = Laya.loader.getRes("res/LevelData2.json");
         this.levelData["chapter_4"] = levelData2["chapter_4"];
         this.levelData["chapter_5"] = levelData2["chapter_5"];
+        this.platform = MooSnowSDK.getPlatform();
+        // this.platform = moosnow.APP_PLATFORM.QQ;
         console.log(this.levelData);
         this.initRoleData();
         this.initChapterConfig();
@@ -88,7 +94,7 @@ export class GameManager {
     /**观看视频后。原地复活继续游戏 */
     public continueGameByVideo(): void {
         this.roleInfo.isDeath = false;
-        this.roleInfo.blood = 3;
+        this.roleInfo.blood = this.oriBlood;
         this.roleInfo.isInvincible = true;
         ViewManager.instance.playerInfoView.updatePlayerBlood();
         ViewManager.instance.hidePopUpView(ViewManager.instance.afterWar);
@@ -162,7 +168,7 @@ export class GameManager {
         }
         this.goLevelGame();
     }
-    private goLevelGame(): void {
+    public goLevelGame(): void {
         ViewManager.instance.hidePopUpView(null, true);
         if (this.curLevel > this.maxLevel * this.maxChapter) {
             ViewManager.instance.showTipsView("您已通关！敬请期待后续章节");
@@ -176,7 +182,7 @@ export class GameManager {
             this.maxLevel = this.levelData["chapter_" + this.curChapter].maxLevelNum;
             this.curLevelData = this.levelData["chapter_" + this.curChapter]["level_" + l];
             this.playerInfo.curlvCoin = 0;
-            this.roleInfo.blood = 3;
+            this.roleInfo.blood = this.oriBlood;
             this.roleInfo.isDeath = false;
             ViewManager.instance.createWarView();
             SoundManager.instance.playBGM("bgm");
@@ -192,7 +198,7 @@ export class GameManager {
 
         this.playerInfo.bombNum = this.levelData.role.bombNum;
         this.playerInfo.weaponType = this.levelData.role.weaponType;
-        this.playerInfo.blood = this.levelData.role.blood;
+        this.oriBlood = this.playerInfo.blood = this.levelData.role.blood;
         // this.playerInfo.bulletNum = this.levelData.role.bulletNum;
         this.playerInfo.addBombNum = this.levelData.role.addBombNum;
         this.playerInfo.addMacNum = this.levelData.role.addMacNum;
@@ -254,7 +260,7 @@ export class GameManager {
 
     public buyShopItem(d: any, showTip: boolean = false): void {
         if (d.type == GoodsType.GoodsType_MED) {
-            GameManager.instance.roleInfo.blood++;
+            GameManager.instance.roleInfo.blood += 2;
         } else if (d.type == GoodsType.GoodsType_MAC) {
             if (this.buyWeaponType != PlayerData.WEAPON_MAC)
                 this.buyBullet = 0;

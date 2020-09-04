@@ -7,10 +7,11 @@ import WXFUI_ADremen2 from "./WXFUI_ADremen2";
 import WXFUI_ADListHorBig from "./WXFUI_ADListHorBig";
 import WXFUI_lastChapter from "./WXFUI_lastChapter";
 import WXFUI_nextChapter from "./WXFUI_nextChapter";
+import WXFUI_ADremen from "./WXFUI_ADremen";
 
 export default class WXFUI_ChapterView extends fgui.GComponent {
 
-	public m_chapter:fgui.Controller;
+	public m_ctl:fgui.Controller;
 	public m_bg:fgui.GImage;
 	public m_n14:fgui.GImage;
 	public m_map:fgui.GLoader;
@@ -32,6 +33,7 @@ export default class WXFUI_ChapterView extends fgui.GComponent {
 	public m_ad:WXFUI_ADListHorBig;
 	public m_last:WXFUI_lastChapter;
 	public m_next:WXFUI_nextChapter;
+	public m_ad_remen2:WXFUI_ADremen;
 	public static URL:string = "ui://bq3h5insdr1tnw";
 
 	public static createInstance():WXFUI_ChapterView {
@@ -39,7 +41,7 @@ export default class WXFUI_ChapterView extends fgui.GComponent {
 	}
 
 	protected onConstruct():void {
-		this.m_chapter = this.getController("chapter");
+		this.m_ctl = this.getController("ctl");
 		this.m_bg = <fgui.GImage>(this.getChild("bg"));
 		this.m_n14 = <fgui.GImage>(this.getChild("n14"));
 		this.m_map = <fgui.GLoader>(this.getChild("map"));
@@ -61,5 +63,6 @@ export default class WXFUI_ChapterView extends fgui.GComponent {
 		this.m_ad = <WXFUI_ADListHorBig>(this.getChild("ad"));
 		this.m_last = <WXFUI_lastChapter>(this.getChild("last"));
 		this.m_next = <WXFUI_nextChapter>(this.getChild("next"));
+		this.m_ad_remen2 = <WXFUI_ADremen>(this.getChild("ad_remen2"));
 	}
 }

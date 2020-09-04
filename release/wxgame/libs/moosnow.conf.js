@@ -21,14 +21,13 @@ window.moosnowConfig = {
         url: "https://liteplay-1253992229.cos.ap-guangzhou.myqcloud.com/config/tp_hzyx_config_wx.json",
     },
     qq: {
-        bannerId: "393fd2c197f4fdda1f9729ef36737890",
-        videoId: "009f6251b101f9eeb54fb202d537e6d6",
+        bannerId: "fae95316eaa78846d6595d396043b28a",
+        videoId: "d673792964532ca5db9d99430cb89e4a",
         interId: "",
-        boxId: "32b9a79d89010c17850ba54da9dab60f", //qq游戏特有的广告
+        boxId: "24371edd20095ac33d149b28e407c474", //qq游戏特有的广告
         nativeId: ["", ""],
-        moosnowAppId: "1110381022",
+        moosnowAppId: "1110956792",
         version: "1.1.0",
-        url: "https://liteplay-1253992229.cos.ap-guangzhou.myqcloud.com/config/tp_zzxhcar_config.json",//游戏的配置json，如果用到了getMistouchNum,后台必须配置mistouchNum字段
     },
     bd: {
         bannerId: "168776",

@@ -35,6 +35,8 @@ import PlayerSanBullet from "../View/PlayerSanBullet";
 import Shake from "../View/Shake";
 import { MooSnowSDK } from "./MooSnowSDK";
 import WXFUI_ADremen2 from "../fui/Game/WXFUI_ADremen2";
+import ClickADView from "../View/PopView/ClickADView";
+import WXFUI_ADremen from "../fui/Game/WXFUI_ADremen";
 
 export class ViewManager {
 
@@ -54,6 +56,7 @@ export class ViewManager {
     public beforeWar: BeforeWar;
     public clickChestView: ClickChestView;
     public adListView: ADListView;
+    public clickAdView: ClickADView;
 
     public tipsView: TipsPopView;
     public popUpView: PopUpView;
@@ -124,14 +127,25 @@ export class ViewManager {
     }
 
     private adBtn: WXFUI_ADremen2;
+    private adBtn2: WXFUI_ADremen;
     private showADBtn(): void {
-        if (!this.adBtn)
-            this.adBtn = fairygui.UIPackage.createObject("Game", "ADremen2") as WXFUI_ADremen2;
-        this.adBtn.x = 80;
-        this.adBtn.y = 250;
-        fairygui.GRoot.inst.addChild(this.adBtn);
-        this.adBtn.onClick(this, this.showADListView);
-        this.adBtn.m_ani.play(null, -1);
+        if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
+            if (!this.adBtn2)
+                this.adBtn2 = fairygui.UIPackage.createObject("Game", "ADremen") as WXFUI_ADremen;
+            this.adBtn2.x = 80;
+            this.adBtn2.y = 250;
+            fairygui.GRoot.inst.addChild(this.adBtn2);
+            this.adBtn2.onClick(this, this.showADListView);
+            this.adBtn2.m_ani_2.play(null, -1);
+        } else if (GameManager.instance.platform == moosnow.APP_PLATFORM.WX) {
+            if (!this.adBtn)
+                this.adBtn = fairygui.UIPackage.createObject("Game", "ADremen2") as WXFUI_ADremen2;
+            this.adBtn.x = 80;
+            this.adBtn.y = 250;
+            fairygui.GRoot.inst.addChild(this.adBtn);
+            this.adBtn.onClick(this, this.showADListView);
+            this.adBtn.m_ani.play(null, -1);
+        }
     }
 
     /**创建步兵扔的雷 */
@@ -300,8 +314,22 @@ export class ViewManager {
     };
 
     public showADListView(type: number = 0): void {
-        this.showPopUpView(this.adListView, false, false, false);
-        this.adListView.type = type;
+        if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
+            MooSnowSDK.showQQADBox();
+            this.hidePopUpView(null, true);
+        } else if (GameManager.instance.platform == moosnow.APP_PLATFORM.WX) {
+            this.showPopUpView(this.adListView, false, false, false);
+            this.adListView.type = type;
+        }
+    };
+
+    public showQQADBoxView(): void {
+
+    };
+
+    public showQQWuChuView(): void {
+        this.showPopUpView(this.clickAdView, false, false, false);
+        this.clickAdView.updateView();
     };
 
     public hideSuspendView(): void {
@@ -310,7 +338,6 @@ export class ViewManager {
     }
 
     public showChapterView(): void {
-        this.chapterView.view.m_chapter.selectedIndex = 0;
         this.chapterView.updateView();
         this.showPopUpView(this.chapterView, false, true);
         SoundManager.instance.playBGM("chapterBgm");
@@ -329,6 +356,7 @@ export class ViewManager {
         this.adListView = new ADListView()
         this.popUpView = new PopUpView();
         this.tipsView = new TipsPopView();
+        this.clickAdView = new ClickADView();
 
         this.afterWar.createView();
         this.beforeWar.createView();
@@ -336,6 +364,7 @@ export class ViewManager {
         this.chapterView.createView();
         this.clickChestView.createView();
         this.adListView.createView();
+        this.clickAdView.createView();
 
         Laya.stage.addChild(fairygui.GRoot.inst.displayObject);
         MooSnowSDK.getAD();
@@ -377,8 +406,14 @@ export class ViewManager {
     public removeWarView(): void {
         if (this.warView) {
             this.warView.removeView();
-            this.adBtn.offClick(this, this.showADListView);
-            this.adBtn.m_ani.stop();
+            if (this.adBtn) {
+                this.adBtn.offClick(this, this.showADListView);
+                this.adBtn.m_ani.stop();
+            }
+            if (this.adBtn2) {
+                this.adBtn2.offClick(this, this.showADListView);
+                this.adBtn2.m_ani_2.stop();
+            }
         }
 
     }

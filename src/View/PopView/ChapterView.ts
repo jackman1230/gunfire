@@ -31,23 +31,25 @@ export default class ChapterView extends PopUpView {
         // this.view.m_bg.setScale(1.2, 1.2);
 
         this.updateView();
-
-        this.view.m_ad_1.onClick(this, this.onClickADItem, [1]);
-        this.view.m_ad_2.onClick(this, this.onClickADItem, [2]);
-        this.view.m_ad_3.onClick(this, this.onClickADItem, [3]);
-
-        this.view.m_ad.m_list.itemRenderer = Laya.Handler.create(this, this.setADItem, null, false);
-        // this.view.m_ad.m_list.numItems = GameManager.instance.adList.length;
-        this.view.m_ad.m_list.width = 240 * GameManager.instance.adList.length;
-        this.view.m_ad.m_list.on(fairygui.Events.CLICK_ITEM, this, this.onClickItem);
-        this.view.m_ad_remen.onClick(this, this.showReMenAD);
-
-
         EventManager.instance.addNotice(GameEvent.PAUSE_GAME, this, this.pauseGame);
-        EventManager.instance.addNotice(GameEvent.SHOW_AD_LIST, this, this.showADList);
 
-        this.view.m_ad.m_n4.width = 1310;
-        // MooSnowSDK.hideBanner();
+        if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
+            this.view.m_ctl.selectedIndex = 1;
+            this.view.m_ad_remen2.onClick(this, this.showReMenAD2);
+            this.view.m_ad_remen2.m_ani_2.play(null, -1);
+            MooSnowSDK.showBanner(false);
+        } else if (GameManager.instance.platform == moosnow.APP_PLATFORM.WX) {
+            this.view.m_ctl.selectedIndex = 0;
+            this.view.m_ad_1.onClick(this, this.onClickADItem, [1]);
+            this.view.m_ad_2.onClick(this, this.onClickADItem, [2]);
+            this.view.m_ad_3.onClick(this, this.onClickADItem, [3]);
+            this.view.m_ad_remen.onClick(this, this.showReMenAD);
+            this.view.m_ad.m_list.itemRenderer = Laya.Handler.create(this, this.setADItem, null, false);
+            this.view.m_ad.m_list.width = 240 * GameManager.instance.adList.length;
+            this.view.m_ad.m_list.on(fairygui.Events.CLICK_ITEM, this, this.onClickItem);
+            EventManager.instance.addNotice(GameEvent.SHOW_AD_LIST, this, this.showADList);
+            this.view.m_ad.m_n4.width = 1310;
+        }
     }
 
     public showView(s, c): void {
@@ -73,9 +75,11 @@ export default class ChapterView extends PopUpView {
             } else {
                 this.view["m_level_" + i].m_ctl.selectedIndex = 0;
                 this.view["m_level_" + i].m_star.m_ctl.selectedIndex = 0;
-
             }
+        }
 
+        if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
+            this.view.m_ad_remen2.m_ani_2.play(null, -1);
         }
     }
     /**选择关卡 */
@@ -124,8 +128,14 @@ export default class ChapterView extends PopUpView {
         ViewManager.instance.showADListView();
     }
 
+    private showReMenAD2(): void {
+        SoundManager.instance.playSound("btn_click");
+        MooSnowSDK.showQQADBox();
+    }
+
     private showADList(): void {
         if (GameManager.instance.adList.length < 1) return;
+        if (GameManager.instance.platform != moosnow.APP_PLATFORM.WX) return;
         EventManager.instance.offNotice(GameEvent.SHOW_AD_LIST, this, this.showADList);
         this.view.m_ad.m_list.width = 240 * GameManager.instance.adList.length;
         this.view.m_ad.m_list.numItems = GameManager.instance.adList.length;

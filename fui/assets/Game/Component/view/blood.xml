@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="66,53">
+  <controller name="ctl" pages="0,,1,,2," selected="0"/>
+  <displayList>
+    <image id="n0_tckh" name="n0" src="dhhtiz" fileName="assets/playerInfo/雪灰(1).png" xy="0,0"/>
+    <image id="n1_tckh" name="n1" src="dhhtiy" fileName="assets/playerInfo/血量(1).png" xy="0,0">
+      <gearDisplay controller="ctl" pages="0"/>
+    </image>
+    <image id="n4_tckh" name="n4" src="tckhxvo" fileName="assets/playerInfo/血量2.png" xy="0,0">
+      <gearDisplay controller="ctl" pages="1"/>
+    </image>
+  </displayList>
+</component>

@@ -6,5 +6,5 @@ if ((typeof swan !== 'undefined') && (typeof swanGlobal !== 'undefined')) {
 	require("libs/laya.wxmini.js");
 }
 window.loadLib = require;
-require("index-b0ef19c272.js");
+require("index-c8c06416e1.js");
 require("utils/ald-game.js");

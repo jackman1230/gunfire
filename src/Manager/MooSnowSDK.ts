@@ -74,7 +74,11 @@ export class MooSnowSDK {
             if (isOpend) {
                 if (isWuChu) {
                     MooSnowSDK.hideBanner();
-                    ViewManager.instance.clickChestView.clickSuccess();
+                    if (GameManager.instance.platform == moosnow.APP_PLATFORM.WX)
+                        ViewManager.instance.clickChestView.clickSuccess();
+                    if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
+
+                    }
                 }
             }
         });
@@ -165,7 +169,7 @@ export class MooSnowSDK {
     }
 
     /**
-     * 微信平台 其他打点
+     * 获取所有参数
      * @param str 
      */
     public static getAllConfig(): any {
@@ -175,6 +179,34 @@ export class MooSnowSDK {
             console.log("游戏的所有配置数据", res);
         });
         return data;
+    }
+
+    /**
+     * 获取平台类型
+     * @param str 
+     */
+    public static getPlatform(): number {
+        let curPlatform = moosnow.getAppPlatform();
+        // QQ
+        // moosnow.APP_PLATFORM.QQ
+        // WX
+        // moosnow.APP_PLATFORM.WX
+        return curPlatform;
+    }
+
+    /**
+    * 盒子广告
+    * @param callback 关闭回调
+    * @param remoteOn 被后台开关控制  一般首页传 false  需要误触的地方传true
+    */
+    public static showQQADBox(): void {
+        moosnow.platform.showAppBox((res) => {
+            //res ==-1 表示后台没有开启功能  res==0 表示用户主动关闭了盒子
+            if (res) {
+
+            }
+            console.log('关闭盒子')
+        }, false);
     }
 
 

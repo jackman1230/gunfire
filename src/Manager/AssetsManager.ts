@@ -74,6 +74,7 @@ export class AssetsManager {
             { url: "res/Game_atlas0_6.png", type: Laya.Loader.IMAGE },
             { url: "res/Game_atlas0_7.png", type: Laya.Loader.IMAGE },
             { url: "res/Game_atlas0_8.png", type: Laya.Loader.IMAGE },
+            { url: "res/Game_atlas0_9.png", type: Laya.Loader.IMAGE },
             { url: "res/Game_atlas_n8qun1.jpg", type: Laya.Loader.IMAGE },
             { url: "res/Game_atlas_n8qun7.png", type: Laya.Loader.IMAGE },
             { url: "res/LevelData.json", type: Laya.Loader.JSON },

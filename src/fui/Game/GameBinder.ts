@@ -66,6 +66,7 @@ import WXFUI_ADmove from "./WXFUI_ADmove";
 import WXFUI_ADListVer from "./WXFUI_ADListVer";
 import WXFUI_ADListHor from "./WXFUI_ADListHor";
 import WXFUI_ADremen from "./WXFUI_ADremen";
+import WXFUI_blood from "./WXFUI_blood";
 import WXFUI_enemy6 from "./WXFUI_enemy6";
 import WXFUI_enemy13 from "./WXFUI_enemy13";
 import WXFUI_enemy14 from "./WXFUI_enemy14";
@@ -149,6 +150,7 @@ export default class GameBinder {
 		fgui.UIObjectFactory.setExtension(WXFUI_ADListVer.URL, WXFUI_ADListVer);
 		fgui.UIObjectFactory.setExtension(WXFUI_ADListHor.URL, WXFUI_ADListHor);
 		fgui.UIObjectFactory.setExtension(WXFUI_ADremen.URL, WXFUI_ADremen);
+		fgui.UIObjectFactory.setExtension(WXFUI_blood.URL, WXFUI_blood);
 		fgui.UIObjectFactory.setExtension(WXFUI_enemy6.URL, WXFUI_enemy6);
 		fgui.UIObjectFactory.setExtension(WXFUI_enemy13.URL, WXFUI_enemy13);
 		fgui.UIObjectFactory.setExtension(WXFUI_enemy14.URL, WXFUI_enemy14);

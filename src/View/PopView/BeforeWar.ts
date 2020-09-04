@@ -22,7 +22,7 @@ export default class BeforeWar extends PopUpView {
 
         this.view.m_enter.onClick(this, this.enterGame);
         this.shopData = GameManager.instance.levelData.shop;
-        this.view.m_item_1.visible = this.view.m_item_2.visible = this.view.m_item_3.visible = this.view.m_item_4.visible = false
+        this.view.m_item_1.visible = this.view.m_item_2.visible = this.view.m_item_3.visible = this.view.m_item_4.visible = false;
         var index: number = 0;
         for (const key in this.shopData) {
             if (this.shopData.hasOwnProperty(key)) {
@@ -39,11 +39,17 @@ export default class BeforeWar extends PopUpView {
             }
         }
 
-        this.view.m_ad.m_list.itemRenderer = Laya.Handler.create(this, this.setADItem, null, false);
-        this.view.m_ad.m_list.on(fairygui.Events.CLICK_ITEM, this, this.onClickItem);
-        // this.showADList();
-        // MooSnowSDK.hideBanner();
-        EventManager.instance.addNotice(GameEvent.SHOW_AD_LIST, this, this.showADList);
+        if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
+            this.view.m_ad.m_list.visible = false;
+            MooSnowSDK.showBanner(false);
+        } else if (GameManager.instance.platform == moosnow.APP_PLATFORM.WX) {
+            this.view.m_ad.m_list.visible = true;
+            this.view.m_ad.m_list.itemRenderer = Laya.Handler.create(this, this.setADItem, null, false);
+            this.view.m_ad.m_list.on(fairygui.Events.CLICK_ITEM, this, this.onClickItem);
+            EventManager.instance.addNotice(GameEvent.SHOW_AD_LIST, this, this.showADList);
+        }
+
+
 
     }
     public showView(s, c): void {
@@ -64,14 +70,12 @@ export default class BeforeWar extends PopUpView {
             GameManager.instance.buyShopItem(d);
             this.updateView();
         }
-
     }
 
     public updateView(): void {
         this.view.m_coin.text = GameManager.instance.roleInfo.totalCoin + "";
         this.view.m_bulletNum.text = GameManager.instance.buyBullet + "";
         this.view.m_bombNum.text = GameManager.instance.buyGre + "";
-
     }
 
     private buyItemByFree(d: any): void {
@@ -81,8 +85,12 @@ export default class BeforeWar extends PopUpView {
 
     private enterGame(): void {
         SoundManager.instance.playSound("btn_click");
-        GameManager.instance.enterGame();
         ViewManager.instance.hidePopUpView(this, true);
+        if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
+            ViewManager.instance.showQQWuChuView();
+        } else if (GameManager.instance.platform == moosnow.APP_PLATFORM.WX) {
+            GameManager.instance.enterGame();
+        }
     }
 
     private showADList(): void {
@@ -92,7 +100,6 @@ export default class BeforeWar extends PopUpView {
         this.view.m_ad.m_list.numItems = GameManager.instance.adList.length;
         Laya.Tween.clearTween(this.view.m_ad.m_list);
         this.adMoveLeft();
-
     }
 
     private setADItem(index: number, item: WXFUI_ADItem): void {
@@ -116,7 +123,6 @@ export default class BeforeWar extends PopUpView {
 
     private adMoveLeft(): void {
         Laya.Tween.to(this.view.m_ad.m_list, { x: this.view.m_ad.width - 136 * GameManager.instance.adList.length }, GameManager.instance.adTime, null, Laya.Handler.create(this, this.adMoveRight));
-
     }
 
     private adMoveRight(): void {

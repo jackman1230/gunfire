@@ -1,64 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1334,750">
-  <controller name="chapter" pages="0,,1,,2,,3," selected="1"/>
+  <controller name="ctl" pages="0,,1," selected="0"/>
   <displayList>
     <image id="n12_dr1t" name="bg" src="n8qun1" fileName="assets/otherView/选择关卡页面/背景.jpg" xy="-145,0" pivot="0.5,0.5"/>
     <image id="n14_dr1t" name="n14" src="n8qun4" fileName="assets/otherView/选择关卡页面/章头底框.png" xy="458,31"/>
     <loader id="n13_dr1t" name="map" xy="32,123" size="1270,508" url="ui://bq3h5insn8qun7"/>
-    <component id="n17_dr1t" name="level_1" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="38,340">
-      <gearDisplay controller="chapter" pages="0,1,2"/>
-      <gearXY controller="chapter" pages="0" values="38,260" default="38,340"/>
+    <component id="n17_dr1t" name="level_1" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="38,260">
+      <gearDisplay controller="ctl" pages="0,1,2"/>
+      <gearXY controller="ctl" pages="0" values="38,260" default="38,340"/>
     </component>
-    <component id="n18_dr1t" name="level_2" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="266,206">
-      <gearDisplay controller="chapter" pages="0,1,2"/>
-      <gearXY controller="chapter" pages="0,1" values="266,177|266,206" default="38,340"/>
+    <component id="n18_dr1t" name="level_2" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="266,177">
+      <gearDisplay controller="ctl" pages="0,1,2"/>
+      <gearXY controller="ctl" pages="0,1" values="266,177|266,206"/>
     </component>
-    <component id="n19_dr1t" name="level_3" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="519,241">
-      <gearDisplay controller="chapter" pages="0,1,2"/>
-      <gearXY controller="chapter" pages="0,1" values="488,215|519,241" default="38,340"/>
+    <component id="n19_dr1t" name="level_3" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="488,215">
+      <gearDisplay controller="ctl" pages="0,1,2"/>
+      <gearXY controller="ctl" pages="0,1" values="488,215|519,241"/>
     </component>
-    <component id="n20_dr1t" name="level_4" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="669,375">
-      <gearXY controller="chapter" pages="0,1" values="629,333|669,375" default="38,340"/>
+    <component id="n20_dr1t" name="level_4" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="629,333">
+      <gearXY controller="ctl" pages="0,1" values="629,333|669,375"/>
     </component>
-    <component id="n21_dr1t" name="level_5" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="953,241">
-      <gearXY controller="chapter" pages="0,1" values="856,341|953,241" default="38,340"/>
+    <component id="n21_dr1t" name="level_5" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="856,341">
+      <gearXY controller="ctl" pages="0,1" values="856,341|953,241"/>
     </component>
-    <component id="n22_dr1t" name="level_6" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="1199,352">
-      <gearXY controller="chapter" pages="0,1" values="1053,289|1199,352" default="38,340"/>
+    <component id="n22_dr1t" name="level_6" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="1053,289">
+      <gearXY controller="ctl" pages="0,1" values="1053,289|1199,352"/>
     </component>
-    <component id="n23_dr1t" name="level_7" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="1135,216">
-      <gearXY controller="chapter" pages="0,1" values="1205,248|1135,216" default="38,340"/>
+    <component id="n23_dr1t" name="level_7" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="1205,248">
+      <gearXY controller="ctl" pages="0,1" values="1205,248|1135,216"/>
     </component>
-    <component id="n24_dr1t" name="level_8" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="927,446">
-      <gearXY controller="chapter" pages="0,1" values="926,213|927,446" default="38,340"/>
+    <component id="n24_dr1t" name="level_8" src="dr1tnx" fileName="Component/view/LevelItem.xml" xy="926,213">
+      <gearXY controller="ctl" pages="0,1" values="926,213|927,446"/>
     </component>
     <loader id="n27_dr1t" name="title" xy="567,40" pivot="0.5,0.5" size="199,63" url="ui://bq3h5insn8quly" align="center" vAlign="middle"/>
     <component id="n32_ugvi" name="setView" src="ugvixpi" fileName="Component/view/volume.xml" xy="1228,82"/>
     <component id="n39_s2x8" name="ad_1" src="s2x8xs4" fileName="Component/view/guanggao/ADmove.xml" xy="84,59">
-      <gearDisplay controller="chapter" pages="0"/>
+      <gearDisplay controller="ctl" pages="0"/>
     </component>
     <component id="n36_s2x8" name="ad_2" src="s2x8xs4" fileName="Component/view/guanggao/ADmove.xml" xy="270,292">
-      <gearDisplay controller="chapter" pages="0"/>
+      <gearDisplay controller="ctl" pages="0"/>
     </component>
     <component id="n37_s2x8" name="ad_3" src="s2x8xs4" fileName="Component/view/guanggao/ADmove.xml" xy="692,171">
-      <gearDisplay controller="chapter" pages="0"/>
+      <gearDisplay controller="ctl" pages="0"/>
     </component>
     <image id="n41_ko37" name="n41" src="ko37xun" fileName="Component/view/guanggao/cainibg.png" xy="0,457" size="1334,293">
-      <gearDisplay controller="chapter" pages="0"/>
+      <gearDisplay controller="ctl" pages="0"/>
     </image>
     <component id="n38_s2x8" name="ad_remen" src="ko37xuk" fileName="Component/view/guanggao/ADremen2.xml" xy="951,18" scale="1.3,1.3">
-      <gearDisplay controller="chapter" pages="0"/>
+      <gearDisplay controller="ctl" pages="0"/>
     </component>
     <component id="n35_s2x8" name="ad" src="ko37xup" fileName="Component/view/guanggao/ADListHorBig.xml" xy="11,458" size="1309,292">
-      <gearDisplay controller="chapter" pages="0"/>
+      <gearDisplay controller="ctl" pages="0"/>
     </component>
-    <component id="n15_dr1t" name="last" src="dr1tnz" fileName="Component/btn/lastChapter.xml" xy="0,610">
-      <gearDisplay controller="chapter" pages="0,1,2"/>
-      <gearXY controller="chapter" pages="1" values="0,610" default="0,374"/>
+    <component id="n15_dr1t" name="last" src="dr1tnz" fileName="Component/btn/lastChapter.xml" xy="0,374">
+      <gearDisplay controller="ctl" pages="0,1,2"/>
+      <gearXY controller="ctl" pages="1" values="0,610" default="0,374"/>
     </component>
-    <component id="n16_dr1t" name="next" src="dr1to0" fileName="Component/btn/nextChapter.xml" xy="1112,610">
-      <gearDisplay controller="chapter" pages="0,1,2"/>
-      <gearXY controller="chapter" pages="1" values="1112,610" default="1112,374"/>
+    <component id="n16_dr1t" name="next" src="dr1to0" fileName="Component/btn/nextChapter.xml" xy="1112,374">
+      <gearDisplay controller="ctl" pages="0,1,2"/>
+      <gearXY controller="ctl" pages="1" values="1112,610" default="1112,374"/>
+    </component>
+    <component id="n42_tckh" name="ad_remen2" src="s2x8xs7" fileName="Component/view/guanggao/ADremen.xml" xy="992,71">
+      <gearDisplay controller="ctl" pages="1"/>
     </component>
   </displayList>
 </component>

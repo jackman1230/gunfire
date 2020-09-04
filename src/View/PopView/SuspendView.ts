@@ -20,7 +20,6 @@ export default class SuspendView extends PopUpView {
         this.view.m_continue.onClick(this, this.continueGame);
         this.view.m_restart.onClick(this, this.restartGame);
 
-
     }
 
     public showViewNoTween(): void {

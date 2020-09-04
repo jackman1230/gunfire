@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1334,740">
   <displayList>
+    <graph id="n4_tckh" name="n4" xy="-112,-111" size="1559,962" type="rect" fillColor="#ff00ffff"/>
     <loader id="n1_m5yy" name="hand" xy="528,103" size="278,468" url="ui://bq3h5insm5yyxvd"/>
     <movieclip id="n0_m5yy" name="finger" src="m5yyxvl" fileName="Component/view/guanggao/QQAD/qqcon/fingerAni.jta" xy="490,138"/>
     <component id="n2_m5yy" name="bar" src="m5yyxvk" fileName="Component/view/guanggao/QQAD/qqcon/clickBar.xml" xy="393,30">

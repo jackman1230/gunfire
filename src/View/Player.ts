@@ -135,11 +135,13 @@ export class Player extends Laya.Script {
         this.setFaceDirection();
         this.setStay();
         GameManager.instance.roleInfo.isInvincible = false;
+        this.playerSk.hideWuDi();
         Laya.timer.clear(this, this.moveMap);
         this.acMove = false;
         GameManager.instance.buyBullet = 0;
         GameManager.instance.buyGre = 10;
         GameManager.instance.buyWeaponType = 0;
+
     }
     private acMove: boolean = false;
     private activeMove(): void {
@@ -161,7 +163,7 @@ export class Player extends Laya.Script {
         Laya.timer.clearAll(this);
         Laya.timer.loop(500, this, this.moveMap);
         this.setStay();
-        Laya.timer.once(3000, this, this.cancleInvincible);
+        // Laya.timer.once(3000, this, this.cancleInvincible);
         // this.bodyLeg.color = "#ffff00";
         // this.bodybody.color = "#ffff00";
         if (this.roleSprite.y > 800) {
@@ -169,13 +171,14 @@ export class Player extends Laya.Script {
             this.roleSprite.x -= 200;
             // console.log("this.roleSprite.x222222", this.roleSprite.x);
         }
+        this.playerSk.showWuDi();
     }
 
     //取消无敌
-    private cancleInvincible(): void {
-        GameManager.instance.roleInfo.isInvincible = false;
-        this.setColor();
-    }
+    // private cancleInvincible(): void {
+    //     GameManager.instance.roleInfo.isInvincible = false;
+    //     this.setColor();
+    // }
     //掉到洞里面去了
     private gotoHole(): void {
         this.setDeath();

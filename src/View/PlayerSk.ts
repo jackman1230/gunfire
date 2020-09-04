@@ -6,6 +6,8 @@ import { GameData } from "../Data/GameData";
 
 export class PlayerSk {
     public role: Laya.Sprite;
+    private wudiImg: fairygui.GImage;
+    private isWuDi: boolean = false;
 
     private weaponType: number = 1;
     public templet1: Laya.Templet;
@@ -38,6 +40,8 @@ export class PlayerSk {
     public static CROUCH: string = "crouch";
     public static ATTACK_1: string = "attack1";
     public static ATTACK_2: string = "attack2";
+
+
     constructor() {
         this.role = new Laya.Sprite();
         this.role.x = 30;
@@ -57,6 +61,20 @@ export class PlayerSk {
         this.weapon3 = new Laya.Templet();
         this.weapon3.loadAni("res/hero_arm.sk");
         this.weapon3.on(Laya.Event.COMPLETE, this, this.weaponComplete3);
+
+        this.wudiImg = fairygui.UIPackage.createObject("Game", "wudi").asImage;
+    }
+
+    public showWuDi(): void {
+        this.isWuDi = true;
+        this.role.addChild(this.wudiImg.displayObject);
+        this.wudiImg.x = (this.role.width - this.wudiImg.width) / 2;
+        this.wudiImg.y = -30;
+    }
+
+    public hideWuDi(): void {
+        this.isWuDi = false;
+        this.role.removeChild(this.wudiImg.displayObject);
     }
 
     public parseComplete(): void {
@@ -138,12 +156,13 @@ export class PlayerSk {
         this.arm.rotation = -90;
     }
     public setWeapon(type: number): void {
-        console.log("ssss--", type);
+        // console.log("ssss--", type);
         this.weaponType = type;
         this.arm.stop();
         this.role.removeChildren();
         this.role.addChild(this.body);
         this.role.addChild(this.arm);
+        if (this.isWuDi) this.showWuDi();
         if (ViewManager.instance.player.sFire) {
             if (GameManager.instance.roleInfo.weaponType == GameData.WEAPON_RIFLE) {
                 this.setAttack2();
