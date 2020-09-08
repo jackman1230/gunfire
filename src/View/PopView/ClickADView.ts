@@ -20,20 +20,31 @@ export default class ClickADView extends PopUpView {
     private randomNum: number = 7;
     private _isShow: boolean = false;
 
+    private viewType: number = 1;//1在进入游戏前，>1在游戏结算前
+
     constructor() { super() }
 
     createView(): void {
         this.view = WXFUI_ClickADView.createInstance();
     }
 
-    public updateView(): void {
+    public updateView(type: number): void {
         this.view.m_btn.onClick(this, this.clickBtn);
         this.view.m_bar.value = 0;
         this.view.m_finger.visible = true;
+        this.view.m_reward.visible = false;
         this._isShow = false;
         this.clickNum = 1;
         this.view.m_hand.url = "ui://Game/hand" + Math.floor(this.clickNum);
         this.randomNum = this.getBannerValue();
+
+        this.viewType = type;
+    }
+
+    public showReward(): void {
+        this.view.m_reward.visible = true;
+        this.view.m_reward.m_btn.onClick(this, this.hideRewardView);
+        GameManager.instance.buyGre += 10;
     }
 
     private addTimeOut(): void {
@@ -55,7 +66,6 @@ export default class ClickADView extends PopUpView {
 
         this.clickNum++;
         if (this.view.m_bar.value >= 100) {
-            console.log("clickSuccess222--");
             clearInterval(this.timeOut);
             this.view.m_bar.value = 100;
             this.clickSuccess();
@@ -63,8 +73,11 @@ export default class ClickADView extends PopUpView {
         }
 
         if (this.clickNum >= this.randomNum) {
-            console.log("clickSuccess--");
-            MooSnowSDK.showBanner(true);
+            if (this.viewType == 1) {
+                MooSnowSDK.showBanner(true);
+            } else {
+                MooSnowSDK.showQQADBox(true);
+            }
             clearTimeout(this.clickTimeOut);
             this.clickTimeOut = setTimeout(() => {
                 this.clickSuccess();
@@ -89,13 +102,21 @@ export default class ClickADView extends PopUpView {
         clearInterval(this.timeOut);
         clearTimeout(this.clickTimeOut);
         this.view.m_btn.offClick(this, this.clickBtn);
-        ViewManager.instance.hidePopUpView(ViewManager.instance.clickAdView);
-        GameManager.instance.enterGame();
+        if (this.viewType == 1) {
+            ViewManager.instance.hidePopUpView(ViewManager.instance.clickAdView);
+            GameManager.instance.enterGame();
+        } else {
+            MooSnowSDK.hideQQADBox();
+            ViewManager.instance.showResultView();
+        }
+    }
 
+    private hideRewardView(): void {
+        this.view.m_reward.m_btn.offClick(this, this.hideRewardView);
     }
 
     private getRandomValue(): number {
-        return Math.ceil(Math.random() * 4) + 20;
+        return Math.ceil(Math.random() * 5) + 15;
     }
 
     private getBannerValue(): number {

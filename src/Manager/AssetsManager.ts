@@ -24,17 +24,41 @@ export class AssetsManager {
         );
 
         // this.setVersionUrl(AssetsManager.loadingAssetsData);
-        if (!Laya.Browser.onWeiXin) {
-            Laya.loader.create(AssetsManager.loadingAssetsData, Laya.Handler.create(this, this.loadingAssetsComplete));
+        if (Laya.Browser.onWeiXin) {
+            Laya.loader.create(AssetsManager.loadingAssetsData, Laya.Handler.create(this, this.onWXLoaded));
+        } else if (Laya.Browser.onQQMiniGame) {
+            Laya.loader.create(AssetsManager.loadingAssetsData, Laya.Handler.create(this, this.onQQLoaded));
         } else {
-            Laya.loader.create(AssetsManager.loadingAssetsData, Laya.Handler.create(this, this.onLoaded));
+            Laya.loader.create(AssetsManager.loadingAssetsData, Laya.Handler.create(this, this.loadingAssetsComplete));
+
         }
     }
 
-    private onLoaded(): void {
-        //小游戏官方的分包加载方式
+    private onWXLoaded(): void {
+        //微信小游戏官方的分包加载方式
         let wxLoad = Laya.Browser.window.wx;
-        const loadTask = wxLoad["loadSubpackage"]({
+        const wxloadTask = wxLoad["loadSubpackage"]({
+            name: 'res', // name 可以填 name 或者 root
+            success: function (res) {
+                // 分包加载成功后通过 success 回调
+                AssetsManager.instance.loadingAssetsComplete();
+            },
+            fail: function (res) {
+                // 分包加载失败通过 fail 回调
+            }
+        })
+
+        // loadTask.onProgressUpdate(res => {
+        //     console.log('下载进度', res.progress)
+        //     console.log('已经下载的数据长度', res.totalBytesWritten)
+        //     console.log('预期需要下载的数据总长度', res.totalBytesExpectedToWrite)
+        // })
+    }
+
+    private onQQLoaded(): void {
+        //qq小游戏官方的分包加载方式
+        let qqLoad = Laya.Browser.window.qq;
+        const qqloadTask = qqLoad["loadSubpackage"]({
             name: 'res', // name 可以填 name 或者 root
             success: function (res) {
                 // 分包加载成功后通过 success 回调

@@ -87,7 +87,7 @@ export default class BeforeWar extends PopUpView {
         SoundManager.instance.playSound("btn_click");
         ViewManager.instance.hidePopUpView(this, true);
         if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
-            ViewManager.instance.showQQWuChuView();
+            ViewManager.instance.showQQWuChuView(1);
         } else if (GameManager.instance.platform == moosnow.APP_PLATFORM.WX) {
             GameManager.instance.enterGame();
         }
@@ -95,6 +95,7 @@ export default class BeforeWar extends PopUpView {
 
     private showADList(): void {
         if (GameManager.instance.adList.length < 1) return;
+        if (GameManager.instance.platform != moosnow.APP_PLATFORM.WX) return
         EventManager.instance.offNotice(GameEvent.SHOW_AD_LIST, this, this.showADList);
         this.view.m_ad.m_list.width = 136 * GameManager.instance.adList.length;
         this.view.m_ad.m_list.numItems = GameManager.instance.adList.length;

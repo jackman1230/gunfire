@@ -8,5 +8,6 @@
       <ProgressBar value="50" max="100"/>
     </component>
     <component id="n3_m5yy" name="btn" src="m5yyxvm" fileName="Component/view/guanggao/QQAD/qqcon/clickBtn.xml" xy="524,614"/>
+    <component id="n5_buh7" name="reward" src="buh7xvr" fileName="Component/view/guanggao/QQAD/qqcon/RewardView.xml" xy="0,0"/>
   </displayList>
 </component>

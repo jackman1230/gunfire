@@ -294,8 +294,18 @@ export class ViewManager {
      */
     public showAfterWarView(type: number): void {
         this.afterWar.view.m_ctl.selectedIndex = type - 1;
-        this.showPopUpView(this.afterWar, true, true, false);
         this.afterWar.updateView(type);
+        if (GameManager.instance.platform == moosnow.APP_PLATFORM.WX) {
+            this.showPopUpView(this.afterWar, true, true, false);
+        } else if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
+            this.showQQWuChuView(2);
+        }
+    }
+    /**
+     * 显示结算界面
+     */
+    public showResultView(): void {
+        this.showPopUpView(this.afterWar, true, true, false);
     }
 
     public showBeforeWarView(): void {
@@ -304,6 +314,7 @@ export class ViewManager {
 
     public showSuspendView(): void {
         this.suspendView.showViewNoTween();
+        MooSnowSDK.showQQADBox();
     };
 
     public showClickChestView(): void {
@@ -327,9 +338,9 @@ export class ViewManager {
 
     };
 
-    public showQQWuChuView(): void {
+    public showQQWuChuView(type: number = 1): void {
         this.showPopUpView(this.clickAdView, false, false, false);
-        this.clickAdView.updateView();
+        this.clickAdView.updateView(type);
     };
 
     public hideSuspendView(): void {

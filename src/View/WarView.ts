@@ -37,7 +37,7 @@ export class WarView {
 
     private loadComplete(): void {
         // this.scene = s;
-        console.log("warView-------");
+        // console.log("warView-------");
 
         this.warView = fairygui.UIPackage.createObject("Game", "WarView") as WXFUI_WarView;
         this.warView.m_bg.url = "res/map_" + GameManager.instance.curLevelData.mapIndex + ".jpg";

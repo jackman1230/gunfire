@@ -77,7 +77,7 @@ export class MooSnowSDK {
                     if (GameManager.instance.platform == moosnow.APP_PLATFORM.WX)
                         ViewManager.instance.clickChestView.clickSuccess();
                     if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
-
+                        ViewManager.instance.clickAdView.showReward();
                     }
                 }
             }
@@ -198,15 +198,33 @@ export class MooSnowSDK {
     * 盒子广告
     * @param callback 关闭回调
     * @param remoteOn 被后台开关控制  一般首页传 false  需要误触的地方传true
+    * @param closeShowBannerr 关闭界面后是否显示banner
     */
-    public static showQQADBox(): void {
+    public static showQQADBox(isWuChu: boolean = false, closeShowBannerr: boolean = false): void {
         moosnow.platform.showAppBox((res) => {
             //res ==-1 表示后台没有开启功能  res==0 表示用户主动关闭了盒子
-            if (res) {
-
+            if (res && res <= 0) {
+                moosnow.platform.hideAppBox();
+                if (closeShowBannerr) {
+                    MooSnowSDK.showBanner(false);
+                }
             }
-            console.log('关闭盒子')
-        }, false);
+            if (isWuChu && res && res == 0) {
+                ViewManager.instance.hidePopUpView(ViewManager.instance.clickAdView);
+            }
+            if (isWuChu && res && res > 0) {
+                moosnow.platform.hideAppBox();
+                ViewManager.instance.showResultView();
+            }
+            // console.log('关闭盒子')
+        }, isWuChu);
+    }
+
+    /**
+    * 隐藏盒子广告
+    */
+    public static hideQQADBox(): void {
+        moosnow.platform.hideAppBox();
     }
 
 

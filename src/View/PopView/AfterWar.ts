@@ -74,9 +74,17 @@ export default class AfterWar extends PopUpView {
     public showView(s, c): void {
         super.showView(s, c);
         this.view.m_ad_1.m_list.y = 0;
-        this.showADList();
-        MooSnowSDK.showBanner(false);
         this.view.m_adHot.visible = false;
+        if (GameManager.instance.platform == moosnow.APP_PLATFORM.WX) {
+            this.showADList();
+            MooSnowSDK.showBanner(false);
+            this.view.m_ad_1.visible = this.view.m_ad_2.visible = true;
+        }
+        if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
+            MooSnowSDK.hideBanner();
+            MooSnowSDK.showQQADBox(false, true);
+            this.view.m_ad_1.visible = this.view.m_ad_2.visible = false;
+        }
 
     }
 
@@ -148,6 +156,7 @@ export default class AfterWar extends PopUpView {
     private _tweenNum: Laya.Tween;
     private showADList(): void {
         if (GameManager.instance.adList.length < 1) return;
+        if (GameManager.instance.platform != moosnow.APP_PLATFORM.WX) return
         EventManager.instance.offNotice(GameEvent.SHOW_AD_LIST, this, this.showADList);
         Laya.Tween.clearTween(this.view.m_ad_1.m_list);
         this.view.m_ad_1.m_list.numItems = GameManager.instance.adList.length;

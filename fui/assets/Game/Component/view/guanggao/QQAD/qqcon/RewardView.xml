@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1334,740">
+  <displayList>
+    <graph id="n12_buh7" name="n12" xy="-89,-87" size="1513,914" alpha="0.5" type="rect" fillColor="#ff333333"/>
+    <image id="n6_buh7" name="n6" src="m5yyxuy" fileName="Component/view/guanggao/QQAD/全屏误触捏橘子横版/恭喜获得/bg.png" xy="346,68" size="641,544"/>
+    <image id="n7_buh7" name="n7" src="m5yyxv0" fileName="Component/view/guanggao/QQAD/全屏误触捏橘子横版/恭喜获得/gxhd.png" xy="518,87"/>
+    <component id="n9_buh7" name="btn" src="buh7xvs" fileName="Component/view/guanggao/QQAD/qqcon/quedingBtn.xml" xy="617,640"/>
+    <loader id="n10_buh7" name="n10" xy="566,261" pivot="0.5,0.5" size="202,152" url="ui://bq3h5insdhhtko" align="center" vAlign="middle" fill="scale"/>
+    <text id="n11_buh7" name="n11" xy="569,470" size="196,85" font="SimHei" fontSize="50" color="#ffffff" align="center" vAlign="middle" autoSize="none" text="X 10"/>
+  </displayList>
+</component>

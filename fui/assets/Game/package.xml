@@ -857,7 +857,7 @@
     <image id="m5yyxuu" name="progressBar.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/"/>
     <image id="m5yyxuv" name="progressBg.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/"/>
     <image id="m5yyxux" name="效果图.jpg" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/"/>
-    <image id="m5yyxuy" name="bg.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/恭喜获得/"/>
+    <image id="m5yyxuy" name="bg.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/恭喜获得/" scale="9grid" scale9grid="41,122,42,21"/>
     <image id="m5yyxuz" name="box.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/恭喜获得/"/>
     <image id="m5yyxv0" name="gxhd.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/恭喜获得/"/>
     <image id="m5yyxv1" name="okBtn.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/恭喜获得/"/>
@@ -886,6 +886,8 @@
     <image id="tckhxvo" name="血量2.png" path="/assets/playerInfo/"/>
     <image id="eko6xvp" name="wudi.png" path="/Component/view/guanggao/" exported="true"/>
     <image id="eko6xvq" name="timg2.jpg" path="/Component/view/guanggao/"/>
+    <component id="buh7xvr" name="RewardView.xml" path="/Component/view/guanggao/QQAD/qqcon/" exported="true"/>
+    <component id="buh7xvs" name="quedingBtn.xml" path="/Component/view/guanggao/QQAD/qqcon/"/>
   </resources>
   <publish name="Game" path="..\bin\res" packageCount="2" genCode="true" codePath="..\src\fui"/>
 </packageDescription>
