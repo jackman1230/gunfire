@@ -39,6 +39,8 @@ export default class ClickADView extends PopUpView {
         this.randomNum = this.getBannerValue();
 
         this.viewType = type;
+        moosnow.platform.hideAppBox();
+        MooSnowSDK.hideBanner();
     }
 
     public showReward(): void {
@@ -58,26 +60,28 @@ export default class ClickADView extends PopUpView {
 
     private clickBtn(): void {
         SoundManager.instance.playSound("btn_click");
-        if (this._isShow) return;
         var v: number = this.getRandomValue();
         this.view.m_bar.value += v;
         this.addTimeOut();
-        this.view.m_hand.url = "ui://Game/hand" + Math.floor(this.clickNum);
-
         this.clickNum++;
+        if (this.clickNum >= 6)
+            this.clickNum = 6;
+        this.view.m_hand.url = "ui://Game/hand" + Math.floor(this.clickNum);
         if (this.view.m_bar.value >= 100) {
-            clearInterval(this.timeOut);
             this.view.m_bar.value = 100;
-            this.clickSuccess();
-            return;
         }
 
+        if (this._isShow) return;
         if (this.clickNum >= this.randomNum) {
             if (this.viewType == 1) {
+                console.log("showBanner--");
                 MooSnowSDK.showBanner(true);
             } else {
+                console.log("showQQADBox--");
                 MooSnowSDK.showQQADBox(true);
             }
+            this._isShow = true;
+            clearInterval(this.timeOut);
             clearTimeout(this.clickTimeOut);
             this.clickTimeOut = setTimeout(() => {
                 this.clickSuccess();
@@ -88,7 +92,7 @@ export default class ClickADView extends PopUpView {
 
     private decValue(): void {
         this.view.m_bar.value -= 5;
-        this.clickNum -= 0.25;
+        this.clickNum -= 0.2;
         if (this.clickNum < 1) this.clickNum = 1;
         this.view.m_hand.url = "ui://Game/hand" + Math.floor(this.clickNum);
         if (this.view.m_bar.value <= 0)
@@ -98,17 +102,23 @@ export default class ClickADView extends PopUpView {
 
     public clickSuccess(): void {
         this._isShow = true;
-        MooSnowSDK.hideBanner();
         clearInterval(this.timeOut);
         clearTimeout(this.clickTimeOut);
         this.view.m_btn.offClick(this, this.clickBtn);
+        ViewManager.instance.hidePopUpView(ViewManager.instance.clickAdView);
         if (this.viewType == 1) {
-            ViewManager.instance.hidePopUpView(ViewManager.instance.clickAdView);
+            MooSnowSDK.hideBanner();
             GameManager.instance.enterGame();
         } else {
             MooSnowSDK.hideQQADBox();
-            ViewManager.instance.showResultView();
         }
+    }
+
+    public hideAllView(): void {
+        super.hideAllView();
+        clearInterval(this.timeOut);
+        clearTimeout(this.clickTimeOut);
+        this.view.m_btn.offClick(this, this.clickBtn);
     }
 
     private hideRewardView(): void {

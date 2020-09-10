@@ -130,6 +130,7 @@ export class ViewManager {
     private adBtn2: WXFUI_ADremen;
     private showADBtn(): void {
         if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
+            Laya.timer.clear(this, this.clearBanner);
             if (!this.adBtn2)
                 this.adBtn2 = fairygui.UIPackage.createObject("Game", "ADremen") as WXFUI_ADremen;
             this.adBtn2.x = 80;
@@ -137,6 +138,10 @@ export class ViewManager {
             fairygui.GRoot.inst.addChild(this.adBtn2);
             this.adBtn2.onClick(this, this.showADListView);
             this.adBtn2.m_ani_2.play(null, -1);
+            if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
+                MooSnowSDK.showBanner(false);
+                Laya.timer.once(2500, this, this.clearBanner);
+            }
         } else if (GameManager.instance.platform == moosnow.APP_PLATFORM.WX) {
             if (!this.adBtn)
                 this.adBtn = fairygui.UIPackage.createObject("Game", "ADremen2") as WXFUI_ADremen2;
@@ -145,7 +150,11 @@ export class ViewManager {
             fairygui.GRoot.inst.addChild(this.adBtn);
             this.adBtn.onClick(this, this.showADListView);
             this.adBtn.m_ani.play(null, -1);
-        }
+        } 
+    }
+
+    private clearBanner(): void {
+        MooSnowSDK.hideBanner();
     }
 
     /**创建步兵扔的雷 */
@@ -298,13 +307,24 @@ export class ViewManager {
         if (GameManager.instance.platform == moosnow.APP_PLATFORM.WX) {
             this.showPopUpView(this.afterWar, true, true, false);
         } else if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
-            this.showQQWuChuView(2);
+            if (MooSnowSDK.misTouchNum == 0) {//没有误触，直接显示结算
+                this.showPopUpView(this.afterWar, true, true, false);
+            } else if (MooSnowSDK.misTouchNum > 0) {
+                GameManager.instance.misTouchNum++;
+                if (GameManager.instance.misTouchNum >= MooSnowSDK.misTouchNum) {
+                    GameManager.instance.misTouchNum = 0;
+                    this.showQQWuChuView(2);
+                } else {
+                    this.showPopUpView(this.afterWar, true, true, false);
+                }
+            }
         }
     }
     /**
      * 显示结算界面
      */
     public showResultView(): void {
+        MooSnowSDK.showQQADBox();
         this.showPopUpView(this.afterWar, true, true, false);
     }
 
@@ -314,7 +334,7 @@ export class ViewManager {
 
     public showSuspendView(): void {
         this.suspendView.showViewNoTween();
-        MooSnowSDK.showQQADBox();
+        // MooSnowSDK.showQQADBox();
     };
 
     public showClickChestView(): void {

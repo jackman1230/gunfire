@@ -41,12 +41,14 @@ export default class BeforeWar extends PopUpView {
 
         if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
             this.view.m_ad.m_list.visible = false;
-            MooSnowSDK.showBanner(false);
+            // MooSnowSDK.showBanner(false);
         } else if (GameManager.instance.platform == moosnow.APP_PLATFORM.WX) {
             this.view.m_ad.m_list.visible = true;
             this.view.m_ad.m_list.itemRenderer = Laya.Handler.create(this, this.setADItem, null, false);
             this.view.m_ad.m_list.on(fairygui.Events.CLICK_ITEM, this, this.onClickItem);
             EventManager.instance.addNotice(GameEvent.SHOW_AD_LIST, this, this.showADList);
+        } else if (GameManager.instance.platform == moosnow.APP_PLATFORM.BYTEDANCE) {
+            this.view.m_ad.m_list.visible = false;
         }
 
 
@@ -87,8 +89,22 @@ export default class BeforeWar extends PopUpView {
         SoundManager.instance.playSound("btn_click");
         ViewManager.instance.hidePopUpView(this, true);
         if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
-            ViewManager.instance.showQQWuChuView(1);
+            if (MooSnowSDK.misTouchNum == 0) {//没有误触，直接进入游戏
+                GameManager.instance.enterGame();
+            } else if (MooSnowSDK.misTouchNum > 0) {
+                GameManager.instance.misTouchNum++;
+                if (GameManager.instance.misTouchNum >= MooSnowSDK.misTouchNum) {
+                    GameManager.instance.misTouchNum = 0;
+                    ViewManager.instance.showQQWuChuView(1);
+                } else {
+                    GameManager.instance.enterGame();
+                }
+            }
         } else if (GameManager.instance.platform == moosnow.APP_PLATFORM.WX) {
+            GameManager.instance.enterGame();
+        } else if (GameManager.instance.platform == moosnow.APP_PLATFORM.BYTEDANCE) {
+            GameManager.instance.enterGame();
+        } else {
             GameManager.instance.enterGame();
         }
     }

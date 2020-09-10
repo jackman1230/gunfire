@@ -49,6 +49,10 @@ export default class ChapterView extends PopUpView {
             this.view.m_ad.m_list.on(fairygui.Events.CLICK_ITEM, this, this.onClickItem);
             EventManager.instance.addNotice(GameEvent.SHOW_AD_LIST, this, this.showADList);
             this.view.m_ad.m_n4.width = 1310;
+        } else if (GameManager.instance.platform == moosnow.APP_PLATFORM.BYTEDANCE) {
+            this.view.m_ctl.selectedIndex = 1;
+            this.view.m_ad_remen2.visible = false;
+            MooSnowSDK.showBanner(false);
         }
     }
 
@@ -56,6 +60,9 @@ export default class ChapterView extends PopUpView {
         super.showView(s, c);
         this.view.m_ad.m_list.x = 0;
         this.showADList();
+        if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
+            MooSnowSDK.showBanner(false);
+        }
     }
 
     public updateView(): void {
@@ -130,6 +137,7 @@ export default class ChapterView extends PopUpView {
 
     private showReMenAD2(): void {
         SoundManager.instance.playSound("btn_click");
+        console.log("showReMenAD2");
         MooSnowSDK.showQQADBox();
     }
 

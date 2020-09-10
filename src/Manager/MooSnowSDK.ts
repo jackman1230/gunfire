@@ -1,6 +1,8 @@
 import { GameManager } from "./GameManager";
 import { ViewManager } from "./ViewManager";
 import { SoundManager } from "./SoundManager";
+import { EventManager } from "./EventManager";
+import GameEvent from "../Control/GameEvent";
 
 export class MooSnowSDK {
 
@@ -13,8 +15,8 @@ export class MooSnowSDK {
         moosnow.platform.login(() => {
             console.log('登录成功 ')
         });
-
-        MooSnowSDK.showAutoBanner();
+        if (MooSnowSDK.getPlatform() == moosnow.APP_PLATFORM.WX)
+            MooSnowSDK.showAutoBanner();
     }
 
     public static finishLoading(): void {
@@ -67,8 +69,8 @@ export class MooSnowSDK {
      * @param position banner的位置，默认底部
      * @param style 自定义样式
      */
-    public static showBanner(isWuChu: boolean): void {
-        moosnow.platform.showBanner(false, (isOpend) => {
+    public static showBanner(isWuChu: boolean = false): void {
+        moosnow.platform.showBanner(isWuChu, (isOpend) => {
             //目前仅支持微信平台
             console.log('用户是否点击了banner ', isOpend);
             if (isOpend) {
@@ -203,28 +205,73 @@ export class MooSnowSDK {
     public static showQQADBox(isWuChu: boolean = false, closeShowBannerr: boolean = false): void {
         moosnow.platform.showAppBox((res) => {
             //res ==-1 表示后台没有开启功能  res==0 表示用户主动关闭了盒子
-            if (res && res <= 0) {
+            if (res <= 0) {
                 moosnow.platform.hideAppBox();
-                if (closeShowBannerr) {
-                    MooSnowSDK.showBanner(false);
-                }
+                EventManager.instance.dispatcherEvt(GameEvent.CLOSE_APP_AD_BOX);
             }
-            if (isWuChu && res && res == 0) {
+            if (isWuChu && res == 0) {
                 ViewManager.instance.hidePopUpView(ViewManager.instance.clickAdView);
-            }
-            if (isWuChu && res && res > 0) {
-                moosnow.platform.hideAppBox();
-                ViewManager.instance.showResultView();
+                MooSnowSDK.hideQQADBox();
             }
             // console.log('关闭盒子')
-        }, isWuChu);
+        }, false);
     }
 
     /**
-    * 隐藏盒子广告
+    * 隐藏盒子广告并显示结算界面
     */
     public static hideQQADBox(): void {
-        moosnow.platform.hideAppBox();
+        moosnow.platform.hideAppBox(
+            () => {
+                ViewManager.instance.showResultView();
+            }
+        );
+    }
+
+    /**
+    *开始录制
+    */
+    public static startRecord(): void {
+        moosnow.platform.startRecord(300, (e) => {
+            console.log('是否是抖音', e)
+        });
+    }
+
+    /**
+    * 停止录制
+    */
+    public static stopRecord(): void {
+        moosnow.platform.stopRecord((res) => {
+            if (res.videoPath) {
+                //录制的视频路径
+                let videoPath = res.videoPath;
+
+                // setTimeout(() => {
+                //     this.shareRecord();
+                // }, 200);
+            }
+        });
+    }
+
+    /**
+    * 分享视频
+    */
+    public static shareRecord(): void {
+        moosnow.platform.share({
+            channel: moosnow.SHARE_CHANNEL.VIDEO
+        }, (res) => {
+            console.log('分享结束', res)
+        }, (res) => {
+            //仅iphone 会有  安卓时间太短会唤起录像功能
+            console.log('录屏时间太短', res)
+        });
+        // /**
+        //      * 分享
+        //      * @param query 分享参数 { channel:moosnow.SHARE_CHANNEL.LINK }  
+        //      * SHARE_CHANNEL.LINK, SHARE_CHANNEL.ARTICLE, SHARE_CHANNEL.TOKEN, SHARE_CHANNEL.VIDEO 可选 仅字节跳动有效
+        //      * @param callback 分享成功回调参数 = true, 分享失败回调参数 = false,
+        //      * @param shortCall 时间过短时回调 ,err 是具体错误信息，目前只在头条分享录屏时用到
+        //      */
     }
 
 

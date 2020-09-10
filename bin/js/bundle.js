@@ -529,142 +529,6 @@
         }
     }
 
-    class MooSnowSDK {
-        static login() {
-            moosnow.platform.login(() => {
-                console.log('登录成功 ');
-            });
-            MooSnowSDK.showAutoBanner();
-        }
-        static finishLoading() {
-            moosnow.http.finishLoading();
-        }
-        static startGame(lv) {
-            moosnow.http.startGame(lv + "");
-        }
-        static endGame(lv, isWin) {
-            moosnow.http.endGame(lv + "", isWin);
-        }
-        static videoPoint(type, lv, str) {
-            moosnow.http.videoPoint(type + "", str, lv + "");
-        }
-        static getAD() {
-            moosnow.ad.getAd((r) => {
-                console.log('广告数据 ', r);
-                GameManager.instance.adList = r.indexLeft.concat();
-                GameManager.instance.setADlist();
-            });
-        }
-        static showBanner(isWuChu) {
-            moosnow.platform.showBanner(false, (isOpend) => {
-                console.log('用户是否点击了banner ', isOpend);
-                if (isOpend) {
-                    if (isWuChu) {
-                        MooSnowSDK.hideBanner();
-                        if (GameManager.instance.platform == moosnow.APP_PLATFORM.WX)
-                            ViewManager.instance.clickChestView.clickSuccess();
-                        if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
-                            ViewManager.instance.clickAdView.showReward();
-                        }
-                    }
-                }
-            });
-        }
-        static hideBanner() {
-            moosnow.platform.hideBanner();
-        }
-        static showAutoBanner() {
-            moosnow.platform.showAutoBanner();
-        }
-        static showVideo(type, data) {
-            var d = data;
-            SoundManager.instance.offSound();
-            if (type == 1) {
-                MooSnowSDK.videoPoint(0, GameManager.instance.choiseLevel, "看视频获得物资");
-            }
-            else {
-                MooSnowSDK.videoPoint(0, GameManager.instance.choiseLevel, "看视频原地复活");
-            }
-            moosnow.platform.showVideo(res => {
-                switch (res) {
-                    case moosnow.VIDEO_STATUS.NOTEND:
-                        console.log('视频未观看完成 ');
-                        ViewManager.instance.showTipsView("未看完视频无法获得奖励哦");
-                        break;
-                    case moosnow.VIDEO_STATUS.ERR:
-                        console.log('获取视频错误 ');
-                        ViewManager.instance.showTipsView("视频获取失败，请稍后再试");
-                        break;
-                    case moosnow.VIDEO_STATUS.END:
-                        console.log('观看视频结束 ');
-                        if (type == 1 && data) {
-                            GameManager.instance.buyShopItem(d, true);
-                            ViewManager.instance.beforeWar.updateView();
-                            MooSnowSDK.videoPoint(1, GameManager.instance.choiseLevel, "看视频获得物资");
-                        }
-                        else {
-                            GameManager.instance.continueGameByVideo();
-                            MooSnowSDK.videoPoint(1, GameManager.instance.choiseLevel, "看视频原地复活");
-                        }
-                    default:
-                        break;
-                }
-                SoundManager.instance.openSound();
-            });
-        }
-        static getMistouchPosNum() {
-            var misTouchPosNum = 0;
-            moosnow.http.getMistouchPosNum((res) => {
-                MooSnowSDK.mistouchPos = misTouchPosNum = res;
-                console.log("误点位移次数间隔", res);
-            });
-        }
-        static getMisTouchNum() {
-            var misTouchNum = 0;
-            moosnow.http.getMisTouchNum((res) => {
-                MooSnowSDK.misTouchNum = misTouchNum = res;
-                console.log("误点次数间隔", res);
-            });
-        }
-        static setPoint(str) {
-            moosnow.http.point(str);
-        }
-        static getAllConfig() {
-            var data;
-            moosnow.http.getAllConfig(res => {
-                data = res;
-                console.log("游戏的所有配置数据", res);
-            });
-            return data;
-        }
-        static getPlatform() {
-            let curPlatform = moosnow.getAppPlatform();
-            return curPlatform;
-        }
-        static showQQADBox(isWuChu = false, closeShowBannerr = false) {
-            moosnow.platform.showAppBox((res) => {
-                if (res && res <= 0) {
-                    moosnow.platform.hideAppBox();
-                    if (closeShowBannerr) {
-                        MooSnowSDK.showBanner(false);
-                    }
-                }
-                if (isWuChu && res && res == 0) {
-                    ViewManager.instance.hidePopUpView(ViewManager.instance.clickAdView);
-                }
-                if (isWuChu && res && res > 0) {
-                    moosnow.platform.hideAppBox();
-                    ViewManager.instance.showResultView();
-                }
-            }, isWuChu);
-        }
-        static hideQQADBox() {
-            moosnow.platform.hideAppBox();
-        }
-    }
-    MooSnowSDK.misTouchNum = 0;
-    MooSnowSDK.mistouchPos = 0;
-
     class WarView {
         constructor() { }
         createView() {
@@ -711,13 +575,6 @@
             this.warView.y = GameManager.instance.curLvData.warViewPos[1];
             this.warView.displayObject.addChild(this.scene);
             Laya.stage.addChildAt(this.warView.displayObject, 0);
-            if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
-                MooSnowSDK.showBanner(false);
-                Laya.timer.once(2500, this, this.clearBanner);
-            }
-        }
-        clearBanner() {
-            MooSnowSDK.hideBanner();
         }
         showReMenAd() {
             SoundManager.instance.playSound("btn_click");
@@ -735,7 +592,6 @@
                 this.warView.displayObject.removeChildren();
                 this.warView.dispose();
             }
-            Laya.timer.clear(this, this.clearBanner);
             this.recover();
         }
         recover() {
@@ -805,6 +661,7 @@
     GameEvent.CHANGE_SIZE = "CHANGE_SIZE";
     GameEvent.ROLE_ANI_COMPLETE = "ROLE_ANI_COMPLETE";
     GameEvent.SHOW_AD_LIST = "SHOW_AD_LIST";
+    GameEvent.CLOSE_APP_AD_BOX = "CLOSE_APP_AD_BOX";
 
     class EnemyBody extends Laya.Script {
         constructor() {
@@ -2304,6 +2161,140 @@
         }
     }
 
+    class MooSnowSDK {
+        static login() {
+            moosnow.platform.login(() => {
+                console.log('登录成功 ');
+            });
+            if (MooSnowSDK.getPlatform() == moosnow.APP_PLATFORM.WX)
+                MooSnowSDK.showAutoBanner();
+        }
+        static finishLoading() {
+            moosnow.http.finishLoading();
+        }
+        static startGame(lv) {
+            moosnow.http.startGame(lv + "");
+        }
+        static endGame(lv, isWin) {
+            moosnow.http.endGame(lv + "", isWin);
+        }
+        static videoPoint(type, lv, str) {
+            moosnow.http.videoPoint(type + "", str, lv + "");
+        }
+        static getAD() {
+            moosnow.ad.getAd((r) => {
+                console.log('广告数据 ', r);
+                GameManager.instance.adList = r.indexLeft.concat();
+                GameManager.instance.setADlist();
+            });
+        }
+        static showBanner(isWuChu = false) {
+            moosnow.platform.showBanner(isWuChu, (isOpend) => {
+                console.log('用户是否点击了banner ', isOpend);
+                if (isOpend) {
+                    if (isWuChu) {
+                        MooSnowSDK.hideBanner();
+                        if (GameManager.instance.platform == moosnow.APP_PLATFORM.WX)
+                            ViewManager.instance.clickChestView.clickSuccess();
+                        if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
+                            ViewManager.instance.clickAdView.showReward();
+                        }
+                    }
+                }
+            });
+        }
+        static hideBanner() {
+            moosnow.platform.hideBanner();
+        }
+        static showAutoBanner() {
+            moosnow.platform.showAutoBanner();
+        }
+        static showVideo(type, data) {
+            var d = data;
+            SoundManager.instance.offSound();
+            if (type == 1) {
+                MooSnowSDK.videoPoint(0, GameManager.instance.choiseLevel, "看视频获得物资");
+            }
+            else {
+                MooSnowSDK.videoPoint(0, GameManager.instance.choiseLevel, "看视频原地复活");
+            }
+            moosnow.platform.showVideo(res => {
+                switch (res) {
+                    case moosnow.VIDEO_STATUS.NOTEND:
+                        console.log('视频未观看完成 ');
+                        ViewManager.instance.showTipsView("未看完视频无法获得奖励哦");
+                        break;
+                    case moosnow.VIDEO_STATUS.ERR:
+                        console.log('获取视频错误 ');
+                        ViewManager.instance.showTipsView("视频获取失败，请稍后再试");
+                        break;
+                    case moosnow.VIDEO_STATUS.END:
+                        console.log('观看视频结束 ');
+                        if (type == 1 && data) {
+                            GameManager.instance.buyShopItem(d, true);
+                            ViewManager.instance.beforeWar.updateView();
+                            MooSnowSDK.videoPoint(1, GameManager.instance.choiseLevel, "看视频获得物资");
+                        }
+                        else {
+                            GameManager.instance.continueGameByVideo();
+                            MooSnowSDK.videoPoint(1, GameManager.instance.choiseLevel, "看视频原地复活");
+                        }
+                    default:
+                        break;
+                }
+                SoundManager.instance.openSound();
+            });
+        }
+        static getMistouchPosNum() {
+            var misTouchPosNum = 0;
+            moosnow.http.getMistouchPosNum((res) => {
+                MooSnowSDK.mistouchPos = misTouchPosNum = res;
+                console.log("误点位移次数间隔", res);
+            });
+        }
+        static getMisTouchNum() {
+            var misTouchNum = 0;
+            moosnow.http.getMisTouchNum((res) => {
+                MooSnowSDK.misTouchNum = misTouchNum = res;
+                console.log("误点次数间隔", res);
+            });
+        }
+        static setPoint(str) {
+            moosnow.http.point(str);
+        }
+        static getAllConfig() {
+            var data;
+            moosnow.http.getAllConfig(res => {
+                data = res;
+                console.log("游戏的所有配置数据", res);
+            });
+            return data;
+        }
+        static getPlatform() {
+            let curPlatform = moosnow.getAppPlatform();
+            return curPlatform;
+        }
+        static showQQADBox(isWuChu = false, closeShowBannerr = false) {
+            moosnow.platform.showAppBox((res) => {
+                if (res <= 0) {
+                    moosnow.platform.hideAppBox();
+                    EventManager.instance.dispatcherEvt(GameEvent.CLOSE_APP_AD_BOX);
+                }
+                if (isWuChu && res == 0) {
+                    ViewManager.instance.hidePopUpView(ViewManager.instance.clickAdView);
+                    MooSnowSDK.hideQQADBox();
+                }
+            }, false);
+        }
+        static hideQQADBox() {
+            moosnow.platform.hideAppBox(() => {
+                ViewManager.instance.showResultView();
+            });
+        }
+    }
+    MooSnowSDK.misTouchNum = 0;
+    MooSnowSDK.mistouchPos = 0;
+
     class PlayerInfoView {
         constructor() { this.createView(); }
         createView() {
@@ -3691,11 +3682,20 @@
                 EventManager.instance.addNotice(GameEvent.SHOW_AD_LIST, this, this.showADList);
                 this.view.m_ad.m_n4.width = 1310;
             }
+            else if (GameManager.instance.platform == moosnow.APP_PLATFORM.BYTEDANCE) {
+                this.view.m_ctl.selectedIndex = 1;
+                this.view.m_ad_remen2.onClick(this, this.showReMenAD2);
+                this.view.m_ad_remen2.m_ani_2.play(null, -1);
+                MooSnowSDK.showBanner(false);
+            }
         }
         showView(s, c) {
             super.showView(s, c);
             this.view.m_ad.m_list.x = 0;
             this.showADList();
+            if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
+                MooSnowSDK.showBanner(false);
+            }
         }
         updateView() {
             var c = GameManager.instance.curChapter;
@@ -3764,6 +3764,7 @@
         }
         showReMenAD2() {
             SoundManager.instance.playSound("btn_click");
+            console.log("showReMenAD2");
             MooSnowSDK.showQQADBox();
         }
         showADList() {
@@ -3941,9 +3942,13 @@
             }
             if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
                 MooSnowSDK.hideBanner();
-                MooSnowSDK.showQQADBox(false, true);
                 this.view.m_ad_1.visible = this.view.m_ad_2.visible = false;
             }
+            EventManager.instance.addNotice(GameEvent.CLOSE_APP_AD_BOX, this, this.closeAppBox);
+        }
+        closeAppBox() {
+            console.log("closeAppBox----");
+            MooSnowSDK.showBanner(false);
         }
         showHotAdList() {
             for (let i = 1; i <= 6; i++) {
@@ -3962,7 +3967,8 @@
             if (type == 3) {
                 this.view.m_abandon.visible = false;
                 Laya.timer.once(2000, this, this.showAbondon);
-                ViewManager.instance.showADListView();
+                if (GameManager.instance.platform == moosnow.APP_PLATFORM.WX)
+                    ViewManager.instance.showADListView();
             }
             else if (type == 1) {
                 this.view.m_adHot.visible = true;
@@ -4050,10 +4056,13 @@
         hideAllView() {
             super.hideAllView();
             Laya.Tween.clearTween(this.view.m_ad_1.m_list);
-            MooSnowSDK.hideBanner();
+            if (GameManager.instance.platform == moosnow.APP_PLATFORM.WX) {
+                MooSnowSDK.hideBanner();
+            }
             for (let i = 1; i <= 6; i++) {
                 this.view.m_adHot["m_ad_" + i].offClick(this, this.clickHotAdItem, [i]);
             }
+            EventManager.instance.offNotice(GameEvent.CLOSE_APP_AD_BOX, this, this.closeAppBox);
         }
         getRandomAdItem() {
             if (this.adList.length > 0) {
@@ -4117,7 +4126,6 @@
             }
             if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
                 this.view.m_ad.m_list.visible = false;
-                MooSnowSDK.showBanner(false);
             }
             else if (GameManager.instance.platform == moosnow.APP_PLATFORM.WX) {
                 this.view.m_ad.m_list.visible = true;
@@ -4158,7 +4166,19 @@
             SoundManager.instance.playSound("btn_click");
             ViewManager.instance.hidePopUpView(this, true);
             if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
-                ViewManager.instance.showQQWuChuView(1);
+                if (MooSnowSDK.misTouchNum == 0) {
+                    GameManager.instance.enterGame();
+                }
+                else if (MooSnowSDK.misTouchNum > 0) {
+                    GameManager.instance.misTouchNum++;
+                    if (GameManager.instance.misTouchNum >= MooSnowSDK.misTouchNum) {
+                        GameManager.instance.misTouchNum = 0;
+                        ViewManager.instance.showQQWuChuView(1);
+                    }
+                    else {
+                        GameManager.instance.enterGame();
+                    }
+                }
             }
             else if (GameManager.instance.platform == moosnow.APP_PLATFORM.WX) {
                 GameManager.instance.enterGame();
@@ -4669,6 +4689,8 @@
             this.view.m_hand.url = "ui://Game/hand" + Math.floor(this.clickNum);
             this.randomNum = this.getBannerValue();
             this.viewType = type;
+            moosnow.platform.hideAppBox();
+            MooSnowSDK.hideBanner();
         }
         showReward() {
             this.view.m_reward.visible = true;
@@ -4684,26 +4706,29 @@
         }
         clickBtn() {
             SoundManager.instance.playSound("btn_click");
-            if (this._isShow)
-                return;
             var v = this.getRandomValue();
             this.view.m_bar.value += v;
             this.addTimeOut();
-            this.view.m_hand.url = "ui://Game/hand" + Math.floor(this.clickNum);
             this.clickNum++;
+            if (this.clickNum >= 6)
+                this.clickNum = 6;
+            this.view.m_hand.url = "ui://Game/hand" + Math.floor(this.clickNum);
             if (this.view.m_bar.value >= 100) {
-                clearInterval(this.timeOut);
                 this.view.m_bar.value = 100;
-                this.clickSuccess();
-                return;
             }
+            if (this._isShow)
+                return;
             if (this.clickNum >= this.randomNum) {
                 if (this.viewType == 1) {
+                    console.log("showBanner--");
                     MooSnowSDK.showBanner(true);
                 }
                 else {
+                    console.log("showQQADBox--");
                     MooSnowSDK.showQQADBox(true);
                 }
+                this._isShow = true;
+                clearInterval(this.timeOut);
                 clearTimeout(this.clickTimeOut);
                 this.clickTimeOut = setTimeout(() => {
                     this.clickSuccess();
@@ -4712,7 +4737,7 @@
         }
         decValue() {
             this.view.m_bar.value -= 5;
-            this.clickNum -= 0.25;
+            this.clickNum -= 0.2;
             if (this.clickNum < 1)
                 this.clickNum = 1;
             this.view.m_hand.url = "ui://Game/hand" + Math.floor(this.clickNum);
@@ -4721,18 +4746,23 @@
         }
         clickSuccess() {
             this._isShow = true;
-            MooSnowSDK.hideBanner();
             clearInterval(this.timeOut);
             clearTimeout(this.clickTimeOut);
             this.view.m_btn.offClick(this, this.clickBtn);
+            ViewManager.instance.hidePopUpView(ViewManager.instance.clickAdView);
             if (this.viewType == 1) {
-                ViewManager.instance.hidePopUpView(ViewManager.instance.clickAdView);
+                MooSnowSDK.hideBanner();
                 GameManager.instance.enterGame();
             }
             else {
                 MooSnowSDK.hideQQADBox();
-                ViewManager.instance.showResultView();
             }
+        }
+        hideAllView() {
+            super.hideAllView();
+            clearInterval(this.timeOut);
+            clearTimeout(this.clickTimeOut);
+            this.view.m_btn.offClick(this, this.clickBtn);
         }
         hideRewardView() {
             this.view.m_reward.m_btn.offClick(this, this.hideRewardView);
@@ -4855,6 +4885,7 @@
         }
         showADBtn() {
             if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
+                Laya.timer.clear(this, this.clearBanner);
                 if (!this.adBtn2)
                     this.adBtn2 = fairygui.UIPackage.createObject("Game", "ADremen");
                 this.adBtn2.x = 80;
@@ -4862,6 +4893,10 @@
                 fairygui.GRoot.inst.addChild(this.adBtn2);
                 this.adBtn2.onClick(this, this.showADListView);
                 this.adBtn2.m_ani_2.play(null, -1);
+                if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
+                    MooSnowSDK.showBanner(false);
+                    Laya.timer.once(2500, this, this.clearBanner);
+                }
             }
             else if (GameManager.instance.platform == moosnow.APP_PLATFORM.WX) {
                 if (!this.adBtn)
@@ -4872,6 +4907,9 @@
                 this.adBtn.onClick(this, this.showADListView);
                 this.adBtn.m_ani.play(null, -1);
             }
+        }
+        clearBanner() {
+            MooSnowSDK.hideBanner();
         }
         createBomb(type, dir, parentPos, b) {
             var bomb = Laya.Pool.getItemByClass("bombView", BombView);
@@ -4976,10 +5014,23 @@
                 this.showPopUpView(this.afterWar, true, true, false);
             }
             else if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
-                this.showQQWuChuView(2);
+                if (MooSnowSDK.misTouchNum == 0) {
+                    this.showPopUpView(this.afterWar, true, true, false);
+                }
+                else if (MooSnowSDK.misTouchNum > 0) {
+                    GameManager.instance.misTouchNum++;
+                    if (GameManager.instance.misTouchNum >= MooSnowSDK.misTouchNum) {
+                        GameManager.instance.misTouchNum = 0;
+                        this.showQQWuChuView(2);
+                    }
+                    else {
+                        this.showPopUpView(this.afterWar, true, true, false);
+                    }
+                }
             }
         }
         showResultView() {
+            MooSnowSDK.showQQADBox();
             this.showPopUpView(this.afterWar, true, true, false);
         }
         showBeforeWarView() {
@@ -4987,7 +5038,6 @@
         }
         showSuspendView() {
             this.suspendView.showViewNoTween();
-            MooSnowSDK.showQQADBox();
         }
         ;
         showClickChestView() {
@@ -5241,7 +5291,7 @@
             var levelData2 = Laya.loader.getRes("res/LevelData2.json");
             this.levelData["chapter_4"] = levelData2["chapter_4"];
             this.levelData["chapter_5"] = levelData2["chapter_5"];
-            this.platform = MooSnowSDK.getPlatform();
+            this.platform = moosnow.APP_PLATFORM.BYTEDANCE;
             console.log(this.levelData);
             this.initRoleData();
             this.initChapterConfig();
@@ -5520,9 +5570,11 @@
         loadLoadingAssetsData() {
             AssetsManager.loadingAssetsData.push({ url: "loading/loading_atlas0.png", type: Laya.Loader.IMAGE }, { url: "loading/loading_atlas_n8quey.jpg", type: Laya.Loader.IMAGE }, { url: "loading/loading.proto", type: Laya.Loader.BUFFER });
             if (Laya.Browser.onWeiXin) {
+                console.log("onWeiXin");
                 Laya.loader.create(AssetsManager.loadingAssetsData, Laya.Handler.create(this, this.onWXLoaded));
             }
-            else if (Laya.Browser.onQQMiniGame) {
+            else if (moosnow.getAppPlatform() == moosnow.APP_PLATFORM.QQ) {
+                console.log("loadQQ");
                 Laya.loader.create(AssetsManager.loadingAssetsData, Laya.Handler.create(this, this.onQQLoaded));
             }
             else {
@@ -5530,6 +5582,11 @@
             }
         }
         onWXLoaded() {
+            if (moosnow.getAppPlatform() == moosnow.APP_PLATFORM.QQ) {
+                console.log("loadQQ");
+                Laya.loader.create(AssetsManager.loadingAssetsData, Laya.Handler.create(this, this.onQQLoaded));
+                return;
+            }
             let wxLoad = Laya.Browser.window.wx;
             const wxloadTask = wxLoad["loadSubpackage"]({
                 name: 'res',

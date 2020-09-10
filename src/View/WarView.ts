@@ -54,21 +54,14 @@ export class WarView {
         this.warView.displayObject.addChild(this.scene);
         Laya.stage.addChildAt(this.warView.displayObject, 0);
 
-        if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
-            MooSnowSDK.showBanner(false);
-            Laya.timer.once(2500, this, this.clearBanner);
-        }
     }
 
-    private clearBanner(): void {
-        MooSnowSDK.hideBanner();
-    }
 
     private showReMenAd(): void {
         SoundManager.instance.playSound("btn_click");
         ViewManager.instance.showADListView();
     }
-    
+
     public updateViewPort(moveX: number): void {
         // ViewManager.instance.warView.warView.width - this.roleSprite.width - 20;
         // if (this.warView.x - moveX > Laya.stage.width - ViewManager.instance.warView.warView.width - 20) {
@@ -97,7 +90,6 @@ export class WarView {
             this.warView.displayObject.removeChildren();
             this.warView.dispose();
         }
-        Laya.timer.clear(this, this.clearBanner);
         this.recover();
     }
 

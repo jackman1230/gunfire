@@ -54,8 +54,8 @@ export class GameManager {
         var levelData2 = Laya.loader.getRes("res/LevelData2.json");
         this.levelData["chapter_4"] = levelData2["chapter_4"];
         this.levelData["chapter_5"] = levelData2["chapter_5"];
-        this.platform = MooSnowSDK.getPlatform();
-        // this.platform = moosnow.APP_PLATFORM.QQ;
+        // this.platform = MooSnowSDK.getPlatform();
+        this.platform = moosnow.APP_PLATFORM.BYTEDANCE;
         console.log(this.levelData);
         this.initRoleData();
         this.initChapterConfig();

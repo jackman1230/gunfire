@@ -73,6 +73,9 @@
     "useMinJsLibs": false,
     "es6toes5": false,
     "projectType": "ts",
-    "pubTime": 1599454484994,
+    "pubTime": 1599722536871,
+    "qqInfo": {
+        "orientation": "landscape"
+    },
     "uesEnginePlugin": false
 }

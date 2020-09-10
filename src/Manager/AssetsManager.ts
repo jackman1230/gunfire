@@ -25,8 +25,10 @@ export class AssetsManager {
 
         // this.setVersionUrl(AssetsManager.loadingAssetsData);
         if (Laya.Browser.onWeiXin) {
+            console.log("onWeiXin");
             Laya.loader.create(AssetsManager.loadingAssetsData, Laya.Handler.create(this, this.onWXLoaded));
-        } else if (Laya.Browser.onQQMiniGame) {
+        } else if (moosnow.getAppPlatform() == moosnow.APP_PLATFORM.QQ) {
+            console.log("loadQQ");
             Laya.loader.create(AssetsManager.loadingAssetsData, Laya.Handler.create(this, this.onQQLoaded));
         } else {
             Laya.loader.create(AssetsManager.loadingAssetsData, Laya.Handler.create(this, this.loadingAssetsComplete));
@@ -35,6 +37,11 @@ export class AssetsManager {
     }
 
     private onWXLoaded(): void {
+        if (moosnow.getAppPlatform() == moosnow.APP_PLATFORM.QQ) {
+            console.log("loadQQ");
+            Laya.loader.create(AssetsManager.loadingAssetsData, Laya.Handler.create(this, this.onQQLoaded));
+            return;
+        }
         //微信小游戏官方的分包加载方式
         let wxLoad = Laya.Browser.window.wx;
         const wxloadTask = wxLoad["loadSubpackage"]({

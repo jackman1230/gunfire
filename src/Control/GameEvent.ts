@@ -67,6 +67,8 @@ export default class GameEvent {
 
     public static SHOW_AD_LIST: string = "SHOW_AD_LIST";
 
+    public static CLOSE_APP_AD_BOX: string = "CLOSE_APP_AD_BOX";
+
 
     constructor() { }
 

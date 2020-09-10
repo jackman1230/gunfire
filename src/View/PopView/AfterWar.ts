@@ -82,10 +82,15 @@ export default class AfterWar extends PopUpView {
         }
         if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
             MooSnowSDK.hideBanner();
-            MooSnowSDK.showQQADBox(false, true);
+            // MooSnowSDK.showQQADBox(false, true);
             this.view.m_ad_1.visible = this.view.m_ad_2.visible = false;
         }
+        EventManager.instance.addNotice(GameEvent.CLOSE_APP_AD_BOX, this, this.closeAppBox);
+    }
 
+    private closeAppBox(): void {
+        console.log("closeAppBox----");
+        MooSnowSDK.showBanner(false);
     }
 
     private showHotAdList(): void {
@@ -108,7 +113,8 @@ export default class AfterWar extends PopUpView {
         if (type == 3) {
             this.view.m_abandon.visible = false;
             Laya.timer.once(2000, this, this.showAbondon);
-            ViewManager.instance.showADListView();
+            if (GameManager.instance.platform == moosnow.APP_PLATFORM.WX)
+                ViewManager.instance.showADListView();
         } else if (type == 1) {
             this.view.m_adHot.visible = true;
             this.adList = GameManager.instance.adList.concat();
@@ -211,10 +217,13 @@ export default class AfterWar extends PopUpView {
     public hideAllView(): void {
         super.hideAllView();
         Laya.Tween.clearTween(this.view.m_ad_1.m_list);
-        MooSnowSDK.hideBanner();
+        if (GameManager.instance.platform == moosnow.APP_PLATFORM.WX) {
+            MooSnowSDK.hideBanner();
+        }
         for (let i = 1; i <= 6; i++) {
             this.view.m_adHot["m_ad_" + i].offClick(this, this.clickHotAdItem, [i]);
         }
+        EventManager.instance.offNotice(GameEvent.CLOSE_APP_AD_BOX, this, this.closeAppBox);
     }
 
     private getRandomAdItem(): any {
