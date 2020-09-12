@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1334,750" opaque="false">
-  <controller name="ctl" pages="0,,1,,2," selected="0"/>
+  <controller name="ctl" pages="0,,1,,2,,5," selected="3"/>
   <displayList>
-    <image id="n20_dr1t" name="n20" src="n8qumh" fileName="assets/otherView/战后结算页面/切图/金币.png" xy="606,159">
-      <gearDisplay controller="ctl" pages="0"/>
+    <image id="n20_dr1t" name="n20" src="n8qumh" fileName="assets/otherView/战后结算页面/切图/金币.png" xy="583,296">
+      <gearDisplay controller="ctl" pages="0,5"/>
+      <gearXY controller="ctl" pages="5" values="583,296" default="606,161"/>
     </image>
-    <text id="n21_dr1t" name="coin" xy="642,157" size="135,33" font="SimHei" fontSize="25" color="#ffffff" vAlign="middle" autoSize="none" bold="true" singleLine="true" text="+10000">
-      <gearDisplay controller="ctl" pages="0"/>
+    <text id="n21_dr1t" name="coin" xy="619,294" size="135,33" font="SimHei" fontSize="25" color="#ffffff" vAlign="middle" autoSize="none" bold="true" singleLine="true" text="+10000">
+      <gearDisplay controller="ctl" pages="0,5"/>
+      <gearXY controller="ctl" pages="5" values="619,294" default="642,159"/>
     </text>
     <image id="n24_dr1t" name="n24" src="n8qumk" fileName="assets/otherView/战后结算页面/切图/营救成功.png" xy="431,0">
-      <gearDisplay controller="ctl" pages="0"/>
+      <gearDisplay controller="ctl" pages="0,5"/>
     </image>
     <image id="n26_dr1t" name="n26" src="n8quml" fileName="assets/otherView/战后结算页面/切图/营救失败.png" xy="438,27">
       <gearDisplay controller="ctl" pages="1"/>
@@ -17,13 +19,13 @@
     <component id="n29_dr1t" name="abandon" src="unfjxqr" fileName="Component/btn/abandon.xml" xy="602,116">
       <gearDisplay controller="ctl" pages="2"/>
     </component>
-    <component id="n31_dr1t" name="continue_1" src="dr1tns" fileName="Component/btn/continueBtn2.xml" xy="546,443">
+    <component id="n31_dr1t" name="continue_1" src="dr1tns" fileName="Component/btn/continueBtn2.xml" xy="536,443">
       <gearDisplay controller="ctl" pages="0"/>
     </component>
-    <component id="n27_dr1t" name="continue_2" src="dr1tnu" fileName="Component/btn/continueBtn4.xml" xy="546,443">
+    <component id="n27_dr1t" name="continue_2" src="dr1tnu" fileName="Component/btn/continueBtn4.xml" xy="536,443">
       <gearDisplay controller="ctl" pages="1"/>
     </component>
-    <component id="n30_dr1t" name="continue_3" src="dr1tnt" fileName="Component/btn/continueBtn3.xml" xy="546,443">
+    <component id="n30_dr1t" name="continue_3" src="dr1tnt" fileName="Component/btn/continueBtn3.xml" xy="536,443">
       <gearDisplay controller="ctl" pages="2"/>
     </component>
     <component id="n23_dr1t" name="return" src="dr1tnr" fileName="Component/btn/backBtn.xml" xy="449,474">
@@ -32,5 +34,17 @@
     <component id="n32_s2x8" name="ad_1" src="s2x8xs5" fileName="Component/view/guanggao/ADListVer.xml" xy="80,10"/>
     <component id="n33_s2x8" name="ad_2" src="s2x8xs5" fileName="Component/view/guanggao/ADListVer.xml" xy="988,10"/>
     <component id="n36_ko37" name="adHot" src="ko37xui" fileName="Component/view/guanggao/ADReMenList.xml" xy="0,5"/>
+    <image id="n37_k6sa" name="n37" src="pei5xx1" fileName="Component/view/guanggao/toutiao/double2.png" xy="616,484">
+      <gearDisplay controller="ctl" pages="5"/>
+    </image>
+    <component id="n40_k6sa" name="nextBtn" src="k6saxwy" fileName="Component/view/guanggao/toutiao/ttcon/nextBtn.xml" xy="536,362">
+      <gearDisplay controller="ctl" pages="5"/>
+    </component>
+    <component id="n41_k6sa" name="gou" src="k6saxwn" fileName="Component/view/guanggao/toutiao/ttcon/videoBtn.xml" xy="585,487">
+      <gearDisplay controller="ctl" pages="5"/>
+    </component>
+    <image id="n42_k6sa" name="n42" src="pei5xx0" fileName="Component/view/guanggao/toutiao/double.png" xy="689,220">
+      <gearDisplay controller="ctl" pages="5"/>
+    </image>
   </displayList>
 </component>

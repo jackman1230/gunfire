@@ -37,6 +37,12 @@ import { MooSnowSDK } from "./MooSnowSDK";
 import WXFUI_ADremen2 from "../fui/Game/WXFUI_ADremen2";
 import ClickADView from "../View/PopView/ClickADView";
 import WXFUI_ADremen from "../fui/Game/WXFUI_ADremen";
+import NoVideoTipsView from "../View/PopView/NoVideoTipsView";
+import FreeView from "../View/PopView/FreeView";
+import { VideoData } from "../Data/VideoData";
+import ShowVideoView from "../View/PopView/ShowVideoView";
+import RecordView from "../View/PopView/RecordView";
+import WXFUI_TipsPopView from "../fui/Game/WXFUI_TipsPopView";
 
 export class ViewManager {
 
@@ -57,6 +63,10 @@ export class ViewManager {
     public clickChestView: ClickChestView;
     public adListView: ADListView;
     public clickAdView: ClickADView;
+    public noVideoView: NoVideoTipsView;
+    public freeView: FreeView;
+    public showVideoView: ShowVideoView;
+    public recordView: RecordView;
 
     public tipsView: TipsPopView;
     public popUpView: PopUpView;
@@ -150,7 +160,7 @@ export class ViewManager {
             fairygui.GRoot.inst.addChild(this.adBtn);
             this.adBtn.onClick(this, this.showADListView);
             this.adBtn.m_ani.play(null, -1);
-        } 
+        }
     }
 
     private clearBanner(): void {
@@ -318,18 +328,28 @@ export class ViewManager {
                     this.showPopUpView(this.afterWar, true, true, false);
                 }
             }
+        } else if (GameManager.instance.platform == moosnow.APP_PLATFORM.BYTEDANCE) {
+            ViewManager.instance.showPopUpView(ViewManager.instance.recordView, true, false, false);
+        } else {
+            this.showPopUpView(this.afterWar, true, true, false);
         }
     }
     /**
      * 显示结算界面
      */
     public showResultView(): void {
-        MooSnowSDK.showQQADBox();
+        if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
+            MooSnowSDK.showQQADBox();
+        }
         this.showPopUpView(this.afterWar, true, true, false);
     }
 
     public showBeforeWarView(): void {
-        this.showPopUpView(this.beforeWar);
+        if (GameManager.instance.platform == moosnow.APP_PLATFORM.BYTEDANCE) {
+            this.showPopUpView(this.freeView, true, false, false);
+        } else {
+            this.showPopUpView(this.beforeWar);
+        }
     }
 
     public showSuspendView(): void {
@@ -372,6 +392,7 @@ export class ViewManager {
         this.chapterView.updateView();
         this.showPopUpView(this.chapterView, false, true);
         SoundManager.instance.playBGM("chapterBgm");
+        // SoundManager.instance.playBGM("bgm");
     }
 
     public playerVicToryLevel(): void {
@@ -379,6 +400,8 @@ export class ViewManager {
     }
 
     public initPopUpView(): void {
+        MooSnowSDK.getAD();
+
         this.afterWar = new AfterWar();
         this.beforeWar = new BeforeWar()
         this.suspendView = new SuspendView();
@@ -388,6 +411,10 @@ export class ViewManager {
         this.popUpView = new PopUpView();
         this.tipsView = new TipsPopView();
         this.clickAdView = new ClickADView();
+        this.freeView = new FreeView();
+        this.noVideoView = new NoVideoTipsView();
+        this.showVideoView = new ShowVideoView();
+        this.recordView = new RecordView();
 
         this.afterWar.createView();
         this.beforeWar.createView();
@@ -396,15 +423,24 @@ export class ViewManager {
         this.clickChestView.createView();
         this.adListView.createView();
         this.clickAdView.createView();
+        this.freeView.createView();
+        this.noVideoView.createView();
+        this.showVideoView.createView();
+        this.recordView.createView();
 
-        Laya.stage.addChild(fairygui.GRoot.inst.displayObject);
-        MooSnowSDK.getAD();
+        Laya.stage.addChildAt(fairygui.GRoot.inst.displayObject, 0);
 
     }
 
     /**显示弹窗 */
     public showTipsView(str: string): void {
         this.tipsView.showView(str);
+    }
+
+    /**显示未观看完视频弹窗 */
+    public showNoVideoView(v: VideoData, d: any, f?: Function): void {
+        this.noVideoView.showView(true, false);
+        this.noVideoView.updateView(v, d, f);
     }
 
     public curPopView: PopUpView[] = [];

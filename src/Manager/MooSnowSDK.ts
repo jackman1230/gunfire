@@ -3,6 +3,7 @@ import { ViewManager } from "./ViewManager";
 import { SoundManager } from "./SoundManager";
 import { EventManager } from "./EventManager";
 import GameEvent from "../Control/GameEvent";
+import { VideoData, VideoType, VideoInfo } from "../Data/VideoData";
 
 export class MooSnowSDK {
 
@@ -97,42 +98,49 @@ export class MooSnowSDK {
 
     /**
      * 显示平台video广告
-     * type:1看视频得奖励，2看视频原地复活
+     * data:获得道具数据
+     * videoData.type:1看视频得奖励，2看视频原地复活,3双倍金币，4获得宝箱
      */
-    public static showVideo(type: number, data: any): void {
-        var d: any = data;
-        SoundManager.instance.offSound();
-        if (type == 1) {
-            MooSnowSDK.videoPoint(0, GameManager.instance.choiseLevel, "看视频获得物资");
-        } else {
-            MooSnowSDK.videoPoint(0, GameManager.instance.choiseLevel, "看视频原地复活");
+    public static showVideo(data: any, videoData: VideoData, successFun?: Function): void {
+        if (SoundManager.instance.isOpenSound) {//如果打开了音效，关闭音效
+            Laya.SoundManager.soundMuted = true;
+            Laya.SoundManager.musicMuted = true;
+        }
+        if (videoData.type == VideoType.VIDEOTYPE_ITEM) {
+            MooSnowSDK.videoPoint(0, GameManager.instance.choiseLevel, VideoInfo.VIDEOINFO_ITEM);
+        } else if (videoData.type == VideoType.VIDEOTYPE_LIFE) {
+            MooSnowSDK.videoPoint(0, GameManager.instance.choiseLevel, VideoInfo.VIDEOINFO_LIFE);
+        } else if (videoData.type == VideoType.VIDEOTYPE_DOUBLE_COIN) {
+            MooSnowSDK.videoPoint(0, GameManager.instance.choiseLevel, VideoInfo.VIDEOINFO_DOUBLE_COIN);
+        } else if (videoData.type == VideoType.VIDEOTYPE_BOX) {
+            MooSnowSDK.videoPoint(0, GameManager.instance.choiseLevel, VideoInfo.VIDEOINFO_BOX);
         }
 
         moosnow.platform.showVideo(res => {
             switch (res) {
                 case moosnow.VIDEO_STATUS.NOTEND:
-                    console.log('视频未观看完成 ')
-                    ViewManager.instance.showTipsView("未看完视频无法获得奖励哦");
+                    console.log('视频未观看完成 ');
+                    if (GameManager.instance.platform == moosnow.APP_PLATFORM.BYTEDANCE) {
+                        ViewManager.instance.showNoVideoView(videoData, data, successFun);
+                    } else
+                        ViewManager.instance.showTipsView("未看完视频无法获得奖励哦");
                     break;
                 case moosnow.VIDEO_STATUS.ERR:
-                    console.log('获取视频错误 ')
+                    console.log('获取视频错误 ');
                     ViewManager.instance.showTipsView("视频获取失败，请稍后再试");
                     break;
                 case moosnow.VIDEO_STATUS.END:
                     console.log('观看视频结束 ')
-                    if (type == 1 && data) {
-                        GameManager.instance.buyShopItem(d, true);
-                        ViewManager.instance.beforeWar.updateView();
-                        MooSnowSDK.videoPoint(1, GameManager.instance.choiseLevel, "看视频获得物资");
-                    } else {
-                        GameManager.instance.continueGameByVideo();
-                        MooSnowSDK.videoPoint(1, GameManager.instance.choiseLevel, "看视频原地复活");
-                    }
-                default:
+                    GameManager.instance.showVideoResp(data, videoData, successFun);
+                    MooSnowSDK.videoPoint(1, GameManager.instance.choiseLevel, videoData.info);
                     break;
             }
-            SoundManager.instance.openSound();
-        })
+            if (SoundManager.instance.isOpenSound) {
+                Laya.SoundManager.soundMuted = false;
+                Laya.SoundManager.musicMuted = false;
+                SoundManager.instance.playBGM(SoundManager.instance.bgmName);
+            }
+        });
     }
 
 

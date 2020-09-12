@@ -7,6 +7,7 @@ import { EventManager } from "../../Manager/EventManager";
 import GameEvent from "../../Control/GameEvent";
 import WXFUI_ADItem from "../../fui/Game/WXFUI_ADItem";
 import { MooSnowSDK } from "../../Manager/MooSnowSDK";
+import { VideoType, VideoInfo, VideoData } from "../../Data/VideoData";
 
 
 export default class BeforeWar extends PopUpView {
@@ -82,7 +83,8 @@ export default class BeforeWar extends PopUpView {
 
     private buyItemByFree(d: any): void {
         SoundManager.instance.playSound("btn_press");
-        MooSnowSDK.showVideo(1, d);
+        var v: VideoData = GameManager.instance.createVideoData(VideoType.VIDEOTYPE_ITEM, VideoInfo.VIDEOINFO_ITEM);
+        MooSnowSDK.showVideo(d, v);
     }
 
     private enterGame(): void {

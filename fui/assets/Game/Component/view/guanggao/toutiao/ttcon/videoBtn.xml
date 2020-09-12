@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="18,15" extention="Button">
+  <controller name="button" pages="0,up,1,down" selected="0"/>
+  <displayList>
+    <image id="n0_k6sa" name="n0" src="k6saxwf" fileName="Component/view/guanggao/toutiao/矩形 15.png" xy="0,0">
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+    <image id="n1_k6sa" name="n1" src="k6saxwa" fileName="Component/view/guanggao/toutiao/形状 2213.png" xy="-4,-1">
+      <gearDisplay controller="button" pages="1"/>
+    </image>
+  </displayList>
+  <Button mode="Check"/>
+</component>

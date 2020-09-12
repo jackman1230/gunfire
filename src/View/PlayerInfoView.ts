@@ -126,7 +126,7 @@ export default class PlayerInfoView {
         }
     }
 
-    private showBoxGoods(): void {
+    public showBoxGoods(): void {
         this.changePlayerGoods(GoodsType.GoodsType_MED);
         Laya.timer.once(500, this, this.changePlayerGoods, [GoodsType.GoodsType_RIF]);
         Laya.timer.once(1000, this, this.showGetGoods, [GoodsType.GoodsType_GRE]);

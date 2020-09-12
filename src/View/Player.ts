@@ -50,7 +50,7 @@ export class Player extends Laya.Script {
     constructor() { super() }
 
     public createView() {
-        console.log("createViewPlayer");
+        // console.log("createViewPlayer");
 
         this.playerSk = new PlayerSk();
         this.roleSprite = new ui.PlayerBodyUI();
@@ -65,7 +65,7 @@ export class Player extends Laya.Script {
     };
 
     public loadComplete(): void {
-        console.log("loadComplete");
+        // console.log("loadComplete");
         this.roleBody = this.roleSprite.getComponent(Laya.RigidBody);
         this.roleBox = this.roleSprite.getComponent(Laya.BoxCollider);
 
@@ -543,7 +543,6 @@ export class Player extends Laya.Script {
         this.removeEvent();
         Laya.timer.clearAll(this);
         this.roleSprite.removeSelf();
-        // this.rolePlayer.m_firePos1.visible = this.rolePlayer.m_firePos2.visible = false;
         GameManager.instance.roleInfo.curlvCoin += GameData.VICTORY_LEVEL_COIN;
         GameManager.instance.roleInfo.totalCoin += GameData.VICTORY_LEVEL_COIN;
         ViewManager.instance.playerInfoView.updateCoin();

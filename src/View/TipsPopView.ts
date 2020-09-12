@@ -16,7 +16,8 @@ export default class TipsPopView {
         this.v.x = (Laya.stage.width - this.v.width) / 2;
         this.v.y = (Laya.stage.height - this.v.height) / 2;
         this.v.m_tips.text = str;
-        Laya.stage.addChildAt(this.v.displayObject, 1);
+        Laya.stage.addChild(this.v.displayObject);
+        this.v.displayObject.zOrder = 10;
         this.v.m_play.play(Laya.Handler.create(this, this.hideView), 1, 0, 0);
     }
 

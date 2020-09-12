@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1334,750" opaque="false">
+  <controller name="ctl" pages="0,,1," selected="1"/>
+  <displayList>
+    <image id="n25_k6sa" name="n25" src="k6saxvw" fileName="Component/view/guanggao/toutiao/dikuang.png" xy="510,244"/>
+    <image id="n27_k6sa" name="n27" src="k6saxwh" fileName="Component/view/guanggao/toutiao/组 110.png" xy="618,307"/>
+    <image id="n28_k6sa" name="n28" src="ke5wea" fileName="assets/goods/515.png" xy="643,324"/>
+    <component id="n29_k6sa" name="gou" src="k6saxwn" fileName="Component/view/guanggao/toutiao/ttcon/videoBtn.xml" xy="572,408"/>
+    <image id="n30_k6sa" name="n30" src="k6saxwj" fileName="Component/view/guanggao/toutiao/观看广告领取奖励.png" xy="601,405"/>
+    <component id="n31_k6sa" name="lingqu" src="k6saxwo" fileName="Component/view/guanggao/toutiao/ttcon/lingquBtn.xml" xy="598,438">
+      <gearDisplay controller="ctl" pages="0"/>
+    </component>
+    <component id="n32_k6sa" name="fangqi" src="k6saxwp" fileName="Component/view/guanggao/toutiao/ttcon/fangqiBtn.xml" xy="598,438">
+      <gearDisplay controller="ctl" pages="1"/>
+    </component>
+    <component id="n33_k6sa" name="cha" src="k6saxwz" fileName="Component/view/guanggao/toutiao/ttcon/chaBtn.xml" xy="697,444">
+      <gearDisplay controller="ctl" pages="1"/>
+    </component>
+  </displayList>
+</component>

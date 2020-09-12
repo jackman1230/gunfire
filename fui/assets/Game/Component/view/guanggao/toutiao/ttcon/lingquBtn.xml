@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="138,51" pivot="0.5,0.5" extention="Button">
+  <controller name="button" pages="0,up,1,down" selected="0"/>
+  <displayList>
+    <image id="n0_k6sa" name="n0" src="k6saxwe" fileName="Component/view/guanggao/toutiao/矩形 10.png" xy="0,0">
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+    <image id="n1_k6sa" name="n1" src="k6saxw3" fileName="Component/view/guanggao/toutiao/图层 182.png" xy="25,12"/>
+  </displayList>
+  <Button downEffect="scale" downEffectValue=".9"/>
+</component>

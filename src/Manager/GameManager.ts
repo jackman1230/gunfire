@@ -7,6 +7,7 @@ import { SoundManager } from "./SoundManager";
 import { SaveManager } from "./SaveManager";
 import Enemy from "../View/Enemy";
 import { MooSnowSDK } from "./MooSnowSDK";
+import { VideoData, VideoType } from "../Data/VideoData";
 
 export class GameManager {
     private static _instance: GameManager;
@@ -192,6 +193,31 @@ export class GameManager {
             ViewManager.instance.showTipsView("您已通关！敬请期待后续章节");
         }
     }
+    /**
+     * 观看视频完成返回
+     * @param d 免费获得道具数据
+     * @param v 视频描述
+     */
+    public showVideoResp(d: any, v: VideoData, successFun?: Function): void {
+        if (successFun) {
+            successFun();
+        }
+        if (v.type == VideoType.VIDEOTYPE_ITEM && d) {
+            GameManager.instance.buyShopItem(d, true);
+            ViewManager.instance.beforeWar.updateView();
+        } else if (v.type == VideoType.VIDEOTYPE_LIFE) {
+            GameManager.instance.continueGameByVideo();
+        } else if (v.type == VideoType.VIDEOTYPE_DOUBLE_COIN) {
+            GameManager.instance.roleInfo.totalCoin += GameManager.instance.roleInfo.curlvCoin;
+            ViewManager.instance.playerInfoView.updateCoin();
+            GameManager.instance.goFirstPage();
+            MooSnowSDK.endGame(GameManager.instance.choiseLevel, true);
+            ViewManager.instance.showTipsView("额外获得金币：" + GameManager.instance.roleInfo.curlvCoin);
+        } else if (v.type == VideoType.VIDEOTYPE_BOX) {
+            ViewManager.instance.playerInfoView.showBoxGoods();
+        }
+
+    }
 
     private initRoleData(): void {
         if (!this.playerInfo) this.playerInfo = new PlayerInfo();
@@ -345,6 +371,13 @@ export class GameManager {
         } else {
             return 1;
         }
+    }
+
+    public createVideoData(t: number, info: string): VideoData {
+        var v: VideoData = new VideoData();
+        v.type = t;
+        v.info = info;
+        return v;
     }
 }
 

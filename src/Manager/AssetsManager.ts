@@ -23,8 +23,13 @@ export class AssetsManager {
             { url: "loading/loading.proto", type: Laya.Loader.BUFFER }
         );
 
+        if (Laya.Browser.onPC) {
+            Laya.loader.create(AssetsManager.loadingAssetsData, Laya.Handler.create(this, this.loadingAssetsComplete));
+            return;
+        }
+
         // this.setVersionUrl(AssetsManager.loadingAssetsData);
-        if (Laya.Browser.onWeiXin) {
+        if (moosnow.getAppPlatform() == moosnow.APP_PLATFORM.WX) {
             console.log("onWeiXin");
             Laya.loader.create(AssetsManager.loadingAssetsData, Laya.Handler.create(this, this.onWXLoaded));
         } else if (moosnow.getAppPlatform() == moosnow.APP_PLATFORM.QQ) {
@@ -88,6 +93,7 @@ export class AssetsManager {
         console.log("loading界面资源加载完成--显示loading界面，并开始加载游戏资源");
         MooSnowSDK.getMistouchPosNum();
         MooSnowSDK.getMisTouchNum();
+        MooSnowSDK.getAllConfig();
         // Laya.timer.once(6000,this,()=>{
         // })
         ViewManager.instance.createLoaningView();
@@ -106,6 +112,7 @@ export class AssetsManager {
             { url: "res/Game_atlas0_7.png", type: Laya.Loader.IMAGE },
             { url: "res/Game_atlas0_8.png", type: Laya.Loader.IMAGE },
             { url: "res/Game_atlas0_9.png", type: Laya.Loader.IMAGE },
+            { url: "res/Game_atlas0_10.png", type: Laya.Loader.IMAGE },
             { url: "res/Game_atlas_n8qun1.jpg", type: Laya.Loader.IMAGE },
             { url: "res/Game_atlas_n8qun7.png", type: Laya.Loader.IMAGE },
             { url: "res/LevelData.json", type: Laya.Loader.JSON },

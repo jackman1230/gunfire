@@ -7,6 +7,7 @@ import { GoodsType } from "../../Data/GameData";
 import { GameManager } from "../../Manager/GameManager";
 import { ViewManager } from "../../Manager/ViewManager";
 import { MooSnowSDK } from "../../Manager/MooSnowSDK";
+import { VideoData, VideoType, VideoInfo } from "../../Data/VideoData";
 
 
 
@@ -47,17 +48,26 @@ export default class ClickChestView extends PopUpView {
         this.view.m_bar.value += v;
         this.addTimeOut();
         if (this.view.m_bar.value >= 100) {
-            clearInterval(this.timeOut);
+            // clearInterval(this.timeOut);
             this.view.m_bar.value = 100;
-            this.clickSuccess();
+            // this.clickSuccess();
         }
         this.view.m_bar.m_title.text = this.view.m_bar.value + "%";
         this.clickNum++;
         if (this.clickNum == this.randomNum) {
-            MooSnowSDK.showBanner(true);
-            this.clickTimeOut = setTimeout(() => {
-                this.clickSuccess();
-            }, 3000);
+            if (GameManager.instance.platform == moosnow.APP_PLATFORM.BYTEDANCE) {
+                clearInterval(this.timeOut);
+                clearTimeout(this.clickTimeOut);
+                this.view.m_clickBtn.offClick(this, this.clickBtn);
+                ViewManager.instance.hidePopUpView(ViewManager.instance.clickChestView);
+                ViewManager.instance.showVideoView.showViewNoTween();
+                ViewManager.instance.showVideoView.updateView();
+            } else {
+                MooSnowSDK.showBanner(true);
+                this.clickTimeOut = setTimeout(() => {
+                    this.clickSuccess();
+                }, 3000);
+            }
         }
     }
 
@@ -76,6 +86,8 @@ export default class ClickChestView extends PopUpView {
         GameManager.instance.suspendGame();
         ViewManager.instance.hidePopUpView(ViewManager.instance.clickChestView);
         EventManager.instance.dispatcherEvt(GameEvent.CHANGE_PLAYER_GOODS, GoodsType.GoodsType_OPEN_BOX);
+        // if (GameManager.instance.platform == moosnow.APP_PLATFORM.BYTEDANCE)
+        //     ViewManager.instance.hidePopUpView(ViewManager.instance.showVideoView);
 
     }
 

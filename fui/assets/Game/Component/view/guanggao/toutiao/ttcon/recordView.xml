@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1334,750">
+  <displayList>
+    <image id="n33_k6sa" name="n33" src="k6saxw9" fileName="Component/view/guanggao/toutiao/巅峰回顾 .png" xy="391,0"/>
+    <component id="n34_k6sa" name="guanbi" src="k6saxwq" fileName="Component/view/guanggao/toutiao/ttcon/guanbiBtn.xml" xy="942,163"/>
+    <image id="n35_k6sa" name="n35" src="k6saxw6" fileName="Component/view/guanggao/toutiao/图层 42.png" xy="502,295"/>
+  </displayList>
+</component>

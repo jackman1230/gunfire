@@ -4,7 +4,7 @@ export class SoundManager {
     private static _instance: SoundManager;
     public isOpenSound: boolean = true;
     public bgm: Laya.SoundChannel;
-    private bgmName: string = "";
+    public bgmName: string = "";
 
     public static get instance(): SoundManager {
         if (this._instance == null) {
@@ -52,13 +52,10 @@ export class SoundManager {
         // }
     }
     public playBGM(name: string): void {
-        this.bgmName = "res/sound/" + name + ".mp3";
-        // if (this.bgm) {
-        //     this.bgm.url = this.bgmName;
-        //     this.bgm.play();
-        // } else
-        //     this.bgm = 
-        Laya.SoundManager.playMusic(this.bgmName);
+        var s: string = "res/sound/" + name + ".mp3";
+        this.bgmName = name;
+        // var sound: Laya.SoundChannel = 
+        Laya.SoundManager.playMusic(s);
     }
 
     public stopBGM(): void {

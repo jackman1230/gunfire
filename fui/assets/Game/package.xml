@@ -888,6 +888,49 @@
     <image id="eko6xvq" name="timg2.jpg" path="/Component/view/guanggao/"/>
     <component id="buh7xvr" name="RewardView.xml" path="/Component/view/guanggao/QQAD/qqcon/" exported="true"/>
     <component id="buh7xvs" name="quedingBtn.xml" path="/Component/view/guanggao/QQAD/qqcon/"/>
+    <image id="k6saxvt" name="10.png" path="/Component/view/guanggao/toutiao/"/>
+    <image id="k6saxvu" name="1599722356(1).jpg" path="/Component/view/guanggao/toutiao/"/>
+    <image id="k6saxvv" name="dianfenghiugu.jpg" path="/Component/view/guanggao/toutiao/"/>
+    <image id="k6saxvw" name="dikuang.png" path="/Component/view/guanggao/toutiao/"/>
+    <image id="k6saxvx" name="guanbi.png" path="/Component/view/guanggao/toutiao/"/>
+    <image id="k6saxvy" name="guoua.png" path="/Component/view/guanggao/toutiao/"/>
+    <image id="k6saxvz" name="qu.png" path="/Component/view/guanggao/toutiao/"/>
+    <image id="k6saxw0" name="shibei.jpg" path="/Component/view/guanggao/toutiao/"/>
+    <image id="k6saxw1" name="X.png" path="/Component/view/guanggao/toutiao/"/>
+    <image id="k6saxw2" name="下一关.png" path="/Component/view/guanggao/toutiao/"/>
+    <image id="k6saxw3" name="图层 182.png" path="/Component/view/guanggao/toutiao/"/>
+    <image id="k6saxw4" name="图层 183.png" path="/Component/view/guanggao/toutiao/"/>
+    <image id="k6saxw5" name="图层 3.png" path="/Component/view/guanggao/toutiao/"/>
+    <image id="k6saxw6" name="图层 42.png" path="/Component/view/guanggao/toutiao/"/>
+    <image id="k6saxw7" name="圆角矩形 4 拷贝.png" path="/Component/view/guanggao/toutiao/"/>
+    <image id="k6saxw8" name="宝箱.jpg" path="/Component/view/guanggao/toutiao/"/>
+    <image id="k6saxw9" name="巅峰回顾 .png" path="/Component/view/guanggao/toutiao/"/>
+    <image id="k6saxwa" name="形状 2213.png" path="/Component/view/guanggao/toutiao/"/>
+    <image id="k6saxwb" name="形状 34 拷贝.png" path="/Component/view/guanggao/toutiao/"/>
+    <image id="k6saxwc" name="是否继续观看.png" path="/Component/view/guanggao/toutiao/"/>
+    <image id="k6saxwd" name="看广告十倍领取.png" path="/Component/view/guanggao/toutiao/"/>
+    <image id="k6saxwe" name="矩形 10.png" path="/Component/view/guanggao/toutiao/"/>
+    <image id="k6saxwf" name="矩形 15.png" path="/Component/view/guanggao/toutiao/"/>
+    <image id="k6saxwg" name="确定.png" path="/Component/view/guanggao/toutiao/"/>
+    <image id="k6saxwh" name="组 110.png" path="/Component/view/guanggao/toutiao/"/>
+    <image id="k6saxwi" name="获得宝箱 .png" path="/Component/view/guanggao/toutiao/"/>
+    <image id="k6saxwj" name="观看广告领取奖励.png" path="/Component/view/guanggao/toutiao/"/>
+    <image id="k6saxwk" name="观看视频试用皮肤.png" path="/Component/view/guanggao/toutiao/"/>
+    <component id="k6saxwm" name="freeView.xml" path="/Component/view/guanggao/toutiao/ttcon/" exported="true"/>
+    <component id="k6saxwn" name="videoBtn.xml" path="/Component/view/guanggao/toutiao/ttcon/"/>
+    <component id="k6saxwo" name="lingquBtn.xml" path="/Component/view/guanggao/toutiao/ttcon/"/>
+    <component id="k6saxwp" name="fangqiBtn.xml" path="/Component/view/guanggao/toutiao/ttcon/"/>
+    <component id="k6saxwq" name="guanbiBtn.xml" path="/Component/view/guanggao/toutiao/ttcon/"/>
+    <component id="k6saxwr" name="noVideoTips.xml" path="/Component/view/guanggao/toutiao/ttcon/" exported="true"/>
+    <component id="k6saxws" name="guanbi2Btn.xml" path="/Component/view/guanggao/toutiao/ttcon/"/>
+    <component id="k6saxwu" name="queding2Btn.xml" path="/Component/view/guanggao/toutiao/ttcon/"/>
+    <component id="k6saxwv" name="showVideoView.xml" path="/Component/view/guanggao/toutiao/ttcon/" exported="true"/>
+    <component id="k6saxww" name="queding3Btn.xml" path="/Component/view/guanggao/toutiao/ttcon/"/>
+    <component id="k6saxwx" name="recordView.xml" path="/Component/view/guanggao/toutiao/ttcon/" exported="true"/>
+    <component id="k6saxwy" name="nextBtn.xml" path="/Component/view/guanggao/toutiao/ttcon/"/>
+    <component id="k6saxwz" name="chaBtn.xml" path="/Component/view/guanggao/toutiao/ttcon/"/>
+    <image id="pei5xx0" name="double.png" path="/Component/view/guanggao/toutiao/"/>
+    <image id="pei5xx1" name="double2.png" path="/Component/view/guanggao/toutiao/"/>
   </resources>
   <publish name="Game" path="..\bin\res" packageCount="2" genCode="true" codePath="..\src\fui"/>
 </packageDescription>

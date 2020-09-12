@@ -52,7 +52,7 @@ export default class ChapterView extends PopUpView {
         } else if (GameManager.instance.platform == moosnow.APP_PLATFORM.BYTEDANCE) {
             this.view.m_ctl.selectedIndex = 1;
             this.view.m_ad_remen2.visible = false;
-            MooSnowSDK.showBanner(false);
+            MooSnowSDK.hideBanner();
         }
     }
 

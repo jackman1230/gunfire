@@ -24,7 +24,8 @@ export default class SuspendView extends PopUpView {
 
     public showViewNoTween(): void {
         super.showViewNoTween();
-        MooSnowSDK.showBanner(false);
+        if (GameManager.instance.platform != moosnow.APP_PLATFORM.BYTEDANCE)
+            MooSnowSDK.showBanner(false);
     }
 
     private goFirstPage(): void {

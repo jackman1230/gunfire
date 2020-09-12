@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1334,750" opaque="false">
+  <displayList>
+    <image id="n33_k6sa" name="n33" src="k6saxwc" fileName="Component/view/guanggao/toutiao/是否继续观看.png" xy="475,222"/>
+    <component id="n34_k6sa" name="queding" src="k6saxwu" fileName="Component/view/guanggao/toutiao/ttcon/queding2Btn.xml" xy="604,435"/>
+    <component id="n35_k6sa" name="guanbi" src="k6saxws" fileName="Component/view/guanggao/toutiao/ttcon/guanbi2Btn.xml" xy="816,253"/>
+  </displayList>
+</component>
