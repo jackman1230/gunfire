@@ -15,6 +15,6 @@ loadLib("libs/laya.ui.js")
 loadLib("libs/laya.physics.js")
 loadLib("libs/fairygui.js")
 loadLib("libs/moosnow.conf.js")
-loadLib("libs/moosnow.platform.sdk.js")
+loadLib("libs/moosnow.platform.sdk.min.js")
 //-----libs-end-------
 loadLib("js/bundle.js");

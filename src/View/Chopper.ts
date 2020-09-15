@@ -8,6 +8,7 @@ import { BombData } from "../Data/GameData";
 import { GameManager } from "../Manager/GameManager";
 import { SoundManager } from "../Manager/SoundManager";
 import { ui } from "../ui/layaMaxUI";
+import { MooSnowSDK } from "../Manager/MooSnowSDK";
 
 export default class Chopper extends Enemy {
 
@@ -77,6 +78,7 @@ export default class Chopper extends Enemy {
         if (this.isBoss) {
             // GameManager.instance.bossDeath = true;
             // EventManager.instance.dispatcherEvt(GameEvent.VICITORY_LEVEL);
+            MooSnowSDK.clipRecord();
             GameManager.instance.victoryGame();
         }
         SoundManager.instance.playSound("boom");

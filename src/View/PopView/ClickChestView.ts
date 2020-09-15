@@ -91,6 +91,18 @@ export default class ClickChestView extends PopUpView {
 
     }
 
+    public showVideoError(): void {
+        MooSnowSDK.hideBanner();
+        clearInterval(this.timeOut);
+        clearTimeout(this.clickTimeOut);
+        this.view.m_clickBtn.offClick(this, this.clickBtn);
+        GameManager.instance.suspendGame();
+        ViewManager.instance.hidePopUpView(ViewManager.instance.clickChestView);
+        // if (GameManager.instance.platform == moosnow.APP_PLATFORM.BYTEDANCE)
+        //     ViewManager.instance.hidePopUpView(ViewManager.instance.showVideoView);
+
+    }
+
     private getRandomValue(): number {
         return Math.ceil(Math.random() * 4) + 5;
     }

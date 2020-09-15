@@ -187,7 +187,8 @@ export class GameManager {
             this.roleInfo.isDeath = false;
             ViewManager.instance.createWarView();
             SoundManager.instance.playBGM("bgm");
-            MooSnowSDK.startGame(GameManager.instance.choiseLevel)
+            MooSnowSDK.startGame(GameManager.instance.choiseLevel);
+            MooSnowSDK.startRecord();
             // this.buyBullet = this.buyWeaponType = 0; this.buyGre = 10;
         } else {
             ViewManager.instance.showTipsView("您已通关！敬请期待后续章节");

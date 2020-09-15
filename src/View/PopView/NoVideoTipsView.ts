@@ -16,31 +16,32 @@ export default class NoVideoTipsView extends PopUpView {
     private itemData: any;
     private successFun: Function;
 
+    private timeOut: number = 0;
+
     constructor() { super() }
 
     createView(): void {
         this.view = WXFUI_noVideoTips.createInstance();
-
-
-    }
-    public showView(s, c): void {
-        super.showView(s, c);
-        this.view.m_guanbi.visible = false;
-        this.view.m_guanbi.onClick(this, this.closeHandle)
-        this.view.m_queding.onClick(this, this.continueHandle);
-        Laya.timer.clear(this, this.showCloseBtn);
-        Laya.timer.once(3000, this, this.showCloseBtn);
     }
 
     private showCloseBtn(): void {
         this.view.m_guanbi.visible = true;
     }
 
-
     public updateView(v: VideoData, item: any, successFun?: Function): void {
         this.videoData = v;
         this.itemData = item;
         this.successFun = successFun;
+
+        this.view.m_guanbi.visible = false;
+        this.view.m_guanbi.onClick(this, this.closeHandle)
+        this.view.m_queding.onClick(this, this.continueHandle);
+        // Laya.timer.clear(this, this.showCloseBtn);
+        // Laya.timer.once(3000, this, this.showCloseBtn);
+        clearTimeout(this.timeOut);
+        this.timeOut = setTimeout(() => {
+            this.showCloseBtn();
+        }, 3000);
     }
 
     private continueHandle(): void {

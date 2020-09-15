@@ -101,7 +101,7 @@ export class MooSnowSDK {
      * data:获得道具数据
      * videoData.type:1看视频得奖励，2看视频原地复活,3双倍金币，4获得宝箱
      */
-    public static showVideo(data: any, videoData: VideoData, successFun?: Function): void {
+    public static showVideo(data: any, videoData: VideoData, successFun?: Function, errorFun?: Function, noFinishFun?: Function): void {
         if (SoundManager.instance.isOpenSound) {//如果打开了音效，关闭音效
             Laya.SoundManager.soundMuted = true;
             Laya.SoundManager.musicMuted = true;
@@ -120,6 +120,9 @@ export class MooSnowSDK {
             switch (res) {
                 case moosnow.VIDEO_STATUS.NOTEND:
                     console.log('视频未观看完成 ');
+                    if (noFinishFun) {
+                        noFinishFun();
+                    }
                     if (GameManager.instance.platform == moosnow.APP_PLATFORM.BYTEDANCE) {
                         ViewManager.instance.showNoVideoView(videoData, data, successFun);
                     } else
@@ -127,10 +130,14 @@ export class MooSnowSDK {
                     break;
                 case moosnow.VIDEO_STATUS.ERR:
                     console.log('获取视频错误 ');
+                    if (errorFun) {
+                        errorFun();
+                    }
                     ViewManager.instance.showTipsView("视频获取失败，请稍后再试");
                     break;
                 case moosnow.VIDEO_STATUS.END:
                     console.log('观看视频结束 ')
+                    ViewManager.instance.hidePopUpView(null, true);
                     GameManager.instance.showVideoResp(data, videoData, successFun);
                     MooSnowSDK.videoPoint(1, GameManager.instance.choiseLevel, videoData.info);
                     break;
@@ -246,6 +253,17 @@ export class MooSnowSDK {
     }
 
     /**
+    * 视频精彩剪切
+    */
+    public static clipRecord(call?: Function): void {
+        console.log('视频精彩剪切');
+        moosnow.platform.clipRecord([15, 2], (res) => {
+            console.log('剪切视频完成');
+            MooSnowSDK.stopRecord();
+        });
+    }
+
+    /**
     * 停止录制
     */
     public static stopRecord(): void {
@@ -253,10 +271,7 @@ export class MooSnowSDK {
             if (res.videoPath) {
                 //录制的视频路径
                 let videoPath = res.videoPath;
-
-                // setTimeout(() => {
-                //     this.shareRecord();
-                // }, 200);
+                console.log('录制的视频路径', videoPath);
             }
         });
     }
@@ -265,14 +280,6 @@ export class MooSnowSDK {
     * 分享视频
     */
     public static shareRecord(): void {
-        moosnow.platform.share({
-            channel: moosnow.SHARE_CHANNEL.VIDEO
-        }, (res) => {
-            console.log('分享结束', res)
-        }, (res) => {
-            //仅iphone 会有  安卓时间太短会唤起录像功能
-            console.log('录屏时间太短', res)
-        });
         // /**
         //      * 分享
         //      * @param query 分享参数 { channel:moosnow.SHARE_CHANNEL.LINK }  
@@ -280,6 +287,17 @@ export class MooSnowSDK {
         //      * @param callback 分享成功回调参数 = true, 分享失败回调参数 = false,
         //      * @param shortCall 时间过短时回调 ,err 是具体错误信息，目前只在头条分享录屏时用到
         //      */
+        moosnow.platform.share({
+            channel: moosnow.SHARE_CHANNEL.VIDEO
+        }, (res) => {
+            console.log('分享结束', res);
+        }, (res) => {
+            //仅iphone 会有  安卓时间太短会唤起录像功能
+            console.log('录屏时间太短', res)
+        }
+        );
+        ViewManager.instance.hidePopUpView(ViewManager.instance.recordView, false);
+        ViewManager.instance.showResultView();
     }
 
 

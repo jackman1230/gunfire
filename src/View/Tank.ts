@@ -6,6 +6,7 @@ import { SoundManager } from "../Manager/SoundManager";
 import { GameData } from "../Data/GameData";
 import EnemyBody from "./Body/EnemyBody";
 import { ui } from "../ui/layaMaxUI";
+import { MooSnowSDK } from "../Manager/MooSnowSDK";
 
 export default class Tank extends Enemy {
     constructor() { super() }
@@ -106,6 +107,7 @@ export default class Tank extends Enemy {
         this.bodyLoader.displayObject.addChild(ani.displayObject);
         if (this.isBoss) {
             // EventManager.instance.dispatcherEvt(GameEvent.VICITORY_LEVEL);
+            MooSnowSDK.clipRecord();
             GameManager.instance.victoryGame();
         }
         SoundManager.instance.playSound("boom");

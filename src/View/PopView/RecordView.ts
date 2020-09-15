@@ -1,9 +1,6 @@
 import PopUpView from "../PopUpView";
-import { GameManager } from "../../Manager/GameManager";
 import { ViewManager } from "../../Manager/ViewManager";
 import { MooSnowSDK } from "../../Manager/MooSnowSDK";
-import WXFUI_freeView from "../../fui/Game/WXFUI_freeView";
-import WXFUI_noVideoTips from "../../fui/Game/WXFUI_noVideoTips";
 import { VideoData, VideoType, VideoInfo } from "../../Data/VideoData";
 import WXFUI_recordView from "../../fui/Game/WXFUI_recordView";
 import WXFUI_guanbiBtn from "../../fui/Game/WXFUI_guanbiBtn";
@@ -12,10 +9,6 @@ import WXFUI_guanbiBtn from "../../fui/Game/WXFUI_guanbiBtn";
 export default class RecordView extends PopUpView {
 
     public view: WXFUI_recordView;
-
-    private videoData: VideoData;
-    private itemData: any;
-    private successFun: Function;
 
     constructor() { super() }
 
@@ -37,13 +30,13 @@ export default class RecordView extends PopUpView {
     private recordHandle(e: any): void {
         var s: Laya.Sprite = e.target["$owner"];
         if (!s) {
-            MooSnowSDK.startRecord();
+            MooSnowSDK.shareRecord();
             return;
         }
         if (s instanceof WXFUI_guanbiBtn) {
             this.closeHandle();
         } else
-            MooSnowSDK.startRecord();
+            MooSnowSDK.shareRecord();
     }
 
     private closeHandle(): void {

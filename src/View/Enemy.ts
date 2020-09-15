@@ -9,6 +9,7 @@ import { EnemyInfo } from "../Data/PlayerData";
 import { GameManager } from "../Manager/GameManager";
 import { SoundManager } from "../Manager/SoundManager";
 import { ui } from "../ui/layaMaxUI";
+import { MooSnowSDK } from "../Manager/MooSnowSDK";
 
 export default class Enemy {
     //常规兵种
@@ -277,7 +278,9 @@ export default class Enemy {
         Laya.timer.once(500, this, this.dispose);
         this.createGoods();
         if (this.isBoss) {
+            MooSnowSDK.clipRecord();
             GameManager.instance.victoryGame();
+            // MooSnowSDK.stopRecord();
         }
     }
 

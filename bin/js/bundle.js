@@ -2,7 +2,8 @@
     'use strict';
 
     class GameConfig {
-        constructor() { }
+        constructor() {
+        }
         static init() {
             var reg = Laya.ClassUtils.regClass;
         }
@@ -26,7 +27,9 @@
     var ui;
     (function (ui) {
         class BoardBodyUI extends Laya.View {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(BoardBodyUI.uiView);
@@ -36,7 +39,9 @@
         ui.BoardBodyUI = BoardBodyUI;
         REG("ui.BoardBodyUI", BoardBodyUI);
         class BombBodyUI extends Laya.View {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(BombBodyUI.uiView);
@@ -46,7 +51,9 @@
         ui.BombBodyUI = BombBodyUI;
         REG("ui.BombBodyUI", BombBodyUI);
         class BoomBodyUI extends Laya.View {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(BoomBodyUI.uiView);
@@ -56,7 +63,9 @@
         ui.BoomBodyUI = BoomBodyUI;
         REG("ui.BoomBodyUI", BoomBodyUI);
         class BulletUI extends Laya.View {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(BulletUI.uiView);
@@ -66,7 +75,9 @@
         ui.BulletUI = BulletUI;
         REG("ui.BulletUI", BulletUI);
         class BulletPanUI extends Laya.View {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(BulletPanUI.uiView);
@@ -76,7 +87,9 @@
         ui.BulletPanUI = BulletPanUI;
         REG("ui.BulletPanUI", BulletPanUI);
         class BulletRifleUI extends Laya.View {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(BulletRifleUI.uiView);
@@ -86,7 +99,9 @@
         ui.BulletRifleUI = BulletRifleUI;
         REG("ui.BulletRifleUI", BulletRifleUI);
         class BulletRifleUpUI extends Laya.View {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(BulletRifleUpUI.uiView);
@@ -96,7 +111,9 @@
         ui.BulletRifleUpUI = BulletRifleUpUI;
         REG("ui.BulletRifleUpUI", BulletRifleUpUI);
         class BulletSanUI extends Laya.View {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(BulletSanUI.uiView);
@@ -106,7 +123,9 @@
         ui.BulletSanUI = BulletSanUI;
         REG("ui.BulletSanUI", BulletSanUI);
         class BulletUpUI extends Laya.View {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(BulletUpUI.uiView);
@@ -116,7 +135,9 @@
         ui.BulletUpUI = BulletUpUI;
         REG("ui.BulletUpUI", BulletUpUI);
         class ChopperBodyUI extends Laya.View {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(ChopperBodyUI.uiView);
@@ -126,7 +147,9 @@
         ui.ChopperBodyUI = ChopperBodyUI;
         REG("ui.ChopperBodyUI", ChopperBodyUI);
         class ChopperBombUI extends Laya.View {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(ChopperBombUI.uiView);
@@ -136,7 +159,9 @@
         ui.ChopperBombUI = ChopperBombUI;
         REG("ui.ChopperBombUI", ChopperBombUI);
         class EnemyBodyUI extends Laya.View {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(EnemyBodyUI.uiView);
@@ -146,7 +171,9 @@
         ui.EnemyBodyUI = EnemyBodyUI;
         REG("ui.EnemyBodyUI", EnemyBodyUI);
         class GoodsBodyUI extends Laya.View {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(GoodsBodyUI.uiView);
@@ -156,7 +183,9 @@
         ui.GoodsBodyUI = GoodsBodyUI;
         REG("ui.GoodsBodyUI", GoodsBodyUI);
         class HostageBodyUI extends Laya.View {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(HostageBodyUI.uiView);
@@ -166,7 +195,9 @@
         ui.HostageBodyUI = HostageBodyUI;
         REG("ui.HostageBodyUI", HostageBodyUI);
         class map_1UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(map_1UI.uiView);
@@ -176,7 +207,9 @@
         ui.map_1UI = map_1UI;
         REG("ui.map_1UI", map_1UI);
         class map_2UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(map_2UI.uiView);
@@ -186,7 +219,9 @@
         ui.map_2UI = map_2UI;
         REG("ui.map_2UI", map_2UI);
         class map_3UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(map_3UI.uiView);
@@ -196,7 +231,9 @@
         ui.map_3UI = map_3UI;
         REG("ui.map_3UI", map_3UI);
         class map_4UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(map_4UI.uiView);
@@ -206,7 +243,9 @@
         ui.map_4UI = map_4UI;
         REG("ui.map_4UI", map_4UI);
         class map_5UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(map_5UI.uiView);
@@ -216,7 +255,9 @@
         ui.map_5UI = map_5UI;
         REG("ui.map_5UI", map_5UI);
         class map_6UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(map_6UI.uiView);
@@ -226,7 +267,9 @@
         ui.map_6UI = map_6UI;
         REG("ui.map_6UI", map_6UI);
         class map_7UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(map_7UI.uiView);
@@ -236,7 +279,9 @@
         ui.map_7UI = map_7UI;
         REG("ui.map_7UI", map_7UI);
         class map_8UI extends Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(map_8UI.uiView);
@@ -246,7 +291,9 @@
         ui.map_8UI = map_8UI;
         REG("ui.map_8UI", map_8UI);
         class ObstacleBoomBodyUI extends Laya.View {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(ObstacleBoomBodyUI.uiView);
@@ -256,7 +303,9 @@
         ui.ObstacleBoomBodyUI = ObstacleBoomBodyUI;
         REG("ui.ObstacleBoomBodyUI", ObstacleBoomBodyUI);
         class ObstacleView_1UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(ObstacleView_1UI.uiView);
@@ -266,7 +315,9 @@
         ui.ObstacleView_1UI = ObstacleView_1UI;
         REG("ui.ObstacleView_1UI", ObstacleView_1UI);
         class ObstacleView_10UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(ObstacleView_10UI.uiView);
@@ -276,7 +327,9 @@
         ui.ObstacleView_10UI = ObstacleView_10UI;
         REG("ui.ObstacleView_10UI", ObstacleView_10UI);
         class ObstacleView_11UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(ObstacleView_11UI.uiView);
@@ -286,7 +339,9 @@
         ui.ObstacleView_11UI = ObstacleView_11UI;
         REG("ui.ObstacleView_11UI", ObstacleView_11UI);
         class ObstacleView_2UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(ObstacleView_2UI.uiView);
@@ -296,7 +351,9 @@
         ui.ObstacleView_2UI = ObstacleView_2UI;
         REG("ui.ObstacleView_2UI", ObstacleView_2UI);
         class ObstacleView_3UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(ObstacleView_3UI.uiView);
@@ -306,7 +363,9 @@
         ui.ObstacleView_3UI = ObstacleView_3UI;
         REG("ui.ObstacleView_3UI", ObstacleView_3UI);
         class ObstacleView_4UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(ObstacleView_4UI.uiView);
@@ -316,7 +375,9 @@
         ui.ObstacleView_4UI = ObstacleView_4UI;
         REG("ui.ObstacleView_4UI", ObstacleView_4UI);
         class ObstacleView_5UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(ObstacleView_5UI.uiView);
@@ -326,7 +387,9 @@
         ui.ObstacleView_5UI = ObstacleView_5UI;
         REG("ui.ObstacleView_5UI", ObstacleView_5UI);
         class ObstacleView_6UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(ObstacleView_6UI.uiView);
@@ -336,7 +399,9 @@
         ui.ObstacleView_6UI = ObstacleView_6UI;
         REG("ui.ObstacleView_6UI", ObstacleView_6UI);
         class ObstacleView_7UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(ObstacleView_7UI.uiView);
@@ -346,7 +411,9 @@
         ui.ObstacleView_7UI = ObstacleView_7UI;
         REG("ui.ObstacleView_7UI", ObstacleView_7UI);
         class ObstacleView_8UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(ObstacleView_8UI.uiView);
@@ -356,7 +423,9 @@
         ui.ObstacleView_8UI = ObstacleView_8UI;
         REG("ui.ObstacleView_8UI", ObstacleView_8UI);
         class ObstacleView_9UI extends Laya.Scene {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(ObstacleView_9UI.uiView);
@@ -366,7 +435,9 @@
         ui.ObstacleView_9UI = ObstacleView_9UI;
         REG("ui.ObstacleView_9UI", ObstacleView_9UI);
         class PlayerBodyUI extends Laya.View {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(PlayerBodyUI.uiView);
@@ -376,7 +447,9 @@
         ui.PlayerBodyUI = PlayerBodyUI;
         REG("ui.PlayerBodyUI", PlayerBodyUI);
         class TankBody11UI extends Laya.View {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(TankBody11UI.uiView);
@@ -386,7 +459,9 @@
         ui.TankBody11UI = TankBody11UI;
         REG("ui.TankBody11UI", TankBody11UI);
         class TankBody12UI extends Laya.View {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(TankBody12UI.uiView);
@@ -396,7 +471,9 @@
         ui.TankBody12UI = TankBody12UI;
         REG("ui.TankBody12UI", TankBody12UI);
         class TankBody13UI extends Laya.View {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(TankBody13UI.uiView);
@@ -406,7 +483,9 @@
         ui.TankBody13UI = TankBody13UI;
         REG("ui.TankBody13UI", TankBody13UI);
         class TankBody14UI extends Laya.View {
-            constructor() { super(); }
+            constructor() {
+                super();
+            }
             createChildren() {
                 super.createChildren();
                 this.createView(TankBody14UI.uiView);
@@ -627,7 +706,8 @@
     EventManager.eventDispatcher = new Laya.EventDispatcher();
 
     class GameEvent {
-        constructor() { }
+        constructor() {
+        }
     }
     GameEvent.PLAYER_DEATH = "PLAYER_DEATH";
     GameEvent.PLAYER_JUMP = "PLAYER_JUMP";
@@ -718,6 +798,205 @@
             this.selfCollider.refresh();
         }
     }
+
+    class VideoData {
+        constructor() {
+            this.type = 0;
+            this.info = "";
+        }
+    }
+    class VideoInfo {
+    }
+    VideoInfo.VIDEOINFO_ITEM = "看视频获得物资";
+    VideoInfo.VIDEOINFO_LIFE = "看视频原地复活";
+    VideoInfo.VIDEOINFO_DOUBLE_COIN = "看视频获得双倍金币";
+    VideoInfo.VIDEOINFO_BOX = "看视频获得宝箱奖励";
+    class VideoType {
+    }
+    VideoType.VIDEOTYPE_ITEM = 1;
+    VideoType.VIDEOTYPE_LIFE = 2;
+    VideoType.VIDEOTYPE_DOUBLE_COIN = 3;
+    VideoType.VIDEOTYPE_BOX = 4;
+
+    class MooSnowSDK {
+        static login() {
+            moosnow.platform.login(() => {
+                console.log('登录成功 ');
+            });
+            if (MooSnowSDK.getPlatform() == moosnow.APP_PLATFORM.WX)
+                MooSnowSDK.showAutoBanner();
+        }
+        static finishLoading() {
+            moosnow.http.finishLoading();
+        }
+        static startGame(lv) {
+            moosnow.http.startGame(lv + "");
+        }
+        static endGame(lv, isWin) {
+            moosnow.http.endGame(lv + "", isWin);
+        }
+        static videoPoint(type, lv, str) {
+            moosnow.http.videoPoint(type + "", str, lv + "");
+        }
+        static getAD() {
+            moosnow.ad.getAd((r) => {
+                console.log('广告数据 ', r);
+                GameManager.instance.adList = r.indexLeft.concat();
+                GameManager.instance.setADlist();
+            });
+        }
+        static showBanner(isWuChu = false) {
+            moosnow.platform.showBanner(isWuChu, (isOpend) => {
+                console.log('用户是否点击了banner ', isOpend);
+                if (isOpend) {
+                    if (isWuChu) {
+                        MooSnowSDK.hideBanner();
+                        if (GameManager.instance.platform == moosnow.APP_PLATFORM.WX)
+                            ViewManager.instance.clickChestView.clickSuccess();
+                        if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
+                            ViewManager.instance.clickAdView.showReward();
+                        }
+                    }
+                }
+            });
+        }
+        static hideBanner() {
+            moosnow.platform.hideBanner();
+        }
+        static showAutoBanner() {
+            moosnow.platform.showAutoBanner();
+        }
+        static showVideo(data, videoData, successFun, errorFun, noFinishFun) {
+            if (SoundManager.instance.isOpenSound) {
+                Laya.SoundManager.soundMuted = true;
+                Laya.SoundManager.musicMuted = true;
+            }
+            if (videoData.type == VideoType.VIDEOTYPE_ITEM) {
+                MooSnowSDK.videoPoint(0, GameManager.instance.choiseLevel, VideoInfo.VIDEOINFO_ITEM);
+            }
+            else if (videoData.type == VideoType.VIDEOTYPE_LIFE) {
+                MooSnowSDK.videoPoint(0, GameManager.instance.choiseLevel, VideoInfo.VIDEOINFO_LIFE);
+            }
+            else if (videoData.type == VideoType.VIDEOTYPE_DOUBLE_COIN) {
+                MooSnowSDK.videoPoint(0, GameManager.instance.choiseLevel, VideoInfo.VIDEOINFO_DOUBLE_COIN);
+            }
+            else if (videoData.type == VideoType.VIDEOTYPE_BOX) {
+                MooSnowSDK.videoPoint(0, GameManager.instance.choiseLevel, VideoInfo.VIDEOINFO_BOX);
+            }
+            moosnow.platform.showVideo(res => {
+                switch (res) {
+                    case moosnow.VIDEO_STATUS.NOTEND:
+                        console.log('视频未观看完成 ');
+                        if (noFinishFun) {
+                            noFinishFun();
+                        }
+                        if (GameManager.instance.platform == moosnow.APP_PLATFORM.BYTEDANCE) {
+                            ViewManager.instance.showNoVideoView(videoData, data, successFun);
+                        }
+                        else
+                            ViewManager.instance.showTipsView("未看完视频无法获得奖励哦");
+                        break;
+                    case moosnow.VIDEO_STATUS.ERR:
+                        console.log('获取视频错误 ');
+                        if (errorFun) {
+                            errorFun();
+                        }
+                        ViewManager.instance.showTipsView("视频获取失败，请稍后再试");
+                        break;
+                    case moosnow.VIDEO_STATUS.END:
+                        console.log('观看视频结束 ');
+                        ViewManager.instance.hidePopUpView(null, true);
+                        GameManager.instance.showVideoResp(data, videoData, successFun);
+                        MooSnowSDK.videoPoint(1, GameManager.instance.choiseLevel, videoData.info);
+                        break;
+                }
+                if (SoundManager.instance.isOpenSound) {
+                    Laya.SoundManager.soundMuted = false;
+                    Laya.SoundManager.musicMuted = false;
+                    SoundManager.instance.playBGM(SoundManager.instance.bgmName);
+                }
+            });
+        }
+        static getMistouchPosNum() {
+            var misTouchPosNum = 0;
+            moosnow.http.getMistouchPosNum((res) => {
+                MooSnowSDK.mistouchPos = misTouchPosNum = res;
+                console.log("误点位移次数间隔", res);
+            });
+        }
+        static getMisTouchNum() {
+            var misTouchNum = 0;
+            moosnow.http.getMisTouchNum((res) => {
+                MooSnowSDK.misTouchNum = misTouchNum = res;
+                console.log("误点次数间隔", res);
+            });
+        }
+        static setPoint(str) {
+            moosnow.http.point(str);
+        }
+        static getAllConfig() {
+            var data;
+            moosnow.http.getAllConfig(res => {
+                data = res;
+                console.log("游戏的所有配置数据", res);
+            });
+            return data;
+        }
+        static getPlatform() {
+            let curPlatform = moosnow.getAppPlatform();
+            return curPlatform;
+        }
+        static showQQADBox(isWuChu = false, closeShowBannerr = false) {
+            moosnow.platform.showAppBox((res) => {
+                if (res <= 0) {
+                    moosnow.platform.hideAppBox();
+                    EventManager.instance.dispatcherEvt(GameEvent.CLOSE_APP_AD_BOX);
+                }
+                if (isWuChu && res == 0) {
+                    ViewManager.instance.hidePopUpView(ViewManager.instance.clickAdView);
+                    MooSnowSDK.hideQQADBox();
+                }
+            }, false);
+        }
+        static hideQQADBox() {
+            moosnow.platform.hideAppBox(() => {
+                ViewManager.instance.showResultView();
+            });
+        }
+        static startRecord() {
+            moosnow.platform.startRecord(300, (e) => {
+                console.log('是否是抖音', e);
+            });
+        }
+        static clipRecord(call) {
+            console.log('视频精彩剪切');
+            moosnow.platform.clipRecord([15, 2], () => {
+                console.log('剪切视频完成');
+                MooSnowSDK.stopRecord();
+            });
+        }
+        static stopRecord() {
+            moosnow.platform.stopRecord((res) => {
+                if (res.videoPath) {
+                    let videoPath = res.videoPath;
+                    console.log('录制的视频路径', videoPath);
+                }
+            });
+        }
+        static shareRecord() {
+            moosnow.platform.share({
+                channel: moosnow.SHARE_CHANNEL.VIDEO
+            }, (res) => {
+                console.log('分享结束', res);
+            }, (res) => {
+                console.log('录屏时间太短', res);
+            });
+            ViewManager.instance.hidePopUpView(ViewManager.instance.recordView, false);
+            ViewManager.instance.showResultView();
+        }
+    }
+    MooSnowSDK.misTouchNum = 0;
+    MooSnowSDK.mistouchPos = 0;
 
     class Enemy {
         constructor() {
@@ -964,6 +1243,7 @@
             Laya.timer.once(500, this, this.dispose);
             this.createGoods();
             if (this.isBoss) {
+                MooSnowSDK.clipRecord();
                 GameManager.instance.victoryGame();
             }
         }
@@ -1851,6 +2131,7 @@
             this.enemy.url = "ui://Game/boom_5";
             this.enemy.content.setPlaySettings(0, -1, 1, 0, Laya.Handler.create(this, this.dispose));
             if (this.isBoss) {
+                MooSnowSDK.clipRecord();
                 GameManager.instance.victoryGame();
             }
             SoundManager.instance.playSound("boom");
@@ -1975,6 +2256,7 @@
             ani.y = -100;
             this.bodyLoader.displayObject.addChild(ani.displayObject);
             if (this.isBoss) {
+                MooSnowSDK.clipRecord();
                 GameManager.instance.victoryGame();
             }
             SoundManager.instance.playSound("boom");
@@ -2162,188 +2444,6 @@
             this.name = "";
         }
     }
-
-    class VideoData {
-        constructor() {
-            this.type = 0;
-            this.info = "";
-        }
-    }
-    class VideoInfo {
-    }
-    VideoInfo.VIDEOINFO_ITEM = "看视频获得物资";
-    VideoInfo.VIDEOINFO_LIFE = "看视频原地复活";
-    VideoInfo.VIDEOINFO_DOUBLE_COIN = "看视频获得双倍金币";
-    VideoInfo.VIDEOINFO_BOX = "看视频获得宝箱奖励";
-    class VideoType {
-    }
-    VideoType.VIDEOTYPE_ITEM = 1;
-    VideoType.VIDEOTYPE_LIFE = 2;
-    VideoType.VIDEOTYPE_DOUBLE_COIN = 3;
-    VideoType.VIDEOTYPE_BOX = 4;
-
-    class MooSnowSDK {
-        static login() {
-            moosnow.platform.login(() => {
-                console.log('登录成功 ');
-            });
-            if (MooSnowSDK.getPlatform() == moosnow.APP_PLATFORM.WX)
-                MooSnowSDK.showAutoBanner();
-        }
-        static finishLoading() {
-            moosnow.http.finishLoading();
-        }
-        static startGame(lv) {
-            moosnow.http.startGame(lv + "");
-        }
-        static endGame(lv, isWin) {
-            moosnow.http.endGame(lv + "", isWin);
-        }
-        static videoPoint(type, lv, str) {
-            moosnow.http.videoPoint(type + "", str, lv + "");
-        }
-        static getAD() {
-            moosnow.ad.getAd((r) => {
-                console.log('广告数据 ', r);
-                GameManager.instance.adList = r.indexLeft.concat();
-                GameManager.instance.setADlist();
-            });
-        }
-        static showBanner(isWuChu = false) {
-            moosnow.platform.showBanner(isWuChu, (isOpend) => {
-                console.log('用户是否点击了banner ', isOpend);
-                if (isOpend) {
-                    if (isWuChu) {
-                        MooSnowSDK.hideBanner();
-                        if (GameManager.instance.platform == moosnow.APP_PLATFORM.WX)
-                            ViewManager.instance.clickChestView.clickSuccess();
-                        if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
-                            ViewManager.instance.clickAdView.showReward();
-                        }
-                    }
-                }
-            });
-        }
-        static hideBanner() {
-            moosnow.platform.hideBanner();
-        }
-        static showAutoBanner() {
-            moosnow.platform.showAutoBanner();
-        }
-        static showVideo(data, videoData, successFun) {
-            if (SoundManager.instance.isOpenSound) {
-                Laya.SoundManager.soundMuted = true;
-                Laya.SoundManager.musicMuted = true;
-            }
-            if (videoData.type == VideoType.VIDEOTYPE_ITEM) {
-                MooSnowSDK.videoPoint(0, GameManager.instance.choiseLevel, VideoInfo.VIDEOINFO_ITEM);
-            }
-            else if (videoData.type == VideoType.VIDEOTYPE_LIFE) {
-                MooSnowSDK.videoPoint(0, GameManager.instance.choiseLevel, VideoInfo.VIDEOINFO_LIFE);
-            }
-            else if (videoData.type == VideoType.VIDEOTYPE_DOUBLE_COIN) {
-                MooSnowSDK.videoPoint(0, GameManager.instance.choiseLevel, VideoInfo.VIDEOINFO_DOUBLE_COIN);
-            }
-            else if (videoData.type == VideoType.VIDEOTYPE_BOX) {
-                MooSnowSDK.videoPoint(0, GameManager.instance.choiseLevel, VideoInfo.VIDEOINFO_BOX);
-            }
-            moosnow.platform.showVideo(res => {
-                switch (res) {
-                    case moosnow.VIDEO_STATUS.NOTEND:
-                        console.log('视频未观看完成 ');
-                        if (GameManager.instance.platform == moosnow.APP_PLATFORM.BYTEDANCE) {
-                            ViewManager.instance.showNoVideoView(videoData, data, successFun);
-                        }
-                        else
-                            ViewManager.instance.showTipsView("未看完视频无法获得奖励哦");
-                        break;
-                    case moosnow.VIDEO_STATUS.ERR:
-                        console.log('获取视频错误 ');
-                        ViewManager.instance.showTipsView("视频获取失败，请稍后再试");
-                        break;
-                    case moosnow.VIDEO_STATUS.END:
-                        console.log('观看视频结束 ');
-                        GameManager.instance.showVideoResp(data, videoData, successFun);
-                        MooSnowSDK.videoPoint(1, GameManager.instance.choiseLevel, videoData.info);
-                        break;
-                }
-                if (SoundManager.instance.isOpenSound) {
-                    Laya.SoundManager.soundMuted = false;
-                    Laya.SoundManager.musicMuted = false;
-                    SoundManager.instance.playBGM(SoundManager.instance.bgmName);
-                }
-            });
-        }
-        static getMistouchPosNum() {
-            var misTouchPosNum = 0;
-            moosnow.http.getMistouchPosNum((res) => {
-                MooSnowSDK.mistouchPos = misTouchPosNum = res;
-                console.log("误点位移次数间隔", res);
-            });
-        }
-        static getMisTouchNum() {
-            var misTouchNum = 0;
-            moosnow.http.getMisTouchNum((res) => {
-                MooSnowSDK.misTouchNum = misTouchNum = res;
-                console.log("误点次数间隔", res);
-            });
-        }
-        static setPoint(str) {
-            moosnow.http.point(str);
-        }
-        static getAllConfig() {
-            var data;
-            moosnow.http.getAllConfig(res => {
-                data = res;
-                console.log("游戏的所有配置数据", res);
-            });
-            return data;
-        }
-        static getPlatform() {
-            let curPlatform = moosnow.getAppPlatform();
-            return curPlatform;
-        }
-        static showQQADBox(isWuChu = false, closeShowBannerr = false) {
-            moosnow.platform.showAppBox((res) => {
-                if (res <= 0) {
-                    moosnow.platform.hideAppBox();
-                    EventManager.instance.dispatcherEvt(GameEvent.CLOSE_APP_AD_BOX);
-                }
-                if (isWuChu && res == 0) {
-                    ViewManager.instance.hidePopUpView(ViewManager.instance.clickAdView);
-                    MooSnowSDK.hideQQADBox();
-                }
-            }, false);
-        }
-        static hideQQADBox() {
-            moosnow.platform.hideAppBox(() => {
-                ViewManager.instance.showResultView();
-            });
-        }
-        static startRecord() {
-            moosnow.platform.startRecord(300, (e) => {
-                console.log('是否是抖音', e);
-            });
-        }
-        static stopRecord() {
-            moosnow.platform.stopRecord((res) => {
-                if (res.videoPath) {
-                    let videoPath = res.videoPath;
-                }
-            });
-        }
-        static shareRecord() {
-            moosnow.platform.share({
-                channel: moosnow.SHARE_CHANNEL.VIDEO
-            }, (res) => {
-                console.log('分享结束', res);
-            }, (res) => {
-                console.log('录屏时间太短', res);
-            });
-        }
-    }
-    MooSnowSDK.misTouchNum = 0;
-    MooSnowSDK.mistouchPos = 0;
 
     class PlayerInfoView {
         constructor() { this.createView(); }
@@ -4416,6 +4516,14 @@
             ViewManager.instance.hidePopUpView(ViewManager.instance.clickChestView);
             EventManager.instance.dispatcherEvt(GameEvent.CHANGE_PLAYER_GOODS, GoodsType.GoodsType_OPEN_BOX);
         }
+        showVideoError() {
+            MooSnowSDK.hideBanner();
+            clearInterval(this.timeOut);
+            clearTimeout(this.clickTimeOut);
+            this.view.m_clickBtn.offClick(this, this.clickBtn);
+            GameManager.instance.suspendGame();
+            ViewManager.instance.hidePopUpView(ViewManager.instance.clickChestView);
+        }
         getRandomValue() {
             return Math.ceil(Math.random() * 4) + 5;
         }
@@ -4898,17 +5006,12 @@
     WXFUI_noVideoTips.URL = "ui://bq3h5insk6saxwr";
 
     class NoVideoTipsView extends PopUpView {
-        constructor() { super(); }
+        constructor() {
+            super();
+            this.timeOut = 0;
+        }
         createView() {
             this.view = WXFUI_noVideoTips.createInstance();
-        }
-        showView(s, c) {
-            super.showView(s, c);
-            this.view.m_guanbi.visible = false;
-            this.view.m_guanbi.onClick(this, this.closeHandle);
-            this.view.m_queding.onClick(this, this.continueHandle);
-            Laya.timer.clear(this, this.showCloseBtn);
-            Laya.timer.once(3000, this, this.showCloseBtn);
         }
         showCloseBtn() {
             this.view.m_guanbi.visible = true;
@@ -4917,6 +5020,13 @@
             this.videoData = v;
             this.itemData = item;
             this.successFun = successFun;
+            this.view.m_guanbi.visible = false;
+            this.view.m_guanbi.onClick(this, this.closeHandle);
+            this.view.m_queding.onClick(this, this.continueHandle);
+            clearTimeout(this.timeOut);
+            this.timeOut = setTimeout(() => {
+                this.showCloseBtn();
+            }, 3000);
         }
         continueHandle() {
             if (!this.videoData)
@@ -5082,7 +5192,7 @@
         continueHandle() {
             if (this.view.m_gou.selected) {
                 var video = GameManager.instance.createVideoData(VideoType.VIDEOTYPE_BOX, VideoInfo.VIDEOINFO_BOX);
-                MooSnowSDK.showVideo(null, video, this.watchVideoSuccess.bind(this));
+                MooSnowSDK.showVideo(null, video, this.watchVideoSuccess.bind(this), this.watchVideoError.bind(this));
             }
             else {
                 GameManager.instance.suspendGame();
@@ -5092,6 +5202,10 @@
         watchVideoSuccess() {
             ViewManager.instance.hidePopUpView(this, false);
             ViewManager.instance.clickChestView.clickSuccess();
+        }
+        watchVideoError() {
+            ViewManager.instance.hidePopUpView(this, false);
+            ViewManager.instance.clickChestView.showVideoError();
         }
         hideAllView() {
             super.hideAllView();
@@ -5140,14 +5254,14 @@
         recordHandle(e) {
             var s = e.target["$owner"];
             if (!s) {
-                MooSnowSDK.startRecord();
+                MooSnowSDK.shareRecord();
                 return;
             }
             if (s instanceof WXFUI_guanbiBtn) {
                 this.closeHandle();
             }
             else
-                MooSnowSDK.startRecord();
+                MooSnowSDK.shareRecord();
         }
         closeHandle() {
             ViewManager.instance.hidePopUpView(this, false);
@@ -5505,8 +5619,9 @@
             this.tipsView.showView(str);
         }
         showNoVideoView(v, d, f) {
-            this.noVideoView.showView(true, false);
+            this.noVideoView.showViewNoTween();
             this.noVideoView.updateView(v, d, f);
+            this.curPopView.push(this.noVideoView);
         }
         showPopUpView(p, showMask = true, hideOther = false, clickMaskHide = true) {
             if (hideOther) {
@@ -5817,6 +5932,7 @@
                 ViewManager.instance.createWarView();
                 SoundManager.instance.playBGM("bgm");
                 MooSnowSDK.startGame(GameManager.instance.choiseLevel);
+                MooSnowSDK.startRecord();
             }
             else {
                 ViewManager.instance.showTipsView("您已通关！敬请期待后续章节");

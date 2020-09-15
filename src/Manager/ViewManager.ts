@@ -439,8 +439,9 @@ export class ViewManager {
 
     /**显示未观看完视频弹窗 */
     public showNoVideoView(v: VideoData, d: any, f?: Function): void {
-        this.noVideoView.showView(true, false);
+        this.noVideoView.showViewNoTween();
         this.noVideoView.updateView(v, d, f);
+        this.curPopView.push(this.noVideoView);
     }
 
     public curPopView: PopUpView[] = [];

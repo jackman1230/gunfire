@@ -37,7 +37,7 @@ export default class ShowVideoView extends PopUpView {
     private continueHandle(): void {
         if (this.view.m_gou.selected) {
             var video: VideoData = GameManager.instance.createVideoData(VideoType.VIDEOTYPE_BOX, VideoInfo.VIDEOINFO_BOX);
-            MooSnowSDK.showVideo(null, video, this.watchVideoSuccess.bind(this));
+            MooSnowSDK.showVideo(null, video, this.watchVideoSuccess.bind(this), this.watchVideoError.bind(this));
         } else {
             GameManager.instance.suspendGame();
             ViewManager.instance.hidePopUpView(this, false);
@@ -47,6 +47,11 @@ export default class ShowVideoView extends PopUpView {
     private watchVideoSuccess(): void {
         ViewManager.instance.hidePopUpView(this, false);
         ViewManager.instance.clickChestView.clickSuccess();
+    }
+
+    private watchVideoError(): void {
+        ViewManager.instance.hidePopUpView(this, false);
+        ViewManager.instance.clickChestView.showVideoError();
     }
 
     public hideAllView(): void {
