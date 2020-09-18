@@ -931,6 +931,17 @@
     <component id="k6saxwz" name="chaBtn.xml" path="/Component/view/guanggao/toutiao/ttcon/"/>
     <image id="pei5xx0" name="double.png" path="/Component/view/guanggao/toutiao/"/>
     <image id="pei5xx1" name="double2.png" path="/Component/view/guanggao/toutiao/"/>
+    <image id="jlssxx2" name="fenxiang.png" path="/Component/view/guanggao/toutiao/"/>
+    <component id="so8uxx3" name="GoodsItem.xml" path="/Component/view/" exported="true"/>
+    <image id="so8uxx4" name="freebuy.png" path="/Component/view/guanggao/"/>
+    <image id="mnewxx5" name="native_see.png" path="/Component/view/guanggao/vivo/"/>
+    <image id="mnewxx6" name="native_pass.png" path="/Component/view/guanggao/vivo/"/>
+    <image id="mnewxx7" name="native_close.png" path="/Component/view/guanggao/vivo/"/>
+    <image id="mnewxx8" name="native_bg.png" path="/Component/view/guanggao/vivo/" scale="9grid" scale9grid="29,28,58,56"/>
+    <component id="mnewxx9" name="NativeADView.xml" path="/Component/view/guanggao/" exported="true"/>
+    <component id="mnewxxa" name="passBtn.xml" path="/Component/view/guanggao/vivo/"/>
+    <component id="mnewxxb" name="seeAdBtn.xml" path="/Component/view/guanggao/vivo/"/>
+    <component id="mnewxxc" name="nativeClose.xml" path="/Component/view/guanggao/vivo/"/>
   </resources>
   <publish name="Game" path="..\bin\res" packageCount="2" genCode="true" codePath="..\src\fui"/>
 </packageDescription>

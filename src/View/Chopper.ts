@@ -33,6 +33,7 @@ export default class Chopper extends Enemy {
         if (this.isActive) return;
         if (this.isDeath) return;
         if (this.box.owner == s) {
+            // MooSnowSDK.startRecord();
             this.isActive = true;
             this.setRun();
             this.setStillFire();
@@ -79,6 +80,7 @@ export default class Chopper extends Enemy {
             // GameManager.instance.bossDeath = true;
             // EventManager.instance.dispatcherEvt(GameEvent.VICITORY_LEVEL);
             MooSnowSDK.clipRecord();
+            // MooSnowSDK.stopRecord();
             GameManager.instance.victoryGame();
         }
         SoundManager.instance.playSound("boom");

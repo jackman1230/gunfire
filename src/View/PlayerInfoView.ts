@@ -7,10 +7,13 @@ import { PlayerData } from "../Data/PlayerData";
 import { SoundManager } from "../Manager/SoundManager";
 import { ViewManager } from "../Manager/ViewManager";
 import { MooSnowSDK } from "../Manager/MooSnowSDK";
+import { VideoData, VideoType, VideoInfo } from "../Data/VideoData";
 
 export default class PlayerInfoView {
 
     public view: WXFUI_PlayerInfoView;
+
+    private shopData: any;
 
 
     constructor() { this.createView() }
@@ -26,6 +29,11 @@ export default class PlayerInfoView {
         // EventManager.instance.addNotice(GameEvent.BUY_SHOP_ITEM, this, this.buyShopItem);
         // EventManager.instance.addNotice(GameEvent.BUY_SHOP_ITEM_FREE, this, this.decPlayerBlood);
 
+        this.view.m_item_1.visible = this.view.m_item_2.visible = this.view.m_item_3.visible = false;
+        if (GameManager.instance.platform == moosnow.APP_PLATFORM.BYTEDANCE) {
+            this.view.m_item_1.visible = this.view.m_item_2.visible = this.view.m_item_3.visible = true;
+            this.initBuyItem();
+        }
 
         this.updateAllView();
 
@@ -57,6 +65,7 @@ export default class PlayerInfoView {
         this.updateGreNum();
         this.updateCoin();
         this.updateLevel();
+        // this.updateBuyItem();
     }
 
     private updateLevel(): void {
@@ -132,8 +141,6 @@ export default class PlayerInfoView {
         Laya.timer.once(1000, this, this.showGetGoods, [GoodsType.GoodsType_GRE]);
     }
 
-
-
     private showGetGoods(t: number): void {
         this.changePlayerGoods(t);
     }
@@ -167,6 +174,7 @@ export default class PlayerInfoView {
 
     public updateCoin(): void {
         this.view.m_coin.text = GameManager.instance.roleInfo.totalCoin + "";
+        this.updateBuyItem();
     }
 
     public updatePlayerBlood(): void {
@@ -195,16 +203,57 @@ export default class PlayerInfoView {
             this.view.m_blood_2.m_ctl.selectedIndex = 2;
             this.view.m_blood_3.m_ctl.selectedIndex = 2;
         }
+    }
 
-        // var n: number = Math.floor(GameManager.instance.roleInfo.blood / 2);
-        // var t: number = GameManager.instance.roleInfo.blood % 2;
-        // for (let i = 3; i > 0; i--) {
-        //     if (t > 0)
-        //         this.view["m_blood_" + i].m_ctl.selectedIndex = 1;
-        //     if (i <= n) {
-        //         this.view["m_blood_" + i].m_ctl.selectedIndex = 0;
-        //     }
-        // }
+    private initBuyItem(): void {
+        this.shopData = GameManager.instance.levelData.shop;
+        var index: number = 0;
+        for (const key in this.shopData) {
+            if (this.shopData.hasOwnProperty(key)) {
+                index++;
+                var d = this.shopData[key];
+                // this.view["m_item_" + index].onClick.setAutoPlay(false);
+                this.view["m_item_" + index].m_coin.text = d.coin + "";
+                this.view["m_item_" + index].m_info.text = "x" + d.num;
+                this.view["m_item_" + index].m_icon.url = "ui://Game/goods_" + d.type;
+                this.view["m_item_" + index].data = d;
+                this.view["m_item_" + index].onClick(this, this.buyItem, [d]);
+                // this.view.m_item_1.onClick(this,this.buyItem,d)
+            }
+        }
+    }
+
+    private updateBuyItem(): void {
+        if (GameManager.instance.platform != moosnow.APP_PLATFORM.BYTEDANCE) return;
+        for (let i = 1; i <= 3; i++) {
+            var d: any = this.view["m_item_" + i].data;
+            if (!d) continue;
+            if (d.coin > GameManager.instance.roleInfo.totalCoin) {
+                this.view["m_item_" + i].m_ctl.selectedIndex = 1;
+            } else {
+                this.view["m_item_" + i].m_ctl.selectedIndex = 0;
+            }
+        }
+    }
+
+    private buyItem(d: any): void {
+        if (d.coin > GameManager.instance.roleInfo.totalCoin) {
+            this.watchVideo(d);
+        } else {
+            this.buyItemSuccess(d);
+        }
+    }
+
+    private buyItemSuccess(d: any): void {
+        GameManager.instance.roleInfo.totalCoin -= d.coin;
+        this.changePlayerGoods(d.type);
+        this.updateCoin();
+        ViewManager.instance.showTipsView("恭喜获得：" + d.name);
+    }
+
+    private watchVideo(d: any): void {
+        var v: VideoData = GameManager.instance.createVideoData(VideoType.VIDEOTYPE_GOODS, VideoInfo.VIDEOINFO_GOODS);
+        MooSnowSDK.showVideo(d, v, this.changePlayerGoods.bind(this, [d.type]));
     }
 
     public getRandomCoin(): number {

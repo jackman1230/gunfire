@@ -12,5 +12,8 @@
     <text id="n12_unfj" name="level" xy="51,138" size="133,35" font="SimHei" fontSize="30" color="#ffffff" vAlign="middle" letterSpacing="2" autoSize="none" text="第3关"/>
     <image id="n13_vmpq" name="n13" src="vmpqxtl" fileName="assets/playerInfo/shoulei.png" xy="204,66" size="40,60" aspect="true"/>
     <image id="n14_vmpq" name="n14" src="vmpqxtk" fileName="assets/playerInfo/danjia.png" xy="43,66" size="50,60" aspect="true"/>
+    <component id="n15_so8u" name="item_1" src="so8uxx3" fileName="Component/view/GoodsItem.xml" xy="51,181"/>
+    <component id="n16_so8u" name="item_2" src="so8uxx3" fileName="Component/view/GoodsItem.xml" xy="115,181"/>
+    <component id="n17_so8u" name="item_3" src="so8uxx3" fileName="Component/view/GoodsItem.xml" xy="179,181"/>
   </displayList>
 </component>

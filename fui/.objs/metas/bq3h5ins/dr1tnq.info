@@ -1,10 +1,10 @@
 {
-  "objectStatus": {
-    "n36_ko37": {
-      "hidden": true
-    },
-    "n24_dr1t": {
-      "locked": true
-    }
-  }
+	"objectStatus": {
+		"n24_dr1t": {
+			"locked": true
+		},
+		"n36_ko37": {
+			"hidden": true
+		}
+	}
 }

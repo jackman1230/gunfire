@@ -8,11 +8,11 @@
 window.screenOrientation = "sensor_landscape";
 
 //-----libs-begin-----
-loadLib("libs/laya.core.js")
-loadLib("libs/laya.ani.js")
-loadLib("libs/laya.html.js")
-loadLib("libs/laya.ui.js")
-loadLib("libs/laya.physics.js")
+loadLib("libs/laya.core.min.js")
+loadLib("libs/laya.ani.min.js")
+loadLib("libs/laya.html.min.js")
+loadLib("libs/laya.ui.min.js")
+loadLib("libs/laya.physics.min.js")
 loadLib("libs/fairygui.js")
 loadLib("libs/moosnow.conf.js")
 loadLib("libs/moosnow.platform.sdk.min.js")

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="1334,750">
+<component size="1334,750" opaque="false">
   <displayList>
-    <image id="n33_k6sa" name="n33" src="k6saxw9" fileName="Component/view/guanggao/toutiao/巅峰回顾 .png" xy="391,0"/>
-    <component id="n34_k6sa" name="guanbi" src="k6saxwq" fileName="Component/view/guanggao/toutiao/ttcon/guanbiBtn.xml" xy="942,163"/>
-    <image id="n35_k6sa" name="n35" src="k6saxw6" fileName="Component/view/guanggao/toutiao/图层 42.png" xy="502,295"/>
+    <image id="n33_k6sa" name="n33" src="k6saxw9" fileName="Component/view/guanggao/toutiao/巅峰回顾 .png" xy="340,-31" size="653,747" aspect="true"/>
+    <component id="n34_k6sa" name="guanbi" src="k6saxwq" fileName="Component/view/guanggao/toutiao/ttcon/guanbiBtn.xml" xy="993,128" scale="1.4,1.4"/>
+    <image id="n36_jlss" name="n36" src="jlssxx2" fileName="Component/view/guanggao/toutiao/fenxiang.png" xy="444,296" size="446,369" aspect="true"/>
+    <text id="n37_mnew" name="n37" xy="631,612" size="261,36" font="SimHei" fontSize="30" color="#ffffff" autoSize="none" text="点击此处分享视频"/>
+    <loader id="n38_mnew" name="clickArea" xy="346,191" size="645,522"/>
   </displayList>
 </component>

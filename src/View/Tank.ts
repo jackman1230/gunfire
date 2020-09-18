@@ -31,6 +31,7 @@ export default class Tank extends Enemy {
         if (this.isActive) return;
         if (this.isDeath) return;
         if (this.box.owner == s) {
+            // MooSnowSDK.startRecord();
             this.isActive = true;
             this.doActive();
             Laya.timer.loop(2000, this, this.doActive);
@@ -108,6 +109,7 @@ export default class Tank extends Enemy {
         if (this.isBoss) {
             // EventManager.instance.dispatcherEvt(GameEvent.VICITORY_LEVEL);
             MooSnowSDK.clipRecord();
+            // MooSnowSDK.stopRecord();
             GameManager.instance.victoryGame();
         }
         SoundManager.instance.playSound("boom");

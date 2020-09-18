@@ -12,6 +12,7 @@ import { ui } from "../ui/layaMaxUI";
 import { GameData, BombData } from "../Data/GameData";
 import PlayerDirView from "./PlayerDirView";
 import { PlayerSk } from "./PlayerSk";
+import { MooSnowSDK } from "../Manager/MooSnowSDK";
 
 export class Player extends Laya.Script {
 
@@ -392,8 +393,6 @@ export class Player extends Laya.Script {
     private moveMap(): void {
         if (Math.abs(ViewManager.instance.warView.warView.x) + Laya.stage.width > ViewManager.instance.warView.warView.width - 200)
             return;
-        // console.log("ddd--22222");
-        // console.log(this.roleSprite.x);
         if (this.roleSprite.x - Math.abs(ViewManager.instance.warView.warView.x) - this.roleSprite.width / 2 >= Laya.stage.width / 2) {
             var dis: number = this.roleSprite.x - Math.abs(ViewManager.instance.warView.warView.x) - Laya.stage.width / 2;
             ViewManager.instance.updateViewPort(dis);
@@ -536,6 +535,8 @@ export class Player extends Laya.Script {
         // this.bodybody.content.setPlaySettings(0, -1, 1, this.bodybody.content.frameCount - 1, Laya.Handler.create(this, this.deathComplete));
         this.playDeathSound();
         ViewManager.instance.showAfterWarView(3);
+        // MooSnowSDK.stopRecord();
+        MooSnowSDK.clipRecord();
     }
 
     public victoryGame(): void {

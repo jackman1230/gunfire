@@ -7,7 +7,6 @@ import { GoodsType } from "../../Data/GameData";
 import { GameManager } from "../../Manager/GameManager";
 import { ViewManager } from "../../Manager/ViewManager";
 import { MooSnowSDK } from "../../Manager/MooSnowSDK";
-import { VideoData, VideoType, VideoInfo } from "../../Data/VideoData";
 
 
 

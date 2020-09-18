@@ -15,6 +15,7 @@ export default class NoVideoTipsView extends PopUpView {
     private videoData: VideoData;
     private itemData: any;
     private successFun: Function;
+    private closeFun:Function;
 
     private timeOut: number = 0;
 
@@ -28,10 +29,11 @@ export default class NoVideoTipsView extends PopUpView {
         this.view.m_guanbi.visible = true;
     }
 
-    public updateView(v: VideoData, item: any, successFun?: Function): void {
+    public updateView(v: VideoData, item: any, successFun?: Function, closeFun?: Function): void {
         this.videoData = v;
         this.itemData = item;
         this.successFun = successFun;
+        this.closeFun = closeFun;
 
         this.view.m_guanbi.visible = false;
         this.view.m_guanbi.onClick(this, this.closeHandle)
@@ -50,6 +52,9 @@ export default class NoVideoTipsView extends PopUpView {
     }
 
     private closeHandle(): void {
+        if(this.closeFun){
+            this.closeFun();
+        }
         this.view.m_guanbi.offClick(this, this.closeHandle)
         this.view.m_queding.offClick(this, this.continueHandle);
         ViewManager.instance.hidePopUpView(this, false);

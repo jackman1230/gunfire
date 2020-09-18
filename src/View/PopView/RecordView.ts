@@ -20,7 +20,7 @@ export default class RecordView extends PopUpView {
         this.view.m_guanbi.visible = false;
         this.view.m_guanbi.onClick(this, this.closeHandle);
         Laya.timer.once(3000, this, this.showCloseBtn);
-        this.view.onClick(this, this.recordHandle);
+        this.view.m_clickArea.onClick(this, this.recordHandle);
     }
 
     private showCloseBtn(): void {
@@ -28,15 +28,7 @@ export default class RecordView extends PopUpView {
     }
 
     private recordHandle(e: any): void {
-        var s: Laya.Sprite = e.target["$owner"];
-        if (!s) {
-            MooSnowSDK.shareRecord();
-            return;
-        }
-        if (s instanceof WXFUI_guanbiBtn) {
-            this.closeHandle();
-        } else
-            MooSnowSDK.shareRecord();
+        MooSnowSDK.shareRecord();
     }
 
     private closeHandle(): void {
@@ -47,6 +39,7 @@ export default class RecordView extends PopUpView {
     public hideAllView(): void {
         super.hideAllView();
         this.view.m_guanbi.offClick(this, this.closeHandle);
+        this.view.m_clickArea.offClick(this, this.recordHandle);
     }
 
 }

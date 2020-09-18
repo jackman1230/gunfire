@@ -34,17 +34,18 @@
     <component id="n32_s2x8" name="ad_1" src="s2x8xs5" fileName="Component/view/guanggao/ADListVer.xml" xy="80,10"/>
     <component id="n33_s2x8" name="ad_2" src="s2x8xs5" fileName="Component/view/guanggao/ADListVer.xml" xy="988,10"/>
     <component id="n36_ko37" name="adHot" src="ko37xui" fileName="Component/view/guanggao/ADReMenList.xml" xy="0,5"/>
-    <image id="n37_k6sa" name="n37" src="pei5xx1" fileName="Component/view/guanggao/toutiao/double2.png" xy="616,484">
+    <image id="n37_k6sa" name="n37" src="pei5xx1" fileName="Component/view/guanggao/toutiao/double2.png" xy="627,480" size="181,26" aspect="true">
       <gearDisplay controller="ctl" pages="5"/>
     </image>
     <component id="n40_k6sa" name="nextBtn" src="k6saxwy" fileName="Component/view/guanggao/toutiao/ttcon/nextBtn.xml" xy="536,362">
       <gearDisplay controller="ctl" pages="5"/>
     </component>
-    <component id="n41_k6sa" name="gou" src="k6saxwn" fileName="Component/view/guanggao/toutiao/ttcon/videoBtn.xml" xy="585,487">
+    <component id="n41_k6sa" name="gou" src="k6saxwn" fileName="Component/view/guanggao/toutiao/ttcon/videoBtn.xml" xy="585,487" pivot="0.5,0.5" scale="2,2">
       <gearDisplay controller="ctl" pages="5"/>
     </component>
-    <image id="n42_k6sa" name="n42" src="pei5xx0" fileName="Component/view/guanggao/toutiao/double.png" xy="689,220">
+    <image id="n42_k6sa" name="n42" src="pei5xx0" fileName="Component/view/guanggao/toutiao/double.png" xy="716,203" pivot="0.5,0.5" scale="1.5,1.5">
       <gearDisplay controller="ctl" pages="5"/>
     </image>
+    <component id="n43_mnew" name="nativeAD" src="mnewxx9" fileName="Component/view/guanggao/NativeADView.xml" xy="0,0"/>
   </displayList>
 </component>

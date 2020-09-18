@@ -117,6 +117,7 @@ export default class Enemy {
         if (this.isActive) return;
         if (this.isDeath) return;
         if (this.box.owner == s) {
+            // MooSnowSDK.startRecord();
             this.isActive = true;
             this.setFire();
             Laya.timer.loop(3000, this, this.setFire);
@@ -279,6 +280,7 @@ export default class Enemy {
         this.createGoods();
         if (this.isBoss) {
             MooSnowSDK.clipRecord();
+            // MooSnowSDK.stopRecord();
             GameManager.instance.victoryGame();
             // MooSnowSDK.stopRecord();
         }

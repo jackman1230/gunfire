@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1334,740">
+  <controller name="ctl" pages="0,,1," selected="1"/>
+  <displayList>
+    <image id="n14_mnew" name="n14" src="mnewxx8" fileName="Component/view/guanggao/vivo/native_bg.png" xy="327,123" size="680,390" group="n19_mnew"/>
+    <loader id="n18_mnew" name="load" xy="327,123" pivot="0.5,0.5" size="680,390" group="n19_mnew" align="center" vAlign="middle" fill="scale"/>
+    <component id="n15_mnew" name="close" src="mnewxxc" fileName="Component/view/guanggao/vivo/nativeClose.xml" xy="324,122" group="n19_mnew"/>
+    <component id="n16_mnew" name="pass" src="mnewxxa" fileName="Component/view/guanggao/vivo/passBtn.xml" xy="574,541" group="n19_mnew"/>
+    <text id="n20_mnew" name="n20" xy="958,490" size="37,20" group="n19_mnew" font="SimHei" fontSize="16" text="广告"/>
+    <component id="n17_mnew" name="see" src="mnewxxb" fileName="Component/view/guanggao/vivo/seeAdBtn.xml" xy="580,541" group="n19_mnew"/>
+    <group id="n19_mnew" name="n19" xy="324,122" size="683,496" advanced="true">
+      <gearXY controller="ctl" pages="1" values="324,122" default="324,207"/>
+    </group>
+  </displayList>
+</component>

@@ -22,8 +22,6 @@ export default class FreeView extends PopUpView {
 
     createView(): void {
         this.view = WXFUI_freeView.createInstance();
-
-
         var sdkData: any = MooSnowSDK.getAllConfig();
         if (sdkData && sdkData.checkBoxMistouch != "0") {
             this._checkBoxMistouch = true;
@@ -54,8 +52,14 @@ export default class FreeView extends PopUpView {
     }
 
     private showFangQiBtn(): void {
+        Laya.timer.clear(this, this.showCloseBtn);
         this.view.m_ctl.selectedIndex = 1;
         Laya.timer.once(3000, this, this.showCloseBtn);
+    }
+
+    private showLingQuBtn(): void {
+        this.view.m_ctl.selectedIndex = 0;
+        Laya.timer.clear(this, this.showCloseBtn);
     }
 
     private showCloseBtn(): void {
@@ -63,18 +67,26 @@ export default class FreeView extends PopUpView {
     }
     private gouHandle(): void {
         // console.log("m_gou.selected--", this.view.m_gou.selected);
-        if (this._isFirst && !this.view.m_gou.selected) {
-            Laya.timer.once(2000, this, this.showFangQiBtn);
-            this._isFirst = false;
-        }
+
         if (this._checkBoxMistouch) {
             if (this._clickCount == this._misTouchIndex) {
                 this.watchVideo();
+            } else {
+                if (!this.view.m_gou.selected) {
+                    this.showFangQiBtn();
+                } else {
+                    this.showLingQuBtn();
+                }
             }
             this._clickCount++;
+        } else {
+            if (!this.view.m_gou.selected) {
+                this.showFangQiBtn();
+            } else {
+                this.showLingQuBtn();
+            }
         }
     }
-
 
     private lingquHandle(): void {
         this.watchVideo();
@@ -86,7 +98,7 @@ export default class FreeView extends PopUpView {
 
     private fangqiHandle(): void {
         if (MooSnowSDK.misTouchNum == 0) {//没有误触，直接开箱
-            // this.enterGame();
+            this.enterGame();
         } else if (MooSnowSDK.misTouchNum > 0) {
             GameManager.instance.misTouchNum++;
             if (GameManager.instance.misTouchNum >= MooSnowSDK.misTouchNum) {
@@ -106,9 +118,22 @@ export default class FreeView extends PopUpView {
     }
 
     private watchVideo(): void {
+        if (!this.view.m_gou.selected) {
+            this.showFangQiBtn();
+        } else {
+            this.showLingQuBtn();
+        }
+        Laya.timer.clear(this, this.showCloseBtn);
         var d = GameManager.instance.levelData.shop["item_4"];
         var v: VideoData = GameManager.instance.createVideoData(VideoType.VIDEOTYPE_ITEM, VideoInfo.VIDEOINFO_ITEM);
-        MooSnowSDK.showVideo(d, v, this.enterGame.bind(this));
+        MooSnowSDK.showVideo(d, v, this.enterGame.bind(this), null, null, this.timeShowCloseBtn.bind(this));
+    }
+
+    private timeShowCloseBtn(): void {
+        console.log("timeShowCloseBtn-");
+        Laya.timer.clear(this, this.showCloseBtn);
+        if (!this.view.m_gou.selected)
+            Laya.timer.once(3000, this, this.showCloseBtn);
     }
 
 

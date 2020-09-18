@@ -101,7 +101,7 @@ export class MooSnowSDK {
      * data:获得道具数据
      * videoData.type:1看视频得奖励，2看视频原地复活,3双倍金币，4获得宝箱
      */
-    public static showVideo(data: any, videoData: VideoData, successFun?: Function, errorFun?: Function, noFinishFun?: Function): void {
+    public static showVideo(data: any, videoData: VideoData, successFun?: Function, errorFun?: Function, noFinishFun?: Function, closeFun?: Function): void {
         if (SoundManager.instance.isOpenSound) {//如果打开了音效，关闭音效
             Laya.SoundManager.soundMuted = true;
             Laya.SoundManager.musicMuted = true;
@@ -124,7 +124,7 @@ export class MooSnowSDK {
                         noFinishFun();
                     }
                     if (GameManager.instance.platform == moosnow.APP_PLATFORM.BYTEDANCE) {
-                        ViewManager.instance.showNoVideoView(videoData, data, successFun);
+                        ViewManager.instance.showNoVideoView(videoData, data, successFun, closeFun);
                     } else
                         ViewManager.instance.showTipsView("未看完视频无法获得奖励哦");
                     break;
@@ -137,7 +137,8 @@ export class MooSnowSDK {
                     break;
                 case moosnow.VIDEO_STATUS.END:
                     console.log('观看视频结束 ')
-                    ViewManager.instance.hidePopUpView(null, true);
+                    if (GameManager.instance.platform == moosnow.APP_PLATFORM.BYTEDANCE)
+                        ViewManager.instance.hidePopUpView(null, true);
                     GameManager.instance.showVideoResp(data, videoData, successFun);
                     MooSnowSDK.videoPoint(1, GameManager.instance.choiseLevel, videoData.info);
                     break;
@@ -247,15 +248,18 @@ export class MooSnowSDK {
     *开始录制
     */
     public static startRecord(): void {
+        if (GameManager.instance.platform != moosnow.APP_PLATFORM.BYTEDANCE) return;
         moosnow.platform.startRecord(300, (e) => {
             console.log('是否是抖音', e)
         });
+        // Laya.timer.loop(10000, this, this.clipRecord);
     }
 
     /**
     * 视频精彩剪切
     */
     public static clipRecord(call?: Function): void {
+        if (GameManager.instance.platform != moosnow.APP_PLATFORM.BYTEDANCE) return;
         console.log('视频精彩剪切');
         moosnow.platform.clipRecord([15, 2], (res) => {
             console.log('剪切视频完成');
@@ -267,6 +271,8 @@ export class MooSnowSDK {
     * 停止录制
     */
     public static stopRecord(): void {
+        if (GameManager.instance.platform != moosnow.APP_PLATFORM.BYTEDANCE) return;
+        // Laya.timer.clear(this, this.clipRecord);
         moosnow.platform.stopRecord((res) => {
             if (res.videoPath) {
                 //录制的视频路径
@@ -287,6 +293,7 @@ export class MooSnowSDK {
         //      * @param callback 分享成功回调参数 = true, 分享失败回调参数 = false,
         //      * @param shortCall 时间过短时回调 ,err 是具体错误信息，目前只在头条分享录屏时用到
         //      */
+        if (GameManager.instance.platform != moosnow.APP_PLATFORM.BYTEDANCE) return;
         moosnow.platform.share({
             channel: moosnow.SHARE_CHANNEL.VIDEO
         }, (res) => {
@@ -298,6 +305,28 @@ export class MooSnowSDK {
         );
         ViewManager.instance.hidePopUpView(ViewManager.instance.recordView, false);
         ViewManager.instance.showResultView();
+    }
+    /**
+    * 创建桌面图标
+    */
+    public static installShortcut() {
+        // var d: any = MooSnowSDK.getAllConfig();
+        // if (d && d.addDesktop > 0) {
+        moosnow.platform.hasShortcutInstalled(
+            function (has) {
+                if (!has)
+                    moosnow.platform.installShortcut(null);
+            }
+        )
+        // }
+    }
+
+    /**
+     * 点击原生广告
+     * @param callback 
+     */
+    public static clickNative(callback?: Function): void {
+        moosnow.platform.clickNative(callback);
     }
 
 

@@ -45,5 +45,13 @@ window.moosnowConfig = {
         nativeId: ["168779", "168780"],
         moosnowAppId: "tt82d6f46b1ded0f70",
         version: "1.1.0",
+    },
+    vivo: {
+        bannerId: "8574385fdbbc4ac9ad21d63ca2f6d34f",
+        videoId: "4587d538ceca43f4a9b4708a2265880a",
+        interId: "168777",
+        nativeId: ["d734a0de426e4f0db0447aa596e7cb75"],
+        moosnowAppId: "100009190",
+        version: "1.0.0",
     }
 }

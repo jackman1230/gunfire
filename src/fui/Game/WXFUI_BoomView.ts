@@ -1,15 +1,22 @@
 /** This is an automatically generated class by FairyGUI. Please do not modify it. **/
 
-export default class WXFUI_BoomView extends fgui.GComponent {
 
-	public m_boom:fgui.GLoader;
+
+export default class WXFUI_BoomView extends fairygui.GComponent {
+
+	public m_boom:fairygui.GLoader;
+
 	public static URL:string = "ui://bq3h5inske5wdt";
 
 	public static createInstance():WXFUI_BoomView {
-		return <WXFUI_BoomView>(fgui.UIPackage.createObject("Game", "BoomView"));
+		return <WXFUI_BoomView><any>(fairygui.UIPackage.createObject("Game","BoomView"));
 	}
 
-	protected onConstruct():void {
-		this.m_boom = <fgui.GLoader>(this.getChild("boom"));
+	public constructor() {
+		super();
+	}
+
+	protected onConstruct(): void {
+		this.m_boom = <fairygui.GLoader><any>(this.getChild("boom"));
 	}
 }

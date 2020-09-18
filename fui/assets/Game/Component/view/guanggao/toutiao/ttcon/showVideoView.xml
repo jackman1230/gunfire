@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1334,750" opaque="false">
   <displayList>
-    <image id="n33_k6sa" name="n33" src="k6saxwi" fileName="Component/view/guanggao/toutiao/获得宝箱 .png" xy="443,0"/>
-    <component id="n35_k6sa" name="queding" src="k6saxww" fileName="Component/view/guanggao/toutiao/ttcon/queding3Btn.xml" xy="555,624"/>
-    <component id="n36_k6sa" name="gou" src="k6saxwn" fileName="Component/view/guanggao/toutiao/ttcon/videoBtn.xml" xy="560,547"/>
-    <image id="n37_k6sa" name="n37" src="k6saxwj" fileName="Component/view/guanggao/toutiao/观看广告领取奖励.png" xy="600,545"/>
+    <image id="n33_k6sa" name="n33" src="k6saxwi" fileName="Component/view/guanggao/toutiao/获得宝箱 .png" xy="406,0" size="520,545" aspect="true"/>
+    <component id="n35_k6sa" name="queding" src="k6saxww" fileName="Component/view/guanggao/toutiao/ttcon/queding3Btn.xml" xy="555,643" pivot="0.5,0.5" scale="1.3,1.3"/>
+    <component id="n36_k6sa" name="gou" src="k6saxwn" fileName="Component/view/guanggao/toutiao/ttcon/videoBtn.xml" xy="547,574" size="18,15" scale="2,2"/>
+    <image id="n37_k6sa" name="n37" src="k6saxwj" fileName="Component/view/guanggao/toutiao/观看广告领取奖励.png" xy="603,573" size="250,31" aspect="true"/>
   </displayList>
 </component>

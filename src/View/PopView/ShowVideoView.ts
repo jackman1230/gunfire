@@ -2,8 +2,6 @@ import PopUpView from "../PopUpView";
 import { GameManager } from "../../Manager/GameManager";
 import { ViewManager } from "../../Manager/ViewManager";
 import { MooSnowSDK } from "../../Manager/MooSnowSDK";
-import WXFUI_freeView from "../../fui/Game/WXFUI_freeView";
-import WXFUI_noVideoTips from "../../fui/Game/WXFUI_noVideoTips";
 import { VideoData, VideoType, VideoInfo } from "../../Data/VideoData";
 import WXFUI_showVideoView from "../../fui/Game/WXFUI_showVideoView";
 
