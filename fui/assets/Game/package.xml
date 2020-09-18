@@ -828,9 +828,9 @@
     <image id="vmpqxty" name="bao11.png" path="/assets/chest/"/>
     <image id="vmpqxtz" name="bao10.png" path="/assets/chest/"/>
     <image id="vmpqxu0" name="bao1.png" path="/assets/chest/"/>
-    <movieclip id="vmpqxu1" name="chestClose.jta" path="/Component/enemy/renzhi/" exported="true"/>
-    <movieclip id="vmpqxu2" name="chestOpen.jta" path="/Component/enemy/renzhi/" exported="true"/>
-    <component id="vmpqxu4" name="ClickChestView.xml" path="/Component/enemy/renzhi/" exported="true"/>
+    <movieclip id="vmpqxu1" name="chestClose.jta" path="/Component/enemy/renzhi/"/>
+    <movieclip id="vmpqxu2" name="chestOpen.jta" path="/Component/enemy/renzhi/"/>
+    <component id="vmpqxu4" name="ClickChestView.xml" path="/Component/enemy/renzhi/"/>
     <component id="vmpqxu5" name="loadingBar.xml" path="/Component/enemy/renzhi/"/>
     <image id="vmpqxu6" name="jiazaikuang.png" path="/Component/enemy/renzhi/load/切图/"/>
     <image id="vmpqxu7" name="加载条.png" path="/Component/enemy/renzhi/load/切图/" scale="9grid" scale9grid="60,7,332,16"/>
@@ -842,7 +842,7 @@
     <image id="lsmyxue" name="remen.png" path="/Component/view/guanggao/wx/" exported="true"/>
     <image id="iwc6xug" name="免费获得2.png" path="/assets/otherView/战前准备/切图/"/>
     <image id="iwc6xuh" name="继续游戏3.png" path="/assets/otherView/战后结算页面/切图/"/>
-    <component id="ko37xui" name="ADReMenList.xml" path="/Component/view/guanggao/" exported="true"/>
+    <component id="ko37xui" name="ADReMenList.xml" path="/Component/view/guanggao/"/>
     <image id="ko37xuj" name="remen2.png" path="/Component/view/guanggao/wx/" exported="true"/>
     <component id="ko37xuk" name="ADremen2.xml" path="/Component/view/guanggao/" exported="true"/>
     <image id="ko37xul" name="shou.png" path="/Component/view/guanggao/wx/" exported="true"/>
@@ -872,13 +872,13 @@
     <image id="m5yyxva" name="7.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/手指/"/>
     <image id="m5yyxvb" name="8.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/手指/"/>
     <image id="m5yyxvc" name="9.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/手指/"/>
-    <image id="m5yyxvd" name="hand1.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/捏橘子动画/" exported="true"/>
-    <image id="m5yyxve" name="hand2.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/捏橘子动画/" exported="true"/>
-    <image id="m5yyxvf" name="hand3.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/捏橘子动画/" exported="true"/>
-    <image id="m5yyxvg" name="hand4.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/捏橘子动画/" exported="true"/>
-    <image id="m5yyxvh" name="hand5.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/捏橘子动画/" exported="true"/>
-    <image id="m5yyxvi" name="hand6.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/捏橘子动画/" exported="true"/>
-    <component id="m5yyxvj" name="ClickADView.xml" path="/Component/view/guanggao/QQAD/qqcon/" exported="true"/>
+    <image id="m5yyxvd" name="hand1.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/捏橘子动画/"/>
+    <image id="m5yyxve" name="hand2.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/捏橘子动画/"/>
+    <image id="m5yyxvf" name="hand3.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/捏橘子动画/"/>
+    <image id="m5yyxvg" name="hand4.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/捏橘子动画/"/>
+    <image id="m5yyxvh" name="hand5.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/捏橘子动画/"/>
+    <image id="m5yyxvi" name="hand6.png" path="/Component/view/guanggao/QQAD/全屏误触捏橘子横版/捏橘子动画/"/>
+    <component id="m5yyxvj" name="ClickADView.xml" path="/Component/view/guanggao/QQAD/qqcon/"/>
     <component id="m5yyxvk" name="clickBar.xml" path="/Component/view/guanggao/QQAD/qqcon/"/>
     <movieclip id="m5yyxvl" name="fingerAni.jta" path="/Component/view/guanggao/QQAD/qqcon/"/>
     <component id="m5yyxvm" name="clickBtn.xml" path="/Component/view/guanggao/QQAD/qqcon/"/>
@@ -886,7 +886,7 @@
     <image id="tckhxvo" name="血量2.png" path="/assets/playerInfo/"/>
     <image id="eko6xvp" name="wudi.png" path="/Component/view/guanggao/wx/" exported="true"/>
     <image id="eko6xvq" name="timg2.jpg" path="/Component/view/guanggao/wx/"/>
-    <component id="buh7xvr" name="RewardView.xml" path="/Component/view/guanggao/QQAD/qqcon/" exported="true"/>
+    <component id="buh7xvr" name="RewardView.xml" path="/Component/view/guanggao/QQAD/qqcon/"/>
     <component id="buh7xvs" name="quedingBtn.xml" path="/Component/view/guanggao/QQAD/qqcon/"/>
     <image id="k6saxvt" name="10.png" path="/Component/view/guanggao/toutiao/"/>
     <image id="k6saxvu" name="1599722356(1).jpg" path="/Component/view/guanggao/toutiao/"/>
@@ -921,12 +921,12 @@
     <component id="k6saxwo" name="lingquBtn.xml" path="/Component/view/guanggao/toutiao/ttcon/"/>
     <component id="k6saxwp" name="fangqiBtn.xml" path="/Component/view/guanggao/toutiao/ttcon/"/>
     <component id="k6saxwq" name="guanbiBtn.xml" path="/Component/view/guanggao/toutiao/ttcon/"/>
-    <component id="k6saxwr" name="noVideoTips.xml" path="/Component/view/guanggao/toutiao/ttcon/" exported="true"/>
+    <component id="k6saxwr" name="noVideoTips.xml" path="/Component/view/guanggao/toutiao/ttcon/"/>
     <component id="k6saxws" name="guanbi2Btn.xml" path="/Component/view/guanggao/toutiao/ttcon/"/>
     <component id="k6saxwu" name="queding2Btn.xml" path="/Component/view/guanggao/toutiao/ttcon/"/>
-    <component id="k6saxwv" name="showVideoView.xml" path="/Component/view/guanggao/toutiao/ttcon/" exported="true"/>
+    <component id="k6saxwv" name="showVideoView.xml" path="/Component/view/guanggao/toutiao/ttcon/"/>
     <component id="k6saxww" name="queding3Btn.xml" path="/Component/view/guanggao/toutiao/ttcon/"/>
-    <component id="k6saxwx" name="recordView.xml" path="/Component/view/guanggao/toutiao/ttcon/" exported="true"/>
+    <component id="k6saxwx" name="recordView.xml" path="/Component/view/guanggao/toutiao/ttcon/"/>
     <component id="k6saxwy" name="nextBtn.xml" path="/Component/view/guanggao/toutiao/ttcon/"/>
     <component id="k6saxwz" name="chaBtn.xml" path="/Component/view/guanggao/toutiao/ttcon/"/>
     <image id="pei5xx0" name="double.png" path="/Component/view/guanggao/toutiao/"/>

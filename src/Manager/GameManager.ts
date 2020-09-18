@@ -114,7 +114,11 @@ export class GameManager {
         ViewManager.instance.hidePopUpView(null, true);
         ViewManager.instance.removeWarView();
         ViewManager.instance.showChapterView();
-        if (end && (GameManager.instance.platform == moosnow.APP_PLATFORM.VIVO || GameManager.instance.platform == moosnow.APP_PLATFORM.OPPO)) {
+        if (end && GameManager.instance.platform == moosnow.APP_PLATFORM.VIVO) {
+            MooSnowSDK.installShortcut();//创建桌面快捷图标
+        }
+
+        if (end && GameManager.instance.platform == moosnow.APP_PLATFORM.OPPO) {
             MooSnowSDK.installShortcut();//创建桌面快捷图标
         }
         // Laya.SoundManager.stopMusic();
