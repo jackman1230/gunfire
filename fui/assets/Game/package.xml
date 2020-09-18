@@ -761,8 +761,8 @@
     <component id="unfjxs1" name="player_death.xml" path="/Component/player/"/>
     <movieclip id="oys6xs2" name="rush_boom_3.jta" path="/Component/player/playerAni/"/>
     <movieclip id="oys6xs3" name="body_3.jta" path="/Component/player/playerAni/"/>
-    <image id="s2x8ip" name="ditu.jpg" path="/Component/view/guanggao/"/>
-    <image id="s2x8iq" name="icon.png" path="/Component/view/guanggao/"/>
+    <image id="s2x8ip" name="ditu.jpg" path="/Component/view/guanggao/wx/"/>
+    <image id="s2x8iq" name="icon.png" path="/Component/view/guanggao/wx/"/>
     <component id="s2x8ir" name="ADItem.xml" path="/Component/view/guanggao/"/>
     <component id="s2x8xs4" name="ADmove.xml" path="/Component/view/guanggao/"/>
     <component id="s2x8xs5" name="ADListVer.xml" path="/Component/view/guanggao/"/>
@@ -839,16 +839,16 @@
     <component id="vmpqxua" name="ADListView.xml" path="/Component/view/guanggao/" exported="true"/>
     <image id="vmpqxuc" name="playerzidan3.png" path="/assets/zadan/" exported="true"/>
     <component id="vmpqxud" name="sandan.xml" path="/Component/bullet/" exported="true"/>
-    <image id="lsmyxue" name="remen.png" path="/Component/view/guanggao/" exported="true"/>
+    <image id="lsmyxue" name="remen.png" path="/Component/view/guanggao/wx/" exported="true"/>
     <image id="iwc6xug" name="免费获得2.png" path="/assets/otherView/战前准备/切图/"/>
     <image id="iwc6xuh" name="继续游戏3.png" path="/assets/otherView/战后结算页面/切图/"/>
     <component id="ko37xui" name="ADReMenList.xml" path="/Component/view/guanggao/" exported="true"/>
-    <image id="ko37xuj" name="remen2.png" path="/Component/view/guanggao/" exported="true"/>
+    <image id="ko37xuj" name="remen2.png" path="/Component/view/guanggao/wx/" exported="true"/>
     <component id="ko37xuk" name="ADremen2.xml" path="/Component/view/guanggao/" exported="true"/>
-    <image id="ko37xul" name="shou.png" path="/Component/view/guanggao/" exported="true"/>
-    <image id="ko37xum" name="remen3.png" path="/Component/view/guanggao/" exported="true"/>
-    <image id="ko37xun" name="cainibg.png" path="/Component/view/guanggao/" exported="true" scale="9grid" scale9grid="20,42,40,84"/>
-    <image id="ko37xuo" name="caini.png" path="/Component/view/guanggao/" exported="true"/>
+    <image id="ko37xul" name="shou.png" path="/Component/view/guanggao/wx/" exported="true"/>
+    <image id="ko37xum" name="remen3.png" path="/Component/view/guanggao/wx/" exported="true"/>
+    <image id="ko37xun" name="cainibg.png" path="/Component/view/guanggao/wx/" exported="true" scale="9grid" scale9grid="20,42,40,84"/>
+    <image id="ko37xuo" name="caini.png" path="/Component/view/guanggao/wx/" exported="true"/>
     <component id="ko37xup" name="ADListHorBig.xml" path="/Component/view/guanggao/"/>
     <component id="ko37xuq" name="ADItemBig.xml" path="/Component/view/guanggao/"/>
     <component id="ihitxur" name="ADListHorBig2.xml" path="/Component/view/guanggao/"/>
@@ -884,8 +884,8 @@
     <component id="m5yyxvm" name="clickBtn.xml" path="/Component/view/guanggao/QQAD/qqcon/"/>
     <component id="tckhxvn" name="blood.xml" path="/Component/view/" exported="true"/>
     <image id="tckhxvo" name="血量2.png" path="/assets/playerInfo/"/>
-    <image id="eko6xvp" name="wudi.png" path="/Component/view/guanggao/" exported="true"/>
-    <image id="eko6xvq" name="timg2.jpg" path="/Component/view/guanggao/"/>
+    <image id="eko6xvp" name="wudi.png" path="/Component/view/guanggao/wx/" exported="true"/>
+    <image id="eko6xvq" name="timg2.jpg" path="/Component/view/guanggao/wx/"/>
     <component id="buh7xvr" name="RewardView.xml" path="/Component/view/guanggao/QQAD/qqcon/" exported="true"/>
     <component id="buh7xvs" name="quedingBtn.xml" path="/Component/view/guanggao/QQAD/qqcon/"/>
     <image id="k6saxvt" name="10.png" path="/Component/view/guanggao/toutiao/"/>
@@ -933,15 +933,20 @@
     <image id="pei5xx1" name="double2.png" path="/Component/view/guanggao/toutiao/"/>
     <image id="jlssxx2" name="fenxiang.png" path="/Component/view/guanggao/toutiao/"/>
     <component id="so8uxx3" name="GoodsItem.xml" path="/Component/view/" exported="true"/>
-    <image id="so8uxx4" name="freebuy.png" path="/Component/view/guanggao/"/>
-    <image id="mnewxx5" name="native_see.png" path="/Component/view/guanggao/vivo/"/>
-    <image id="mnewxx6" name="native_pass.png" path="/Component/view/guanggao/vivo/"/>
-    <image id="mnewxx7" name="native_close.png" path="/Component/view/guanggao/vivo/"/>
-    <image id="mnewxx8" name="native_bg.png" path="/Component/view/guanggao/vivo/" scale="9grid" scale9grid="29,28,58,56"/>
+    <image id="so8uxx4" name="freebuy.png" path="/Component/view/guanggao/toutiao/"/>
+    <image id="mnewxx5" name="native_see.png" path="/Component/view/guanggao/vivo-oppo/"/>
+    <image id="mnewxx6" name="native_pass.png" path="/Component/view/guanggao/vivo-oppo/"/>
+    <image id="mnewxx7" name="native_close.png" path="/Component/view/guanggao/vivo-oppo/"/>
+    <image id="mnewxx8" name="native_bg.png" path="/Component/view/guanggao/vivo-oppo/" scale="9grid" scale9grid="29,28,58,56"/>
     <component id="mnewxx9" name="NativeADView.xml" path="/Component/view/guanggao/" exported="true"/>
-    <component id="mnewxxa" name="passBtn.xml" path="/Component/view/guanggao/vivo/"/>
-    <component id="mnewxxb" name="seeAdBtn.xml" path="/Component/view/guanggao/vivo/"/>
-    <component id="mnewxxc" name="nativeClose.xml" path="/Component/view/guanggao/vivo/"/>
+    <component id="mnewxxa" name="passBtn.xml" path="/Component/view/guanggao/vivo-oppo/"/>
+    <component id="mnewxxb" name="seeAdBtn.xml" path="/Component/view/guanggao/vivo-oppo/"/>
+    <component id="mnewxxc" name="nativeClose.xml" path="/Component/view/guanggao/vivo-oppo/"/>
+    <component id="lpi5xxd" name="OppoNativeADView.xml" path="/Component/view/guanggao/" exported="true"/>
+    <image id="lpi5xxe" name="sanbei.png" path="/Component/view/guanggao/vivo-oppo/"/>
+    <component id="lpi5xxf" name="sanBeiBtn.xml" path="/Component/view/guanggao/vivo-oppo/"/>
+    <component id="lpi5xxg" name="nextBtn2.xml" path="/Component/view/guanggao/vivo-oppo/"/>
+    <image id="lpi5xxh" name="xiayiguan.png" path="/Component/view/guanggao/vivo-oppo/"/>
   </resources>
   <publish name="Game" path="..\bin\res" packageCount="2" genCode="true" codePath="..\src\fui"/>
 </packageDescription>

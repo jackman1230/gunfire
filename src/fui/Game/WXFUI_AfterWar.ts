@@ -10,6 +10,9 @@ import WXFUI_ADReMenList from "./WXFUI_ADReMenList";
 import WXFUI_nextBtn from "./WXFUI_nextBtn";
 import WXFUI_videoBtn from "./WXFUI_videoBtn";
 import WXFUI_NativeADView from "./WXFUI_NativeADView";
+import WXFUI_OppoNativeADView from "./WXFUI_OppoNativeADView";
+import WXFUI_sanBeiBtn from "./WXFUI_sanBeiBtn";
+import WXFUI_nextBtn2 from "./WXFUI_nextBtn2";
 
 export default class WXFUI_AfterWar extends fairygui.GComponent {
 
@@ -31,6 +34,9 @@ export default class WXFUI_AfterWar extends fairygui.GComponent {
 	public m_gou:WXFUI_videoBtn;
 	public m_n42:fairygui.GImage;
 	public m_nativeAD:WXFUI_NativeADView;
+	public m_oppoNative:WXFUI_OppoNativeADView;
+	public m_sanbei:WXFUI_sanBeiBtn;
+	public m_nextBtn2:WXFUI_nextBtn2;
 
 	public static URL:string = "ui://bq3h5insdr1tnq";
 
@@ -61,5 +67,8 @@ export default class WXFUI_AfterWar extends fairygui.GComponent {
 		this.m_gou = <WXFUI_videoBtn><any>(this.getChild("gou"));
 		this.m_n42 = <fairygui.GImage><any>(this.getChild("n42"));
 		this.m_nativeAD = <WXFUI_NativeADView><any>(this.getChild("nativeAD"));
+		this.m_oppoNative = <WXFUI_OppoNativeADView><any>(this.getChild("oppoNative"));
+		this.m_sanbei = <WXFUI_sanBeiBtn><any>(this.getChild("sanbei"));
+		this.m_nextBtn2 = <WXFUI_nextBtn2><any>(this.getChild("nextBtn2"));
 	}
 }

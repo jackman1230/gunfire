@@ -101,7 +101,15 @@ export class MooSnowSDK {
      * data:获得道具数据
      * videoData.type:1看视频得奖励，2看视频原地复活,3双倍金币，4获得宝箱
      */
+    public static showVIVOTimer: boolean = true;
     public static showVideo(data: any, videoData: VideoData, successFun?: Function, errorFun?: Function, noFinishFun?: Function, closeFun?: Function): void {
+        if (GameManager.instance.platform == moosnow.APP_PLATFORM.VIVO) {
+            if (!MooSnowSDK.showVIVOTimer) {
+                ViewManager.instance.showTipsView("视频还未准备好，请稍后再试");
+                return;
+            }
+        }
+
         if (SoundManager.instance.isOpenSound) {//如果打开了音效，关闭音效
             Laya.SoundManager.soundMuted = true;
             Laya.SoundManager.musicMuted = true;
@@ -148,7 +156,16 @@ export class MooSnowSDK {
                 Laya.SoundManager.musicMuted = false;
                 SoundManager.instance.playBGM(SoundManager.instance.bgmName);
             }
+            if (GameManager.instance.platform == moosnow.APP_PLATFORM.VIVO) {
+                Laya.timer.clear(this, this.showVIVOVideo);
+                this.showVIVOTimer = false;
+                Laya.timer.once(10000, this, this.showVIVOVideo);
+            }
         });
+    }
+
+    public static showVIVOVideo(): void {
+        this.showVIVOTimer = true;
     }
 
 

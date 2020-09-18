@@ -16,7 +16,6 @@ export default class FreeView extends PopUpView {
     private _clickCount: number = 0;
     private _misTouchIndex: number;
     private _randomList: number[] = [];
-    private _isFirst: boolean = true;
 
     constructor() { super() }
 
@@ -41,7 +40,6 @@ export default class FreeView extends PopUpView {
         this._clickCount = 0;
         if (this._checkBoxMistouch)
             this.getRandomMisTouchIndex();
-        this._isFirst = true;
         this.view.m_gou.selected = true;
         this.view.m_cha.visible = false;
 

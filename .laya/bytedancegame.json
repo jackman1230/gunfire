@@ -33,9 +33,11 @@
         "!$basePath/{version.json,game.js,game.json,project.config.json,weapp-adapter.js,project.swan.json,swan-game-adapter.js,main.js,gameConfig.json,my-adapter.js,microgame-adapter.js,qg-adapter.js,huawei-adapter.js}",
         "!$basePath/layaforqq/**/*.*",
         "!$basePath/utils/**/*.*",
-        "!$basePath/libs/**/*.*"
+        "!$basePath/libs/**/*.*",
+        "!$basePath/res/**/*.js"
     ],
     "versionNoteList": [
+        "",
         "",
         "",
         "",
@@ -73,8 +75,18 @@
     "useMinJsLibs": false,
     "es6toes5": false,
     "projectType": "ts",
-    "pubTime": 1600331914034,
+    "pubTime": 1600400621129,
     "bytedanceInfo": {
         "orientation": "landscape"
+    },
+    "vivoSign": {
+        "generateSign": false,
+        "countryName": "",
+        "provinceName": "",
+        "localityName": "",
+        "orgName": "",
+        "orgUnitName": "",
+        "commonName": "",
+        "emailAddr": ""
     }
 }

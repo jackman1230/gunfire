@@ -56,7 +56,7 @@ export class GameManager {
         this.levelData["chapter_4"] = levelData2["chapter_4"];
         this.levelData["chapter_5"] = levelData2["chapter_5"];
         this.platform = MooSnowSDK.getPlatform();
-        // this.platform = moosnow.APP_PLATFORM.VIVO;
+        // this.platform = moosnow.APP_PLATFORM.OPPO;
         console.log(this.levelData);
         this.initRoleData();
         this.initChapterConfig();
@@ -107,13 +107,16 @@ export class GameManager {
         this.goFirstPage();
     }
 
-    /**返回首页 */
-    public goFirstPage(): void {
+    /**返回首页 (是否是战斗结束)*/
+    public goFirstPage(end: boolean = false): void {
         this.enemyArr.length = 0;
         EventManager.instance.dispatcherEvt(GameEvent.CLEAR_WAR_VIEW);
         ViewManager.instance.hidePopUpView(null, true);
         ViewManager.instance.removeWarView();
         ViewManager.instance.showChapterView();
+        if (end && (GameManager.instance.platform == moosnow.APP_PLATFORM.VIVO || GameManager.instance.platform == moosnow.APP_PLATFORM.OPPO)) {
+            MooSnowSDK.installShortcut();//创建桌面快捷图标
+        }
         // Laya.SoundManager.stopMusic();
     }
 
@@ -200,9 +203,6 @@ export class GameManager {
      * @param v 视频描述
      */
     public showVideoResp(d: any, v: VideoData, successFun?: Function): void {
-        if (successFun) {
-            successFun();
-        }
         if (v.type == VideoType.VIDEOTYPE_ITEM && d) {
             GameManager.instance.buyShopItem(d, true);
             ViewManager.instance.beforeWar.updateView();
@@ -214,10 +214,18 @@ export class GameManager {
             GameManager.instance.goFirstPage();
             MooSnowSDK.endGame(GameManager.instance.choiseLevel, true);
             ViewManager.instance.showTipsView("额外获得金币：" + GameManager.instance.roleInfo.curlvCoin);
+        } else if (v.type == VideoType.VIDEOTYPE_TREBLE_COIN) {
+            GameManager.instance.roleInfo.totalCoin += GameManager.instance.roleInfo.curlvCoin * 2;
+            ViewManager.instance.playerInfoView.updateCoin();
+            GameManager.instance.goFirstPage();
+            MooSnowSDK.endGame(GameManager.instance.choiseLevel, true);
+            ViewManager.instance.showTipsView("额外获得金币：" + GameManager.instance.roleInfo.curlvCoin * 2);
         } else if (v.type == VideoType.VIDEOTYPE_BOX) {
             ViewManager.instance.playerInfoView.showBoxGoods();
         }
-
+        if (successFun) {
+            successFun();
+        }
     }
 
     private initRoleData(): void {

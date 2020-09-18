@@ -36,7 +36,7 @@ export class AssetsManager {
             console.log("loadQQ");
             Laya.loader.create(AssetsManager.loadingAssetsData, Laya.Handler.create(this, this.onQQLoaded));
         } else if (moosnow.getAppPlatform() == moosnow.APP_PLATFORM.VIVO) {
-            console.log("loadVIVO");
+            console.log("loadVIVO ");
             Laya.loader.create(AssetsManager.loadingAssetsData, Laya.Handler.create(this, this.onVIVOLoaded));
         } else {
             Laya.loader.create(AssetsManager.loadingAssetsData, Laya.Handler.create(this, this.loadingAssetsComplete));
@@ -94,7 +94,7 @@ export class AssetsManager {
                 // 分包加载失败通过 fail 回调
                 console.log("分包加载vivo失败");
             }
-        })
+        });
     }
 
     private loadingAssetsComplete(): void {

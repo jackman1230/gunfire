@@ -13,6 +13,7 @@ export class VideoInfo {
     public static VIDEOINFO_DOUBLE_COIN: string = "看视频获得双倍金币";
     public static VIDEOINFO_BOX: string = "看视频获得宝箱奖励";
     public static VIDEOINFO_GOODS: string = "金币不够,看视频获得道具";
+    public static VIDEOTYPE_TREBLE_COIN: string = "看视频获得三倍金币";
 }
 
 export class VideoType {
@@ -21,5 +22,6 @@ export class VideoType {
     public static VIDEOTYPE_DOUBLE_COIN: number = 3;
     public static VIDEOTYPE_BOX: number = 4;
     public static VIDEOTYPE_GOODS: number = 5;
+    public static VIDEOTYPE_TREBLE_COIN: number = 6;
 
 }

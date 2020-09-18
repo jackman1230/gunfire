@@ -119,6 +119,10 @@ export default class PlayerInfoView {
             this.updateCoin();
             ViewManager.instance.createAddGold(t, coin, true);
         } else if (t == GoodsType.GoodsType_BOX) {
+            if (GameManager.instance.platform == moosnow.APP_PLATFORM.VIVO || GameManager.instance.platform == moosnow.APP_PLATFORM.OPPO) {
+                this.showBoxGoods();
+                return;
+            }
             if (MooSnowSDK.misTouchNum == 0) {//没有误触，直接开箱
                 this.showBoxGoods();
             } else if (MooSnowSDK.misTouchNum > 0) {

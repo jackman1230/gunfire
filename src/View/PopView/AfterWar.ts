@@ -104,7 +104,7 @@ export default class AfterWar extends PopUpView {
             MooSnowSDK.hideBanner();
             this.view.m_ad_1.visible = this.view.m_ad_2.visible = false;
             this.view.m_gou.selected = true;
-        } if (GameManager.instance.platform == moosnow.APP_PLATFORM.VIVO) {
+        } if (GameManager.instance.platform == moosnow.APP_PLATFORM.VIVO || GameManager.instance.platform == moosnow.APP_PLATFORM.OPPO) {
             MooSnowSDK.hideBanner();
             this.view.m_ad_1.visible = this.view.m_ad_2.visible = false;
         }
@@ -132,6 +132,9 @@ export default class AfterWar extends PopUpView {
         this.viewType = type;
         this.updateCoin();
         this.view.m_nativeAD.visible = false;
+        this.view.m_oppoNative.visible = false;
+        this.view.m_sanbei.visible = false;
+        this.view.m_nextBtn2.visible = false;
         if (type == 3) {
             this.view.m_abandon.visible = false;
             Laya.timer.once(2000, this, this.showAbondon);
@@ -150,20 +153,34 @@ export default class AfterWar extends PopUpView {
                     this.getRandomMisTouchIndex();
             }
         }
-        if (GameManager.instance.platform == moosnow.APP_PLATFORM.VIVO) {
+        if (GameManager.instance.platform == moosnow.APP_PLATFORM.VIVO || GameManager.instance.platform == moosnow.APP_PLATFORM.OPPO) {
             if (type == 3) {
                 this.view.m_nativeAD.m_ctl.selectedIndex = 1;
+                this.view.m_oppoNative.m_ctl.selectedIndex = 1;
             } else {
                 this.view.m_nativeAD.m_ctl.selectedIndex = 0;
+                this.view.m_oppoNative.m_ctl.selectedIndex = 0;
+                if (GameManager.instance.platform == moosnow.APP_PLATFORM.OPPO) {
+                    this.view.m_continue_1.visible = false;
+                    this.view.m_sanbei.visible = true;
+                    this.view.m_sanbei.onClick(this, this.onSanBeiHandle);
+                    Laya.timer.once(3000, this, () => {
+                        this.view.m_nextBtn2.visible = true;
+                        this.view.m_nextBtn2.onClick(this, this.continueGame);
+                    });
+                }
             }
-            MooSnowSDK.installShortcut();//创建桌面快捷图标
+
             var self = this;
-            // this.showNativeAD(null);
             moosnow.platform.checkVersion("", (open) => {
                 if (open) {
                     moosnow.platform.showNativeAd((row: nativeAdRow) => {
                         if (row && row.imgUrlList && row.imgUrlList.length > 0) {
-                            self.showNativeAD(row);
+                            if (GameManager.instance.platform == moosnow.APP_PLATFORM.VIVO)
+                                self.showNativeAD(row);
+                            else {
+                                self.showOppoNativeAD(row);
+                            }
                         }
                     });
                 }
@@ -172,21 +189,43 @@ export default class AfterWar extends PopUpView {
     }
 
     private showNativeAD(row: nativeAdRow): void {
-        this.view.m_nativeAD.visible = true;
-        this.view.m_nativeAD.m_close.onClick(this, this.onCloseHandle);
-        this.view.m_nativeAD.m_see.onClick(this, this.onSeeHandle);
-        this.view.m_nativeAD.m_pass.onClick(this, this.onSeeHandle);
-        if (this._sdkData && this._sdkData.mx_native_click_switch && this._sdkData.mx_native_click_switch == 1) {
-            this.view.m_nativeAD.m_see.visible = false;
-            this.view.m_nativeAD.m_pass.visible = true;
-        } else {
-            this.view.m_nativeAD.m_see.visible = true;
-            this.view.m_nativeAD.m_pass.visible = false;
-        }
-        Laya.loader.create(row.imgUrlList[0], Laya.Handler.create(this, (res) => {
-            if (res == null) return;
-            this.view.m_nativeAD.m_load.url = row.imgUrlList[0];
-        }));
+        Laya.timer.once(500, this, () => {//0.5秒后弹出原生广告
+            this.view.m_nativeAD.visible = true;
+            this.view.m_nativeAD.m_close.onClick(this, this.onCloseHandle);
+            this.view.m_nativeAD.m_see.onClick(this, this.onSeeHandle);
+            this.view.m_nativeAD.m_pass.onClick(this, this.onSeeHandle);
+            if (this._sdkData && this._sdkData.mx_native_click_switch && this._sdkData.mx_native_click_switch == 1) {
+                this.view.m_nativeAD.m_see.visible = false;
+                this.view.m_nativeAD.m_pass.visible = true;
+            } else {
+                this.view.m_nativeAD.m_see.visible = true;
+                this.view.m_nativeAD.m_pass.visible = false;
+            }
+            Laya.loader.create(row.imgUrlList[0], Laya.Handler.create(this, (res) => {
+                if (res == null) return;
+                this.view.m_nativeAD.m_load.url = row.imgUrlList[0];
+            }));
+        });
+    }
+
+    private showOppoNativeAD(row: nativeAdRow): void {
+        Laya.timer.once(500, this, () => {//0.5秒后弹出原生广告
+            this.view.m_oppoNative.visible = true;
+            this.view.m_oppoNative.m_close.onClick(this, this.onCloseHandle);
+            this.view.m_oppoNative.m_see.onClick(this, this.onSeeHandle);
+            this.view.m_oppoNative.m_pass.onClick(this, this.onSeeHandle);
+            if (this._sdkData && this._sdkData.mx_native_click_switch && this._sdkData.mx_native_click_switch == 1) {
+                this.view.m_oppoNative.m_see.visible = false;
+                this.view.m_oppoNative.m_pass.visible = true;
+            } else {
+                this.view.m_oppoNative.m_see.visible = true;
+                this.view.m_oppoNative.m_pass.visible = false;
+            }
+            Laya.loader.create(row.imgUrlList[0], Laya.Handler.create(this, (res) => {
+                if (res == null) return;
+                this.view.m_oppoNative.m_load.url = row.imgUrlList[0];
+            }));
+        });
     }
 
     private onCloseHandle(): void {
@@ -199,6 +238,7 @@ export default class AfterWar extends PopUpView {
 
     private hideNativeAD(): void {
         this.view.m_nativeAD.visible = false;
+        this.view.m_oppoNative.visible = false;
     }
 
     private onSeeHandle(): void {
@@ -215,7 +255,7 @@ export default class AfterWar extends PopUpView {
     private continueGame(): void {
         SoundManager.instance.playSound("btn_click");
         // ViewManager.instance.showChapterView();
-        GameManager.instance.goFirstPage();
+        GameManager.instance.goFirstPage(true);
         MooSnowSDK.endGame(GameManager.instance.choiseLevel, true);
     }
 
@@ -233,7 +273,7 @@ export default class AfterWar extends PopUpView {
 
     private abandonHandle(): void {
         SoundManager.instance.playSound("btn_click");
-        GameManager.instance.goFirstPage();
+        GameManager.instance.goFirstPage(true);
         MooSnowSDK.endGame(GameManager.instance.choiseLevel, false);
     }
 
@@ -243,6 +283,14 @@ export default class AfterWar extends PopUpView {
         } else {
             this.continueGame();
         }
+    }
+
+    private onSanBeiHandle(): void {
+        var v: VideoData = GameManager.instance.createVideoData(VideoType.VIDEOTYPE_TREBLE_COIN, VideoInfo.VIDEOTYPE_TREBLE_COIN);
+        MooSnowSDK.showVideo(null, v, this.getTrebleCoin.bind(this));
+    }
+    private getTrebleCoin(): void {
+
     }
 
     private gouHandle(): void {
@@ -261,7 +309,7 @@ export default class AfterWar extends PopUpView {
 
     private returnHandle(): void {
         SoundManager.instance.playSound("btn_click");
-        GameManager.instance.goFirstPage();
+        GameManager.instance.goFirstPage(true);
     }
 
     private _tweenNum: Laya.Tween;
@@ -331,6 +379,11 @@ export default class AfterWar extends PopUpView {
         this.view.m_nativeAD.m_close.offClick(this, this.onCloseHandle);
         this.view.m_nativeAD.m_see.offClick(this, this.onSeeHandle);
         this.view.m_nativeAD.m_pass.offClick(this, this.onSeeHandle);
+        this.view.m_oppoNative.m_close.offClick(this, this.onCloseHandle);
+        this.view.m_oppoNative.m_see.offClick(this, this.onSeeHandle);
+        this.view.m_oppoNative.m_pass.offClick(this, this.onSeeHandle);
+        this.view.m_sanbei.offClick(this, this.onSanBeiHandle);
+        this.view.m_nextBtn2.offClick(this, this.continueGame);
         this.view.m_ad_1.m_list.off(fairygui.Events.CLICK_ITEM, this, this.onClickItem);
         this.view.m_ad_2.m_list.off(fairygui.Events.CLICK_ITEM, this, this.onClickItem);
         Laya.Tween.clearTween(this.view.m_ad_1.m_list);

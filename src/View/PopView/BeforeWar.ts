@@ -50,7 +50,7 @@ export default class BeforeWar extends PopUpView {
             EventManager.instance.addNotice(GameEvent.SHOW_AD_LIST, this, this.showADList);
         } else if (GameManager.instance.platform == moosnow.APP_PLATFORM.BYTEDANCE) {
             this.view.m_ad.m_list.visible = false;
-        }else if (GameManager.instance.platform == moosnow.APP_PLATFORM.VIVO) {
+        } else if (GameManager.instance.platform == moosnow.APP_PLATFORM.VIVO || GameManager.instance.platform == moosnow.APP_PLATFORM.OPPO) {
             this.view.m_ad.m_list.visible = false;
         }
 

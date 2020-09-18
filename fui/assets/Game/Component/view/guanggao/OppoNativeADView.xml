@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1334,740" opaque="false">
+  <controller name="ctl" pages="0,,1," selected="0"/>
+  <displayList>
+    <component id="n17_mnew" name="see" src="mnewxxb" fileName="Component/view/guanggao/vivo-oppo/seeAdBtn.xml" xy="580,345">
+      <gearDisplay controller="ctl" pages="0"/>
+    </component>
+    <component id="n16_mnew" name="pass" src="dr1tns" fileName="Component/btn/continueBtn2.xml" xy="536,340" scale="0.8,0.8">
+      <gearDisplay controller="ctl" pages="0"/>
+    </component>
+    <image id="n14_mnew" name="n14" src="mnewxx8" fileName="Component/view/guanggao/vivo-oppo/native_bg.png" xy="347,420" size="640,320" group="n21_lpi5"/>
+    <loader id="n18_mnew" name="load" xy="347,420" pivot="0.5,0.5" size="640,320" group="n21_lpi5" align="center" vAlign="middle" fill="scale"/>
+    <component id="n15_mnew" name="close" src="mnewxxc" fileName="Component/view/guanggao/vivo-oppo/nativeClose.xml" xy="349,417" group="n21_lpi5"/>
+    <text id="n20_mnew" name="n20" xy="932,714" size="37,20" group="n21_lpi5" font="SimHei" fontSize="16" text="广告"/>
+    <group id="n21_lpi5" name="n21" xy="347,417" size="640,323" advanced="true">
+      <gearXY controller="ctl" pages="0,1" values="347,417|347,162"/>
+    </group>
+  </displayList>
+</component>
