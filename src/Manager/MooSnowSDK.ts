@@ -335,7 +335,6 @@ export class MooSnowSDK {
                     moosnow.platform.installShortcut(null);
             }
         )
-        // }
     }
 
     /**

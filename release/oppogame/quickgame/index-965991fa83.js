@@ -17,4 +17,4 @@ require("./libs/fairygui.js")
 require("./libs/moosnow.conf.js")
 require("./libs/moosnow.platform.sdk.min.js")
 //-----libs-end-------
-require("./js/bundle-4196ec5df1.js");
+require("./js/bundle-c66b9bfd2f.js");
