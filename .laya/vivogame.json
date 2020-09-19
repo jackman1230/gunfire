@@ -71,31 +71,31 @@
     "useMinJsLibs": false,
     "es6toes5": false,
     "projectType": "ts",
-    "pubTime": 1600495189484,
+    "pubTime": 1600502780258,
     "vivoInfo": {
         "name": "特种突击队",
         "projName": "quickgame",
         "package": "com.mx.tztjd.vivominigame",
         "icon": "C:\\Users\\jq\\Desktop\\icon.jpg",
-        "versionName": "1.0.3",
-        "versionCode": 4,
+        "versionName": "1.0.6",
+        "versionCode": 7,
         "minPlatformVersion": 1063,
         "orientation": "landscape",
         "logLevel": "off",
         "adbDebug": false,
         "apkUpdate": false,
-        "useReleaseSign": false,
+        "useReleaseSign": true,
         "subpack": true
     },
     "vivoSign": {
         "generateSign": false,
-        "countryName": "",
-        "provinceName": "",
-        "localityName": "",
-        "orgName": "",
-        "orgUnitName": "",
-        "commonName": "",
-        "emailAddr": ""
+        "countryName": "CN",
+        "provinceName": "guangdong",
+        "localityName": "shenzhen",
+        "orgName": "moosnow",
+        "orgUnitName": "moonsonw",
+        "commonName": "jiangqian",
+        "emailAddr": "jq263793113@163.com"
     },
     "vivoSubpack": [
         {
