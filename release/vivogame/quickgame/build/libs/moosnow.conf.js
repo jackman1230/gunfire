@@ -12,13 +12,12 @@ window.moosnowConfig = {
         version: "1.1.0"
     },
     oppo: {
-        bannerId: "168776",
-        videoId: "168781",
+        bannerId: "217751",
+        videoId: "217755",
         interId: "168777",
-        nativeId: ["168779", "168780"],
-        moosnowAppId: "30251588",
-        version: "1.1.0",
-        url: "https://liteplay-1253992229.cos.ap-guangzhou.myqcloud.com/config/tp_hzyx_config_wx.json",
+        nativeId: ["217756", "217753"],
+        moosnowAppId: "30338023",
+        version: "1.0.0",
     },
     qq: {
         bannerId: "fae95316eaa78846d6595d396043b28a",

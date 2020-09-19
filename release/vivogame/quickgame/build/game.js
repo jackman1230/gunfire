@@ -5001,7 +5001,7 @@ module.exports = require("./libs/moosnow.platform.sdk.min.js");
 /* 12 */
 /***/ (function(module, exports) {
 
-module.exports = require("./js/bundle-06e081bd81.js");
+module.exports = require("./js/bundle-bb1e4439f6.js");
 
 /***/ })
 /******/ ]);

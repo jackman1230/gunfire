@@ -77,11 +77,11 @@ export class MooSnowSDK {
             if (isOpend) {
                 if (isWuChu) {
                     MooSnowSDK.hideBanner();
-                    if (GameManager.instance.platform == moosnow.APP_PLATFORM.WX)
-                        ViewManager.instance.clickChestView.clickSuccess();
-                    if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
-                        ViewManager.instance.clickAdView.showReward();
-                    }
+                    // if (GameManager.instance.platform == moosnow.APP_PLATFORM.WX)
+                    //     ViewManager.instance.clickChestView.clickSuccess();
+                    // if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
+                    //     ViewManager.instance.clickAdView.showReward();
+                    // }
                 }
             }
         });
@@ -243,7 +243,7 @@ export class MooSnowSDK {
                 EventManager.instance.dispatcherEvt(GameEvent.CLOSE_APP_AD_BOX);
             }
             if (isWuChu && res == 0) {
-                ViewManager.instance.hidePopUpView(ViewManager.instance.clickAdView);
+                // ViewManager.instance.hidePopUpView(ViewManager.instance.clickAdView);
                 MooSnowSDK.hideQQADBox();
             }
             // console.log('关闭盒子')
@@ -320,7 +320,7 @@ export class MooSnowSDK {
             console.log('录屏时间太短', res)
         }
         );
-        ViewManager.instance.hidePopUpView(ViewManager.instance.recordView, false);
+        // ViewManager.instance.hidePopUpView(ViewManager.instance.recordView, false);
         ViewManager.instance.showResultView();
     }
     /**

@@ -56,7 +56,7 @@ export class GameManager {
         this.levelData["chapter_4"] = levelData2["chapter_4"];
         this.levelData["chapter_5"] = levelData2["chapter_5"];
         this.platform = MooSnowSDK.getPlatform();
-        // this.platform = moosnow.APP_PLATFORM.OPPO;
+        // this.platform = moosnow.APP_PLATFORM.VIVO;
         console.log(this.levelData);
         this.initRoleData();
         this.initChapterConfig();
@@ -117,11 +117,9 @@ export class GameManager {
         if (end && GameManager.instance.platform == moosnow.APP_PLATFORM.VIVO) {
             MooSnowSDK.installShortcut();//创建桌面快捷图标
         }
-
         if (end && GameManager.instance.platform == moosnow.APP_PLATFORM.OPPO) {
             MooSnowSDK.installShortcut();//创建桌面快捷图标
         }
-        // Laya.SoundManager.stopMusic();
     }
 
     /**暂停/继续游戏 */

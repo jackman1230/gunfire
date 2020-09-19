@@ -28,20 +28,20 @@ import SuspendView from "../View/PopView/SuspendView";
 import ChapterView from "../View/PopView/ChapterView";
 import AfterWar from "../View/PopView/AfterWar";
 import BeforeWar from "../View/PopView/BeforeWar";
-import ClickChestView from "../View/PopView/ClickChestView";
+// import ClickChestView from "../View/PopView/ClickChestView";
 import { GameManager } from "./GameManager";
 import ADListView from "../View/PopView/ADListView";
 import PlayerSanBullet from "../View/PlayerSanBullet";
 import Shake from "../View/Shake";
 import { MooSnowSDK } from "./MooSnowSDK";
 import WXFUI_ADremen2 from "../fui/Game/WXFUI_ADremen2";
-import ClickADView from "../View/PopView/ClickADView";
+// import ClickADView from "../View/PopView/ClickADView";
 import WXFUI_ADremen from "../fui/Game/WXFUI_ADremen";
-import NoVideoTipsView from "../View/PopView/NoVideoTipsView";
+// import NoVideoTipsView from "../View/PopView/NoVideoTipsView";
 import FreeView from "../View/PopView/FreeView";
 import { VideoData } from "../Data/VideoData";
-import ShowVideoView from "../View/PopView/ShowVideoView";
-import RecordView from "../View/PopView/RecordView";
+// import ShowVideoView from "../View/PopView/ShowVideoView";
+// import RecordView from "../View/PopView/RecordView";
 import WXFUI_TipsPopView from "../fui/Game/WXFUI_TipsPopView";
 
 export class ViewManager {
@@ -60,13 +60,13 @@ export class ViewManager {
     public chapterView: ChapterView;
     public afterWar: AfterWar;
     public beforeWar: BeforeWar;
-    public clickChestView: ClickChestView;
+    // public clickChestView: ClickChestView;
     public adListView: ADListView;
-    public clickAdView: ClickADView;
-    public noVideoView: NoVideoTipsView;
+    // public clickAdView: ClickADView;
+    // public noVideoView: NoVideoTipsView;
     public freeView: FreeView;
-    public showVideoView: ShowVideoView;
-    public recordView: RecordView;
+    // public showVideoView: ShowVideoView;
+    // public recordView: RecordView;
 
     public tipsView: TipsPopView;
     public popUpView: PopUpView;
@@ -329,7 +329,7 @@ export class ViewManager {
                 }
             }
         } else if (GameManager.instance.platform == moosnow.APP_PLATFORM.BYTEDANCE) {
-            ViewManager.instance.showPopUpView(ViewManager.instance.recordView, true, false, false);
+            // ViewManager.instance.showPopUpView(ViewManager.instance.recordView, true, false, false);
         } else {
             this.showPopUpView(this.afterWar, true, true, false);
         }
@@ -359,9 +359,9 @@ export class ViewManager {
 
     public showClickChestView(): void {
         // console.log("showClickChestView");
-        this.clickChestView.showViewNoTween();
-        GameManager.instance.suspendGame();
-        this.clickChestView.updateView();
+        // this.clickChestView.showViewNoTween();
+        // GameManager.instance.suspendGame();
+        // this.clickChestView.updateView();
     };
 
     public showADListView(type: number = 0): void {
@@ -379,8 +379,8 @@ export class ViewManager {
     };
 
     public showQQWuChuView(type: number = 1): void {
-        this.showPopUpView(this.clickAdView, false, false, false);
-        this.clickAdView.updateView(type);
+        // this.showPopUpView(this.clickAdView, false, false, false);
+        // this.clickAdView.updateView(type);
     };
 
     public hideSuspendView(): void {
@@ -406,27 +406,27 @@ export class ViewManager {
         this.beforeWar = new BeforeWar()
         this.suspendView = new SuspendView();
         this.chapterView = new ChapterView();
-        this.clickChestView = new ClickChestView();
+        // this.clickChestView = new ClickChestView();
         this.adListView = new ADListView()
         this.popUpView = new PopUpView();
         this.tipsView = new TipsPopView();
-        this.clickAdView = new ClickADView();
+        // this.clickAdView = new ClickADView();
         this.freeView = new FreeView();
-        this.noVideoView = new NoVideoTipsView();
-        this.showVideoView = new ShowVideoView();
-        this.recordView = new RecordView();
+        // this.noVideoView = new NoVideoTipsView();
+        // this.showVideoView = new ShowVideoView();
+        // this.recordView = new RecordView();
 
         this.afterWar.createView();
         this.beforeWar.createView();
         this.suspendView.createView();
         this.chapterView.createView();
-        this.clickChestView.createView();
+        // this.clickChestView.createView();
         this.adListView.createView();
-        this.clickAdView.createView();
+        // this.clickAdView.createView();
         this.freeView.createView();
-        this.noVideoView.createView();
-        this.showVideoView.createView();
-        this.recordView.createView();
+        // this.noVideoView.createView();
+        // this.showVideoView.createView();
+        // this.recordView.createView();
 
         Laya.stage.addChildAt(fairygui.GRoot.inst.displayObject, 0);
 
@@ -439,9 +439,9 @@ export class ViewManager {
 
     /**显示未观看完视频弹窗 */
     public showNoVideoView(v: VideoData, d: any, f?: Function, c?: Function): void {
-        this.noVideoView.showViewNoTween();
-        this.noVideoView.updateView(v, d, f,c);
-        this.curPopView.push(this.noVideoView);
+        // this.noVideoView.showViewNoTween();
+        // this.noVideoView.updateView(v, d, f,c);
+        // this.curPopView.push(this.noVideoView);
     }
 
     public curPopView: PopUpView[] = [];

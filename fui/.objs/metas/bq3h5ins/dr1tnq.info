@@ -1,23 +1,23 @@
 {
 	"objectStatus": {
-		"n44_lpi5": {
-			"hidden": true
-		},
-		"n24_dr1t": {
+		"n33_s2x8": {
 			"locked": true
 		},
 		"n32_s2x8": {
 			"locked": true
 		},
-		"n33_s2x8": {
+		"n36_ko37": {
+			"hidden": true,
 			"locked": true
 		},
-		"n36_ko37": {
-			"locked": true,
-			"hidden": true
+		"n24_dr1t": {
+			"locked": true
 		},
 		"n43_mnew": {
-			"locked": true,
+			"hidden": true,
+			"locked": true
+		},
+		"n44_lpi5": {
 			"hidden": true
 		}
 	}

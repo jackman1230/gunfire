@@ -52,7 +52,7 @@ export class SoundManager {
         // }
     }
     public playBGM(name: string): void {
-        var s: string = "res/sound/" + name + ".mp3";
+        var s: string = "sound/" + name + ".mp3";
         this.bgmName = name;
         // var sound: Laya.SoundChannel = 
         Laya.SoundManager.playMusic(s);
