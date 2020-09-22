@@ -1,0 +1,7 @@
+{
+  "code": "export default class PlayerCtlView {\r\n    constructor() { this.createView(); }\r\n    createView() {\r\n        this.view = fairygui.UIPackage.createObject(\"Game\", \"PlayerCtlView\");\r\n        this.layout();\r\n    }\r\n    layout() {\r\n        if (Laya.Browser.onWeiXin) {\r\n            let wxInfo = wx.getSystemInfoSync();\r\n            this.view.x = Laya.stage.width - this.view.width - 50 * (Laya.stage.width / 1334);\r\n            this.view.y = 385;\r\n            console.log(\"this.view--\", this.view.x);\r\n        }\r\n        else {\r\n            var h = (Laya.Browser.height / 750) * 1334;\r\n            this.view.x = 930 * (Laya.Browser.width / h);\r\n            this.view.y = 385;\r\n        }\r\n    }\r\n}\r\n",
+  "references": [
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_PlayerCtlView.ts",
+    "D:/littleGame/gunfire/src/Manager/ViewManager.ts"
+  ]
+}

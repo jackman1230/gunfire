@@ -1,0 +1,6 @@
+{
+  "code": "export default class WXFUI_recordView extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"recordView\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_n33 = (this.getChild(\"n33\"));\r\n        this.m_guanbi = (this.getChild(\"guanbi\"));\r\n        this.m_n36 = (this.getChild(\"n36\"));\r\n        this.m_n37 = (this.getChild(\"n37\"));\r\n        this.m_clickArea = (this.getChild(\"clickArea\"));\r\n    }\r\n}\r\nWXFUI_recordView.URL = \"ui://bq3h5insk6saxwx\";\r\n",
+  "references": [
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_guanbiBtn.ts"
+  ]
+}

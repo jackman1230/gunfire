@@ -1,0 +1,8 @@
+{
+  "code": "import { EventManager } from \"../../Manager/EventManager\";\r\nimport GameEvent from \"../../Control/GameEvent\";\r\nimport { ViewManager } from \"../../Manager/ViewManager\";\r\nexport default class HostageBody extends Laya.Script {\r\n    constructor() {\r\n        super();\r\n        this.activeDis = 150;\r\n        this.isActive = false;\r\n    }\r\n    onEnable() {\r\n        this.selfCollider = this.owner.getComponent(Laya.BoxCollider);\r\n        this.selfBody = this.selfCollider.rigidBody;\r\n        this.self = this.owner;\r\n        this.oriPosX = this.selfBody.getWorldCenter().x;\r\n    }\r\n    onDisable() {\r\n    }\r\n    onTriggerEnter(other, self, contact) {\r\n    }\r\n    onTriggerExit() {\r\n    }\r\n    onTriggerStay(other, self, contact) {\r\n    }\r\n    onUpdate() {\r\n        if (this.isActive)\r\n            return;\r\n        if (Math.abs(ViewManager.instance.rolePlayer.roleSprite.x - this.oriPosX) < this.activeDis) {\r\n            this.isActive = true;\r\n            EventManager.instance.dispatcherEvt(GameEvent.ACTIVE_HOSTAGE, this.owner);\r\n        }\r\n    }\r\n}\r\n",
+  "references": [
+    "D:/littleGame/gunfire/src/Manager/EventManager.ts",
+    "D:/littleGame/gunfire/src/Control/GameEvent.ts",
+    "D:/littleGame/gunfire/src/Manager/ViewManager.ts"
+  ]
+}

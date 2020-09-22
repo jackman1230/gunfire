@@ -115,10 +115,14 @@ export class GameManager {
         ViewManager.instance.removeWarView();
         ViewManager.instance.showChapterView();
         if (end && GameManager.instance.platform == moosnow.APP_PLATFORM.VIVO) {
-            MooSnowSDK.installShortcut();//创建桌面快捷图标
+            Laya.timer.once(500, this, () => {
+                MooSnowSDK.installShortcut();//创建桌面快捷图标
+            });
         }
         if (end && GameManager.instance.platform == moosnow.APP_PLATFORM.OPPO) {
-            MooSnowSDK.installShortcut();//创建桌面快捷图标
+            Laya.timer.once(500, this, () => {
+                MooSnowSDK.installShortcut();//创建桌面快捷图标
+            });
         }
     }
     // Laya.SoundManager.stopMusic();

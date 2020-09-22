@@ -12,13 +12,12 @@ window.moosnowConfig = {
         version: "1.1.0"
     },
     oppo: {
-        bannerId: "168776",
-        videoId: "168781",
+        bannerId: "217751",
+        videoId: "217755",
         interId: "168777",
-        nativeId: ["168779", "168780"],
-        moosnowAppId: "30251588",
-        version: "1.1.0",
-        url: "https://liteplay-1253992229.cos.ap-guangzhou.myqcloud.com/config/tp_hzyx_config_wx.json",
+        nativeId: ["217756", "217753"],
+        moosnowAppId: "30338023",
+        version: "1.0.0",
     },
     qq: {
         bannerId: "fae95316eaa78846d6595d396043b28a",
@@ -39,12 +38,19 @@ window.moosnowConfig = {
         url: "https://liteplay-1253992229.cos.ap-guangzhou.myqcloud.com/config/tp_zzxhcar_config.json",//游戏的配置json，如果用到了getMistouchNum,后台必须配置mistouchNum字段
     },
     byte: {
-        bannerId: "168776",
-        videoId: "168781",
+        bannerId: "24ed1lm552051196jd",
+        videoId: "24o39cpglob96bf1aa",
         interId: "168777",
         nativeId: ["168779", "168780"],
-        moosnowAppId: "30251588",
+        moosnowAppId: "tt82d6f46b1ded0f70",
         version: "1.1.0",
-        url: "https://liteplay-1253992229.cos.ap-guangzhou.myqcloud.com/config/tp_zzxhcar_config.json",//游戏的配置json，如果用到了getMistouchNum,后台必须配置mistouchNum字段
+    },
+    vivo: {
+        bannerId: "8574385fdbbc4ac9ad21d63ca2f6d34f",
+        videoId: "4587d538ceca43f4a9b4708a2265880a",
+        interId: "168777",
+        nativeId: ["d734a0de426e4f0db0447aa596e7cb75"],
+        moosnowAppId: "100009190",
+        version: "1.0.0",
     }
 }

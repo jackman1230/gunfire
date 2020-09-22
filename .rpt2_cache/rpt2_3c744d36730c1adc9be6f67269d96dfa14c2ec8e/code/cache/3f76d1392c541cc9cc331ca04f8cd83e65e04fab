@@ -1,0 +1,4 @@
+{
+  "code": "export class EventManager extends Laya.EventDispatcher {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static get instance() {\r\n        if (this._instance == null)\r\n            this._instance = new EventManager();\r\n        return this._instance;\r\n    }\r\n    dispatcherEvt(InName, agv) {\r\n        EventManager.eventDispatcher.event(InName, agv);\r\n    }\r\n    addNotice(InName, caller, listener, arg) {\r\n        EventManager.eventDispatcher.on(InName, caller, listener, (arg == null) ? null : ([arg]));\r\n    }\r\n    offNotice(InName, caller, listener) {\r\n        EventManager.eventDispatcher.off(InName, caller, listener);\r\n    }\r\n}\r\nEventManager.eventDispatcher = new Laya.EventDispatcher();\r\n",
+  "references": []
+}

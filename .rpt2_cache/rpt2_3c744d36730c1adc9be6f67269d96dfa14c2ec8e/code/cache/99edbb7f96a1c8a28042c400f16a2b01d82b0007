@@ -1,0 +1,6 @@
+{
+  "code": "export default class WXFUI_LevelItem extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"LevelItem\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_ctl = this.getController(\"ctl\");\r\n        this.m_n12 = (this.getChild(\"n12\"));\r\n        this.m_n13 = (this.getChild(\"n13\"));\r\n        this.m_n14 = (this.getChild(\"n14\"));\r\n        this.m_n15 = (this.getChild(\"n15\"));\r\n        this.m_star = (this.getChild(\"star\"));\r\n        this.m_numF = (this.getChild(\"numF\"));\r\n    }\r\n}\r\nWXFUI_LevelItem.URL = \"ui://bq3h5insdr1tnx\";\r\n",
+  "references": [
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_star.ts"
+  ]
+}

@@ -17,6 +17,7 @@ import WXFUI_nextBtn2 from "./WXFUI_nextBtn2";
 export default class WXFUI_AfterWar extends fairygui.GComponent {
 
 	public m_ctl:fairygui.Controller;
+	public m_pos:fairygui.Controller;
 	public m_n20:fairygui.GImage;
 	public m_coin:fairygui.GTextField;
 	public m_n24:fairygui.GImage;
@@ -50,6 +51,7 @@ export default class WXFUI_AfterWar extends fairygui.GComponent {
 
 	protected onConstruct(): void {
 		this.m_ctl = this.getController("ctl");
+		this.m_pos = this.getController("pos");
 		this.m_n20 = <fairygui.GImage><any>(this.getChild("n20"));
 		this.m_coin = <fairygui.GTextField><any>(this.getChild("coin"));
 		this.m_n24 = <fairygui.GImage><any>(this.getChild("n24"));

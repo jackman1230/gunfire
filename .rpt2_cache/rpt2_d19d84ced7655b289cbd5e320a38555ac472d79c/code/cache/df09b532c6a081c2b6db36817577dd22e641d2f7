@@ -1,0 +1,8 @@
+{
+  "code": "export default class WXFUI_BeforeWar extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"BeforeWar\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_bg = (this.getChild(\"bg\"));\r\n        this.m_item_1 = (this.getChild(\"item_1\"));\r\n        this.m_item_2 = (this.getChild(\"item_2\"));\r\n        this.m_item_3 = (this.getChild(\"item_3\"));\r\n        this.m_item_4 = (this.getChild(\"item_4\"));\r\n        this.m_enter = (this.getChild(\"enter\"));\r\n        this.m_n17 = (this.getChild(\"n17\"));\r\n        this.m_n19 = (this.getChild(\"n19\"));\r\n        this.m_n20 = (this.getChild(\"n20\"));\r\n        this.m_n21 = (this.getChild(\"n21\"));\r\n        this.m_coin = (this.getChild(\"coin\"));\r\n        this.m_bulletNum = (this.getChild(\"bulletNum\"));\r\n        this.m_bombNum = (this.getChild(\"bombNum\"));\r\n        this.m_ad1 = (this.getChild(\"ad1\"));\r\n        this.m_ad2 = (this.getChild(\"ad2\"));\r\n    }\r\n}\r\nWXFUI_BeforeWar.URL = \"ui://bq3h5insdr1tnl\";\r\n",
+  "references": [
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_buyItem.ts",
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_enterBtn.ts",
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_ADListVer.ts"
+  ]
+}

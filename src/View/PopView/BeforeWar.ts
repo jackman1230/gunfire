@@ -41,17 +41,19 @@ export default class BeforeWar extends PopUpView {
         }
 
         if (GameManager.instance.platform == moosnow.APP_PLATFORM.QQ) {
-            this.view.m_ad.m_list.visible = false;
+            this.view.m_ad2.m_list.visible = this.view.m_ad1.m_list.visible = false;
             // MooSnowSDK.showBanner(false);
         } else if (GameManager.instance.platform == moosnow.APP_PLATFORM.WX) {
-            this.view.m_ad.m_list.visible = true;
-            this.view.m_ad.m_list.itemRenderer = Laya.Handler.create(this, this.setADItem, null, false);
-            this.view.m_ad.m_list.on(fairygui.Events.CLICK_ITEM, this, this.onClickItem);
+            this.view.m_ad2.m_list.visible = this.view.m_ad1.m_list.visible = true;
+            this.view.m_ad2.m_list.itemRenderer = Laya.Handler.create(this, this.setADItem2, null, false);
+            this.view.m_ad1.m_list.itemRenderer = Laya.Handler.create(this, this.setADItem, null, false);
+            this.view.m_ad2.m_list.on(fairygui.Events.CLICK_ITEM, this, this.onClickItem);
+            this.view.m_ad1.m_list.on(fairygui.Events.CLICK_ITEM, this, this.onClickItem);
             EventManager.instance.addNotice(GameEvent.SHOW_AD_LIST, this, this.showADList);
         } else if (GameManager.instance.platform == moosnow.APP_PLATFORM.BYTEDANCE) {
-            this.view.m_ad.m_list.visible = false;
+            this.view.m_ad2.m_list.visible = this.view.m_ad1.m_list.visible = false;
         } else if (GameManager.instance.platform == moosnow.APP_PLATFORM.VIVO || GameManager.instance.platform == moosnow.APP_PLATFORM.OPPO) {
-            this.view.m_ad.m_list.visible = false;
+            this.view.m_ad2.m_list.visible = this.view.m_ad1.m_list.visible = false;
         }
 
 
@@ -59,7 +61,7 @@ export default class BeforeWar extends PopUpView {
     }
     public showView(s, c): void {
         super.showView(s, c);
-        this.view.m_ad.m_list.x = 0;
+        this.view.m_ad1.m_list.y = 0;
         this.showADList();
         this.updateView();
     }
@@ -81,6 +83,9 @@ export default class BeforeWar extends PopUpView {
         this.view.m_coin.text = GameManager.instance.roleInfo.totalCoin + "";
         this.view.m_bulletNum.text = GameManager.instance.buyBullet + "";
         this.view.m_bombNum.text = GameManager.instance.buyGre + "";
+        if (GameManager.instance.platform == moosnow.APP_PLATFORM.WX) {
+            MooSnowSDK.showBanner(false);
+        }
     }
 
     private buyItemByFree(d: any): void {
@@ -112,19 +117,28 @@ export default class BeforeWar extends PopUpView {
             GameManager.instance.enterGame();
         }
     }
-
+    private _tweenNum: Laya.Tween;
     private showADList(): void {
         if (GameManager.instance.adList.length < 1) return;
         if (GameManager.instance.platform != moosnow.APP_PLATFORM.WX) return
         EventManager.instance.offNotice(GameEvent.SHOW_AD_LIST, this, this.showADList);
-        this.view.m_ad.m_list.width = 136 * GameManager.instance.adList.length;
-        this.view.m_ad.m_list.numItems = GameManager.instance.adList.length;
-        Laya.Tween.clearTween(this.view.m_ad.m_list);
-        this.adMoveLeft();
+        this.view.m_ad1.m_list.numItems = GameManager.instance.adList.length;
+        this.view.m_ad2.m_list.numItems = GameManager.instance.adListRever.length;
+        this.view.m_ad1.m_list.height = this.view.m_ad2.m_list.height = 311 * GameManager.instance.adList.length + 2;
+        Laya.Tween.clearTween(this.view.m_ad1.m_list);
+        this.adMoveUp();
     }
 
     private setADItem(index: number, item: WXFUI_ADItem): void {
         var d: any = GameManager.instance.adList[index];
+        if (!d) return;
+        item.data = d;
+        item.m_icon.url = d.img;
+        item.m_name.text = d.title;
+    }
+
+    private setADItem2(index: number, item: WXFUI_ADItem): void {
+        var d: any = GameManager.instance.adListRever[index];
         if (!d) return;
         item.data = d;
         item.m_icon.url = d.img;
@@ -138,21 +152,33 @@ export default class BeforeWar extends PopUpView {
             console.log('跳转成功 ', res)
         }, (res) => {
             console.log('跳转失败 ', res)
-            ViewManager.instance.showADListView();
+            ViewManager.instance.showADListView(2);
         });
     }
 
-    private adMoveLeft(): void {
-        Laya.Tween.to(this.view.m_ad.m_list, { x: this.view.m_ad.width - 136 * GameManager.instance.adList.length }, GameManager.instance.adTime, null, Laya.Handler.create(this, this.adMoveRight));
+    private adMoveDown(): void {
+        this._tweenNum = Laya.Tween.to(this.view.m_ad1.m_list, { y: 0 }, GameManager.instance.adTime, null, Laya.Handler.create(this, this.adMoveUp));
+        this._tweenNum.update = Laya.Handler.create(this, this.updateTween, null, false);
+
     }
 
-    private adMoveRight(): void {
-        Laya.Tween.to(this.view.m_ad.m_list, { x: 0 }, GameManager.instance.adTime, null, Laya.Handler.create(this, this.adMoveLeft));
+    private adMoveUp(): void {
+        this._tweenNum = Laya.Tween.to(this.view.m_ad1.m_list, { y: this.view.m_ad1.height - 311 * GameManager.instance.adList.length }, GameManager.instance.adTime, null, Laya.Handler.create(this, this.adMoveDown));
+        this._tweenNum.update = Laya.Handler.create(this, this.updateTween, null, false);
+
+    }
+
+    private updateTween(): void {
+        // console.log("updateTween--", this.view.m_ad_1.m_list.y);
+        this.view.m_ad2.m_list.y = this.view.m_ad1.m_list.y;
     }
 
     public hideAllView(): void {
         super.hideAllView();
-        Laya.Tween.clearTween(this.view.m_ad.m_list);
+        Laya.Tween.clearTween(this.view.m_ad1.m_list);
+        if (GameManager.instance.platform == moosnow.APP_PLATFORM.WX) {
+            MooSnowSDK.hideBanner();
+        }
     }
 
 

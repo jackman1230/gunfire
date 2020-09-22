@@ -1,0 +1,13 @@
+{
+  "code": "export default class WXFUI_ChapterView extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"ChapterView\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_ctl = this.getController(\"ctl\");\r\n        this.m_bg = (this.getChild(\"bg\"));\r\n        this.m_n14 = (this.getChild(\"n14\"));\r\n        this.m_map = (this.getChild(\"map\"));\r\n        this.m_level_1 = (this.getChild(\"level_1\"));\r\n        this.m_level_2 = (this.getChild(\"level_2\"));\r\n        this.m_level_3 = (this.getChild(\"level_3\"));\r\n        this.m_level_4 = (this.getChild(\"level_4\"));\r\n        this.m_level_5 = (this.getChild(\"level_5\"));\r\n        this.m_level_6 = (this.getChild(\"level_6\"));\r\n        this.m_level_7 = (this.getChild(\"level_7\"));\r\n        this.m_level_8 = (this.getChild(\"level_8\"));\r\n        this.m_title = (this.getChild(\"title\"));\r\n        this.m_setView = (this.getChild(\"setView\"));\r\n        this.m_ad_1 = (this.getChild(\"ad_1\"));\r\n        this.m_ad_2 = (this.getChild(\"ad_2\"));\r\n        this.m_ad_3 = (this.getChild(\"ad_3\"));\r\n        this.m_n41 = (this.getChild(\"n41\"));\r\n        this.m_ad_remen = (this.getChild(\"ad_remen\"));\r\n        this.m_ad = (this.getChild(\"ad\"));\r\n        this.m_last = (this.getChild(\"last\"));\r\n        this.m_next = (this.getChild(\"next\"));\r\n        this.m_ad_remen2 = (this.getChild(\"ad_remen2\"));\r\n    }\r\n}\r\nWXFUI_ChapterView.URL = \"ui://bq3h5insdr1tnw\";\r\n",
+  "references": [
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_LevelItem.ts",
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_volume.ts",
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_ADmove.ts",
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_ADremen2.ts",
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_ADListHorBig.ts",
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_lastChapter.ts",
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_nextChapter.ts",
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_ADremen.ts"
+  ]
+}

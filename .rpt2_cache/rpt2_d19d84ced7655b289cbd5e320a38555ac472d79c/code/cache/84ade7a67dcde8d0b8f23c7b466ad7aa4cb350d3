@@ -1,0 +1,6 @@
+{
+  "code": "import WXFUI_TipsPopView from \"../fui/Game/WXFUI_TipsPopView\";\r\nexport default class TipsPopView {\r\n    constructor() {\r\n        this.isShow = false;\r\n        this.v = WXFUI_TipsPopView.createInstance();\r\n    }\r\n    showView(str) {\r\n        if (this.isShow)\r\n            return;\r\n        this.isShow = true;\r\n        this.v.x = (Laya.stage.width - this.v.width) / 2;\r\n        this.v.y = (Laya.stage.height - this.v.height) / 2;\r\n        this.v.m_tips.text = str;\r\n        Laya.stage.addChild(this.v.displayObject);\r\n        this.v.displayObject.zOrder = 10;\r\n        this.v.m_play.play(Laya.Handler.create(this, this.hideView), 1, 0, 0);\r\n    }\r\n    hideView() {\r\n        Laya.stage.removeChild(this.v.displayObject);\r\n        this.isShow = false;\r\n    }\r\n}\r\n",
+  "references": [
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_TipsPopView.ts"
+  ]
+}

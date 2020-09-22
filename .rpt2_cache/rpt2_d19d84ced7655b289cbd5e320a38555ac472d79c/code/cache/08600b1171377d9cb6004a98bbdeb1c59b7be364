@@ -1,0 +1,4 @@
+{
+  "code": "export default class WXFUI_WarView extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"WarView\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_bg = (this.getChild(\"bg\"));\r\n        this.m_bg2 = (this.getChild(\"bg2\"));\r\n    }\r\n}\r\nWXFUI_WarView.URL = \"ui://bq3h5insoqgwam\";\r\n",
+  "references": []
+}

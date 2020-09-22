@@ -1,0 +1,8 @@
+{
+  "code": "export default class WXFUI_NativeADView extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"NativeADView\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_ctl = this.getController(\"ctl\");\r\n        this.m_n14 = (this.getChild(\"n14\"));\r\n        this.m_load = (this.getChild(\"load\"));\r\n        this.m_close = (this.getChild(\"close\"));\r\n        this.m_n20 = (this.getChild(\"n20\"));\r\n        this.m_see = (this.getChild(\"see\"));\r\n        this.m_pass = (this.getChild(\"pass\"));\r\n        this.m_n19 = (this.getChild(\"n19\"));\r\n    }\r\n}\r\nWXFUI_NativeADView.URL = \"ui://bq3h5insmnewxx9\";\r\n",
+  "references": [
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_nativeClose.ts",
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_seeAdBtn.ts",
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_continueBtn2.ts"
+  ]
+}

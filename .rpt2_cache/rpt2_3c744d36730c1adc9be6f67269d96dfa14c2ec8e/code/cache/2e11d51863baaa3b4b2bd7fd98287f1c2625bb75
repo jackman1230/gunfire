@@ -1,0 +1,7 @@
+{
+  "code": "export default class PlayerDirView {\r\n    constructor() { this.createView(); }\r\n    createView() {\r\n        this.view = fairygui.UIPackage.createObject(\"Game\", \"PlayerDirView\");\r\n        this.layout();\r\n    }\r\n    layout() {\r\n        if (Laya.Browser.onWeiXin) {\r\n            let wxInfo = wx.getSystemInfoSync();\r\n            this.view.x = 300 * (Laya.stage.width / 1334);\r\n            this.view.y = 720;\r\n        }\r\n        else {\r\n            var h = (Laya.Browser.height / 750) * 1334;\r\n            this.view.x = 320 * (Laya.Browser.width / h);\r\n            this.view.y = 720;\r\n        }\r\n    }\r\n}\r\n",
+  "references": [
+    "D:/littleGame/gunfire/src/Manager/ViewManager.ts",
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_PlayerDirView.ts"
+  ]
+}

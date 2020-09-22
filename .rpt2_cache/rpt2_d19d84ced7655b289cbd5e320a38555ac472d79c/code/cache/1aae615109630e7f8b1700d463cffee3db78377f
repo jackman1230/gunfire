@@ -1,0 +1,4 @@
+{
+  "code": "export default class WXFUI_star extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"star\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_ctl = this.getController(\"ctl\");\r\n        this.m_n18 = (this.getChild(\"n18\"));\r\n        this.m_n19 = (this.getChild(\"n19\"));\r\n        this.m_n16 = (this.getChild(\"n16\"));\r\n        this.m_n17 = (this.getChild(\"n17\"));\r\n        this.m_n20 = (this.getChild(\"n20\"));\r\n        this.m_n21 = (this.getChild(\"n21\"));\r\n    }\r\n}\r\nWXFUI_star.URL = \"ui://bq3h5inscde5xqp\";\r\n",
+  "references": []
+}

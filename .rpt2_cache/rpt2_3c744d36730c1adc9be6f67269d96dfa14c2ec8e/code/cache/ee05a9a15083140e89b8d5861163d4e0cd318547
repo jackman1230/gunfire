@@ -1,0 +1,4 @@
+{
+  "code": "export default class WXFUI_ADremen extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"ADremen\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_n2 = (this.getChild(\"n2\"));\r\n        this.m_ani_1 = this.getTransition(\"ani_1\");\r\n        this.m_ani_2 = this.getTransition(\"ani_2\");\r\n    }\r\n}\r\nWXFUI_ADremen.URL = \"ui://bq3h5inss2x8xs7\";\r\n",
+  "references": []
+}

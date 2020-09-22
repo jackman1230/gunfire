@@ -1,9 +1,7 @@
 {
 	"backgroundColor": 6710886,
 	"libview.iconScale": 0,
-	"auxline2": true,
 	"canvasColor": 10066329,
-	"libview.firstColumnWidth": 243,
 	"doc.openedDocs": [
 		"ui://bq3h5insdr1tnl",
 		"ui://bq3h5insoqgwam",
@@ -31,6 +29,7 @@
 		"ui://bq3h5insbuh7xvr",
 		"ui://bq3h5inss2x8xs6",
 		"ui://bq3h5insdr1tnq",
+		"ui://bq3h5inslpi5xxd",
 		"ui://bq3h5insmnewxx9",
 		"ui://bq3h5insmnewxxb",
 		"ui://bq3h5insmnewxxa",
@@ -48,11 +47,9 @@
 		"ui://bq3h5insko37xuq",
 		"ui://bq3h5inss2x8ir"
 	],
-	"doc.activeDoc": "ui://bq3h5insso8uxx3",
-	"libview.currentGroup": "",
-	"test.orientation": "landscape",
-	"auxline1": true,
+	"auxline2": true,
 	"test.device": "iPhone Xs Max",
+	"test.orientation": "landscape",
 	"libview.expandedNodes": [
 		"bq3h5ins",
 		"/",
@@ -104,10 +101,12 @@
 		"/Component/view/guanggao/QQAD/全屏误触捏橘子横版/",
 		"bq3h5ins",
 		"/Component/view/guanggao/QQAD/全屏误触捏橘子横版/恭喜获得/",
-		"bq3h5ins",
-		"/Component/view/guanggao/vivo/",
 		"nr80du74",
 		"/"
 	],
+	"auxline1": true,
+	"libview.firstColumnWidth": 243,
+	"libview.currentGroup": "",
+	"doc.activeDoc": "ui://bq3h5insdr1tnq",
 	"libview.twoColumn": false
 }

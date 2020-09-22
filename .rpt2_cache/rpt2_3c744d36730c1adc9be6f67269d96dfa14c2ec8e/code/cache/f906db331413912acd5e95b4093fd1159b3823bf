@@ -1,0 +1,7 @@
+{
+  "code": "export default class WXFUI_ClickChestView extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"ClickChestView\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_box = (this.getChild(\"box\"));\r\n        this.m_bar = (this.getChild(\"bar\"));\r\n        this.m_n18 = (this.getChild(\"n18\"));\r\n        this.m_clickBtn = (this.getChild(\"clickBtn\"));\r\n        this.m_t0 = this.getTransition(\"t0\");\r\n    }\r\n}\r\nWXFUI_ClickChestView.URL = \"ui://bq3h5insvmpqxu4\";\r\n",
+  "references": [
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_loadingBar.ts",
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_openChestBtn.ts"
+  ]
+}

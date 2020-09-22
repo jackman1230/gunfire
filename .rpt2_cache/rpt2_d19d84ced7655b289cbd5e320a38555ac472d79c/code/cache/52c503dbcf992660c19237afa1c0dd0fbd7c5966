@@ -1,0 +1,4 @@
+{
+  "code": "export default class WXFUI_BoomView extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"BoomView\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_boom = (this.getChild(\"boom\"));\r\n    }\r\n}\r\nWXFUI_BoomView.URL = \"ui://bq3h5inske5wdt\";\r\n",
+  "references": []
+}

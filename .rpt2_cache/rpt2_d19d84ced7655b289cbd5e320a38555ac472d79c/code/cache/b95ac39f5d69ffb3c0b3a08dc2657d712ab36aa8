@@ -1,0 +1,6 @@
+{
+  "code": "export default class WXFUI_fangqiBtn extends fairygui.GButton {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"fangqiBtn\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_button = this.getController(\"button\");\r\n        this.m_ctl = this.getController(\"ctl\");\r\n        this.m_n0 = (this.getChild(\"n0\"));\r\n        this.m_n1 = (this.getChild(\"n1\"));\r\n        this.m_guanbi = (this.getChild(\"guanbi\"));\r\n    }\r\n}\r\nWXFUI_fangqiBtn.URL = \"ui://bq3h5insk6saxwp\";\r\n",
+  "references": [
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_guanbiBtn.ts"
+  ]
+}

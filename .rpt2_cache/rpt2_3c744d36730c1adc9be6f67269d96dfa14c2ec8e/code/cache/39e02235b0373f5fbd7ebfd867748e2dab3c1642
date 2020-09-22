@@ -1,0 +1,7 @@
+{
+  "code": "export default class WXFUI_buyItem extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"buyItem\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_n2 = (this.getChild(\"n2\"));\r\n        this.m_n4 = (this.getChild(\"n4\"));\r\n        this.m_n5 = (this.getChild(\"n5\"));\r\n        this.m_buy = (this.getChild(\"buy\"));\r\n        this.m_coin = (this.getChild(\"coin\"));\r\n        this.m_free = (this.getChild(\"free\"));\r\n        this.m_icon = (this.getChild(\"icon\"));\r\n        this.m_info = (this.getChild(\"info\"));\r\n        this.m_ani = this.getTransition(\"ani\");\r\n    }\r\n}\r\nWXFUI_buyItem.URL = \"ui://bq3h5insdr1tnm\";\r\n",
+  "references": [
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_buyBtn.ts",
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_freeBtn.ts"
+  ]
+}

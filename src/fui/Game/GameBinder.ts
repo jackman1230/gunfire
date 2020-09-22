@@ -85,7 +85,6 @@ import WXFUI_obstacleView from "./WXFUI_obstacleView";
 import WXFUI_ADItem from "./WXFUI_ADItem";
 import WXFUI_ADmove from "./WXFUI_ADmove";
 import WXFUI_ADListVer from "./WXFUI_ADListVer";
-import WXFUI_ADListHor from "./WXFUI_ADListHor";
 import WXFUI_ADremen from "./WXFUI_ADremen";
 import WXFUI_GoodsItem from "./WXFUI_GoodsItem";
 import WXFUI_blood from "./WXFUI_blood";
@@ -191,7 +190,6 @@ export default class GameBinder{
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_ADItem.URL, WXFUI_ADItem);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_ADmove.URL, WXFUI_ADmove);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_ADListVer.URL, WXFUI_ADListVer);
-		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_ADListHor.URL, WXFUI_ADListHor);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_ADremen.URL, WXFUI_ADremen);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_GoodsItem.URL, WXFUI_GoodsItem);
 		fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_blood.URL, WXFUI_blood);

@@ -1,0 +1,8 @@
+{
+  "code": "import { GoodsType } from \"../Data/GameData\";\r\nimport { GameManager } from \"../Manager/GameManager\";\r\nexport default class AddGold {\r\n    constructor() { }\r\n    createView(goodsType, num, s, isBox = false) {\r\n        this.view = fairygui.UIPackage.createObject(\"Game\", \"addGold\");\r\n        this.view.m_icon.url = \"\";\r\n        var n = num;\r\n        if (isBox) {\r\n            this.view.m_icon.url = \"ui://Game/goods_\" + goodsType;\r\n            if (goodsType == GoodsType.GoodsType_MED) {\r\n                n = 1;\r\n            }\r\n            else if (goodsType == GoodsType.GoodsType_MAC) {\r\n                n = GameManager.instance.roleInfo.addMacNum;\r\n            }\r\n            else if (goodsType == GoodsType.GoodsType_RIF) {\r\n                n = GameManager.instance.roleInfo.addRifNum;\r\n            }\r\n            else if (goodsType == GoodsType.GoodsType_GRE) {\r\n                n = GameManager.instance.roleInfo.addBombNum;\r\n            }\r\n        }\r\n        this.view.m_num.text = \" + \" + n;\r\n        this.view.m_ani.play(Laya.Handler.create(this, this.dispose));\r\n        s.addChild(this.view.displayObject);\r\n    }\r\n    dispose() {\r\n        if (this.view.parent) {\r\n            this.view.parent.removeChild(this.view);\r\n        }\r\n        Laya.Pool.recover(\"addGold\", this);\r\n    }\r\n}\r\n",
+  "references": [
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_addGold.ts",
+    "D:/littleGame/gunfire/src/Data/GameData.ts",
+    "D:/littleGame/gunfire/src/Manager/GameManager.ts"
+  ]
+}

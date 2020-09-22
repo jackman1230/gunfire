@@ -1,0 +1,4 @@
+{
+  "code": "export default class WXFUI_PopUpView extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"PopUpView\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_mask = (this.getChild(\"mask\"));\r\n        this.m_load = (this.getChild(\"load\"));\r\n        this.m_t0 = this.getTransition(\"t0\");\r\n    }\r\n}\r\nWXFUI_PopUpView.URL = \"ui://bq3h5insmtpio6\";\r\n",
+  "references": []
+}

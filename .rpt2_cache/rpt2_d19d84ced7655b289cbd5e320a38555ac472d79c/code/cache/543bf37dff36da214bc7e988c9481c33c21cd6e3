@@ -1,0 +1,6 @@
+{
+  "code": "export default class DamageView {\r\n    constructor() { }\r\n    createView(damage, s) {\r\n        this.view = fairygui.UIPackage.createObject(\"Game\", \"damageView\");\r\n        this.view.m_num.text = \" - \" + damage * 5;\r\n        this.view.m_ani.play(Laya.Handler.create(this, this.dispose));\r\n        s.addChild(this.view.displayObject);\r\n    }\r\n    dispose() {\r\n        if (this.view.parent) {\r\n            this.view.parent.removeChild(this.view);\r\n        }\r\n        Laya.Pool.recover(\"damageView\", this);\r\n    }\r\n}\r\n",
+  "references": [
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_damageView.ts"
+  ]
+}

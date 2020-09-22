@@ -1,0 +1,7 @@
+{
+  "code": "export default class WXFUI_showVideoView extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"showVideoView\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_n33 = (this.getChild(\"n33\"));\r\n        this.m_queding = (this.getChild(\"queding\"));\r\n        this.m_gou = (this.getChild(\"gou\"));\r\n        this.m_n37 = (this.getChild(\"n37\"));\r\n    }\r\n}\r\nWXFUI_showVideoView.URL = \"ui://bq3h5insk6saxwv\";\r\n",
+  "references": [
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_queding3Btn.ts",
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_videoBtn.ts"
+  ]
+}

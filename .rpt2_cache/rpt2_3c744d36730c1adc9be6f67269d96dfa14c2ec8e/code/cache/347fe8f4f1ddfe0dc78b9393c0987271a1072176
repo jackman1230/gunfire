@@ -1,0 +1,13 @@
+{
+  "code": "import PopUpView from \"../PopUpView\";\r\nimport { ViewManager } from \"../../Manager/ViewManager\";\r\nimport { MooSnowSDK } from \"../../Manager/MooSnowSDK\";\r\nimport WXFUI_noVideoTips from \"../../fui/Game/WXFUI_noVideoTips\";\r\nexport default class NoVideoTipsView extends PopUpView {\r\n    constructor() {\r\n        super();\r\n        this.timeOut = 0;\r\n    }\r\n    createView() {\r\n        this.view = WXFUI_noVideoTips.createInstance();\r\n    }\r\n    showCloseBtn() {\r\n        this.view.m_guanbi.visible = true;\r\n    }\r\n    updateView(v, item, successFun, closeFun) {\r\n        this.videoData = v;\r\n        this.itemData = item;\r\n        this.successFun = successFun;\r\n        this.closeFun = closeFun;\r\n        this.view.m_guanbi.visible = false;\r\n        this.view.m_guanbi.onClick(this, this.closeHandle);\r\n        this.view.m_queding.onClick(this, this.continueHandle);\r\n        clearTimeout(this.timeOut);\r\n        this.timeOut = setTimeout(() => {\r\n            this.showCloseBtn();\r\n        }, 3000);\r\n    }\r\n    continueHandle() {\r\n        if (!this.videoData)\r\n            return;\r\n        MooSnowSDK.showVideo(this.itemData, this.videoData, this.successFun);\r\n    }\r\n    closeHandle() {\r\n        if (this.closeFun) {\r\n            this.closeFun();\r\n        }\r\n        this.view.m_guanbi.offClick(this, this.closeHandle);\r\n        this.view.m_queding.offClick(this, this.continueHandle);\r\n        ViewManager.instance.hidePopUpView(this, false);\r\n    }\r\n}\r\n",
+  "references": [
+    "D:/littleGame/gunfire/src/View/PopUpView.ts",
+    "D:/littleGame/gunfire/src/Manager/GameManager.ts",
+    "D:/littleGame/gunfire/src/Manager/SoundManager.ts",
+    "D:/littleGame/gunfire/src/Manager/ViewManager.ts",
+    "D:/littleGame/gunfire/src/Manager/MooSnowSDK.ts",
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_freeView.ts",
+    "D:/littleGame/gunfire/src/fui/Game/WXFUI_noVideoTips.ts",
+    "D:/littleGame/gunfire/src/Data/VideoData.ts"
+  ]
+}

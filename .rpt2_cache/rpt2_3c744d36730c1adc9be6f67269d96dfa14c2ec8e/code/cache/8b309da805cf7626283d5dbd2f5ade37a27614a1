@@ -1,0 +1,6 @@
+{
+  "code": "export default class WXFUI_loadingView extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"loading\", \"loadingView\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_n7 = (this.getChild(\"n7\"));\r\n        this.m_n6 = (this.getChild(\"n6\"));\r\n        this.m_bar = (this.getChild(\"bar\"));\r\n        this.m_txt = (this.getChild(\"txt\"));\r\n    }\r\n}\r\nWXFUI_loadingView.URL = \"ui://nr80du74n8quil\";\r\n",
+  "references": [
+    "D:/littleGame/gunfire/src/fui/loading/WXFUI_loadingBar.ts"
+  ]
+}

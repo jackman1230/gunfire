@@ -32,9 +32,11 @@
         "!$basePath/*. html",
         "!$basePath/{version.json,game.js,game.json,project.config.json,weapp-adapter.js,project.swan.json,swan-game-adapter.js,main.js,gameConfig.json,my-adapter.js}",
         "!$basePath/utils/**/*.*",
-        "!$basePath/libs/**/*.*"
+        "!$basePath/libs/**/*.*",
+        "!$basePath/res/**/*.js"
     ],
     "versionNoteList": [
+        "",
         "",
         "",
         "",
@@ -92,7 +94,7 @@
     "useMinJsLibs": false,
     "es6toes5": false,
     "projectType": "ts",
-    "pubTime": 1599187898425,
+    "pubTime": 1600678810456,
     "uesEnginePlugin": false,
     "wxOptimize": {
         "useOptimizeOpen": false,

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1334,750" opaque="false">
-  <controller name="ctl" pages="0,,1,,2,,5," selected="0"/>
+  <controller name="ctl" pages="0,,1,,2,,5," selected="2"/>
+  <controller name="pos" pages="0,,1," selected="1"/>
   <displayList>
     <image id="n20_dr1t" name="n20" src="n8qumh" fileName="assets/otherView/战后结算页面/切图/金币.png" xy="606,161">
       <gearDisplay controller="ctl" pages="0,5,6"/>
@@ -19,14 +20,15 @@
     <component id="n29_dr1t" name="abandon" src="unfjxqr" fileName="Component/btn/abandon.xml" xy="602,116">
       <gearDisplay controller="ctl" pages="2"/>
     </component>
-    <component id="n31_dr1t" name="continue_1" src="dr1tns" fileName="Component/btn/continueBtn2.xml" xy="536,490">
+    <component id="n31_dr1t" name="continue_1" src="dr1tns" fileName="Component/btn/continueBtn2.xml" xy="536,420">
       <gearDisplay controller="ctl" pages="0"/>
     </component>
     <component id="n27_dr1t" name="continue_2" src="dr1tnu" fileName="Component/btn/continueBtn4.xml" xy="536,443">
       <gearDisplay controller="ctl" pages="1"/>
     </component>
-    <component id="n30_dr1t" name="continue_3" src="dr1tnt" fileName="Component/btn/continueBtn3.xml" xy="536,512">
+    <component id="n30_dr1t" name="continue_3" src="dr1tnt" fileName="Component/btn/continueBtn3.xml" xy="536,495">
       <gearDisplay controller="ctl" pages="2"/>
+      <gearXY controller="pos" pages="0,1" values="536,420|536,495"/>
     </component>
     <component id="n23_dr1t" name="return" src="dr1tnr" fileName="Component/btn/backBtn.xml" xy="449,474">
       <gearDisplay controller="ctl" pages="1"/>

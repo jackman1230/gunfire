@@ -14,9 +14,8 @@ import { MooSnowSDK } from "../../Manager/MooSnowSDK";
 export default class ADListView extends PopUpView {
 
     public view: WXFUI_ADListView;
-    private floor: number = 0;
-    private ceil: number = 0;
     public type: number = 0;
+
     constructor() { super() }
 
     createView(): void {
@@ -55,6 +54,7 @@ export default class ADListView extends PopUpView {
         if (d && d.exportAutoNavigate && d.exportAutoNavigate != 0) {//开启自动跳转一个随机游戏
             this.gotoRandomGame();
         }
+        MooSnowSDK.hideBanner();
     }
     private timer: number = 4;
     private showTimer(): void {
@@ -75,6 +75,10 @@ export default class ADListView extends PopUpView {
         ViewManager.instance.adListView.hideAllView();
         if (this.type == 1) {
             GameManager.instance.goFirstPage();
+        }
+        if (this.type == 2) {
+            // GameManager.instance.goFirstPage();
+            MooSnowSDK.showBanner(false);
         }
     }
 

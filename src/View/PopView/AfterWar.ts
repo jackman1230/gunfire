@@ -137,9 +137,13 @@ export default class AfterWar extends PopUpView {
         this.view.m_nextBtn2.visible = false;
         if (type == 3) {
             this.view.m_abandon.visible = false;
-            Laya.timer.once(2000, this, this.showAbondon);
             if (GameManager.instance.platform == moosnow.APP_PLATFORM.WX)
                 ViewManager.instance.showADListView();
+            if (GameManager.instance.platform == moosnow.APP_PLATFORM.OPPO) {
+                this.showAbondon();
+            } else {
+                Laya.timer.once(2000, this, this.showAbondon);
+            }
         } else if (type == 1) {
             if (GameManager.instance.platform == moosnow.APP_PLATFORM.WX) {
                 this.view.m_adHot.visible = true;
@@ -157,6 +161,9 @@ export default class AfterWar extends PopUpView {
             if (type == 3) {
                 this.view.m_nativeAD.m_ctl.selectedIndex = 1;
                 this.view.m_oppoNative.m_ctl.selectedIndex = 1;
+                if (GameManager.instance.platform == moosnow.APP_PLATFORM.OPPO) {
+                    this.view.m_pos.selectedIndex = 1;
+                }
             } else {
                 this.view.m_nativeAD.m_ctl.selectedIndex = 0;
                 this.view.m_oppoNative.m_ctl.selectedIndex = 0;
@@ -164,10 +171,10 @@ export default class AfterWar extends PopUpView {
                     this.view.m_continue_1.visible = false;
                     this.view.m_sanbei.visible = true;
                     this.view.m_sanbei.onClick(this, this.onSanBeiHandle);
-                    Laya.timer.once(3000, this, () => {
-                        this.view.m_nextBtn2.visible = true;
-                        this.view.m_nextBtn2.onClick(this, this.continueGame);
-                    });
+                    // Laya.timer.once(3000, this, () => {
+                    this.view.m_nextBtn2.visible = true;
+                    this.view.m_nextBtn2.onClick(this, this.continueGame);
+                    // });
                 }
             }
 
