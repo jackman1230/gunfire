@@ -1,9 +1,0 @@
-{
-  "code": "export default class WXFUI_freeView extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"freeView\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_ctl = this.getController(\"ctl\");\r\n        this.m_n25 = (this.getChild(\"n25\"));\r\n        this.m_n27 = (this.getChild(\"n27\"));\r\n        this.m_n28 = (this.getChild(\"n28\"));\r\n        this.m_gou = (this.getChild(\"gou\"));\r\n        this.m_n30 = (this.getChild(\"n30\"));\r\n        this.m_lingqu = (this.getChild(\"lingqu\"));\r\n        this.m_fangqi = (this.getChild(\"fangqi\"));\r\n        this.m_cha = (this.getChild(\"cha\"));\r\n    }\r\n}\r\nWXFUI_freeView.URL = \"ui://bq3h5insk6saxwm\";\r\n",
-  "references": [
-    "D:/littleGame/gunfire/src/fui/Game/WXFUI_videoBtn.ts",
-    "D:/littleGame/gunfire/src/fui/Game/WXFUI_lingquBtn.ts",
-    "D:/littleGame/gunfire/src/fui/Game/WXFUI_fangqiBtn.ts",
-    "D:/littleGame/gunfire/src/fui/Game/WXFUI_chaBtn.ts"
-  ]
-}

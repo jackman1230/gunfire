@@ -1,4 +1,0 @@
-{
-  "code": "export default class WXFUI_zidan extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"zidan\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_zidan = (this.getChild(\"zidan\"));\r\n    }\r\n}\r\nWXFUI_zidan.URL = \"ui://bq3h5insyqv7ax\";\r\n",
-  "references": []
-}

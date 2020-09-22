@@ -1,4 +1,0 @@
-{
-  "code": "export default class WXFUI_quedingBtn extends fairygui.GButton {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"quedingBtn\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_button = this.getController(\"button\");\r\n        this.m_n0 = (this.getChild(\"n0\"));\r\n    }\r\n}\r\nWXFUI_quedingBtn.URL = \"ui://bq3h5insbuh7xvs\";\r\n",
-  "references": []
-}

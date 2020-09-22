@@ -1,4 +1,0 @@
-{
-  "code": "export default class WXFUI_enemy_fire_11 extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"enemy_fire_11\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_tank = (this.getChild(\"tank\"));\r\n        this.m_fire = (this.getChild(\"fire\"));\r\n    }\r\n}\r\nWXFUI_enemy_fire_11.URL = \"ui://bq3h5insqz5uks\";\r\n",
-  "references": []
-}

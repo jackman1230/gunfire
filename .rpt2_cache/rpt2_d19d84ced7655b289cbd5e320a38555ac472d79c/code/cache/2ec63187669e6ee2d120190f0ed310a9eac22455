@@ -1,4 +1,0 @@
-{
-  "code": "export class VideoData {\r\n    constructor() {\r\n        this.type = 0;\r\n        this.info = \"\";\r\n    }\r\n}\r\nexport class VideoInfo {\r\n}\r\nVideoInfo.VIDEOINFO_ITEM = \"看视频获得物资\";\r\nVideoInfo.VIDEOINFO_LIFE = \"看视频原地复活\";\r\nVideoInfo.VIDEOINFO_DOUBLE_COIN = \"看视频获得双倍金币\";\r\nVideoInfo.VIDEOINFO_BOX = \"看视频获得宝箱奖励\";\r\nVideoInfo.VIDEOINFO_GOODS = \"金币不够,看视频获得道具\";\r\nVideoInfo.VIDEOTYPE_TREBLE_COIN = \"看视频获得三倍金币\";\r\nexport class VideoType {\r\n}\r\nVideoType.VIDEOTYPE_ITEM = 1;\r\nVideoType.VIDEOTYPE_LIFE = 2;\r\nVideoType.VIDEOTYPE_DOUBLE_COIN = 3;\r\nVideoType.VIDEOTYPE_BOX = 4;\r\nVideoType.VIDEOTYPE_GOODS = 5;\r\nVideoType.VIDEOTYPE_TREBLE_COIN = 6;\r\n",
-  "references": []
-}

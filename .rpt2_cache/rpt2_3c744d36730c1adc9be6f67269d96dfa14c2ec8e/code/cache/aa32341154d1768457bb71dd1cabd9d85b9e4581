@@ -1,4 +1,0 @@
-{
-  "code": "export default class WXFUI_openChestBtn extends fairygui.GButton {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"openChestBtn\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_button = this.getController(\"button\");\r\n        this.m_n0 = (this.getChild(\"n0\"));\r\n        this.m_n1 = (this.getChild(\"n1\"));\r\n        this.m_n2 = (this.getChild(\"n2\"));\r\n    }\r\n}\r\nWXFUI_openChestBtn.URL = \"ui://bq3h5insvmpqxu9\";\r\n",
-  "references": []
-}

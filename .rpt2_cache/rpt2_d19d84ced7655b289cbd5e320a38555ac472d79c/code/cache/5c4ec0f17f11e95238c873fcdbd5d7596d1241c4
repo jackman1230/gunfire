@@ -1,7 +1,0 @@
-{
-  "code": "export default class WXFUI_ADListView extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"ADListView\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_ctl = this.getController(\"ctl\");\r\n        this.m_n6 = (this.getChild(\"n6\"));\r\n        this.m_ad_1 = (this.getChild(\"ad_1\"));\r\n        this.m_ad_2 = (this.getChild(\"ad_2\"));\r\n        this.m_jixu = (this.getChild(\"jixu\"));\r\n        this.m_n12 = (this.getChild(\"n12\"));\r\n        this.m_time = (this.getChild(\"time\"));\r\n    }\r\n}\r\nWXFUI_ADListView.URL = \"ui://bq3h5insvmpqxua\";\r\n",
-  "references": [
-    "D:/littleGame/gunfire/src/fui/Game/WXFUI_ADListHorBig2.ts",
-    "D:/littleGame/gunfire/src/fui/Game/WXFUI_continueBtn.ts"
-  ]
-}

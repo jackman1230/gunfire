@@ -1,6 +1,0 @@
-{
-  "code": "export default class WXFUI_RewardView extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"RewardView\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_n12 = (this.getChild(\"n12\"));\r\n        this.m_n6 = (this.getChild(\"n6\"));\r\n        this.m_n7 = (this.getChild(\"n7\"));\r\n        this.m_btn = (this.getChild(\"btn\"));\r\n        this.m_n10 = (this.getChild(\"n10\"));\r\n        this.m_n11 = (this.getChild(\"n11\"));\r\n    }\r\n}\r\nWXFUI_RewardView.URL = \"ui://bq3h5insbuh7xvr\";\r\n",
-  "references": [
-    "D:/littleGame/gunfire/src/fui/Game/WXFUI_quedingBtn.ts"
-  ]
-}

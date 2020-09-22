@@ -1,4 +1,0 @@
-{
-  "code": "export default class WXFUI_clickBtn extends fairygui.GButton {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"clickBtn\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_button = this.getController(\"button\");\r\n        this.m_n0 = (this.getChild(\"n0\"));\r\n    }\r\n}\r\nWXFUI_clickBtn.URL = \"ui://bq3h5insm5yyxvm\";\r\n",
-  "references": []
-}

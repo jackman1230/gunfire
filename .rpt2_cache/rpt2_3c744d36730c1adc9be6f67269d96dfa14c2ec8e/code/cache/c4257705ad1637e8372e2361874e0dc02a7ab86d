@@ -1,4 +1,0 @@
-{
-  "code": "export default class WXFUI_ADItemBig2 extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"ADItemBig2\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_n0 = (this.getChild(\"n0\"));\r\n        this.m_icon = (this.getChild(\"icon\"));\r\n        this.m_name = (this.getChild(\"name\"));\r\n    }\r\n}\r\nWXFUI_ADItemBig2.URL = \"ui://bq3h5insihitxus\";\r\n",
-  "references": []
-}

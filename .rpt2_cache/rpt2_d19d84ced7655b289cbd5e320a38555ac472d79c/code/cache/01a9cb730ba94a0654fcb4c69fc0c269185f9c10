@@ -1,4 +1,0 @@
-{
-  "code": "export default class WXFUI_volume extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"volume\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_ctl = this.getController(\"ctl\");\r\n        this.m_n4 = (this.getChild(\"n4\"));\r\n        this.m_n5 = (this.getChild(\"n5\"));\r\n        this.m_n6 = (this.getChild(\"n6\"));\r\n    }\r\n}\r\nWXFUI_volume.URL = \"ui://bq3h5insugvixpi\";\r\n",
-  "references": []
-}

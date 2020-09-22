@@ -1,4 +1,0 @@
-{
-  "code": "export default class WXFUI_ADListVer extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"ADListVer\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_list = (this.getChild(\"list\"));\r\n        this.m_n4 = (this.getChild(\"n4\"));\r\n    }\r\n}\r\nWXFUI_ADListVer.URL = \"ui://bq3h5inss2x8xs5\";\r\n",
-  "references": []
-}

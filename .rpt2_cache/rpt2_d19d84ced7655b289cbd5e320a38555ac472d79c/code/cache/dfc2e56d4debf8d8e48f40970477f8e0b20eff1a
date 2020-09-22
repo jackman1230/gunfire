@@ -1,8 +1,0 @@
-{
-  "code": "export default class WXFUI_OppoNativeADView extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"OppoNativeADView\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_ctl = this.getController(\"ctl\");\r\n        this.m_see = (this.getChild(\"see\"));\r\n        this.m_pass = (this.getChild(\"pass\"));\r\n        this.m_n14 = (this.getChild(\"n14\"));\r\n        this.m_load = (this.getChild(\"load\"));\r\n        this.m_close = (this.getChild(\"close\"));\r\n        this.m_n20 = (this.getChild(\"n20\"));\r\n        this.m_n21 = (this.getChild(\"n21\"));\r\n    }\r\n}\r\nWXFUI_OppoNativeADView.URL = \"ui://bq3h5inslpi5xxd\";\r\n",
-  "references": [
-    "D:/littleGame/gunfire/src/fui/Game/WXFUI_seeAdBtn.ts",
-    "D:/littleGame/gunfire/src/fui/Game/WXFUI_continueBtn2.ts",
-    "D:/littleGame/gunfire/src/fui/Game/WXFUI_nativeClose.ts"
-  ]
-}

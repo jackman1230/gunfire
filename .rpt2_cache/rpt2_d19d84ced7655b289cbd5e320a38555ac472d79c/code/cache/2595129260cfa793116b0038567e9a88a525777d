@@ -1,4 +1,0 @@
-{
-  "code": "export default class WXFUI_damageView extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"damageView\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_num = (this.getChild(\"num\"));\r\n        this.m_ani = this.getTransition(\"ani\");\r\n    }\r\n}\r\nWXFUI_damageView.URL = \"ui://bq3h5ins8mn4xsm\";\r\n",
-  "references": []
-}

@@ -1,7 +1,0 @@
-{
-  "code": "export default class WXFUI_ADReMenList extends fairygui.GComponent {\r\n    constructor() {\r\n        super();\r\n    }\r\n    static createInstance() {\r\n        return (fairygui.UIPackage.createObject(\"Game\", \"ADReMenList\"));\r\n    }\r\n    onConstruct() {\r\n        this.m_n6 = (this.getChild(\"n6\"));\r\n        this.m_ad_3 = (this.getChild(\"ad_3\"));\r\n        this.m_ad_2 = (this.getChild(\"ad_2\"));\r\n        this.m_ad_1 = (this.getChild(\"ad_1\"));\r\n        this.m_ad_6 = (this.getChild(\"ad_6\"));\r\n        this.m_ad_5 = (this.getChild(\"ad_5\"));\r\n        this.m_ad_4 = (this.getChild(\"ad_4\"));\r\n        this.m_n21 = (this.getChild(\"n21\"));\r\n        this.m_jixu = (this.getChild(\"jixu\"));\r\n    }\r\n}\r\nWXFUI_ADReMenList.URL = \"ui://bq3h5insko37xui\";\r\n",
-  "references": [
-    "D:/littleGame/gunfire/src/fui/Game/WXFUI_ADItem.ts",
-    "D:/littleGame/gunfire/src/fui/Game/WXFUI_continueBtn.ts"
-  ]
-}
