@@ -14,9 +14,6 @@ import { VideoData, VideoType, VideoInfo } from "../../Data/VideoData";
 export default class AfterWar extends PopUpView {
 
     public view: WXFUI_AfterWar;
-    private viewType: number = 1;
-
-    private hotNum: number = 6;
     private adList: any[] = [];
 
     private _checkBoxMistouch: boolean = false;
@@ -129,7 +126,7 @@ export default class AfterWar extends PopUpView {
      * @param type 1胜利界面，2失败界面，3放弃界面
      */
     public updateView(type: number): void {
-        this.viewType = type;
+        // this.viewType = type;
         this.updateCoin();
         this.view.m_nativeAD.visible = false;
         this.view.m_oppoNative.visible = false;
@@ -194,6 +191,7 @@ export default class AfterWar extends PopUpView {
             this.view.m_nativeAD.m_close.onClick(this, this.onCloseHandle);
             this.view.m_nativeAD.m_see.onClick(this, this.onSeeHandle);
             this.view.m_nativeAD.m_pass.onClick(this, this.onSeeHandle);
+            this.view.m_nativeAD.m_load.onClick(this, this.onSeeHandle);
             if (this._sdkData && this._sdkData.mx_native_click_switch && this._sdkData.mx_native_click_switch == 1) {
                 this.view.m_nativeAD.m_see.visible = false;
                 this.view.m_nativeAD.m_pass.visible = true;
@@ -214,6 +212,7 @@ export default class AfterWar extends PopUpView {
             this.view.m_oppoNative.m_close.onClick(this, this.onCloseHandle);
             this.view.m_oppoNative.m_see.onClick(this, this.onSeeHandle);
             this.view.m_oppoNative.m_pass.onClick(this, this.onSeeHandle);
+            this.view.m_oppoNative.m_load.onClick(this, this.onSeeHandle);
             if (this._sdkData && this._sdkData.mx_native_click_switch && this._sdkData.mx_native_click_switch == 1) {
                 this.view.m_oppoNative.m_see.visible = false;
                 this.view.m_oppoNative.m_pass.visible = true;
@@ -235,7 +234,6 @@ export default class AfterWar extends PopUpView {
         else
             this.hideNativeAD();
     }
-
     private hideNativeAD(): void {
         this.view.m_nativeAD.visible = false;
         this.view.m_oppoNative.visible = false;
@@ -379,9 +377,11 @@ export default class AfterWar extends PopUpView {
         this.view.m_nativeAD.m_close.offClick(this, this.onCloseHandle);
         this.view.m_nativeAD.m_see.offClick(this, this.onSeeHandle);
         this.view.m_nativeAD.m_pass.offClick(this, this.onSeeHandle);
+        this.view.m_nativeAD.m_load.offClick(this, this.onSeeHandle);
         this.view.m_oppoNative.m_close.offClick(this, this.onCloseHandle);
         this.view.m_oppoNative.m_see.offClick(this, this.onSeeHandle);
         this.view.m_oppoNative.m_pass.offClick(this, this.onSeeHandle);
+        this.view.m_oppoNative.m_load.offClick(this, this.onSeeHandle);
         this.view.m_sanbei.offClick(this, this.onSanBeiHandle);
         this.view.m_nextBtn2.offClick(this, this.continueGame);
         this.view.m_ad_1.m_list.off(fairygui.Events.CLICK_ITEM, this, this.onClickItem);

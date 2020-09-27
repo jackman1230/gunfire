@@ -230,7 +230,7 @@
         map_3UI.uiView = { "type": "Scene", "props": { "width": 50, "height": 50 }, "compId": 2, "child": [{ "type": "Script", "props": { "y": 343, "x": 832, "points": "0,-340,0,250,4199,250", "label": "ground", "friction": 0, "runtime": "laya.physics.ChainCollider" }, "compId": 12 }, { "type": "Script", "props": { "y": -167, "x": -1848, "type": "static", "label": "ground", "group": 0, "runtime": "laya.physics.RigidBody" }, "compId": 13 }], "loadList": [], "loadList3D": [] };
         ui.map_3UI = map_3UI;
         REG("ui.map_3UI", map_3UI);
-        class map_4UI extends Scene {
+        class map_4UI extends Laya.Scene {
             constructor() {
                 super();
             }
@@ -4139,8 +4139,6 @@
     class AfterWar extends PopUpView {
         constructor() {
             super();
-            this.viewType = 1;
-            this.hotNum = 6;
             this.adList = [];
             this._checkBoxMistouch = false;
             this._clickCount = 0;
@@ -4231,7 +4229,6 @@
             }
         }
         updateView(type) {
-            this.viewType = type;
             this.updateCoin();
             this.view.m_nativeAD.visible = false;
             this.view.m_oppoNative.visible = false;
@@ -4296,6 +4293,7 @@
                 this.view.m_nativeAD.m_close.onClick(this, this.onCloseHandle);
                 this.view.m_nativeAD.m_see.onClick(this, this.onSeeHandle);
                 this.view.m_nativeAD.m_pass.onClick(this, this.onSeeHandle);
+                this.view.m_nativeAD.m_load.onClick(this, this.onSeeHandle);
                 if (this._sdkData && this._sdkData.mx_native_click_switch && this._sdkData.mx_native_click_switch == 1) {
                     this.view.m_nativeAD.m_see.visible = false;
                     this.view.m_nativeAD.m_pass.visible = true;
@@ -4317,6 +4315,7 @@
                 this.view.m_oppoNative.m_close.onClick(this, this.onCloseHandle);
                 this.view.m_oppoNative.m_see.onClick(this, this.onSeeHandle);
                 this.view.m_oppoNative.m_pass.onClick(this, this.onSeeHandle);
+                this.view.m_oppoNative.m_load.onClick(this, this.onSeeHandle);
                 if (this._sdkData && this._sdkData.mx_native_click_switch && this._sdkData.mx_native_click_switch == 1) {
                     this.view.m_oppoNative.m_see.visible = false;
                     this.view.m_oppoNative.m_pass.visible = true;
@@ -4462,9 +4461,11 @@
             this.view.m_nativeAD.m_close.offClick(this, this.onCloseHandle);
             this.view.m_nativeAD.m_see.offClick(this, this.onSeeHandle);
             this.view.m_nativeAD.m_pass.offClick(this, this.onSeeHandle);
+            this.view.m_nativeAD.m_load.offClick(this, this.onSeeHandle);
             this.view.m_oppoNative.m_close.offClick(this, this.onCloseHandle);
             this.view.m_oppoNative.m_see.offClick(this, this.onSeeHandle);
             this.view.m_oppoNative.m_pass.offClick(this, this.onSeeHandle);
+            this.view.m_oppoNative.m_load.offClick(this, this.onSeeHandle);
             this.view.m_sanbei.offClick(this, this.onSanBeiHandle);
             this.view.m_nextBtn2.offClick(this, this.continueGame);
             this.view.m_ad_1.m_list.off(fairygui.Events.CLICK_ITEM, this, this.onClickItem);

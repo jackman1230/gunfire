@@ -157,7 +157,7 @@ export module ui {
         }
     }
     REG("ui.map_3UI",map_3UI);
-    export class map_4UI extends Scene {
+    export class map_4UI extends Laya.Scene {
         public static  uiView:any ={"type":"Scene","props":{"width":50,"height":50},"compId":2,"child":[{"type":"Script","props":{"y":342.75,"x":829,"points":"-800,-340,-800,250,-141,250,-146,186,-66,186,441,75,850,180,1156,180,1384,119,1651,180,2163,57,2705,182,2707,59,2782,57,3099,107,3301,163,3674,163,4199,250","label":"ground","friction":0,"runtime":"laya.physics.ChainCollider"},"compId":12},{"type":"Script","props":{"y":-167,"x":-1848,"type":"static","label":"ground","group":0,"runtime":"laya.physics.RigidBody"},"compId":13}],"loadList":[],"loadList3D":[]};
         constructor(){ super()}
         createChildren():void {
