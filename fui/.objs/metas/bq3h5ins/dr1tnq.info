@@ -1,24 +1,24 @@
 {
-	"objectStatus": {
-		"n32_s2x8": {
-			"locked": true
-		},
-		"n24_dr1t": {
-			"locked": true
-		},
-		"n44_lpi5": {
-			"hidden": true
-		},
-		"n43_mnew": {
-			"locked": true,
-			"hidden": true
-		},
-		"n36_ko37": {
-			"locked": true,
-			"hidden": true
-		},
-		"n33_s2x8": {
-			"locked": true
-		}
-	}
+  "objectStatus": {
+    "n33_s2x8": {
+      "locked": true
+    },
+    "n43_mnew": {
+      "locked": true,
+      "hidden": true
+    },
+    "n44_lpi5": {
+      "hidden": true
+    },
+    "n36_ko37": {
+      "locked": true,
+      "hidden": true
+    },
+    "n32_s2x8": {
+      "locked": true
+    },
+    "n24_dr1t": {
+      "locked": true
+    }
+  }
 }

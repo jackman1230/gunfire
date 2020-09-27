@@ -75,11 +75,11 @@
     "useMinJsLibs": false,
     "es6toes5": false,
     "projectType": "ts",
-    "pubTime": 1600400621129,
+    "pubTime": 1600931581425,
     "bytedanceInfo": {
         "orientation": "landscape"
     },
-    "vivoSign": {
+    "oppoSign": {
         "generateSign": false,
         "countryName": "",
         "provinceName": "",

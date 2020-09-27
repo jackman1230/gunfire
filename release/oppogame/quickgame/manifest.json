@@ -1,8 +1,8 @@
 {
     "package": "com.mx.tztjd.nearme.gamecenter",
     "name": "特种突击队",
-    "versionName": "1.0.6",
-    "versionCode": 7,
+    "versionName": "1.0.7",
+    "versionCode": 8,
     "minPlatformVersion": 1060,
     "icon": "./oppo.png",
     "orientation": "landscape",

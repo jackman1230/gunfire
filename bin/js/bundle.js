@@ -230,7 +230,7 @@
         map_3UI.uiView = { "type": "Scene", "props": { "width": 50, "height": 50 }, "compId": 2, "child": [{ "type": "Script", "props": { "y": 343, "x": 832, "points": "0,-340,0,250,4199,250", "label": "ground", "friction": 0, "runtime": "laya.physics.ChainCollider" }, "compId": 12 }, { "type": "Script", "props": { "y": -167, "x": -1848, "type": "static", "label": "ground", "group": 0, "runtime": "laya.physics.RigidBody" }, "compId": 13 }], "loadList": [], "loadList3D": [] };
         ui.map_3UI = map_3UI;
         REG("ui.map_3UI", map_3UI);
-        class map_4UI extends Scene {
+        class map_4UI extends Laya.Scene {
             constructor() {
                 super();
             }
@@ -2738,12 +2738,9 @@
     }
     WXFUI_loadingView.URL = "ui://nr80du74n8quil";
 
-    class WXFUI_PopUpView extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_PopUpView extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "PopUpView"));
+            return (fgui.UIPackage.createObject("Game", "PopUpView"));
         }
         onConstruct() {
             this.m_mask = (this.getChild("mask"));
@@ -2801,12 +2798,9 @@
         }
     }
 
-    class WXFUI_TipsPopView extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_TipsPopView extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "TipsPopView"));
+            return (fgui.UIPackage.createObject("Game", "TipsPopView"));
         }
         onConstruct() {
             this.m_tips = (this.getChild("tips"));
@@ -3797,12 +3791,9 @@
         }
     }
 
-    class WXFUI_SuspendView extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_SuspendView extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "SuspendView"));
+            return (fgui.UIPackage.createObject("Game", "SuspendView"));
         }
         onConstruct() {
             this.m_bg = (this.getChild("bg"));
@@ -3858,12 +3849,9 @@
         }
     }
 
-    class WXFUI_ChapterView extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_ChapterView extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "ChapterView"));
+            return (fgui.UIPackage.createObject("Game", "ChapterView"));
         }
         onConstruct() {
             this.m_ctl = this.getController("ctl");
@@ -4110,12 +4098,9 @@
         }
     }
 
-    class WXFUI_AfterWar extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_AfterWar extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "AfterWar"));
+            return (fgui.UIPackage.createObject("Game", "AfterWar"));
         }
         onConstruct() {
             this.m_ctl = this.getController("ctl");
@@ -4519,12 +4504,9 @@
         }
     }
 
-    class WXFUI_BeforeWar extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_BeforeWar extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "BeforeWar"));
+            return (fgui.UIPackage.createObject("Game", "BeforeWar"));
         }
         onConstruct() {
             this.m_bg = (this.getChild("bg"));
@@ -4703,12 +4685,9 @@
         }
     }
 
-    class WXFUI_ClickChestView extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_ClickChestView extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "ClickChestView"));
+            return (fgui.UIPackage.createObject("Game", "ClickChestView"));
         }
         onConstruct() {
             this.m_box = (this.getChild("box"));
@@ -4799,12 +4778,9 @@
         }
     }
 
-    class WXFUI_ADListView extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_ADListView extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "ADListView"));
+            return (fgui.UIPackage.createObject("Game", "ADListView"));
         }
         onConstruct() {
             this.m_ctl = this.getController("ctl");
@@ -5144,12 +5120,9 @@
         }
     }
 
-    class WXFUI_ClickADView extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_ClickADView extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "ClickADView"));
+            return (fgui.UIPackage.createObject("Game", "ClickADView"));
         }
         onConstruct() {
             this.m_n4 = (this.getChild("n4"));
@@ -5271,12 +5244,9 @@
         }
     }
 
-    class WXFUI_noVideoTips extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_noVideoTips extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "noVideoTips"));
+            return (fgui.UIPackage.createObject("Game", "noVideoTips"));
         }
         onConstruct() {
             this.m_n33 = (this.getChild("n33"));
@@ -5325,12 +5295,9 @@
         }
     }
 
-    class WXFUI_freeView extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_freeView extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "freeView"));
+            return (fgui.UIPackage.createObject("Game", "freeView"));
         }
         onConstruct() {
             this.m_ctl = this.getController("ctl");
@@ -5481,12 +5448,9 @@
         }
     }
 
-    class WXFUI_showVideoView extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_showVideoView extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "showVideoView"));
+            return (fgui.UIPackage.createObject("Game", "showVideoView"));
         }
         onConstruct() {
             this.m_n33 = (this.getChild("n33"));
@@ -5533,12 +5497,9 @@
         }
     }
 
-    class WXFUI_recordView extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_recordView extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "recordView"));
+            return (fgui.UIPackage.createObject("Game", "recordView"));
         }
         onConstruct() {
             this.m_n33 = (this.getChild("n33"));
@@ -6545,12 +6506,9 @@
     AssetsManager.assetsData = [];
     AssetsManager.loadingAssetsData = [];
 
-    class WXFUI_damageView extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_damageView extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "damageView"));
+            return (fgui.UIPackage.createObject("Game", "damageView"));
         }
         onConstruct() {
             this.m_num = (this.getChild("num"));
@@ -6559,12 +6517,9 @@
     }
     WXFUI_damageView.URL = "ui://bq3h5ins8mn4xsm";
 
-    class WXFUI_addGold extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_addGold extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "addGold"));
+            return (fgui.UIPackage.createObject("Game", "addGold"));
         }
         onConstruct() {
             this.m_num = (this.getChild("num"));
@@ -6575,12 +6530,9 @@
     }
     WXFUI_addGold.URL = "ui://bq3h5ins8mn4xsz";
 
-    class WXFUI_RewardView extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_RewardView extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "RewardView"));
+            return (fgui.UIPackage.createObject("Game", "RewardView"));
         }
         onConstruct() {
             this.m_n12 = (this.getChild("n12"));
@@ -6593,12 +6545,9 @@
     }
     WXFUI_RewardView.URL = "ui://bq3h5insbuh7xvr";
 
-    class WXFUI_quedingBtn extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_quedingBtn extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "quedingBtn"));
+            return (fgui.UIPackage.createObject("Game", "quedingBtn"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -6607,12 +6556,9 @@
     }
     WXFUI_quedingBtn.URL = "ui://bq3h5insbuh7xvs";
 
-    class WXFUI_enemy_fire_14 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_enemy_fire_14 extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "enemy_fire_14"));
+            return (fgui.UIPackage.createObject("Game", "enemy_fire_14"));
         }
         onConstruct() {
             this.m_n1 = (this.getChild("n1"));
@@ -6620,12 +6566,9 @@
     }
     WXFUI_enemy_fire_14.URL = "ui://bq3h5inscdcoxpj";
 
-    class WXFUI_star extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_star extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "star"));
+            return (fgui.UIPackage.createObject("Game", "star"));
         }
         onConstruct() {
             this.m_ctl = this.getController("ctl");
@@ -6639,12 +6582,9 @@
     }
     WXFUI_star.URL = "ui://bq3h5inscde5xqp";
 
-    class WXFUI_jumpBtn extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_jumpBtn extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "jumpBtn"));
+            return (fgui.UIPackage.createObject("Game", "jumpBtn"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -6654,12 +6594,9 @@
     }
     WXFUI_jumpBtn.URL = "ui://bq3h5inscqp93n";
 
-    class WXFUI_fireBtn extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_fireBtn extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "fireBtn"));
+            return (fgui.UIPackage.createObject("Game", "fireBtn"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -6670,12 +6607,9 @@
     }
     WXFUI_fireBtn.URL = "ui://bq3h5inscqp93o";
 
-    class WXFUI_throwBtn extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_throwBtn extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "throwBtn"));
+            return (fgui.UIPackage.createObject("Game", "throwBtn"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -6685,12 +6619,9 @@
     }
     WXFUI_throwBtn.URL = "ui://bq3h5inscqp93p";
 
-    class WXFUI_enemyStay_5 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_enemyStay_5 extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "enemyStay_5"));
+            return (fgui.UIPackage.createObject("Game", "enemyStay_5"));
         }
         onConstruct() {
             this.m_en = (this.getChild("en"));
@@ -6699,12 +6630,9 @@
     }
     WXFUI_enemyStay_5.URL = "ui://bq3h5insdhktei";
 
-    class WXFUI_enemy_fire_5 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_enemy_fire_5 extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "enemy_fire_5"));
+            return (fgui.UIPackage.createObject("Game", "enemy_fire_5"));
         }
         onConstruct() {
             this.m_mor = (this.getChild("mor"));
@@ -6713,12 +6641,9 @@
     }
     WXFUI_enemy_fire_5.URL = "ui://bq3h5insdhktej";
 
-    class WXFUI_enemy5 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_enemy5 extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "enemy5"));
+            return (fgui.UIPackage.createObject("Game", "enemy5"));
         }
         onConstruct() {
             this.m_en = (this.getChild("en"));
@@ -6726,12 +6651,9 @@
     }
     WXFUI_enemy5.URL = "ui://bq3h5insdhktem";
 
-    class WXFUI_backHomeBtn extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_backHomeBtn extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "backHomeBtn"));
+            return (fgui.UIPackage.createObject("Game", "backHomeBtn"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -6741,12 +6663,9 @@
     }
     WXFUI_backHomeBtn.URL = "ui://bq3h5insdr1tni";
 
-    class WXFUI_restartBtn extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_restartBtn extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "restartBtn"));
+            return (fgui.UIPackage.createObject("Game", "restartBtn"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -6756,12 +6675,9 @@
     }
     WXFUI_restartBtn.URL = "ui://bq3h5insdr1tnj";
 
-    class WXFUI_continueBtn extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_continueBtn extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "continueBtn"));
+            return (fgui.UIPackage.createObject("Game", "continueBtn"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -6770,12 +6686,9 @@
     }
     WXFUI_continueBtn.URL = "ui://bq3h5insdr1tnk";
 
-    class WXFUI_buyItem extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_buyItem extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "buyItem"));
+            return (fgui.UIPackage.createObject("Game", "buyItem"));
         }
         onConstruct() {
             this.m_n2 = (this.getChild("n2"));
@@ -6791,12 +6704,9 @@
     }
     WXFUI_buyItem.URL = "ui://bq3h5insdr1tnm";
 
-    class WXFUI_enterBtn extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_enterBtn extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "enterBtn"));
+            return (fgui.UIPackage.createObject("Game", "enterBtn"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -6805,12 +6715,9 @@
     }
     WXFUI_enterBtn.URL = "ui://bq3h5insdr1tnn";
 
-    class WXFUI_buyBtn extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_buyBtn extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "buyBtn"));
+            return (fgui.UIPackage.createObject("Game", "buyBtn"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -6819,12 +6726,9 @@
     }
     WXFUI_buyBtn.URL = "ui://bq3h5insdr1tno";
 
-    class WXFUI_freeBtn extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_freeBtn extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "freeBtn"));
+            return (fgui.UIPackage.createObject("Game", "freeBtn"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -6834,12 +6738,9 @@
     }
     WXFUI_freeBtn.URL = "ui://bq3h5insdr1tnp";
 
-    class WXFUI_backBtn extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_backBtn extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "backBtn"));
+            return (fgui.UIPackage.createObject("Game", "backBtn"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -6848,12 +6749,9 @@
     }
     WXFUI_backBtn.URL = "ui://bq3h5insdr1tnr";
 
-    class WXFUI_continueBtn2 extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_continueBtn2 extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "continueBtn2"));
+            return (fgui.UIPackage.createObject("Game", "continueBtn2"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -6862,12 +6760,9 @@
     }
     WXFUI_continueBtn2.URL = "ui://bq3h5insdr1tns";
 
-    class WXFUI_continueBtn3 extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_continueBtn3 extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "continueBtn3"));
+            return (fgui.UIPackage.createObject("Game", "continueBtn3"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -6876,12 +6771,9 @@
     }
     WXFUI_continueBtn3.URL = "ui://bq3h5insdr1tnt";
 
-    class WXFUI_continueBtn4 extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_continueBtn4 extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "continueBtn4"));
+            return (fgui.UIPackage.createObject("Game", "continueBtn4"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -6890,12 +6782,9 @@
     }
     WXFUI_continueBtn4.URL = "ui://bq3h5insdr1tnu";
 
-    class WXFUI_LevelItem extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_LevelItem extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "LevelItem"));
+            return (fgui.UIPackage.createObject("Game", "LevelItem"));
         }
         onConstruct() {
             this.m_ctl = this.getController("ctl");
@@ -6909,12 +6798,9 @@
     }
     WXFUI_LevelItem.URL = "ui://bq3h5insdr1tnx";
 
-    class WXFUI_lastChapter extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_lastChapter extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "lastChapter"));
+            return (fgui.UIPackage.createObject("Game", "lastChapter"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -6923,12 +6809,9 @@
     }
     WXFUI_lastChapter.URL = "ui://bq3h5insdr1tnz";
 
-    class WXFUI_nextChapter extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_nextChapter extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "nextChapter"));
+            return (fgui.UIPackage.createObject("Game", "nextChapter"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -6937,12 +6820,9 @@
     }
     WXFUI_nextChapter.URL = "ui://bq3h5insdr1to0";
 
-    class WXFUI_share extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_share extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "share"));
+            return (fgui.UIPackage.createObject("Game", "share"));
         }
         onConstruct() {
             this.m_n2 = (this.getChild("n2"));
@@ -6952,12 +6832,9 @@
     }
     WXFUI_share.URL = "ui://bq3h5insdr1to2";
 
-    class WXFUI_shareBtn1 extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_shareBtn1 extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "shareBtn1"));
+            return (fgui.UIPackage.createObject("Game", "shareBtn1"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -6966,12 +6843,9 @@
     }
     WXFUI_shareBtn1.URL = "ui://bq3h5insdr1to3";
 
-    class WXFUI_shareBtn2 extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_shareBtn2 extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "shareBtn2"));
+            return (fgui.UIPackage.createObject("Game", "shareBtn2"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -6980,12 +6854,9 @@
     }
     WXFUI_shareBtn2.URL = "ui://bq3h5insdr1to4";
 
-    class WXFUI_enemy11 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_enemy11 extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "enemy11"));
+            return (fgui.UIPackage.createObject("Game", "enemy11"));
         }
         onConstruct() {
             this.m_load = (this.getChild("load"));
@@ -6993,12 +6864,9 @@
     }
     WXFUI_enemy11.URL = "ui://bq3h5insdx35l4";
 
-    class WXFUI_enemy12 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_enemy12 extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "enemy12"));
+            return (fgui.UIPackage.createObject("Game", "enemy12"));
         }
         onConstruct() {
             this.m_load = (this.getChild("load"));
@@ -7006,12 +6874,9 @@
     }
     WXFUI_enemy12.URL = "ui://bq3h5insdx35l5";
 
-    class WXFUI_Bomb extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_Bomb extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "Bomb"));
+            return (fgui.UIPackage.createObject("Game", "Bomb"));
         }
         onConstruct() {
             this.m_boom = (this.getChild("boom"));
@@ -7024,12 +6889,9 @@
     }
     WXFUI_Bomb.URL = "ui://bq3h5insgww20";
 
-    class WXFUI_PlayerInfoView extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_PlayerInfoView extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "PlayerInfoView"));
+            return (fgui.UIPackage.createObject("Game", "PlayerInfoView"));
         }
         onConstruct() {
             this.m_blood_1 = (this.getChild("blood_1"));
@@ -7050,12 +6912,9 @@
     }
     WXFUI_PlayerInfoView.URL = "ui://bq3h5insiasdkz";
 
-    class WXFUI_PlayerCtlView extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_PlayerCtlView extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "PlayerCtlView"));
+            return (fgui.UIPackage.createObject("Game", "PlayerCtlView"));
         }
         onConstruct() {
             this.m_fire = (this.getChild("fire"));
@@ -7065,12 +6924,9 @@
     }
     WXFUI_PlayerCtlView.URL = "ui://bq3h5insiasdl0";
 
-    class WXFUI_PlayerDirView extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_PlayerDirView extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "PlayerDirView"));
+            return (fgui.UIPackage.createObject("Game", "PlayerDirView"));
         }
         onConstruct() {
             this.m_bg = (this.getChild("bg"));
@@ -7080,12 +6936,9 @@
     }
     WXFUI_PlayerDirView.URL = "ui://bq3h5insiasdl1";
 
-    class WXFUI_dirBtn extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_dirBtn extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "dirBtn"));
+            return (fgui.UIPackage.createObject("Game", "dirBtn"));
         }
         onConstruct() {
             this.m_n1 = (this.getChild("n1"));
@@ -7093,12 +6946,9 @@
     }
     WXFUI_dirBtn.URL = "ui://bq3h5insiasdl2";
 
-    class WXFUI_susBtn extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_susBtn extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "susBtn"));
+            return (fgui.UIPackage.createObject("Game", "susBtn"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -7107,12 +6957,9 @@
     }
     WXFUI_susBtn.URL = "ui://bq3h5insiasdl3";
 
-    class WXFUI_ADListHorBig2 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_ADListHorBig2 extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "ADListHorBig2"));
+            return (fgui.UIPackage.createObject("Game", "ADListHorBig2"));
         }
         onConstruct() {
             this.m_list = (this.getChild("list"));
@@ -7121,12 +6968,9 @@
     }
     WXFUI_ADListHorBig2.URL = "ui://bq3h5insihitxur";
 
-    class WXFUI_ADItemBig2 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_ADItemBig2 extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "ADItemBig2"));
+            return (fgui.UIPackage.createObject("Game", "ADItemBig2"));
         }
         onConstruct() {
             this.m_n0 = (this.getChild("n0"));
@@ -7136,12 +6980,9 @@
     }
     WXFUI_ADItemBig2.URL = "ui://bq3h5insihitxus";
 
-    class WXFUI_videoBtn extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_videoBtn extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "videoBtn"));
+            return (fgui.UIPackage.createObject("Game", "videoBtn"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -7151,12 +6992,9 @@
     }
     WXFUI_videoBtn.URL = "ui://bq3h5insk6saxwn";
 
-    class WXFUI_lingquBtn extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_lingquBtn extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "lingquBtn"));
+            return (fgui.UIPackage.createObject("Game", "lingquBtn"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -7166,12 +7004,9 @@
     }
     WXFUI_lingquBtn.URL = "ui://bq3h5insk6saxwo";
 
-    class WXFUI_fangqiBtn extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_fangqiBtn extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "fangqiBtn"));
+            return (fgui.UIPackage.createObject("Game", "fangqiBtn"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -7183,12 +7018,9 @@
     }
     WXFUI_fangqiBtn.URL = "ui://bq3h5insk6saxwp";
 
-    class WXFUI_guanbiBtn extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_guanbiBtn extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "guanbiBtn"));
+            return (fgui.UIPackage.createObject("Game", "guanbiBtn"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -7197,12 +7029,9 @@
     }
     WXFUI_guanbiBtn.URL = "ui://bq3h5insk6saxwq";
 
-    class WXFUI_guanbi2Btn extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_guanbi2Btn extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "guanbi2Btn"));
+            return (fgui.UIPackage.createObject("Game", "guanbi2Btn"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -7211,12 +7040,9 @@
     }
     WXFUI_guanbi2Btn.URL = "ui://bq3h5insk6saxws";
 
-    class WXFUI_queding2Btn extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_queding2Btn extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "queding2Btn"));
+            return (fgui.UIPackage.createObject("Game", "queding2Btn"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -7225,12 +7051,9 @@
     }
     WXFUI_queding2Btn.URL = "ui://bq3h5insk6saxwu";
 
-    class WXFUI_queding3Btn extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_queding3Btn extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "queding3Btn"));
+            return (fgui.UIPackage.createObject("Game", "queding3Btn"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -7239,12 +7062,9 @@
     }
     WXFUI_queding3Btn.URL = "ui://bq3h5insk6saxww";
 
-    class WXFUI_nextBtn extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_nextBtn extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "nextBtn"));
+            return (fgui.UIPackage.createObject("Game", "nextBtn"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -7253,12 +7073,9 @@
     }
     WXFUI_nextBtn.URL = "ui://bq3h5insk6saxwy";
 
-    class WXFUI_chaBtn extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_chaBtn extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "chaBtn"));
+            return (fgui.UIPackage.createObject("Game", "chaBtn"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -7267,12 +7084,9 @@
     }
     WXFUI_chaBtn.URL = "ui://bq3h5insk6saxwz";
 
-    class WXFUI_BoomView extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_BoomView extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "BoomView"));
+            return (fgui.UIPackage.createObject("Game", "BoomView"));
         }
         onConstruct() {
             this.m_boom = (this.getChild("boom"));
@@ -7280,12 +7094,9 @@
     }
     WXFUI_BoomView.URL = "ui://bq3h5inske5wdt";
 
-    class WXFUI_ADReMenList extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_ADReMenList extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "ADReMenList"));
+            return (fgui.UIPackage.createObject("Game", "ADReMenList"));
         }
         onConstruct() {
             this.m_n6 = (this.getChild("n6"));
@@ -7301,12 +7112,9 @@
     }
     WXFUI_ADReMenList.URL = "ui://bq3h5insko37xui";
 
-    class WXFUI_ADremen2 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_ADremen2 extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "ADremen2"));
+            return (fgui.UIPackage.createObject("Game", "ADremen2"));
         }
         onConstruct() {
             this.m_n3 = (this.getChild("n3"));
@@ -7316,12 +7124,9 @@
     }
     WXFUI_ADremen2.URL = "ui://bq3h5insko37xuk";
 
-    class WXFUI_ADListHorBig extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_ADListHorBig extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "ADListHorBig"));
+            return (fgui.UIPackage.createObject("Game", "ADListHorBig"));
         }
         onConstruct() {
             this.m_list = (this.getChild("list"));
@@ -7330,12 +7135,9 @@
     }
     WXFUI_ADListHorBig.URL = "ui://bq3h5insko37xup";
 
-    class WXFUI_ADItemBig extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_ADItemBig extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "ADItemBig"));
+            return (fgui.UIPackage.createObject("Game", "ADItemBig"));
         }
         onConstruct() {
             this.m_n0 = (this.getChild("n0"));
@@ -7345,12 +7147,9 @@
     }
     WXFUI_ADItemBig.URL = "ui://bq3h5insko37xuq";
 
-    class WXFUI_OppoNativeADView extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_OppoNativeADView extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "OppoNativeADView"));
+            return (fgui.UIPackage.createObject("Game", "OppoNativeADView"));
         }
         onConstruct() {
             this.m_ctl = this.getController("ctl");
@@ -7365,12 +7164,9 @@
     }
     WXFUI_OppoNativeADView.URL = "ui://bq3h5inslpi5xxd";
 
-    class WXFUI_sanBeiBtn extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_sanBeiBtn extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "sanBeiBtn"));
+            return (fgui.UIPackage.createObject("Game", "sanBeiBtn"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -7379,12 +7175,9 @@
     }
     WXFUI_sanBeiBtn.URL = "ui://bq3h5inslpi5xxf";
 
-    class WXFUI_nextBtn2 extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_nextBtn2 extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "nextBtn2"));
+            return (fgui.UIPackage.createObject("Game", "nextBtn2"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -7393,12 +7186,9 @@
     }
     WXFUI_nextBtn2.URL = "ui://bq3h5inslpi5xxg";
 
-    class WXFUI_clickBar extends fairygui.GProgressBar {
-        constructor() {
-            super();
-        }
+    class WXFUI_clickBar extends fgui.GProgressBar {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "clickBar"));
+            return (fgui.UIPackage.createObject("Game", "clickBar"));
         }
         onConstruct() {
             this.m_n0 = (this.getChild("n0"));
@@ -7407,12 +7197,9 @@
     }
     WXFUI_clickBar.URL = "ui://bq3h5insm5yyxvk";
 
-    class WXFUI_clickBtn extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_clickBtn extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "clickBtn"));
+            return (fgui.UIPackage.createObject("Game", "clickBtn"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -7421,12 +7208,9 @@
     }
     WXFUI_clickBtn.URL = "ui://bq3h5insm5yyxvm";
 
-    class WXFUI_NativeADView extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_NativeADView extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "NativeADView"));
+            return (fgui.UIPackage.createObject("Game", "NativeADView"));
         }
         onConstruct() {
             this.m_ctl = this.getController("ctl");
@@ -7441,12 +7225,9 @@
     }
     WXFUI_NativeADView.URL = "ui://bq3h5insmnewxx9";
 
-    class WXFUI_seeAdBtn extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_seeAdBtn extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "seeAdBtn"));
+            return (fgui.UIPackage.createObject("Game", "seeAdBtn"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -7455,12 +7236,9 @@
     }
     WXFUI_seeAdBtn.URL = "ui://bq3h5insmnewxxb";
 
-    class WXFUI_nativeClose extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_nativeClose extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "nativeClose"));
+            return (fgui.UIPackage.createObject("Game", "nativeClose"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -7469,12 +7247,9 @@
     }
     WXFUI_nativeClose.URL = "ui://bq3h5insmnewxxc";
 
-    class WXFUI_enemy1 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_enemy1 extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "enemy1"));
+            return (fgui.UIPackage.createObject("Game", "enemy1"));
         }
         onConstruct() {
             this.m_en = (this.getChild("en"));
@@ -7482,12 +7257,9 @@
     }
     WXFUI_enemy1.URL = "ui://bq3h5insoqgw9y";
 
-    class WXFUI_enemy2 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_enemy2 extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "enemy2"));
+            return (fgui.UIPackage.createObject("Game", "enemy2"));
         }
         onConstruct() {
             this.m_en = (this.getChild("en"));
@@ -7495,12 +7267,9 @@
     }
     WXFUI_enemy2.URL = "ui://bq3h5insoqgwa0";
 
-    class WXFUI_enemy3 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_enemy3 extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "enemy3"));
+            return (fgui.UIPackage.createObject("Game", "enemy3"));
         }
         onConstruct() {
             this.m_en = (this.getChild("en"));
@@ -7508,12 +7277,9 @@
     }
     WXFUI_enemy3.URL = "ui://bq3h5insoqgwa1";
 
-    class WXFUI_enemy4 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_enemy4 extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "enemy4"));
+            return (fgui.UIPackage.createObject("Game", "enemy4"));
         }
         onConstruct() {
             this.m_en = (this.getChild("en"));
@@ -7521,12 +7287,9 @@
     }
     WXFUI_enemy4.URL = "ui://bq3h5insoqgwa2";
 
-    class WXFUI_enemy extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_enemy extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "enemy"));
+            return (fgui.UIPackage.createObject("Game", "enemy"));
         }
         onConstruct() {
             this.m_enemy = (this.getChild("enemy"));
@@ -7534,12 +7297,9 @@
     }
     WXFUI_enemy.URL = "ui://bq3h5insoqgwa5";
 
-    class WXFUI_WarView extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_WarView extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "WarView"));
+            return (fgui.UIPackage.createObject("Game", "WarView"));
         }
         onConstruct() {
             this.m_bg = (this.getChild("bg"));
@@ -7548,12 +7308,9 @@
     }
     WXFUI_WarView.URL = "ui://bq3h5insoqgwam";
 
-    class WXFUI_goodsView extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_goodsView extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "goodsView"));
+            return (fgui.UIPackage.createObject("Game", "goodsView"));
         }
         onConstruct() {
             this.m_load = (this.getChild("load"));
@@ -7561,12 +7318,9 @@
     }
     WXFUI_goodsView.URL = "ui://bq3h5insqz5ukq";
 
-    class WXFUI_enemy10 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_enemy10 extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "enemy10"));
+            return (fgui.UIPackage.createObject("Game", "enemy10"));
         }
         onConstruct() {
             this.m_load = (this.getChild("load"));
@@ -7574,12 +7328,9 @@
     }
     WXFUI_enemy10.URL = "ui://bq3h5insqz5ukr";
 
-    class WXFUI_enemy_fire_11 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_enemy_fire_11 extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "enemy_fire_11"));
+            return (fgui.UIPackage.createObject("Game", "enemy_fire_11"));
         }
         onConstruct() {
             this.m_tank = (this.getChild("tank"));
@@ -7588,12 +7339,9 @@
     }
     WXFUI_enemy_fire_11.URL = "ui://bq3h5insqz5uks";
 
-    class WXFUI_enemy_fire_12 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_enemy_fire_12 extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "enemy_fire_12"));
+            return (fgui.UIPackage.createObject("Game", "enemy_fire_12"));
         }
         onConstruct() {
             this.m_tank = (this.getChild("tank"));
@@ -7602,12 +7350,9 @@
     }
     WXFUI_enemy_fire_12.URL = "ui://bq3h5insqz5ukt";
 
-    class WXFUI_obstacleView extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_obstacleView extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "obstacleView"));
+            return (fgui.UIPackage.createObject("Game", "obstacleView"));
         }
         onConstruct() {
             this.m_load = (this.getChild("load"));
@@ -7615,12 +7360,9 @@
     }
     WXFUI_obstacleView.URL = "ui://bq3h5insqz5uku";
 
-    class WXFUI_ADItem extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_ADItem extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "ADItem"));
+            return (fgui.UIPackage.createObject("Game", "ADItem"));
         }
         onConstruct() {
             this.m_n0 = (this.getChild("n0"));
@@ -7630,12 +7372,9 @@
     }
     WXFUI_ADItem.URL = "ui://bq3h5inss2x8ir";
 
-    class WXFUI_ADmove extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_ADmove extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "ADmove"));
+            return (fgui.UIPackage.createObject("Game", "ADmove"));
         }
         onConstruct() {
             this.m_ad = (this.getChild("ad"));
@@ -7645,12 +7384,9 @@
     }
     WXFUI_ADmove.URL = "ui://bq3h5inss2x8xs4";
 
-    class WXFUI_ADListVer extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_ADListVer extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "ADListVer"));
+            return (fgui.UIPackage.createObject("Game", "ADListVer"));
         }
         onConstruct() {
             this.m_list = (this.getChild("list"));
@@ -7659,12 +7395,9 @@
     }
     WXFUI_ADListVer.URL = "ui://bq3h5inss2x8xs5";
 
-    class WXFUI_ADremen extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_ADremen extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "ADremen"));
+            return (fgui.UIPackage.createObject("Game", "ADremen"));
         }
         onConstruct() {
             this.m_n2 = (this.getChild("n2"));
@@ -7674,12 +7407,9 @@
     }
     WXFUI_ADremen.URL = "ui://bq3h5inss2x8xs7";
 
-    class WXFUI_GoodsItem extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_GoodsItem extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "GoodsItem"));
+            return (fgui.UIPackage.createObject("Game", "GoodsItem"));
         }
         onConstruct() {
             this.m_ctl = this.getController("ctl");
@@ -7692,12 +7422,9 @@
     }
     WXFUI_GoodsItem.URL = "ui://bq3h5insso8uxx3";
 
-    class WXFUI_blood extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_blood extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "blood"));
+            return (fgui.UIPackage.createObject("Game", "blood"));
         }
         onConstruct() {
             this.m_ctl = this.getController("ctl");
@@ -7708,12 +7435,9 @@
     }
     WXFUI_blood.URL = "ui://bq3h5instckhxvn";
 
-    class WXFUI_enemy6 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_enemy6 extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "enemy6"));
+            return (fgui.UIPackage.createObject("Game", "enemy6"));
         }
         onConstruct() {
             this.m_en = (this.getChild("en"));
@@ -7721,12 +7445,9 @@
     }
     WXFUI_enemy6.URL = "ui://bq3h5instvmxxoo";
 
-    class WXFUI_enemy13 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_enemy13 extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "enemy13"));
+            return (fgui.UIPackage.createObject("Game", "enemy13"));
         }
         onConstruct() {
             this.m_load = (this.getChild("load"));
@@ -7734,12 +7455,9 @@
     }
     WXFUI_enemy13.URL = "ui://bq3h5instvmxxot";
 
-    class WXFUI_enemy14 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_enemy14 extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "enemy14"));
+            return (fgui.UIPackage.createObject("Game", "enemy14"));
         }
         onConstruct() {
             this.m_load = (this.getChild("load"));
@@ -7747,12 +7465,9 @@
     }
     WXFUI_enemy14.URL = "ui://bq3h5instvmxxou";
 
-    class WXFUI_enemy_fire_13 extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_enemy_fire_13 extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "enemy_fire_13"));
+            return (fgui.UIPackage.createObject("Game", "enemy_fire_13"));
         }
         onConstruct() {
             this.m_n1 = (this.getChild("n1"));
@@ -7760,12 +7475,9 @@
     }
     WXFUI_enemy_fire_13.URL = "ui://bq3h5instvmxxov";
 
-    class WXFUI_volume extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_volume extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "volume"));
+            return (fgui.UIPackage.createObject("Game", "volume"));
         }
         onConstruct() {
             this.m_ctl = this.getController("ctl");
@@ -7776,12 +7488,9 @@
     }
     WXFUI_volume.URL = "ui://bq3h5insugvixpi";
 
-    class WXFUI_abandon extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_abandon extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "abandon"));
+            return (fgui.UIPackage.createObject("Game", "abandon"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -7790,12 +7499,9 @@
     }
     WXFUI_abandon.URL = "ui://bq3h5insunfjxqr";
 
-    class WXFUI_hostage extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_hostage extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "hostage"));
+            return (fgui.UIPackage.createObject("Game", "hostage"));
         }
         onConstruct() {
             this.m_en = (this.getChild("en"));
@@ -7803,12 +7509,9 @@
     }
     WXFUI_hostage.URL = "ui://bq3h5insvmpqxtc";
 
-    class WXFUI_loadingBar extends fairygui.GProgressBar {
-        constructor() {
-            super();
-        }
+    class WXFUI_loadingBar extends fgui.GProgressBar {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "loadingBar"));
+            return (fgui.UIPackage.createObject("Game", "loadingBar"));
         }
         onConstruct() {
             this.m_n0 = (this.getChild("n0"));
@@ -7818,12 +7521,9 @@
     }
     WXFUI_loadingBar.URL = "ui://bq3h5insvmpqxu5";
 
-    class WXFUI_openChestBtn extends fairygui.GButton {
-        constructor() {
-            super();
-        }
+    class WXFUI_openChestBtn extends fgui.GButton {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "openChestBtn"));
+            return (fgui.UIPackage.createObject("Game", "openChestBtn"));
         }
         onConstruct() {
             this.m_button = this.getController("button");
@@ -7834,12 +7534,9 @@
     }
     WXFUI_openChestBtn.URL = "ui://bq3h5insvmpqxu9";
 
-    class WXFUI_sandan extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_sandan extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "sandan"));
+            return (fgui.UIPackage.createObject("Game", "sandan"));
         }
         onConstruct() {
             this.m_zidan = (this.getChild("zidan"));
@@ -7847,12 +7544,9 @@
     }
     WXFUI_sandan.URL = "ui://bq3h5insvmpqxud";
 
-    class WXFUI_zidan extends fairygui.GComponent {
-        constructor() {
-            super();
-        }
+    class WXFUI_zidan extends fgui.GComponent {
         static createInstance() {
-            return (fairygui.UIPackage.createObject("Game", "zidan"));
+            return (fgui.UIPackage.createObject("Game", "zidan"));
         }
         onConstruct() {
             this.m_zidan = (this.getChild("zidan"));
@@ -7862,108 +7556,108 @@
 
     class GameBinder {
         static bindAll() {
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_damageView.URL, WXFUI_damageView);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_addGold.URL, WXFUI_addGold);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_RewardView.URL, WXFUI_RewardView);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_quedingBtn.URL, WXFUI_quedingBtn);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy_fire_14.URL, WXFUI_enemy_fire_14);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_star.URL, WXFUI_star);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_jumpBtn.URL, WXFUI_jumpBtn);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_fireBtn.URL, WXFUI_fireBtn);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_throwBtn.URL, WXFUI_throwBtn);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemyStay_5.URL, WXFUI_enemyStay_5);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy_fire_5.URL, WXFUI_enemy_fire_5);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy5.URL, WXFUI_enemy5);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_backHomeBtn.URL, WXFUI_backHomeBtn);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_restartBtn.URL, WXFUI_restartBtn);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_continueBtn.URL, WXFUI_continueBtn);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_BeforeWar.URL, WXFUI_BeforeWar);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_buyItem.URL, WXFUI_buyItem);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enterBtn.URL, WXFUI_enterBtn);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_buyBtn.URL, WXFUI_buyBtn);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_freeBtn.URL, WXFUI_freeBtn);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_AfterWar.URL, WXFUI_AfterWar);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_backBtn.URL, WXFUI_backBtn);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_continueBtn2.URL, WXFUI_continueBtn2);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_continueBtn3.URL, WXFUI_continueBtn3);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_continueBtn4.URL, WXFUI_continueBtn4);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_ChapterView.URL, WXFUI_ChapterView);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_LevelItem.URL, WXFUI_LevelItem);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_lastChapter.URL, WXFUI_lastChapter);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_nextChapter.URL, WXFUI_nextChapter);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_share.URL, WXFUI_share);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_shareBtn1.URL, WXFUI_shareBtn1);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_shareBtn2.URL, WXFUI_shareBtn2);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy11.URL, WXFUI_enemy11);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy12.URL, WXFUI_enemy12);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_Bomb.URL, WXFUI_Bomb);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_PlayerInfoView.URL, WXFUI_PlayerInfoView);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_PlayerCtlView.URL, WXFUI_PlayerCtlView);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_PlayerDirView.URL, WXFUI_PlayerDirView);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_dirBtn.URL, WXFUI_dirBtn);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_susBtn.URL, WXFUI_susBtn);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_ADListHorBig2.URL, WXFUI_ADListHorBig2);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_ADItemBig2.URL, WXFUI_ADItemBig2);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_freeView.URL, WXFUI_freeView);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_videoBtn.URL, WXFUI_videoBtn);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_lingquBtn.URL, WXFUI_lingquBtn);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_fangqiBtn.URL, WXFUI_fangqiBtn);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_guanbiBtn.URL, WXFUI_guanbiBtn);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_noVideoTips.URL, WXFUI_noVideoTips);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_guanbi2Btn.URL, WXFUI_guanbi2Btn);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_queding2Btn.URL, WXFUI_queding2Btn);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_showVideoView.URL, WXFUI_showVideoView);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_queding3Btn.URL, WXFUI_queding3Btn);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_recordView.URL, WXFUI_recordView);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_nextBtn.URL, WXFUI_nextBtn);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_chaBtn.URL, WXFUI_chaBtn);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_BoomView.URL, WXFUI_BoomView);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_ADReMenList.URL, WXFUI_ADReMenList);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_ADremen2.URL, WXFUI_ADremen2);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_ADListHorBig.URL, WXFUI_ADListHorBig);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_ADItemBig.URL, WXFUI_ADItemBig);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_OppoNativeADView.URL, WXFUI_OppoNativeADView);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_sanBeiBtn.URL, WXFUI_sanBeiBtn);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_nextBtn2.URL, WXFUI_nextBtn2);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_ClickADView.URL, WXFUI_ClickADView);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_clickBar.URL, WXFUI_clickBar);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_clickBtn.URL, WXFUI_clickBtn);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_NativeADView.URL, WXFUI_NativeADView);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_seeAdBtn.URL, WXFUI_seeAdBtn);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_nativeClose.URL, WXFUI_nativeClose);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_PopUpView.URL, WXFUI_PopUpView);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_SuspendView.URL, WXFUI_SuspendView);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy1.URL, WXFUI_enemy1);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy2.URL, WXFUI_enemy2);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy3.URL, WXFUI_enemy3);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy4.URL, WXFUI_enemy4);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy.URL, WXFUI_enemy);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_WarView.URL, WXFUI_WarView);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_goodsView.URL, WXFUI_goodsView);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy10.URL, WXFUI_enemy10);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy_fire_11.URL, WXFUI_enemy_fire_11);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy_fire_12.URL, WXFUI_enemy_fire_12);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_obstacleView.URL, WXFUI_obstacleView);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_ADItem.URL, WXFUI_ADItem);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_ADmove.URL, WXFUI_ADmove);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_ADListVer.URL, WXFUI_ADListVer);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_ADremen.URL, WXFUI_ADremen);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_GoodsItem.URL, WXFUI_GoodsItem);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_blood.URL, WXFUI_blood);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy6.URL, WXFUI_enemy6);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy13.URL, WXFUI_enemy13);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy14.URL, WXFUI_enemy14);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_enemy_fire_13.URL, WXFUI_enemy_fire_13);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_TipsPopView.URL, WXFUI_TipsPopView);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_volume.URL, WXFUI_volume);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_abandon.URL, WXFUI_abandon);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_hostage.URL, WXFUI_hostage);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_ClickChestView.URL, WXFUI_ClickChestView);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_loadingBar.URL, WXFUI_loadingBar);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_openChestBtn.URL, WXFUI_openChestBtn);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_ADListView.URL, WXFUI_ADListView);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_sandan.URL, WXFUI_sandan);
-            fairygui.UIObjectFactory.setPackageItemExtension(WXFUI_zidan.URL, WXFUI_zidan);
+            fgui.UIObjectFactory.setExtension(WXFUI_damageView.URL, WXFUI_damageView);
+            fgui.UIObjectFactory.setExtension(WXFUI_addGold.URL, WXFUI_addGold);
+            fgui.UIObjectFactory.setExtension(WXFUI_RewardView.URL, WXFUI_RewardView);
+            fgui.UIObjectFactory.setExtension(WXFUI_quedingBtn.URL, WXFUI_quedingBtn);
+            fgui.UIObjectFactory.setExtension(WXFUI_enemy_fire_14.URL, WXFUI_enemy_fire_14);
+            fgui.UIObjectFactory.setExtension(WXFUI_star.URL, WXFUI_star);
+            fgui.UIObjectFactory.setExtension(WXFUI_jumpBtn.URL, WXFUI_jumpBtn);
+            fgui.UIObjectFactory.setExtension(WXFUI_fireBtn.URL, WXFUI_fireBtn);
+            fgui.UIObjectFactory.setExtension(WXFUI_throwBtn.URL, WXFUI_throwBtn);
+            fgui.UIObjectFactory.setExtension(WXFUI_enemyStay_5.URL, WXFUI_enemyStay_5);
+            fgui.UIObjectFactory.setExtension(WXFUI_enemy_fire_5.URL, WXFUI_enemy_fire_5);
+            fgui.UIObjectFactory.setExtension(WXFUI_enemy5.URL, WXFUI_enemy5);
+            fgui.UIObjectFactory.setExtension(WXFUI_backHomeBtn.URL, WXFUI_backHomeBtn);
+            fgui.UIObjectFactory.setExtension(WXFUI_restartBtn.URL, WXFUI_restartBtn);
+            fgui.UIObjectFactory.setExtension(WXFUI_continueBtn.URL, WXFUI_continueBtn);
+            fgui.UIObjectFactory.setExtension(WXFUI_BeforeWar.URL, WXFUI_BeforeWar);
+            fgui.UIObjectFactory.setExtension(WXFUI_buyItem.URL, WXFUI_buyItem);
+            fgui.UIObjectFactory.setExtension(WXFUI_enterBtn.URL, WXFUI_enterBtn);
+            fgui.UIObjectFactory.setExtension(WXFUI_buyBtn.URL, WXFUI_buyBtn);
+            fgui.UIObjectFactory.setExtension(WXFUI_freeBtn.URL, WXFUI_freeBtn);
+            fgui.UIObjectFactory.setExtension(WXFUI_AfterWar.URL, WXFUI_AfterWar);
+            fgui.UIObjectFactory.setExtension(WXFUI_backBtn.URL, WXFUI_backBtn);
+            fgui.UIObjectFactory.setExtension(WXFUI_continueBtn2.URL, WXFUI_continueBtn2);
+            fgui.UIObjectFactory.setExtension(WXFUI_continueBtn3.URL, WXFUI_continueBtn3);
+            fgui.UIObjectFactory.setExtension(WXFUI_continueBtn4.URL, WXFUI_continueBtn4);
+            fgui.UIObjectFactory.setExtension(WXFUI_ChapterView.URL, WXFUI_ChapterView);
+            fgui.UIObjectFactory.setExtension(WXFUI_LevelItem.URL, WXFUI_LevelItem);
+            fgui.UIObjectFactory.setExtension(WXFUI_lastChapter.URL, WXFUI_lastChapter);
+            fgui.UIObjectFactory.setExtension(WXFUI_nextChapter.URL, WXFUI_nextChapter);
+            fgui.UIObjectFactory.setExtension(WXFUI_share.URL, WXFUI_share);
+            fgui.UIObjectFactory.setExtension(WXFUI_shareBtn1.URL, WXFUI_shareBtn1);
+            fgui.UIObjectFactory.setExtension(WXFUI_shareBtn2.URL, WXFUI_shareBtn2);
+            fgui.UIObjectFactory.setExtension(WXFUI_enemy11.URL, WXFUI_enemy11);
+            fgui.UIObjectFactory.setExtension(WXFUI_enemy12.URL, WXFUI_enemy12);
+            fgui.UIObjectFactory.setExtension(WXFUI_Bomb.URL, WXFUI_Bomb);
+            fgui.UIObjectFactory.setExtension(WXFUI_PlayerInfoView.URL, WXFUI_PlayerInfoView);
+            fgui.UIObjectFactory.setExtension(WXFUI_PlayerCtlView.URL, WXFUI_PlayerCtlView);
+            fgui.UIObjectFactory.setExtension(WXFUI_PlayerDirView.URL, WXFUI_PlayerDirView);
+            fgui.UIObjectFactory.setExtension(WXFUI_dirBtn.URL, WXFUI_dirBtn);
+            fgui.UIObjectFactory.setExtension(WXFUI_susBtn.URL, WXFUI_susBtn);
+            fgui.UIObjectFactory.setExtension(WXFUI_ADListHorBig2.URL, WXFUI_ADListHorBig2);
+            fgui.UIObjectFactory.setExtension(WXFUI_ADItemBig2.URL, WXFUI_ADItemBig2);
+            fgui.UIObjectFactory.setExtension(WXFUI_freeView.URL, WXFUI_freeView);
+            fgui.UIObjectFactory.setExtension(WXFUI_videoBtn.URL, WXFUI_videoBtn);
+            fgui.UIObjectFactory.setExtension(WXFUI_lingquBtn.URL, WXFUI_lingquBtn);
+            fgui.UIObjectFactory.setExtension(WXFUI_fangqiBtn.URL, WXFUI_fangqiBtn);
+            fgui.UIObjectFactory.setExtension(WXFUI_guanbiBtn.URL, WXFUI_guanbiBtn);
+            fgui.UIObjectFactory.setExtension(WXFUI_noVideoTips.URL, WXFUI_noVideoTips);
+            fgui.UIObjectFactory.setExtension(WXFUI_guanbi2Btn.URL, WXFUI_guanbi2Btn);
+            fgui.UIObjectFactory.setExtension(WXFUI_queding2Btn.URL, WXFUI_queding2Btn);
+            fgui.UIObjectFactory.setExtension(WXFUI_showVideoView.URL, WXFUI_showVideoView);
+            fgui.UIObjectFactory.setExtension(WXFUI_queding3Btn.URL, WXFUI_queding3Btn);
+            fgui.UIObjectFactory.setExtension(WXFUI_recordView.URL, WXFUI_recordView);
+            fgui.UIObjectFactory.setExtension(WXFUI_nextBtn.URL, WXFUI_nextBtn);
+            fgui.UIObjectFactory.setExtension(WXFUI_chaBtn.URL, WXFUI_chaBtn);
+            fgui.UIObjectFactory.setExtension(WXFUI_BoomView.URL, WXFUI_BoomView);
+            fgui.UIObjectFactory.setExtension(WXFUI_ADReMenList.URL, WXFUI_ADReMenList);
+            fgui.UIObjectFactory.setExtension(WXFUI_ADremen2.URL, WXFUI_ADremen2);
+            fgui.UIObjectFactory.setExtension(WXFUI_ADListHorBig.URL, WXFUI_ADListHorBig);
+            fgui.UIObjectFactory.setExtension(WXFUI_ADItemBig.URL, WXFUI_ADItemBig);
+            fgui.UIObjectFactory.setExtension(WXFUI_OppoNativeADView.URL, WXFUI_OppoNativeADView);
+            fgui.UIObjectFactory.setExtension(WXFUI_sanBeiBtn.URL, WXFUI_sanBeiBtn);
+            fgui.UIObjectFactory.setExtension(WXFUI_nextBtn2.URL, WXFUI_nextBtn2);
+            fgui.UIObjectFactory.setExtension(WXFUI_ClickADView.URL, WXFUI_ClickADView);
+            fgui.UIObjectFactory.setExtension(WXFUI_clickBar.URL, WXFUI_clickBar);
+            fgui.UIObjectFactory.setExtension(WXFUI_clickBtn.URL, WXFUI_clickBtn);
+            fgui.UIObjectFactory.setExtension(WXFUI_NativeADView.URL, WXFUI_NativeADView);
+            fgui.UIObjectFactory.setExtension(WXFUI_seeAdBtn.URL, WXFUI_seeAdBtn);
+            fgui.UIObjectFactory.setExtension(WXFUI_nativeClose.URL, WXFUI_nativeClose);
+            fgui.UIObjectFactory.setExtension(WXFUI_PopUpView.URL, WXFUI_PopUpView);
+            fgui.UIObjectFactory.setExtension(WXFUI_SuspendView.URL, WXFUI_SuspendView);
+            fgui.UIObjectFactory.setExtension(WXFUI_enemy1.URL, WXFUI_enemy1);
+            fgui.UIObjectFactory.setExtension(WXFUI_enemy2.URL, WXFUI_enemy2);
+            fgui.UIObjectFactory.setExtension(WXFUI_enemy3.URL, WXFUI_enemy3);
+            fgui.UIObjectFactory.setExtension(WXFUI_enemy4.URL, WXFUI_enemy4);
+            fgui.UIObjectFactory.setExtension(WXFUI_enemy.URL, WXFUI_enemy);
+            fgui.UIObjectFactory.setExtension(WXFUI_WarView.URL, WXFUI_WarView);
+            fgui.UIObjectFactory.setExtension(WXFUI_goodsView.URL, WXFUI_goodsView);
+            fgui.UIObjectFactory.setExtension(WXFUI_enemy10.URL, WXFUI_enemy10);
+            fgui.UIObjectFactory.setExtension(WXFUI_enemy_fire_11.URL, WXFUI_enemy_fire_11);
+            fgui.UIObjectFactory.setExtension(WXFUI_enemy_fire_12.URL, WXFUI_enemy_fire_12);
+            fgui.UIObjectFactory.setExtension(WXFUI_obstacleView.URL, WXFUI_obstacleView);
+            fgui.UIObjectFactory.setExtension(WXFUI_ADItem.URL, WXFUI_ADItem);
+            fgui.UIObjectFactory.setExtension(WXFUI_ADmove.URL, WXFUI_ADmove);
+            fgui.UIObjectFactory.setExtension(WXFUI_ADListVer.URL, WXFUI_ADListVer);
+            fgui.UIObjectFactory.setExtension(WXFUI_ADremen.URL, WXFUI_ADremen);
+            fgui.UIObjectFactory.setExtension(WXFUI_GoodsItem.URL, WXFUI_GoodsItem);
+            fgui.UIObjectFactory.setExtension(WXFUI_blood.URL, WXFUI_blood);
+            fgui.UIObjectFactory.setExtension(WXFUI_enemy6.URL, WXFUI_enemy6);
+            fgui.UIObjectFactory.setExtension(WXFUI_enemy13.URL, WXFUI_enemy13);
+            fgui.UIObjectFactory.setExtension(WXFUI_enemy14.URL, WXFUI_enemy14);
+            fgui.UIObjectFactory.setExtension(WXFUI_enemy_fire_13.URL, WXFUI_enemy_fire_13);
+            fgui.UIObjectFactory.setExtension(WXFUI_TipsPopView.URL, WXFUI_TipsPopView);
+            fgui.UIObjectFactory.setExtension(WXFUI_volume.URL, WXFUI_volume);
+            fgui.UIObjectFactory.setExtension(WXFUI_abandon.URL, WXFUI_abandon);
+            fgui.UIObjectFactory.setExtension(WXFUI_hostage.URL, WXFUI_hostage);
+            fgui.UIObjectFactory.setExtension(WXFUI_ClickChestView.URL, WXFUI_ClickChestView);
+            fgui.UIObjectFactory.setExtension(WXFUI_loadingBar.URL, WXFUI_loadingBar);
+            fgui.UIObjectFactory.setExtension(WXFUI_openChestBtn.URL, WXFUI_openChestBtn);
+            fgui.UIObjectFactory.setExtension(WXFUI_ADListView.URL, WXFUI_ADListView);
+            fgui.UIObjectFactory.setExtension(WXFUI_sandan.URL, WXFUI_sandan);
+            fgui.UIObjectFactory.setExtension(WXFUI_zidan.URL, WXFUI_zidan);
         }
     }
 

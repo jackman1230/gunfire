@@ -1,24 +1,17 @@
 /** This is an automatically generated class by FairyGUI. Please do not modify it. **/
 
+export default class WXFUI_sanBeiBtn extends fgui.GButton {
 
-
-export default class WXFUI_sanBeiBtn extends fairygui.GButton {
-
-	public m_button:fairygui.Controller;
-	public m_n0:fairygui.GImage;
-
+	public m_button:fgui.Controller;
+	public m_n0:fgui.GImage;
 	public static URL:string = "ui://bq3h5inslpi5xxf";
 
 	public static createInstance():WXFUI_sanBeiBtn {
-		return <WXFUI_sanBeiBtn><any>(fairygui.UIPackage.createObject("Game","sanBeiBtn"));
+		return <WXFUI_sanBeiBtn>(fgui.UIPackage.createObject("Game", "sanBeiBtn"));
 	}
 
-	public constructor() {
-		super();
-	}
-
-	protected onConstruct(): void {
+	protected onConstruct():void {
 		this.m_button = this.getController("button");
-		this.m_n0 = <fairygui.GImage><any>(this.getChild("n0"));
+		this.m_n0 = <fgui.GImage>(this.getChild("n0"));
 	}
 }
