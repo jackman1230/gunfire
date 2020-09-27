@@ -1,9 +1,9 @@
 {
     "package": "com.mx.tztjd.vivominigame",
     "name": "特种突击队",
-    "icon": "/icon.jpg",
-    "versionName": "1.0.6",
-    "versionCode": 7,
+    "icon": "/vivo.jpg",
+    "versionName": "1.0.7",
+    "versionCode": 8,
     "minPlatformVersion": 1063,
     "deviceOrientation": "landscape",
     "type": "game",

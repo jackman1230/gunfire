@@ -28,9 +28,9 @@ module.exports = function (options) {
    */
   const externals = [
 	{
-		module_name:'./js/bundle-bb1e4439f6.js',
-		module_path:'./js/bundle-bb1e4439f6.js',
-		module_from:'engine/js/bundle-bb1e4439f6.js'
+		module_name:'./js/bundle-2469570af5.js',
+		module_path:'./js/bundle-2469570af5.js',
+		module_from:'engine/js/bundle-2469570af5.js'
 	},
 	{
 		module_name:'./libs/fairygui.js',
