@@ -56,7 +56,7 @@ export class GameManager {
         this.levelData["chapter_4"] = levelData2["chapter_4"];
         this.levelData["chapter_5"] = levelData2["chapter_5"];
         this.platform = MooSnowSDK.getPlatform();
-        // this.platform = moosnow.APP_PLATFORM.BYTEDANCE;
+        // this.platform = moosnow.APP_PLATFORM.OPPO;
         console.log(this.levelData);
         this.initRoleData();
         this.initChapterConfig();
